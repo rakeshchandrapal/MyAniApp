@@ -1,0 +1,322 @@
+fragment BasicMedia on Media {
+  id
+  type
+  description(asHtml: true)
+  isAdult
+  genres
+  episodes
+  format
+  chapters
+  title {
+    userPreferred
+  }
+  coverImage {
+    large
+  }
+}
+
+fragment MediaListEntry on MediaList {
+  status
+  id
+  updatedAt
+  status
+  progress
+  progressVolumes
+  priority
+  notes
+  hiddenFromStatusLists
+  private
+  repeat
+  score(format: POINT_100)
+  startedAt {
+    year
+    month
+    day
+  }
+  completedAt {
+    year
+    month
+    day
+  }
+  media {
+    ...BasicMedia
+    episodes
+    chapters
+  }
+}
+
+query FetchMediaById($id: Int) {
+  Media(id: $id) {
+    ...BasicMedia
+    bannerImage
+    averageScore
+    episodes
+    duration
+    source(version: 3)
+    status(version: 2)
+    favourites
+    isFavourite
+    season
+    chapters
+    volumes
+    coverImage {
+      large
+      extraLarge
+    }
+    trailer {
+      id
+      site
+      thumbnail
+    }
+    startDate {
+      year
+      day
+      month
+    }
+    endDate {
+      year
+      day
+      month
+    }
+    title {
+      english
+      native
+      romaji
+      userPreferred
+    }
+    relations {
+      edges {
+        relationType(version: 2)
+        node {
+          ...BasicMedia
+        }
+      }
+    }
+    mediaListEntry {
+      ...MediaListEntry
+    }
+    streamingEpisodes {
+      title
+      thumbnail
+      url
+      site
+    }
+    externalLinks {
+      id
+      site
+      url
+      icon
+      color
+      language
+    }
+    reviews {
+      edges {
+        id
+      }
+    }
+    characters(page: 1, sort: [ROLE, RELEVANCE, ID]) {
+      edges {
+        id
+      }
+    }
+  }
+}
+
+query GenreCollection {
+  genres: GenreCollection
+  tags: MediaTagCollection {
+    name
+    description
+    category
+    isAdult
+  }
+}
+
+query FetchMedia(
+  $page: Int
+  $perPage: Int
+  $type: MediaType
+  $sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
+  $season: MediaSeason
+  $seasonYear: Int
+  $search: String
+  $year: String
+  $genres: [String]
+  $tags: [String]
+  $isAdult: Boolean = false
+) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    media(
+      isAdult: $isAdult
+      type: $type
+      sort: $sort
+      season: $season
+      seasonYear: $seasonYear
+      startDate_like: $year
+      search: $search
+      genre_in: $genres
+      tag_in: $tags
+    ) {
+      ...BasicMedia
+    }
+  }
+}
+
+query FetchMediaList($userId: Int, $type: MediaType, $sort: [MediaListSort]) {
+  MediaListCollection(userId: $userId, type: $type, sort: $sort) {
+    lists {
+      name
+      isCustomList
+      isSplitCompletedList
+      status
+      entries {
+        ...MediaListEntry
+      }
+    }
+  }
+}
+
+mutation SaveMediaListEntry(
+  $id: Int
+  $mediaId: Int
+  $status: MediaListStatus
+  $score: Float
+  $scoreRaw: Int
+  $progress: Int
+  $progressVolumes: Int
+  $repeat: Int
+  $priority: Int
+  $private: Boolean
+  $notes: String
+  $hiddenFromStatusLists: Boolean
+  $customLists: [String]
+  $advancedScores: [Float] # graphql_codegen just cant do types in mutations so no started and completed at dates
+) {
+  SaveMediaListEntry(
+    id: $id
+    mediaId: $mediaId
+    status: $status
+    score: $score
+    scoreRaw: $scoreRaw
+    progress: $progress
+    progressVolumes: $progressVolumes
+    repeat: $repeat
+    priority: $priority
+    private: $private
+    notes: $notes
+    hiddenFromStatusLists: $hiddenFromStatusLists
+    customLists: $customLists
+    advancedScores: $advancedScores
+  ) {
+    ...MediaListEntry
+  }
+}
+
+mutation DeleteMediaListEntry($id: Int) {
+  DeleteMediaListEntry(id: $id) {
+    deleted
+  }
+}
+
+mutation ToggleFavourite($animeId: Int, $mangaId: Int) {
+  ToggleFavourite(animeId: $animeId, mangaId: $mangaId) {
+    anime {
+      pageInfo {
+        total
+      }
+    }
+    manga {
+      pageInfo {
+        total
+      }
+    }
+  }
+}
+
+query Home($page: Int = 1, $perPage: Int, $userId: Int!, $type: MediaType) {
+  releasing: Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      hasNextPage
+    }
+    media(onList: true, status_in: [RELEASING, NOT_YET_RELEASED]) {
+      ...BasicMedia
+      nextAiringEpisode {
+        airingAt
+        timeUntilAiring
+        episode
+      }
+      airingSchedule(notYetAired: false) {
+        edges {
+          node {
+            airingAt
+            timeUntilAiring
+            episode
+          }
+        }
+      }
+    }
+  }
+  list: MediaListCollection(userId: $userId, type: $type, status_in: [CURRENT, PLANNING], sort: [UPDATED_TIME_DESC]) {
+    lists {
+      name
+      isCustomList
+      isSplitCompletedList
+      status
+      entries {
+        ...MediaListEntry
+      }
+    }
+  }
+}
+
+query Discovery($page: Int = 1, $perPage: Int, $type: MediaType, $season: MediaSeason, $year: Int, $nextSeason: MediaSeason, $nextYear: Int) {
+  popular: Page(page: $page, perPage: $perPage) {
+    media(sort: POPULARITY_DESC, type: $type, isAdult: false) {
+      ...BasicMedia
+    }
+  }
+  trending: Page(page: $page, perPage: $perPage) {
+    media(sort: TRENDING_DESC, type: $type, isAdult: false) {
+      ...BasicMedia
+    }
+  }
+  thisSeason: Page(page: $page, perPage: $perPage) {
+    media(season: $season, seasonYear: $year, sort: POPULARITY_DESC, type: $type, isAdult: false) {
+      ...BasicMedia
+      seasonYear
+    }
+  }
+  seasonNext: Page(page: $page, perPage: $perPage) {
+    media(season: $nextSeason, seasonYear: $nextYear, sort: POPULARITY_DESC, type: $type, isAdult: false) {
+      ...BasicMedia
+      season
+      # seasonYear
+    }
+  }
+  # releasing: Page(page: $page) {
+  #   media(onList: true, type: $type, status: RELEASING) {
+  #     ...BasicMedia
+  #     nextAiringEpisode {
+  #       airingAt
+  #       timeUntilAiring
+  #       episode
+  #     }
+  #     airingSchedule(notYetAired: false) {
+  #       edges {
+  #         node {
+  #           airingAt
+  #           timeUntilAiring
+  #           episode
+  #         }
+  #       }
+  #     }
+  #   }
+  # }
+}

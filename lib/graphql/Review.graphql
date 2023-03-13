@@ -1,0 +1,34 @@
+query Reviews($mediaId: Int, $page: Int) {
+  Media(id: $mediaId) {
+    reviews(page: $page, sort: [RATING_DESC, ID]) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
+      nodes {
+        id
+        summary
+        rating
+        ratingAmount
+        userRating
+        score
+        user {
+          id
+          name
+          avatar {
+            large
+            medium
+          }
+        }
+        createdAt
+        updatedAt
+        media {
+          title {
+            userPreferred
+          }
+        }
+        body(asHtml: true)
+      }
+    }
+  }
+}

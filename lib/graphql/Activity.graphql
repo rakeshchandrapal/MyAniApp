@@ -1,0 +1,107 @@
+query Activities($isFollowing: Boolean = true, $hasReplies: Boolean = false, $activityType: ActivityType, $page: Int) {
+  Page(page: $page, perPage: 25) {
+    pageInfo {
+      currentPage
+      hasNextPage
+    }
+    activities(
+      isFollowing: $isFollowing
+      type: $activityType
+      hasRepliesOrTypeText: $hasReplies
+      type_in: [TEXT, ANIME_LIST, MANGA_LIST]
+      sort: ID_DESC
+    ) {
+      ... on TextActivity {
+        id
+        userId
+        type
+        replyCount
+        text(asHtml: true)
+        isLocked
+        isSubscribed
+        isLiked
+        likeCount
+        createdAt
+        user {
+          ...BasicUser
+        }
+      }
+      ... on ListActivity {
+        id
+        userId
+        type
+        status
+        progress
+        replyCount
+        isLocked
+        isSubscribed
+        isLiked
+        likeCount
+        createdAt
+        user {
+          ...BasicUser
+        }
+        media {
+          ...BasicMedia
+        }
+      }
+    }
+  }
+}
+
+query Activity($id: Int, $page: Int = 1) {
+  activity: Activity(id: $id) {
+    ... on TextActivity {
+      id
+      userId
+      type
+      replyCount
+      text(asHtml: true)
+      isLocked
+      isSubscribed
+      isLiked
+      likeCount
+      createdAt
+      user {
+        ...BasicUser
+      }
+    }
+    ... on ListActivity {
+      id
+      userId
+      type
+      status
+      progress
+      replyCount
+      isLocked
+      isSubscribed
+      isLiked
+      likeCount
+      createdAt
+      user {
+        ...BasicUser
+      }
+      media {
+        ...BasicMedia
+      }
+    }
+  }
+  replies: Page(page: $page) {
+    pageInfo {
+      currentPage
+      hasNextPage
+    }
+    activityReplies(activityId: $id) {
+      id
+      userId
+      text
+      createdAt
+      activityId
+      isLiked
+      likeCount
+      user {
+        ...BasicUser
+      }
+    }
+  }
+}

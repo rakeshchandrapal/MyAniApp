@@ -1,0 +1,93 @@
+query Characters($mediaId: Int, $page: Int) {
+  Media(id: $mediaId) {
+    id
+    characters(page: $page, sort: [ROLE, RELEVANCE, ID]) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
+      edges {
+        name
+        role
+        node {
+          id
+          name {
+            first
+            full
+            userPreferred
+          }
+          image {
+            large
+          }
+        }
+        voiceActors {
+          id
+          languageV2
+          name {
+            first
+            middle
+            last
+            full
+            native
+            userPreferred
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}
+
+query Character(
+  $id: Int
+  $isBirthday: Boolean
+  $search: String
+  $id_not: Int
+  $id_in: [Int]
+  $id_not_in: [Int]
+  $sort: [CharacterSort]
+  $mediaType: MediaType
+  $mediaSort: [MediaSort] = [POPULARITY_DESC]
+  $onList: Boolean
+  $page: Int = 1
+  $perPage: Int
+) {
+  Character(id: $id, isBirthday: $isBirthday, search: $search, id_not: $id_not, id_in: $id_in, id_not_in: $id_not_in, sort: $sort) {
+    id
+    gender
+    age
+    bloodType
+    siteUrl
+    description(asHtml: true)
+    name {
+      first
+      middle
+      last
+      full
+      native
+      userPreferred
+    }
+    image {
+      large
+    }
+    dateOfBirth {
+      year
+      month
+      day
+    }
+    media(sort: $mediaSort, type: $mediaType, onList: $onList, page: $page, perPage: $perPage) {
+      nodes {
+        ...BasicMedia
+      }
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+    }
+  }
+}

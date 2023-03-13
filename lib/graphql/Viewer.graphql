@@ -1,0 +1,103 @@
+fragment ThisUser on User {
+  id
+  name
+  about(asHtml: true)
+  bannerImage
+  unreadNotificationCount
+  avatar {
+    large
+  }
+  statistics {
+    anime {
+      count
+      episodesWatched
+      minutesWatched
+      meanScore
+      standardDeviation
+    }
+    manga {
+      count
+      chaptersRead
+      volumesRead
+      meanScore
+      standardDeviation
+    }
+  }
+  favourites(page: 1) {
+    anime(page: 1) {
+      edges {
+        node {
+          ...BasicMedia
+        }
+      }
+    }
+    manga(page: 1) {
+      edges {
+        node {
+          ...BasicMedia
+        }
+      }
+    }
+  }
+  options {
+    displayAdultContent
+    airingNotifications
+    titleLanguage
+    staffNameLanguage
+    activityMergeTime
+    restrictMessagesToFollowing
+  }
+  mediaListOptions {
+    scoreFormat
+    rowOrder
+    animeList {
+      sectionOrder
+    }
+  }
+}
+
+query FetchViewer {
+  Viewer {
+    ...ThisUser
+  }
+}
+
+mutation UpdateUser(
+  $about: String
+  $titleLanguage: UserTitleLanguage
+  $displayAdultContent: Boolean
+  $airingNotifications: Boolean
+  $scoreFormat: ScoreFormat
+  $rowOrder: String
+  $profileColor: String
+  $donatorBadge: String
+  $notificationOptions: [NotificationOptionInput]
+  $timezone: String
+  $activityMergeTime: Int
+  $animeListOptions: MediaListOptionsInput
+  $mangaListOptions: MediaListOptionsInput
+  $staffNameLanguage: UserStaffNameLanguage
+  $restrictMessagesToFollowing: Boolean
+  $disabledListActivity: [ListActivityOptionInput]
+) {
+  UpdateUser(
+    about: $about
+    titleLanguage: $titleLanguage
+    displayAdultContent: $displayAdultContent
+    airingNotifications: $airingNotifications
+    scoreFormat: $scoreFormat
+    rowOrder: $rowOrder
+    profileColor: $profileColor
+    donatorBadge: $donatorBadge
+    notificationOptions: $notificationOptions
+    timezone: $timezone
+    activityMergeTime: $activityMergeTime
+    animeListOptions: $animeListOptions
+    mangaListOptions: $mangaListOptions
+    staffNameLanguage: $staffNameLanguage
+    restrictMessagesToFollowing: $restrictMessagesToFollowing
+    disabledListActivity: $disabledListActivity
+  ) {
+    ...ThisUser
+  }
+}

@@ -1,0 +1,210 @@
+fragment BasicUser on User {
+  id
+  name
+  donatorTier
+  donatorBadge
+  moderatorRoles
+  avatar {
+    large
+  }
+}
+
+query Notifications($page: Int, $reset: Boolean = true, $types: [NotificationType]) {
+  Page(page: $page, perPage: 15) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    notifications(type_in: $types, resetNotificationCount: $reset) {
+      ... on AiringNotification {
+        id
+        type
+        episode
+        contexts
+        media {
+          ...BasicMedia
+        }
+        createdAt
+      }
+      ... on RelatedMediaAdditionNotification {
+        id
+        type
+        context
+        media {
+          ...BasicMedia
+        }
+        createdAt
+      }
+      ... on FollowingNotification {
+        id
+        type
+        context
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ActivityMessageNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ActivityMentionNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ActivityReplyNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ActivityReplySubscribedNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ActivityLikeNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ActivityReplyLikeNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ThreadCommentMentionNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ThreadCommentReplyNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ThreadCommentSubscribedNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ThreadCommentLikeNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on ThreadLikeNotification {
+        id
+        type
+        context
+        thread {
+          id
+          title
+        }
+        user {
+          ...BasicUser
+        }
+        createdAt
+      }
+      ... on MediaDataChangeNotification {
+        id
+        type
+        context
+        media {
+          ...BasicMedia
+        }
+        reason
+        createdAt
+      }
+      ... on MediaMergeNotification {
+        id
+        type
+        context
+        media {
+          ...BasicMedia
+        }
+        deletedMediaTitles
+        reason
+        createdAt
+      }
+      ... on MediaDeletionNotification {
+        id
+        type
+        context
+        deletedMediaTitle
+        reason
+        createdAt
+      }
+    }
+  }
+}
