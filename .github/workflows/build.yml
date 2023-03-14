@@ -27,7 +27,7 @@ jobs:
           channel: 'stable'
 
       - run: flutter pub get
-      - run: flutter build apk
+      - run: flutter build apk --enable-experiment=records
 
       - uses: ncipollo/release-action@v1
         with:
