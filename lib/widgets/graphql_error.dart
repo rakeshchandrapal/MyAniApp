@@ -5,8 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Graphql<T> extends StatelessWidget {
   final QueryHookResult<T> hook;
-  final Function(T result) builder;
-  const Graphql({super.key, required this.builder, required this.hook});
+  final Widget Function(T result) builder;
+  const Graphql({
+    super.key,
+    required this.hook,
+    required this.builder,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -10,12 +10,13 @@ class Appbar extends StatelessWidget {
   final List<Widget>? actions;
   final Widget child;
 
-  const Appbar(
-      {super.key,
-      required this.title,
-      this.bottom,
-      this.actions,
-      required this.child});
+  const Appbar({
+    super.key,
+    required this.title,
+    this.bottom,
+    this.actions,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {

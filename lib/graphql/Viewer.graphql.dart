@@ -3174,6 +3174,607 @@ class Query$FetchViewer$Widget
         );
 }
 
+class Query$NotificationCount {
+  Query$NotificationCount({
+    this.Viewer,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$NotificationCount.fromJson(Map<String, dynamic> json) {
+    final l$Viewer = json['Viewer'];
+    final l$$__typename = json['__typename'];
+    return Query$NotificationCount(
+      Viewer: l$Viewer == null
+          ? null
+          : Query$NotificationCount$Viewer.fromJson(
+              (l$Viewer as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$NotificationCount$Viewer? Viewer;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$Viewer = Viewer;
+    _resultData['Viewer'] = l$Viewer?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$Viewer = Viewer;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$Viewer,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$NotificationCount) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$Viewer = Viewer;
+    final lOther$Viewer = other.Viewer;
+    if (l$Viewer != lOther$Viewer) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$NotificationCount on Query$NotificationCount {
+  CopyWith$Query$NotificationCount<Query$NotificationCount> get copyWith =>
+      CopyWith$Query$NotificationCount(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$NotificationCount<TRes> {
+  factory CopyWith$Query$NotificationCount(
+    Query$NotificationCount instance,
+    TRes Function(Query$NotificationCount) then,
+  ) = _CopyWithImpl$Query$NotificationCount;
+
+  factory CopyWith$Query$NotificationCount.stub(TRes res) =
+      _CopyWithStubImpl$Query$NotificationCount;
+
+  TRes call({
+    Query$NotificationCount$Viewer? Viewer,
+    String? $__typename,
+  });
+  CopyWith$Query$NotificationCount$Viewer<TRes> get Viewer;
+}
+
+class _CopyWithImpl$Query$NotificationCount<TRes>
+    implements CopyWith$Query$NotificationCount<TRes> {
+  _CopyWithImpl$Query$NotificationCount(
+    this._instance,
+    this._then,
+  );
+
+  final Query$NotificationCount _instance;
+
+  final TRes Function(Query$NotificationCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? Viewer = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$NotificationCount(
+        Viewer: Viewer == _undefined
+            ? _instance.Viewer
+            : (Viewer as Query$NotificationCount$Viewer?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$NotificationCount$Viewer<TRes> get Viewer {
+    final local$Viewer = _instance.Viewer;
+    return local$Viewer == null
+        ? CopyWith$Query$NotificationCount$Viewer.stub(_then(_instance))
+        : CopyWith$Query$NotificationCount$Viewer(
+            local$Viewer, (e) => call(Viewer: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$NotificationCount<TRes>
+    implements CopyWith$Query$NotificationCount<TRes> {
+  _CopyWithStubImpl$Query$NotificationCount(this._res);
+
+  TRes _res;
+
+  call({
+    Query$NotificationCount$Viewer? Viewer,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$NotificationCount$Viewer<TRes> get Viewer =>
+      CopyWith$Query$NotificationCount$Viewer.stub(_res);
+}
+
+const documentNodeQueryNotificationCount = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'NotificationCount'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'Viewer'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'unreadNotificationCount'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'options'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'airingNotifications'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$NotificationCount _parserFn$Query$NotificationCount(
+        Map<String, dynamic> data) =>
+    Query$NotificationCount.fromJson(data);
+
+class Options$Query$NotificationCount
+    extends graphql.QueryOptions<Query$NotificationCount> {
+  Options$Query$NotificationCount({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+  }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult,
+          pollInterval: pollInterval,
+          context: context,
+          document: documentNodeQueryNotificationCount,
+          parserFn: _parserFn$Query$NotificationCount,
+        );
+}
+
+class WatchOptions$Query$NotificationCount
+    extends graphql.WatchQueryOptions<Query$NotificationCount> {
+  WatchOptions$Query$NotificationCount({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult,
+          context: context,
+          document: documentNodeQueryNotificationCount,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$NotificationCount,
+        );
+}
+
+class FetchMoreOptions$Query$NotificationCount
+    extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$NotificationCount(
+      {required graphql.UpdateQuery updateQuery})
+      : super(
+          updateQuery: updateQuery,
+          document: documentNodeQueryNotificationCount,
+        );
+}
+
+extension ClientExtension$Query$NotificationCount on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$NotificationCount>> query$NotificationCount(
+          [Options$Query$NotificationCount? options]) async =>
+      await this.query(options ?? Options$Query$NotificationCount());
+  graphql.ObservableQuery<Query$NotificationCount> watchQuery$NotificationCount(
+          [WatchOptions$Query$NotificationCount? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$NotificationCount());
+  void writeQuery$NotificationCount({
+    required Query$NotificationCount data,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+            operation: graphql.Operation(
+                document: documentNodeQueryNotificationCount)),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Query$NotificationCount? readQuery$NotificationCount(
+      {bool optimistic = true}) {
+    final result = this.readQuery(
+      graphql.Request(
+          operation:
+              graphql.Operation(document: documentNodeQueryNotificationCount)),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$NotificationCount.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$NotificationCount>
+    useQuery$NotificationCount([Options$Query$NotificationCount? options]) =>
+        graphql_flutter.useQuery(options ?? Options$Query$NotificationCount());
+graphql.ObservableQuery<Query$NotificationCount>
+    useWatchQuery$NotificationCount(
+            [WatchOptions$Query$NotificationCount? options]) =>
+        graphql_flutter
+            .useWatchQuery(options ?? WatchOptions$Query$NotificationCount());
+
+class Query$NotificationCount$Widget
+    extends graphql_flutter.Query<Query$NotificationCount> {
+  Query$NotificationCount$Widget({
+    widgets.Key? key,
+    Options$Query$NotificationCount? options,
+    required graphql_flutter.QueryBuilder<Query$NotificationCount> builder,
+  }) : super(
+          key: key,
+          options: options ?? Options$Query$NotificationCount(),
+          builder: builder,
+        );
+}
+
+class Query$NotificationCount$Viewer {
+  Query$NotificationCount$Viewer({
+    this.unreadNotificationCount,
+    this.options,
+    this.$__typename = 'User',
+  });
+
+  factory Query$NotificationCount$Viewer.fromJson(Map<String, dynamic> json) {
+    final l$unreadNotificationCount = json['unreadNotificationCount'];
+    final l$options = json['options'];
+    final l$$__typename = json['__typename'];
+    return Query$NotificationCount$Viewer(
+      unreadNotificationCount: (l$unreadNotificationCount as int?),
+      options: l$options == null
+          ? null
+          : Query$NotificationCount$Viewer$options.fromJson(
+              (l$options as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? unreadNotificationCount;
+
+  final Query$NotificationCount$Viewer$options? options;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$unreadNotificationCount = unreadNotificationCount;
+    _resultData['unreadNotificationCount'] = l$unreadNotificationCount;
+    final l$options = options;
+    _resultData['options'] = l$options?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$unreadNotificationCount = unreadNotificationCount;
+    final l$options = options;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$unreadNotificationCount,
+      l$options,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$NotificationCount$Viewer) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$unreadNotificationCount = unreadNotificationCount;
+    final lOther$unreadNotificationCount = other.unreadNotificationCount;
+    if (l$unreadNotificationCount != lOther$unreadNotificationCount) {
+      return false;
+    }
+    final l$options = options;
+    final lOther$options = other.options;
+    if (l$options != lOther$options) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$NotificationCount$Viewer
+    on Query$NotificationCount$Viewer {
+  CopyWith$Query$NotificationCount$Viewer<Query$NotificationCount$Viewer>
+      get copyWith => CopyWith$Query$NotificationCount$Viewer(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$NotificationCount$Viewer<TRes> {
+  factory CopyWith$Query$NotificationCount$Viewer(
+    Query$NotificationCount$Viewer instance,
+    TRes Function(Query$NotificationCount$Viewer) then,
+  ) = _CopyWithImpl$Query$NotificationCount$Viewer;
+
+  factory CopyWith$Query$NotificationCount$Viewer.stub(TRes res) =
+      _CopyWithStubImpl$Query$NotificationCount$Viewer;
+
+  TRes call({
+    int? unreadNotificationCount,
+    Query$NotificationCount$Viewer$options? options,
+    String? $__typename,
+  });
+  CopyWith$Query$NotificationCount$Viewer$options<TRes> get options;
+}
+
+class _CopyWithImpl$Query$NotificationCount$Viewer<TRes>
+    implements CopyWith$Query$NotificationCount$Viewer<TRes> {
+  _CopyWithImpl$Query$NotificationCount$Viewer(
+    this._instance,
+    this._then,
+  );
+
+  final Query$NotificationCount$Viewer _instance;
+
+  final TRes Function(Query$NotificationCount$Viewer) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? unreadNotificationCount = _undefined,
+    Object? options = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$NotificationCount$Viewer(
+        unreadNotificationCount: unreadNotificationCount == _undefined
+            ? _instance.unreadNotificationCount
+            : (unreadNotificationCount as int?),
+        options: options == _undefined
+            ? _instance.options
+            : (options as Query$NotificationCount$Viewer$options?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$NotificationCount$Viewer$options<TRes> get options {
+    final local$options = _instance.options;
+    return local$options == null
+        ? CopyWith$Query$NotificationCount$Viewer$options.stub(_then(_instance))
+        : CopyWith$Query$NotificationCount$Viewer$options(
+            local$options, (e) => call(options: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$NotificationCount$Viewer<TRes>
+    implements CopyWith$Query$NotificationCount$Viewer<TRes> {
+  _CopyWithStubImpl$Query$NotificationCount$Viewer(this._res);
+
+  TRes _res;
+
+  call({
+    int? unreadNotificationCount,
+    Query$NotificationCount$Viewer$options? options,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$NotificationCount$Viewer$options<TRes> get options =>
+      CopyWith$Query$NotificationCount$Viewer$options.stub(_res);
+}
+
+class Query$NotificationCount$Viewer$options {
+  Query$NotificationCount$Viewer$options({
+    this.airingNotifications,
+    this.$__typename = 'UserOptions',
+  });
+
+  factory Query$NotificationCount$Viewer$options.fromJson(
+      Map<String, dynamic> json) {
+    final l$airingNotifications = json['airingNotifications'];
+    final l$$__typename = json['__typename'];
+    return Query$NotificationCount$Viewer$options(
+      airingNotifications: (l$airingNotifications as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final bool? airingNotifications;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$airingNotifications = airingNotifications;
+    _resultData['airingNotifications'] = l$airingNotifications;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$airingNotifications = airingNotifications;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$airingNotifications,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$NotificationCount$Viewer$options) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$airingNotifications = airingNotifications;
+    final lOther$airingNotifications = other.airingNotifications;
+    if (l$airingNotifications != lOther$airingNotifications) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$NotificationCount$Viewer$options
+    on Query$NotificationCount$Viewer$options {
+  CopyWith$Query$NotificationCount$Viewer$options<
+          Query$NotificationCount$Viewer$options>
+      get copyWith => CopyWith$Query$NotificationCount$Viewer$options(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$NotificationCount$Viewer$options<TRes> {
+  factory CopyWith$Query$NotificationCount$Viewer$options(
+    Query$NotificationCount$Viewer$options instance,
+    TRes Function(Query$NotificationCount$Viewer$options) then,
+  ) = _CopyWithImpl$Query$NotificationCount$Viewer$options;
+
+  factory CopyWith$Query$NotificationCount$Viewer$options.stub(TRes res) =
+      _CopyWithStubImpl$Query$NotificationCount$Viewer$options;
+
+  TRes call({
+    bool? airingNotifications,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$NotificationCount$Viewer$options<TRes>
+    implements CopyWith$Query$NotificationCount$Viewer$options<TRes> {
+  _CopyWithImpl$Query$NotificationCount$Viewer$options(
+    this._instance,
+    this._then,
+  );
+
+  final Query$NotificationCount$Viewer$options _instance;
+
+  final TRes Function(Query$NotificationCount$Viewer$options) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? airingNotifications = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$NotificationCount$Viewer$options(
+        airingNotifications: airingNotifications == _undefined
+            ? _instance.airingNotifications
+            : (airingNotifications as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$NotificationCount$Viewer$options<TRes>
+    implements CopyWith$Query$NotificationCount$Viewer$options<TRes> {
+  _CopyWithStubImpl$Query$NotificationCount$Viewer$options(this._res);
+
+  TRes _res;
+
+  call({
+    bool? airingNotifications,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables$Mutation$UpdateUser {
   factory Variables$Mutation$UpdateUser({
     String? about,

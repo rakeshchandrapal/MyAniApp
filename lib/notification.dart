@@ -248,8 +248,8 @@ void callbackDispatcher() {
     if (!isAllowed) return true;
 
     var e = await client();
-    var user = await e.value.query$FetchViewer(
-      Options$Query$FetchViewer(fetchPolicy: FetchPolicy.noCache),
+    var user = await e.value.query$NotificationCount(
+      Options$Query$NotificationCount(fetchPolicy: FetchPolicy.noCache),
     );
     if (user.parsedData?.Viewer?.unreadNotificationCount != null) {
       await NotificationApi().show(

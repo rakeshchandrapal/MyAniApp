@@ -158,7 +158,9 @@ class _ViewState extends State<View> {
             });
             return false;
           },
-          child: TabBarView(children: _tabs),
+          child: TabBarView(
+            children: _tabs,
+          ),
         ),
       ),
     );
@@ -523,27 +525,15 @@ class Overview extends StatelessWidget {
 
   Widget _info(BuildContext context) {
     // print(anime.data!['Media']);
-    var startDate = media.startDate != null &&
-            media.startDate?.year != null &&
-            media.startDate?.month != null
-        ? DateTime(media.startDate!.year!, media.startDate!.month!)
+    var startDate = media.startDate != null
+        ? formattedDate(
+            media.startDate!.year, media.startDate!.month, media.startDate!.day)
         : null;
 
-    var endDate = media.endDate != null &&
-            media.endDate?.year != null &&
-            media.endDate?.month != null
-        ? DateTime(media.endDate!.year!, media.endDate!.month!)
+    var endDate = media.endDate != null && media.endDate?.year != null
+        ? formattedDate(
+            media.endDate!.year, media.endDate!.month, media.endDate!.day)
         : null;
-
-    if (media.startDate?.day != null && startDate != null) {
-      startDate = DateTime(media.startDate!.year!, media.startDate!.month!,
-          media.startDate!.day!);
-    }
-
-    if (media.endDate?.day != null && endDate != null) {
-      endDate = DateTime(
-          media.endDate!.year!, media.endDate!.month!, media.endDate!.day!);
-    }
 
     return Padding(
       padding: const EdgeInsets.only(top: 0, left: 8, right: 8),
@@ -603,17 +593,11 @@ class Overview extends StatelessWidget {
                 ] else
                   _infoRow(context, 'Chapters', media.chapters?.toString()),
                 _infoRow(
-                    context,
-                    'Start Date',
-                    startDate != null
-                        ? DateFormat.yMMMMd().format(startDate)
-                        : '??'),
-                _infoRow(
-                    context,
-                    'End Date',
-                    endDate != null
-                        ? DateFormat.yMMMMd().format(endDate)
-                        : null),
+                  context,
+                  'Start Date',
+                  startDate,
+                ),
+                _infoRow(context, 'End Date', endDate),
                 _infoRow(context, 'Season', media.season?.name),
                 _infoRow(context, 'Source', media.source?.name),
                 _infoRow(context, 'Status', media.status?.name),
@@ -942,10 +926,12 @@ class Characters extends HookWidget {
                                     )
                                 ],
                               ),
-                              TextButton(
-                                onPressed: () => print('nope'),
-                                child: const Text('View Voice Actor'),
-                              ),
+                              if (character.voiceActors?.isNotEmpty == true)
+                                TextButton(
+                                  onPressed: () => context.push(
+                                      '/staff/${character.voiceActors!.first!.id}'),
+                                  child: const Text('View Voice Actor'),
+                                ),
                             ],
                           ),
                         ),

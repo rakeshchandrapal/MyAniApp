@@ -51,37 +51,6 @@ class HTML extends StatelessWidget {
               }
               return null;
             },
-            // renderMode: RenderMode.listView,
-            // data: removeHTML(markdown),
-            // selectable: selected,
-            // physics: physics,
-            // shrinkWrap: shrinkWrap,
-            // config: MarkdownConfig(
-            //   configs: [
-            //     const PConfig(textStyle: TextStyle()),
-            //     LinkConfig(
-            //       style: const TextStyle(
-            //         color: Color(0xff0969da),
-            //         decoration: TextDecoration.none,
-            //       ),
-            //       onTap: (value) {
-            //         // onTapLink: (text, href, title) {
-            //         if (spoilerRegex.hasMatch(value)) {
-            //           _openSpoiler(
-            //               context,
-            //               Uri.decodeComponent(value)
-            //                   .replaceAll('~!', '')
-            //                   .replaceAll('!~', ''));
-            //         } else if (characterRegex.hasMatch(value)) {
-            //           context.push(
-            //               '/character/${characterRegex.firstMatch(value)?.group(1)}');
-            //         }
-            //         // },
-            //       },
-            //     ),
-            //     ...configs
-            //   ],
-            // ),
           ),
         ),
       ),

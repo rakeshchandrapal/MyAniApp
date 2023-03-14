@@ -18,6 +18,7 @@ import 'package:MyAniApp/pages/settings/anilist.dart';
 import 'package:MyAniApp/pages/settings/app.dart';
 import 'package:MyAniApp/pages/settings/general.dart';
 import 'package:MyAniApp/pages/social.dart';
+import 'package:MyAniApp/pages/staff.dart';
 import 'package:MyAniApp/providers/graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/providers/theme.dart';
@@ -129,6 +130,10 @@ var _routerConfig = GoRouter(
         GoRoute(
           path: '/character/:id',
           builder: (context, state) => Character(id: state.params['id']!),
+        ),
+        GoRoute(
+          path: '/staff/:id',
+          builder: (context, state) => Staff(id: state.params['id']!),
         ),
         GoRoute(
           path: '/notifications',

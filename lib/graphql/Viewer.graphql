@@ -62,6 +62,15 @@ query FetchViewer {
   }
 }
 
+query NotificationCount {
+  Viewer {
+    unreadNotificationCount
+    options {
+      airingNotifications
+    }
+  }
+}
+
 mutation UpdateUser(
   $about: String
   $titleLanguage: UserTitleLanguage

@@ -1,5 +1,6 @@
 import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
+import 'package:intl/intl.dart';
 
 ({Enum$MediaSeason nextSeason, int nextYear, Enum$MediaSeason season, int year}) formatDate() {
   var date = DateTime.now();
@@ -28,10 +29,14 @@ String removeHTML(String data) {
   return data.replaceAll('<br>', '');
 }
 
+String formattedDate(int? year, int? month, int? day) {
+  return '${month != null ? DateFormat.MMMM().format(DateTime(0, month))  : ''}${day != null ?' $day': ''}${day != null || month != null ? ', ' : ''}${year??''}';
+}
+
 bool isTodayFromTimestamp(int? timestamp) {
   if (timestamp == null) return false;
   var now = DateTime.now();
-  var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  var date = dateFromTimestamp(timestamp);
   return now.year == date.year &&
       now.month == date.month &&
       (now.day) == (date.day);

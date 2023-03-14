@@ -111,7 +111,9 @@ query FetchMediaById($id: Int) {
     }
     reviews {
       edges {
-        id
+        node {
+          id
+        }
       }
     }
     characters(page: 1, sort: [ROLE, RELEVANCE, ID]) {
