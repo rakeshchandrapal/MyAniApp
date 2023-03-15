@@ -31,6 +31,6 @@ jobs:
 
       - uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref }}
+          tag: ${{ github.sha }}
           artifacts: 'build/app/outputs/flutter-apk/*'
-          makeLatest: true
+          prerelease: true
