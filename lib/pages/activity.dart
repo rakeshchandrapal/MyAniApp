@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Activity extends HookWidget {
   final String id;
@@ -131,7 +132,7 @@ class ActivityCard extends StatelessWidget {
                 children: [
                   Text(user.name),
                   Text(
-                    DateFormat.yMMMMEEEEd().format(
+                    timeago.format(
                       dateFromTimestamp(createdAt),
                     ),
                     style: Theme.of(context).textTheme.bodySmall,

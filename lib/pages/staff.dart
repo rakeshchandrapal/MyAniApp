@@ -4,6 +4,7 @@ import 'package:MyAniApp/pages/media_view.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
 import 'package:MyAniApp/widgets/html.dart';
+import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -27,6 +28,7 @@ class Staff extends HookWidget {
     return Graphql(
       hook: hook,
       builder: (result) {
+        // print(result.Staff?.characterMedia?.toJson());
         var description = result.Staff?.description != null
             ? result.Staff!.description!.replaceAll(metaRegex, '')
             : null;
@@ -72,6 +74,7 @@ class Staff extends HookWidget {
                           ),
                         ),
                       ),
+                    Medias(medias: result.Staff!.characterMedia!.edges!)
                   ],
                 ),
               ),
@@ -185,6 +188,41 @@ class Title extends StatelessWidget {
                                 ],
                               ),
                             ),
+                          if (staff.yearsActive != null)
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: 'Years Active: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(
+                                      text:
+                                          staff.yearsActive!.first!.toString()),
+                                  const TextSpan(text: '-'),
+                                  TextSpan(
+                                    text: (staff.yearsActive!.length >= 2
+                                            ? staff.yearsActive![1]
+                                            : 'Present')
+                                        .toString(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          if (staff.homeTown != null)
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: 'Hometown: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(text: staff.homeTown),
+                                ],
+                              ),
+                            ),
                           if (staff.bloodType != null)
                             Text.rich(
                               TextSpan(
@@ -224,6 +262,29 @@ class Title extends StatelessWidget {
             ),
           ),
       ],
+    );
+  }
+}
+
+class Medias extends StatelessWidget {
+  final List<Query$Staff$Staff$characterMedia$edges?> medias;
+
+  const Medias({super.key, required this.medias});
+
+  @override
+  Widget build(BuildContext context) {
+    return Cards(
+      list: medias.map((e) => e!.node!).toList(),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+    );
+    return ListView(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        for (var media in medias) Text(media!.node!.title!.userPreferred!),
+      ],
+      // ),
     );
   }
 }

@@ -1,11 +1,25 @@
+import 'Media.graphql.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
+import 'schema.graphql.dart';
 
 class Variables$Query$Staff {
-  factory Variables$Query$Staff({int? id}) => Variables$Query$Staff._({
+  factory Variables$Query$Staff({
+    int? id,
+    bool? withCharacterRoles,
+    bool? onList,
+    int? characterPage,
+    List<Enum$MediaSort?>? sort,
+  }) =>
+      Variables$Query$Staff._({
         if (id != null) r'id': id,
+        if (withCharacterRoles != null)
+          r'withCharacterRoles': withCharacterRoles,
+        if (onList != null) r'onList': onList,
+        if (characterPage != null) r'characterPage': characterPage,
+        if (sort != null) r'sort': sort,
       });
 
   Variables$Query$Staff._(this._$data);
@@ -16,17 +30,58 @@ class Variables$Query$Staff {
       final l$id = data['id'];
       result$data['id'] = (l$id as int?);
     }
+    if (data.containsKey('withCharacterRoles')) {
+      final l$withCharacterRoles = data['withCharacterRoles'];
+      result$data['withCharacterRoles'] = (l$withCharacterRoles as bool?);
+    }
+    if (data.containsKey('onList')) {
+      final l$onList = data['onList'];
+      result$data['onList'] = (l$onList as bool?);
+    }
+    if (data.containsKey('characterPage')) {
+      final l$characterPage = data['characterPage'];
+      result$data['characterPage'] = (l$characterPage as int?);
+    }
+    if (data.containsKey('sort')) {
+      final l$sort = data['sort'];
+      result$data['sort'] = (l$sort as List<dynamic>?)
+          ?.map(
+              (e) => e == null ? null : fromJson$Enum$MediaSort((e as String)))
+          .toList();
+    }
     return Variables$Query$Staff._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+  bool? get withCharacterRoles => (_$data['withCharacterRoles'] as bool?);
+  bool? get onList => (_$data['onList'] as bool?);
+  int? get characterPage => (_$data['characterPage'] as int?);
+  List<Enum$MediaSort?>? get sort => (_$data['sort'] as List<Enum$MediaSort?>?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('withCharacterRoles')) {
+      final l$withCharacterRoles = withCharacterRoles;
+      result$data['withCharacterRoles'] = l$withCharacterRoles;
+    }
+    if (_$data.containsKey('onList')) {
+      final l$onList = onList;
+      result$data['onList'] = l$onList;
+    }
+    if (_$data.containsKey('characterPage')) {
+      final l$characterPage = characterPage;
+      result$data['characterPage'] = l$characterPage;
+    }
+    if (_$data.containsKey('sort')) {
+      final l$sort = sort;
+      result$data['sort'] = l$sort
+          ?.map((e) => e == null ? null : toJson$Enum$MediaSort(e))
+          .toList();
     }
     return result$data;
   }
@@ -52,13 +107,74 @@ class Variables$Query$Staff {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$withCharacterRoles = withCharacterRoles;
+    final lOther$withCharacterRoles = other.withCharacterRoles;
+    if (_$data.containsKey('withCharacterRoles') !=
+        other._$data.containsKey('withCharacterRoles')) {
+      return false;
+    }
+    if (l$withCharacterRoles != lOther$withCharacterRoles) {
+      return false;
+    }
+    final l$onList = onList;
+    final lOther$onList = other.onList;
+    if (_$data.containsKey('onList') != other._$data.containsKey('onList')) {
+      return false;
+    }
+    if (l$onList != lOther$onList) {
+      return false;
+    }
+    final l$characterPage = characterPage;
+    final lOther$characterPage = other.characterPage;
+    if (_$data.containsKey('characterPage') !=
+        other._$data.containsKey('characterPage')) {
+      return false;
+    }
+    if (l$characterPage != lOther$characterPage) {
+      return false;
+    }
+    final l$sort = sort;
+    final lOther$sort = other.sort;
+    if (_$data.containsKey('sort') != other._$data.containsKey('sort')) {
+      return false;
+    }
+    if (l$sort != null && lOther$sort != null) {
+      if (l$sort.length != lOther$sort.length) {
+        return false;
+      }
+      for (int i = 0; i < l$sort.length; i++) {
+        final l$sort$entry = l$sort[i];
+        final lOther$sort$entry = lOther$sort[i];
+        if (l$sort$entry != lOther$sort$entry) {
+          return false;
+        }
+      }
+    } else if (l$sort != lOther$sort) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$id = id;
-    return Object.hashAll([_$data.containsKey('id') ? l$id : const {}]);
+    final l$withCharacterRoles = withCharacterRoles;
+    final l$onList = onList;
+    final l$characterPage = characterPage;
+    final l$sort = sort;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('withCharacterRoles')
+          ? l$withCharacterRoles
+          : const {},
+      _$data.containsKey('onList') ? l$onList : const {},
+      _$data.containsKey('characterPage') ? l$characterPage : const {},
+      _$data.containsKey('sort')
+          ? l$sort == null
+              ? null
+              : Object.hashAll(l$sort.map((v) => v))
+          : const {},
+    ]);
   }
 }
 
@@ -71,7 +187,13 @@ abstract class CopyWith$Variables$Query$Staff<TRes> {
   factory CopyWith$Variables$Query$Staff.stub(TRes res) =
       _CopyWithStubImpl$Variables$Query$Staff;
 
-  TRes call({int? id});
+  TRes call({
+    int? id,
+    bool? withCharacterRoles,
+    bool? onList,
+    int? characterPage,
+    List<Enum$MediaSort?>? sort,
+  });
 }
 
 class _CopyWithImpl$Variables$Query$Staff<TRes>
@@ -87,9 +209,22 @@ class _CopyWithImpl$Variables$Query$Staff<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined}) => _then(Variables$Query$Staff._({
+  TRes call({
+    Object? id = _undefined,
+    Object? withCharacterRoles = _undefined,
+    Object? onList = _undefined,
+    Object? characterPage = _undefined,
+    Object? sort = _undefined,
+  }) =>
+      _then(Variables$Query$Staff._({
         ..._instance._$data,
         if (id != _undefined) 'id': (id as int?),
+        if (withCharacterRoles != _undefined)
+          'withCharacterRoles': (withCharacterRoles as bool?),
+        if (onList != _undefined) 'onList': (onList as bool?),
+        if (characterPage != _undefined)
+          'characterPage': (characterPage as int?),
+        if (sort != _undefined) 'sort': (sort as List<Enum$MediaSort?>?),
       }));
 }
 
@@ -99,7 +234,14 @@ class _CopyWithStubImpl$Variables$Query$Staff<TRes>
 
   TRes _res;
 
-  call({int? id}) => _res;
+  call({
+    int? id,
+    bool? withCharacterRoles,
+    bool? onList,
+    int? characterPage,
+    List<Enum$MediaSort?>? sort,
+  }) =>
+      _res;
 }
 
 class Query$Staff {
@@ -246,7 +388,49 @@ const documentNodeQueryStaff = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'withCharacterRoles')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'onList')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'characterPage')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: IntValueNode(value: '1')),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'sort')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'MediaSort'),
+            isNonNull: false,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(
+            value: ListValueNode(values: [
+          EnumValueNode(name: NameNode(value: 'START_DATE_DESC'))
+        ])),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -304,7 +488,7 @@ const documentNodeQueryStaff = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'siteUrl'),
+            name: NameNode(value: 'yearsActive'),
             alias: null,
             arguments: [],
             directives: [],
@@ -446,6 +630,260 @@ const documentNodeQueryStaff = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'characterMedia'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'page'),
+                value: VariableNode(name: NameNode(value: 'characterPage')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'sort'),
+                value: VariableNode(name: NameNode(value: 'sort')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onList'),
+                value: VariableNode(name: NameNode(value: 'onList')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                        name: NameNode(value: 'withCharacterRoles')),
+                  )
+                ],
+              )
+            ],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'pageInfo'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'total'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'perPage'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'currentPage'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'lastPage'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'hasNextPage'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'edges'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'characterRole'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'characterName'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'node'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'BasicMedia'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'startDate'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'year'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'mediaListEntry'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'id'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'status'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'characters'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'userPreferred'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'image'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'large'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -463,6 +901,7 @@ const documentNodeQueryStaff = DocumentNode(definitions: [
       ),
     ]),
   ),
+  fragmentDefinitionBasicMedia,
 ]);
 Query$Staff _parserFn$Query$Staff(Map<String, dynamic> data) =>
     Query$Staff.fromJson(data);
@@ -594,13 +1033,14 @@ class Query$Staff$Staff {
     this.homeTown,
     this.bloodType,
     required this.isFavourite,
-    this.siteUrl,
+    this.yearsActive,
     this.description,
     this.age,
     this.name,
     this.image,
     this.dateOfBirth,
     this.dateOfDeath,
+    this.characterMedia,
     this.$__typename = 'Staff',
   });
 
@@ -611,13 +1051,14 @@ class Query$Staff$Staff {
     final l$homeTown = json['homeTown'];
     final l$bloodType = json['bloodType'];
     final l$isFavourite = json['isFavourite'];
-    final l$siteUrl = json['siteUrl'];
+    final l$yearsActive = json['yearsActive'];
     final l$description = json['description'];
     final l$age = json['age'];
     final l$name = json['name'];
     final l$image = json['image'];
     final l$dateOfBirth = json['dateOfBirth'];
     final l$dateOfDeath = json['dateOfDeath'];
+    final l$characterMedia = json['characterMedia'];
     final l$$__typename = json['__typename'];
     return Query$Staff$Staff(
       id: (l$id as int),
@@ -626,7 +1067,8 @@ class Query$Staff$Staff {
       homeTown: (l$homeTown as String?),
       bloodType: (l$bloodType as String?),
       isFavourite: (l$isFavourite as bool),
-      siteUrl: (l$siteUrl as String?),
+      yearsActive:
+          (l$yearsActive as List<dynamic>?)?.map((e) => (e as int?)).toList(),
       description: (l$description as String?),
       age: (l$age as int?),
       name: l$name == null
@@ -643,6 +1085,10 @@ class Query$Staff$Staff {
           ? null
           : Query$Staff$Staff$dateOfDeath.fromJson(
               (l$dateOfDeath as Map<String, dynamic>)),
+      characterMedia: l$characterMedia == null
+          ? null
+          : Query$Staff$Staff$characterMedia.fromJson(
+              (l$characterMedia as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -659,7 +1105,7 @@ class Query$Staff$Staff {
 
   final bool isFavourite;
 
-  final String? siteUrl;
+  final List<int?>? yearsActive;
 
   final String? description;
 
@@ -672,6 +1118,8 @@ class Query$Staff$Staff {
   final Query$Staff$Staff$dateOfBirth? dateOfBirth;
 
   final Query$Staff$Staff$dateOfDeath? dateOfDeath;
+
+  final Query$Staff$Staff$characterMedia? characterMedia;
 
   final String $__typename;
 
@@ -689,8 +1137,8 @@ class Query$Staff$Staff {
     _resultData['bloodType'] = l$bloodType;
     final l$isFavourite = isFavourite;
     _resultData['isFavourite'] = l$isFavourite;
-    final l$siteUrl = siteUrl;
-    _resultData['siteUrl'] = l$siteUrl;
+    final l$yearsActive = yearsActive;
+    _resultData['yearsActive'] = l$yearsActive?.map((e) => e).toList();
     final l$description = description;
     _resultData['description'] = l$description;
     final l$age = age;
@@ -703,6 +1151,8 @@ class Query$Staff$Staff {
     _resultData['dateOfBirth'] = l$dateOfBirth?.toJson();
     final l$dateOfDeath = dateOfDeath;
     _resultData['dateOfDeath'] = l$dateOfDeath?.toJson();
+    final l$characterMedia = characterMedia;
+    _resultData['characterMedia'] = l$characterMedia?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -716,13 +1166,14 @@ class Query$Staff$Staff {
     final l$homeTown = homeTown;
     final l$bloodType = bloodType;
     final l$isFavourite = isFavourite;
-    final l$siteUrl = siteUrl;
+    final l$yearsActive = yearsActive;
     final l$description = description;
     final l$age = age;
     final l$name = name;
     final l$image = image;
     final l$dateOfBirth = dateOfBirth;
     final l$dateOfDeath = dateOfDeath;
+    final l$characterMedia = characterMedia;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -731,13 +1182,16 @@ class Query$Staff$Staff {
       l$homeTown,
       l$bloodType,
       l$isFavourite,
-      l$siteUrl,
+      l$yearsActive == null
+          ? null
+          : Object.hashAll(l$yearsActive.map((v) => v)),
       l$description,
       l$age,
       l$name,
       l$image,
       l$dateOfBirth,
       l$dateOfDeath,
+      l$characterMedia,
       l$$__typename,
     ]);
   }
@@ -780,9 +1234,20 @@ class Query$Staff$Staff {
     if (l$isFavourite != lOther$isFavourite) {
       return false;
     }
-    final l$siteUrl = siteUrl;
-    final lOther$siteUrl = other.siteUrl;
-    if (l$siteUrl != lOther$siteUrl) {
+    final l$yearsActive = yearsActive;
+    final lOther$yearsActive = other.yearsActive;
+    if (l$yearsActive != null && lOther$yearsActive != null) {
+      if (l$yearsActive.length != lOther$yearsActive.length) {
+        return false;
+      }
+      for (int i = 0; i < l$yearsActive.length; i++) {
+        final l$yearsActive$entry = l$yearsActive[i];
+        final lOther$yearsActive$entry = lOther$yearsActive[i];
+        if (l$yearsActive$entry != lOther$yearsActive$entry) {
+          return false;
+        }
+      }
+    } else if (l$yearsActive != lOther$yearsActive) {
       return false;
     }
     final l$description = description;
@@ -813,6 +1278,11 @@ class Query$Staff$Staff {
     final l$dateOfDeath = dateOfDeath;
     final lOther$dateOfDeath = other.dateOfDeath;
     if (l$dateOfDeath != lOther$dateOfDeath) {
+      return false;
+    }
+    final l$characterMedia = characterMedia;
+    final lOther$characterMedia = other.characterMedia;
+    if (l$characterMedia != lOther$characterMedia) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -848,19 +1318,21 @@ abstract class CopyWith$Query$Staff$Staff<TRes> {
     String? homeTown,
     String? bloodType,
     bool? isFavourite,
-    String? siteUrl,
+    List<int?>? yearsActive,
     String? description,
     int? age,
     Query$Staff$Staff$name? name,
     Query$Staff$Staff$image? image,
     Query$Staff$Staff$dateOfBirth? dateOfBirth,
     Query$Staff$Staff$dateOfDeath? dateOfDeath,
+    Query$Staff$Staff$characterMedia? characterMedia,
     String? $__typename,
   });
   CopyWith$Query$Staff$Staff$name<TRes> get name;
   CopyWith$Query$Staff$Staff$image<TRes> get image;
   CopyWith$Query$Staff$Staff$dateOfBirth<TRes> get dateOfBirth;
   CopyWith$Query$Staff$Staff$dateOfDeath<TRes> get dateOfDeath;
+  CopyWith$Query$Staff$Staff$characterMedia<TRes> get characterMedia;
 }
 
 class _CopyWithImpl$Query$Staff$Staff<TRes>
@@ -883,13 +1355,14 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
     Object? homeTown = _undefined,
     Object? bloodType = _undefined,
     Object? isFavourite = _undefined,
-    Object? siteUrl = _undefined,
+    Object? yearsActive = _undefined,
     Object? description = _undefined,
     Object? age = _undefined,
     Object? name = _undefined,
     Object? image = _undefined,
     Object? dateOfBirth = _undefined,
     Object? dateOfDeath = _undefined,
+    Object? characterMedia = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Staff$Staff(
@@ -906,8 +1379,9 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
         isFavourite: isFavourite == _undefined || isFavourite == null
             ? _instance.isFavourite
             : (isFavourite as bool),
-        siteUrl:
-            siteUrl == _undefined ? _instance.siteUrl : (siteUrl as String?),
+        yearsActive: yearsActive == _undefined
+            ? _instance.yearsActive
+            : (yearsActive as List<int?>?),
         description: description == _undefined
             ? _instance.description
             : (description as String?),
@@ -924,6 +1398,9 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
         dateOfDeath: dateOfDeath == _undefined
             ? _instance.dateOfDeath
             : (dateOfDeath as Query$Staff$Staff$dateOfDeath?),
+        characterMedia: characterMedia == _undefined
+            ? _instance.characterMedia
+            : (characterMedia as Query$Staff$Staff$characterMedia?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -957,6 +1434,14 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
         : CopyWith$Query$Staff$Staff$dateOfDeath(
             local$dateOfDeath, (e) => call(dateOfDeath: e));
   }
+
+  CopyWith$Query$Staff$Staff$characterMedia<TRes> get characterMedia {
+    final local$characterMedia = _instance.characterMedia;
+    return local$characterMedia == null
+        ? CopyWith$Query$Staff$Staff$characterMedia.stub(_then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia(
+            local$characterMedia, (e) => call(characterMedia: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$Staff$Staff<TRes>
@@ -972,13 +1457,14 @@ class _CopyWithStubImpl$Query$Staff$Staff<TRes>
     String? homeTown,
     String? bloodType,
     bool? isFavourite,
-    String? siteUrl,
+    List<int?>? yearsActive,
     String? description,
     int? age,
     Query$Staff$Staff$name? name,
     Query$Staff$Staff$image? image,
     Query$Staff$Staff$dateOfBirth? dateOfBirth,
     Query$Staff$Staff$dateOfDeath? dateOfDeath,
+    Query$Staff$Staff$characterMedia? characterMedia,
     String? $__typename,
   }) =>
       _res;
@@ -990,6 +1476,8 @@ class _CopyWithStubImpl$Query$Staff$Staff<TRes>
       CopyWith$Query$Staff$Staff$dateOfBirth.stub(_res);
   CopyWith$Query$Staff$Staff$dateOfDeath<TRes> get dateOfDeath =>
       CopyWith$Query$Staff$Staff$dateOfDeath.stub(_res);
+  CopyWith$Query$Staff$Staff$characterMedia<TRes> get characterMedia =>
+      CopyWith$Query$Staff$Staff$characterMedia.stub(_res);
 }
 
 class Query$Staff$Staff$name {
@@ -1551,6 +2039,2116 @@ class _CopyWithStubImpl$Query$Staff$Staff$dateOfDeath<TRes>
     int? year,
     int? month,
     int? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia {
+  Query$Staff$Staff$characterMedia({
+    this.pageInfo,
+    this.edges,
+    this.$__typename = 'MediaConnection',
+  });
+
+  factory Query$Staff$Staff$characterMedia.fromJson(Map<String, dynamic> json) {
+    final l$pageInfo = json['pageInfo'];
+    final l$edges = json['edges'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia(
+      pageInfo: l$pageInfo == null
+          ? null
+          : Query$Staff$Staff$characterMedia$pageInfo.fromJson(
+              (l$pageInfo as Map<String, dynamic>)),
+      edges: (l$edges as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$Staff$Staff$characterMedia$edges.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$Staff$Staff$characterMedia$pageInfo? pageInfo;
+
+  final List<Query$Staff$Staff$characterMedia$edges?>? edges;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$pageInfo = pageInfo;
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    final l$edges = edges;
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$pageInfo = pageInfo;
+    final l$edges = edges;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$pageInfo,
+      l$edges == null ? null : Object.hashAll(l$edges.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$pageInfo = pageInfo;
+    final lOther$pageInfo = other.pageInfo;
+    if (l$pageInfo != lOther$pageInfo) {
+      return false;
+    }
+    final l$edges = edges;
+    final lOther$edges = other.edges;
+    if (l$edges != null && lOther$edges != null) {
+      if (l$edges.length != lOther$edges.length) {
+        return false;
+      }
+      for (int i = 0; i < l$edges.length; i++) {
+        final l$edges$entry = l$edges[i];
+        final lOther$edges$entry = lOther$edges[i];
+        if (l$edges$entry != lOther$edges$entry) {
+          return false;
+        }
+      }
+    } else if (l$edges != lOther$edges) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia
+    on Query$Staff$Staff$characterMedia {
+  CopyWith$Query$Staff$Staff$characterMedia<Query$Staff$Staff$characterMedia>
+      get copyWith => CopyWith$Query$Staff$Staff$characterMedia(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia<TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia(
+    Query$Staff$Staff$characterMedia instance,
+    TRes Function(Query$Staff$Staff$characterMedia) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia.stub(TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia;
+
+  TRes call({
+    Query$Staff$Staff$characterMedia$pageInfo? pageInfo,
+    List<Query$Staff$Staff$characterMedia$edges?>? edges,
+    String? $__typename,
+  });
+  CopyWith$Query$Staff$Staff$characterMedia$pageInfo<TRes> get pageInfo;
+  TRes edges(
+      Iterable<Query$Staff$Staff$characterMedia$edges?>? Function(
+              Iterable<
+                  CopyWith$Query$Staff$Staff$characterMedia$edges<
+                      Query$Staff$Staff$characterMedia$edges>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? pageInfo = _undefined,
+    Object? edges = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia(
+        pageInfo: pageInfo == _undefined
+            ? _instance.pageInfo
+            : (pageInfo as Query$Staff$Staff$characterMedia$pageInfo?),
+        edges: edges == _undefined
+            ? _instance.edges
+            : (edges as List<Query$Staff$Staff$characterMedia$edges?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$Staff$Staff$characterMedia$pageInfo<TRes> get pageInfo {
+    final local$pageInfo = _instance.pageInfo;
+    return local$pageInfo == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$pageInfo.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$pageInfo(
+            local$pageInfo, (e) => call(pageInfo: e));
+  }
+
+  TRes edges(
+          Iterable<Query$Staff$Staff$characterMedia$edges?>? Function(
+                  Iterable<
+                      CopyWith$Query$Staff$Staff$characterMedia$edges<
+                          Query$Staff$Staff$characterMedia$edges>?>?)
+              _fn) =>
+      call(
+          edges: _fn(_instance.edges?.map((e) => e == null
+              ? null
+              : CopyWith$Query$Staff$Staff$characterMedia$edges(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia(this._res);
+
+  TRes _res;
+
+  call({
+    Query$Staff$Staff$characterMedia$pageInfo? pageInfo,
+    List<Query$Staff$Staff$characterMedia$edges?>? edges,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$Staff$Staff$characterMedia$pageInfo<TRes> get pageInfo =>
+      CopyWith$Query$Staff$Staff$characterMedia$pageInfo.stub(_res);
+  edges(_fn) => _res;
+}
+
+class Query$Staff$Staff$characterMedia$pageInfo {
+  Query$Staff$Staff$characterMedia$pageInfo({
+    this.total,
+    this.perPage,
+    this.currentPage,
+    this.lastPage,
+    this.hasNextPage,
+    this.$__typename = 'PageInfo',
+  });
+
+  factory Query$Staff$Staff$characterMedia$pageInfo.fromJson(
+      Map<String, dynamic> json) {
+    final l$total = json['total'];
+    final l$perPage = json['perPage'];
+    final l$currentPage = json['currentPage'];
+    final l$lastPage = json['lastPage'];
+    final l$hasNextPage = json['hasNextPage'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$pageInfo(
+      total: (l$total as int?),
+      perPage: (l$perPage as int?),
+      currentPage: (l$currentPage as int?),
+      lastPage: (l$lastPage as int?),
+      hasNextPage: (l$hasNextPage as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? total;
+
+  final int? perPage;
+
+  final int? currentPage;
+
+  final int? lastPage;
+
+  final bool? hasNextPage;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$total = total;
+    _resultData['total'] = l$total;
+    final l$perPage = perPage;
+    _resultData['perPage'] = l$perPage;
+    final l$currentPage = currentPage;
+    _resultData['currentPage'] = l$currentPage;
+    final l$lastPage = lastPage;
+    _resultData['lastPage'] = l$lastPage;
+    final l$hasNextPage = hasNextPage;
+    _resultData['hasNextPage'] = l$hasNextPage;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$total = total;
+    final l$perPage = perPage;
+    final l$currentPage = currentPage;
+    final l$lastPage = lastPage;
+    final l$hasNextPage = hasNextPage;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$total,
+      l$perPage,
+      l$currentPage,
+      l$lastPage,
+      l$hasNextPage,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$pageInfo) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$total = total;
+    final lOther$total = other.total;
+    if (l$total != lOther$total) {
+      return false;
+    }
+    final l$perPage = perPage;
+    final lOther$perPage = other.perPage;
+    if (l$perPage != lOther$perPage) {
+      return false;
+    }
+    final l$currentPage = currentPage;
+    final lOther$currentPage = other.currentPage;
+    if (l$currentPage != lOther$currentPage) {
+      return false;
+    }
+    final l$lastPage = lastPage;
+    final lOther$lastPage = other.lastPage;
+    if (l$lastPage != lOther$lastPage) {
+      return false;
+    }
+    final l$hasNextPage = hasNextPage;
+    final lOther$hasNextPage = other.hasNextPage;
+    if (l$hasNextPage != lOther$hasNextPage) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$pageInfo
+    on Query$Staff$Staff$characterMedia$pageInfo {
+  CopyWith$Query$Staff$Staff$characterMedia$pageInfo<
+          Query$Staff$Staff$characterMedia$pageInfo>
+      get copyWith => CopyWith$Query$Staff$Staff$characterMedia$pageInfo(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$pageInfo<TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$pageInfo(
+    Query$Staff$Staff$characterMedia$pageInfo instance,
+    TRes Function(Query$Staff$Staff$characterMedia$pageInfo) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$pageInfo;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$pageInfo.stub(TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$pageInfo;
+
+  TRes call({
+    int? total,
+    int? perPage,
+    int? currentPage,
+    int? lastPage,
+    bool? hasNextPage,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$pageInfo<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia$pageInfo<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$pageInfo(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$pageInfo _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$pageInfo) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? total = _undefined,
+    Object? perPage = _undefined,
+    Object? currentPage = _undefined,
+    Object? lastPage = _undefined,
+    Object? hasNextPage = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$pageInfo(
+        total: total == _undefined ? _instance.total : (total as int?),
+        perPage: perPage == _undefined ? _instance.perPage : (perPage as int?),
+        currentPage: currentPage == _undefined
+            ? _instance.currentPage
+            : (currentPage as int?),
+        lastPage:
+            lastPage == _undefined ? _instance.lastPage : (lastPage as int?),
+        hasNextPage: hasNextPage == _undefined
+            ? _instance.hasNextPage
+            : (hasNextPage as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$pageInfo<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia$pageInfo<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$pageInfo(this._res);
+
+  TRes _res;
+
+  call({
+    int? total,
+    int? perPage,
+    int? currentPage,
+    int? lastPage,
+    bool? hasNextPage,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges {
+  Query$Staff$Staff$characterMedia$edges({
+    this.characterRole,
+    this.characterName,
+    this.node,
+    this.characters,
+    this.$__typename = 'MediaEdge',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges.fromJson(
+      Map<String, dynamic> json) {
+    final l$characterRole = json['characterRole'];
+    final l$characterName = json['characterName'];
+    final l$node = json['node'];
+    final l$characters = json['characters'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges(
+      characterRole: l$characterRole == null
+          ? null
+          : fromJson$Enum$CharacterRole((l$characterRole as String)),
+      characterName: (l$characterName as String?),
+      node: l$node == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$node.fromJson(
+              (l$node as Map<String, dynamic>)),
+      characters: (l$characters as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$Staff$Staff$characterMedia$edges$characters.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$CharacterRole? characterRole;
+
+  final String? characterName;
+
+  final Query$Staff$Staff$characterMedia$edges$node? node;
+
+  final List<Query$Staff$Staff$characterMedia$edges$characters?>? characters;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$characterRole = characterRole;
+    _resultData['characterRole'] = l$characterRole == null
+        ? null
+        : toJson$Enum$CharacterRole(l$characterRole);
+    final l$characterName = characterName;
+    _resultData['characterName'] = l$characterName;
+    final l$node = node;
+    _resultData['node'] = l$node?.toJson();
+    final l$characters = characters;
+    _resultData['characters'] = l$characters?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$characterRole = characterRole;
+    final l$characterName = characterName;
+    final l$node = node;
+    final l$characters = characters;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$characterRole,
+      l$characterName,
+      l$node,
+      l$characters == null ? null : Object.hashAll(l$characters.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$characterRole = characterRole;
+    final lOther$characterRole = other.characterRole;
+    if (l$characterRole != lOther$characterRole) {
+      return false;
+    }
+    final l$characterName = characterName;
+    final lOther$characterName = other.characterName;
+    if (l$characterName != lOther$characterName) {
+      return false;
+    }
+    final l$node = node;
+    final lOther$node = other.node;
+    if (l$node != lOther$node) {
+      return false;
+    }
+    final l$characters = characters;
+    final lOther$characters = other.characters;
+    if (l$characters != null && lOther$characters != null) {
+      if (l$characters.length != lOther$characters.length) {
+        return false;
+      }
+      for (int i = 0; i < l$characters.length; i++) {
+        final l$characters$entry = l$characters[i];
+        final lOther$characters$entry = lOther$characters[i];
+        if (l$characters$entry != lOther$characters$entry) {
+          return false;
+        }
+      }
+    } else if (l$characters != lOther$characters) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges
+    on Query$Staff$Staff$characterMedia$edges {
+  CopyWith$Query$Staff$Staff$characterMedia$edges<
+          Query$Staff$Staff$characterMedia$edges>
+      get copyWith => CopyWith$Query$Staff$Staff$characterMedia$edges(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges<TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges(
+    Query$Staff$Staff$characterMedia$edges instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges.stub(TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges;
+
+  TRes call({
+    Enum$CharacterRole? characterRole,
+    String? characterName,
+    Query$Staff$Staff$characterMedia$edges$node? node,
+    List<Query$Staff$Staff$characterMedia$edges$characters?>? characters,
+    String? $__typename,
+  });
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node;
+  TRes characters(
+      Iterable<Query$Staff$Staff$characterMedia$edges$characters?>? Function(
+              Iterable<
+                  CopyWith$Query$Staff$Staff$characterMedia$edges$characters<
+                      Query$Staff$Staff$characterMedia$edges$characters>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia$edges<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? characterRole = _undefined,
+    Object? characterName = _undefined,
+    Object? node = _undefined,
+    Object? characters = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges(
+        characterRole: characterRole == _undefined
+            ? _instance.characterRole
+            : (characterRole as Enum$CharacterRole?),
+        characterName: characterName == _undefined
+            ? _instance.characterName
+            : (characterName as String?),
+        node: node == _undefined
+            ? _instance.node
+            : (node as Query$Staff$Staff$characterMedia$edges$node?),
+        characters: characters == _undefined
+            ? _instance.characters
+            : (characters
+                as List<Query$Staff$Staff$characterMedia$edges$characters?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node {
+    final local$node = _instance.node;
+    return local$node == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$node.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$node(
+            local$node, (e) => call(node: e));
+  }
+
+  TRes characters(
+          Iterable<Query$Staff$Staff$characterMedia$edges$characters?>? Function(
+                  Iterable<
+                      CopyWith$Query$Staff$Staff$characterMedia$edges$characters<
+                          Query$Staff$Staff$characterMedia$edges$characters>?>?)
+              _fn) =>
+      call(
+          characters: _fn(_instance.characters?.map((e) => e == null
+              ? null
+              : CopyWith$Query$Staff$Staff$characterMedia$edges$characters(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia$edges<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$CharacterRole? characterRole,
+    String? characterName,
+    Query$Staff$Staff$characterMedia$edges$node? node,
+    List<Query$Staff$Staff$characterMedia$edges$characters?>? characters,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node =>
+      CopyWith$Query$Staff$Staff$characterMedia$edges$node.stub(_res);
+  characters(_fn) => _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges$node
+    implements Fragment$BasicMedia {
+  Query$Staff$Staff$characterMedia$edges$node({
+    this.id,
+    this.type,
+    this.isAdult,
+    this.genres,
+    this.episodes,
+    this.format,
+    this.chapters,
+    this.title,
+    this.coverImage,
+    this.description,
+    this.$__typename = 'Media',
+    this.startDate,
+    this.mediaListEntry,
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$node.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$type = json['type'];
+    final l$isAdult = json['isAdult'];
+    final l$genres = json['genres'];
+    final l$episodes = json['episodes'];
+    final l$format = json['format'];
+    final l$chapters = json['chapters'];
+    final l$title = json['title'];
+    final l$coverImage = json['coverImage'];
+    final l$description = json['description'];
+    final l$$__typename = json['__typename'];
+    final l$startDate = json['startDate'];
+    final l$mediaListEntry = json['mediaListEntry'];
+    return Query$Staff$Staff$characterMedia$edges$node(
+      id: (l$id as int?),
+      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
+      isAdult: (l$isAdult as bool?),
+      genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
+      episodes: (l$episodes as int?),
+      format: l$format == null
+          ? null
+          : fromJson$Enum$MediaFormat((l$format as String)),
+      chapters: (l$chapters as int?),
+      title: l$title == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$node$title.fromJson(
+              (l$title as Map<String, dynamic>)),
+      coverImage: l$coverImage == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$node$coverImage.fromJson(
+              (l$coverImage as Map<String, dynamic>)),
+      description: (l$description as String?),
+      $__typename: (l$$__typename as String),
+      startDate: l$startDate == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$node$startDate.fromJson(
+              (l$startDate as Map<String, dynamic>)),
+      mediaListEntry: l$mediaListEntry == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$node$mediaListEntry.fromJson(
+              (l$mediaListEntry as Map<String, dynamic>)),
+    );
+  }
+
+  final int? id;
+
+  final Enum$MediaType? type;
+
+  final bool? isAdult;
+
+  final List<String?>? genres;
+
+  final int? episodes;
+
+  final Enum$MediaFormat? format;
+
+  final int? chapters;
+
+  final Query$Staff$Staff$characterMedia$edges$node$title? title;
+
+  final Query$Staff$Staff$characterMedia$edges$node$coverImage? coverImage;
+
+  final String? description;
+
+  final String $__typename;
+
+  final Query$Staff$Staff$characterMedia$edges$node$startDate? startDate;
+
+  final Query$Staff$Staff$characterMedia$edges$node$mediaListEntry?
+      mediaListEntry;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$type = type;
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    final l$isAdult = isAdult;
+    _resultData['isAdult'] = l$isAdult;
+    final l$genres = genres;
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
+    final l$episodes = episodes;
+    _resultData['episodes'] = l$episodes;
+    final l$format = format;
+    _resultData['format'] =
+        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+    final l$chapters = chapters;
+    _resultData['chapters'] = l$chapters;
+    final l$title = title;
+    _resultData['title'] = l$title?.toJson();
+    final l$coverImage = coverImage;
+    _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$description = description;
+    _resultData['description'] = l$description;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$startDate = startDate;
+    _resultData['startDate'] = l$startDate?.toJson();
+    final l$mediaListEntry = mediaListEntry;
+    _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$type = type;
+    final l$isAdult = isAdult;
+    final l$genres = genres;
+    final l$episodes = episodes;
+    final l$format = format;
+    final l$chapters = chapters;
+    final l$title = title;
+    final l$coverImage = coverImage;
+    final l$description = description;
+    final l$$__typename = $__typename;
+    final l$startDate = startDate;
+    final l$mediaListEntry = mediaListEntry;
+    return Object.hashAll([
+      l$id,
+      l$type,
+      l$isAdult,
+      l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
+      l$episodes,
+      l$format,
+      l$chapters,
+      l$title,
+      l$coverImage,
+      l$description,
+      l$$__typename,
+      l$startDate,
+      l$mediaListEntry,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$node) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$isAdult = isAdult;
+    final lOther$isAdult = other.isAdult;
+    if (l$isAdult != lOther$isAdult) {
+      return false;
+    }
+    final l$genres = genres;
+    final lOther$genres = other.genres;
+    if (l$genres != null && lOther$genres != null) {
+      if (l$genres.length != lOther$genres.length) {
+        return false;
+      }
+      for (int i = 0; i < l$genres.length; i++) {
+        final l$genres$entry = l$genres[i];
+        final lOther$genres$entry = lOther$genres[i];
+        if (l$genres$entry != lOther$genres$entry) {
+          return false;
+        }
+      }
+    } else if (l$genres != lOther$genres) {
+      return false;
+    }
+    final l$episodes = episodes;
+    final lOther$episodes = other.episodes;
+    if (l$episodes != lOther$episodes) {
+      return false;
+    }
+    final l$format = format;
+    final lOther$format = other.format;
+    if (l$format != lOther$format) {
+      return false;
+    }
+    final l$chapters = chapters;
+    final lOther$chapters = other.chapters;
+    if (l$chapters != lOther$chapters) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$coverImage = coverImage;
+    final lOther$coverImage = other.coverImage;
+    if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$description = description;
+    final lOther$description = other.description;
+    if (l$description != lOther$description) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$startDate = startDate;
+    final lOther$startDate = other.startDate;
+    if (l$startDate != lOther$startDate) {
+      return false;
+    }
+    final l$mediaListEntry = mediaListEntry;
+    final lOther$mediaListEntry = other.mediaListEntry;
+    if (l$mediaListEntry != lOther$mediaListEntry) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$node
+    on Query$Staff$Staff$characterMedia$edges$node {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node<
+          Query$Staff$Staff$characterMedia$edges$node>
+      get copyWith => CopyWith$Query$Staff$Staff$characterMedia$edges$node(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node(
+    Query$Staff$Staff$characterMedia$edges$node instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$node) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node.stub(TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node;
+
+  TRes call({
+    int? id,
+    Enum$MediaType? type,
+    bool? isAdult,
+    List<String?>? genres,
+    int? episodes,
+    Enum$MediaFormat? format,
+    int? chapters,
+    Query$Staff$Staff$characterMedia$edges$node$title? title,
+    Query$Staff$Staff$characterMedia$edges$node$coverImage? coverImage,
+    String? description,
+    String? $__typename,
+    Query$Staff$Staff$characterMedia$edges$node$startDate? startDate,
+    Query$Staff$Staff$characterMedia$edges$node$mediaListEntry? mediaListEntry,
+  });
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
+      get coverImage;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
+      get startDate;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<TRes>
+      get mediaListEntry;
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$node _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$node) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? type = _undefined,
+    Object? isAdult = _undefined,
+    Object? genres = _undefined,
+    Object? episodes = _undefined,
+    Object? format = _undefined,
+    Object? chapters = _undefined,
+    Object? title = _undefined,
+    Object? coverImage = _undefined,
+    Object? description = _undefined,
+    Object? $__typename = _undefined,
+    Object? startDate = _undefined,
+    Object? mediaListEntry = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$node(
+        id: id == _undefined ? _instance.id : (id as int?),
+        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
+        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
+        genres: genres == _undefined
+            ? _instance.genres
+            : (genres as List<String?>?),
+        episodes:
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
+        format: format == _undefined
+            ? _instance.format
+            : (format as Enum$MediaFormat?),
+        chapters:
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
+        title: title == _undefined
+            ? _instance.title
+            : (title as Query$Staff$Staff$characterMedia$edges$node$title?),
+        coverImage: coverImage == _undefined
+            ? _instance.coverImage
+            : (coverImage
+                as Query$Staff$Staff$characterMedia$edges$node$coverImage?),
+        description: description == _undefined
+            ? _instance.description
+            : (description as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+        startDate: startDate == _undefined
+            ? _instance.startDate
+            : (startDate
+                as Query$Staff$Staff$characterMedia$edges$node$startDate?),
+        mediaListEntry: mediaListEntry == _undefined
+            ? _instance.mediaListEntry
+            : (mediaListEntry
+                as Query$Staff$Staff$characterMedia$edges$node$mediaListEntry?),
+      ));
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title {
+    final local$title = _instance.title;
+    return local$title == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$node$title.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$node$title(
+            local$title, (e) => call(title: e));
+  }
+
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
+      get coverImage {
+    final local$coverImage = _instance.coverImage;
+    return local$coverImage == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage(
+            local$coverImage, (e) => call(coverImage: e));
+  }
+
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
+      get startDate {
+    final local$startDate = _instance.startDate;
+    return local$startDate == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate(
+            local$startDate, (e) => call(startDate: e));
+  }
+
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<TRes>
+      get mediaListEntry {
+    final local$mediaListEntry = _instance.mediaListEntry;
+    return local$mediaListEntry == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry
+            .stub(_then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+            local$mediaListEntry, (e) => call(mediaListEntry: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
+    implements CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Enum$MediaType? type,
+    bool? isAdult,
+    List<String?>? genres,
+    int? episodes,
+    Enum$MediaFormat? format,
+    int? chapters,
+    Query$Staff$Staff$characterMedia$edges$node$title? title,
+    Query$Staff$Staff$characterMedia$edges$node$coverImage? coverImage,
+    String? description,
+    String? $__typename,
+    Query$Staff$Staff$characterMedia$edges$node$startDate? startDate,
+    Query$Staff$Staff$characterMedia$edges$node$mediaListEntry? mediaListEntry,
+  }) =>
+      _res;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title =>
+      CopyWith$Query$Staff$Staff$characterMedia$edges$node$title.stub(_res);
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
+      get coverImage =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage.stub(
+              _res);
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
+      get startDate =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate.stub(
+              _res);
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<TRes>
+      get mediaListEntry =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry
+              .stub(_res);
+}
+
+class Query$Staff$Staff$characterMedia$edges$node$title
+    implements Fragment$BasicMedia$title {
+  Query$Staff$Staff$characterMedia$edges$node$title({
+    this.userPreferred,
+    this.$__typename = 'MediaTitle',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$node$title.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$node$title(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$node$title) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$node$title
+    on Query$Staff$Staff$characterMedia$edges$node$title {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<
+          Query$Staff$Staff$characterMedia$edges$node$title>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$title(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$title(
+    Query$Staff$Staff$characterMedia$edges$node$title instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$node$title) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$title;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$title.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$title;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$title<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$title(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$node$title _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$node$title) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$node$title(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$title<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$title(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges$node$coverImage
+    implements Fragment$BasicMedia$coverImage {
+  Query$Staff$Staff$characterMedia$edges$node$coverImage({
+    this.large,
+    this.$__typename = 'MediaCoverImage',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$node$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$node$coverImage(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$node$coverImage) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$node$coverImage
+    on Query$Staff$Staff$characterMedia$edges$node$coverImage {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<
+          Query$Staff$Staff$characterMedia$edges$node$coverImage>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage(
+    Query$Staff$Staff$characterMedia$edges$node$coverImage instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$node$coverImage) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$node$coverImage _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$node$coverImage)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$node$coverImage(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges$node$startDate {
+  Query$Staff$Staff$characterMedia$edges$node$startDate({
+    this.year,
+    this.$__typename = 'FuzzyDate',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$node$startDate.fromJson(
+      Map<String, dynamic> json) {
+    final l$year = json['year'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$node$startDate(
+      year: (l$year as int?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int? year;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$year = year;
+    _resultData['year'] = l$year;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$year = year;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$year,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$node$startDate) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$year = year;
+    final lOther$year = other.year;
+    if (l$year != lOther$year) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$node$startDate
+    on Query$Staff$Staff$characterMedia$edges$node$startDate {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<
+          Query$Staff$Staff$characterMedia$edges$node$startDate>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate(
+    Query$Staff$Staff$characterMedia$edges$node$startDate instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$node$startDate) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$startDate;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$startDate;
+
+  TRes call({
+    int? year,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$startDate(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$node$startDate _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$node$startDate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? year = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$node$startDate(
+        year: year == _undefined ? _instance.year : (year as int?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$startDate<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$startDate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? year,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges$node$mediaListEntry {
+  Query$Staff$Staff$characterMedia$edges$node$mediaListEntry({
+    required this.id,
+    this.status,
+    this.$__typename = 'MediaList',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$node$mediaListEntry.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$status = json['status'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+      id: (l$id as int),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaListStatus((l$status as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Enum$MediaListStatus? status;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$status = status;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$status,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other
+            is Query$Staff$Staff$characterMedia$edges$node$mediaListEntry) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry
+    on Query$Staff$Staff$characterMedia$edges$node$mediaListEntry {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<
+          Query$Staff$Staff$characterMedia$edges$node$mediaListEntry>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+    Query$Staff$Staff$characterMedia$edges$node$mediaListEntry instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$node$mediaListEntry)
+        then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry;
+
+  TRes call({
+    int? id,
+    Enum$MediaListStatus? status,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<
+            TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$node$mediaListEntry _instance;
+
+  final TRes Function(
+      Query$Staff$Staff$characterMedia$edges$node$mediaListEntry) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? status = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaListStatus?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry<
+            TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$mediaListEntry(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Enum$MediaListStatus? status,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges$characters {
+  Query$Staff$Staff$characterMedia$edges$characters({
+    required this.id,
+    this.name,
+    this.image,
+    this.$__typename = 'Character',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$characters.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$image = json['image'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$characters(
+      id: (l$id as int),
+      name: l$name == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$characters$name.fromJson(
+              (l$name as Map<String, dynamic>)),
+      image: l$image == null
+          ? null
+          : Query$Staff$Staff$characterMedia$edges$characters$image.fromJson(
+              (l$image as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Query$Staff$Staff$characterMedia$edges$characters$name? name;
+
+  final Query$Staff$Staff$characterMedia$edges$characters$image? image;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name?.toJson();
+    final l$image = image;
+    _resultData['image'] = l$image?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$image = image;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$image,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$characters) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$image = image;
+    final lOther$image = other.image;
+    if (l$image != lOther$image) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$characters
+    on Query$Staff$Staff$characterMedia$edges$characters {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters<
+          Query$Staff$Staff$characterMedia$edges$characters>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$characters(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$characters<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$characters(
+    Query$Staff$Staff$characterMedia$edges$characters instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$characters) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$characters.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters;
+
+  TRes call({
+    int? id,
+    Query$Staff$Staff$characterMedia$edges$characters$name? name,
+    Query$Staff$Staff$characterMedia$edges$characters$image? image,
+    String? $__typename,
+  });
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes>
+      get name;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<TRes>
+      get image;
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$characters<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$characters _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$characters) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? image = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$characters(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined
+            ? _instance.name
+            : (name as Query$Staff$Staff$characterMedia$edges$characters$name?),
+        image: image == _undefined
+            ? _instance.image
+            : (image
+                as Query$Staff$Staff$characterMedia$edges$characters$image?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes>
+      get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name(
+            local$name, (e) => call(name: e));
+  }
+
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<TRes>
+      get image {
+    final local$image = _instance.image;
+    return local$image == null
+        ? CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image.stub(
+            _then(_instance))
+        : CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image(
+            local$image, (e) => call(image: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$characters<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Query$Staff$Staff$characterMedia$edges$characters$name? name,
+    Query$Staff$Staff$characterMedia$edges$characters$image? image,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes>
+      get name =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name.stub(
+              _res);
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<TRes>
+      get image =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image.stub(
+              _res);
+}
+
+class Query$Staff$Staff$characterMedia$edges$characters$name {
+  Query$Staff$Staff$characterMedia$edges$characters$name({
+    this.userPreferred,
+    this.$__typename = 'CharacterName',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$characters$name.fromJson(
+      Map<String, dynamic> json) {
+    final l$userPreferred = json['userPreferred'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$characters$name(
+      userPreferred: (l$userPreferred as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? userPreferred;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$userPreferred = userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$userPreferred = userPreferred;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$userPreferred,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$characters$name) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userPreferred = userPreferred;
+    final lOther$userPreferred = other.userPreferred;
+    if (l$userPreferred != lOther$userPreferred) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$characters$name
+    on Query$Staff$Staff$characterMedia$edges$characters$name {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<
+          Query$Staff$Staff$characterMedia$edges$characters$name>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name(
+    Query$Staff$Staff$characterMedia$edges$characters$name instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$characters$name) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters$name;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters$name;
+
+  TRes call({
+    String? userPreferred,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters$name<TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters$name(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$characters$name _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$characters$name)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? userPreferred = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$characters$name(
+        userPreferred: userPreferred == _undefined
+            ? _instance.userPreferred
+            : (userPreferred as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters$name<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters$name(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? userPreferred,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Staff$Staff$characterMedia$edges$characters$image {
+  Query$Staff$Staff$characterMedia$edges$characters$image({
+    this.large,
+    this.$__typename = 'CharacterImage',
+  });
+
+  factory Query$Staff$Staff$characterMedia$edges$characters$image.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Query$Staff$Staff$characterMedia$edges$characters$image(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Staff$Staff$characterMedia$edges$characters$image) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Staff$Staff$characterMedia$edges$characters$image
+    on Query$Staff$Staff$characterMedia$edges$characters$image {
+  CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<
+          Query$Staff$Staff$characterMedia$edges$characters$image>
+      get copyWith =>
+          CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<
+    TRes> {
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image(
+    Query$Staff$Staff$characterMedia$edges$characters$image instance,
+    TRes Function(Query$Staff$Staff$characterMedia$edges$characters$image) then,
+  ) = _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters$image;
+
+  factory CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters$image;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters$image<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<TRes> {
+  _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters$image(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Staff$Staff$characterMedia$edges$characters$image _instance;
+
+  final TRes Function(Query$Staff$Staff$characterMedia$edges$characters$image)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Staff$Staff$characterMedia$edges$characters$image(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters$image<
+        TRes>
+    implements
+        CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<TRes> {
+  _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters$image(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
     String? $__typename,
   }) =>
       _res;

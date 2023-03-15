@@ -21,8 +21,10 @@ class Graphql<T> extends StatelessWidget {
     }
 
     if (hook.result.hasException) {
-      if (hook.result.exception!.linkException is ServerException) {
-        var message = (hook.result.exception as ServerException)
+      if (hook.result.exception!.linkException != null &&
+          hook.result.exception!.linkException is ServerException) {
+        print(hook.result.exception?.linkException);
+        var message = (hook.result.exception!.linkException as ServerException)
             .parsedResponse
             ?.errors
             ?.first

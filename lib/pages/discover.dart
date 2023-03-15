@@ -21,10 +21,10 @@ class Discovery extends HookWidget {
       Options$Query$Discovery(
         variables: Variables$Query$Discovery(
           year: date.year,
+          season: date.season,
           nextYear: date.nextYear,
           nextSeason: date.nextSeason,
-          type: Enum$MediaType.ANIME,
-          season: date.season,
+          mediaType: Enum$MediaType.ANIME,
         ),
       ),
     );
@@ -34,13 +34,6 @@ class Discovery extends HookWidget {
         fetchPolicy: FetchPolicy.cacheFirst,
       ),
     );
-
-    if (hook.result.isLoading) {
-      return const Center(
-        child: CircularProgressIndicator.adaptive(),
-      );
-    }
-
     // print(date);
 
     // print(hook.result.exception);

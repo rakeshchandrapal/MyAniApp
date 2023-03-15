@@ -25,10 +25,10 @@ class DetailedListCards extends HookWidget {
     this.shrinkWrap = false,
     this.underTitle,
   }) : assert(
-            (list is List<Fragment$BasicMedia> ||
-                    list is List<Fragment$MediaListEntry>) ==
-                false,
-            'Invalid List');
+            (list is List<Fragment$BasicMedia> != true &&
+                    list is List<Fragment$MediaListEntry>) !=
+                true,
+            list);
 
   @override
   Widget build(BuildContext context) {
@@ -197,10 +197,10 @@ class SimpleCards extends HookWidget {
     this.shrinkWrap = false,
     this.underTitle,
   }) : assert(
-            (list is List<Fragment$BasicMedia> ||
-                    list is List<Fragment$MediaListEntry>) ==
-                false,
-            'Invalid List');
+            (list is List<Fragment$BasicMedia> != true &&
+                    list is List<Fragment$MediaListEntry>) !=
+                true,
+            list);
 
   @override
   Widget build(BuildContext context) {

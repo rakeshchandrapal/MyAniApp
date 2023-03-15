@@ -1,7 +1,6 @@
 fragment BasicMedia on Media {
   id
   type
-  description(asHtml: true)
   isAdult
   genres
   episodes
@@ -13,6 +12,7 @@ fragment BasicMedia on Media {
   coverImage {
     large
   }
+  description(asHtml: true)
 }
 
 fragment MediaListEntry on MediaList {
@@ -278,47 +278,36 @@ query Home($page: Int = 1, $perPage: Int, $userId: Int!, $type: MediaType) {
   }
 }
 
-query Discovery($page: Int = 1, $perPage: Int, $type: MediaType, $season: MediaSeason, $year: Int, $nextSeason: MediaSeason, $nextYear: Int) {
+query Discovery(
+  $page: Int = 1
+  $perPage: Int
+  $mediaType: MediaType = ANIME
+  $season: MediaSeason
+  $year: Int
+  $nextSeason: MediaSeason
+  $nextYear: Int
+) {
   popular: Page(page: $page, perPage: $perPage) {
-    media(sort: POPULARITY_DESC, type: $type, isAdult: false) {
+    media(sort: POPULARITY_DESC, type: $mediaType, isAdult: false) {
       ...BasicMedia
     }
   }
   trending: Page(page: $page, perPage: $perPage) {
-    media(sort: TRENDING_DESC, type: $type, isAdult: false) {
+    media(sort: TRENDING_DESC, type: $mediaType, isAdult: false) {
       ...BasicMedia
     }
   }
   thisSeason: Page(page: $page, perPage: $perPage) {
-    media(season: $season, seasonYear: $year, sort: POPULARITY_DESC, type: $type, isAdult: false) {
+    media(season: $season, seasonYear: $year, sort: POPULARITY_DESC, type: $mediaType, isAdult: false) {
       ...BasicMedia
-      seasonYear
-    }
-  }
-  seasonNext: Page(page: $page, perPage: $perPage) {
-    media(season: $nextSeason, seasonYear: $nextYear, sort: POPULARITY_DESC, type: $type, isAdult: false) {
-      ...BasicMedia
-      season
       # seasonYear
     }
   }
-  # releasing: Page(page: $page) {
-  #   media(onList: true, type: $type, status: RELEASING) {
-  #     ...BasicMedia
-  #     nextAiringEpisode {
-  #       airingAt
-  #       timeUntilAiring
-  #       episode
-  #     }
-  #     airingSchedule(notYetAired: false) {
-  #       edges {
-  #         node {
-  #           airingAt
-  #           timeUntilAiring
-  #           episode
-  #         }
-  #       }
-  #     }
-  #   }
-  # }
+  seasonNext: Page(page: $page, perPage: $perPage) {
+    media(season: $nextSeason, seasonYear: $nextYear, sort: POPULARITY_DESC, type: $mediaType, isAdult: false) {
+      ...BasicMedia
+      # season
+      # seasonYear
+    }
+  }
 }

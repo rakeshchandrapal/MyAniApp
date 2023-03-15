@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class SocialPage extends StatefulWidget {
   const SocialPage({super.key});
@@ -155,7 +156,7 @@ class Social extends HookWidget {
                         children: [
                           Text(item.user!.name),
                           Text(
-                            DateFormat.yMMMMEEEEd().format(
+                            timeago.format(
                               dateFromTimestamp(item.createdAt),
                             ),
                             style: Theme.of(context).textTheme.bodySmall,
@@ -297,7 +298,7 @@ class Social extends HookWidget {
                         children: [
                           Text(item.user!.name),
                           Text(
-                            DateFormat.yMMMMEEEEd().format(
+                            timeago.format(
                               dateFromTimestamp(item.createdAt),
                             ),
                             style: Theme.of(context).textTheme.bodySmall,

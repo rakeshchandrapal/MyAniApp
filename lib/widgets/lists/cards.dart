@@ -23,7 +23,7 @@ class Cards extends StatelessWidget {
     this.underTitle,
     this.gridChips,
   }) : assert(
-            (list is List<Fragment$BasicMedia> ||
+            (list is List<Fragment$BasicMedia> != true &&
                     list is List<Fragment$MediaListEntry>) !=
                 true,
             list);

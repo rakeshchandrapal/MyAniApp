@@ -9,7 +9,6 @@ class Fragment$BasicMedia {
   Fragment$BasicMedia({
     this.id,
     this.type,
-    this.description,
     this.isAdult,
     this.genres,
     this.episodes,
@@ -17,13 +16,13 @@ class Fragment$BasicMedia {
     this.chapters,
     this.title,
     this.coverImage,
+    this.description,
     this.$__typename = 'Media',
   });
 
   factory Fragment$BasicMedia.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
-    final l$description = json['description'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
     final l$episodes = json['episodes'];
@@ -31,11 +30,11 @@ class Fragment$BasicMedia {
     final l$chapters = json['chapters'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
+    final l$description = json['description'];
     final l$$__typename = json['__typename'];
     return Fragment$BasicMedia(
       id: (l$id as int?),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      description: (l$description as String?),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
       episodes: (l$episodes as int?),
@@ -51,6 +50,7 @@ class Fragment$BasicMedia {
           ? null
           : Fragment$BasicMedia$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
+      description: (l$description as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -58,8 +58,6 @@ class Fragment$BasicMedia {
   final int? id;
 
   final Enum$MediaType? type;
-
-  final String? description;
 
   final bool? isAdult;
 
@@ -75,6 +73,8 @@ class Fragment$BasicMedia {
 
   final Fragment$BasicMedia$coverImage? coverImage;
 
+  final String? description;
+
   final String $__typename;
 
   Map<String, dynamic> toJson() {
@@ -83,8 +83,6 @@ class Fragment$BasicMedia {
     _resultData['id'] = l$id;
     final l$type = type;
     _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$description = description;
-    _resultData['description'] = l$description;
     final l$isAdult = isAdult;
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
@@ -100,6 +98,8 @@ class Fragment$BasicMedia {
     _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$description = description;
+    _resultData['description'] = l$description;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -109,7 +109,6 @@ class Fragment$BasicMedia {
   int get hashCode {
     final l$id = id;
     final l$type = type;
-    final l$description = description;
     final l$isAdult = isAdult;
     final l$genres = genres;
     final l$episodes = episodes;
@@ -117,11 +116,11 @@ class Fragment$BasicMedia {
     final l$chapters = chapters;
     final l$title = title;
     final l$coverImage = coverImage;
+    final l$description = description;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$type,
-      l$description,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$episodes,
@@ -129,6 +128,7 @@ class Fragment$BasicMedia {
       l$chapters,
       l$title,
       l$coverImage,
+      l$description,
       l$$__typename,
     ]);
   }
@@ -149,11 +149,6 @@ class Fragment$BasicMedia {
     final l$type = type;
     final lOther$type = other.type;
     if (l$type != lOther$type) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
       return false;
     }
     final l$isAdult = isAdult;
@@ -202,6 +197,11 @@ class Fragment$BasicMedia {
     if (l$coverImage != lOther$coverImage) {
       return false;
     }
+    final l$description = description;
+    final lOther$description = other.description;
+    if (l$description != lOther$description) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -231,7 +231,6 @@ abstract class CopyWith$Fragment$BasicMedia<TRes> {
   TRes call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -239,6 +238,7 @@ abstract class CopyWith$Fragment$BasicMedia<TRes> {
     int? chapters,
     Fragment$BasicMedia$title? title,
     Fragment$BasicMedia$coverImage? coverImage,
+    String? description,
     String? $__typename,
   });
   CopyWith$Fragment$BasicMedia$title<TRes> get title;
@@ -261,7 +261,6 @@ class _CopyWithImpl$Fragment$BasicMedia<TRes>
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
-    Object? description = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
     Object? episodes = _undefined,
@@ -269,14 +268,12 @@ class _CopyWithImpl$Fragment$BasicMedia<TRes>
     Object? chapters = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
+    Object? description = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$BasicMedia(
         id: id == _undefined ? _instance.id : (id as int?),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
         isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         genres: genres == _undefined
             ? _instance.genres
@@ -294,6 +291,9 @@ class _CopyWithImpl$Fragment$BasicMedia<TRes>
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Fragment$BasicMedia$coverImage?),
+        description: description == _undefined
+            ? _instance.description
+            : (description as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -324,7 +324,6 @@ class _CopyWithStubImpl$Fragment$BasicMedia<TRes>
   call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -332,6 +331,7 @@ class _CopyWithStubImpl$Fragment$BasicMedia<TRes>
     int? chapters,
     Fragment$BasicMedia$title? title,
     Fragment$BasicMedia$coverImage? coverImage,
+    String? description,
     String? $__typename,
   }) =>
       _res;
@@ -361,18 +361,6 @@ const fragmentDefinitionBasicMedia = FragmentDefinitionNode(
       name: NameNode(value: 'type'),
       alias: null,
       arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'description'),
-      alias: null,
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'asHtml'),
-          value: BooleanValueNode(value: true),
-        )
-      ],
       directives: [],
       selectionSet: null,
     ),
@@ -454,6 +442,18 @@ const fragmentDefinitionBasicMedia = FragmentDefinitionNode(
           selectionSet: null,
         ),
       ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'description'),
+      alias: null,
+      arguments: [
+        ArgumentNode(
+          name: NameNode(value: 'asHtml'),
+          value: BooleanValueNode(value: true),
+        )
+      ],
+      directives: [],
+      selectionSet: null,
     ),
     FieldNode(
       name: NameNode(value: '__typename'),
@@ -1743,7 +1743,6 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
   Fragment$MediaListEntry$media({
     this.id,
     this.type,
-    this.description,
     this.isAdult,
     this.genres,
     this.episodes,
@@ -1751,13 +1750,13 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     this.chapters,
     this.title,
     this.coverImage,
+    this.description,
     this.$__typename = 'Media',
   });
 
   factory Fragment$MediaListEntry$media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
-    final l$description = json['description'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
     final l$episodes = json['episodes'];
@@ -1765,11 +1764,11 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     final l$chapters = json['chapters'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
+    final l$description = json['description'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaListEntry$media(
       id: (l$id as int?),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      description: (l$description as String?),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
       episodes: (l$episodes as int?),
@@ -1785,6 +1784,7 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
           ? null
           : Fragment$MediaListEntry$media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
+      description: (l$description as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1792,8 +1792,6 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
   final int? id;
 
   final Enum$MediaType? type;
-
-  final String? description;
 
   final bool? isAdult;
 
@@ -1809,6 +1807,8 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
 
   final Fragment$MediaListEntry$media$coverImage? coverImage;
 
+  final String? description;
+
   final String $__typename;
 
   Map<String, dynamic> toJson() {
@@ -1817,8 +1817,6 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     _resultData['id'] = l$id;
     final l$type = type;
     _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$description = description;
-    _resultData['description'] = l$description;
     final l$isAdult = isAdult;
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
@@ -1834,6 +1832,8 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$description = description;
+    _resultData['description'] = l$description;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1843,7 +1843,6 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
   int get hashCode {
     final l$id = id;
     final l$type = type;
-    final l$description = description;
     final l$isAdult = isAdult;
     final l$genres = genres;
     final l$episodes = episodes;
@@ -1851,11 +1850,11 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     final l$chapters = chapters;
     final l$title = title;
     final l$coverImage = coverImage;
+    final l$description = description;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$type,
-      l$description,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$episodes,
@@ -1863,6 +1862,7 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
       l$chapters,
       l$title,
       l$coverImage,
+      l$description,
       l$$__typename,
     ]);
   }
@@ -1884,11 +1884,6 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     final l$type = type;
     final lOther$type = other.type;
     if (l$type != lOther$type) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
       return false;
     }
     final l$isAdult = isAdult;
@@ -1937,6 +1932,11 @@ class Fragment$MediaListEntry$media implements Fragment$BasicMedia {
     if (l$coverImage != lOther$coverImage) {
       return false;
     }
+    final l$description = description;
+    final lOther$description = other.description;
+    if (l$description != lOther$description) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1967,7 +1967,6 @@ abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
   TRes call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -1975,6 +1974,7 @@ abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
     int? chapters,
     Fragment$MediaListEntry$media$title? title,
     Fragment$MediaListEntry$media$coverImage? coverImage,
+    String? description,
     String? $__typename,
   });
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title;
@@ -1997,7 +1997,6 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
-    Object? description = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
     Object? episodes = _undefined,
@@ -2005,14 +2004,12 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
     Object? chapters = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
+    Object? description = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaListEntry$media(
         id: id == _undefined ? _instance.id : (id as int?),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
         isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         genres: genres == _undefined
             ? _instance.genres
@@ -2030,6 +2027,9 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Fragment$MediaListEntry$media$coverImage?),
+        description: description == _undefined
+            ? _instance.description
+            : (description as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2061,7 +2061,6 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
   call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -2069,6 +2068,7 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
     int? chapters,
     Fragment$MediaListEntry$media$title? title,
     Fragment$MediaListEntry$media$coverImage? coverImage,
+    String? description,
     String? $__typename,
   }) =>
       _res;
@@ -3303,7 +3303,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
   Query$FetchMediaById$Media({
     this.id,
     this.type,
-    this.description,
     this.isAdult,
     this.genres,
     this.episodes,
@@ -3311,6 +3310,7 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     this.chapters,
     this.title,
     this.coverImage,
+    this.description,
     this.$__typename = 'Media',
     this.bannerImage,
     this.averageScore,
@@ -3335,7 +3335,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
   factory Query$FetchMediaById$Media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
-    final l$description = json['description'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
     final l$episodes = json['episodes'];
@@ -3343,6 +3342,7 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     final l$chapters = json['chapters'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
+    final l$description = json['description'];
     final l$$__typename = json['__typename'];
     final l$bannerImage = json['bannerImage'];
     final l$averageScore = json['averageScore'];
@@ -3365,7 +3365,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     return Query$FetchMediaById$Media(
       id: (l$id as int?),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      description: (l$description as String?),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
       episodes: (l$episodes as int?),
@@ -3381,6 +3380,7 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
           ? null
           : Query$FetchMediaById$Media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
+      description: (l$description as String?),
       $__typename: (l$$__typename as String),
       bannerImage: (l$bannerImage as String?),
       averageScore: (l$averageScore as int?),
@@ -3444,8 +3444,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
 
   final Enum$MediaType? type;
 
-  final String? description;
-
   final bool? isAdult;
 
   final List<String?>? genres;
@@ -3459,6 +3457,8 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
   final Query$FetchMediaById$Media$title? title;
 
   final Query$FetchMediaById$Media$coverImage? coverImage;
+
+  final String? description;
 
   final String $__typename;
 
@@ -3504,8 +3504,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     _resultData['id'] = l$id;
     final l$type = type;
     _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$description = description;
-    _resultData['description'] = l$description;
     final l$isAdult = isAdult;
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
@@ -3521,6 +3519,8 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$description = description;
+    _resultData['description'] = l$description;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$bannerImage = bannerImage;
@@ -3571,7 +3571,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
   int get hashCode {
     final l$id = id;
     final l$type = type;
-    final l$description = description;
     final l$isAdult = isAdult;
     final l$genres = genres;
     final l$episodes = episodes;
@@ -3579,6 +3578,7 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     final l$chapters = chapters;
     final l$title = title;
     final l$coverImage = coverImage;
+    final l$description = description;
     final l$$__typename = $__typename;
     final l$bannerImage = bannerImage;
     final l$averageScore = averageScore;
@@ -3601,7 +3601,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     return Object.hashAll([
       l$id,
       l$type,
-      l$description,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$episodes,
@@ -3609,6 +3608,7 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
       l$chapters,
       l$title,
       l$coverImage,
+      l$description,
       l$$__typename,
       l$bannerImage,
       l$averageScore,
@@ -3652,11 +3652,6 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     final l$type = type;
     final lOther$type = other.type;
     if (l$type != lOther$type) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
       return false;
     }
     final l$isAdult = isAdult;
@@ -3703,6 +3698,11 @@ class Query$FetchMediaById$Media implements Fragment$BasicMedia {
     final l$coverImage = coverImage;
     final lOther$coverImage = other.coverImage;
     if (l$coverImage != lOther$coverImage) {
+      return false;
+    }
+    final l$description = description;
+    final lOther$description = other.description;
+    if (l$description != lOther$description) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3847,7 +3847,6 @@ abstract class CopyWith$Query$FetchMediaById$Media<TRes> {
   TRes call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -3855,6 +3854,7 @@ abstract class CopyWith$Query$FetchMediaById$Media<TRes> {
     int? chapters,
     Query$FetchMediaById$Media$title? title,
     Query$FetchMediaById$Media$coverImage? coverImage,
+    String? description,
     String? $__typename,
     String? bannerImage,
     int? averageScore,
@@ -3914,7 +3914,6 @@ class _CopyWithImpl$Query$FetchMediaById$Media<TRes>
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
-    Object? description = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
     Object? episodes = _undefined,
@@ -3922,6 +3921,7 @@ class _CopyWithImpl$Query$FetchMediaById$Media<TRes>
     Object? chapters = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
+    Object? description = _undefined,
     Object? $__typename = _undefined,
     Object? bannerImage = _undefined,
     Object? averageScore = _undefined,
@@ -3945,9 +3945,6 @@ class _CopyWithImpl$Query$FetchMediaById$Media<TRes>
       _then(Query$FetchMediaById$Media(
         id: id == _undefined ? _instance.id : (id as int?),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
         isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         genres: genres == _undefined
             ? _instance.genres
@@ -3965,6 +3962,9 @@ class _CopyWithImpl$Query$FetchMediaById$Media<TRes>
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Query$FetchMediaById$Media$coverImage?),
+        description: description == _undefined
+            ? _instance.description
+            : (description as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -4131,7 +4131,6 @@ class _CopyWithStubImpl$Query$FetchMediaById$Media<TRes>
   call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -4139,6 +4138,7 @@ class _CopyWithStubImpl$Query$FetchMediaById$Media<TRes>
     int? chapters,
     Query$FetchMediaById$Media$title? title,
     Query$FetchMediaById$Media$coverImage? coverImage,
+    String? description,
     String? $__typename,
     String? bannerImage,
     int? averageScore,
@@ -13520,7 +13520,6 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
   Query$Home$releasing$media({
     this.id,
     this.type,
-    this.description,
     this.isAdult,
     this.genres,
     this.episodes,
@@ -13528,6 +13527,7 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     this.chapters,
     this.title,
     this.coverImage,
+    this.description,
     this.$__typename = 'Media',
     this.nextAiringEpisode,
     this.airingSchedule,
@@ -13536,7 +13536,6 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
   factory Query$Home$releasing$media.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
-    final l$description = json['description'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
     final l$episodes = json['episodes'];
@@ -13544,13 +13543,13 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     final l$chapters = json['chapters'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
+    final l$description = json['description'];
     final l$$__typename = json['__typename'];
     final l$nextAiringEpisode = json['nextAiringEpisode'];
     final l$airingSchedule = json['airingSchedule'];
     return Query$Home$releasing$media(
       id: (l$id as int?),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      description: (l$description as String?),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
       episodes: (l$episodes as int?),
@@ -13566,6 +13565,7 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
           ? null
           : Query$Home$releasing$media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
+      description: (l$description as String?),
       $__typename: (l$$__typename as String),
       nextAiringEpisode: l$nextAiringEpisode == null
           ? null
@@ -13582,8 +13582,6 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
 
   final Enum$MediaType? type;
 
-  final String? description;
-
   final bool? isAdult;
 
   final List<String?>? genres;
@@ -13598,6 +13596,8 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
 
   final Query$Home$releasing$media$coverImage? coverImage;
 
+  final String? description;
+
   final String $__typename;
 
   final Query$Home$releasing$media$nextAiringEpisode? nextAiringEpisode;
@@ -13610,8 +13610,6 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     _resultData['id'] = l$id;
     final l$type = type;
     _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$description = description;
-    _resultData['description'] = l$description;
     final l$isAdult = isAdult;
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
@@ -13627,6 +13625,8 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
     _resultData['coverImage'] = l$coverImage?.toJson();
+    final l$description = description;
+    _resultData['description'] = l$description;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$nextAiringEpisode = nextAiringEpisode;
@@ -13640,7 +13640,6 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
   int get hashCode {
     final l$id = id;
     final l$type = type;
-    final l$description = description;
     final l$isAdult = isAdult;
     final l$genres = genres;
     final l$episodes = episodes;
@@ -13648,13 +13647,13 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     final l$chapters = chapters;
     final l$title = title;
     final l$coverImage = coverImage;
+    final l$description = description;
     final l$$__typename = $__typename;
     final l$nextAiringEpisode = nextAiringEpisode;
     final l$airingSchedule = airingSchedule;
     return Object.hashAll([
       l$id,
       l$type,
-      l$description,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$episodes,
@@ -13662,6 +13661,7 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
       l$chapters,
       l$title,
       l$coverImage,
+      l$description,
       l$$__typename,
       l$nextAiringEpisode,
       l$airingSchedule,
@@ -13685,11 +13685,6 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     final l$type = type;
     final lOther$type = other.type;
     if (l$type != lOther$type) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
       return false;
     }
     final l$isAdult = isAdult;
@@ -13738,6 +13733,11 @@ class Query$Home$releasing$media implements Fragment$BasicMedia {
     if (l$coverImage != lOther$coverImage) {
       return false;
     }
+    final l$description = description;
+    final lOther$description = other.description;
+    if (l$description != lOther$description) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -13778,7 +13778,6 @@ abstract class CopyWith$Query$Home$releasing$media<TRes> {
   TRes call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -13786,6 +13785,7 @@ abstract class CopyWith$Query$Home$releasing$media<TRes> {
     int? chapters,
     Query$Home$releasing$media$title? title,
     Query$Home$releasing$media$coverImage? coverImage,
+    String? description,
     String? $__typename,
     Query$Home$releasing$media$nextAiringEpisode? nextAiringEpisode,
     Query$Home$releasing$media$airingSchedule? airingSchedule,
@@ -13813,7 +13813,6 @@ class _CopyWithImpl$Query$Home$releasing$media<TRes>
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
-    Object? description = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
     Object? episodes = _undefined,
@@ -13821,6 +13820,7 @@ class _CopyWithImpl$Query$Home$releasing$media<TRes>
     Object? chapters = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
+    Object? description = _undefined,
     Object? $__typename = _undefined,
     Object? nextAiringEpisode = _undefined,
     Object? airingSchedule = _undefined,
@@ -13828,9 +13828,6 @@ class _CopyWithImpl$Query$Home$releasing$media<TRes>
       _then(Query$Home$releasing$media(
         id: id == _undefined ? _instance.id : (id as int?),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
         isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         genres: genres == _undefined
             ? _instance.genres
@@ -13848,6 +13845,9 @@ class _CopyWithImpl$Query$Home$releasing$media<TRes>
         coverImage: coverImage == _undefined
             ? _instance.coverImage
             : (coverImage as Query$Home$releasing$media$coverImage?),
+        description: description == _undefined
+            ? _instance.description
+            : (description as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -13904,7 +13904,6 @@ class _CopyWithStubImpl$Query$Home$releasing$media<TRes>
   call({
     int? id,
     Enum$MediaType? type,
-    String? description,
     bool? isAdult,
     List<String?>? genres,
     int? episodes,
@@ -13912,6 +13911,7 @@ class _CopyWithStubImpl$Query$Home$releasing$media<TRes>
     int? chapters,
     Query$Home$releasing$media$title? title,
     Query$Home$releasing$media$coverImage? coverImage,
+    String? description,
     String? $__typename,
     Query$Home$releasing$media$nextAiringEpisode? nextAiringEpisode,
     Query$Home$releasing$media$airingSchedule? airingSchedule,
@@ -15228,7 +15228,7 @@ class Variables$Query$Discovery {
   factory Variables$Query$Discovery({
     int? page,
     int? perPage,
-    Enum$MediaType? type,
+    Enum$MediaType? mediaType,
     Enum$MediaSeason? season,
     int? year,
     Enum$MediaSeason? nextSeason,
@@ -15237,7 +15237,7 @@ class Variables$Query$Discovery {
       Variables$Query$Discovery._({
         if (page != null) r'page': page,
         if (perPage != null) r'perPage': perPage,
-        if (type != null) r'type': type,
+        if (mediaType != null) r'mediaType': mediaType,
         if (season != null) r'season': season,
         if (year != null) r'year': year,
         if (nextSeason != null) r'nextSeason': nextSeason,
@@ -15256,10 +15256,11 @@ class Variables$Query$Discovery {
       final l$perPage = data['perPage'];
       result$data['perPage'] = (l$perPage as int?);
     }
-    if (data.containsKey('type')) {
-      final l$type = data['type'];
-      result$data['type'] =
-          l$type == null ? null : fromJson$Enum$MediaType((l$type as String));
+    if (data.containsKey('mediaType')) {
+      final l$mediaType = data['mediaType'];
+      result$data['mediaType'] = l$mediaType == null
+          ? null
+          : fromJson$Enum$MediaType((l$mediaType as String));
     }
     if (data.containsKey('season')) {
       final l$season = data['season'];
@@ -15288,7 +15289,7 @@ class Variables$Query$Discovery {
 
   int? get page => (_$data['page'] as int?);
   int? get perPage => (_$data['perPage'] as int?);
-  Enum$MediaType? get type => (_$data['type'] as Enum$MediaType?);
+  Enum$MediaType? get mediaType => (_$data['mediaType'] as Enum$MediaType?);
   Enum$MediaSeason? get season => (_$data['season'] as Enum$MediaSeason?);
   int? get year => (_$data['year'] as int?);
   Enum$MediaSeason? get nextSeason =>
@@ -15304,10 +15305,10 @@ class Variables$Query$Discovery {
       final l$perPage = perPage;
       result$data['perPage'] = l$perPage;
     }
-    if (_$data.containsKey('type')) {
-      final l$type = type;
-      result$data['type'] =
-          l$type == null ? null : toJson$Enum$MediaType(l$type);
+    if (_$data.containsKey('mediaType')) {
+      final l$mediaType = mediaType;
+      result$data['mediaType'] =
+          l$mediaType == null ? null : toJson$Enum$MediaType(l$mediaType);
     }
     if (_$data.containsKey('season')) {
       final l$season = season;
@@ -15360,12 +15361,13 @@ class Variables$Query$Discovery {
     if (l$perPage != lOther$perPage) {
       return false;
     }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
+    final l$mediaType = mediaType;
+    final lOther$mediaType = other.mediaType;
+    if (_$data.containsKey('mediaType') !=
+        other._$data.containsKey('mediaType')) {
       return false;
     }
-    if (l$type != lOther$type) {
+    if (l$mediaType != lOther$mediaType) {
       return false;
     }
     final l$season = season;
@@ -15409,7 +15411,7 @@ class Variables$Query$Discovery {
   int get hashCode {
     final l$page = page;
     final l$perPage = perPage;
-    final l$type = type;
+    final l$mediaType = mediaType;
     final l$season = season;
     final l$year = year;
     final l$nextSeason = nextSeason;
@@ -15417,7 +15419,7 @@ class Variables$Query$Discovery {
     return Object.hashAll([
       _$data.containsKey('page') ? l$page : const {},
       _$data.containsKey('perPage') ? l$perPage : const {},
-      _$data.containsKey('type') ? l$type : const {},
+      _$data.containsKey('mediaType') ? l$mediaType : const {},
       _$data.containsKey('season') ? l$season : const {},
       _$data.containsKey('year') ? l$year : const {},
       _$data.containsKey('nextSeason') ? l$nextSeason : const {},
@@ -15438,7 +15440,7 @@ abstract class CopyWith$Variables$Query$Discovery<TRes> {
   TRes call({
     int? page,
     int? perPage,
-    Enum$MediaType? type,
+    Enum$MediaType? mediaType,
     Enum$MediaSeason? season,
     int? year,
     Enum$MediaSeason? nextSeason,
@@ -15462,7 +15464,7 @@ class _CopyWithImpl$Variables$Query$Discovery<TRes>
   TRes call({
     Object? page = _undefined,
     Object? perPage = _undefined,
-    Object? type = _undefined,
+    Object? mediaType = _undefined,
     Object? season = _undefined,
     Object? year = _undefined,
     Object? nextSeason = _undefined,
@@ -15472,7 +15474,8 @@ class _CopyWithImpl$Variables$Query$Discovery<TRes>
         ..._instance._$data,
         if (page != _undefined) 'page': (page as int?),
         if (perPage != _undefined) 'perPage': (perPage as int?),
-        if (type != _undefined) 'type': (type as Enum$MediaType?),
+        if (mediaType != _undefined)
+          'mediaType': (mediaType as Enum$MediaType?),
         if (season != _undefined) 'season': (season as Enum$MediaSeason?),
         if (year != _undefined) 'year': (year as int?),
         if (nextSeason != _undefined)
@@ -15490,7 +15493,7 @@ class _CopyWithStubImpl$Variables$Query$Discovery<TRes>
   call({
     int? page,
     int? perPage,
-    Enum$MediaType? type,
+    Enum$MediaType? mediaType,
     Enum$MediaSeason? season,
     int? year,
     Enum$MediaSeason? nextSeason,
@@ -15761,12 +15764,13 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'type')),
+        variable: VariableNode(name: NameNode(value: 'mediaType')),
         type: NamedTypeNode(
           name: NameNode(value: 'MediaType'),
           isNonNull: false,
         ),
-        defaultValue: DefaultValueNode(value: null),
+        defaultValue: DefaultValueNode(
+            value: EnumValueNode(name: NameNode(value: 'ANIME'))),
         directives: [],
       ),
       VariableDefinitionNode(
@@ -15833,7 +15837,7 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
               ),
               ArgumentNode(
                 name: NameNode(value: 'type'),
-                value: VariableNode(name: NameNode(value: 'type')),
+                value: VariableNode(name: NameNode(value: 'mediaType')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'isAdult'),
@@ -15889,7 +15893,7 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
               ),
               ArgumentNode(
                 name: NameNode(value: 'type'),
-                value: VariableNode(name: NameNode(value: 'type')),
+                value: VariableNode(name: NameNode(value: 'mediaType')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'isAdult'),
@@ -15953,7 +15957,7 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
               ),
               ArgumentNode(
                 name: NameNode(value: 'type'),
-                value: VariableNode(name: NameNode(value: 'type')),
+                value: VariableNode(name: NameNode(value: 'mediaType')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'isAdult'),
@@ -15965,13 +15969,6 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
               FragmentSpreadNode(
                 name: NameNode(value: 'BasicMedia'),
                 directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: 'seasonYear'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -16024,7 +16021,7 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
               ),
               ArgumentNode(
                 name: NameNode(value: 'type'),
-                value: VariableNode(name: NameNode(value: 'type')),
+                value: VariableNode(name: NameNode(value: 'mediaType')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'isAdult'),
@@ -16036,13 +16033,6 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
               FragmentSpreadNode(
                 name: NameNode(value: 'BasicMedia'),
                 directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: 'season'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -16520,14 +16510,13 @@ class Query$Discovery$thisSeason {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Discovery$thisSeason$media.fromJson(
-                  (e as Map<String, dynamic>)))
+              : Fragment$BasicMedia.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$Discovery$thisSeason$media?>? media;
+  final List<Fragment$BasicMedia?>? media;
 
   final String $__typename;
 
@@ -16603,14 +16592,12 @@ abstract class CopyWith$Query$Discovery$thisSeason<TRes> {
       _CopyWithStubImpl$Query$Discovery$thisSeason;
 
   TRes call({
-    List<Query$Discovery$thisSeason$media?>? media,
+    List<Fragment$BasicMedia?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Query$Discovery$thisSeason$media?>? Function(
-              Iterable<
-                  CopyWith$Query$Discovery$thisSeason$media<
-                      Query$Discovery$thisSeason$media>?>?)
+      Iterable<Fragment$BasicMedia?>? Function(
+              Iterable<CopyWith$Fragment$BasicMedia<Fragment$BasicMedia>?>?)
           _fn);
 }
 
@@ -16634,21 +16621,19 @@ class _CopyWithImpl$Query$Discovery$thisSeason<TRes>
       _then(Query$Discovery$thisSeason(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Query$Discovery$thisSeason$media?>?),
+            : (media as List<Fragment$BasicMedia?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes media(
-          Iterable<Query$Discovery$thisSeason$media?>? Function(
-                  Iterable<
-                      CopyWith$Query$Discovery$thisSeason$media<
-                          Query$Discovery$thisSeason$media>?>?)
+          Iterable<Fragment$BasicMedia?>? Function(
+                  Iterable<CopyWith$Fragment$BasicMedia<Fragment$BasicMedia>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Query$Discovery$thisSeason$media(
+              : CopyWith$Fragment$BasicMedia(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -16661,624 +16646,11 @@ class _CopyWithStubImpl$Query$Discovery$thisSeason<TRes>
   TRes _res;
 
   call({
-    List<Query$Discovery$thisSeason$media?>? media,
+    List<Fragment$BasicMedia?>? media,
     String? $__typename,
   }) =>
       _res;
   media(_fn) => _res;
-}
-
-class Query$Discovery$thisSeason$media implements Fragment$BasicMedia {
-  Query$Discovery$thisSeason$media({
-    this.id,
-    this.type,
-    this.description,
-    this.isAdult,
-    this.genres,
-    this.episodes,
-    this.format,
-    this.chapters,
-    this.title,
-    this.coverImage,
-    this.$__typename = 'Media',
-    this.seasonYear,
-  });
-
-  factory Query$Discovery$thisSeason$media.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$type = json['type'];
-    final l$description = json['description'];
-    final l$isAdult = json['isAdult'];
-    final l$genres = json['genres'];
-    final l$episodes = json['episodes'];
-    final l$format = json['format'];
-    final l$chapters = json['chapters'];
-    final l$title = json['title'];
-    final l$coverImage = json['coverImage'];
-    final l$$__typename = json['__typename'];
-    final l$seasonYear = json['seasonYear'];
-    return Query$Discovery$thisSeason$media(
-      id: (l$id as int?),
-      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      description: (l$description as String?),
-      isAdult: (l$isAdult as bool?),
-      genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
-      episodes: (l$episodes as int?),
-      format: l$format == null
-          ? null
-          : fromJson$Enum$MediaFormat((l$format as String)),
-      chapters: (l$chapters as int?),
-      title: l$title == null
-          ? null
-          : Query$Discovery$thisSeason$media$title.fromJson(
-              (l$title as Map<String, dynamic>)),
-      coverImage: l$coverImage == null
-          ? null
-          : Query$Discovery$thisSeason$media$coverImage.fromJson(
-              (l$coverImage as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-      seasonYear: (l$seasonYear as int?),
-    );
-  }
-
-  final int? id;
-
-  final Enum$MediaType? type;
-
-  final String? description;
-
-  final bool? isAdult;
-
-  final List<String?>? genres;
-
-  final int? episodes;
-
-  final Enum$MediaFormat? format;
-
-  final int? chapters;
-
-  final Query$Discovery$thisSeason$media$title? title;
-
-  final Query$Discovery$thisSeason$media$coverImage? coverImage;
-
-  final String $__typename;
-
-  final int? seasonYear;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$description = description;
-    _resultData['description'] = l$description;
-    final l$isAdult = isAdult;
-    _resultData['isAdult'] = l$isAdult;
-    final l$genres = genres;
-    _resultData['genres'] = l$genres?.map((e) => e).toList();
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
-    final l$format = format;
-    _resultData['format'] =
-        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
-    final l$title = title;
-    _resultData['title'] = l$title?.toJson();
-    final l$coverImage = coverImage;
-    _resultData['coverImage'] = l$coverImage?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    final l$seasonYear = seasonYear;
-    _resultData['seasonYear'] = l$seasonYear;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$type = type;
-    final l$description = description;
-    final l$isAdult = isAdult;
-    final l$genres = genres;
-    final l$episodes = episodes;
-    final l$format = format;
-    final l$chapters = chapters;
-    final l$title = title;
-    final l$coverImage = coverImage;
-    final l$$__typename = $__typename;
-    final l$seasonYear = seasonYear;
-    return Object.hashAll([
-      l$id,
-      l$type,
-      l$description,
-      l$isAdult,
-      l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
-      l$episodes,
-      l$format,
-      l$chapters,
-      l$title,
-      l$coverImage,
-      l$$__typename,
-      l$seasonYear,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Discovery$thisSeason$media) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (l$type != lOther$type) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
-      return false;
-    }
-    final l$isAdult = isAdult;
-    final lOther$isAdult = other.isAdult;
-    if (l$isAdult != lOther$isAdult) {
-      return false;
-    }
-    final l$genres = genres;
-    final lOther$genres = other.genres;
-    if (l$genres != null && lOther$genres != null) {
-      if (l$genres.length != lOther$genres.length) {
-        return false;
-      }
-      for (int i = 0; i < l$genres.length; i++) {
-        final l$genres$entry = l$genres[i];
-        final lOther$genres$entry = lOther$genres[i];
-        if (l$genres$entry != lOther$genres$entry) {
-          return false;
-        }
-      }
-    } else if (l$genres != lOther$genres) {
-      return false;
-    }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
-    final l$format = format;
-    final lOther$format = other.format;
-    if (l$format != lOther$format) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
-      return false;
-    }
-    final l$title = title;
-    final lOther$title = other.title;
-    if (l$title != lOther$title) {
-      return false;
-    }
-    final l$coverImage = coverImage;
-    final lOther$coverImage = other.coverImage;
-    if (l$coverImage != lOther$coverImage) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    final l$seasonYear = seasonYear;
-    final lOther$seasonYear = other.seasonYear;
-    if (l$seasonYear != lOther$seasonYear) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Discovery$thisSeason$media
-    on Query$Discovery$thisSeason$media {
-  CopyWith$Query$Discovery$thisSeason$media<Query$Discovery$thisSeason$media>
-      get copyWith => CopyWith$Query$Discovery$thisSeason$media(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Discovery$thisSeason$media<TRes> {
-  factory CopyWith$Query$Discovery$thisSeason$media(
-    Query$Discovery$thisSeason$media instance,
-    TRes Function(Query$Discovery$thisSeason$media) then,
-  ) = _CopyWithImpl$Query$Discovery$thisSeason$media;
-
-  factory CopyWith$Query$Discovery$thisSeason$media.stub(TRes res) =
-      _CopyWithStubImpl$Query$Discovery$thisSeason$media;
-
-  TRes call({
-    int? id,
-    Enum$MediaType? type,
-    String? description,
-    bool? isAdult,
-    List<String?>? genres,
-    int? episodes,
-    Enum$MediaFormat? format,
-    int? chapters,
-    Query$Discovery$thisSeason$media$title? title,
-    Query$Discovery$thisSeason$media$coverImage? coverImage,
-    String? $__typename,
-    int? seasonYear,
-  });
-  CopyWith$Query$Discovery$thisSeason$media$title<TRes> get title;
-  CopyWith$Query$Discovery$thisSeason$media$coverImage<TRes> get coverImage;
-}
-
-class _CopyWithImpl$Query$Discovery$thisSeason$media<TRes>
-    implements CopyWith$Query$Discovery$thisSeason$media<TRes> {
-  _CopyWithImpl$Query$Discovery$thisSeason$media(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Discovery$thisSeason$media _instance;
-
-  final TRes Function(Query$Discovery$thisSeason$media) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? type = _undefined,
-    Object? description = _undefined,
-    Object? isAdult = _undefined,
-    Object? genres = _undefined,
-    Object? episodes = _undefined,
-    Object? format = _undefined,
-    Object? chapters = _undefined,
-    Object? title = _undefined,
-    Object? coverImage = _undefined,
-    Object? $__typename = _undefined,
-    Object? seasonYear = _undefined,
-  }) =>
-      _then(Query$Discovery$thisSeason$media(
-        id: id == _undefined ? _instance.id : (id as int?),
-        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
-        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
-        genres: genres == _undefined
-            ? _instance.genres
-            : (genres as List<String?>?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
-        format: format == _undefined
-            ? _instance.format
-            : (format as Enum$MediaFormat?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
-        title: title == _undefined
-            ? _instance.title
-            : (title as Query$Discovery$thisSeason$media$title?),
-        coverImage: coverImage == _undefined
-            ? _instance.coverImage
-            : (coverImage as Query$Discovery$thisSeason$media$coverImage?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        seasonYear: seasonYear == _undefined
-            ? _instance.seasonYear
-            : (seasonYear as int?),
-      ));
-  CopyWith$Query$Discovery$thisSeason$media$title<TRes> get title {
-    final local$title = _instance.title;
-    return local$title == null
-        ? CopyWith$Query$Discovery$thisSeason$media$title.stub(_then(_instance))
-        : CopyWith$Query$Discovery$thisSeason$media$title(
-            local$title, (e) => call(title: e));
-  }
-
-  CopyWith$Query$Discovery$thisSeason$media$coverImage<TRes> get coverImage {
-    final local$coverImage = _instance.coverImage;
-    return local$coverImage == null
-        ? CopyWith$Query$Discovery$thisSeason$media$coverImage.stub(
-            _then(_instance))
-        : CopyWith$Query$Discovery$thisSeason$media$coverImage(
-            local$coverImage, (e) => call(coverImage: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$Discovery$thisSeason$media<TRes>
-    implements CopyWith$Query$Discovery$thisSeason$media<TRes> {
-  _CopyWithStubImpl$Query$Discovery$thisSeason$media(this._res);
-
-  TRes _res;
-
-  call({
-    int? id,
-    Enum$MediaType? type,
-    String? description,
-    bool? isAdult,
-    List<String?>? genres,
-    int? episodes,
-    Enum$MediaFormat? format,
-    int? chapters,
-    Query$Discovery$thisSeason$media$title? title,
-    Query$Discovery$thisSeason$media$coverImage? coverImage,
-    String? $__typename,
-    int? seasonYear,
-  }) =>
-      _res;
-  CopyWith$Query$Discovery$thisSeason$media$title<TRes> get title =>
-      CopyWith$Query$Discovery$thisSeason$media$title.stub(_res);
-  CopyWith$Query$Discovery$thisSeason$media$coverImage<TRes> get coverImage =>
-      CopyWith$Query$Discovery$thisSeason$media$coverImage.stub(_res);
-}
-
-class Query$Discovery$thisSeason$media$title
-    implements Fragment$BasicMedia$title {
-  Query$Discovery$thisSeason$media$title({
-    this.userPreferred,
-    this.$__typename = 'MediaTitle',
-  });
-
-  factory Query$Discovery$thisSeason$media$title.fromJson(
-      Map<String, dynamic> json) {
-    final l$userPreferred = json['userPreferred'];
-    final l$$__typename = json['__typename'];
-    return Query$Discovery$thisSeason$media$title(
-      userPreferred: (l$userPreferred as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? userPreferred;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$userPreferred = userPreferred;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$userPreferred,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Discovery$thisSeason$media$title) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$userPreferred = userPreferred;
-    final lOther$userPreferred = other.userPreferred;
-    if (l$userPreferred != lOther$userPreferred) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Discovery$thisSeason$media$title
-    on Query$Discovery$thisSeason$media$title {
-  CopyWith$Query$Discovery$thisSeason$media$title<
-          Query$Discovery$thisSeason$media$title>
-      get copyWith => CopyWith$Query$Discovery$thisSeason$media$title(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Discovery$thisSeason$media$title<TRes> {
-  factory CopyWith$Query$Discovery$thisSeason$media$title(
-    Query$Discovery$thisSeason$media$title instance,
-    TRes Function(Query$Discovery$thisSeason$media$title) then,
-  ) = _CopyWithImpl$Query$Discovery$thisSeason$media$title;
-
-  factory CopyWith$Query$Discovery$thisSeason$media$title.stub(TRes res) =
-      _CopyWithStubImpl$Query$Discovery$thisSeason$media$title;
-
-  TRes call({
-    String? userPreferred,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Discovery$thisSeason$media$title<TRes>
-    implements CopyWith$Query$Discovery$thisSeason$media$title<TRes> {
-  _CopyWithImpl$Query$Discovery$thisSeason$media$title(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Discovery$thisSeason$media$title _instance;
-
-  final TRes Function(Query$Discovery$thisSeason$media$title) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? userPreferred = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Discovery$thisSeason$media$title(
-        userPreferred: userPreferred == _undefined
-            ? _instance.userPreferred
-            : (userPreferred as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Discovery$thisSeason$media$title<TRes>
-    implements CopyWith$Query$Discovery$thisSeason$media$title<TRes> {
-  _CopyWithStubImpl$Query$Discovery$thisSeason$media$title(this._res);
-
-  TRes _res;
-
-  call({
-    String? userPreferred,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$Discovery$thisSeason$media$coverImage
-    implements Fragment$BasicMedia$coverImage {
-  Query$Discovery$thisSeason$media$coverImage({
-    this.large,
-    this.$__typename = 'MediaCoverImage',
-  });
-
-  factory Query$Discovery$thisSeason$media$coverImage.fromJson(
-      Map<String, dynamic> json) {
-    final l$large = json['large'];
-    final l$$__typename = json['__typename'];
-    return Query$Discovery$thisSeason$media$coverImage(
-      large: (l$large as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? large;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$large = large;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$large,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Discovery$thisSeason$media$coverImage) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Discovery$thisSeason$media$coverImage
-    on Query$Discovery$thisSeason$media$coverImage {
-  CopyWith$Query$Discovery$thisSeason$media$coverImage<
-          Query$Discovery$thisSeason$media$coverImage>
-      get copyWith => CopyWith$Query$Discovery$thisSeason$media$coverImage(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Discovery$thisSeason$media$coverImage<TRes> {
-  factory CopyWith$Query$Discovery$thisSeason$media$coverImage(
-    Query$Discovery$thisSeason$media$coverImage instance,
-    TRes Function(Query$Discovery$thisSeason$media$coverImage) then,
-  ) = _CopyWithImpl$Query$Discovery$thisSeason$media$coverImage;
-
-  factory CopyWith$Query$Discovery$thisSeason$media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Query$Discovery$thisSeason$media$coverImage;
-
-  TRes call({
-    String? large,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Discovery$thisSeason$media$coverImage<TRes>
-    implements CopyWith$Query$Discovery$thisSeason$media$coverImage<TRes> {
-  _CopyWithImpl$Query$Discovery$thisSeason$media$coverImage(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Discovery$thisSeason$media$coverImage _instance;
-
-  final TRes Function(Query$Discovery$thisSeason$media$coverImage) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? large = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Discovery$thisSeason$media$coverImage(
-        large: large == _undefined ? _instance.large : (large as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Discovery$thisSeason$media$coverImage<TRes>
-    implements CopyWith$Query$Discovery$thisSeason$media$coverImage<TRes> {
-  _CopyWithStubImpl$Query$Discovery$thisSeason$media$coverImage(this._res);
-
-  TRes _res;
-
-  call({
-    String? large,
-    String? $__typename,
-  }) =>
-      _res;
 }
 
 class Query$Discovery$seasonNext {
@@ -17294,14 +16666,13 @@ class Query$Discovery$seasonNext {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Discovery$seasonNext$media.fromJson(
-                  (e as Map<String, dynamic>)))
+              : Fragment$BasicMedia.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$Discovery$seasonNext$media?>? media;
+  final List<Fragment$BasicMedia?>? media;
 
   final String $__typename;
 
@@ -17377,14 +16748,12 @@ abstract class CopyWith$Query$Discovery$seasonNext<TRes> {
       _CopyWithStubImpl$Query$Discovery$seasonNext;
 
   TRes call({
-    List<Query$Discovery$seasonNext$media?>? media,
+    List<Fragment$BasicMedia?>? media,
     String? $__typename,
   });
   TRes media(
-      Iterable<Query$Discovery$seasonNext$media?>? Function(
-              Iterable<
-                  CopyWith$Query$Discovery$seasonNext$media<
-                      Query$Discovery$seasonNext$media>?>?)
+      Iterable<Fragment$BasicMedia?>? Function(
+              Iterable<CopyWith$Fragment$BasicMedia<Fragment$BasicMedia>?>?)
           _fn);
 }
 
@@ -17408,21 +16777,19 @@ class _CopyWithImpl$Query$Discovery$seasonNext<TRes>
       _then(Query$Discovery$seasonNext(
         media: media == _undefined
             ? _instance.media
-            : (media as List<Query$Discovery$seasonNext$media?>?),
+            : (media as List<Fragment$BasicMedia?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes media(
-          Iterable<Query$Discovery$seasonNext$media?>? Function(
-                  Iterable<
-                      CopyWith$Query$Discovery$seasonNext$media<
-                          Query$Discovery$seasonNext$media>?>?)
+          Iterable<Fragment$BasicMedia?>? Function(
+                  Iterable<CopyWith$Fragment$BasicMedia<Fragment$BasicMedia>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Query$Discovery$seasonNext$media(
+              : CopyWith$Fragment$BasicMedia(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -17435,625 +16802,9 @@ class _CopyWithStubImpl$Query$Discovery$seasonNext<TRes>
   TRes _res;
 
   call({
-    List<Query$Discovery$seasonNext$media?>? media,
+    List<Fragment$BasicMedia?>? media,
     String? $__typename,
   }) =>
       _res;
   media(_fn) => _res;
-}
-
-class Query$Discovery$seasonNext$media implements Fragment$BasicMedia {
-  Query$Discovery$seasonNext$media({
-    this.id,
-    this.type,
-    this.description,
-    this.isAdult,
-    this.genres,
-    this.episodes,
-    this.format,
-    this.chapters,
-    this.title,
-    this.coverImage,
-    this.$__typename = 'Media',
-    this.season,
-  });
-
-  factory Query$Discovery$seasonNext$media.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$type = json['type'];
-    final l$description = json['description'];
-    final l$isAdult = json['isAdult'];
-    final l$genres = json['genres'];
-    final l$episodes = json['episodes'];
-    final l$format = json['format'];
-    final l$chapters = json['chapters'];
-    final l$title = json['title'];
-    final l$coverImage = json['coverImage'];
-    final l$$__typename = json['__typename'];
-    final l$season = json['season'];
-    return Query$Discovery$seasonNext$media(
-      id: (l$id as int?),
-      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      description: (l$description as String?),
-      isAdult: (l$isAdult as bool?),
-      genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
-      episodes: (l$episodes as int?),
-      format: l$format == null
-          ? null
-          : fromJson$Enum$MediaFormat((l$format as String)),
-      chapters: (l$chapters as int?),
-      title: l$title == null
-          ? null
-          : Query$Discovery$seasonNext$media$title.fromJson(
-              (l$title as Map<String, dynamic>)),
-      coverImage: l$coverImage == null
-          ? null
-          : Query$Discovery$seasonNext$media$coverImage.fromJson(
-              (l$coverImage as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-      season: l$season == null
-          ? null
-          : fromJson$Enum$MediaSeason((l$season as String)),
-    );
-  }
-
-  final int? id;
-
-  final Enum$MediaType? type;
-
-  final String? description;
-
-  final bool? isAdult;
-
-  final List<String?>? genres;
-
-  final int? episodes;
-
-  final Enum$MediaFormat? format;
-
-  final int? chapters;
-
-  final Query$Discovery$seasonNext$media$title? title;
-
-  final Query$Discovery$seasonNext$media$coverImage? coverImage;
-
-  final String $__typename;
-
-  final Enum$MediaSeason? season;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$description = description;
-    _resultData['description'] = l$description;
-    final l$isAdult = isAdult;
-    _resultData['isAdult'] = l$isAdult;
-    final l$genres = genres;
-    _resultData['genres'] = l$genres?.map((e) => e).toList();
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
-    final l$format = format;
-    _resultData['format'] =
-        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
-    final l$title = title;
-    _resultData['title'] = l$title?.toJson();
-    final l$coverImage = coverImage;
-    _resultData['coverImage'] = l$coverImage?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    final l$season = season;
-    _resultData['season'] =
-        l$season == null ? null : toJson$Enum$MediaSeason(l$season);
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$type = type;
-    final l$description = description;
-    final l$isAdult = isAdult;
-    final l$genres = genres;
-    final l$episodes = episodes;
-    final l$format = format;
-    final l$chapters = chapters;
-    final l$title = title;
-    final l$coverImage = coverImage;
-    final l$$__typename = $__typename;
-    final l$season = season;
-    return Object.hashAll([
-      l$id,
-      l$type,
-      l$description,
-      l$isAdult,
-      l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
-      l$episodes,
-      l$format,
-      l$chapters,
-      l$title,
-      l$coverImage,
-      l$$__typename,
-      l$season,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Discovery$seasonNext$media) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (l$type != lOther$type) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
-      return false;
-    }
-    final l$isAdult = isAdult;
-    final lOther$isAdult = other.isAdult;
-    if (l$isAdult != lOther$isAdult) {
-      return false;
-    }
-    final l$genres = genres;
-    final lOther$genres = other.genres;
-    if (l$genres != null && lOther$genres != null) {
-      if (l$genres.length != lOther$genres.length) {
-        return false;
-      }
-      for (int i = 0; i < l$genres.length; i++) {
-        final l$genres$entry = l$genres[i];
-        final lOther$genres$entry = lOther$genres[i];
-        if (l$genres$entry != lOther$genres$entry) {
-          return false;
-        }
-      }
-    } else if (l$genres != lOther$genres) {
-      return false;
-    }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
-    final l$format = format;
-    final lOther$format = other.format;
-    if (l$format != lOther$format) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
-      return false;
-    }
-    final l$title = title;
-    final lOther$title = other.title;
-    if (l$title != lOther$title) {
-      return false;
-    }
-    final l$coverImage = coverImage;
-    final lOther$coverImage = other.coverImage;
-    if (l$coverImage != lOther$coverImage) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    final l$season = season;
-    final lOther$season = other.season;
-    if (l$season != lOther$season) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Discovery$seasonNext$media
-    on Query$Discovery$seasonNext$media {
-  CopyWith$Query$Discovery$seasonNext$media<Query$Discovery$seasonNext$media>
-      get copyWith => CopyWith$Query$Discovery$seasonNext$media(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Discovery$seasonNext$media<TRes> {
-  factory CopyWith$Query$Discovery$seasonNext$media(
-    Query$Discovery$seasonNext$media instance,
-    TRes Function(Query$Discovery$seasonNext$media) then,
-  ) = _CopyWithImpl$Query$Discovery$seasonNext$media;
-
-  factory CopyWith$Query$Discovery$seasonNext$media.stub(TRes res) =
-      _CopyWithStubImpl$Query$Discovery$seasonNext$media;
-
-  TRes call({
-    int? id,
-    Enum$MediaType? type,
-    String? description,
-    bool? isAdult,
-    List<String?>? genres,
-    int? episodes,
-    Enum$MediaFormat? format,
-    int? chapters,
-    Query$Discovery$seasonNext$media$title? title,
-    Query$Discovery$seasonNext$media$coverImage? coverImage,
-    String? $__typename,
-    Enum$MediaSeason? season,
-  });
-  CopyWith$Query$Discovery$seasonNext$media$title<TRes> get title;
-  CopyWith$Query$Discovery$seasonNext$media$coverImage<TRes> get coverImage;
-}
-
-class _CopyWithImpl$Query$Discovery$seasonNext$media<TRes>
-    implements CopyWith$Query$Discovery$seasonNext$media<TRes> {
-  _CopyWithImpl$Query$Discovery$seasonNext$media(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Discovery$seasonNext$media _instance;
-
-  final TRes Function(Query$Discovery$seasonNext$media) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? type = _undefined,
-    Object? description = _undefined,
-    Object? isAdult = _undefined,
-    Object? genres = _undefined,
-    Object? episodes = _undefined,
-    Object? format = _undefined,
-    Object? chapters = _undefined,
-    Object? title = _undefined,
-    Object? coverImage = _undefined,
-    Object? $__typename = _undefined,
-    Object? season = _undefined,
-  }) =>
-      _then(Query$Discovery$seasonNext$media(
-        id: id == _undefined ? _instance.id : (id as int?),
-        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
-        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
-        genres: genres == _undefined
-            ? _instance.genres
-            : (genres as List<String?>?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
-        format: format == _undefined
-            ? _instance.format
-            : (format as Enum$MediaFormat?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
-        title: title == _undefined
-            ? _instance.title
-            : (title as Query$Discovery$seasonNext$media$title?),
-        coverImage: coverImage == _undefined
-            ? _instance.coverImage
-            : (coverImage as Query$Discovery$seasonNext$media$coverImage?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        season: season == _undefined
-            ? _instance.season
-            : (season as Enum$MediaSeason?),
-      ));
-  CopyWith$Query$Discovery$seasonNext$media$title<TRes> get title {
-    final local$title = _instance.title;
-    return local$title == null
-        ? CopyWith$Query$Discovery$seasonNext$media$title.stub(_then(_instance))
-        : CopyWith$Query$Discovery$seasonNext$media$title(
-            local$title, (e) => call(title: e));
-  }
-
-  CopyWith$Query$Discovery$seasonNext$media$coverImage<TRes> get coverImage {
-    final local$coverImage = _instance.coverImage;
-    return local$coverImage == null
-        ? CopyWith$Query$Discovery$seasonNext$media$coverImage.stub(
-            _then(_instance))
-        : CopyWith$Query$Discovery$seasonNext$media$coverImage(
-            local$coverImage, (e) => call(coverImage: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$Discovery$seasonNext$media<TRes>
-    implements CopyWith$Query$Discovery$seasonNext$media<TRes> {
-  _CopyWithStubImpl$Query$Discovery$seasonNext$media(this._res);
-
-  TRes _res;
-
-  call({
-    int? id,
-    Enum$MediaType? type,
-    String? description,
-    bool? isAdult,
-    List<String?>? genres,
-    int? episodes,
-    Enum$MediaFormat? format,
-    int? chapters,
-    Query$Discovery$seasonNext$media$title? title,
-    Query$Discovery$seasonNext$media$coverImage? coverImage,
-    String? $__typename,
-    Enum$MediaSeason? season,
-  }) =>
-      _res;
-  CopyWith$Query$Discovery$seasonNext$media$title<TRes> get title =>
-      CopyWith$Query$Discovery$seasonNext$media$title.stub(_res);
-  CopyWith$Query$Discovery$seasonNext$media$coverImage<TRes> get coverImage =>
-      CopyWith$Query$Discovery$seasonNext$media$coverImage.stub(_res);
-}
-
-class Query$Discovery$seasonNext$media$title
-    implements Fragment$BasicMedia$title {
-  Query$Discovery$seasonNext$media$title({
-    this.userPreferred,
-    this.$__typename = 'MediaTitle',
-  });
-
-  factory Query$Discovery$seasonNext$media$title.fromJson(
-      Map<String, dynamic> json) {
-    final l$userPreferred = json['userPreferred'];
-    final l$$__typename = json['__typename'];
-    return Query$Discovery$seasonNext$media$title(
-      userPreferred: (l$userPreferred as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? userPreferred;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$userPreferred = userPreferred;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$userPreferred,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Discovery$seasonNext$media$title) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$userPreferred = userPreferred;
-    final lOther$userPreferred = other.userPreferred;
-    if (l$userPreferred != lOther$userPreferred) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Discovery$seasonNext$media$title
-    on Query$Discovery$seasonNext$media$title {
-  CopyWith$Query$Discovery$seasonNext$media$title<
-          Query$Discovery$seasonNext$media$title>
-      get copyWith => CopyWith$Query$Discovery$seasonNext$media$title(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Discovery$seasonNext$media$title<TRes> {
-  factory CopyWith$Query$Discovery$seasonNext$media$title(
-    Query$Discovery$seasonNext$media$title instance,
-    TRes Function(Query$Discovery$seasonNext$media$title) then,
-  ) = _CopyWithImpl$Query$Discovery$seasonNext$media$title;
-
-  factory CopyWith$Query$Discovery$seasonNext$media$title.stub(TRes res) =
-      _CopyWithStubImpl$Query$Discovery$seasonNext$media$title;
-
-  TRes call({
-    String? userPreferred,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Discovery$seasonNext$media$title<TRes>
-    implements CopyWith$Query$Discovery$seasonNext$media$title<TRes> {
-  _CopyWithImpl$Query$Discovery$seasonNext$media$title(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Discovery$seasonNext$media$title _instance;
-
-  final TRes Function(Query$Discovery$seasonNext$media$title) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? userPreferred = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Discovery$seasonNext$media$title(
-        userPreferred: userPreferred == _undefined
-            ? _instance.userPreferred
-            : (userPreferred as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Discovery$seasonNext$media$title<TRes>
-    implements CopyWith$Query$Discovery$seasonNext$media$title<TRes> {
-  _CopyWithStubImpl$Query$Discovery$seasonNext$media$title(this._res);
-
-  TRes _res;
-
-  call({
-    String? userPreferred,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$Discovery$seasonNext$media$coverImage
-    implements Fragment$BasicMedia$coverImage {
-  Query$Discovery$seasonNext$media$coverImage({
-    this.large,
-    this.$__typename = 'MediaCoverImage',
-  });
-
-  factory Query$Discovery$seasonNext$media$coverImage.fromJson(
-      Map<String, dynamic> json) {
-    final l$large = json['large'];
-    final l$$__typename = json['__typename'];
-    return Query$Discovery$seasonNext$media$coverImage(
-      large: (l$large as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? large;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$large = large;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$large,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Discovery$seasonNext$media$coverImage) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Discovery$seasonNext$media$coverImage
-    on Query$Discovery$seasonNext$media$coverImage {
-  CopyWith$Query$Discovery$seasonNext$media$coverImage<
-          Query$Discovery$seasonNext$media$coverImage>
-      get copyWith => CopyWith$Query$Discovery$seasonNext$media$coverImage(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Discovery$seasonNext$media$coverImage<TRes> {
-  factory CopyWith$Query$Discovery$seasonNext$media$coverImage(
-    Query$Discovery$seasonNext$media$coverImage instance,
-    TRes Function(Query$Discovery$seasonNext$media$coverImage) then,
-  ) = _CopyWithImpl$Query$Discovery$seasonNext$media$coverImage;
-
-  factory CopyWith$Query$Discovery$seasonNext$media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Query$Discovery$seasonNext$media$coverImage;
-
-  TRes call({
-    String? large,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Discovery$seasonNext$media$coverImage<TRes>
-    implements CopyWith$Query$Discovery$seasonNext$media$coverImage<TRes> {
-  _CopyWithImpl$Query$Discovery$seasonNext$media$coverImage(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Discovery$seasonNext$media$coverImage _instance;
-
-  final TRes Function(Query$Discovery$seasonNext$media$coverImage) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? large = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Discovery$seasonNext$media$coverImage(
-        large: large == _undefined ? _instance.large : (large as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Discovery$seasonNext$media$coverImage<TRes>
-    implements CopyWith$Query$Discovery$seasonNext$media$coverImage<TRes> {
-  _CopyWithStubImpl$Query$Discovery$seasonNext$media$coverImage(this._res);
-
-  TRes _res;
-
-  call({
-    String? large,
-    String? $__typename,
-  }) =>
-      _res;
 }

@@ -2,7 +2,6 @@ import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/providers/graphql.dart';
-import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -10,9 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:provider/provider.dart';
 
-class Tabs extends StatefulWidget {
+class Tabs extends StatelessWidget {
   final List<Query$FetchMediaList$MediaListCollection$lists?> lists;
   final Future<QueryResult<Query$FetchMediaList>?> Function()? refresh;
   final String title;
@@ -21,69 +19,60 @@ class Tabs extends StatefulWidget {
       {super.key, required this.lists, this.refresh, required this.title});
 
   @override
-  State<Tabs> createState() => _TabsState();
-}
-
-class _TabsState extends State<Tabs> with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: widget.lists.length, vsync: this);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var user = context.watch<User>();
-
-    return Appbar(
-      title: Text(widget.title),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 4),
-          child: IconButton(
-            onPressed: () => context.push('/settings/app'),
-            icon: const Icon(Icons.settings),
+    return DefaultTabController(
+      length: lists.length,
+      child: Appbar(
+        title: Text(title),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 4),
+            child: IconButton(
+              onPressed: () => context.push('/settings/app'),
+              icon: const Icon(Icons.settings),
+            ),
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TabBar(
+              isScrollable: true,
+              // controller: _tabController,
+              tabs: [
+                for (var list in lists)
+                  Tab(
+                    text: list!.name,
+                  )
+              ],
+            ),
           ),
         ),
-      ],
-      bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: TabBar(
-            isScrollable: true,
-            controller: _tabController,
-            tabs: [
-              for (var list in widget.lists)
-                Tab(
-                  text: list!.name,
-                )
-            ],
-          ),
-        ),
-      ),
-      child: MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              for (var list in widget.lists)
-                ListTab(
-                  list: list!,
-                  updateList: widget.refresh,
-                )
-            ],
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TabBarView(
+              // controller: _tabController,
+              children: [
+                for (var list in lists)
+                  ListTab(
+                    list: list!,
+                    updateList: refresh,
+                  )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
+// class _TabsState extends State<Tabs> with SingleTickerProviderStateMixin {
+// }
 
 class ListTab extends StatefulWidget {
   final Query$FetchMediaList$MediaListCollection$lists list;

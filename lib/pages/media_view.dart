@@ -102,64 +102,75 @@ class _ViewState extends State<View> {
       _key.currentState?.updateState(widget.media);
     }
 
+    // return DefaultTabController(length: _tabs.length, child: )
+
     return DefaultTabController(
       length: _tabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          surfaceTintColor: Colors.transparent,
-          leading: const SizedBox(),
-          leadingWidth: 0,
-          toolbarHeight: 210,
-          flexibleSpace: Title(
-            media: widget.media,
-          ),
-          bottom: TabBar(
-            isScrollable: true,
-            dividerColor: Colors.transparent,
-            // controller: _controller,
-            tabs: [
-              const Tab(text: 'Overview'),
-              if (widget.media.relations?.edges?.isNotEmpty == true)
-                const Tab(text: 'Relations'),
-              if (widget.media.characters?.edges?.isNotEmpty == true)
-                const Tab(text: 'Characters'),
-              if (widget.media.reviews?.edges?.isNotEmpty == true)
-                const Tab(
-                  text: 'Reviews',
-                ),
-              if (widget.media.type == Enum$MediaType.ANIME &&
-                  widget.media.streamingEpisodes?.isNotEmpty == true)
-                const Tab(text: 'Episodes'),
-            ],
-          ),
-        ),
-        floatingActionButton: AnimatedSlide(
-          duration: duration,
-          offset: _show ? Offset.zero : const Offset(0, 2),
-          child: AnimatedOpacity(
-            duration: duration,
-            opacity: _show ? 1 : 0,
-            child: FloatingButtons(
-              media: widget.media,
-              key: _key,
+      child: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            surfaceTintColor: Colors.transparent,
+            leading: const SizedBox(),
+            leadingWidth: 0,
+            toolbarHeight: 210,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Title(
+                media: widget.media,
+              ),
+            ),
+            pinned: true,
+            floating: true,
+            bottom: TabBar(
+              isScrollable: true,
+              dividerColor: Colors.transparent,
+              // controller: _controller,
+              tabs: [
+                const Tab(text: 'Overview'),
+                if (widget.media.relations?.edges?.isNotEmpty == true)
+                  const Tab(text: 'Relations'),
+                if (widget.media.characters?.edges?.isNotEmpty == true)
+                  const Tab(text: 'Characters'),
+                if (widget.media.reviews?.edges?.isNotEmpty == true)
+                  const Tab(
+                    text: 'Reviews',
+                  ),
+                if (widget.media.type == Enum$MediaType.ANIME &&
+                    widget.media.streamingEpisodes?.isNotEmpty == true)
+                  const Tab(text: 'Episodes'),
+              ],
             ),
           ),
-        ),
-        body: NotificationListener<UserScrollNotification>(
-          onNotification: (notification) {
-            // print(notification);
-            final ScrollDirection direction = notification.direction;
-            setState(() {
-              if (direction == ScrollDirection.reverse) {
-                _show = false;
-              } else if (direction == ScrollDirection.forward) {
-                _show = true;
-              }
-            });
-            return false;
-          },
-          child: TabBarView(
-            children: _tabs,
+        ],
+        body: Scaffold(
+          floatingActionButton: AnimatedSlide(
+            duration: duration,
+            offset: _show ? Offset.zero : const Offset(0, 2),
+            child: AnimatedOpacity(
+              duration: duration,
+              opacity: _show ? 1 : 0,
+              child: FloatingButtons(
+                media: widget.media,
+                key: _key,
+              ),
+            ),
+          ),
+          body: NotificationListener<UserScrollNotification>(
+            onNotification: (notification) {
+              // print(notification);
+              final ScrollDirection direction = notification.direction;
+              setState(() {
+                if (direction == ScrollDirection.reverse) {
+                  _show = false;
+                } else if (direction == ScrollDirection.forward) {
+                  _show = true;
+                }
+              });
+              return false;
+            },
+            child: TabBarView(
+              children: _tabs,
+            ),
           ),
         ),
       ),

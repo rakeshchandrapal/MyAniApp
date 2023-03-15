@@ -1,4 +1,4 @@
-query Staff($id: Int) {
+query Staff($id: Int, $withCharacterRoles: Boolean = true, $onList: Boolean, $characterPage: Int = 1, $sort: [MediaSort] = [START_DATE_DESC]) {
   Staff(id: $id) {
     id
     languageV2
@@ -6,7 +6,7 @@ query Staff($id: Int) {
     homeTown
     bloodType
     isFavourite
-    siteUrl
+    yearsActive
     description(asHtml: true)
     age
     name {
@@ -24,6 +24,38 @@ query Staff($id: Int) {
       year
       month
       day
+    }
+    characterMedia(page: $characterPage, sort: $sort, onList: $onList) @include(if: $withCharacterRoles) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      edges {
+        characterRole
+        characterName
+        node {
+          ...BasicMedia
+          startDate {
+            year
+          }
+          mediaListEntry {
+            id
+            status
+          }
+        }
+        characters {
+          id
+          name {
+            userPreferred
+          }
+          image {
+            large
+          }
+        }
+      }
     }
   }
 }

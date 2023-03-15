@@ -26,15 +26,14 @@ class GridCards extends StatelessWidget {
     this.underTitle,
     this.gridChips,
   }) : assert(
-            (list is List<Fragment$BasicMedia> ||
-                    list is List<Fragment$MediaListEntry>) ==
-                false,
-            'Invalid List');
+            (list is List<Fragment$BasicMedia> != true &&
+                    list is List<Fragment$MediaListEntry>) !=
+                true,
+            list);
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    // print(size.width);
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
