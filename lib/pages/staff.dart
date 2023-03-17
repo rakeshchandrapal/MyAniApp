@@ -273,18 +273,61 @@ class Medias extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Cards(
-      list: medias.map((e) => e!.node!).toList(),
+    var sorted = MediaCategory.sort(
+        medias.whereType<Query$Staff$Staff$characterMedia$edges>().toList());
+
+    return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        var item = sorted[index];
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              item.year.toString(),
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Cards(
+              list: item.medias.map((e) => e.node).toList(),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+            ),
+          ],
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        height: 10,
+      ),
+      itemCount: sorted.length,
     );
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        for (var media in medias) Text(media!.node!.title!.userPreferred!),
-      ],
-      // ),
-    );
+  }
+}
+
+class MediaCategory {
+  int year;
+  List<Query$Staff$Staff$characterMedia$edges> medias = [];
+  MediaCategory({required this.year});
+
+  static List<MediaCategory> sort(
+      List<Query$Staff$Staff$characterMedia$edges> medias) {
+    List<MediaCategory> listsP = [];
+
+    for (var media in medias) {
+      var o = listsP
+          .indexWhere((element) => element.year == media.node?.startDate?.year);
+      if (o == -1) {
+        if (media.node?.startDate?.year == null) continue;
+        listsP.add(MediaCategory(year: media.node!.startDate!.year!)
+          ..medias.add(media));
+      } else {
+        listsP[o].medias.add(media);
+      }
+    }
+    return listsP;
   }
 }

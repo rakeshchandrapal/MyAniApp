@@ -94,7 +94,7 @@ query Activity($id: Int, $page: Int = 1) {
     activityReplies(activityId: $id) {
       id
       userId
-      text
+      text(asHtml: true)
       createdAt
       activityId
       isLiked

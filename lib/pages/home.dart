@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HomePage extends StatefulHookWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -294,7 +295,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
-                                      "Episode ${use?.episode.toString()} ${fromTimestamp(use.airingAt)}",
+                                      "Episode ${use?.episode.toString()} ${isTodayFromTimestamp(use.airingAt) ? '' : 'in '}${timeago.format(
+                                        dateFromTimestamp(use.airingAt),
+                                        locale: 'en_short',
+                                        allowFromNow: true,
+                                      )} ${isTodayFromTimestamp(use.airingAt) ? 'ago' : ''}",
                                       style: const TextStyle(
                                         fontSize: 9,
                                       ),

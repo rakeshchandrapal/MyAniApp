@@ -120,6 +120,7 @@ class _ViewState extends State<View> {
               ),
             ),
             pinned: true,
+            snap: true,
             floating: true,
             bottom: TabBar(
               isScrollable: true,
