@@ -4,6 +4,7 @@ import 'package:MyAniApp/graphql/Character.graphql.dart';
 import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/Review.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
+import 'package:MyAniApp/graphql/thread.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/main.dart';
 import 'package:MyAniApp/pages/lists/shared.dart';
@@ -11,6 +12,7 @@ import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
 import 'package:MyAniApp/widgets/html.dart';
+import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -46,7 +49,9 @@ class AnimePage extends HookWidget {
           await hook.refetch();
           return;
         },
-        child: View(media: result.Media!),
+        child: View(
+          media: result.Media!,
+        ),
       ),
     );
   }
@@ -93,6 +98,7 @@ class _ViewState extends State<View> {
         widget.media.streamingEpisodes?.isNotEmpty == true) {
       _tabs.add(Episodes(media: widget.media));
     }
+    _tabs.add(Social(widget.media));
   }
 
   @override
@@ -139,6 +145,7 @@ class _ViewState extends State<View> {
                 if (widget.media.type == Enum$MediaType.ANIME &&
                     widget.media.streamingEpisodes?.isNotEmpty == true)
                   const Tab(text: 'Episodes'),
+                const Tab(text: 'Social')
               ],
             ),
           ),
@@ -486,31 +493,29 @@ class Overview extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 8, left: 8),
-            child: Text(
-              "Description",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
-                fontWeight: FontWeight.w600,
+          if (media.description != null) ...[
+            Padding(
+              padding: const EdgeInsets.only(top: 8, left: 8),
+              child: Text(
+                "Description",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
-          Container(
-            constraints: const BoxConstraints(maxHeight: 150),
-            width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              color: Color.fromRGBO(92, 114, 138, 0.1),
+            Container(
+              constraints: const BoxConstraints(maxHeight: 150),
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: Color.fromRGBO(92, 114, 138, 0.1),
+              ),
+              child: HTML(data: media.description!),
             ),
-            child: HTML(
-              data: media.description != null
-                  ? removeHTML(media.description!)
-                  : '',
-            ),
-          ),
+          ],
           _info(context),
           if (media.trailer?.site == 'youtube' && Platform.isAndroid) ...[
             Padding(
@@ -529,7 +534,7 @@ class Overview extends StatelessWidget {
               child: Player(id: media.trailer!.id!),
             )
           ],
-          _links(context),
+          if (media.externalLinks?.isNotEmpty == true) _links(context),
         ],
       ),
     );
@@ -881,6 +886,7 @@ class Characters extends HookWidget {
           return false;
         },
         child: ListView(
+          padding: EdgeInsets.zero,
           shrinkWrap: true,
           // physics: const NeverScrollableScrollPhysics(),
           children: [
@@ -968,6 +974,7 @@ class Episodes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       children: [
         for (var episode in media.streamingEpisodes!)
           Padding(
@@ -1069,6 +1076,7 @@ class Reviews extends HookWidget {
     return Graphql(
       hook: hook,
       builder: (result) => ListView(
+        padding: EdgeInsets.zero,
         // mainAxisSize: MainAxisSize.min,
         children: [
           for (var review in result.Media!.reviews!.nodes!)
@@ -1132,6 +1140,133 @@ class Reviews extends HookWidget {
       context: context,
       builder: (context) => Dialog.fullscreen(
         child: Review(review: review),
+      ),
+    );
+  }
+}
+
+class Social extends HookWidget {
+  final Query$FetchMediaById$Media media;
+
+  const Social(this.media, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var hook = useQuery$Threads(
+      Options$Query$Threads(
+        variables: Variables$Query$Threads(mediaId: media.id),
+      ),
+    );
+
+    return Graphql(
+      hook: hook,
+      builder: (result) => ListView.builder(
+        padding: EdgeInsets.zero,
+        itemBuilder: (context, index) {
+          var thread = result.Page!.threads![index];
+          // print(thread!.categories);
+
+          return Card(
+            child: InkWell(
+              onTap: () => context.push('/thread/${thread.id}'),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            thread!.title!.trim(),
+                            style: Theme.of(context).textTheme.titleMedium,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if ((thread.viewCount ?? 0) > 0)
+                          Row(
+                            children: [
+                              const Icon(Icons.remove_red_eye),
+                              Text(thread.viewCount!.toString()),
+                            ],
+                          ),
+                        if ((thread.replyCount ?? 0) > 0)
+                          Row(
+                            children: [
+                              const Icon(Icons.chat_bubble),
+                              Text(thread.replyCount!.toString()),
+                            ],
+                          ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        if (thread.replyUser != null) ...[
+                          CImage(
+                            imageUrl: thread.replyUser!.avatar!.large!,
+                            height: 25,
+                            width: 25,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Text.rich(
+                              TextSpan(
+                                text: thread.replyUser?.name,
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        ' replied ${timeago.format(dateFromTimestamp(thread.repliedAt!))}',
+                                  ),
+                                ],
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          // Text(thread.replyUser!.name),
+                        ] else ...[
+                          CImage(
+                            imageUrl: thread.user!.avatar!.large!,
+                          ),
+                        ],
+                      ],
+                    ),
+                    if (thread.categories?.isNotEmpty == true) ...[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: [
+                          for (var cat in thread.categories!)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 5),
+                              child: Chip(
+                                label: Text(
+                                  cat!.name,
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                ),
+                                visualDensity: const VisualDensity(
+                                  horizontal: -2,
+                                  vertical: -2,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: result.Page?.threads?.length,
       ),
     );
   }

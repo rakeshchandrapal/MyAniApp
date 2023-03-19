@@ -1,6 +1,7 @@
 import 'package:MyAniApp/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:go_router/go_router.dart';
 
 var spoilerRegex = RegExp(r'~!(.*?)!~', dotAll: true);
 var characterRegex = RegExp(r'https://anilist.co/character/([0-9]+)');
@@ -34,7 +35,21 @@ class HTML extends StatelessWidget {
         removeTop: true,
         child: SingleChildScrollView(
           child: HtmlWidget(
-            data,
+            removeHTML(data),
+            onTapUrl: (url) async {
+              print(url);
+              var uri = Uri.parse(url);
+              print(uri.pathSegments);
+              if (uri.pathSegments.first.contains('character')) {
+                context.push(uri.path);
+                return true;
+              } else if (uri.pathSegments.first
+                  .contains(RegExp(r'anime|manga'))) {
+                context.push('/media/${uri.pathSegments[1]}');
+                return true;
+              }
+              return false;
+            },
             customWidgetBuilder: (element) {
               if (element.className == 'markdown_spoiler') {
                 // print();

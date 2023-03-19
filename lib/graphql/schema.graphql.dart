@@ -678,6 +678,128 @@ Enum$ActivityType fromJson$Enum$ActivityType(String value) {
   }
 }
 
+enum Enum$ThreadCommentSort { ID, ID_DESC, $unknown }
+
+String toJson$Enum$ThreadCommentSort(Enum$ThreadCommentSort e) {
+  switch (e) {
+    case Enum$ThreadCommentSort.ID:
+      return r'ID';
+    case Enum$ThreadCommentSort.ID_DESC:
+      return r'ID_DESC';
+    case Enum$ThreadCommentSort.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$ThreadCommentSort fromJson$Enum$ThreadCommentSort(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum$ThreadCommentSort.ID;
+    case r'ID_DESC':
+      return Enum$ThreadCommentSort.ID_DESC;
+    default:
+      return Enum$ThreadCommentSort.$unknown;
+  }
+}
+
+enum Enum$ThreadSort {
+  ID,
+  ID_DESC,
+  TITLE,
+  TITLE_DESC,
+  CREATED_AT,
+  CREATED_AT_DESC,
+  UPDATED_AT,
+  UPDATED_AT_DESC,
+  REPLIED_AT,
+  REPLIED_AT_DESC,
+  REPLY_COUNT,
+  REPLY_COUNT_DESC,
+  VIEW_COUNT,
+  VIEW_COUNT_DESC,
+  IS_STICKY,
+  SEARCH_MATCH,
+  $unknown
+}
+
+String toJson$Enum$ThreadSort(Enum$ThreadSort e) {
+  switch (e) {
+    case Enum$ThreadSort.ID:
+      return r'ID';
+    case Enum$ThreadSort.ID_DESC:
+      return r'ID_DESC';
+    case Enum$ThreadSort.TITLE:
+      return r'TITLE';
+    case Enum$ThreadSort.TITLE_DESC:
+      return r'TITLE_DESC';
+    case Enum$ThreadSort.CREATED_AT:
+      return r'CREATED_AT';
+    case Enum$ThreadSort.CREATED_AT_DESC:
+      return r'CREATED_AT_DESC';
+    case Enum$ThreadSort.UPDATED_AT:
+      return r'UPDATED_AT';
+    case Enum$ThreadSort.UPDATED_AT_DESC:
+      return r'UPDATED_AT_DESC';
+    case Enum$ThreadSort.REPLIED_AT:
+      return r'REPLIED_AT';
+    case Enum$ThreadSort.REPLIED_AT_DESC:
+      return r'REPLIED_AT_DESC';
+    case Enum$ThreadSort.REPLY_COUNT:
+      return r'REPLY_COUNT';
+    case Enum$ThreadSort.REPLY_COUNT_DESC:
+      return r'REPLY_COUNT_DESC';
+    case Enum$ThreadSort.VIEW_COUNT:
+      return r'VIEW_COUNT';
+    case Enum$ThreadSort.VIEW_COUNT_DESC:
+      return r'VIEW_COUNT_DESC';
+    case Enum$ThreadSort.IS_STICKY:
+      return r'IS_STICKY';
+    case Enum$ThreadSort.SEARCH_MATCH:
+      return r'SEARCH_MATCH';
+    case Enum$ThreadSort.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$ThreadSort fromJson$Enum$ThreadSort(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum$ThreadSort.ID;
+    case r'ID_DESC':
+      return Enum$ThreadSort.ID_DESC;
+    case r'TITLE':
+      return Enum$ThreadSort.TITLE;
+    case r'TITLE_DESC':
+      return Enum$ThreadSort.TITLE_DESC;
+    case r'CREATED_AT':
+      return Enum$ThreadSort.CREATED_AT;
+    case r'CREATED_AT_DESC':
+      return Enum$ThreadSort.CREATED_AT_DESC;
+    case r'UPDATED_AT':
+      return Enum$ThreadSort.UPDATED_AT;
+    case r'UPDATED_AT_DESC':
+      return Enum$ThreadSort.UPDATED_AT_DESC;
+    case r'REPLIED_AT':
+      return Enum$ThreadSort.REPLIED_AT;
+    case r'REPLIED_AT_DESC':
+      return Enum$ThreadSort.REPLIED_AT_DESC;
+    case r'REPLY_COUNT':
+      return Enum$ThreadSort.REPLY_COUNT;
+    case r'REPLY_COUNT_DESC':
+      return Enum$ThreadSort.REPLY_COUNT_DESC;
+    case r'VIEW_COUNT':
+      return Enum$ThreadSort.VIEW_COUNT;
+    case r'VIEW_COUNT_DESC':
+      return Enum$ThreadSort.VIEW_COUNT_DESC;
+    case r'IS_STICKY':
+      return Enum$ThreadSort.IS_STICKY;
+    case r'SEARCH_MATCH':
+      return Enum$ThreadSort.SEARCH_MATCH;
+    default:
+      return Enum$ThreadSort.$unknown;
+  }
+}
+
 enum Enum$ActivitySort { ID, ID_DESC, PINNED, $unknown }
 
 String toJson$Enum$ActivitySort(Enum$ActivitySort e) {

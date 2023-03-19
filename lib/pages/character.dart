@@ -9,7 +9,6 @@ import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 
 var metaRegex = RegExp(r'<p><strong>(.*?)</p>', dotAll: true);
 
@@ -56,8 +55,14 @@ class Character extends HookWidget {
           },
         );
 
-        return SafeArea(
-          child: NotificationListener<ScrollUpdateNotification>(
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            surfaceTintColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: NotificationListener<ScrollUpdateNotification>(
             onNotification: (notification) {
               if (!hook.result.isLoading &&
                   notification.metrics.pixels >=
@@ -74,6 +79,9 @@ class Character extends HookWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top,
+                    ),
                     Title(
                       meta: meta?.group(0),
                       character: result.Character!,
@@ -176,134 +184,117 @@ class Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print();
-    return Stack(
+    return Row(
       children: [
-        Row(
-          children: [
-            SizedBox(
-              height: 150,
-              width: 100,
-              child: AspectRatio(
-                aspectRatio: 9 / 16,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ImagePage(
-                        image: character.image!.large!,
-                        tag: 'character',
-                      ),
-                    ),
-                  ),
-                  child: Hero(
+        SizedBox(
+          height: 150,
+          width: 100,
+          child: AspectRatio(
+            aspectRatio: 9 / 16,
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ImagePage(
+                    image: character.image!.large!,
                     tag: 'character',
-                    child: CachedNetworkImage(
-                      imageUrl: character.image!.large!,
-                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                constraints: const BoxConstraints(minWidth: 20, maxHeight: 130),
-                // height: 20,
-                width: MediaQuery.of(context).size.width - 140,
-                child: CustomScrollView(
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildListDelegate.fixed(
-                        [
-                          Text(
-                            character.name!.userPreferred!,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          if (character.dateOfBirth != null)
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: 'Birthday: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(
-                                    text: formattedDate(
-                                      character.dateOfBirth!.year,
-                                      character.dateOfBirth!.month,
-                                      character.dateOfBirth!.day,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          if (character.age != null)
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: 'Age: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(text: character.age),
-                                ],
-                              ),
-                            ),
-                          if (character.gender != null)
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: 'Gender: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(text: character.gender),
-                                ],
-                              ),
-                            ),
-                          if (character.bloodType != null)
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: 'Blood Type: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(text: character.bloodType),
-                                ],
-                              ),
-                            ),
-                          if (meta != null)
-                            HTML(
-                              data: removeHTML(meta!),
-                              padding: const EdgeInsets.all(0),
-                              // shrinkWrap: true,
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
+              child: Hero(
+                tag: 'character',
+                child: CachedNetworkImage(
+                  imageUrl: character.image!.large!,
                 ),
-              ),
-            ),
-          ],
-        ),
-        if (context.canPop())
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: BackButton(
-                onPressed: () => context.pop(),
-                color: Colors.white,
               ),
             ),
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            constraints: const BoxConstraints(minWidth: 20, maxHeight: 130),
+            // height: 20,
+            width: MediaQuery.of(context).size.width - 140,
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate.fixed(
+                    [
+                      Text(
+                        character.name!.userPreferred!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      if (character.dateOfBirth != null &&
+                          character.dateOfBirth?.month != null)
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'Birthday: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(
+                                text: formattedDate(
+                                  character.dateOfBirth!.year,
+                                  character.dateOfBirth!.month,
+                                  character.dateOfBirth!.day,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      if (character.age != null)
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'Age: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(
+                                  text: character.age?.replaceAll('-', '')),
+                            ],
+                          ),
+                        ),
+                      if (character.gender != null)
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'Gender: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(text: character.gender),
+                            ],
+                          ),
+                        ),
+                      if (character.bloodType != null)
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'Blood Type: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(text: character.bloodType),
+                            ],
+                          ),
+                        ),
+                      if (meta != null)
+                        HTML(
+                          data: removeHTML(meta!),
+                          padding: const EdgeInsets.all(0),
+                          // shrinkWrap: true,
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

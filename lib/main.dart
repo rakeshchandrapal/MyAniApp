@@ -19,6 +19,7 @@ import 'package:MyAniApp/pages/settings/app.dart';
 import 'package:MyAniApp/pages/settings/general.dart';
 import 'package:MyAniApp/pages/social.dart';
 import 'package:MyAniApp/pages/staff.dart';
+import 'package:MyAniApp/pages/thread.dart';
 import 'package:MyAniApp/providers/graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/providers/theme.dart';
@@ -142,6 +143,10 @@ var _routerConfig = GoRouter(
         GoRoute(
           path: '/activity/:id',
           builder: (context, state) => Activity(id: state.params['id']!),
+        ),
+        GoRoute(
+          path: '/thread/:id',
+          builder: (context, state) => Thread(id: state.params['id']!),
         ),
       ],
     ),

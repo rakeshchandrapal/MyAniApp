@@ -1,0 +1,107 @@
+query Threads($mediaId: Int, $page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      hasNextPage
+      currentPage
+    }
+    threads(mediaCategoryId: $mediaId, sort: ID_DESC) {
+      id
+      title
+      replyCount
+      viewCount
+      replyCommentId
+      repliedAt
+      createdAt
+      categories {
+        id
+        name
+      }
+      user {
+        id
+        name
+        avatar {
+          large
+        }
+      }
+      replyUser {
+        id
+        name
+        avatar {
+          large
+        }
+      }
+    }
+  }
+}
+
+query Thread($id: Int) {
+  Thread(id: $id) {
+    id
+    title
+    body(asHtml: true)
+    userId
+    replyCount
+    viewCount
+    isLocked
+    isSticky
+    isSubscribed
+    isLiked
+    likeCount
+    repliedAt
+    createdAt
+    user {
+      id
+      name
+      avatar {
+        large
+      }
+    }
+    categories {
+      id
+      name
+    }
+    mediaCategories {
+      id
+      title {
+        userPreferred
+      }
+      coverImage {
+        large
+      }
+      type
+      format
+    }
+  }
+}
+
+query ThreadComments($threadId: Int, $page: Int) {
+  Page(page: $page, perPage: 15) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    threadComments(threadId: $threadId) {
+      id
+      threadId
+      comment(asHtml: true)
+      isLiked
+      likeCount
+      createdAt
+      user {
+        id
+        name
+        donatorTier
+        donatorBadge
+        moderatorRoles
+        avatar {
+          large
+        }
+      }
+      childComments
+      isLocked
+    }
+  }
+}

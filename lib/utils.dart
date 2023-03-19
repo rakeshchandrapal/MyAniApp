@@ -30,7 +30,7 @@ String removeHTML(String data) {
 }
 
 String formattedDate(int? year, int? month, int? day) {
-  return '${month != null ? DateFormat.MMMM().format(DateTime(0, month))  : ''}${day != null ?' $day': ''}${day != null || month != null ? ', ' : ''}${year??''}';
+  return '${month != null ? DateFormat.MMMM().format(DateTime(0, month))  : ''}${day != null ?' $day': ''}${(day != null || month != null) && year != null ? ', ' : ''}${year??''}';
 }
 
 bool isTodayFromTimestamp(int? timestamp) {
