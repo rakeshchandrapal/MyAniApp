@@ -519,12 +519,7 @@ const documentNodeQueryReviews = DocumentNode(definitions: [
                   FieldNode(
                     name: NameNode(value: 'body'),
                     alias: null,
-                    arguments: [
-                      ArgumentNode(
-                        name: NameNode(value: 'asHtml'),
-                        value: BooleanValueNode(value: true),
-                      )
-                    ],
+                    arguments: [],
                     directives: [],
                     selectionSet: null,
                   ),

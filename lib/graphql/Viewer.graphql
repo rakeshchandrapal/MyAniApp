@@ -1,7 +1,7 @@
 fragment ThisUser on User {
   id
   name
-  about(asHtml: true)
+  about
   bannerImage
   unreadNotificationCount
   avatar {

@@ -16,7 +16,7 @@ query Activities($isFollowing: Boolean = true, $hasReplies: Boolean = false, $ac
         userId
         type
         replyCount
-        text(asHtml: true)
+        text
         isLocked
         isSubscribed
         isLiked
@@ -56,7 +56,7 @@ query Activity($id: Int, $page: Int = 1) {
       userId
       type
       replyCount
-      text(asHtml: true)
+      text
       isLocked
       isSubscribed
       isLiked
@@ -94,7 +94,7 @@ query Activity($id: Int, $page: Int = 1) {
     activityReplies(activityId: $id) {
       id
       userId
-      text(asHtml: true)
+      text
       createdAt
       activityId
       isLiked

@@ -27,7 +27,7 @@ query Reviews($mediaId: Int, $page: Int) {
             userPreferred
           }
         }
-        body(asHtml: true)
+        body
       }
     }
   }

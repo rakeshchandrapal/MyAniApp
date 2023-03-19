@@ -11,9 +11,9 @@ import 'package:MyAniApp/pages/lists/shared.dart';
 import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
-import 'package:MyAniApp/widgets/html.dart';
 import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -513,7 +513,10 @@ class Overview extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 color: Color.fromRGBO(92, 114, 138, 0.1),
               ),
-              child: HTML(data: media.description!),
+              child: Markdown(
+                data: media.description!,
+                hasHtml: true,
+              ),
             ),
           ],
           _info(context),
@@ -541,7 +544,6 @@ class Overview extends StatelessWidget {
   }
 
   Widget _info(BuildContext context) {
-    // print(anime.data!['Media']);
     var startDate = media.startDate != null
         ? formattedDate(
             media.startDate!.year, media.startDate!.month, media.startDate!.day)
@@ -944,10 +946,10 @@ class Characters extends HookWidget {
                                     )
                                 ],
                               ),
-                              if (character.voiceActors?.isNotEmpty == true)
+                              if (character.voiceActorRoles?.isNotEmpty == true)
                                 TextButton(
-                                  onPressed: () => context.push(
-                                      '/staff/${character.voiceActors!.first!.id}'),
+                                  onPressed: () => showVoiceActors(
+                                      context, character.voiceActorRoles!),
                                   child: const Text('View Voice Actor'),
                                 ),
                             ],
@@ -964,6 +966,232 @@ class Characters extends HookWidget {
         ),
       ),
     );
+  }
+
+  showVoiceActors(
+      BuildContext context,
+      List<Query$Characters$Media$characters$edges$voiceActorRoles?>
+          voiceActors) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        var sorted = VoiceActors.sort(voiceActors);
+
+        return DefaultTabController(
+          length: sorted.length,
+          child: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: TabBar(
+                isScrollable: true,
+                tabs: [
+                  for (var tab in sorted) Tab(text: tab.language),
+                ],
+              ),
+            ),
+            // appBar: AppBar(
+            //   // leading: const SizedBox(),
+            //   automaticallyImplyLeading: false,
+            //   bottom: TabBar(
+            //     isScrollable: true,
+            //     tabs: [
+            //       for (var tab in sorted) Tab(text: tab.language),
+            //     ],
+            //   ),
+            // ),
+            body: TabBarView(
+              children: [
+                for (var tab in sorted)
+                  ListView(
+                    children: [
+                      for (var actor in tab.actors)
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .surfaceVariant
+                                  .withOpacity(0.7),
+                              width: 0.7,
+                            ),
+                          ),
+                          // surfaceTintColor: Theme.of(context).colorScheme.surfaceVariant,
+                          child: InkWell(
+                            onTap: () =>
+                                context.push('/staff/${actor.voiceActor!.id}'),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    bottomLeft: Radius.circular(8),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: actor.voiceActor!.image!.large!,
+                                    height: 100,
+                                    width: 70,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 100,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 8, left: 8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(actor.voiceActor!.name!
+                                                .userPreferred!),
+                                            if (actor.roleNotes != null)
+                                              Text(
+                                                actor.roleNotes!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium,
+                                              ),
+                                            if (actor.voiceActor!.languageV2 !=
+                                                null)
+                                              Text(
+                                                actor.voiceActor!.languageV2!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall
+                                                    ?.copyWith(fontSize: 10),
+                                              ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                    ],
+                  ),
+              ],
+            ),
+          ),
+        );
+        // return SingleChildScrollView(
+        //   child: Column(
+        //     children: [
+        //       for (var actor in voiceActors)
+        //         Card(
+        //           shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(8),
+        //             side: BorderSide(
+        //               color: Theme.of(context)
+        //                   .colorScheme
+        //                   .surfaceVariant
+        //                   .withOpacity(0.7),
+        //               width: 0.7,
+        //             ),
+        //           ),
+        //           // surfaceTintColor: Theme.of(context).colorScheme.surfaceVariant,
+        //           child: InkWell(
+        //             child: Row(
+        //               crossAxisAlignment: CrossAxisAlignment.start,
+        //               children: [
+        //                 ClipRRect(
+        //                   borderRadius: const BorderRadius.only(
+        //                     topLeft: Radius.circular(8),
+        //                     bottomLeft: Radius.circular(8),
+        //                   ),
+        //                   child: CachedNetworkImage(
+        //                     imageUrl: actor!.voiceActor!.image!.large!,
+        //                     height: 100,
+        //                     width: 70,
+        //                     fit: BoxFit.cover,
+        //                     placeholder: (context, url) => const Center(
+        //                         child: CircularProgressIndicator()),
+        //                   ),
+        //                 ),
+        //                 SizedBox(
+        //                   height: 100,
+        //                   child: Padding(
+        //                     padding: const EdgeInsets.only(top: 8, left: 8),
+        //                     child: Column(
+        //                       crossAxisAlignment: CrossAxisAlignment.start,
+        //                       mainAxisAlignment:
+        //                           MainAxisAlignment.spaceBetween,
+        //                       children: [
+        //                         Column(
+        //                           crossAxisAlignment:
+        //                               CrossAxisAlignment.start,
+        //                           children: [
+        //                             Text(actor
+        //                                 .voiceActor!.name!.userPreferred!),
+        //                             if (actor.voiceActor!.languageV2 != null)
+        //                               Text(
+        //                                 actor.voiceActor!.languageV2!,
+        //                                 style: Theme.of(context)
+        //                                     .textTheme
+        //                                     .labelSmall
+        //                                     ?.copyWith(fontSize: 10),
+        //                               ),
+        //                             if (actor.roleNotes != null)
+        //                               Text(
+        //                                 actor.roleNotes!,
+        //                                 style: Theme.of(context)
+        //                                     .textTheme
+        //                                     .labelSmall
+        //                                     ?.copyWith(fontSize: 10),
+        //                               )
+        //                           ],
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         )
+        //     ],
+        //   ),
+        // );
+      },
+    );
+  }
+}
+
+// class used for sorting voice actors by language
+class VoiceActors {
+  String language;
+  List<Query$Characters$Media$characters$edges$voiceActorRoles> actors = [];
+
+  VoiceActors({required this.language});
+
+  static List<VoiceActors> sort(
+      List<Query$Characters$Media$characters$edges$voiceActorRoles?> actors) {
+    List<VoiceActors> list = [];
+
+    for (var actor in actors) {
+      var o = list.indexWhere(
+          (element) => element.language == actor?.voiceActor?.languageV2);
+      if (o == -1) {
+        list.add(VoiceActors(language: actor!.voiceActor!.languageV2!)
+          ..actors.add(actor));
+      } else {
+        list[o].actors.add(actor!);
+      }
+    }
+
+    return list;
   }
 }
 
@@ -1292,8 +1520,8 @@ class Review extends StatelessWidget {
               child: Text(
                   '${review.user!.name} gave ${review.media!.title!.userPreferred} a ${review.score}/100'),
             ),
-            HTML(
-              data: removeHTML(review.body!),
+            Markdown(
+              data: review.body!,
             ),
           ],
         ),

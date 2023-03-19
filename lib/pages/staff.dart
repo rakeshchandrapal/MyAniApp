@@ -3,8 +3,8 @@ import 'package:MyAniApp/pages/character.dart';
 import 'package:MyAniApp/pages/media_view.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
-import 'package:MyAniApp/widgets/html.dart';
 import 'package:MyAniApp/widgets/image.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -102,8 +102,8 @@ class Staff extends HookWidget {
                             color: Color.fromRGBO(92, 114, 138, 0.1),
                           ),
                           // width: /,
-                          child: HTML(
-                            data: removeHTML(description),
+                          child: Markdown(
+                            data: description,
                           ),
                         ),
                       ),
@@ -261,10 +261,11 @@ class Title extends StatelessWidget {
                           ),
                         ),
                       if (meta != null)
-                        HTML(
-                          data: removeHTML(meta!),
+                        Markdown(
+                          data: meta!,
                           padding: const EdgeInsets.all(0),
-                          // shrinkWrap: true,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                         ),
                     ],
                   ),

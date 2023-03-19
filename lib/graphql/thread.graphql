@@ -38,7 +38,7 @@ query Thread($id: Int) {
   Thread(id: $id) {
     id
     title
-    body(asHtml: true)
+    body
     userId
     replyCount
     viewCount
@@ -86,7 +86,7 @@ query ThreadComments($threadId: Int, $page: Int) {
     threadComments(threadId: $threadId) {
       id
       threadId
-      comment(asHtml: true)
+      comment
       isLiked
       likeCount
       createdAt

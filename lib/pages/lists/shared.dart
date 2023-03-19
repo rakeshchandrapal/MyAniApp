@@ -6,6 +6,7 @@ import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -71,10 +72,7 @@ class Tabs extends StatelessWidget {
   }
 }
 
-// class _TabsState extends State<Tabs> with SingleTickerProviderStateMixin {
-// }
-
-class ListTab extends StatefulWidget {
+class ListTab extends HookWidget {
   final Query$FetchMediaList$MediaListCollection$lists list;
   final Future<QueryResult<Query$FetchMediaList>?> Function()? updateList;
   const ListTab({
@@ -84,21 +82,16 @@ class ListTab extends StatefulWidget {
   });
 
   @override
-  State<ListTab> createState() => _ListTabState();
-}
-
-class _ListTabState extends State<ListTab>
-    with AutomaticKeepAliveClientMixin<ListTab> {
-  @override
   Widget build(BuildContext context) {
+    useAutomaticKeepAlive(wantKeepAlive: true);
     return Cards(
-      list: widget.list.entries!.reversed.toList(),
-      openEditDialog: openEditDialog,
-      updateList: widget.updateList,
+      list: list.entries!.reversed.toList(),
+      openEditDialog: (list) => openEditDialog(context, list),
+      updateList: updateList,
     );
   }
 
-  openEditDialog(Fragment$MediaListEntry media) {
+  openEditDialog(BuildContext context, Fragment$MediaListEntry media) {
     showDialog(
       context: context,
       builder: (context) => Dialog.fullscreen(
@@ -106,15 +99,12 @@ class _ListTabState extends State<ListTab>
           child: EditDialog(
             media: media.media!,
             entry: media,
-            onSave: () => {if (widget.updateList != null) widget.updateList!()},
+            onSave: () => {if (updateList != null) updateList!()},
           ),
         ),
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class EditDialog extends StatelessWidget {

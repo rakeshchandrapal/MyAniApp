@@ -446,12 +446,7 @@ const fragmentDefinitionBasicMedia = FragmentDefinitionNode(
     FieldNode(
       name: NameNode(value: 'description'),
       alias: null,
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'asHtml'),
-          value: BooleanValueNode(value: true),
-        )
-      ],
+      arguments: [],
       directives: [],
       selectionSet: null,
     ),

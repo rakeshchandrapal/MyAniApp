@@ -1,6 +1,5 @@
 import 'package:MyAniApp/providers/user.dart';
-import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/html.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -111,10 +110,8 @@ class ProfilePage extends StatelessWidget {
               color: Color.fromRGBO(92, 114, 138, 0.1),
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            child: HTML(
-              data: user.user!.about != null
-                  ? removeHTML(user.user!.about!)
-                  : 'No bio',
+            child: Markdown(
+              data: user.user?.about ?? 'No bio',
             ),
           ),
           Text(

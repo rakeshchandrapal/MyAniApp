@@ -2450,12 +2450,7 @@ const documentNodeQueryThread = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'body'),
             alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'asHtml'),
-                value: BooleanValueNode(value: true),
-              )
-            ],
+            arguments: [],
             directives: [],
             selectionSet: null,
           ),
@@ -4653,12 +4648,7 @@ const documentNodeQueryThreadComments = DocumentNode(definitions: [
               FieldNode(
                 name: NameNode(value: 'comment'),
                 alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'asHtml'),
-                    value: BooleanValueNode(value: true),
-                  )
-                ],
+                arguments: [],
                 directives: [],
                 selectionSet: null,
               ),

@@ -1,8 +1,9 @@
 import 'package:MyAniApp/graphql/thread.graphql.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
-import 'package:MyAniApp/widgets/html.dart';
 import 'package:MyAniApp/widgets/image.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
+import 'package:MyAniApp/widgets/markdown_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -71,7 +72,7 @@ class Thread extends HookWidget {
                         height: 10,
                       ),
                       if (result.Thread!.body != null)
-                        HTML(data: result.Thread!.body!),
+                        Markdown(data: result.Thread!.body!),
                       if (result.Thread!.categories?.isNotEmpty == true) ...[
                         const SizedBox(
                           height: 10,
@@ -139,6 +140,9 @@ class Comments extends HookWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
+            TextButton(
+                onPressed: () => _showEditor(context),
+                child: const Text('Comment')),
             ListView.separated(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
@@ -172,7 +176,7 @@ class Comments extends HookWidget {
                           height: 10,
                         ),
                         if (comment.comment != null)
-                          HTML(data: comment.comment!),
+                          Markdown(data: comment.comment!),
                       ],
                     ),
                   ),
@@ -186,6 +190,15 @@ class Comments extends HookWidget {
           ],
         );
       },
+    );
+  }
+
+  _showEditor(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const Dialog.fullscreen(
+        child: Editor(),
+      ),
     );
   }
 }

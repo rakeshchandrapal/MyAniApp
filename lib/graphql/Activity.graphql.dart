@@ -495,12 +495,7 @@ const documentNodeQueryActivities = DocumentNode(definitions: [
                   FieldNode(
                     name: NameNode(value: 'text'),
                     alias: null,
-                    arguments: [
-                      ArgumentNode(
-                        name: NameNode(value: 'asHtml'),
-                        value: BooleanValueNode(value: true),
-                      )
-                    ],
+                    arguments: [],
                     directives: [],
                     selectionSet: null,
                   ),
@@ -2495,12 +2490,7 @@ const documentNodeQueryActivity = DocumentNode(definitions: [
               FieldNode(
                 name: NameNode(value: 'text'),
                 alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'asHtml'),
-                    value: BooleanValueNode(value: true),
-                  )
-                ],
+                arguments: [],
                 directives: [],
                 selectionSet: null,
               ),
@@ -2776,12 +2766,7 @@ const documentNodeQueryActivity = DocumentNode(definitions: [
               FieldNode(
                 name: NameNode(value: 'text'),
                 alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'asHtml'),
-                    value: BooleanValueNode(value: true),
-                  )
-                ],
+                arguments: [],
                 directives: [],
                 selectionSet: null,
               ),

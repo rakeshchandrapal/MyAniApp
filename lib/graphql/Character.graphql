@@ -20,19 +20,18 @@ query Characters($mediaId: Int, $page: Int) {
             large
           }
         }
-        voiceActors {
-          id
-          languageV2
-          name {
-            first
-            middle
-            last
-            full
-            native
-            userPreferred
-          }
-          image {
-            large
+        voiceActorRoles(sort: [RELEVANCE, ID]) {
+          roleNotes
+          dubGroup
+          voiceActor {
+            id
+            name {
+              userPreferred
+            }
+            languageV2
+            image {
+              large
+            }
           }
         }
       }

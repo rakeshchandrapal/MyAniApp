@@ -4,7 +4,7 @@ import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
-import 'package:MyAniApp/widgets/html.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -336,7 +336,7 @@ class Social extends HookWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: HTML(
+                                  child: Markdown(
                                     data: item.text!,
                                   ),
                                 ),

@@ -12,7 +12,7 @@ fragment BasicMedia on Media {
   coverImage {
     large
   }
-  description(asHtml: true)
+  description
 }
 
 fragment MediaListEntry on MediaList {

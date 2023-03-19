@@ -7,7 +7,7 @@ query Staff($id: Int, $withCharacterRoles: Boolean = true, $onList: Boolean, $ch
     bloodType
     isFavourite
     yearsActive
-    description(asHtml: true)
+    description
     age
     name {
       userPreferred

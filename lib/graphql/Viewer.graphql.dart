@@ -400,12 +400,7 @@ const fragmentDefinitionThisUser = FragmentDefinitionNode(
     FieldNode(
       name: NameNode(value: 'about'),
       alias: null,
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'asHtml'),
-          value: BooleanValueNode(value: true),
-        )
-      ],
+      arguments: [],
       directives: [],
       selectionSet: null,
     ),

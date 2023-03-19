@@ -1,6 +1,5 @@
 import 'package:MyAniApp/graphql/Media.graphql.dart';
-import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/html.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -137,12 +136,11 @@ class Sheet extends StatelessWidget {
                     ],
                   ),
                 ),
-              HTML(
-                data: media.description != null
-                    ? removeHTML(media.description!)
-                    : '',
+              Markdown(
+                data: media.description ?? '',
                 // controller: scrollController,
                 padding: const EdgeInsets.all(0),
+                hasHtml: true,
               ),
             ],
           ),

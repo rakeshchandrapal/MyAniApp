@@ -470,94 +470,96 @@ const documentNodeQueryCharacters = DocumentNode(definitions: [
                     ]),
                   ),
                   FieldNode(
-                    name: NameNode(value: 'voiceActors'),
+                    name: NameNode(value: 'voiceActorRoles'),
                     alias: null,
-                    arguments: [],
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'sort'),
+                        value: ListValueNode(values: [
+                          EnumValueNode(name: NameNode(value: 'RELEVANCE')),
+                          EnumValueNode(name: NameNode(value: 'ID')),
+                        ]),
+                      )
+                    ],
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
-                        name: NameNode(value: 'id'),
+                        name: NameNode(value: 'roleNotes'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null,
                       ),
                       FieldNode(
-                        name: NameNode(value: 'languageV2'),
+                        name: NameNode(value: 'dubGroup'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null,
                       ),
                       FieldNode(
-                        name: NameNode(value: 'name'),
+                        name: NameNode(value: 'voiceActor'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: SelectionSetNode(selections: [
                           FieldNode(
-                            name: NameNode(value: 'first'),
+                            name: NameNode(value: 'id'),
                             alias: null,
                             arguments: [],
                             directives: [],
                             selectionSet: null,
                           ),
                           FieldNode(
-                            name: NameNode(value: 'middle'),
+                            name: NameNode(value: 'name'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: SelectionSetNode(selections: [
+                              FieldNode(
+                                name: NameNode(value: 'userPreferred'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ]),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'languageV2'),
                             alias: null,
                             arguments: [],
                             directives: [],
                             selectionSet: null,
                           ),
                           FieldNode(
-                            name: NameNode(value: 'last'),
+                            name: NameNode(value: 'image'),
                             alias: null,
                             arguments: [],
                             directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: 'full'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: 'native'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: 'userPreferred'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: '__typename'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                        ]),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'image'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                            name: NameNode(value: 'large'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
+                            selectionSet: SelectionSetNode(selections: [
+                              FieldNode(
+                                name: NameNode(value: 'large'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ]),
                           ),
                           FieldNode(
                             name: NameNode(value: '__typename'),
@@ -1241,7 +1243,7 @@ class Query$Characters$Media$characters$edges {
     this.name,
     this.role,
     this.node,
-    this.voiceActors,
+    this.voiceActorRoles,
     this.$__typename = 'CharacterEdge',
   });
 
@@ -1250,7 +1252,7 @@ class Query$Characters$Media$characters$edges {
     final l$name = json['name'];
     final l$role = json['role'];
     final l$node = json['node'];
-    final l$voiceActors = json['voiceActors'];
+    final l$voiceActorRoles = json['voiceActorRoles'];
     final l$$__typename = json['__typename'];
     return Query$Characters$Media$characters$edges(
       name: (l$name as String?),
@@ -1261,11 +1263,11 @@ class Query$Characters$Media$characters$edges {
           ? null
           : Query$Characters$Media$characters$edges$node.fromJson(
               (l$node as Map<String, dynamic>)),
-      voiceActors: (l$voiceActors as List<dynamic>?)
+      voiceActorRoles: (l$voiceActorRoles as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Characters$Media$characters$edges$voiceActors.fromJson(
-                  (e as Map<String, dynamic>)))
+              : Query$Characters$Media$characters$edges$voiceActorRoles
+                  .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -1277,7 +1279,8 @@ class Query$Characters$Media$characters$edges {
 
   final Query$Characters$Media$characters$edges$node? node;
 
-  final List<Query$Characters$Media$characters$edges$voiceActors?>? voiceActors;
+  final List<Query$Characters$Media$characters$edges$voiceActorRoles?>?
+      voiceActorRoles;
 
   final String $__typename;
 
@@ -1290,9 +1293,9 @@ class Query$Characters$Media$characters$edges {
         l$role == null ? null : toJson$Enum$CharacterRole(l$role);
     final l$node = node;
     _resultData['node'] = l$node?.toJson();
-    final l$voiceActors = voiceActors;
-    _resultData['voiceActors'] =
-        l$voiceActors?.map((e) => e?.toJson()).toList();
+    final l$voiceActorRoles = voiceActorRoles;
+    _resultData['voiceActorRoles'] =
+        l$voiceActorRoles?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1303,15 +1306,15 @@ class Query$Characters$Media$characters$edges {
     final l$name = name;
     final l$role = role;
     final l$node = node;
-    final l$voiceActors = voiceActors;
+    final l$voiceActorRoles = voiceActorRoles;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$name,
       l$role,
       l$node,
-      l$voiceActors == null
+      l$voiceActorRoles == null
           ? null
-          : Object.hashAll(l$voiceActors.map((v) => v)),
+          : Object.hashAll(l$voiceActorRoles.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -1340,20 +1343,20 @@ class Query$Characters$Media$characters$edges {
     if (l$node != lOther$node) {
       return false;
     }
-    final l$voiceActors = voiceActors;
-    final lOther$voiceActors = other.voiceActors;
-    if (l$voiceActors != null && lOther$voiceActors != null) {
-      if (l$voiceActors.length != lOther$voiceActors.length) {
+    final l$voiceActorRoles = voiceActorRoles;
+    final lOther$voiceActorRoles = other.voiceActorRoles;
+    if (l$voiceActorRoles != null && lOther$voiceActorRoles != null) {
+      if (l$voiceActorRoles.length != lOther$voiceActorRoles.length) {
         return false;
       }
-      for (int i = 0; i < l$voiceActors.length; i++) {
-        final l$voiceActors$entry = l$voiceActors[i];
-        final lOther$voiceActors$entry = lOther$voiceActors[i];
-        if (l$voiceActors$entry != lOther$voiceActors$entry) {
+      for (int i = 0; i < l$voiceActorRoles.length; i++) {
+        final l$voiceActorRoles$entry = l$voiceActorRoles[i];
+        final lOther$voiceActorRoles$entry = lOther$voiceActorRoles[i];
+        if (l$voiceActorRoles$entry != lOther$voiceActorRoles$entry) {
           return false;
         }
       }
-    } else if (l$voiceActors != lOther$voiceActors) {
+    } else if (l$voiceActorRoles != lOther$voiceActorRoles) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1388,15 +1391,16 @@ abstract class CopyWith$Query$Characters$Media$characters$edges<TRes> {
     String? name,
     Enum$CharacterRole? role,
     Query$Characters$Media$characters$edges$node? node,
-    List<Query$Characters$Media$characters$edges$voiceActors?>? voiceActors,
+    List<Query$Characters$Media$characters$edges$voiceActorRoles?>?
+        voiceActorRoles,
     String? $__typename,
   });
   CopyWith$Query$Characters$Media$characters$edges$node<TRes> get node;
-  TRes voiceActors(
-      Iterable<Query$Characters$Media$characters$edges$voiceActors?>? Function(
+  TRes voiceActorRoles(
+      Iterable<Query$Characters$Media$characters$edges$voiceActorRoles?>? Function(
               Iterable<
-                  CopyWith$Query$Characters$Media$characters$edges$voiceActors<
-                      Query$Characters$Media$characters$edges$voiceActors>?>?)
+                  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles<
+                      Query$Characters$Media$characters$edges$voiceActorRoles>?>?)
           _fn);
 }
 
@@ -1417,7 +1421,7 @@ class _CopyWithImpl$Query$Characters$Media$characters$edges<TRes>
     Object? name = _undefined,
     Object? role = _undefined,
     Object? node = _undefined,
-    Object? voiceActors = _undefined,
+    Object? voiceActorRoles = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Characters$Media$characters$edges(
@@ -1427,10 +1431,10 @@ class _CopyWithImpl$Query$Characters$Media$characters$edges<TRes>
         node: node == _undefined
             ? _instance.node
             : (node as Query$Characters$Media$characters$edges$node?),
-        voiceActors: voiceActors == _undefined
-            ? _instance.voiceActors
-            : (voiceActors
-                as List<Query$Characters$Media$characters$edges$voiceActors?>?),
+        voiceActorRoles: voiceActorRoles == _undefined
+            ? _instance.voiceActorRoles
+            : (voiceActorRoles as List<
+                Query$Characters$Media$characters$edges$voiceActorRoles?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1444,16 +1448,16 @@ class _CopyWithImpl$Query$Characters$Media$characters$edges<TRes>
             local$node, (e) => call(node: e));
   }
 
-  TRes voiceActors(
-          Iterable<Query$Characters$Media$characters$edges$voiceActors?>? Function(
+  TRes voiceActorRoles(
+          Iterable<Query$Characters$Media$characters$edges$voiceActorRoles?>? Function(
                   Iterable<
-                      CopyWith$Query$Characters$Media$characters$edges$voiceActors<
-                          Query$Characters$Media$characters$edges$voiceActors>?>?)
+                      CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles<
+                          Query$Characters$Media$characters$edges$voiceActorRoles>?>?)
               _fn) =>
       call(
-          voiceActors: _fn(_instance.voiceActors?.map((e) => e == null
+          voiceActorRoles: _fn(_instance.voiceActorRoles?.map((e) => e == null
               ? null
-              : CopyWith$Query$Characters$Media$characters$edges$voiceActors(
+              : CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -1469,13 +1473,14 @@ class _CopyWithStubImpl$Query$Characters$Media$characters$edges<TRes>
     String? name,
     Enum$CharacterRole? role,
     Query$Characters$Media$characters$edges$node? node,
-    List<Query$Characters$Media$characters$edges$voiceActors?>? voiceActors,
+    List<Query$Characters$Media$characters$edges$voiceActorRoles?>?
+        voiceActorRoles,
     String? $__typename,
   }) =>
       _res;
   CopyWith$Query$Characters$Media$characters$edges$node<TRes> get node =>
       CopyWith$Query$Characters$Media$characters$edges$node.stub(_res);
-  voiceActors(_fn) => _res;
+  voiceActorRoles(_fn) => _res;
 }
 
 class Query$Characters$Media$characters$edges$node {
@@ -1972,44 +1977,244 @@ class _CopyWithStubImpl$Query$Characters$Media$characters$edges$node$image<TRes>
       _res;
 }
 
-class Query$Characters$Media$characters$edges$voiceActors {
-  Query$Characters$Media$characters$edges$voiceActors({
+class Query$Characters$Media$characters$edges$voiceActorRoles {
+  Query$Characters$Media$characters$edges$voiceActorRoles({
+    this.roleNotes,
+    this.dubGroup,
+    this.voiceActor,
+    this.$__typename = 'StaffRoleType',
+  });
+
+  factory Query$Characters$Media$characters$edges$voiceActorRoles.fromJson(
+      Map<String, dynamic> json) {
+    final l$roleNotes = json['roleNotes'];
+    final l$dubGroup = json['dubGroup'];
+    final l$voiceActor = json['voiceActor'];
+    final l$$__typename = json['__typename'];
+    return Query$Characters$Media$characters$edges$voiceActorRoles(
+      roleNotes: (l$roleNotes as String?),
+      dubGroup: (l$dubGroup as String?),
+      voiceActor: l$voiceActor == null
+          ? null
+          : Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor
+              .fromJson((l$voiceActor as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? roleNotes;
+
+  final String? dubGroup;
+
+  final Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor?
+      voiceActor;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$roleNotes = roleNotes;
+    _resultData['roleNotes'] = l$roleNotes;
+    final l$dubGroup = dubGroup;
+    _resultData['dubGroup'] = l$dubGroup;
+    final l$voiceActor = voiceActor;
+    _resultData['voiceActor'] = l$voiceActor?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$roleNotes = roleNotes;
+    final l$dubGroup = dubGroup;
+    final l$voiceActor = voiceActor;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$roleNotes,
+      l$dubGroup,
+      l$voiceActor,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Characters$Media$characters$edges$voiceActorRoles) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$roleNotes = roleNotes;
+    final lOther$roleNotes = other.roleNotes;
+    if (l$roleNotes != lOther$roleNotes) {
+      return false;
+    }
+    final l$dubGroup = dubGroup;
+    final lOther$dubGroup = other.dubGroup;
+    if (l$dubGroup != lOther$dubGroup) {
+      return false;
+    }
+    final l$voiceActor = voiceActor;
+    final lOther$voiceActor = other.voiceActor;
+    if (l$voiceActor != lOther$voiceActor) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActorRoles
+    on Query$Characters$Media$characters$edges$voiceActorRoles {
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles<
+          Query$Characters$Media$characters$edges$voiceActorRoles>
+      get copyWith =>
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles<
+    TRes> {
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles(
+    Query$Characters$Media$characters$edges$voiceActorRoles instance,
+    TRes Function(Query$Characters$Media$characters$edges$voiceActorRoles) then,
+  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles;
+
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles;
+
+  TRes call({
+    String? roleNotes,
+    String? dubGroup,
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor?
+        voiceActor,
+    String? $__typename,
+  });
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+      TRes> get voiceActor;
+}
+
+class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles<
+        TRes>
+    implements
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles<TRes> {
+  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Characters$Media$characters$edges$voiceActorRoles _instance;
+
+  final TRes Function(Query$Characters$Media$characters$edges$voiceActorRoles)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? roleNotes = _undefined,
+    Object? dubGroup = _undefined,
+    Object? voiceActor = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Characters$Media$characters$edges$voiceActorRoles(
+        roleNotes: roleNotes == _undefined
+            ? _instance.roleNotes
+            : (roleNotes as String?),
+        dubGroup:
+            dubGroup == _undefined ? _instance.dubGroup : (dubGroup as String?),
+        voiceActor: voiceActor == _undefined
+            ? _instance.voiceActor
+            : (voiceActor
+                as Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+      TRes> get voiceActor {
+    final local$voiceActor = _instance.voiceActor;
+    return local$voiceActor == null
+        ? CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor
+            .stub(_then(_instance))
+        : CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
+            local$voiceActor, (e) => call(voiceActor: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles<
+        TRes>
+    implements
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles<TRes> {
+  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? roleNotes,
+    String? dubGroup,
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor?
+        voiceActor,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+          TRes>
+      get voiceActor =>
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor
+              .stub(_res);
+}
+
+class Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor {
+  Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor({
     required this.id,
-    this.languageV2,
     this.name,
+    this.languageV2,
     this.image,
     this.$__typename = 'Staff',
   });
 
-  factory Query$Characters$Media$characters$edges$voiceActors.fromJson(
+  factory Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
-    final l$languageV2 = json['languageV2'];
     final l$name = json['name'];
+    final l$languageV2 = json['languageV2'];
     final l$image = json['image'];
     final l$$__typename = json['__typename'];
-    return Query$Characters$Media$characters$edges$voiceActors(
+    return Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
       id: (l$id as int),
-      languageV2: (l$languageV2 as String?),
       name: l$name == null
           ? null
-          : Query$Characters$Media$characters$edges$voiceActors$name.fromJson(
-              (l$name as Map<String, dynamic>)),
+          : Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name
+              .fromJson((l$name as Map<String, dynamic>)),
+      languageV2: (l$languageV2 as String?),
       image: l$image == null
           ? null
-          : Query$Characters$Media$characters$edges$voiceActors$image.fromJson(
-              (l$image as Map<String, dynamic>)),
+          : Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image
+              .fromJson((l$image as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final int id;
 
+  final Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name?
+      name;
+
   final String? languageV2;
 
-  final Query$Characters$Media$characters$edges$voiceActors$name? name;
-
-  final Query$Characters$Media$characters$edges$voiceActors$image? image;
+  final Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image?
+      image;
 
   final String $__typename;
 
@@ -2017,10 +2222,10 @@ class Query$Characters$Media$characters$edges$voiceActors {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
-    final l$languageV2 = languageV2;
-    _resultData['languageV2'] = l$languageV2;
     final l$name = name;
     _resultData['name'] = l$name?.toJson();
+    final l$languageV2 = languageV2;
+    _resultData['languageV2'] = l$languageV2;
     final l$image = image;
     _resultData['image'] = l$image?.toJson();
     final l$$__typename = $__typename;
@@ -2031,14 +2236,14 @@ class Query$Characters$Media$characters$edges$voiceActors {
   @override
   int get hashCode {
     final l$id = id;
-    final l$languageV2 = languageV2;
     final l$name = name;
+    final l$languageV2 = languageV2;
     final l$image = image;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
-      l$languageV2,
       l$name,
+      l$languageV2,
       l$image,
       l$$__typename,
     ]);
@@ -2049,7 +2254,8 @@ class Query$Characters$Media$characters$edges$voiceActors {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$voiceActors) ||
+    if (!(other
+            is Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2058,14 +2264,14 @@ class Query$Characters$Media$characters$edges$voiceActors {
     if (l$id != lOther$id) {
       return false;
     }
-    final l$languageV2 = languageV2;
-    final lOther$languageV2 = other.languageV2;
-    if (l$languageV2 != lOther$languageV2) {
-      return false;
-    }
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$languageV2 = languageV2;
+    final lOther$languageV2 = other.languageV2;
+    if (l$languageV2 != lOther$languageV2) {
       return false;
     }
     final l$image = image;
@@ -2082,168 +2288,155 @@ class Query$Characters$Media$characters$edges$voiceActors {
   }
 }
 
-extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActors
-    on Query$Characters$Media$characters$edges$voiceActors {
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors<
-          Query$Characters$Media$characters$edges$voiceActors>
+extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor
+    on Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor {
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor>
       get copyWith =>
-          CopyWith$Query$Characters$Media$characters$edges$voiceActors(
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActors<
+abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
     TRes> {
-  factory CopyWith$Query$Characters$Media$characters$edges$voiceActors(
-    Query$Characters$Media$characters$edges$voiceActors instance,
-    TRes Function(Query$Characters$Media$characters$edges$voiceActors) then,
-  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors;
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor instance,
+    TRes Function(
+            Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor)
+        then,
+  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor;
 
-  factory CopyWith$Query$Characters$Media$characters$edges$voiceActors.stub(
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors;
+      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor;
 
   TRes call({
     int? id,
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name?
+        name,
     String? languageV2,
-    Query$Characters$Media$characters$edges$voiceActors$name? name,
-    Query$Characters$Media$characters$edges$voiceActors$image? image,
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image?
+        image,
     String? $__typename,
   });
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<TRes>
-      get name;
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<TRes>
-      get image;
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
+      TRes> get name;
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
+      TRes> get image;
 }
 
-class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors<TRes>
+class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+        TRes>
     implements
-        CopyWith$Query$Characters$Media$characters$edges$voiceActors<TRes> {
-  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors(
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+            TRes> {
+  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
     this._instance,
     this._then,
   );
 
-  final Query$Characters$Media$characters$edges$voiceActors _instance;
+  final Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor
+      _instance;
 
-  final TRes Function(Query$Characters$Media$characters$edges$voiceActors)
-      _then;
+  final TRes Function(
+      Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
-    Object? languageV2 = _undefined,
     Object? name = _undefined,
+    Object? languageV2 = _undefined,
     Object? image = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$Characters$Media$characters$edges$voiceActors(
+      _then(Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
         id: id == _undefined || id == null ? _instance.id : (id as int),
-        languageV2: languageV2 == _undefined
-            ? _instance.languageV2
-            : (languageV2 as String?),
         name: name == _undefined
             ? _instance.name
             : (name
-                as Query$Characters$Media$characters$edges$voiceActors$name?),
+                as Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name?),
+        languageV2: languageV2 == _undefined
+            ? _instance.languageV2
+            : (languageV2 as String?),
         image: image == _undefined
             ? _instance.image
             : (image
-                as Query$Characters$Media$characters$edges$voiceActors$image?),
+                as Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<TRes>
-      get name {
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
+      TRes> get name {
     final local$name = _instance.name;
     return local$name == null
-        ? CopyWith$Query$Characters$Media$characters$edges$voiceActors$name
+        ? CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name
             .stub(_then(_instance))
-        : CopyWith$Query$Characters$Media$characters$edges$voiceActors$name(
+        : CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
             local$name, (e) => call(name: e));
   }
 
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<TRes>
-      get image {
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
+      TRes> get image {
     final local$image = _instance.image;
     return local$image == null
-        ? CopyWith$Query$Characters$Media$characters$edges$voiceActors$image
+        ? CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image
             .stub(_then(_instance))
-        : CopyWith$Query$Characters$Media$characters$edges$voiceActors$image(
+        : CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
             local$image, (e) => call(image: e));
   }
 }
 
-class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors<
+class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
         TRes>
     implements
-        CopyWith$Query$Characters$Media$characters$edges$voiceActors<TRes> {
-  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors(
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor<
+            TRes> {
+  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor(
       this._res);
 
   TRes _res;
 
   call({
     int? id,
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name?
+        name,
     String? languageV2,
-    Query$Characters$Media$characters$edges$voiceActors$name? name,
-    Query$Characters$Media$characters$edges$voiceActors$image? image,
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image?
+        image,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<TRes>
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
+          TRes>
       get name =>
-          CopyWith$Query$Characters$Media$characters$edges$voiceActors$name
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name
               .stub(_res);
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<TRes>
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
+          TRes>
       get image =>
-          CopyWith$Query$Characters$Media$characters$edges$voiceActors$image
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image
               .stub(_res);
 }
 
-class Query$Characters$Media$characters$edges$voiceActors$name {
-  Query$Characters$Media$characters$edges$voiceActors$name({
-    this.first,
-    this.middle,
-    this.last,
-    this.full,
-    this.native,
+class Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name {
+  Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name({
     this.userPreferred,
     this.$__typename = 'StaffName',
   });
 
-  factory Query$Characters$Media$characters$edges$voiceActors$name.fromJson(
+  factory Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name.fromJson(
       Map<String, dynamic> json) {
-    final l$first = json['first'];
-    final l$middle = json['middle'];
-    final l$last = json['last'];
-    final l$full = json['full'];
-    final l$native = json['native'];
     final l$userPreferred = json['userPreferred'];
     final l$$__typename = json['__typename'];
-    return Query$Characters$Media$characters$edges$voiceActors$name(
-      first: (l$first as String?),
-      middle: (l$middle as String?),
-      last: (l$last as String?),
-      full: (l$full as String?),
-      native: (l$native as String?),
+    return Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
       userPreferred: (l$userPreferred as String?),
       $__typename: (l$$__typename as String),
     );
   }
-
-  final String? first;
-
-  final String? middle;
-
-  final String? last;
-
-  final String? full;
-
-  final String? native;
 
   final String? userPreferred;
 
@@ -2251,16 +2444,6 @@ class Query$Characters$Media$characters$edges$voiceActors$name {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$first = first;
-    _resultData['first'] = l$first;
-    final l$middle = middle;
-    _resultData['middle'] = l$middle;
-    final l$last = last;
-    _resultData['last'] = l$last;
-    final l$full = full;
-    _resultData['full'] = l$full;
-    final l$native = native;
-    _resultData['native'] = l$native;
     final l$userPreferred = userPreferred;
     _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
@@ -2270,19 +2453,9 @@ class Query$Characters$Media$characters$edges$voiceActors$name {
 
   @override
   int get hashCode {
-    final l$first = first;
-    final l$middle = middle;
-    final l$last = last;
-    final l$full = full;
-    final l$native = native;
     final l$userPreferred = userPreferred;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$first,
-      l$middle,
-      l$last,
-      l$full,
-      l$native,
       l$userPreferred,
       l$$__typename,
     ]);
@@ -2293,33 +2466,9 @@ class Query$Characters$Media$characters$edges$voiceActors$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$voiceActors$name) ||
+    if (!(other
+            is Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name) ||
         runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$first = first;
-    final lOther$first = other.first;
-    if (l$first != lOther$first) {
-      return false;
-    }
-    final l$middle = middle;
-    final lOther$middle = other.middle;
-    if (l$middle != lOther$middle) {
-      return false;
-    }
-    final l$last = last;
-    final lOther$last = other.last;
-    if (l$last != lOther$last) {
-      return false;
-    }
-    final l$full = full;
-    final lOther$full = other.full;
-    if (l$full != lOther$full) {
-      return false;
-    }
-    final l$native = native;
-    final lOther$native = other.native;
-    if (l$native != lOther$native) {
       return false;
     }
     final l$userPreferred = userPreferred;
@@ -2336,72 +2485,62 @@ class Query$Characters$Media$characters$edges$voiceActors$name {
   }
 }
 
-extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActors$name
-    on Query$Characters$Media$characters$edges$voiceActors$name {
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<
-          Query$Characters$Media$characters$edges$voiceActors$name>
+extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name
+    on Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name {
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name>
       get copyWith =>
-          CopyWith$Query$Characters$Media$characters$edges$voiceActors$name(
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<
+abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
     TRes> {
-  factory CopyWith$Query$Characters$Media$characters$edges$voiceActors$name(
-    Query$Characters$Media$characters$edges$voiceActors$name instance,
-    TRes Function(Query$Characters$Media$characters$edges$voiceActors$name)
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name
+        instance,
+    TRes Function(
+            Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name)
         then,
-  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$name;
+  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name;
 
-  factory CopyWith$Query$Characters$Media$characters$edges$voiceActors$name.stub(
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors$name;
+      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name;
 
   TRes call({
-    String? first,
-    String? middle,
-    String? last,
-    String? full,
-    String? native,
     String? userPreferred,
     String? $__typename,
   });
 }
 
-class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$name<
+class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
         TRes>
     implements
-        CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
             TRes> {
-  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$name(
+  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
     this._instance,
     this._then,
   );
 
-  final Query$Characters$Media$characters$edges$voiceActors$name _instance;
+  final Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name
+      _instance;
 
-  final TRes Function(Query$Characters$Media$characters$edges$voiceActors$name)
+  final TRes Function(
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? first = _undefined,
-    Object? middle = _undefined,
-    Object? last = _undefined,
-    Object? full = _undefined,
-    Object? native = _undefined,
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$Characters$Media$characters$edges$voiceActors$name(
-        first: first == _undefined ? _instance.first : (first as String?),
-        middle: middle == _undefined ? _instance.middle : (middle as String?),
-        last: last == _undefined ? _instance.last : (last as String?),
-        full: full == _undefined ? _instance.full : (full as String?),
-        native: native == _undefined ? _instance.native : (native as String?),
+      _then(
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
         userPreferred: userPreferred == _undefined
             ? _instance.userPreferred
             : (userPreferred as String?),
@@ -2411,39 +2550,34 @@ class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$name<
       ));
 }
 
-class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors$name<
+class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
         TRes>
     implements
-        CopyWith$Query$Characters$Media$characters$edges$voiceActors$name<
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name<
             TRes> {
-  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors$name(
+  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$name(
       this._res);
 
   TRes _res;
 
   call({
-    String? first,
-    String? middle,
-    String? last,
-    String? full,
-    String? native,
     String? userPreferred,
     String? $__typename,
   }) =>
       _res;
 }
 
-class Query$Characters$Media$characters$edges$voiceActors$image {
-  Query$Characters$Media$characters$edges$voiceActors$image({
+class Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image {
+  Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image({
     this.large,
     this.$__typename = 'StaffImage',
   });
 
-  factory Query$Characters$Media$characters$edges$voiceActors$image.fromJson(
+  factory Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image.fromJson(
       Map<String, dynamic> json) {
     final l$large = json['large'];
     final l$$__typename = json['__typename'];
-    return Query$Characters$Media$characters$edges$voiceActors$image(
+    return Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
       large: (l$large as String?),
       $__typename: (l$$__typename as String),
     );
@@ -2477,7 +2611,8 @@ class Query$Characters$Media$characters$edges$voiceActors$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Characters$Media$characters$edges$voiceActors$image) ||
+    if (!(other
+            is Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2495,28 +2630,30 @@ class Query$Characters$Media$characters$edges$voiceActors$image {
   }
 }
 
-extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActors$image
-    on Query$Characters$Media$characters$edges$voiceActors$image {
-  CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<
-          Query$Characters$Media$characters$edges$voiceActors$image>
+extension UtilityExtension$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image
+    on Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image {
+  CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image>
       get copyWith =>
-          CopyWith$Query$Characters$Media$characters$edges$voiceActors$image(
+          CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<
+abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
     TRes> {
-  factory CopyWith$Query$Characters$Media$characters$edges$voiceActors$image(
-    Query$Characters$Media$characters$edges$voiceActors$image instance,
-    TRes Function(Query$Characters$Media$characters$edges$voiceActors$image)
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
+    Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image
+        instance,
+    TRes Function(
+            Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image)
         then,
-  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$image;
+  ) = _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image;
 
-  factory CopyWith$Query$Characters$Media$characters$edges$voiceActors$image.stub(
+  factory CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image.stub(
           TRes res) =
-      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors$image;
+      _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image;
 
   TRes call({
     String? large,
@@ -2524,19 +2661,21 @@ abstract class CopyWith$Query$Characters$Media$characters$edges$voiceActors$imag
   });
 }
 
-class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$image<
+class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
         TRes>
     implements
-        CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
             TRes> {
-  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$image(
+  _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
     this._instance,
     this._then,
   );
 
-  final Query$Characters$Media$characters$edges$voiceActors$image _instance;
+  final Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image
+      _instance;
 
-  final TRes Function(Query$Characters$Media$characters$edges$voiceActors$image)
+  final TRes Function(
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -2545,7 +2684,8 @@ class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$image<
     Object? large = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$Characters$Media$characters$edges$voiceActors$image(
+      _then(
+          Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
         large: large == _undefined ? _instance.large : (large as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -2553,12 +2693,12 @@ class _CopyWithImpl$Query$Characters$Media$characters$edges$voiceActors$image<
       ));
 }
 
-class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors$image<
+class _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
         TRes>
     implements
-        CopyWith$Query$Characters$Media$characters$edges$voiceActors$image<
+        CopyWith$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image<
             TRes> {
-  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActors$image(
+  _CopyWithStubImpl$Query$Characters$Media$characters$edges$voiceActorRoles$voiceActor$image(
       this._res);
 
   TRes _res;

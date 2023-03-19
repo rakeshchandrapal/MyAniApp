@@ -4,7 +4,7 @@ import 'package:MyAniApp/graphql/Notifications.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
-import 'package:MyAniApp/widgets/html.dart';
+import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -95,14 +95,14 @@ class ActivityCard extends StatelessWidget {
       var i = (activity as Query$Activity$activity$$TextActivity);
       createdAt = i.createdAt;
       user = i.user;
-      text = HTML(
+      text = Markdown(
         data: i.text!,
       );
     } else if (activity is Query$Activity$replies$activityReplies) {
       var i = activity as Query$Activity$replies$activityReplies;
       createdAt = i.createdAt;
       user = i.user;
-      text = HTML(data: i.text!);
+      text = Markdown(data: i.text!);
     }
 
     if (text == null || user == null || createdAt == null) {
