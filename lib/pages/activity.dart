@@ -2,9 +2,11 @@ import 'package:MyAniApp/graphql/Activity.graphql.dart';
 import 'package:MyAniApp/graphql/Like.graphql.dart';
 import 'package:MyAniApp/graphql/Notifications.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
+import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
+import 'package:MyAniApp/widgets/markdown_editor.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -35,14 +37,22 @@ class Activity extends HookWidget {
           child: Column(
             children: [
               ActivityCard(activity: result.activity!),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Write a reply...',
-                  ),
+              TextButton(
+                onPressed: () => _showEditor(
+                  context,
+                  (markdown) async {
+                    (await client()).value.mutate$SaveActivityReply(
+                          Options$Mutation$SaveActivityReply(
+                            onCompleted: (_, __) => hook.refetch(),
+                            variables: Variables$Mutation$SaveActivityReply(
+                              activityId: int.tryParse(id),
+                              text: markdown,
+                            ),
+                          ),
+                        );
+                  },
                 ),
+                child: const Text('Reply'),
               ),
               for (var i in result.replies!.activityReplies!)
                 ActivityCard(activity: i),
@@ -51,6 +61,32 @@ class Activity extends HookWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  _showEditor(BuildContext context, Function(String) onSave) {
+    showDialog(
+      context: context,
+      builder: (context) => AEditor(
+        onSave: onSave,
+      ),
+    );
+  }
+}
+
+class AEditor extends HookWidget {
+  final Function(String) onSave;
+  const AEditor({
+    super.key,
+    required this.onSave,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog.fullscreen(
+      child: Editor(
+        onSave: onSave,
       ),
     );
   }

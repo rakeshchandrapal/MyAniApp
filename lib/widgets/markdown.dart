@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart' as md;
 import 'package:go_router/go_router.dart';
 import 'package:html2md/html2md.dart' as html2md;
+import 'package:markdown/markdown.dart' as mark;
 import 'package:url_launcher/url_launcher.dart';
 
 var spoilerRegex = RegExp(r'~!(.*?)!~', dotAll: true);
 var routesRegex = RegExp(r'https://anilist.co/((?:character|staff)/[0-9]+)');
+var imageRegex = RegExp(r'img(?<height>[0-9]+)?\((?<url>.*?)\)', dotAll: true);
 
 class Markdown extends StatelessWidget {
   final String data;
@@ -30,6 +32,16 @@ class Markdown extends StatelessWidget {
       spoilerRegex,
       (match) => '[[Spoiler]](${Uri.encodeComponent(match.group(0)!)})',
     );
+    // print(imageRegex.firstMatch(markdown)?.namedGroup('height'));
+    markdown = markdown.replaceAllMapped(
+      imageRegex,
+      (match) {
+        // print(match.group(2));
+        // print(match.group(1));
+        return '[![image](${match.group(2)})](${match.group(2)})';
+        // return '<img src="${match.group(2)}" height="${match.group(1)}" >';
+      },
+    );
 
     return Padding(
       padding: padding,
@@ -40,6 +52,7 @@ class Markdown extends StatelessWidget {
               selectable: selectable,
               onTapLink: (text, href, title) =>
                   onTapLink(context, text, href, title),
+              extensionSet: mark.ExtensionSet.gitHubFlavored,
             )
           : md.Markdown(
               data: hasHtml ? html2md.convert(markdown) : markdown,
@@ -49,6 +62,7 @@ class Markdown extends StatelessWidget {
               selectable: selectable,
               onTapLink: (text, href, title) =>
                   onTapLink(context, text, href, title),
+              extensionSet: mark.ExtensionSet.gitHubFlavored,
             ),
     );
   }

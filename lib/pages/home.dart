@@ -6,6 +6,7 @@ import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
+import 'package:MyAniApp/widgets/markdown_editor.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
@@ -139,6 +140,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       ),
                       icon: const Icon(Icons.notification_add),
                     ),
+                    IconButton(
+                      onPressed: () => showDialog(
+                        context: context,
+                        builder: (context) => Dialog.fullscreen(
+                          child: Editor(),
+                        ),
+                      ),
+                      icon: const Icon(Icons.edit),
+                    )
                   ],
                 ),
                 _list(

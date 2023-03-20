@@ -196,7 +196,7 @@ class Comments extends HookWidget {
   _showEditor(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => const Dialog.fullscreen(
+      builder: (context) => Dialog.fullscreen(
         child: Editor(),
       ),
     );

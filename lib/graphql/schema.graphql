@@ -183,6 +183,7 @@ type Mutation {
   ): User
   SaveRecommendation(mediaId: Int, mediaRecommendationId: Int, rating: RecommendationRating): Recommendation
   ToggleLikeV2(id: Int, type: LikeableType): LikeableUnion
+  SaveActivityReply(id: Int, activityId: Int, text: String, asMod: Boolean): ActivityReply
 }
 
 scalar ISODateTime
