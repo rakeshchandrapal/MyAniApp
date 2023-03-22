@@ -13,6 +13,7 @@ class Cards extends StatelessWidget {
   final bool shrinkWrap;
   final Widget Function(Fragment$BasicMedia media, ListStyle style)? underTitle;
   final List<Widget> Function(Fragment$BasicMedia media)? gridChips;
+  final SettingStrings setting;
   const Cards({
     super.key,
     required this.list,
@@ -22,6 +23,7 @@ class Cards extends StatelessWidget {
     this.shrinkWrap = false,
     this.underTitle,
     this.gridChips,
+    this.setting = SettingStrings.fallbackList,
   }) : assert(
             (list is List<Fragment$BasicMedia> != true &&
                     list is List<Fragment$MediaListEntry>) !=
@@ -31,7 +33,21 @@ class Cards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var settings = context.watch<SettingsProvider>();
-    var style = settings.list;
+    ListStyle style;
+
+    switch (setting) {
+      case SettingStrings.animeList:
+        style = settings.animeList;
+        break;
+
+      case SettingStrings.mangaList:
+        style = settings.mangaList;
+        break;
+
+      default:
+        style = settings.fallbackList;
+        break;
+    }
 
     if (style == ListStyle.grid) {
       return GridCards(

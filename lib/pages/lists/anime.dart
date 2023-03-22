@@ -29,7 +29,7 @@ class AnimeList extends HookWidget {
         variables: Variables$Query$FetchMediaList(
           type: Enum$MediaType.ANIME,
           userId: user.user!.id,
-          sort: [Enum$MediaListSort.UPDATED_TIME],
+          sort: [Enum$MediaListSort.UPDATED_TIME_DESC],
         ),
       ),
     );

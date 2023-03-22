@@ -2,6 +2,7 @@ import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/providers/graphql.dart';
+import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -16,8 +17,12 @@ class Tabs extends StatelessWidget {
   final Future<QueryResult<Query$FetchMediaList>?> Function()? refresh;
   final String title;
 
-  const Tabs(
-      {super.key, required this.lists, this.refresh, required this.title});
+  const Tabs({
+    super.key,
+    required this.lists,
+    this.refresh,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +67,7 @@ class Tabs extends StatelessWidget {
                   ListTab(
                     list: list!,
                     updateList: refresh,
+                    isManga: title == 'Manga List',
                   )
               ],
             ),
@@ -75,19 +81,22 @@ class Tabs extends StatelessWidget {
 class ListTab extends HookWidget {
   final Query$FetchMediaList$MediaListCollection$lists list;
   final Future<QueryResult<Query$FetchMediaList>?> Function()? updateList;
+  final bool isManga;
   const ListTab({
     super.key,
     required this.list,
     required this.updateList,
+    required this.isManga,
   });
 
   @override
   Widget build(BuildContext context) {
     useAutomaticKeepAlive(wantKeepAlive: true);
     return Cards(
-      list: list.entries!.reversed.toList(),
+      list: list.entries!,
       openEditDialog: (list) => openEditDialog(context, list),
       updateList: updateList,
+      setting: isManga ? SettingStrings.mangaList : SettingStrings.animeList,
     );
   }
 

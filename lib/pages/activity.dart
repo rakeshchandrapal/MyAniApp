@@ -3,6 +3,7 @@ import 'package:MyAniApp/graphql/Like.graphql.dart';
 import 'package:MyAniApp/graphql/Notifications.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
+import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql_error.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Activity extends HookWidget {
@@ -37,25 +39,40 @@ class Activity extends HookWidget {
           child: Column(
             children: [
               ActivityCard(activity: result.activity!),
-              TextButton(
-                onPressed: () => _showEditor(
-                  context,
-                  (markdown) async {
-                    (await client()).value.mutate$SaveActivityReply(
-                          Options$Mutation$SaveActivityReply(
-                            onCompleted: (_, __) => hook.refetch(),
-                            variables: Variables$Mutation$SaveActivityReply(
-                              activityId: int.tryParse(id),
-                              text: markdown,
-                            ),
-                          ),
-                        );
-                  },
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      '${result.replies!.activityReplies!.length} Replies',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    TextButton(
+                      onPressed: () => _showEditor(
+                        context,
+                        (markdown) async {
+                          (await client()).value.mutate$SaveActivityReply(
+                                Options$Mutation$SaveActivityReply(
+                                  onCompleted: (_, __) => hook.refetch(),
+                                  variables:
+                                      Variables$Mutation$SaveActivityReply(
+                                    activityId: int.tryParse(id),
+                                    text: markdown,
+                                  ),
+                                ),
+                              );
+                        },
+                      ),
+                      child: const Text('Reply'),
+                    ),
+                  ],
                 ),
-                child: const Text('Reply'),
               ),
               for (var i in result.replies!.activityReplies!)
-                ActivityCard(activity: i),
+                ActivityCard(
+                  activity: i,
+                  refetch: hook.refetch,
+                ),
               // ],
               // )
             ],
@@ -68,25 +85,10 @@ class Activity extends HookWidget {
   _showEditor(BuildContext context, Function(String) onSave) {
     showDialog(
       context: context,
-      builder: (context) => AEditor(
-        onSave: onSave,
-      ),
-    );
-  }
-}
-
-class AEditor extends HookWidget {
-  final Function(String) onSave;
-  const AEditor({
-    super.key,
-    required this.onSave,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog.fullscreen(
-      child: Editor(
-        onSave: onSave,
+      builder: (context) => Dialog.fullscreen(
+        child: Editor(
+          onSave: onSave,
+        ),
       ),
     );
   }
@@ -94,17 +96,26 @@ class AEditor extends HookWidget {
 
 class ActivityCard extends StatelessWidget {
   final dynamic activity;
-  const ActivityCard({super.key, required this.activity});
+  final void Function()? refetch;
+  const ActivityCard({
+    super.key,
+    required this.activity,
+    this.refetch,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var currentUser = context.watch<User>();
     Widget? text;
     String? image;
     Fragment$BasicUser? user;
     int? createdAt;
+    int? id;
+    bool isReply = false;
 
     if (activity is Query$Activity$activity$$ListActivity) {
       var i = (activity as Query$Activity$activity$$ListActivity);
+      id = i.id;
       image = i.media?.coverImage?.large;
       user = i.user;
       createdAt = i.createdAt;
@@ -125,10 +136,11 @@ class ActivityCard extends StatelessWidget {
             ),
           ],
         ),
-        overflow: TextOverflow.ellipsis,
+        // overflow: TextOverflow.ellipsis,
       );
     } else if (activity is Query$Activity$activity$$TextActivity) {
       var i = (activity as Query$Activity$activity$$TextActivity);
+      id = i.id;
       createdAt = i.createdAt;
       user = i.user;
       text = Markdown(
@@ -136,6 +148,8 @@ class ActivityCard extends StatelessWidget {
       );
     } else if (activity is Query$Activity$replies$activityReplies) {
       var i = activity as Query$Activity$replies$activityReplies;
+      id = i.id;
+      isReply = true;
       createdAt = i.createdAt;
       user = i.user;
       text = Markdown(data: i.text!);
@@ -211,7 +225,14 @@ class ActivityCard extends StatelessWidget {
             ),
           ),
           Container(
-            color: Theme.of(context).colorScheme.onInverseSurface,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                // Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(12),
+              ),
+              color: Theme.of(context).colorScheme.onInverseSurface,
+            ),
             child: Row(
               children: [
                 Mutation$ToggleLike$Widget(
@@ -244,9 +265,62 @@ class ActivityCard extends StatelessWidget {
                     );
                   },
                 ),
+                if (currentUser.user?.id == user.id)
+                  Mutation$SaveActivityReply$Widget(
+                    builder: (p0, p1) => IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.edit),
+                    ),
+                  ),
+                if (currentUser.user?.id == user.id)
+                  IconButton(
+                    onPressed: () async {
+                      var result = await _showDeleteConfirmation(context);
+                      if (result != true) return;
+                      var c = (await client()).value;
+                      if (isReply) {
+                        c.mutate$DeleteActivityReply(
+                          Options$Mutation$DeleteActivityReply(
+                            onCompleted: (p0, p1) => refetch?.call(),
+                            variables:
+                                Variables$Mutation$DeleteActivityReply(id: id),
+                          ),
+                        );
+                      } else {
+                        c.mutate$DeleteActivity(
+                          Options$Mutation$DeleteActivity(
+                            onCompleted: (p0, p1) => refetch?.call(),
+                            variables:
+                                Variables$Mutation$DeleteActivity(id: id),
+                          ),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.delete_forever),
+                  ),
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Future<bool?> _showDeleteConfirmation(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title:
+            const Text('Are you sure you want to delete this activity reply?'),
+        actions: <Widget>[
+          ElevatedButton(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          ElevatedButton(
+            child: const Text('OK'),
+            onPressed: () => Navigator.pop(context, true),
+          ),
         ],
       ),
     );

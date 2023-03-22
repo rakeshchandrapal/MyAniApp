@@ -111,3 +111,15 @@ mutation SaveActivityReply($activityId: Int, $text: String) {
     id
   }
 }
+
+mutation DeleteActivityReply($id: Int) {
+  DeleteActivityReply(id: $id) {
+    deleted
+  }
+}
+
+mutation DeleteActivity($id: Int) {
+  DeleteActivity(id: $id) {
+    deleted
+  }
+}

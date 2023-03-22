@@ -8,6 +8,16 @@ enum ListStyle {
   simpleList,
 }
 
+enum SettingStrings {
+  animeList('list.anime'),
+  mangaList('list.manga'),
+  fallbackList('list.fallback'),
+  theme('theme');
+
+  const SettingStrings(this.setting);
+  final String setting;
+}
+
 class SharedPreferencesProvider {
   final Future<SharedPreferences> sharedPreferences;
 
@@ -19,16 +29,26 @@ class SharedPreferencesProvider {
 class SettingsProvider extends ChangeNotifier {
   final Future<SharedPreferences> _instance = SharedPreferences.getInstance();
 
-  ListStyle _list = ListStyle.grid;
+  ListStyle _animeList = ListStyle.grid;
+  ListStyle _mangaList = ListStyle.grid;
+  ListStyle _fallbackList = ListStyle.grid;
   AppTheme _theme = AppTheme.dark;
 
-  ListStyle get list => _list;
+  ListStyle get animeList => _animeList;
+  ListStyle get mangaList => _mangaList;
+  ListStyle get fallbackList => _fallbackList;
   AppTheme get theme => _theme;
 
   loadSettings() {
     _instance.then((i) {
-      _list = ListStyle.values.byName(i.getString('anime.list') ?? 'grid');
-      _theme = AppTheme.values.byName(i.getString('theme') ?? 'dark');
+      _animeList = ListStyle.values
+          .byName(i.getString(SettingStrings.animeList.setting) ?? 'grid');
+      _mangaList = ListStyle.values
+          .byName(i.getString(SettingStrings.mangaList.setting) ?? 'grid');
+      _fallbackList = ListStyle.values
+          .byName(i.getString(SettingStrings.fallbackList.setting) ?? 'grid');
+      _theme = AppTheme.values
+          .byName(i.getString(SettingStrings.theme.setting) ?? 'dark');
 
       notifyListeners();
     });
@@ -40,17 +60,17 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
 
     _instance.then((i) {
-      i.setString('theme', theme.name);
+      i.setString(SettingStrings.theme.setting, theme.name);
     });
   }
 
-  changeListView(ListStyle list) {
-    _list = list;
+  changeListView(ListStyle list, SettingStrings setting) {
+    // _animeList = list;
     // print(theme);
-    notifyListeners();
+    // notifyListeners();
 
     _instance.then((i) {
-      i.setString('anime.list', list.name);
+      i.setString(setting.setting, list.name).then((value) => loadSettings());
     });
   }
 }
