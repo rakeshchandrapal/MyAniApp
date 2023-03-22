@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:MyAniApp/graphql_client.dart';
+import 'package:MyAniApp/providers/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,8 +39,10 @@ class _LoginPageState extends State<LoginPage> {
         var middle = fragment.indexOf('&');
         var accessToken = fragment.substring(start + 1, middle);
         if (accessToken == null) return;
-        var instance = await SharedPreferences.getInstance();
-        await instance.setString('token', accessToken);
+        var settings = context.read<SettingsProvider>();
+        // var instance = await SharedPreferences.getInstance();
+        settings.login(accessToken);
+        // await instance.setString('token', accessToken);
         var c = await client(updated: true);
         context.go('/');
         // print(RegExp('(?:access_token=)(.+)', dotAll: true)
@@ -59,6 +62,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var settings = context.watch<SettingsProvider>();
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -85,10 +90,10 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    var settings = await SharedPreferences.getInstance();
-                    settings.setString('token', myController.text).then(
-                          (value) => context.go('/'),
-                        );
+                    // var settings = await SharedPreferences.getInstance();
+                    settings.login(myController.text).then((value) {
+                      context.go('/');
+                    });
                   }
                 },
                 child: const Text('Login'),

@@ -134,6 +134,11 @@ class AnilistSettings extends StatelessWidget {
                       ),
                     ),
                     DropdownSearch<Enum$UserStaffNameLanguage>(
+                      onChanged: (value) => user.updateSettings(
+                        Variables$Mutation$UpdateUser(
+                          staffNameLanguage: value,
+                        ),
+                      ),
                       items: Enum$UserStaffNameLanguage.values.take(3).toList(),
                       selectedItem: user.user?.options?.staffNameLanguage ??
                           Enum$UserStaffNameLanguage.ROMAJI_WESTERN,
@@ -171,6 +176,11 @@ class AnilistSettings extends StatelessWidget {
                       ),
                     ),
                     DropdownSearch<int>(
+                      onChanged: (value) => user.updateSettings(
+                        Variables$Mutation$UpdateUser(
+                          activityMergeTime: value,
+                        ),
+                      ),
                       items: const [
                         0,
                         30,
@@ -245,6 +255,11 @@ class AnilistSettings extends StatelessWidget {
                       ),
                     ),
                     DropdownSearch<Enum$ScoreFormat>(
+                      onChanged: (value) => user.updateSettings(
+                        Variables$Mutation$UpdateUser(
+                          scoreFormat: value,
+                        ),
+                      ),
                       items: Enum$ScoreFormat.values
                           .take(Enum$ScoreFormat.values.length - 1)
                           .toList(),

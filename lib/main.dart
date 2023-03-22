@@ -2,35 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:MyAniApp/notification.dart';
-import 'package:MyAniApp/pages/activity.dart';
-import 'package:MyAniApp/pages/character.dart';
-import 'package:MyAniApp/pages/discover.dart';
-import 'package:MyAniApp/pages/home.dart';
-import 'package:MyAniApp/pages/lists/anime.dart';
-import 'package:MyAniApp/pages/lists/manga.dart';
-import 'package:MyAniApp/pages/login.dart';
-import 'package:MyAniApp/pages/media_view.dart';
-import 'package:MyAniApp/pages/notifications.dart';
-import 'package:MyAniApp/pages/profile.dart';
-import 'package:MyAniApp/pages/recommendations.dart';
-import 'package:MyAniApp/pages/search.dart';
-import 'package:MyAniApp/pages/settings/anilist.dart';
-import 'package:MyAniApp/pages/settings/app.dart';
-import 'package:MyAniApp/pages/settings/general.dart';
-import 'package:MyAniApp/pages/social.dart';
-import 'package:MyAniApp/pages/staff.dart';
-import 'package:MyAniApp/pages/thread.dart';
-import 'package:MyAniApp/providers/graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/providers/theme.dart';
 import 'package:MyAniApp/providers/user.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:MyAniApp/routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -42,9 +21,6 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
         PointerDeviceKind.mouse,
       };
 }
-
-final rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,103 +40,6 @@ void main() async {
 
   runApp(const App());
 }
-
-var _routerConfig = GoRouter(
-  navigatorKey: rootNavigatorKey,
-  routes: [
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) => BottomBar(child: child),
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) => const HomePage(),
-          redirect: (context, state) async {
-            var settings = await SharedPreferences.getInstance();
-            // print(settings.getString('token'));
-            if (settings.getString('token') == null) return '/login';
-            return null;
-          },
-        ),
-        GoRoute(
-          path: '/settings',
-          builder: (context, state) => const Settings(),
-        ),
-        GoRoute(
-          path: '/settings/app',
-          builder: (context, state) => const AppSettings(),
-        ),
-        GoRoute(
-          path: '/settings/anilist',
-          builder: (context, state) => const AnilistSettings(),
-        ),
-        GoRoute(
-          path: '/media/:id',
-          builder: (context, state) => AnimePage(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/lists/anime',
-          builder: (context, state) => const AnimeList(),
-        ),
-        GoRoute(
-          path: '/lists/manga',
-          builder: (context, state) => const MangaList(),
-        ),
-        GoRoute(
-          path: '/social',
-          builder: (context, state) => const SocialPage(),
-        ),
-        GoRoute(
-          path: '/profile',
-          builder: (context, state) => const ProfilePage(),
-        ),
-        GoRoute(
-          path: '/discover',
-          builder: (context, state) => const Discovery(),
-        ),
-        GoRoute(
-          path: '/search',
-          builder: (context, state) => SearchPage(
-            options: state.extra,
-          ),
-        ),
-        GoRoute(
-          path: '/recommendations',
-          builder: (context, state) => const Recommendations(),
-        ),
-        GoRoute(
-          path: '/character/:id',
-          builder: (context, state) => Character(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/staff/:id',
-          builder: (context, state) => Staff(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/notifications',
-          builder: (context, state) => const NotificationsPage(),
-        ),
-        GoRoute(
-          path: '/activity/:id',
-          builder: (context, state) => Activity(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/thread/:id',
-          builder: (context, state) => Thread(id: state.params['id']!),
-        ),
-      ],
-    ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginPage(),
-      redirect: (context, state) async {
-        var settings = await SharedPreferences.getInstance();
-        if (settings.getString('token') != null) return '/';
-        return null;
-      },
-    )
-  ],
-);
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -217,64 +96,8 @@ class _AppState extends State<App> {
           debugShowCheckedModeBanner: false,
           scrollBehavior: MyCustomScrollBehavior(),
           theme: Styles.themeData(value.theme),
-          routerConfig: _routerConfig,
+          routerConfig: routerConfig,
         ),
-      ),
-    );
-  }
-}
-
-class BottomBar extends StatefulWidget {
-  final Widget child;
-  const BottomBar({super.key, required this.child});
-
-  @override
-  State<BottomBar> createState() => _BottomBarState();
-}
-
-const tabs = ['/', '/lists/anime', '/discover', '/lists/manga', '/social'];
-
-class _BottomBarState extends State<BottomBar> {
-  var currentIdx = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GraphQlProvider(child: widget.child),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        useLegacyColorScheme: false,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: currentIdx,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_movies),
-            label: 'Anime List',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              IconData(
-                0xf8ca,
-                fontFamily: CupertinoIcons.iconFont,
-                fontPackage: CupertinoIcons.iconFontPackage,
-              ),
-            ),
-            label: 'Discover',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Manga List'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble), label: 'Social'),
-        ],
-        onTap: (value) {
-          setState(() {
-            currentIdx = value;
-          });
-
-          context.go(tabs[value]);
-        },
       ),
     );
   }

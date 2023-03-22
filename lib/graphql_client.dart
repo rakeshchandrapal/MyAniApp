@@ -1,12 +1,15 @@
+import 'package:MyAniApp/providers/settings.dart';
+import 'package:MyAniApp/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 Future<ValueNotifier<GraphQLClient>> getClient() async {
   await initHiveForFlutter();
   Link link = HttpLink('https://graphql.anilist.co');
-  var settings = await SharedPreferences.getInstance();
-  var token = settings.getString('token');
+  var token = rootNavigatorKey.currentContext?.read<SettingsProvider>().token;
+  // var settings = await SharedPreferences.getInstance();
+  // var token = settings.getString('token');
   if (token != null) {
     link = HttpLink(
       'https://graphql.anilist.co',

@@ -7,7 +7,7 @@ import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/Notifications.graphql.dart';
 import 'package:MyAniApp/graphql/Viewer.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
-import 'package:MyAniApp/main.dart';
+import 'package:MyAniApp/routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

@@ -12,6 +12,7 @@ enum SettingStrings {
   animeList('list.anime'),
   mangaList('list.manga'),
   fallbackList('list.fallback'),
+  token('token'),
   theme('theme');
 
   const SettingStrings(this.setting);
@@ -33,11 +34,13 @@ class SettingsProvider extends ChangeNotifier {
   ListStyle _mangaList = ListStyle.grid;
   ListStyle _fallbackList = ListStyle.grid;
   AppTheme _theme = AppTheme.dark;
+  String? _token;
 
   ListStyle get animeList => _animeList;
   ListStyle get mangaList => _mangaList;
   ListStyle get fallbackList => _fallbackList;
   AppTheme get theme => _theme;
+  String? get token => _token;
 
   loadSettings() {
     _instance.then((i) {
@@ -49,6 +52,7 @@ class SettingsProvider extends ChangeNotifier {
           .byName(i.getString(SettingStrings.fallbackList.setting) ?? 'grid');
       _theme = AppTheme.values
           .byName(i.getString(SettingStrings.theme.setting) ?? 'dark');
+      _token = i.getString(SettingStrings.token.setting);
 
       notifyListeners();
     });
@@ -69,8 +73,46 @@ class SettingsProvider extends ChangeNotifier {
     // print(theme);
     // notifyListeners();
 
+    switch (setting) {
+      case SettingStrings.animeList:
+        _animeList = list;
+        break;
+
+      case SettingStrings.mangaList:
+        // _ = settings.mangaList;
+        _mangaList = list;
+        break;
+
+      case SettingStrings.fallbackList:
+        _fallbackList = list;
+        break;
+
+      default:
+        break;
+    }
+
+    notifyListeners();
+
     _instance.then((i) {
-      i.setString(setting.setting, list.name).then((value) => loadSettings());
+      i.setString(setting.setting, list.name);
     });
+  }
+
+  Future<bool> login(String token) async {
+    _token = token;
+    notifyListeners();
+
+    var i = await _instance;
+
+    // _instance.then((i) {
+    return await i.setString(SettingStrings.token.setting, token);
+    // });
+  }
+
+  Future<bool> clearAll() async {
+    var i = await _instance;
+    // _instance.then((i) {
+    return await i.clear();
+    // });
   }
 }

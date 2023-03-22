@@ -1,9 +1,9 @@
+import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/providers/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -11,6 +11,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var user = context.watch<User>();
+    var settings = context.watch<SettingsProvider>();
 
     return Drawer(
       // width: 200,
@@ -56,9 +57,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () async {
-                      var settings = await SharedPreferences.getInstance();
-                      await settings.remove('token');
-                      // ignore: use_build_context_synchronously
+                      await settings.clearAll();
                       context.go('/login');
                     },
                     child: const Text(

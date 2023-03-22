@@ -34,7 +34,9 @@ class Tabs extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 4),
             child: IconButton(
-              onPressed: () => context.push('/settings/app'),
+              onPressed: () => context.push(title == 'Manga List'
+                  ? '/settings/lists/manga'
+                  : '/settings/lists/anime'),
               icon: const Icon(Icons.settings),
             ),
           ),

@@ -145,6 +145,7 @@ class ActivityCard extends StatelessWidget {
       user = i.user;
       text = Markdown(
         data: i.text!,
+        physics: const NeverScrollableScrollPhysics(),
       );
     } else if (activity is Query$Activity$replies$activityReplies) {
       var i = activity as Query$Activity$replies$activityReplies;
@@ -152,7 +153,10 @@ class ActivityCard extends StatelessWidget {
       isReply = true;
       createdAt = i.createdAt;
       user = i.user;
-      text = Markdown(data: i.text!);
+      text = Markdown(
+        data: i.text!,
+        physics: const NeverScrollableScrollPhysics(),
+      );
     }
 
     if (text == null || user == null || createdAt == null) {

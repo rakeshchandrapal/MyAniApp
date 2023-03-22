@@ -52,7 +52,7 @@ class Markdown extends StatelessWidget {
               selectable: selectable,
               onTapLink: (text, href, title) =>
                   onTapLink(context, text, href, title),
-              extensionSet: mark.ExtensionSet.gitHubFlavored,
+              extensionSet: mark.ExtensionSet.gitHubWeb,
             )
           : md.Markdown(
               data: hasHtml ? html2md.convert(markdown) : markdown,
@@ -62,7 +62,7 @@ class Markdown extends StatelessWidget {
               selectable: selectable,
               onTapLink: (text, href, title) =>
                   onTapLink(context, text, href, title),
-              extensionSet: mark.ExtensionSet.gitHubFlavored,
+              extensionSet: mark.ExtensionSet.gitHubWeb,
             ),
     );
   }

@@ -216,7 +216,10 @@ class _PreviewState extends State<Preview> {
           color: const Color.fromRGBO(92, 114, 138, 0.1),
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Markdown(data: text),
+        child: Markdown(
+          data: text,
+          // hasHtml: true,
+        ),
       ),
     );
   }
