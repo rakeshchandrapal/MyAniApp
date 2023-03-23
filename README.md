@@ -1,13 +1,15 @@
 # MyAniApp
 
-> _I'll uhh think of a better name soon (hopefully)_
-
-> **Note** IOS is planned to be supported but as I have no way to test on IOS devices for now it isn't
+> **Note** IOS is planned to be supported but as I have no way to test on IOS devices
 
 A Anilist mobile app.
 
-a little thingy im doing for fun.
+# Download
+Check [releases](https://github.com/MyAniApp/MyAniApp/releases) for the lasest version. Download the apk and install. 
 
-If you look and see that windows is supported it's because emulators and real devices are laggy for me when in debug mode.
+## Until I think the app is finished ill make prs everyday I work on it
 
-Since this repo has been created i'll be making prs for almost everyday i work on this.
+## Why is Windows suppored?
+
+Technically it is supported but only for testing. Testing on emulators are slow for me.
+
