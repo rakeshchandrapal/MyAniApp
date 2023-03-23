@@ -58,9 +58,8 @@ dependencies:
   flutter_local_notifications: ^13.0.0
   http: ^0.13.5
   badges: ^3.0.2
-  flutter_markdown: ^0.6.14
   html2md: ^1.2.6
-  markdown: ^7.0.1
+  markdown_widget: ^2.1.0
 
 dev_dependencies:
   flutter_test:

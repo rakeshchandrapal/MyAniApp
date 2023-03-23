@@ -72,7 +72,11 @@ class Thread extends HookWidget {
                         height: 10,
                       ),
                       if (result.Thread!.body != null)
-                        Markdown(data: result.Thread!.body!),
+                        MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: Markdown(data: result.Thread!.body!),
+                        ),
                       if (result.Thread!.categories?.isNotEmpty == true) ...[
                         const SizedBox(
                           height: 10,
@@ -172,11 +176,12 @@ class Comments extends HookWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
                         if (comment.comment != null)
-                          Markdown(data: comment.comment!),
+                          MediaQuery.removePadding(
+                            context: context,
+                            removeTop: true,
+                            child: Markdown(data: comment.comment!),
+                          ),
                       ],
                     ),
                   ),

@@ -59,7 +59,7 @@ query Character(
     age
     bloodType
     siteUrl
-    description(asHtml: true)
+    description
     name {
       first
       middle

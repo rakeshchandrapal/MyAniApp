@@ -184,6 +184,7 @@ class Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(meta);
     return Row(
       children: [
         SizedBox(
@@ -285,7 +286,7 @@ class Title extends StatelessWidget {
                         Markdown(
                           data: meta!.replaceAll('\n', '\n\n'),
                           padding: EdgeInsets.zero,
-                          shrinkWrap: false,
+                          shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                         ),
                     ],
