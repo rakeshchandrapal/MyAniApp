@@ -60,6 +60,9 @@ class Markdown extends StatelessWidget {
                 style: const TextStyle(color: Color(0xff0969da)),
                 onTap: (url) => onTapLink(context, url),
               ),
+              const PConfig(
+                textStyle: TextStyle(),
+              )
             ],
           ),
           markdownGeneratorConfig: MarkdownGeneratorConfig(

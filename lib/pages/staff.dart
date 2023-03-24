@@ -78,39 +78,41 @@ class Staff extends HookWidget {
 
               return false;
             },
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).padding.top,
-                    ),
-                    Title(
-                      meta: meta?.group(0),
-                      staff: result.Staff!,
-                    ),
-                    if (description != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 8),
-                        child: Container(
-                          constraints: const BoxConstraints(maxHeight: 200),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            color: Color.fromRGBO(92, 114, 138, 0.1),
-                          ),
-                          // width: /,
-                          child: Markdown(
-                            data: description,
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).padding.top,
+                      ),
+                      Title(
+                        meta: meta?.group(0),
+                        staff: result.Staff!,
+                      ),
+                      if (description != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16, bottom: 8),
+                          child: Container(
+                            constraints: const BoxConstraints(maxHeight: 200),
+                            width: MediaQuery.of(context).size.width,
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Color.fromRGBO(92, 114, 138, 0.1),
+                            ),
+                            // width: /,
+                            child: Markdown(
+                              data: description,
+                            ),
                           ),
                         ),
-                      ),
-                    Medias(medias: result.Staff!.characterMedia!.edges!)
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                Medias(medias: result.Staff!.characterMedia!.edges!)
+              ],
             ),
           );
         },
@@ -262,8 +264,8 @@ class Title extends StatelessWidget {
                         ),
                       if (meta != null)
                         Markdown(
-                          data: meta!,
-                          padding: const EdgeInsets.all(0),
+                          data: meta!.replaceAll('\n', '\n\n'),
+                          padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                         ),
@@ -290,47 +292,47 @@ class Medias extends StatelessWidget {
         medias.whereType<Query$Staff$Staff$characterMedia$edges>().toList());
     var size = MediaQuery.of(context).size;
 
-    return ListView.separated(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        var item = sorted[index];
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          var item = sorted[index];
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              item.year == 0 ? 'TBA' : item.year.toString(),
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            GridView.builder(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: size.width ~/ (size.width > 800 ? 140 : 110),
-                childAspectRatio: 10 / 17,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                var edge = item.medias[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.year == 0 ? 'TBA' : item.year.toString(),
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                GridView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount:
+                        size.width ~/ (size.width > 800 ? 140 : 110),
+                    childAspectRatio: 10 / 17,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    var edge = item.medias[index];
 
-                return CharacterMedia(edge: edge);
-              },
-              itemCount: item.medias.length,
+                    return CharacterMedia(edge: edge);
+                  },
+                  itemCount: item.medias.length,
+                ),
+              ],
             ),
-          ],
-        );
-      },
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 10,
+          );
+        },
+        childCount: sorted.length,
       ),
-      itemCount: sorted.length,
     );
   }
 }
