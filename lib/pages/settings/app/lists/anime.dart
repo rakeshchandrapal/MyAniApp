@@ -1,10 +1,12 @@
 import 'package:MyAniApp/providers/settings.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:provider/provider.dart';
 
-class AnimeListSetting extends StatelessWidget {
-  const AnimeListSetting({super.key});
+@RoutePage()
+class AnimeListSettingPage extends StatelessWidget {
+  const AnimeListSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class AnimeListSetting extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Anime List'),
+        leading: const AutoLeadingButton(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

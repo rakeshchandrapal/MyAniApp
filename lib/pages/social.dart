@@ -1,17 +1,19 @@
 import 'package:MyAniApp/graphql/Activity.graphql.dart';
 import 'package:MyAniApp/graphql/Like.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+@RoutePage()
 class SocialPage extends StatefulWidget {
   const SocialPage({super.key});
 
@@ -30,7 +32,7 @@ class _SocialPageState extends State<SocialPage> {
         Padding(
           padding: const EdgeInsets.only(right: 4),
           child: IconButton(
-            onPressed: () => context.push('/settings/app'),
+            onPressed: () => context.router.pushNamed('/settings/app'),
             icon: const Icon(Icons.settings),
           ),
         ),
@@ -167,13 +169,15 @@ class Social extends HookWidget {
                   ),
                   Card(
                     child: InkWell(
-                      onTap: () => context.push('/activity/${item.id}'),
+                      onTap: () => context.router.push(
+                        ActivityRoute(id: item.id),
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
-                            onTap: () =>
-                                context.push('/media/${item.media!.id}'),
+                            onTap: () => context.router
+                                .push(MediaRoute(id: item.media!.id!)),
                             child: SizedBox(
                               height: 120,
                               width: 80,
@@ -259,7 +263,9 @@ class Social extends HookWidget {
                           },
                         ),
                         IconButton(
-                          onPressed: () => context.push('/activity/${item.id}'),
+                          onPressed: () => context.router.push(
+                            ActivityRoute(id: item.id),
+                          ),
                           icon: Row(
                             children: [
                               const Icon(Icons.forum_rounded),
@@ -309,7 +315,9 @@ class Social extends HookWidget {
                   ),
                   Card(
                     child: InkWell(
-                      onTap: () => context.push('/activity/${item.id}'),
+                      onTap: () => context.router.push(
+                        ActivityRoute(id: item.id),
+                      ),
                       // onTap: () => context.push('/media/${item.media!.id}'),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,

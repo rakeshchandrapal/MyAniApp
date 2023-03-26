@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 
 class DetailedListCards extends HookWidget {
   final List list;
@@ -62,7 +63,9 @@ class DetailedListCards extends HookWidget {
                 height: 130,
                 child: Card(
                   child: InkWell(
-                    onTap: () => context.push('/media/${media.id}'),
+                    onTap: () => context.router.push(
+                      MediaRoute(id: media.id!),
+                    ),
                     onDoubleTap: openEditDialog != null &&
                             entry is Fragment$MediaListEntry
                         ? () => openEditDialog!(entry)
@@ -230,7 +233,9 @@ class SimpleCards extends HookWidget {
               }
 
               return InkWell(
-                onTap: () => context.push('/media/${media.id}'),
+                onTap: () => context.router.push(
+                  MediaRoute(id: media.id!),
+                ),
                 onDoubleTap:
                     openEditDialog != null && entry is Fragment$MediaListEntry
                         ? () => openEditDialog!(entry)

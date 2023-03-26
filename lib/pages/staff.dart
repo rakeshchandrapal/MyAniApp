@@ -1,28 +1,29 @@
 import 'package:MyAniApp/graphql/staff.graphql.dart';
 import 'package:MyAniApp/pages/character.dart';
-import 'package:MyAniApp/pages/media_view.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class Staff extends HookWidget {
-  final String id;
+@RoutePage()
+class StaffPage extends HookWidget {
+  final int id;
 
-  const Staff({super.key, required this.id});
+  const StaffPage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     var hook = useQuery$Staff(
       Options$Query$Staff(
         variables: Variables$Query$Staff(
-          id: int.tryParse(id),
+          id: id,
         ),
       ),
     );
@@ -142,14 +143,7 @@ class Title extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 9 / 16,
             child: GestureDetector(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ImagePage(
-                    image: staff.image!.large!,
-                    tag: 'character',
-                  ),
-                ),
-              ),
+              onTap: () => showImage(context, staff.image!.large!),
               child: Hero(
                 tag: 'character',
                 child: CachedNetworkImage(
@@ -354,8 +348,9 @@ class CharacterMedia extends StatelessWidget {
           child: Stack(
             children: [
               GestureDetector(
-                onTap: () =>
-                    context.push('/character/${edge.characters!.first!.id}'),
+                onTap: () => context.router.push(
+                  CharacterRoute(id: edge.characters!.first!.id),
+                ),
                 child: CImage(
                   imageUrl: edge.characters!.first!.image!.large!,
                   height: double.maxFinite,
@@ -365,7 +360,9 @@ class CharacterMedia extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
-                  onTap: () => context.push('/media/${edge.node!.id}'),
+                  onTap: () => context.router.push(
+                    MediaRoute(id: edge.node!.id!),
+                  ),
                   onLongPress: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => Sheet(media: edge.node!),

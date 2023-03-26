@@ -2,14 +2,16 @@ import 'dart:async';
 
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/providers/settings.dart';
+import 'package:MyAniApp/routes.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 var accessRegex = RegExp('(?:access_token=)(.+)', dotAll: true);
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         settings.login(accessToken);
         // await instance.setString('token', accessToken);
         var c = await client(updated: true);
-        context.go('/');
+        context.router.popAndPush(const HomeRouteTabs());
         // print(RegExp('(?:access_token=)(.+)', dotAll: true)
         //     .firstMatch(fragment)
         //     ?.group(1));
@@ -92,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (_formKey.currentState!.validate()) {
                     // var settings = await SharedPreferences.getInstance();
                     settings.login(myController.text).then((value) {
-                      context.go('/');
+                      context.router.pushNamed('/');
                     });
                   }
                 },

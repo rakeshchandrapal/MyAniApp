@@ -1,4 +1,5 @@
 import 'Media.graphql.dart';
+import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
@@ -2288,6 +2289,10 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
 ]);
 Query$Notifications _parserFn$Query$Notifications(Map<String, dynamic> data) =>
     Query$Notifications.fromJson(data);
+typedef OnQueryComplete$Query$Notifications = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Notifications?,
+);
 
 class Options$Query$Notifications
     extends graphql.QueryOptions<Query$Notifications> {
@@ -2298,20 +2303,41 @@ class Options$Query$Notifications
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Notifications? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Notifications? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Notifications(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryNotifications,
           parserFn: _parserFn$Query$Notifications,
         );
+
+  final OnQueryComplete$Query$Notifications? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Notifications
@@ -2323,6 +2349,7 @@ class WatchOptions$Query$Notifications
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Notifications? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -2334,7 +2361,7 @@ class WatchOptions$Query$Notifications
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryNotifications,
           pollInterval: pollInterval,

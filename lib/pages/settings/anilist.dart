@@ -1,12 +1,14 @@
 import 'package:MyAniApp/graphql/Viewer.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AnilistSettings extends StatelessWidget {
-  const AnilistSettings({super.key});
+@RoutePage()
+class AnilistSettingsPage extends StatelessWidget {
+  const AnilistSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class AnilistSettings extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             const SliverAppBar(
               title: Text('Settings'),
+              leading: AutoLeadingButton(),
               floating: true,
               snap: true,
             ),

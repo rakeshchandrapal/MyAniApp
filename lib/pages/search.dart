@@ -2,12 +2,12 @@ import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/providers/graphql.dart';
 import 'package:MyAniApp/providers/user.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql/client.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +22,29 @@ typedef OnSave = void Function(
   bool? isAdult,
 );
 
+@RoutePage()
 class SearchPage extends StatefulHookWidget {
-  final dynamic options;
-  const SearchPage({super.key, this.options});
+  final List<dynamic>? sort;
+  final Enum$MediaSeason? season;
+  final String? search;
+  final int? year;
+  final Enum$MediaType? type;
+  final List<String>? genres;
+  final List<dynamic>? tags;
+  final bool? isAdult;
+  final bool? autofoucus;
+  const SearchPage({
+    super.key,
+    this.sort,
+    this.season,
+    this.search,
+    this.year,
+    this.type,
+    this.genres,
+    this.tags,
+    this.isAdult,
+    this.autofoucus,
+  });
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -44,15 +64,15 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    sort = widget.options?['sort'];
-    year = widget.options?['year'];
-    season = widget.options?['season'];
-    type = widget.options?['type'];
-    genres = widget.options?['genres'];
-    tags = widget.options?['tags'];
-    isAdult = widget.options?['isAdult'];
-    search = widget.options?['search'];
-    if (widget.options?['autofocus'] == true) node.requestFocus();
+    sort = widget.sort as List<Enum$MediaSort>?;
+    year = widget.year;
+    season = widget.season;
+    type = widget.type;
+    genres = widget.genres;
+    tags = widget.tags as List<Query$GenreCollection$tags>?;
+    isAdult = widget.isAdult;
+    search = widget.search;
+    if (widget.autofoucus == true) node.requestFocus();
   }
 
   @override
@@ -73,9 +93,9 @@ class _SearchPageState extends State<SearchPage> {
           leading: const SizedBox(),
           floating: true,
           actions: [
-            if (context.canPop())
+            if (context.router.canPop())
               IconButton(
-                onPressed: () => context.pop(),
+                onPressed: () => context.router.pop(),
                 icon: const Icon(Icons.arrow_back),
               ),
             Expanded(
@@ -396,7 +416,7 @@ class _FilterDialogState extends State<FilterDialog> {
               onPressed: () {
                 widget.onSave(
                     sort, type, year, season, search, genres, tags, isAdult);
-                context.pop();
+                context.router.pop();
               },
               icon: const Icon(Icons.save),
             ),

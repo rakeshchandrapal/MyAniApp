@@ -1,9 +1,10 @@
 import 'package:MyAniApp/graphql/Recommendations.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 
 var sortingOptions = [
   Enum$RecommendationSort.RATING_DESC,
@@ -11,14 +12,15 @@ var sortingOptions = [
   Enum$RecommendationSort.ID_DESC
 ];
 
-class Recommendations extends StatefulHookWidget {
-  const Recommendations({super.key});
+@RoutePage()
+class RecommendationsPage extends StatefulHookWidget {
+  const RecommendationsPage({super.key});
 
   @override
-  State<Recommendations> createState() => _RecommendationsState();
+  State<RecommendationsPage> createState() => _RecommendationsState();
 }
 
-class _RecommendationsState extends State<Recommendations> {
+class _RecommendationsState extends State<RecommendationsPage> {
   Enum$RecommendationSort sort = Enum$RecommendationSort.RATING_DESC;
   bool onList = false;
 
@@ -161,8 +163,9 @@ class _RecommendationsState extends State<Recommendations> {
                                       width: 110,
                                       child: MediaCard(
                                         media: r.media!,
-                                        onTap: () => context
-                                            .push('/media/${r.media!.id}'),
+                                        onTap: () => context.router.push(
+                                          MediaRoute(id: r.media!.id!),
+                                        ),
                                       ),
                                     ),
                                   const SizedBox(
@@ -174,8 +177,10 @@ class _RecommendationsState extends State<Recommendations> {
                                       width: 110,
                                       child: MediaCard(
                                         media: r.mediaRecommendation!,
-                                        onTap: () => context.push(
-                                            '/media/${r.mediaRecommendation!.id}'),
+                                        onTap: () => context.router.push(
+                                          MediaRoute(
+                                              id: r.mediaRecommendation!.id!),
+                                        ),
                                       ),
                                     )
                                 ],

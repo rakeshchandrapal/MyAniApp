@@ -1,16 +1,18 @@
 import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql/client.dart';
 import 'package:provider/provider.dart';
 
-class Discovery extends HookWidget {
-  const Discovery({super.key});
+@RoutePage()
+class DiscoveryPage extends HookWidget {
+  const DiscoveryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +49,10 @@ class Discovery extends HookWidget {
             children: [
               GestureDetector(
                 child: TextField(
-                  onTap: () =>
-                      context.push('/search', extra: {'autofocus': true}),
+                  onTap: () => context.router.push(
+                    SearchRoute(autofoucus: true),
+                  ),
+                  // context.push('/search', extra: {'autofocus': true}),
                   // enabled: false,
                   focusNode: FocusNode(
                     canRequestFocus: false,
@@ -74,7 +78,8 @@ class Discovery extends HookWidget {
                       Text('Recommendations'),
                     ],
                   ),
-                  onSelected: (value) => context.push('/recommendations'),
+                  onSelected: (value) =>
+                      context.router.push(const RecommendationsRoute()),
                 ),
               ),
               _list(
@@ -82,12 +87,11 @@ class Discovery extends HookWidget {
                 title: 'Trending',
                 isLoading: hook.result.isLoading,
                 list: hook.result.parsedData?.trending?.media,
-                onViewMore: () => context.push(
-                  '/search',
-                  extra: {
-                    'sort': [Enum$MediaSort.TRENDING_DESC],
-                    'type': Enum$MediaType.ANIME,
-                  },
+                onViewMore: () => context.router.push(
+                  SearchRoute(
+                    sort: const [Enum$MediaSort.TRENDING_DESC],
+                    type: Enum$MediaType.ANIME,
+                  ),
                 ),
               ),
               _list(
@@ -95,14 +99,13 @@ class Discovery extends HookWidget {
                 title: 'Popular This Season',
                 isLoading: hook.result.isLoading,
                 list: hook.result.parsedData?.thisSeason?.media,
-                onViewMore: () => context.push(
-                  '/search',
-                  extra: {
-                    'sort': [Enum$MediaSort.POPULARITY_DESC],
-                    'year': date.year,
-                    'season': date.season,
-                    'type': Enum$MediaType.ANIME,
-                  },
+                onViewMore: () => context.router.push(
+                  SearchRoute(
+                    sort: const [Enum$MediaSort.POPULARITY_DESC],
+                    type: Enum$MediaType.ANIME,
+                    year: date.year,
+                    season: date.season,
+                  ),
                 ),
               ),
               _list(
@@ -110,14 +113,13 @@ class Discovery extends HookWidget {
                 title: 'Popular Next Season',
                 isLoading: hook.result.isLoading,
                 list: hook.result.parsedData?.seasonNext?.media,
-                onViewMore: () => context.push(
-                  '/search',
-                  extra: {
-                    'sort': [Enum$MediaSort.POPULARITY_DESC],
-                    'year': date.nextYear,
-                    'season': date.nextSeason,
-                    'type': Enum$MediaType.ANIME,
-                  },
+                onViewMore: () => context.router.push(
+                  SearchRoute(
+                    sort: const [Enum$MediaSort.POPULARITY_DESC],
+                    type: Enum$MediaType.ANIME,
+                    year: date.nextYear,
+                    season: date.nextSeason,
+                  ),
                 ),
               ),
               _list(
@@ -125,12 +127,11 @@ class Discovery extends HookWidget {
                 title: 'All time Popular',
                 isLoading: hook.result.isLoading,
                 list: hook.result.parsedData?.popular?.media,
-                onViewMore: () => context.push(
-                  '/search',
-                  extra: {
-                    'sort': [Enum$MediaSort.POPULARITY_DESC],
-                    'type': Enum$MediaType.ANIME,
-                  },
+                onViewMore: () => context.router.push(
+                  SearchRoute(
+                    sort: const [Enum$MediaSort.POPULARITY_DESC],
+                    type: Enum$MediaType.ANIME,
+                  ),
                 ),
               ),
               Text(
@@ -148,10 +149,12 @@ class Discovery extends HookWidget {
                         Padding(
                           padding: const EdgeInsets.all(2),
                           child: TextButton(
-                            onPressed: () => context.push('/search', extra: {
-                              'genres': [genre],
-                              'isAdult': genre == 'Hentai' ? true : null
-                            }),
+                            onPressed: () => context.router.push(
+                              SearchRoute(
+                                genres: [genre],
+                                isAdult: genre == 'Hentai' ? true : null,
+                              ),
+                            ),
                             child: Text(genre!),
                           ),
                         )
@@ -174,8 +177,7 @@ class Discovery extends HookWidget {
     if (list == null && !isLoading || list != null && list.isEmpty) {
       return const SizedBox();
     }
-    // print(Theme.of(context).textTheme.labelSmall?.fontSize);
-    // if (list.isEmpty && isLoading) list.addAll([[], [], [], [], [], [], []]);
+
     return Column(
       children: [
         Row(
@@ -192,7 +194,6 @@ class Discovery extends HookWidget {
               )
           ],
         ),
-        // if (!isLoading && list != null)
         SizedBox(
           height: 170,
           child: ListView(
@@ -219,41 +220,9 @@ class Discovery extends HookWidget {
                             MediaCard(
                               height: 150,
                               media: i!,
-                              onTap: () => context.push('/media/${i.id}'),
+                              onTap: () =>
+                                  context.router.pushNamed('/media/${i.id}'),
                             ),
-                            if (i is Query$Home$releasing$media)
-                              Builder(builder: (context) {
-                                var next = i.nextAiringEpisode;
-                                var passed = i.airingSchedule?.edges
-                                    ?.firstWhere((a) =>
-                                        a?.node?.episode ==
-                                        i.nextAiringEpisode!.episode - 1)
-                                    ?.node;
-                                dynamic use;
-                                if (isTodayFromTimestamp(passed?.airingAt)) {
-                                  use = passed;
-                                } else {
-                                  use = next;
-                                }
-                                return Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(4, 2, 4, 2),
-                                  margin: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surfaceVariant
-                                        .withOpacity(0.9),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    "Episode ${use?.episode.toString()} ${fromTimestamp(use.airingAt)}",
-                                    style: const TextStyle(
-                                      fontSize: 9,
-                                    ),
-                                  ),
-                                );
-                              })
                           ],
                         ),
                       ],

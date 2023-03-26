@@ -4,28 +4,30 @@ import 'package:MyAniApp/graphql/Notifications.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:MyAniApp/widgets/markdown_editor.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class Activity extends HookWidget {
-  final String id;
-  const Activity({super.key, required this.id});
+@RoutePage()
+class ActivityPage extends HookWidget {
+  final int id;
+  const ActivityPage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     var hook = useQuery$Activity(
       Options$Query$Activity(
-        variables: Variables$Query$Activity(id: int.tryParse(id)),
+        variables: Variables$Query$Activity(id: id),
       ),
     );
 
@@ -56,7 +58,7 @@ class Activity extends HookWidget {
                                   onCompleted: (_, __) => hook.refetch(),
                                   variables:
                                       Variables$Mutation$SaveActivityReply(
-                                    activityId: int.tryParse(id),
+                                    activityId: id,
                                     text: markdown,
                                   ),
                                 ),
@@ -132,7 +134,9 @@ class ActivityCard extends StatelessWidget {
                 color: Color(0xff0969da),
               ),
               recognizer: TapGestureRecognizer()
-                ..onTap = () => context.push('/media/${i.media!.id}'),
+                ..onTap = () => context.router.push(
+                      MediaRoute(id: i.media!.id!),
+                    ),
             ),
           ],
         ),
@@ -201,8 +205,13 @@ class ActivityCard extends StatelessWidget {
               children: [
                 if (image != null)
                   GestureDetector(
-                    onTap: () => context.push(
-                        '/media/${(activity as Query$Activity$activity$$ListActivity).media!.id}'),
+                    onTap: () => context.router.push(
+                      MediaRoute(
+                          id: (activity
+                                  as Query$Activity$activity$$ListActivity)
+                              .media!
+                              .id!),
+                    ),
                     child: SizedBox(
                       height: 120,
                       width: 80,

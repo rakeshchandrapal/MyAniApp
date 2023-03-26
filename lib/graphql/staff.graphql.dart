@@ -1,4 +1,5 @@
 import 'Media.graphql.dart';
+import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
@@ -900,6 +901,10 @@ const documentNodeQueryStaff = DocumentNode(definitions: [
 ]);
 Query$Staff _parserFn$Query$Staff(Map<String, dynamic> data) =>
     Query$Staff.fromJson(data);
+typedef OnQueryComplete$Query$Staff = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Staff?,
+);
 
 class Options$Query$Staff extends graphql.QueryOptions<Query$Staff> {
   Options$Query$Staff({
@@ -909,20 +914,41 @@ class Options$Query$Staff extends graphql.QueryOptions<Query$Staff> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Staff? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Staff? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Staff(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryStaff,
           parserFn: _parserFn$Query$Staff,
         );
+
+  final OnQueryComplete$Query$Staff? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Staff extends graphql.WatchQueryOptions<Query$Staff> {
@@ -933,6 +959,7 @@ class WatchOptions$Query$Staff extends graphql.WatchQueryOptions<Query$Staff> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Staff? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -944,7 +971,7 @@ class WatchOptions$Query$Staff extends graphql.WatchQueryOptions<Query$Staff> {
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryStaff,
           pollInterval: pollInterval,

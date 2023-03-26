@@ -1,140 +1,102 @@
-import 'package:MyAniApp/pages/activity.dart';
-import 'package:MyAniApp/pages/character.dart';
-import 'package:MyAniApp/pages/discover.dart';
-import 'package:MyAniApp/pages/home.dart';
-import 'package:MyAniApp/pages/lists/anime.dart';
-import 'package:MyAniApp/pages/lists/manga.dart';
-import 'package:MyAniApp/pages/login.dart';
-import 'package:MyAniApp/pages/media_view.dart';
-import 'package:MyAniApp/pages/notifications.dart';
-import 'package:MyAniApp/pages/profile.dart';
-import 'package:MyAniApp/pages/recommendations.dart';
-import 'package:MyAniApp/pages/search.dart';
-import 'package:MyAniApp/pages/settings/anilist.dart';
-import 'package:MyAniApp/pages/settings/app/app.dart';
-import 'package:MyAniApp/pages/settings/app/lists/anime.dart';
-import 'package:MyAniApp/pages/settings/app/lists/fallback.dart';
-import 'package:MyAniApp/pages/settings/app/lists/manga.dart';
-import 'package:MyAniApp/pages/settings/general.dart';
-import 'package:MyAniApp/pages/social.dart';
-import 'package:MyAniApp/pages/staff.dart';
-import 'package:MyAniApp/pages/thread.dart';
+import 'package:MyAniApp/providers/graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
-import 'package:MyAniApp/widgets/bottom_bar.dart';
+import 'package:MyAniApp/routes.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorKey = GlobalKey<NavigatorState>();
-
-var routerConfig = GoRouter(
-  navigatorKey: rootNavigatorKey,
-  routes: [
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) => BottomBar(child: child),
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) => const HomePage(),
-          redirect: (context, state) async {
-            context.read<SettingsProvider>();
-            var settings = await SharedPreferences.getInstance();
-            if (settings.getString('token') == null) return '/login';
-            return null;
-          },
+@AutoRouterConfig()
+class AppRouter extends $AppRouter {
+  @override
+  final List<AutoRoute> routes = [
+    /// routes go here
+    AutoRoute(
+      page: EmptyRouterRoute.page,
+      path: '/',
+      guards: [AuthGuard()],
+      children: [
+        AutoRoute(page: LoginRoute.page, path: 'login'),
+        AutoRoute(page: ProfileRoute.page, path: 'profile'),
+        AutoRoute(page: MediaRoute.page, path: 'media/:id'),
+        AutoRoute(page: ReleaseCalenderRoute.page, path: 'releasing'),
+        AutoRoute(page: ActivityRoute.page, path: 'activity/:id'),
+        AutoRoute(page: CharacterRoute.page, path: 'character/:id'),
+        AutoRoute(page: NotificationsRoute.page, path: 'notifications'),
+        AutoRoute(page: RecommendationsRoute.page, path: 'recommendations'),
+        AutoRoute(page: SearchRoute.page, path: 'search'),
+        AutoRoute(
+          page: EmptyRouterRoute.page,
+          path: 'settings',
+          children: [
+            AutoRoute(page: SettingsRoute.page, path: ''),
+            AutoRoute(
+              page: EmptyRouterRoute.page,
+              path: 'app',
+              children: [
+                AutoRoute(page: AppSettingsRoute.page, path: ''),
+                AutoRoute(
+                  page: FallbackListSettingRoute.page,
+                  path: 'lists/fallback',
+                ),
+                AutoRoute(
+                  page: AnimeListSettingRoute.page,
+                  path: 'lists/anime',
+                ),
+                AutoRoute(
+                  page: MangaListSettingRoute.page,
+                  path: 'lists/manga',
+                ),
+              ],
+            ),
+            AutoRoute(page: AnilistSettingsRoute.page, path: 'anilist'),
+          ],
         ),
-        GoRoute(
-          path: '/settings',
-          builder: (context, state) => const Settings(),
+        AutoRoute(page: StaffRoute.page, path: 'staff/:id'),
+        AutoRoute(page: ThreadRoute.page, path: 'thread/:id'),
+        AutoRoute(
+          page: HomeRouteTabs.page,
+          path: '',
+          guards: [AuthGuard()],
+          children: [
+            AutoRoute(page: HomeRoute.page, path: ''),
+            AutoRoute(page: AnimeListRoute.page, path: 'lists/anime'),
+            AutoRoute(page: MangaListRoute.page, path: 'lists/manga'),
+            AutoRoute(page: DiscoveryRoute.page, path: 'discovery'),
+            AutoRoute(page: SocialRoute.page, path: 'social'),
+          ],
         ),
-        GoRoute(
-          path: '/settings/app',
-          builder: (context, state) => const AppSettings(),
-        ),
-        GoRoute(
-          path: '/settings/lists/anime',
-          builder: (context, state) => const AnimeListSetting(),
-        ),
-        GoRoute(
-          path: '/settings/lists/manga',
-          builder: (context, state) => const MangaListSetting(),
-        ),
-        GoRoute(
-          path: '/settings/lists/fallback',
-          builder: (context, state) => const FallbackListSetting(),
-        ),
-        GoRoute(
-          path: '/settings/anilist',
-          builder: (context, state) => const AnilistSettings(),
-        ),
-        GoRoute(
-          path: '/media/:id',
-          builder: (context, state) => AnimePage(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/lists/anime',
-          builder: (context, state) => const AnimeList(),
-        ),
-        GoRoute(
-          path: '/lists/manga',
-          builder: (context, state) => const MangaList(),
-        ),
-        GoRoute(
-          path: '/social',
-          builder: (context, state) => const SocialPage(),
-        ),
-        GoRoute(
-          path: '/profile',
-          builder: (context, state) => const ProfilePage(),
-        ),
-        GoRoute(
-          path: '/discover',
-          builder: (context, state) => const Discovery(),
-        ),
-        GoRoute(
-          path: '/search',
-          builder: (context, state) => SearchPage(
-            options: state.extra,
-          ),
-        ),
-        GoRoute(
-          path: '/recommendations',
-          builder: (context, state) => const Recommendations(),
-        ),
-        GoRoute(
-          path: '/character/:id',
-          builder: (context, state) => Character(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/staff/:id',
-          builder: (context, state) => Staff(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/notifications',
-          builder: (context, state) => const NotificationsPage(),
-        ),
-        GoRoute(
-          path: '/activity/:id',
-          builder: (context, state) => Activity(id: state.params['id']!),
-        ),
-        GoRoute(
-          path: '/thread/:id',
-          builder: (context, state) => Thread(id: state.params['id']!),
-        ),
+        // RedirectRoute(path: '*', redirectTo: '/home')
       ],
     ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginPage(),
-      redirect: (context, state) async {
-        var settings = await SharedPreferences.getInstance();
-        await settings.reload();
-        if (settings.getString('token') != null) return '/';
-        return null;
-      },
-    )
-  ],
-);
+  ];
+}
+
+class AuthGuard extends AutoRouteGuard {
+  @override
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    // the navigation is paused until resolver.next() is called with either
+    // true to resume/continue navigation or false to abort navigation
+    var settings = await SharedPreferences.getInstance();
+    await settings.reload();
+    var token = settings.getString(SettingStrings.token.setting);
+    if (token != null) {
+      // if user is authenticated we continue
+      resolver.next(true);
+    } else {
+      // we redirect the user to our login page
+      router.push(const LoginRoute());
+    }
+  }
+}
+
+@RoutePage()
+class EmptyRouterPage extends StatelessWidget {
+  const EmptyRouterPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(body: GraphQlProvider(child: AutoRouter()));
+  }
+}
+
+final appRouter = AppRouter();

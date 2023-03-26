@@ -1,20 +1,23 @@
 import 'package:MyAniApp/graphql/Media.graphql.dart';
+import 'package:MyAniApp/graphql/Releasing.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/notification.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:MyAniApp/widgets/markdown_editor.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+@RoutePage()
 class HomePage extends StatefulHookWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -70,8 +73,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     //   return Graphql(hook.result.exception!);
     // }
 
-    var releases = results?.releasing?.media != null
-        ? sortReleases(results!.releasing!)
+    var releases = results?.releasing?.media?.isNotEmpty == true
+        ? sortReleases(results!.releasing!.media!
+            .whereType<Fragment$ReleasingMedia>()
+            .toList())
         : null;
 
     var watching = results?.list?.lists?.firstWhere(
@@ -88,7 +93,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         Padding(
           padding: const EdgeInsets.only(right: 4),
           child: IconButton(
-            onPressed: () => context.push('/notifications'),
+            // onPressed: () {},
+            onPressed: () => context.router.push(const NotificationsRoute()),
             icon: badges.Badge(
               badgeContent: Text(
                 user.user?.unreadNotificationCount?.toString() ?? '0',
@@ -125,7 +131,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () => context.push('/search'),
+                      // onPressed: () {},
+                      onPressed: () => context.router.push(
+                        SearchRoute(autofoucus: true),
+                      ),
                       iconSize: 30,
                       icon: const Icon(Icons.search),
                     ),
@@ -156,6 +165,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   title: 'Releasing',
                   isLoading: hook.result.isLoading,
                   list: releases?.toList(),
+                  onViewMore: () =>
+                      context.router.push(const ReleaseCalenderRoute()),
                 ),
                 const SizedBox(
                   height: 10,
@@ -218,7 +229,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     BuildContext context, {
     required String title,
     required bool isLoading,
-    List<Fragment$BasicMedia?>? list,
+    List<Fragment$ReleasingMedia?>? list,
     onViewMore,
   }) {
     if (list == null && !isLoading || list != null && list.isEmpty) {
@@ -274,48 +285,50 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                               MediaCard(
                                 height: 150,
                                 media: i!,
-                                onTap: () => context.push('/media/${i.id}'),
+                                // onTap: () {},
+                                onTap: () => context.router.push(
+                                  MediaRoute(id: i.id!),
+                                ),
                               ),
-                              if (i is Query$Home$releasing$media)
-                                Builder(builder: (context) {
-                                  var next = i.nextAiringEpisode;
-                                  var passed = i.airingSchedule?.edges
-                                      ?.firstWhere(
-                                        (a) =>
-                                            a?.node?.episode ==
-                                            i.nextAiringEpisode!.episode - 1,
-                                        orElse: () => null,
-                                      )
-                                      ?.node;
-                                  dynamic use;
-                                  if (isTodayFromTimestamp(passed?.airingAt)) {
-                                    use = passed;
-                                  } else {
-                                    use = next;
-                                  }
-                                  return Container(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(4, 2, 4, 2),
-                                    margin: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .surfaceVariant
-                                          .withOpacity(0.9),
-                                      borderRadius: BorderRadius.circular(10),
+                              Builder(builder: (context) {
+                                var next = i.nextAiringEpisode;
+                                var passed = i.airingSchedule?.edges
+                                    ?.firstWhere(
+                                      (a) =>
+                                          a?.node?.episode ==
+                                          i.nextAiringEpisode!.episode - 1,
+                                      orElse: () => null,
+                                    )
+                                    ?.node;
+                                dynamic use;
+                                if (isTodayFromTimestamp(passed?.airingAt)) {
+                                  use = passed;
+                                } else {
+                                  use = next;
+                                }
+                                return Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(4, 2, 4, 2),
+                                  margin: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .surfaceVariant
+                                        .withOpacity(0.9),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    "Episode ${use?.episode.toString()} ${isTodayFromTimestamp(use.airingAt) ? '(' : 'in '}${timeago.format(
+                                      dateFromTimestamp(use.airingAt),
+                                      locale: 'en_short',
+                                      allowFromNow: true,
+                                    )}${isTodayFromTimestamp(use.airingAt) ? ' ago)' : ''}",
+                                    style: const TextStyle(
+                                      fontSize: 9,
                                     ),
-                                    child: Text(
-                                      "Episode ${use?.episode.toString()} ${isTodayFromTimestamp(use.airingAt) ? '' : 'in '}${timeago.format(
-                                        dateFromTimestamp(use.airingAt),
-                                        locale: 'en_short',
-                                        allowFromNow: true,
-                                      )} ${isTodayFromTimestamp(use.airingAt) ? 'ago' : ''}",
-                                      style: const TextStyle(
-                                        fontSize: 9,
-                                      ),
-                                    ),
-                                  );
-                                })
+                                  ),
+                                );
+                              })
                             ],
                           ),
                         ],
@@ -329,3 +342,64 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 }
+// import 'package:MyAniApp/routes.gr.dart';
+// import 'package:auto_route/auto_route.dart';
+// import 'package:flutter/material.dart';
+
+// @RoutePage()
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AutoTabsScaffold(
+//       routes: const [RealRoute(), NotRealRoute(), FakeRoute()],
+//       bottomNavigationBuilder: (context, tabsRouter) => BottomNavigationBar(
+//         currentIndex: tabsRouter.activeIndex,
+//         onTap: tabsRouter.setActiveIndex,
+//         items: const [
+//           BottomNavigationBarItem(label: 'Users', icon: Icon(Icons.person)),
+//           BottomNavigationBarItem(label: 'Posts', icon: Icon(Icons.abc)),
+//           BottomNavigationBarItem(
+//               label: 'Settings', icon: Icon(Icons.ac_unit_outlined)),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// @RoutePage()
+// class RealPage extends StatelessWidget {
+//   const RealPage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Center(
+//       child: Text('real'),
+//     );
+//   }
+// }
+
+// @RoutePage()
+// class NotRealPage extends StatelessWidget {
+//   const NotRealPage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Center(
+//       child: Text('Not real'),
+//     );
+//   }
+// }
+
+// @RoutePage()
+// class FakePage extends StatelessWidget {
+//   const FakePage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Center(
+//       child: Text('Fake'),
+//     );
+//   }
+// }

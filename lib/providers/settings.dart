@@ -1,5 +1,4 @@
-import 'package:MyAniApp/providers/theme.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ListStyle {
@@ -33,13 +32,13 @@ class SettingsProvider extends ChangeNotifier {
   ListStyle _animeList = ListStyle.grid;
   ListStyle _mangaList = ListStyle.grid;
   ListStyle _fallbackList = ListStyle.grid;
-  AppTheme _theme = AppTheme.dark;
+  ThemeMode _theme = ThemeMode.system;
   String? _token;
 
   ListStyle get animeList => _animeList;
   ListStyle get mangaList => _mangaList;
   ListStyle get fallbackList => _fallbackList;
-  AppTheme get theme => _theme;
+  ThemeMode get theme => _theme;
   String? get token => _token;
 
   loadSettings() {
@@ -50,15 +49,15 @@ class SettingsProvider extends ChangeNotifier {
           .byName(i.getString(SettingStrings.mangaList.setting) ?? 'grid');
       _fallbackList = ListStyle.values
           .byName(i.getString(SettingStrings.fallbackList.setting) ?? 'grid');
-      _theme = AppTheme.values
-          .byName(i.getString(SettingStrings.theme.setting) ?? 'dark');
+      _theme = ThemeMode.values
+          .byName(i.getString(SettingStrings.theme.setting) ?? 'system');
       _token = i.getString(SettingStrings.token.setting);
 
       notifyListeners();
     });
   }
 
-  changeTheme(AppTheme theme) {
+  changeTheme(ThemeMode theme) {
     _theme = theme;
     // print(theme);
     notifyListeners();

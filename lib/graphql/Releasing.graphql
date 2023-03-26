@@ -1,0 +1,29 @@
+fragment ReleasingMedia on Media {
+  ...BasicMedia
+  nextAiringEpisode {
+    airingAt
+    timeUntilAiring
+    episode
+  }
+  airingSchedule(notYetAired: false) {
+    edges {
+      node {
+        airingAt
+        timeUntilAiring
+        episode
+      }
+    }
+  }
+}
+
+query Releasing($page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      hasNextPage
+      currentPage
+    }
+    media(onList: true, status_in: [RELEASING, NOT_YET_RELEASED], type: ANIME) {
+      ...ReleasingMedia
+    }
+  }
+}

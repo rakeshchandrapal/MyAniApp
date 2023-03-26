@@ -1,5 +1,6 @@
+import 'package:MyAniApp/routes.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +35,7 @@ class Graphql<T> extends StatelessWidget {
             onPressed: () async {
               var settings = await SharedPreferences.getInstance();
               await settings.remove('token');
-              context.go('/login');
+              context.router.popAndPush(const LoginRoute());
             },
             child: const Text('L bozo'),
           );

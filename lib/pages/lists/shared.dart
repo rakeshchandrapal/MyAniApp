@@ -5,10 +5,10 @@ import 'package:MyAniApp/providers/graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -34,9 +34,10 @@ class Tabs extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 4),
             child: IconButton(
-              onPressed: () => context.push(title == 'Manga List'
-                  ? '/settings/lists/manga'
-                  : '/settings/lists/anime'),
+              // onPressed: () {},
+              onPressed: () => context.router.pushNamed(title == 'Manga List'
+                  ? 'settings/app/lists/manga'
+                  : 'settings/app/lists/anime'),
               icon: const Icon(Icons.settings),
             ),
           ),
@@ -217,7 +218,7 @@ class _OptionsState extends State<Options> {
             ),
             onPressed: () {
               widget.onSave(options);
-              context.pop();
+              // context.pop();
             },
             child: const Icon(Icons.save),
           ),
@@ -310,7 +311,7 @@ class _OptionsState extends State<Options> {
                 child: ElevatedButton(
                   onPressed: () {
                     widget.onDelete(options.id);
-                    context.pop();
+                    // context.pop();
                   },
                   // style: ButtonStyle(co),
                   child: const Text(

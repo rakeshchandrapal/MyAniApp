@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
@@ -313,6 +314,13 @@ const documentNodeQueryReviews = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'reviews'),
             alias: null,
             arguments: [
@@ -562,6 +570,10 @@ const documentNodeQueryReviews = DocumentNode(definitions: [
 ]);
 Query$Reviews _parserFn$Query$Reviews(Map<String, dynamic> data) =>
     Query$Reviews.fromJson(data);
+typedef OnQueryComplete$Query$Reviews = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Reviews?,
+);
 
 class Options$Query$Reviews extends graphql.QueryOptions<Query$Reviews> {
   Options$Query$Reviews({
@@ -571,20 +583,41 @@ class Options$Query$Reviews extends graphql.QueryOptions<Query$Reviews> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Reviews? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Reviews? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Reviews(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryReviews,
           parserFn: _parserFn$Query$Reviews,
         );
+
+  final OnQueryComplete$Query$Reviews? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Reviews
@@ -596,6 +629,7 @@ class WatchOptions$Query$Reviews
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Reviews? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -607,7 +641,7 @@ class WatchOptions$Query$Reviews
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryReviews,
           pollInterval: pollInterval,
@@ -685,14 +719,17 @@ class Query$Reviews$Widget extends graphql_flutter.Query<Query$Reviews> {
 
 class Query$Reviews$Media {
   Query$Reviews$Media({
+    this.id,
     this.reviews,
     this.$__typename = 'Media',
   });
 
   factory Query$Reviews$Media.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$reviews = json['reviews'];
     final l$$__typename = json['__typename'];
     return Query$Reviews$Media(
+      id: (l$id as int?),
       reviews: l$reviews == null
           ? null
           : Query$Reviews$Media$reviews.fromJson(
@@ -701,12 +738,16 @@ class Query$Reviews$Media {
     );
   }
 
+  final int? id;
+
   final Query$Reviews$Media$reviews? reviews;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$reviews = reviews;
     _resultData['reviews'] = l$reviews?.toJson();
     final l$$__typename = $__typename;
@@ -716,9 +757,11 @@ class Query$Reviews$Media {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$reviews = reviews;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$reviews,
       l$$__typename,
     ]);
@@ -730,6 +773,11 @@ class Query$Reviews$Media {
       return true;
     }
     if (!(other is Query$Reviews$Media) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$reviews = reviews;
@@ -764,6 +812,7 @@ abstract class CopyWith$Query$Reviews$Media<TRes> {
       _CopyWithStubImpl$Query$Reviews$Media;
 
   TRes call({
+    int? id,
     Query$Reviews$Media$reviews? reviews,
     String? $__typename,
   });
@@ -784,10 +833,12 @@ class _CopyWithImpl$Query$Reviews$Media<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? reviews = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Reviews$Media(
+        id: id == _undefined ? _instance.id : (id as int?),
         reviews: reviews == _undefined
             ? _instance.reviews
             : (reviews as Query$Reviews$Media$reviews?),
@@ -811,6 +862,7 @@ class _CopyWithStubImpl$Query$Reviews$Media<TRes>
   TRes _res;
 
   call({
+    int? id,
     Query$Reviews$Media$reviews? reviews,
     String? $__typename,
   }) =>

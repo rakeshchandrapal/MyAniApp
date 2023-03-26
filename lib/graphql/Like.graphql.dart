@@ -573,7 +573,7 @@ const documentNodeMutationToggleLike = DocumentNode(definitions: [
 Mutation$ToggleLike _parserFn$Mutation$ToggleLike(Map<String, dynamic> data) =>
     Mutation$ToggleLike.fromJson(data);
 typedef OnMutationCompleted$Mutation$ToggleLike = FutureOr<void> Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$ToggleLike?,
 );
 
@@ -586,6 +586,7 @@ class Options$Mutation$ToggleLike
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$ToggleLike? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$ToggleLike? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleLike>? update,
@@ -597,7 +598,7 @@ class Options$Mutation$ToggleLike
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -631,6 +632,7 @@ class WatchOptions$Mutation$ToggleLike
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$ToggleLike? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -642,7 +644,7 @@ class WatchOptions$Mutation$ToggleLike
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationToggleLike,
           pollInterval: pollInterval,
@@ -678,9 +680,10 @@ Mutation$ToggleLike$HookResult useMutation$ToggleLike(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$ToggleLike());
   return Mutation$ToggleLike$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -699,6 +702,7 @@ class WidgetOptions$Mutation$ToggleLike
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$ToggleLike? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$ToggleLike? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleLike>? update,
@@ -709,7 +713,7 @@ class WidgetOptions$Mutation$ToggleLike
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -738,6 +742,7 @@ typedef RunMutation$Mutation$ToggleLike
     = graphql.MultiSourceResult<Mutation$ToggleLike> Function({
   Variables$Mutation$ToggleLike? variables,
   Object? optimisticResult,
+  Mutation$ToggleLike? typedOptimisticResult,
 });
 typedef Builder$Mutation$ToggleLike = widgets.Widget Function(
   RunMutation$Mutation$ToggleLike,
@@ -761,10 +766,12 @@ class Mutation$ToggleLike$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),

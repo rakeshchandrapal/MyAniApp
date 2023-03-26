@@ -1,10 +1,12 @@
 import 'package:MyAniApp/pages/settings/app/lists/anime.dart';
 import 'package:MyAniApp/providers/settings.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FallbackListSetting extends StatelessWidget {
-  const FallbackListSetting({super.key});
+@RoutePage()
+class FallbackListSettingPage extends StatelessWidget {
+  const FallbackListSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class FallbackListSetting extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Fallback List'),
+        leading: const AutoLeadingButton(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

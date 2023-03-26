@@ -1,7 +1,7 @@
 import 'package:MyAniApp/widgets/markdown.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 
 class Editor extends HookWidget {
   final Function(String markdown)? onSave;
@@ -19,7 +19,7 @@ class Editor extends HookWidget {
             IconButton(
               onPressed: () {
                 onSave!(controller.text);
-                context.pop();
+                context.popRoute();
               },
               icon: const Icon(Icons.save),
             ),

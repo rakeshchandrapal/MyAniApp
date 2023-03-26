@@ -1,8 +1,10 @@
+import 'package:MyAniApp/main.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/providers/user.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:MyAniApp/routes.gr.dart';
+import 'package:MyAniApp/widgets/image.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -18,26 +20,29 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceVariant,
+          GestureDetector(
+            onTap: () => context.router.push(
+              ProfileRoute(username: user.user!.name),
             ),
-            accountName: user.user != null ? Text(user.user!.name) : null,
-            accountEmail: null,
-            currentAccountPictureSize: const Size.square(90),
-            currentAccountPicture: user.user != null
-                ? CachedNetworkImage(
-                    height: 90,
-                    imageUrl: user.user!.avatar!.large!,
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator.adaptive(),
-                  )
-                : null,
+            child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              accountName: user.user != null ? Text(user.user!.name) : null,
+              accountEmail: null,
+              currentAccountPictureSize: const Size.square(90),
+              currentAccountPicture: user.user != null
+                  ? CImage(
+                      // height: 90,
+                      imageUrl: user.user!.avatar!.large!,
+                    )
+                  : null,
+            ),
           ),
           ListTile(
             title: const Text('Settings'),
             trailing: const Icon(Icons.settings),
-            onTap: () => context.push('/settings'),
+            onTap: () => context.router.pushNamed('settings'),
           ),
           ListTile(
             textColor: Colors.red,
@@ -52,13 +57,13 @@ class AppDrawer extends StatelessWidget {
                     'Logging out will not delete your anilist settings.'),
                 actions: [
                   TextButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () => context.router.pop(),
                     child: const Text('Go back'),
                   ),
                   TextButton(
                     onPressed: () async {
                       await settings.clearAll();
-                      context.go('/login');
+                      context.router.popAndPush(const LoginRoute());
                     },
                     child: const Text(
                       'Logout',
@@ -75,7 +80,7 @@ class AppDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Version 0.1.0',
+                  'Version ${packageInfo.version}',
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),

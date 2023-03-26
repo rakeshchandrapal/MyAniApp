@@ -1,23 +1,25 @@
 import 'package:MyAniApp/graphql/thread.graphql.dart';
 import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:MyAniApp/widgets/markdown_editor.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class Thread extends HookWidget {
-  final String id;
-  const Thread({super.key, required this.id});
+@RoutePage()
+class ThreadPage extends HookWidget {
+  final int id;
+  const ThreadPage({super.key, @PathParam('id') required this.id});
 
   @override
   Widget build(BuildContext context) {
     var hook = useQuery$Thread(
       Options$Query$Thread(
         variables: Variables$Query$Thread(
-          id: int.tryParse(id),
+          id: id,
         ),
       ),
     );

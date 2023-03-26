@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 import 'package:html/dom.dart' as h;
 import 'package:html/dom_parsing.dart';
 import 'package:html/parser.dart';
@@ -89,7 +89,8 @@ class Markdown extends StatelessWidget {
       var char = routesRegex.firstMatch(href);
 
       if (char != null) {
-        return context.push('/${char.group(1)}');
+        return;
+        // return context.pushNamed('/${char.group(1)}');
       }
     }
 

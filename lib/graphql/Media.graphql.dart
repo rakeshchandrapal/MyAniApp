@@ -1,3 +1,4 @@
+import 'Releasing.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
@@ -3169,6 +3170,10 @@ const documentNodeQueryFetchMediaById = DocumentNode(definitions: [
 Query$FetchMediaById _parserFn$Query$FetchMediaById(
         Map<String, dynamic> data) =>
     Query$FetchMediaById.fromJson(data);
+typedef OnQueryComplete$Query$FetchMediaById = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$FetchMediaById?,
+);
 
 class Options$Query$FetchMediaById
     extends graphql.QueryOptions<Query$FetchMediaById> {
@@ -3179,20 +3184,41 @@ class Options$Query$FetchMediaById
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$FetchMediaById? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$FetchMediaById? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$FetchMediaById(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryFetchMediaById,
           parserFn: _parserFn$Query$FetchMediaById,
         );
+
+  final OnQueryComplete$Query$FetchMediaById? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$FetchMediaById
@@ -3204,6 +3230,7 @@ class WatchOptions$Query$FetchMediaById
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$FetchMediaById? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -3215,7 +3242,7 @@ class WatchOptions$Query$FetchMediaById
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryFetchMediaById,
           pollInterval: pollInterval,
@@ -6690,6 +6717,10 @@ const documentNodeQueryGenreCollection = DocumentNode(definitions: [
 Query$GenreCollection _parserFn$Query$GenreCollection(
         Map<String, dynamic> data) =>
     Query$GenreCollection.fromJson(data);
+typedef OnQueryComplete$Query$GenreCollection = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GenreCollection?,
+);
 
 class Options$Query$GenreCollection
     extends graphql.QueryOptions<Query$GenreCollection> {
@@ -6699,19 +6730,40 @@ class Options$Query$GenreCollection
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$GenreCollection? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$GenreCollection? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$GenreCollection(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryGenreCollection,
           parserFn: _parserFn$Query$GenreCollection,
         );
+
+  final OnQueryComplete$Query$GenreCollection? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$GenreCollection
@@ -6722,6 +6774,7 @@ class WatchOptions$Query$GenreCollection
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$GenreCollection? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -6732,7 +6785,7 @@ class WatchOptions$Query$GenreCollection
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryGenreCollection,
           pollInterval: pollInterval,
@@ -7802,6 +7855,10 @@ const documentNodeQueryFetchMedia = DocumentNode(definitions: [
 ]);
 Query$FetchMedia _parserFn$Query$FetchMedia(Map<String, dynamic> data) =>
     Query$FetchMedia.fromJson(data);
+typedef OnQueryComplete$Query$FetchMedia = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$FetchMedia?,
+);
 
 class Options$Query$FetchMedia extends graphql.QueryOptions<Query$FetchMedia> {
   Options$Query$FetchMedia({
@@ -7811,20 +7868,41 @@ class Options$Query$FetchMedia extends graphql.QueryOptions<Query$FetchMedia> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$FetchMedia? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$FetchMedia? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$FetchMedia(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryFetchMedia,
           parserFn: _parserFn$Query$FetchMedia,
         );
+
+  final OnQueryComplete$Query$FetchMedia? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$FetchMedia
@@ -7836,6 +7914,7 @@ class WatchOptions$Query$FetchMedia
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$FetchMedia? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -7847,7 +7926,7 @@ class WatchOptions$Query$FetchMedia
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryFetchMedia,
           pollInterval: pollInterval,
@@ -8781,6 +8860,10 @@ const documentNodeQueryFetchMediaList = DocumentNode(definitions: [
 Query$FetchMediaList _parserFn$Query$FetchMediaList(
         Map<String, dynamic> data) =>
     Query$FetchMediaList.fromJson(data);
+typedef OnQueryComplete$Query$FetchMediaList = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$FetchMediaList?,
+);
 
 class Options$Query$FetchMediaList
     extends graphql.QueryOptions<Query$FetchMediaList> {
@@ -8791,20 +8874,41 @@ class Options$Query$FetchMediaList
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$FetchMediaList? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$FetchMediaList? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$FetchMediaList(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryFetchMediaList,
           parserFn: _parserFn$Query$FetchMediaList,
         );
+
+  final OnQueryComplete$Query$FetchMediaList? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$FetchMediaList
@@ -8816,6 +8920,7 @@ class WatchOptions$Query$FetchMediaList
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$FetchMediaList? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -8827,7 +8932,7 @@ class WatchOptions$Query$FetchMediaList
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryFetchMediaList,
           pollInterval: pollInterval,
@@ -10176,7 +10281,7 @@ Mutation$SaveMediaListEntry _parserFn$Mutation$SaveMediaListEntry(
     Mutation$SaveMediaListEntry.fromJson(data);
 typedef OnMutationCompleted$Mutation$SaveMediaListEntry = FutureOr<void>
     Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$SaveMediaListEntry?,
 );
 
@@ -10189,6 +10294,7 @@ class Options$Mutation$SaveMediaListEntry
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveMediaListEntry? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$SaveMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveMediaListEntry>? update,
@@ -10200,7 +10306,7 @@ class Options$Mutation$SaveMediaListEntry
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -10236,6 +10342,7 @@ class WatchOptions$Mutation$SaveMediaListEntry
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveMediaListEntry? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -10247,7 +10354,7 @@ class WatchOptions$Mutation$SaveMediaListEntry
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationSaveMediaListEntry,
           pollInterval: pollInterval,
@@ -10285,9 +10392,10 @@ Mutation$SaveMediaListEntry$HookResult useMutation$SaveMediaListEntry(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$SaveMediaListEntry());
   return Mutation$SaveMediaListEntry$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -10307,6 +10415,7 @@ class WidgetOptions$Mutation$SaveMediaListEntry
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveMediaListEntry? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$SaveMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveMediaListEntry>? update,
@@ -10317,7 +10426,7 @@ class WidgetOptions$Mutation$SaveMediaListEntry
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -10348,6 +10457,7 @@ typedef RunMutation$Mutation$SaveMediaListEntry
     = graphql.MultiSourceResult<Mutation$SaveMediaListEntry> Function({
   Variables$Mutation$SaveMediaListEntry? variables,
   Object? optimisticResult,
+  Mutation$SaveMediaListEntry? typedOptimisticResult,
 });
 typedef Builder$Mutation$SaveMediaListEntry = widgets.Widget Function(
   RunMutation$Mutation$SaveMediaListEntry,
@@ -10371,10 +10481,12 @@ class Mutation$SaveMediaListEntry$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),
@@ -10689,7 +10801,7 @@ Mutation$DeleteMediaListEntry _parserFn$Mutation$DeleteMediaListEntry(
     Mutation$DeleteMediaListEntry.fromJson(data);
 typedef OnMutationCompleted$Mutation$DeleteMediaListEntry = FutureOr<void>
     Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$DeleteMediaListEntry?,
 );
 
@@ -10702,6 +10814,7 @@ class Options$Mutation$DeleteMediaListEntry
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteMediaListEntry? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteMediaListEntry>? update,
@@ -10713,7 +10826,7 @@ class Options$Mutation$DeleteMediaListEntry
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -10750,6 +10863,7 @@ class WatchOptions$Mutation$DeleteMediaListEntry
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteMediaListEntry? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -10761,7 +10875,7 @@ class WatchOptions$Mutation$DeleteMediaListEntry
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationDeleteMediaListEntry,
           pollInterval: pollInterval,
@@ -10801,9 +10915,10 @@ Mutation$DeleteMediaListEntry$HookResult useMutation$DeleteMediaListEntry(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$DeleteMediaListEntry());
   return Mutation$DeleteMediaListEntry$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -10823,6 +10938,7 @@ class WidgetOptions$Mutation$DeleteMediaListEntry
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteMediaListEntry? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteMediaListEntry? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteMediaListEntry>? update,
@@ -10833,7 +10949,7 @@ class WidgetOptions$Mutation$DeleteMediaListEntry
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -10865,6 +10981,7 @@ typedef RunMutation$Mutation$DeleteMediaListEntry
     = graphql.MultiSourceResult<Mutation$DeleteMediaListEntry> Function({
   Variables$Mutation$DeleteMediaListEntry? variables,
   Object? optimisticResult,
+  Mutation$DeleteMediaListEntry? typedOptimisticResult,
 });
 typedef Builder$Mutation$DeleteMediaListEntry = widgets.Widget Function(
   RunMutation$Mutation$DeleteMediaListEntry,
@@ -10888,10 +11005,12 @@ class Mutation$DeleteMediaListEntry$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),
@@ -11446,7 +11565,7 @@ Mutation$ToggleFavourite _parserFn$Mutation$ToggleFavourite(
         Map<String, dynamic> data) =>
     Mutation$ToggleFavourite.fromJson(data);
 typedef OnMutationCompleted$Mutation$ToggleFavourite = FutureOr<void> Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$ToggleFavourite?,
 );
 
@@ -11459,6 +11578,7 @@ class Options$Mutation$ToggleFavourite
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$ToggleFavourite? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$ToggleFavourite? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleFavourite>? update,
@@ -11470,7 +11590,7 @@ class Options$Mutation$ToggleFavourite
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -11506,6 +11626,7 @@ class WatchOptions$Mutation$ToggleFavourite
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$ToggleFavourite? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -11517,7 +11638,7 @@ class WatchOptions$Mutation$ToggleFavourite
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationToggleFavourite,
           pollInterval: pollInterval,
@@ -11554,9 +11675,10 @@ Mutation$ToggleFavourite$HookResult useMutation$ToggleFavourite(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$ToggleFavourite());
   return Mutation$ToggleFavourite$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -11576,6 +11698,7 @@ class WidgetOptions$Mutation$ToggleFavourite
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$ToggleFavourite? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$ToggleFavourite? onCompleted,
     graphql.OnMutationUpdate<Mutation$ToggleFavourite>? update,
@@ -11586,7 +11709,7 @@ class WidgetOptions$Mutation$ToggleFavourite
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -11617,6 +11740,7 @@ typedef RunMutation$Mutation$ToggleFavourite
     = graphql.MultiSourceResult<Mutation$ToggleFavourite> Function({
   Variables$Mutation$ToggleFavourite? variables,
   Object? optimisticResult,
+  Mutation$ToggleFavourite? typedOptimisticResult,
 });
 typedef Builder$Mutation$ToggleFavourite = widgets.Widget Function(
   RunMutation$Mutation$ToggleFavourite,
@@ -11640,10 +11764,12 @@ class Mutation$ToggleFavourite$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),
@@ -12832,115 +12958,8 @@ const documentNodeQueryHome = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'BasicMedia'),
+                name: NameNode(value: 'ReleasingMedia'),
                 directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: 'nextAiringEpisode'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'airingAt'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'timeUntilAiring'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'episode'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: 'airingSchedule'),
-                alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'notYetAired'),
-                    value: BooleanValueNode(value: false),
-                  )
-                ],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'edges'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: SelectionSetNode(selections: [
-                      FieldNode(
-                        name: NameNode(value: 'node'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                            name: NameNode(value: 'airingAt'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: 'timeUntilAiring'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: 'episode'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                          FieldNode(
-                            name: NameNode(value: '__typename'),
-                            alias: null,
-                            arguments: [],
-                            directives: [],
-                            selectionSet: null,
-                          ),
-                        ]),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ]),
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -13068,11 +13087,16 @@ const documentNodeQueryHome = DocumentNode(definitions: [
       ),
     ]),
   ),
+  fragmentDefinitionReleasingMedia,
   fragmentDefinitionBasicMedia,
   fragmentDefinitionMediaListEntry,
 ]);
 Query$Home _parserFn$Query$Home(Map<String, dynamic> data) =>
     Query$Home.fromJson(data);
+typedef OnQueryComplete$Query$Home = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Home?,
+);
 
 class Options$Query$Home extends graphql.QueryOptions<Query$Home> {
   Options$Query$Home({
@@ -13082,20 +13106,41 @@ class Options$Query$Home extends graphql.QueryOptions<Query$Home> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Home? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Home? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables.toJson(),
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Home(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryHome,
           parserFn: _parserFn$Query$Home,
         );
+
+  final OnQueryComplete$Query$Home? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Home extends graphql.WatchQueryOptions<Query$Home> {
@@ -13106,6 +13151,7 @@ class WatchOptions$Query$Home extends graphql.WatchQueryOptions<Query$Home> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Home? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -13117,7 +13163,7 @@ class WatchOptions$Query$Home extends graphql.WatchQueryOptions<Query$Home> {
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryHome,
           pollInterval: pollInterval,
@@ -13212,8 +13258,7 @@ class Query$Home$releasing {
       media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Home$releasing$media.fromJson(
-                  (e as Map<String, dynamic>)))
+              : Fragment$ReleasingMedia.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -13221,7 +13266,7 @@ class Query$Home$releasing {
 
   final Query$Home$releasing$pageInfo? pageInfo;
 
-  final List<Query$Home$releasing$media?>? media;
+  final List<Fragment$ReleasingMedia?>? media;
 
   final String $__typename;
 
@@ -13305,15 +13350,14 @@ abstract class CopyWith$Query$Home$releasing<TRes> {
 
   TRes call({
     Query$Home$releasing$pageInfo? pageInfo,
-    List<Query$Home$releasing$media?>? media,
+    List<Fragment$ReleasingMedia?>? media,
     String? $__typename,
   });
   CopyWith$Query$Home$releasing$pageInfo<TRes> get pageInfo;
   TRes media(
-      Iterable<Query$Home$releasing$media?>? Function(
+      Iterable<Fragment$ReleasingMedia?>? Function(
               Iterable<
-                  CopyWith$Query$Home$releasing$media<
-                      Query$Home$releasing$media>?>?)
+                  CopyWith$Fragment$ReleasingMedia<Fragment$ReleasingMedia>?>?)
           _fn);
 }
 
@@ -13341,7 +13385,7 @@ class _CopyWithImpl$Query$Home$releasing<TRes>
             : (pageInfo as Query$Home$releasing$pageInfo?),
         media: media == _undefined
             ? _instance.media
-            : (media as List<Query$Home$releasing$media?>?),
+            : (media as List<Fragment$ReleasingMedia?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -13355,15 +13399,15 @@ class _CopyWithImpl$Query$Home$releasing<TRes>
   }
 
   TRes media(
-          Iterable<Query$Home$releasing$media?>? Function(
+          Iterable<Fragment$ReleasingMedia?>? Function(
                   Iterable<
-                      CopyWith$Query$Home$releasing$media<
-                          Query$Home$releasing$media>?>?)
+                      CopyWith$Fragment$ReleasingMedia<
+                          Fragment$ReleasingMedia>?>?)
               _fn) =>
       call(
           media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Query$Home$releasing$media(
+              : CopyWith$Fragment$ReleasingMedia(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -13377,7 +13421,7 @@ class _CopyWithStubImpl$Query$Home$releasing<TRes>
 
   call({
     Query$Home$releasing$pageInfo? pageInfo,
-    List<Query$Home$releasing$media?>? media,
+    List<Fragment$ReleasingMedia?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -13506,1321 +13550,6 @@ class _CopyWithStubImpl$Query$Home$releasing$pageInfo<TRes>
 
   call({
     bool? hasNextPage,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$Home$releasing$media implements Fragment$BasicMedia {
-  Query$Home$releasing$media({
-    this.id,
-    this.type,
-    this.isAdult,
-    this.genres,
-    this.episodes,
-    this.format,
-    this.chapters,
-    this.title,
-    this.coverImage,
-    this.description,
-    this.$__typename = 'Media',
-    this.nextAiringEpisode,
-    this.airingSchedule,
-  });
-
-  factory Query$Home$releasing$media.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$type = json['type'];
-    final l$isAdult = json['isAdult'];
-    final l$genres = json['genres'];
-    final l$episodes = json['episodes'];
-    final l$format = json['format'];
-    final l$chapters = json['chapters'];
-    final l$title = json['title'];
-    final l$coverImage = json['coverImage'];
-    final l$description = json['description'];
-    final l$$__typename = json['__typename'];
-    final l$nextAiringEpisode = json['nextAiringEpisode'];
-    final l$airingSchedule = json['airingSchedule'];
-    return Query$Home$releasing$media(
-      id: (l$id as int?),
-      type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
-      isAdult: (l$isAdult as bool?),
-      genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
-      episodes: (l$episodes as int?),
-      format: l$format == null
-          ? null
-          : fromJson$Enum$MediaFormat((l$format as String)),
-      chapters: (l$chapters as int?),
-      title: l$title == null
-          ? null
-          : Query$Home$releasing$media$title.fromJson(
-              (l$title as Map<String, dynamic>)),
-      coverImage: l$coverImage == null
-          ? null
-          : Query$Home$releasing$media$coverImage.fromJson(
-              (l$coverImage as Map<String, dynamic>)),
-      description: (l$description as String?),
-      $__typename: (l$$__typename as String),
-      nextAiringEpisode: l$nextAiringEpisode == null
-          ? null
-          : Query$Home$releasing$media$nextAiringEpisode.fromJson(
-              (l$nextAiringEpisode as Map<String, dynamic>)),
-      airingSchedule: l$airingSchedule == null
-          ? null
-          : Query$Home$releasing$media$airingSchedule.fromJson(
-              (l$airingSchedule as Map<String, dynamic>)),
-    );
-  }
-
-  final int? id;
-
-  final Enum$MediaType? type;
-
-  final bool? isAdult;
-
-  final List<String?>? genres;
-
-  final int? episodes;
-
-  final Enum$MediaFormat? format;
-
-  final int? chapters;
-
-  final Query$Home$releasing$media$title? title;
-
-  final Query$Home$releasing$media$coverImage? coverImage;
-
-  final String? description;
-
-  final String $__typename;
-
-  final Query$Home$releasing$media$nextAiringEpisode? nextAiringEpisode;
-
-  final Query$Home$releasing$media$airingSchedule? airingSchedule;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
-    final l$isAdult = isAdult;
-    _resultData['isAdult'] = l$isAdult;
-    final l$genres = genres;
-    _resultData['genres'] = l$genres?.map((e) => e).toList();
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
-    final l$format = format;
-    _resultData['format'] =
-        l$format == null ? null : toJson$Enum$MediaFormat(l$format);
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
-    final l$title = title;
-    _resultData['title'] = l$title?.toJson();
-    final l$coverImage = coverImage;
-    _resultData['coverImage'] = l$coverImage?.toJson();
-    final l$description = description;
-    _resultData['description'] = l$description;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    final l$nextAiringEpisode = nextAiringEpisode;
-    _resultData['nextAiringEpisode'] = l$nextAiringEpisode?.toJson();
-    final l$airingSchedule = airingSchedule;
-    _resultData['airingSchedule'] = l$airingSchedule?.toJson();
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$type = type;
-    final l$isAdult = isAdult;
-    final l$genres = genres;
-    final l$episodes = episodes;
-    final l$format = format;
-    final l$chapters = chapters;
-    final l$title = title;
-    final l$coverImage = coverImage;
-    final l$description = description;
-    final l$$__typename = $__typename;
-    final l$nextAiringEpisode = nextAiringEpisode;
-    final l$airingSchedule = airingSchedule;
-    return Object.hashAll([
-      l$id,
-      l$type,
-      l$isAdult,
-      l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
-      l$episodes,
-      l$format,
-      l$chapters,
-      l$title,
-      l$coverImage,
-      l$description,
-      l$$__typename,
-      l$nextAiringEpisode,
-      l$airingSchedule,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (l$type != lOther$type) {
-      return false;
-    }
-    final l$isAdult = isAdult;
-    final lOther$isAdult = other.isAdult;
-    if (l$isAdult != lOther$isAdult) {
-      return false;
-    }
-    final l$genres = genres;
-    final lOther$genres = other.genres;
-    if (l$genres != null && lOther$genres != null) {
-      if (l$genres.length != lOther$genres.length) {
-        return false;
-      }
-      for (int i = 0; i < l$genres.length; i++) {
-        final l$genres$entry = l$genres[i];
-        final lOther$genres$entry = lOther$genres[i];
-        if (l$genres$entry != lOther$genres$entry) {
-          return false;
-        }
-      }
-    } else if (l$genres != lOther$genres) {
-      return false;
-    }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
-    final l$format = format;
-    final lOther$format = other.format;
-    if (l$format != lOther$format) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
-      return false;
-    }
-    final l$title = title;
-    final lOther$title = other.title;
-    if (l$title != lOther$title) {
-      return false;
-    }
-    final l$coverImage = coverImage;
-    final lOther$coverImage = other.coverImage;
-    if (l$coverImage != lOther$coverImage) {
-      return false;
-    }
-    final l$description = description;
-    final lOther$description = other.description;
-    if (l$description != lOther$description) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    final l$nextAiringEpisode = nextAiringEpisode;
-    final lOther$nextAiringEpisode = other.nextAiringEpisode;
-    if (l$nextAiringEpisode != lOther$nextAiringEpisode) {
-      return false;
-    }
-    final l$airingSchedule = airingSchedule;
-    final lOther$airingSchedule = other.airingSchedule;
-    if (l$airingSchedule != lOther$airingSchedule) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media
-    on Query$Home$releasing$media {
-  CopyWith$Query$Home$releasing$media<Query$Home$releasing$media>
-      get copyWith => CopyWith$Query$Home$releasing$media(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media<TRes> {
-  factory CopyWith$Query$Home$releasing$media(
-    Query$Home$releasing$media instance,
-    TRes Function(Query$Home$releasing$media) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media;
-
-  factory CopyWith$Query$Home$releasing$media.stub(TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media;
-
-  TRes call({
-    int? id,
-    Enum$MediaType? type,
-    bool? isAdult,
-    List<String?>? genres,
-    int? episodes,
-    Enum$MediaFormat? format,
-    int? chapters,
-    Query$Home$releasing$media$title? title,
-    Query$Home$releasing$media$coverImage? coverImage,
-    String? description,
-    String? $__typename,
-    Query$Home$releasing$media$nextAiringEpisode? nextAiringEpisode,
-    Query$Home$releasing$media$airingSchedule? airingSchedule,
-  });
-  CopyWith$Query$Home$releasing$media$title<TRes> get title;
-  CopyWith$Query$Home$releasing$media$coverImage<TRes> get coverImage;
-  CopyWith$Query$Home$releasing$media$nextAiringEpisode<TRes>
-      get nextAiringEpisode;
-  CopyWith$Query$Home$releasing$media$airingSchedule<TRes> get airingSchedule;
-}
-
-class _CopyWithImpl$Query$Home$releasing$media<TRes>
-    implements CopyWith$Query$Home$releasing$media<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media _instance;
-
-  final TRes Function(Query$Home$releasing$media) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? type = _undefined,
-    Object? isAdult = _undefined,
-    Object? genres = _undefined,
-    Object? episodes = _undefined,
-    Object? format = _undefined,
-    Object? chapters = _undefined,
-    Object? title = _undefined,
-    Object? coverImage = _undefined,
-    Object? description = _undefined,
-    Object? $__typename = _undefined,
-    Object? nextAiringEpisode = _undefined,
-    Object? airingSchedule = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media(
-        id: id == _undefined ? _instance.id : (id as int?),
-        type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
-        isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
-        genres: genres == _undefined
-            ? _instance.genres
-            : (genres as List<String?>?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
-        format: format == _undefined
-            ? _instance.format
-            : (format as Enum$MediaFormat?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
-        title: title == _undefined
-            ? _instance.title
-            : (title as Query$Home$releasing$media$title?),
-        coverImage: coverImage == _undefined
-            ? _instance.coverImage
-            : (coverImage as Query$Home$releasing$media$coverImage?),
-        description: description == _undefined
-            ? _instance.description
-            : (description as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        nextAiringEpisode: nextAiringEpisode == _undefined
-            ? _instance.nextAiringEpisode
-            : (nextAiringEpisode
-                as Query$Home$releasing$media$nextAiringEpisode?),
-        airingSchedule: airingSchedule == _undefined
-            ? _instance.airingSchedule
-            : (airingSchedule as Query$Home$releasing$media$airingSchedule?),
-      ));
-  CopyWith$Query$Home$releasing$media$title<TRes> get title {
-    final local$title = _instance.title;
-    return local$title == null
-        ? CopyWith$Query$Home$releasing$media$title.stub(_then(_instance))
-        : CopyWith$Query$Home$releasing$media$title(
-            local$title, (e) => call(title: e));
-  }
-
-  CopyWith$Query$Home$releasing$media$coverImage<TRes> get coverImage {
-    final local$coverImage = _instance.coverImage;
-    return local$coverImage == null
-        ? CopyWith$Query$Home$releasing$media$coverImage.stub(_then(_instance))
-        : CopyWith$Query$Home$releasing$media$coverImage(
-            local$coverImage, (e) => call(coverImage: e));
-  }
-
-  CopyWith$Query$Home$releasing$media$nextAiringEpisode<TRes>
-      get nextAiringEpisode {
-    final local$nextAiringEpisode = _instance.nextAiringEpisode;
-    return local$nextAiringEpisode == null
-        ? CopyWith$Query$Home$releasing$media$nextAiringEpisode.stub(
-            _then(_instance))
-        : CopyWith$Query$Home$releasing$media$nextAiringEpisode(
-            local$nextAiringEpisode, (e) => call(nextAiringEpisode: e));
-  }
-
-  CopyWith$Query$Home$releasing$media$airingSchedule<TRes> get airingSchedule {
-    final local$airingSchedule = _instance.airingSchedule;
-    return local$airingSchedule == null
-        ? CopyWith$Query$Home$releasing$media$airingSchedule.stub(
-            _then(_instance))
-        : CopyWith$Query$Home$releasing$media$airingSchedule(
-            local$airingSchedule, (e) => call(airingSchedule: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media<TRes>
-    implements CopyWith$Query$Home$releasing$media<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media(this._res);
-
-  TRes _res;
-
-  call({
-    int? id,
-    Enum$MediaType? type,
-    bool? isAdult,
-    List<String?>? genres,
-    int? episodes,
-    Enum$MediaFormat? format,
-    int? chapters,
-    Query$Home$releasing$media$title? title,
-    Query$Home$releasing$media$coverImage? coverImage,
-    String? description,
-    String? $__typename,
-    Query$Home$releasing$media$nextAiringEpisode? nextAiringEpisode,
-    Query$Home$releasing$media$airingSchedule? airingSchedule,
-  }) =>
-      _res;
-  CopyWith$Query$Home$releasing$media$title<TRes> get title =>
-      CopyWith$Query$Home$releasing$media$title.stub(_res);
-  CopyWith$Query$Home$releasing$media$coverImage<TRes> get coverImage =>
-      CopyWith$Query$Home$releasing$media$coverImage.stub(_res);
-  CopyWith$Query$Home$releasing$media$nextAiringEpisode<TRes>
-      get nextAiringEpisode =>
-          CopyWith$Query$Home$releasing$media$nextAiringEpisode.stub(_res);
-  CopyWith$Query$Home$releasing$media$airingSchedule<TRes> get airingSchedule =>
-      CopyWith$Query$Home$releasing$media$airingSchedule.stub(_res);
-}
-
-class Query$Home$releasing$media$title implements Fragment$BasicMedia$title {
-  Query$Home$releasing$media$title({
-    this.userPreferred,
-    this.$__typename = 'MediaTitle',
-  });
-
-  factory Query$Home$releasing$media$title.fromJson(Map<String, dynamic> json) {
-    final l$userPreferred = json['userPreferred'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$releasing$media$title(
-      userPreferred: (l$userPreferred as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? userPreferred;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$userPreferred = userPreferred;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$userPreferred,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media$title) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$userPreferred = userPreferred;
-    final lOther$userPreferred = other.userPreferred;
-    if (l$userPreferred != lOther$userPreferred) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media$title
-    on Query$Home$releasing$media$title {
-  CopyWith$Query$Home$releasing$media$title<Query$Home$releasing$media$title>
-      get copyWith => CopyWith$Query$Home$releasing$media$title(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media$title<TRes> {
-  factory CopyWith$Query$Home$releasing$media$title(
-    Query$Home$releasing$media$title instance,
-    TRes Function(Query$Home$releasing$media$title) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media$title;
-
-  factory CopyWith$Query$Home$releasing$media$title.stub(TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media$title;
-
-  TRes call({
-    String? userPreferred,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Home$releasing$media$title<TRes>
-    implements CopyWith$Query$Home$releasing$media$title<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media$title(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media$title _instance;
-
-  final TRes Function(Query$Home$releasing$media$title) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? userPreferred = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media$title(
-        userPreferred: userPreferred == _undefined
-            ? _instance.userPreferred
-            : (userPreferred as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media$title<TRes>
-    implements CopyWith$Query$Home$releasing$media$title<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media$title(this._res);
-
-  TRes _res;
-
-  call({
-    String? userPreferred,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$Home$releasing$media$coverImage
-    implements Fragment$BasicMedia$coverImage {
-  Query$Home$releasing$media$coverImage({
-    this.large,
-    this.$__typename = 'MediaCoverImage',
-  });
-
-  factory Query$Home$releasing$media$coverImage.fromJson(
-      Map<String, dynamic> json) {
-    final l$large = json['large'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$releasing$media$coverImage(
-      large: (l$large as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? large;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$large = large;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$large,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media$coverImage) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media$coverImage
-    on Query$Home$releasing$media$coverImage {
-  CopyWith$Query$Home$releasing$media$coverImage<
-          Query$Home$releasing$media$coverImage>
-      get copyWith => CopyWith$Query$Home$releasing$media$coverImage(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media$coverImage<TRes> {
-  factory CopyWith$Query$Home$releasing$media$coverImage(
-    Query$Home$releasing$media$coverImage instance,
-    TRes Function(Query$Home$releasing$media$coverImage) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media$coverImage;
-
-  factory CopyWith$Query$Home$releasing$media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media$coverImage;
-
-  TRes call({
-    String? large,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Home$releasing$media$coverImage<TRes>
-    implements CopyWith$Query$Home$releasing$media$coverImage<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media$coverImage(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media$coverImage _instance;
-
-  final TRes Function(Query$Home$releasing$media$coverImage) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? large = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media$coverImage(
-        large: large == _undefined ? _instance.large : (large as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media$coverImage<TRes>
-    implements CopyWith$Query$Home$releasing$media$coverImage<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media$coverImage(this._res);
-
-  TRes _res;
-
-  call({
-    String? large,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$Home$releasing$media$nextAiringEpisode {
-  Query$Home$releasing$media$nextAiringEpisode({
-    required this.airingAt,
-    required this.timeUntilAiring,
-    required this.episode,
-    this.$__typename = 'AiringSchedule',
-  });
-
-  factory Query$Home$releasing$media$nextAiringEpisode.fromJson(
-      Map<String, dynamic> json) {
-    final l$airingAt = json['airingAt'];
-    final l$timeUntilAiring = json['timeUntilAiring'];
-    final l$episode = json['episode'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$releasing$media$nextAiringEpisode(
-      airingAt: (l$airingAt as int),
-      timeUntilAiring: (l$timeUntilAiring as int),
-      episode: (l$episode as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int airingAt;
-
-  final int timeUntilAiring;
-
-  final int episode;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$airingAt = airingAt;
-    _resultData['airingAt'] = l$airingAt;
-    final l$timeUntilAiring = timeUntilAiring;
-    _resultData['timeUntilAiring'] = l$timeUntilAiring;
-    final l$episode = episode;
-    _resultData['episode'] = l$episode;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$airingAt = airingAt;
-    final l$timeUntilAiring = timeUntilAiring;
-    final l$episode = episode;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$airingAt,
-      l$timeUntilAiring,
-      l$episode,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media$nextAiringEpisode) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$airingAt = airingAt;
-    final lOther$airingAt = other.airingAt;
-    if (l$airingAt != lOther$airingAt) {
-      return false;
-    }
-    final l$timeUntilAiring = timeUntilAiring;
-    final lOther$timeUntilAiring = other.timeUntilAiring;
-    if (l$timeUntilAiring != lOther$timeUntilAiring) {
-      return false;
-    }
-    final l$episode = episode;
-    final lOther$episode = other.episode;
-    if (l$episode != lOther$episode) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media$nextAiringEpisode
-    on Query$Home$releasing$media$nextAiringEpisode {
-  CopyWith$Query$Home$releasing$media$nextAiringEpisode<
-          Query$Home$releasing$media$nextAiringEpisode>
-      get copyWith => CopyWith$Query$Home$releasing$media$nextAiringEpisode(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media$nextAiringEpisode<TRes> {
-  factory CopyWith$Query$Home$releasing$media$nextAiringEpisode(
-    Query$Home$releasing$media$nextAiringEpisode instance,
-    TRes Function(Query$Home$releasing$media$nextAiringEpisode) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media$nextAiringEpisode;
-
-  factory CopyWith$Query$Home$releasing$media$nextAiringEpisode.stub(TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media$nextAiringEpisode;
-
-  TRes call({
-    int? airingAt,
-    int? timeUntilAiring,
-    int? episode,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Home$releasing$media$nextAiringEpisode<TRes>
-    implements CopyWith$Query$Home$releasing$media$nextAiringEpisode<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media$nextAiringEpisode(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media$nextAiringEpisode _instance;
-
-  final TRes Function(Query$Home$releasing$media$nextAiringEpisode) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? airingAt = _undefined,
-    Object? timeUntilAiring = _undefined,
-    Object? episode = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media$nextAiringEpisode(
-        airingAt: airingAt == _undefined || airingAt == null
-            ? _instance.airingAt
-            : (airingAt as int),
-        timeUntilAiring:
-            timeUntilAiring == _undefined || timeUntilAiring == null
-                ? _instance.timeUntilAiring
-                : (timeUntilAiring as int),
-        episode: episode == _undefined || episode == null
-            ? _instance.episode
-            : (episode as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media$nextAiringEpisode<TRes>
-    implements CopyWith$Query$Home$releasing$media$nextAiringEpisode<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media$nextAiringEpisode(this._res);
-
-  TRes _res;
-
-  call({
-    int? airingAt,
-    int? timeUntilAiring,
-    int? episode,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$Home$releasing$media$airingSchedule {
-  Query$Home$releasing$media$airingSchedule({
-    this.edges,
-    this.$__typename = 'AiringScheduleConnection',
-  });
-
-  factory Query$Home$releasing$media$airingSchedule.fromJson(
-      Map<String, dynamic> json) {
-    final l$edges = json['edges'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$releasing$media$airingSchedule(
-      edges: (l$edges as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : Query$Home$releasing$media$airingSchedule$edges.fromJson(
-                  (e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Query$Home$releasing$media$airingSchedule$edges?>? edges;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$edges = edges;
-    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$edges = edges;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$edges == null ? null : Object.hashAll(l$edges.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media$airingSchedule) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$edges = edges;
-    final lOther$edges = other.edges;
-    if (l$edges != null && lOther$edges != null) {
-      if (l$edges.length != lOther$edges.length) {
-        return false;
-      }
-      for (int i = 0; i < l$edges.length; i++) {
-        final l$edges$entry = l$edges[i];
-        final lOther$edges$entry = lOther$edges[i];
-        if (l$edges$entry != lOther$edges$entry) {
-          return false;
-        }
-      }
-    } else if (l$edges != lOther$edges) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media$airingSchedule
-    on Query$Home$releasing$media$airingSchedule {
-  CopyWith$Query$Home$releasing$media$airingSchedule<
-          Query$Home$releasing$media$airingSchedule>
-      get copyWith => CopyWith$Query$Home$releasing$media$airingSchedule(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media$airingSchedule<TRes> {
-  factory CopyWith$Query$Home$releasing$media$airingSchedule(
-    Query$Home$releasing$media$airingSchedule instance,
-    TRes Function(Query$Home$releasing$media$airingSchedule) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media$airingSchedule;
-
-  factory CopyWith$Query$Home$releasing$media$airingSchedule.stub(TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule;
-
-  TRes call({
-    List<Query$Home$releasing$media$airingSchedule$edges?>? edges,
-    String? $__typename,
-  });
-  TRes edges(
-      Iterable<Query$Home$releasing$media$airingSchedule$edges?>? Function(
-              Iterable<
-                  CopyWith$Query$Home$releasing$media$airingSchedule$edges<
-                      Query$Home$releasing$media$airingSchedule$edges>?>?)
-          _fn);
-}
-
-class _CopyWithImpl$Query$Home$releasing$media$airingSchedule<TRes>
-    implements CopyWith$Query$Home$releasing$media$airingSchedule<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media$airingSchedule(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media$airingSchedule _instance;
-
-  final TRes Function(Query$Home$releasing$media$airingSchedule) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? edges = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media$airingSchedule(
-        edges: edges == _undefined
-            ? _instance.edges
-            : (edges
-                as List<Query$Home$releasing$media$airingSchedule$edges?>?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes edges(
-          Iterable<Query$Home$releasing$media$airingSchedule$edges?>? Function(
-                  Iterable<
-                      CopyWith$Query$Home$releasing$media$airingSchedule$edges<
-                          Query$Home$releasing$media$airingSchedule$edges>?>?)
-              _fn) =>
-      call(
-          edges: _fn(_instance.edges?.map((e) => e == null
-              ? null
-              : CopyWith$Query$Home$releasing$media$airingSchedule$edges(
-                  e,
-                  (i) => i,
-                )))?.toList());
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule<TRes>
-    implements CopyWith$Query$Home$releasing$media$airingSchedule<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule(this._res);
-
-  TRes _res;
-
-  call({
-    List<Query$Home$releasing$media$airingSchedule$edges?>? edges,
-    String? $__typename,
-  }) =>
-      _res;
-  edges(_fn) => _res;
-}
-
-class Query$Home$releasing$media$airingSchedule$edges {
-  Query$Home$releasing$media$airingSchedule$edges({
-    this.node,
-    this.$__typename = 'AiringScheduleEdge',
-  });
-
-  factory Query$Home$releasing$media$airingSchedule$edges.fromJson(
-      Map<String, dynamic> json) {
-    final l$node = json['node'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$releasing$media$airingSchedule$edges(
-      node: l$node == null
-          ? null
-          : Query$Home$releasing$media$airingSchedule$edges$node.fromJson(
-              (l$node as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Query$Home$releasing$media$airingSchedule$edges$node? node;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$node = node;
-    _resultData['node'] = l$node?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$node = node;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$node,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media$airingSchedule$edges) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$node = node;
-    final lOther$node = other.node;
-    if (l$node != lOther$node) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media$airingSchedule$edges
-    on Query$Home$releasing$media$airingSchedule$edges {
-  CopyWith$Query$Home$releasing$media$airingSchedule$edges<
-          Query$Home$releasing$media$airingSchedule$edges>
-      get copyWith => CopyWith$Query$Home$releasing$media$airingSchedule$edges(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media$airingSchedule$edges<TRes> {
-  factory CopyWith$Query$Home$releasing$media$airingSchedule$edges(
-    Query$Home$releasing$media$airingSchedule$edges instance,
-    TRes Function(Query$Home$releasing$media$airingSchedule$edges) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media$airingSchedule$edges;
-
-  factory CopyWith$Query$Home$releasing$media$airingSchedule$edges.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule$edges;
-
-  TRes call({
-    Query$Home$releasing$media$airingSchedule$edges$node? node,
-    String? $__typename,
-  });
-  CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<TRes> get node;
-}
-
-class _CopyWithImpl$Query$Home$releasing$media$airingSchedule$edges<TRes>
-    implements CopyWith$Query$Home$releasing$media$airingSchedule$edges<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media$airingSchedule$edges(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media$airingSchedule$edges _instance;
-
-  final TRes Function(Query$Home$releasing$media$airingSchedule$edges) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? node = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media$airingSchedule$edges(
-        node: node == _undefined
-            ? _instance.node
-            : (node as Query$Home$releasing$media$airingSchedule$edges$node?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<TRes> get node {
-    final local$node = _instance.node;
-    return local$node == null
-        ? CopyWith$Query$Home$releasing$media$airingSchedule$edges$node.stub(
-            _then(_instance))
-        : CopyWith$Query$Home$releasing$media$airingSchedule$edges$node(
-            local$node, (e) => call(node: e));
-  }
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule$edges<TRes>
-    implements CopyWith$Query$Home$releasing$media$airingSchedule$edges<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule$edges(this._res);
-
-  TRes _res;
-
-  call({
-    Query$Home$releasing$media$airingSchedule$edges$node? node,
-    String? $__typename,
-  }) =>
-      _res;
-  CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<TRes>
-      get node =>
-          CopyWith$Query$Home$releasing$media$airingSchedule$edges$node.stub(
-              _res);
-}
-
-class Query$Home$releasing$media$airingSchedule$edges$node {
-  Query$Home$releasing$media$airingSchedule$edges$node({
-    required this.airingAt,
-    required this.timeUntilAiring,
-    required this.episode,
-    this.$__typename = 'AiringSchedule',
-  });
-
-  factory Query$Home$releasing$media$airingSchedule$edges$node.fromJson(
-      Map<String, dynamic> json) {
-    final l$airingAt = json['airingAt'];
-    final l$timeUntilAiring = json['timeUntilAiring'];
-    final l$episode = json['episode'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$releasing$media$airingSchedule$edges$node(
-      airingAt: (l$airingAt as int),
-      timeUntilAiring: (l$timeUntilAiring as int),
-      episode: (l$episode as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int airingAt;
-
-  final int timeUntilAiring;
-
-  final int episode;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$airingAt = airingAt;
-    _resultData['airingAt'] = l$airingAt;
-    final l$timeUntilAiring = timeUntilAiring;
-    _resultData['timeUntilAiring'] = l$timeUntilAiring;
-    final l$episode = episode;
-    _resultData['episode'] = l$episode;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$airingAt = airingAt;
-    final l$timeUntilAiring = timeUntilAiring;
-    final l$episode = episode;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$airingAt,
-      l$timeUntilAiring,
-      l$episode,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$releasing$media$airingSchedule$edges$node) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$airingAt = airingAt;
-    final lOther$airingAt = other.airingAt;
-    if (l$airingAt != lOther$airingAt) {
-      return false;
-    }
-    final l$timeUntilAiring = timeUntilAiring;
-    final lOther$timeUntilAiring = other.timeUntilAiring;
-    if (l$timeUntilAiring != lOther$timeUntilAiring) {
-      return false;
-    }
-    final l$episode = episode;
-    final lOther$episode = other.episode;
-    if (l$episode != lOther$episode) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$releasing$media$airingSchedule$edges$node
-    on Query$Home$releasing$media$airingSchedule$edges$node {
-  CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<
-          Query$Home$releasing$media$airingSchedule$edges$node>
-      get copyWith =>
-          CopyWith$Query$Home$releasing$media$airingSchedule$edges$node(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<
-    TRes> {
-  factory CopyWith$Query$Home$releasing$media$airingSchedule$edges$node(
-    Query$Home$releasing$media$airingSchedule$edges$node instance,
-    TRes Function(Query$Home$releasing$media$airingSchedule$edges$node) then,
-  ) = _CopyWithImpl$Query$Home$releasing$media$airingSchedule$edges$node;
-
-  factory CopyWith$Query$Home$releasing$media$airingSchedule$edges$node.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule$edges$node;
-
-  TRes call({
-    int? airingAt,
-    int? timeUntilAiring,
-    int? episode,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Home$releasing$media$airingSchedule$edges$node<TRes>
-    implements
-        CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<TRes> {
-  _CopyWithImpl$Query$Home$releasing$media$airingSchedule$edges$node(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$releasing$media$airingSchedule$edges$node _instance;
-
-  final TRes Function(Query$Home$releasing$media$airingSchedule$edges$node)
-      _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? airingAt = _undefined,
-    Object? timeUntilAiring = _undefined,
-    Object? episode = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$releasing$media$airingSchedule$edges$node(
-        airingAt: airingAt == _undefined || airingAt == null
-            ? _instance.airingAt
-            : (airingAt as int),
-        timeUntilAiring:
-            timeUntilAiring == _undefined || timeUntilAiring == null
-                ? _instance.timeUntilAiring
-                : (timeUntilAiring as int),
-        episode: episode == _undefined || episode == null
-            ? _instance.episode
-            : (episode as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule$edges$node<
-        TRes>
-    implements
-        CopyWith$Query$Home$releasing$media$airingSchedule$edges$node<TRes> {
-  _CopyWithStubImpl$Query$Home$releasing$media$airingSchedule$edges$node(
-      this._res);
-
-  TRes _res;
-
-  call({
-    int? airingAt,
-    int? timeUntilAiring,
-    int? episode,
     String? $__typename,
   }) =>
       _res;
@@ -16060,6 +14789,10 @@ const documentNodeQueryDiscovery = DocumentNode(definitions: [
 ]);
 Query$Discovery _parserFn$Query$Discovery(Map<String, dynamic> data) =>
     Query$Discovery.fromJson(data);
+typedef OnQueryComplete$Query$Discovery = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Discovery?,
+);
 
 class Options$Query$Discovery extends graphql.QueryOptions<Query$Discovery> {
   Options$Query$Discovery({
@@ -16069,20 +14802,41 @@ class Options$Query$Discovery extends graphql.QueryOptions<Query$Discovery> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Discovery? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Discovery? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Discovery(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryDiscovery,
           parserFn: _parserFn$Query$Discovery,
         );
+
+  final OnQueryComplete$Query$Discovery? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Discovery
@@ -16094,6 +14848,7 @@ class WatchOptions$Query$Discovery
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Discovery? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -16105,7 +14860,7 @@ class WatchOptions$Query$Discovery
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryDiscovery,
           pollInterval: pollInterval,

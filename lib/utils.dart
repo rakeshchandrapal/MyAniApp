@@ -1,6 +1,9 @@
-import 'package:MyAniApp/graphql/Media.graphql.dart';
+import 'package:MyAniApp/graphql/Releasing.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
+import 'package:MyAniApp/widgets/image.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 
 ({Enum$MediaSeason nextSeason, int nextYear, Enum$MediaSeason season, int year}) formatDate() {
   var date = DateTime.now();
@@ -10,6 +13,19 @@ import 'package:intl/intl.dart';
   var nextSeason = getSeason(month + 3);
 
   return (season: season, nextSeason: nextSeason, nextYear: nextYear, year: date.year);
+}
+
+void showImage(BuildContext context, String url) {
+  Navigator.of(context).push(
+    PageRouteBuilder(
+      opaque: false,
+      pageBuilder: (_, __, ___) => ImageViewer(
+        child: CImage(
+          imageUrl: url,
+        ),
+      ),
+    ),
+  );
 }
 
 Enum$MediaSeason getSeason(int month) {
@@ -25,12 +41,12 @@ Enum$MediaSeason getSeason(int month) {
 }
 
 String removeHTML(String data) {
-  // var r = 
+  // var r =
   return data.replaceAll('<br>', '');
 }
 
 String formattedDate(int? year, int? month, int? day) {
-  return '${month != null ? DateFormat.MMMM().format(DateTime(0, month))  : ''}${day != null ?' $day': ''}${(day != null || month != null) && year != null ? ', ' : ''}${year??''}';
+  return '${month != null ? DateFormat.MMMM().format(DateTime(0, month)) : ''}${day != null ? ' $day' : ''}${(day != null || month != null) && year != null ? ', ' : ''}${year ?? ''}';
 }
 
 bool isTodayFromTimestamp(int? timestamp) {
@@ -56,7 +72,7 @@ String fromTimestamp(int timestamp) {
     time += '${date.inDays.abs()}d ';
   }
   if (date.inHours.abs() > 0) {
-    time += '${date.inHours.abs()%24}h';
+    time += '${date.inHours.abs() % 24}h';
   } else if (date.inMinutes.abs() > 0) {
     time += '${date.inMinutes.abs()}m';
   } else {
@@ -68,19 +84,58 @@ String fromTimestamp(int timestamp) {
   return time;
 }
 
-List<Query$Home$releasing$media?> sortReleases(
-    Query$Home$releasing releases) {
-  return releases.media!
-    .where((element) => element?.nextAiringEpisode != null && element?.airingSchedule != null)
-    .toList()
-    ..sort((checka, checkb) {
-      var nextEpTimea = checka!.nextAiringEpisode!.airingAt;
-      var lastEpTimea = checka.airingSchedule?.edges?.toList().firstWhere((a) => a?.node?.episode == checka.nextAiringEpisode!.episode - 1, orElse: () => null)?.node?.airingAt;
-      var nextEpTimeb = checkb!.nextAiringEpisode!.airingAt;
-      var lastEpTimeb = checkb.airingSchedule?.edges?.toList().firstWhere((a) => a?.node?.episode == checkb.nextAiringEpisode!.episode - 1, orElse: () => null)?.node?.airingAt;
-     
-      var datea = isTodayFromTimestamp(lastEpTimea) ? dateFromTimestamp(lastEpTimea!) : dateFromTimestamp(nextEpTimea);
-      var dateb = isTodayFromTimestamp(lastEpTimeb) ? dateFromTimestamp(lastEpTimeb!) : dateFromTimestamp(nextEpTimeb);
+List<Fragment$ReleasingMedia> sortReleases(List<Fragment$ReleasingMedia> releases, {bool includeUnreleased = false,}) {
+  return releases
+      .where(
+        (element) {
+          if (includeUnreleased) return true;
+            return
+            element.nextAiringEpisode != null &&
+            element.airingSchedule != null &&
+            dateFromTimestamp((element.nextAiringEpisode?.airingAt ??
+                        element.airingSchedule!.edges!.first!.node!.airingAt))
+                    .difference(DateTime.now())
+                    .inDays <=
+                8;
+        }
+      )
+      .toList()
+    ..sort((a, b) {
+      // var airingAta = a.nextAiringEpisode
+      if ((a.nextAiringEpisode??a.airingSchedule) == null) {
+        return 1;
+      } else if ((b.nextAiringEpisode??b.airingSchedule) == null) {
+        return -1;
+      }
+      var nextEpTimea = a.nextAiringEpisode?.airingAt;
+      var lastEpTimea = a.nextAiringEpisode?.episode != null ? a.airingSchedule?.edges
+          ?.toList()
+          .firstWhere(
+              (aa) => aa?.node?.episode == a.nextAiringEpisode!.episode - 1,
+              orElse: () => null)
+          ?.node
+          ?.airingAt: null;
+      var nextEpTimeb = b.nextAiringEpisode?.airingAt;
+      var lastEpTimeb = b.nextAiringEpisode?.episode != null ? b.airingSchedule?.edges
+          ?.toList()
+          .firstWhere(
+              (a) => a?.node?.episode == b.nextAiringEpisode!.episode - 1,
+              orElse: () => null)
+          ?.node
+          ?.airingAt:null;
+
+      if (nextEpTimea == null) {
+        return 1;
+      } else if (nextEpTimeb == null) {
+        return -1;
+      }
+
+      var datea = isTodayFromTimestamp(lastEpTimea)
+          ? dateFromTimestamp(lastEpTimea!)
+          : dateFromTimestamp(nextEpTimea);
+      var dateb = isTodayFromTimestamp(lastEpTimeb)
+          ? dateFromTimestamp(lastEpTimeb!)
+          : dateFromTimestamp(nextEpTimeb);
 
       return datea.compareTo(dateb);
     });

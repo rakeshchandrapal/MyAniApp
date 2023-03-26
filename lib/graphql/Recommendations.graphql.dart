@@ -542,6 +542,10 @@ const documentNodeQueryRecommendations = DocumentNode(definitions: [
 Query$Recommendations _parserFn$Query$Recommendations(
         Map<String, dynamic> data) =>
     Query$Recommendations.fromJson(data);
+typedef OnQueryComplete$Query$Recommendations = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Recommendations?,
+);
 
 class Options$Query$Recommendations
     extends graphql.QueryOptions<Query$Recommendations> {
@@ -552,20 +556,41 @@ class Options$Query$Recommendations
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Recommendations? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Recommendations? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Recommendations(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryRecommendations,
           parserFn: _parserFn$Query$Recommendations,
         );
+
+  final OnQueryComplete$Query$Recommendations? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Recommendations
@@ -577,6 +602,7 @@ class WatchOptions$Query$Recommendations
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Recommendations? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -588,7 +614,7 @@ class WatchOptions$Query$Recommendations
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryRecommendations,
           pollInterval: pollInterval,
@@ -1631,7 +1657,7 @@ Mutation$SaveRecommendation _parserFn$Mutation$SaveRecommendation(
     Mutation$SaveRecommendation.fromJson(data);
 typedef OnMutationCompleted$Mutation$SaveRecommendation = FutureOr<void>
     Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$SaveRecommendation?,
 );
 
@@ -1644,6 +1670,7 @@ class Options$Mutation$SaveRecommendation
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveRecommendation? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$SaveRecommendation? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveRecommendation>? update,
@@ -1655,7 +1682,7 @@ class Options$Mutation$SaveRecommendation
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -1691,6 +1718,7 @@ class WatchOptions$Mutation$SaveRecommendation
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveRecommendation? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -1702,7 +1730,7 @@ class WatchOptions$Mutation$SaveRecommendation
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationSaveRecommendation,
           pollInterval: pollInterval,
@@ -1740,9 +1768,10 @@ Mutation$SaveRecommendation$HookResult useMutation$SaveRecommendation(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$SaveRecommendation());
   return Mutation$SaveRecommendation$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -1762,6 +1791,7 @@ class WidgetOptions$Mutation$SaveRecommendation
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveRecommendation? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$SaveRecommendation? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveRecommendation>? update,
@@ -1772,7 +1802,7 @@ class WidgetOptions$Mutation$SaveRecommendation
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -1803,6 +1833,7 @@ typedef RunMutation$Mutation$SaveRecommendation
     = graphql.MultiSourceResult<Mutation$SaveRecommendation> Function({
   Variables$Mutation$SaveRecommendation? variables,
   Object? optimisticResult,
+  Mutation$SaveRecommendation? typedOptimisticResult,
 });
 typedef Builder$Mutation$SaveRecommendation = widgets.Widget Function(
   RunMutation$Mutation$SaveRecommendation,
@@ -1826,10 +1857,12 @@ class Mutation$SaveRecommendation$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),

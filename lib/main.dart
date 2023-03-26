@@ -9,6 +9,7 @@ import 'package:MyAniApp/routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:workmanager/workmanager.dart';
@@ -21,6 +22,8 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
         PointerDeviceKind.mouse,
       };
 }
+
+late PackageInfo packageInfo;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +38,8 @@ void main() async {
       // runs every 15 minutes
     );
   }
+
+  packageInfo = await PackageInfo.fromPlatform();
 
   runApp(const App());
 }
@@ -93,8 +98,12 @@ class _AppState extends State<App> {
           title: 'MyAniApp',
           debugShowCheckedModeBanner: false,
           scrollBehavior: MyCustomScrollBehavior(),
-          theme: Styles.themeData(value.theme),
-          routerConfig: routerConfig,
+          // theme: Styles.themeData(value.theme),
+          theme: Styles.light,
+          darkTheme: Styles.dark,
+          themeMode: value.theme,
+          // themeMode: ThemeMo,
+          routerConfig: appRouter.config(),
         ),
       ),
     );

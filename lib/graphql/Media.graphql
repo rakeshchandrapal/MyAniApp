@@ -248,21 +248,7 @@ query Home($page: Int = 1, $perPage: Int, $userId: Int!, $type: MediaType) {
       hasNextPage
     }
     media(onList: true, status_in: [RELEASING, NOT_YET_RELEASED]) {
-      ...BasicMedia
-      nextAiringEpisode {
-        airingAt
-        timeUntilAiring
-        episode
-      }
-      airingSchedule(notYetAired: false) {
-        edges {
-          node {
-            airingAt
-            timeUntilAiring
-            episode
-          }
-        }
-      }
+      ...ReleasingMedia
     }
   }
   list: MediaListCollection(userId: $userId, type: $type, status_in: [CURRENT, PLANNING], sort: [UPDATED_TIME_DESC]) {

@@ -1,28 +1,29 @@
 import 'package:MyAniApp/graphql/Character.graphql.dart';
 import 'package:MyAniApp/graphql/Media.graphql.dart';
-import 'package:MyAniApp/pages/media_view.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 var metaRegex = RegExp(r'(?:__|\*\*)(.*?)\n\n', dotAll: true);
 
-class Character extends HookWidget {
-  final String id;
+@RoutePage()
+class CharacterPage extends HookWidget {
+  final int id;
 
-  const Character({super.key, required this.id});
+  const CharacterPage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     var hook = useQuery$Character(
       Options$Query$Character(
         variables: Variables$Query$Character(
-          id: int.tryParse(id),
+          id: id,
         ),
       ),
     );
@@ -193,14 +194,7 @@ class Title extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 9 / 16,
             child: GestureDetector(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ImagePage(
-                    image: character.image!.large!,
-                    tag: 'character',
-                  ),
-                ),
-              ),
+              onTap: () => showImage(context, character.image!.large!),
               child: Hero(
                 tag: 'character',
                 child: CachedNetworkImage(

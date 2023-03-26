@@ -1,0 +1,39 @@
+query User($name: String) {
+  User(name: $name) {
+    ...BasicUser
+    bannerImage
+    about
+    statistics {
+      anime {
+        count
+        episodesWatched
+        minutesWatched
+        meanScore
+        standardDeviation
+      }
+      manga {
+        count
+        chaptersRead
+        volumesRead
+        meanScore
+        standardDeviation
+      }
+    }
+    favourites(page: 1) {
+      anime(page: 1) {
+        edges {
+          node {
+            ...BasicMedia
+          }
+        }
+      }
+      manga(page: 1) {
+        edges {
+          node {
+            ...BasicMedia
+          }
+        }
+      }
+    }
+  }
+}

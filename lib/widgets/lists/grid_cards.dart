@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class GridCards extends StatelessWidget {
   final List list;
@@ -67,7 +68,9 @@ class GridCards extends StatelessWidget {
                       alignment: Alignment.bottomRight,
                       children: [
                         GestureDetector(
-                          onTap: () => context.push('/media/${media.id}'),
+                          onTap: () => context.router.push(
+                            MediaRoute(id: media.id!),
+                          ),
                           onLongPress: () {
                             showModalBottomSheet(
                               context: context,

@@ -72,6 +72,7 @@ type Query {
   ): Media
   Page(page: Int, perPage: Int): Page
   Viewer: User
+  User(id: Int, name: String, isModerator: Boolean, search: String, sort: [UserSort]): User
   Character(id: Int, isBirthday: Boolean, search: String, id_not: Int, id_in: [Int], id_not_in: [Int], sort: [CharacterSort]): Character
   MediaListCollection(
     userId: Int

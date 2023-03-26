@@ -12,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:workmanager/workmanager.dart';
@@ -52,7 +51,7 @@ class NotificationApi {
     if (notif.payload == null || notif.payload?.isEmpty == true) return;
     Map<String, dynamic>? decodePayload = jsonDecode(notif.payload!);
     if (decodePayload?['path'] != null) {
-      rootNavigatorKey.currentContext?.push(decodePayload!['path'] as String);
+      appRouter.pushNamed(decodePayload!['path'] as String);
     }
   }
 

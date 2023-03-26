@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
@@ -603,6 +604,10 @@ const documentNodeQueryThreads = DocumentNode(definitions: [
 ]);
 Query$Threads _parserFn$Query$Threads(Map<String, dynamic> data) =>
     Query$Threads.fromJson(data);
+typedef OnQueryComplete$Query$Threads = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Threads?,
+);
 
 class Options$Query$Threads extends graphql.QueryOptions<Query$Threads> {
   Options$Query$Threads({
@@ -612,20 +617,41 @@ class Options$Query$Threads extends graphql.QueryOptions<Query$Threads> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Threads? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Threads? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Threads(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryThreads,
           parserFn: _parserFn$Query$Threads,
         );
+
+  final OnQueryComplete$Query$Threads? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Threads
@@ -637,6 +663,7 @@ class WatchOptions$Query$Threads
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Threads? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -648,7 +675,7 @@ class WatchOptions$Query$Threads
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryThreads,
           pollInterval: pollInterval,
@@ -2705,6 +2732,10 @@ const documentNodeQueryThread = DocumentNode(definitions: [
 ]);
 Query$Thread _parserFn$Query$Thread(Map<String, dynamic> data) =>
     Query$Thread.fromJson(data);
+typedef OnQueryComplete$Query$Thread = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Thread?,
+);
 
 class Options$Query$Thread extends graphql.QueryOptions<Query$Thread> {
   Options$Query$Thread({
@@ -2714,20 +2745,41 @@ class Options$Query$Thread extends graphql.QueryOptions<Query$Thread> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Thread? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Thread? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Thread(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryThread,
           parserFn: _parserFn$Query$Thread,
         );
+
+  final OnQueryComplete$Query$Thread? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Thread
@@ -2739,6 +2791,7 @@ class WatchOptions$Query$Thread
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Thread? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -2750,7 +2803,7 @@ class WatchOptions$Query$Thread
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryThread,
           pollInterval: pollInterval,
@@ -4790,6 +4843,10 @@ const documentNodeQueryThreadComments = DocumentNode(definitions: [
 Query$ThreadComments _parserFn$Query$ThreadComments(
         Map<String, dynamic> data) =>
     Query$ThreadComments.fromJson(data);
+typedef OnQueryComplete$Query$ThreadComments = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$ThreadComments?,
+);
 
 class Options$Query$ThreadComments
     extends graphql.QueryOptions<Query$ThreadComments> {
@@ -4800,20 +4857,41 @@ class Options$Query$ThreadComments
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$ThreadComments? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$ThreadComments? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$ThreadComments(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryThreadComments,
           parserFn: _parserFn$Query$ThreadComments,
         );
+
+  final OnQueryComplete$Query$ThreadComments? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$ThreadComments
@@ -4825,6 +4903,7 @@ class WatchOptions$Query$ThreadComments
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$ThreadComments? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -4836,7 +4915,7 @@ class WatchOptions$Query$ThreadComments
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryThreadComments,
           pollInterval: pollInterval,

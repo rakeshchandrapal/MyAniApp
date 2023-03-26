@@ -9,35 +9,36 @@ import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/main.dart';
 import 'package:MyAniApp/pages/lists/shared.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
-import 'package:MyAniApp/widgets/graphql_error.dart';
+import 'package:MyAniApp/widgets/graphql.dart';
 import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-class AnimePage extends HookWidget {
-  final String id;
-  const AnimePage({super.key, required this.id});
+@RoutePage()
+class MediaPage extends HookWidget {
+  final int id;
+  const MediaPage({super.key, @PathParam('id') required this.id});
 
   @override
   Widget build(BuildContext context) {
     var hook = useQuery$FetchMediaById(
       Options$Query$FetchMediaById(
         variables: Variables$Query$FetchMediaById(
-          id: int.tryParse(id),
+          id: id,
         ),
       ),
     );
@@ -379,25 +380,15 @@ class Title extends StatelessWidget {
                 },
                 blendMode: BlendMode.srcOver,
                 child: media.bannerImage != null
-                    ? Hero(
-                        tag: 'banner',
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ImagePage(
-                                image: media.bannerImage!,
-                                tag: 'banner',
-                              ),
-                            ),
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: media.bannerImage!,
-                            width: MediaQuery.of(context).size.width,
-                            height: 149,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator()),
-                          ),
+                    ? GestureDetector(
+                        onTap: () => showImage(context, media.bannerImage!),
+                        child: CachedNetworkImage(
+                          imageUrl: media.bannerImage!,
+                          width: MediaQuery.of(context).size.width,
+                          height: 149,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
                         ),
                       )
                     : Container(
@@ -442,36 +433,26 @@ class Title extends StatelessWidget {
             padding: const EdgeInsets.only(top: 78, left: 8),
             // top: 65,
             // left: 8,
-            child: Hero(
-              tag: 'cover',
-              child: SizedBox(
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ImagePage(
-                        image: media.coverImage!.extraLarge!,
-                        tag: 'cover',
-                      ),
-                    ),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: media.coverImage!.large!,
-                    height: 130,
-                    width: 90,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                  ),
+            child: SizedBox(
+              child: GestureDetector(
+                onTap: () => showImage(context, media.coverImage!.extraLarge!),
+                child: CachedNetworkImage(
+                  imageUrl: media.coverImage!.large!,
+                  height: 130,
+                  width: 90,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
                 ),
               ),
             ),
           ),
-          if (context.canPop())
+          if (context.router.canPop())
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: BackButton(
-                  onPressed: () => context.pop(),
+                  onPressed: () => context.router.pop(),
                   color: Colors.white,
                 ),
               ),
@@ -906,7 +887,9 @@ class Characters extends HookWidget {
                 ),
                 surfaceTintColor: Theme.of(context).colorScheme.surfaceVariant,
                 child: InkWell(
-                  onTap: () => context.push('/character/${character.node!.id}'),
+                  onTap: () => context.router.push(
+                    CharacterRoute(id: character.node!.id),
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1018,8 +1001,9 @@ class Characters extends HookWidget {
                           ),
                           // surfaceTintColor: Theme.of(context).colorScheme.surfaceVariant,
                           child: InkWell(
-                            onTap: () =>
-                                context.push('/staff/${actor.voiceActor!.id}'),
+                            onTap: () => context.router.push(
+                              StaffRoute(id: actor.voiceActor!.id),
+                            ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1396,7 +1380,7 @@ class Social extends HookWidget {
 
           return Card(
             child: InkWell(
-              onTap: () => context.push('/thread/${thread.id}'),
+              onTap: () => context.router.push(ThreadRoute(id: thread.id)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -1524,29 +1508,6 @@ class Review extends StatelessWidget {
               data: review.body!,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ImagePage extends StatelessWidget {
-  final String image;
-  final String tag;
-  const ImagePage({super.key, required this.image, required this.tag});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Image'),
-      ),
-      body: Center(
-        child: Hero(
-          tag: tag,
-          child: PhotoView(
-            imageProvider: CachedNetworkImageProvider(image),
-          ),
         ),
       ),
     );

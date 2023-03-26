@@ -1,10 +1,12 @@
 import 'package:MyAniApp/pages/settings/app/lists/anime.dart';
 import 'package:MyAniApp/providers/settings.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MangaListSetting extends StatelessWidget {
-  const MangaListSetting({super.key});
+@RoutePage()
+class MangaListSettingPage extends StatelessWidget {
+  const MangaListSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class MangaListSetting extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manga List'),
+        leading: const AutoLeadingButton(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,13 +1,15 @@
 import 'package:MyAniApp/graphql/Notifications.graphql.dart';
 import 'package:MyAniApp/notification.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/routes.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+@RoutePage()
 class NotificationsPage extends HookWidget {
   const NotificationsPage({super.key});
 
@@ -181,8 +183,9 @@ class NotifCard extends StatelessWidget {
                     text: TextSpan(
                       children: AnilistNotif.extractTextWidgets(
                         notif,
-                        onMediaTap: (media) =>
-                            context.push('/media/${media.id}'),
+                        onMediaTap: (media) => context.router.push(
+                          MediaRoute(id: media.id!),
+                        ),
                       ),
                     ),
                   ),

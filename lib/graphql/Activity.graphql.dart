@@ -727,6 +727,10 @@ const documentNodeQueryActivities = DocumentNode(definitions: [
 ]);
 Query$Activities _parserFn$Query$Activities(Map<String, dynamic> data) =>
     Query$Activities.fromJson(data);
+typedef OnQueryComplete$Query$Activities = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Activities?,
+);
 
 class Options$Query$Activities extends graphql.QueryOptions<Query$Activities> {
   Options$Query$Activities({
@@ -736,20 +740,41 @@ class Options$Query$Activities extends graphql.QueryOptions<Query$Activities> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Activities? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Activities? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Activities(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryActivities,
           parserFn: _parserFn$Query$Activities,
         );
+
+  final OnQueryComplete$Query$Activities? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Activities
@@ -761,6 +786,7 @@ class WatchOptions$Query$Activities
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Activities? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -772,7 +798,7 @@ class WatchOptions$Query$Activities
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryActivities,
           pollInterval: pollInterval,
@@ -2850,6 +2876,10 @@ const documentNodeQueryActivity = DocumentNode(definitions: [
 ]);
 Query$Activity _parserFn$Query$Activity(Map<String, dynamic> data) =>
     Query$Activity.fromJson(data);
+typedef OnQueryComplete$Query$Activity = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$Activity?,
+);
 
 class Options$Query$Activity extends graphql.QueryOptions<Query$Activity> {
   Options$Query$Activity({
@@ -2859,20 +2889,41 @@ class Options$Query$Activity extends graphql.QueryOptions<Query$Activity> {
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Activity? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-  }) : super(
+    OnQueryComplete$Query$Activity? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
           variables: variables?.toJson() ?? {},
           operationName: operationName,
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           pollInterval: pollInterval,
           context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$Activity(data),
+                  ),
+          onError: onError,
           document: documentNodeQueryActivity,
           parserFn: _parserFn$Query$Activity,
         );
+
+  final OnQueryComplete$Query$Activity? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
 }
 
 class WatchOptions$Query$Activity
@@ -2884,6 +2935,7 @@ class WatchOptions$Query$Activity
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Query$Activity? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -2895,7 +2947,7 @@ class WatchOptions$Query$Activity
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeQueryActivity,
           pollInterval: pollInterval,
@@ -4848,7 +4900,7 @@ Mutation$SaveActivityReply _parserFn$Mutation$SaveActivityReply(
     Mutation$SaveActivityReply.fromJson(data);
 typedef OnMutationCompleted$Mutation$SaveActivityReply = FutureOr<void>
     Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$SaveActivityReply?,
 );
 
@@ -4861,6 +4913,7 @@ class Options$Mutation$SaveActivityReply
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveActivityReply? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$SaveActivityReply? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveActivityReply>? update,
@@ -4872,7 +4925,7 @@ class Options$Mutation$SaveActivityReply
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -4908,6 +4961,7 @@ class WatchOptions$Mutation$SaveActivityReply
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveActivityReply? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -4919,7 +4973,7 @@ class WatchOptions$Mutation$SaveActivityReply
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationSaveActivityReply,
           pollInterval: pollInterval,
@@ -4957,9 +5011,10 @@ Mutation$SaveActivityReply$HookResult useMutation$SaveActivityReply(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$SaveActivityReply());
   return Mutation$SaveActivityReply$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -4979,6 +5034,7 @@ class WidgetOptions$Mutation$SaveActivityReply
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$SaveActivityReply? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$SaveActivityReply? onCompleted,
     graphql.OnMutationUpdate<Mutation$SaveActivityReply>? update,
@@ -4989,7 +5045,7 @@ class WidgetOptions$Mutation$SaveActivityReply
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -5020,6 +5076,7 @@ typedef RunMutation$Mutation$SaveActivityReply
     = graphql.MultiSourceResult<Mutation$SaveActivityReply> Function({
   Variables$Mutation$SaveActivityReply? variables,
   Object? optimisticResult,
+  Mutation$SaveActivityReply? typedOptimisticResult,
 });
 typedef Builder$Mutation$SaveActivityReply = widgets.Widget Function(
   RunMutation$Mutation$SaveActivityReply,
@@ -5043,10 +5100,12 @@ class Mutation$SaveActivityReply$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),
@@ -5484,7 +5543,7 @@ Mutation$DeleteActivityReply _parserFn$Mutation$DeleteActivityReply(
     Mutation$DeleteActivityReply.fromJson(data);
 typedef OnMutationCompleted$Mutation$DeleteActivityReply = FutureOr<void>
     Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$DeleteActivityReply?,
 );
 
@@ -5497,6 +5556,7 @@ class Options$Mutation$DeleteActivityReply
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteActivityReply? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteActivityReply? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteActivityReply>? update,
@@ -5508,7 +5568,7 @@ class Options$Mutation$DeleteActivityReply
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -5544,6 +5604,7 @@ class WatchOptions$Mutation$DeleteActivityReply
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteActivityReply? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -5555,7 +5616,7 @@ class WatchOptions$Mutation$DeleteActivityReply
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationDeleteActivityReply,
           pollInterval: pollInterval,
@@ -5595,9 +5656,10 @@ Mutation$DeleteActivityReply$HookResult useMutation$DeleteActivityReply(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$DeleteActivityReply());
   return Mutation$DeleteActivityReply$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -5617,6 +5679,7 @@ class WidgetOptions$Mutation$DeleteActivityReply
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteActivityReply? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteActivityReply? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteActivityReply>? update,
@@ -5627,7 +5690,7 @@ class WidgetOptions$Mutation$DeleteActivityReply
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -5658,6 +5721,7 @@ typedef RunMutation$Mutation$DeleteActivityReply
     = graphql.MultiSourceResult<Mutation$DeleteActivityReply> Function({
   Variables$Mutation$DeleteActivityReply? variables,
   Object? optimisticResult,
+  Mutation$DeleteActivityReply? typedOptimisticResult,
 });
 typedef Builder$Mutation$DeleteActivityReply = widgets.Widget Function(
   RunMutation$Mutation$DeleteActivityReply,
@@ -5681,10 +5745,12 @@ class Mutation$DeleteActivityReply$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),
@@ -6115,7 +6181,7 @@ Mutation$DeleteActivity _parserFn$Mutation$DeleteActivity(
         Map<String, dynamic> data) =>
     Mutation$DeleteActivity.fromJson(data);
 typedef OnMutationCompleted$Mutation$DeleteActivity = FutureOr<void> Function(
-  dynamic,
+  Map<String, dynamic>?,
   Mutation$DeleteActivity?,
 );
 
@@ -6128,6 +6194,7 @@ class Options$Mutation$DeleteActivity
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteActivity? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteActivity? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteActivity>? update,
@@ -6139,7 +6206,7 @@ class Options$Mutation$DeleteActivity
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -6175,6 +6242,7 @@ class WatchOptions$Mutation$DeleteActivity
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteActivity? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -6186,7 +6254,7 @@ class WatchOptions$Mutation$DeleteActivity
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           document: documentNodeMutationDeleteActivity,
           pollInterval: pollInterval,
@@ -6222,9 +6290,10 @@ Mutation$DeleteActivity$HookResult useMutation$DeleteActivity(
   final result = graphql_flutter
       .useMutation(options ?? WidgetOptions$Mutation$DeleteActivity());
   return Mutation$DeleteActivity$HookResult(
-    ({variables, optimisticResult}) => result.runMutation(
+    ({variables, optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
       variables?.toJson() ?? const {},
-      optimisticResult: optimisticResult,
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
     ),
     result.result,
   );
@@ -6244,6 +6313,7 @@ class WidgetOptions$Mutation$DeleteActivity
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
+    Mutation$DeleteActivity? typedOptimisticResult,
     graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteActivity? onCompleted,
     graphql.OnMutationUpdate<Mutation$DeleteActivity>? update,
@@ -6254,7 +6324,7 @@ class WidgetOptions$Mutation$DeleteActivity
           fetchPolicy: fetchPolicy,
           errorPolicy: errorPolicy,
           cacheRereadPolicy: cacheRereadPolicy,
-          optimisticResult: optimisticResult,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
           onCompleted: onCompleted == null
               ? null
@@ -6285,6 +6355,7 @@ typedef RunMutation$Mutation$DeleteActivity
     = graphql.MultiSourceResult<Mutation$DeleteActivity> Function({
   Variables$Mutation$DeleteActivity? variables,
   Object? optimisticResult,
+  Mutation$DeleteActivity? typedOptimisticResult,
 });
 typedef Builder$Mutation$DeleteActivity = widgets.Widget Function(
   RunMutation$Mutation$DeleteActivity,
@@ -6308,10 +6379,12 @@ class Mutation$DeleteActivity$Widget
             ({
               variables,
               optimisticResult,
+              typedOptimisticResult,
             }) =>
                 run(
               variables?.toJson() ?? const {},
-              optimisticResult: optimisticResult,
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
             ),
             result,
           ),
