@@ -40,6 +40,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
 
       - run: flutter pub get
       - run: flutter build apk --enable-experiment=records
