@@ -8,7 +8,7 @@ import 'package:MyAniApp/graphql/thread.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/main.dart';
 import 'package:MyAniApp/pages/lists/shared.dart';
-import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/pages/profile/profile.dart';
 import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql.dart';
@@ -23,7 +23,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -114,42 +113,47 @@ class _ViewState extends State<View> {
     return DefaultTabController(
       length: _tabs.length,
       child: NestedScrollView(
-        floatHeaderSlivers: true,
+        // floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
             surfaceTintColor: Colors.transparent,
             leading: const SizedBox(),
             leadingWidth: 0,
-            toolbarHeight: 210,
+            expandedHeight: 220,
             flexibleSpace: FlexibleSpaceBar(
               background: Title(
                 media: widget.media,
               ),
             ),
-            pinned: true,
-            snap: true,
-            floating: true,
-            bottom: TabBar(
-              isScrollable: true,
-              dividerColor: Colors.transparent,
-              // controller: _controller,
-              tabs: [
-                const Tab(text: 'Overview'),
-                if (widget.media.relations?.edges?.isNotEmpty == true)
-                  const Tab(text: 'Relations'),
-                if (widget.media.characters?.edges?.isNotEmpty == true)
-                  const Tab(text: 'Characters'),
-                if (widget.media.reviews?.edges?.isNotEmpty == true)
-                  const Tab(
-                    text: 'Reviews',
-                  ),
-                if (widget.media.type == Enum$MediaType.ANIME &&
-                    widget.media.streamingEpisodes?.isNotEmpty == true)
-                  const Tab(text: 'Episodes'),
-                const Tab(text: 'Social')
-              ],
-            ),
+            // pinned: true,
           ),
+          SliverPersistentHeader(
+            delegate: MySliverPersistentHeaderDelegate(
+              TabBar(
+                isScrollable: true,
+                dividerColor: Colors.transparent,
+                // controller: _controller,
+                tabs: [
+                  const Tab(text: 'Overview'),
+                  if (widget.media.relations?.edges?.isNotEmpty == true)
+                    const Tab(text: 'Relations'),
+                  if (widget.media.characters?.edges?.isNotEmpty == true)
+                    const Tab(text: 'Characters'),
+                  if (widget.media.reviews?.edges?.isNotEmpty == true)
+                    const Tab(
+                      text: 'Reviews',
+                    ),
+                  if (widget.media.type == Enum$MediaType.ANIME &&
+                      widget.media.streamingEpisodes?.isNotEmpty == true)
+                    const Tab(text: 'Episodes'),
+                  const Tab(text: 'Social')
+                ],
+              ),
+            ),
+            pinned: true,
+          ),
+          // snap: true,
+          // floating: true,
         ],
         body: Scaffold(
           floatingActionButton: AnimatedSlide(
@@ -206,7 +210,6 @@ class _FloatingButtonsState extends State<FloatingButtons> {
 
   @override
   Widget build(BuildContext context) {
-    var user = context.watch<User>();
     var mutation = useMutation$ToggleFavourite(
       WidgetOptions$Mutation$ToggleFavourite(
         onError: (error) {
@@ -224,7 +227,6 @@ class _FloatingButtonsState extends State<FloatingButtons> {
           } catch (err) {}
         },
         onCompleted: (_, __) {
-          user.update();
           try {
             if (Platform.isAndroid || Platform.isIOS) {
               Fluttertoast.showToast(
@@ -488,12 +490,6 @@ class Overview extends StatelessWidget {
             ),
             Container(
               constraints: const BoxConstraints(maxHeight: 150),
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                color: Color.fromRGBO(92, 114, 138, 0.1),
-              ),
               child: Markdown(
                 data: media.description!,
                 hasHtml: true,
@@ -641,9 +637,10 @@ class Overview extends StatelessWidget {
       child: Container(
         // width: ,
         // height: 200,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: Color.fromRGBO(92, 114, 138, 0.1),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          color:
+              Theme.of(context).colorScheme.secondaryContainer.withAlpha(100),
         ),
         padding: const EdgeInsets.all(8.0),
         // child: Text(data),

@@ -4,16 +4,15 @@ import 'package:MyAniApp/providers/user.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class AnilistSettingsPage extends StatelessWidget {
+class AnilistSettingsPage extends ConsumerWidget {
   const AnilistSettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var user = context.watch<User>();
-    print(user.user?.options?.toJson());
+  Widget build(BuildContext context, ref) {
+    var user = ref.watch(userProvider);
 
     return SizedBox(
       height: MediaQuery.of(context).size.height - 60,
@@ -52,21 +51,23 @@ class AnilistSettingsPage extends StatelessWidget {
               //   ),
               // ),
               SwitchListTile.adaptive(
-                value: user.user?.options?.airingNotifications ?? false,
-                onChanged: (value) => user.updateSettings(
-                  Variables$Mutation$UpdateUser(
-                    airingNotifications: value,
-                  ),
-                ),
+                value: user.value?.options?.airingNotifications ?? false,
+                onChanged: (value) =>
+                    ref.read(userProvider.notifier).updateSettings(
+                          Variables$Mutation$UpdateUser(
+                            airingNotifications: value,
+                          ),
+                        ),
                 title: const Text('Airing Notification'),
               ),
               SwitchListTile.adaptive(
-                value: user.user?.options?.displayAdultContent ?? false,
-                onChanged: (value) => user.updateSettings(
-                  Variables$Mutation$UpdateUser(
-                    displayAdultContent: value,
-                  ),
-                ),
+                value: user.value?.options?.displayAdultContent ?? false,
+                onChanged: (value) =>
+                    ref.read(userProvider.notifier).updateSettings(
+                          Variables$Mutation$UpdateUser(
+                            displayAdultContent: value,
+                          ),
+                        ),
                 title: const Text('18+ content'),
               ),
               // Padding(
@@ -103,7 +104,7 @@ class AnilistSettingsPage extends StatelessWidget {
                     ),
                     DropdownSearch<Enum$UserTitleLanguage>(
                       items: Enum$UserTitleLanguage.values.take(3).toList(),
-                      selectedItem: user.user?.options?.titleLanguage ??
+                      selectedItem: user.value?.options?.titleLanguage ??
                           Enum$UserTitleLanguage.ROMAJI,
                       itemAsString: (item) {
                         if (item == Enum$UserTitleLanguage.NATIVE) {
@@ -116,9 +117,11 @@ class AnilistSettingsPage extends StatelessWidget {
 
                         return item.name;
                       },
-                      onChanged: (value) => user.updateSettings(
-                        Variables$Mutation$UpdateUser(titleLanguage: value),
-                      ),
+                      onChanged: (value) => ref
+                          .read(userProvider.notifier)
+                          .updateSettings(
+                            Variables$Mutation$UpdateUser(titleLanguage: value),
+                          ),
                       popupProps: const PopupProps.dialog(),
                     )
                   ],
@@ -137,13 +140,14 @@ class AnilistSettingsPage extends StatelessWidget {
                       ),
                     ),
                     DropdownSearch<Enum$UserStaffNameLanguage>(
-                      onChanged: (value) => user.updateSettings(
-                        Variables$Mutation$UpdateUser(
-                          staffNameLanguage: value,
-                        ),
-                      ),
+                      onChanged: (value) =>
+                          ref.read(userProvider.notifier).updateSettings(
+                                Variables$Mutation$UpdateUser(
+                                  staffNameLanguage: value,
+                                ),
+                              ),
                       items: Enum$UserStaffNameLanguage.values.take(3).toList(),
-                      selectedItem: user.user?.options?.staffNameLanguage ??
+                      selectedItem: user.value?.options?.staffNameLanguage ??
                           Enum$UserStaffNameLanguage.ROMAJI_WESTERN,
                       itemAsString: (item) {
                         if (item == Enum$UserStaffNameLanguage.NATIVE) {
@@ -179,11 +183,12 @@ class AnilistSettingsPage extends StatelessWidget {
                       ),
                     ),
                     DropdownSearch<int>(
-                      onChanged: (value) => user.updateSettings(
-                        Variables$Mutation$UpdateUser(
-                          activityMergeTime: value,
-                        ),
-                      ),
+                      onChanged: (value) =>
+                          ref.read(userProvider.notifier).updateSettings(
+                                Variables$Mutation$UpdateUser(
+                                  activityMergeTime: value,
+                                ),
+                              ),
                       items: const [
                         0,
                         30,
@@ -228,21 +233,22 @@ class AnilistSettingsPage extends StatelessWidget {
                           return 'Always';
                         }
                       },
-                      selectedItem: user.user?.options?.activityMergeTime,
+                      selectedItem: user.value?.options?.activityMergeTime,
                       popupProps: const PopupProps.dialog(),
                     )
                   ],
                 ),
               ),
               CheckboxListTile(
-                value: user.user?.options?.restrictMessagesToFollowing,
+                value: user.value?.options?.restrictMessagesToFollowing,
                 // selected:
                 //     user.user?.options?.restrictMessagesToFollowing ?? false,
-                onChanged: (value) => user.updateSettings(
-                  Variables$Mutation$UpdateUser(
-                    restrictMessagesToFollowing: value,
-                  ),
-                ),
+                onChanged: (value) =>
+                    ref.read(userProvider.notifier).updateSettings(
+                          Variables$Mutation$UpdateUser(
+                            restrictMessagesToFollowing: value,
+                          ),
+                        ),
                 title: const Text('Allow only users I follow to message me'),
               ),
               Padding(
@@ -258,15 +264,16 @@ class AnilistSettingsPage extends StatelessWidget {
                       ),
                     ),
                     DropdownSearch<Enum$ScoreFormat>(
-                      onChanged: (value) => user.updateSettings(
-                        Variables$Mutation$UpdateUser(
-                          scoreFormat: value,
-                        ),
-                      ),
+                      onChanged: (value) =>
+                          ref.read(userProvider.notifier).updateSettings(
+                                Variables$Mutation$UpdateUser(
+                                  scoreFormat: value,
+                                ),
+                              ),
                       items: Enum$ScoreFormat.values
                           .take(Enum$ScoreFormat.values.length - 1)
                           .toList(),
-                      selectedItem: user.user?.mediaListOptions?.scoreFormat,
+                      selectedItem: user.value?.mediaListOptions?.scoreFormat,
                       itemAsString: (item) {
                         if (item == Enum$ScoreFormat.POINT_100) {
                           return '100 Point (55/100)';

@@ -9,7 +9,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql/client.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 typedef OnSave = void Function(
   List<Enum$MediaSort>? sort,
@@ -322,7 +322,7 @@ class SearchBar extends StatelessWidget {
   }
 }
 
-class FilterDialog extends StatefulHookWidget {
+class FilterDialog extends StatefulHookConsumerWidget {
   final List<Enum$MediaSort>? sort;
   final Enum$MediaSeason? season;
   final int? year;
@@ -347,10 +347,10 @@ class FilterDialog extends StatefulHookWidget {
   });
 
   @override
-  State<FilterDialog> createState() => _FilterDialogState();
+  ConsumerState<FilterDialog> createState() => _FilterDialogState();
 }
 
-class _FilterDialogState extends State<FilterDialog> {
+class _FilterDialogState extends ConsumerState<FilterDialog> {
   List<Enum$MediaSort>? sort;
   Enum$MediaSeason? season;
   int? year;
@@ -375,7 +375,7 @@ class _FilterDialogState extends State<FilterDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var user = context.watch<User>();
+    var user = ref.watch(userProvider);
     var years = List<int>.generate(
         DateTime.now().year + 2 - 1940, (index) => 1940 + index);
     var hook = useQuery$GenreCollection(
@@ -387,13 +387,13 @@ class _FilterDialogState extends State<FilterDialog> {
     var sortedGenres = hook.result.parsedData?.genres
       ?..removeWhere((element) =>
           element == 'Hentai' &&
-          user.user?.options?.displayAdultContent == false);
+          user.value?.options?.displayAdultContent == false);
 
     var sortedTags = hook.result.parsedData?.tags
       ?..removeWhere(
         (element) =>
             element?.isAdult == true &&
-            user.user?.options?.displayAdultContent == false,
+            user.value?.options?.displayAdultContent == false,
       );
 
     List<TagsModel> listsP = [];

@@ -344,7 +344,7 @@ class Social extends HookWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Markdown(
+                                  child: Markdown.transparent(
                                     data: item.text!,
                                   ),
                                 ),

@@ -96,7 +96,7 @@ List<Fragment$ReleasingMedia> sortReleases(List<Fragment$ReleasingMedia> release
                         element.airingSchedule!.edges!.first!.node!.airingAt))
                     .difference(DateTime.now())
                     .inDays <=
-                8;
+                7;
         }
       )
       .toList()

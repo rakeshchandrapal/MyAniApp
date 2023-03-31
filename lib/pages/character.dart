@@ -88,20 +88,9 @@ class CharacterPage extends HookWidget {
                       character: result.Character!,
                     ),
                     if (description != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 8),
-                        child: Container(
-                          constraints: const BoxConstraints(maxHeight: 200),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            color: Color.fromRGBO(92, 114, 138, 0.1),
-                          ),
-                          // width: /,
-                          child: Markdown(
-                            data: description,
-                          ),
-                        ),
+                      Markdown(
+                        padding: const EdgeInsets.only(top: 8),
+                        data: description,
                       ),
                     if (result.Character?.media?.nodes?.isNotEmpty == true) ...[
                       Padding(
@@ -151,7 +140,7 @@ class Appearances extends StatelessWidget {
 
         return Text(media.type!.name);
       },
-      gridChips: (media) {
+      gridChips: (media, _) {
         return [
           Positioned(
             top: 0,
@@ -277,7 +266,7 @@ class Title extends StatelessWidget {
                           ),
                         ),
                       if (meta != null)
-                        Markdown(
+                        Markdown.transparent(
                           data: meta!.replaceAll('\n', '\n\n'),
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,

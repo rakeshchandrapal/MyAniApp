@@ -1,3 +1,13 @@
+fragment ListGroup on MediaListGroup {
+  name
+  isCustomList
+  isSplitCompletedList
+  status
+  entries {
+    ...MediaListEntry
+  }
+}
+
 query User($name: String) {
   User(name: $name) {
     ...BasicUser
@@ -34,6 +44,76 @@ query User($name: String) {
           }
         }
       }
+    }
+  }
+}
+
+query Favorites($username: String, $animePage: Int, $mangaPage: Int, $characterPage: Int, $staffPage: Int, $studioPage: Int) {
+  User(name: $username) {
+    id
+    name
+    favourites {
+      anime(page: $animePage) {
+        edges {
+          favouriteOrder
+          node {
+            ...BasicMedia
+          }
+        }
+      }
+      manga(page: $mangaPage) {
+        edges {
+          favouriteOrder
+          node {
+            ...BasicMedia
+          }
+        }
+      }
+      characters(page: $characterPage) {
+        edges {
+          favouriteOrder
+          node {
+            id
+            image {
+              large
+            }
+            name {
+              userPreferred
+            }
+          }
+        }
+      }
+      staff(page: $staffPage) {
+        edges {
+          favouriteOrder
+          node {
+            id
+            image {
+              large
+            }
+            name {
+              userPreferred
+            }
+          }
+        }
+      }
+      studios(page: $studioPage) {
+        edges {
+          favouriteOrder
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+query UserList($name: String, $type: MediaType, $sort: [MediaListSort]) {
+  MediaListCollection(userName: $name, type: $type, sort: $sort) {
+    lists {
+      ...ListGroup
     }
   }
 }

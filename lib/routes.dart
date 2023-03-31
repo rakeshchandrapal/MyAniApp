@@ -17,6 +17,8 @@ class AppRouter extends $AppRouter {
       children: [
         AutoRoute(page: LoginRoute.page, path: 'login'),
         AutoRoute(page: ProfileRoute.page, path: 'profile'),
+        AutoRoute(page: AAnimeListRoute.page, path: 'profile/list/anime'),
+        AutoRoute(page: MMangaListRoute.page, path: 'profile/list/manga'),
         AutoRoute(page: MediaRoute.page, path: 'media/:id'),
         AutoRoute(page: ReleaseCalenderRoute.page, path: 'releasing'),
         AutoRoute(page: ActivityRoute.page, path: 'activity/:id'),
@@ -53,6 +55,7 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(page: StaffRoute.page, path: 'staff/:id'),
         AutoRoute(page: ThreadRoute.page, path: 'thread/:id'),
+        AutoRoute(page: ColorsRoute.page, path: 'colors'),
         AutoRoute(
           page: HomeRouteTabs.page,
           path: '',
@@ -65,7 +68,6 @@ class AppRouter extends $AppRouter {
             AutoRoute(page: SocialRoute.page, path: 'social'),
           ],
         ),
-        // RedirectRoute(path: '*', redirectTo: '/home')
       ],
     ),
   ];

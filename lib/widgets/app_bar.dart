@@ -2,9 +2,9 @@ import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/widgets/drawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Appbar extends StatelessWidget {
+class Appbar extends ConsumerWidget {
   final Widget title;
   final PreferredSizeWidget? bottom;
   final List<Widget>? actions;
@@ -19,8 +19,8 @@ class Appbar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    var user = context.watch<User>();
+  Widget build(BuildContext context, ref) {
+    var user = ref.watch(fetchCurrentUserProvider);
 
     return Scaffold(
       drawer: const AppDrawer(),
@@ -34,12 +34,12 @@ class Appbar extends StatelessWidget {
             floating: true,
             snap: true,
             actions: actions,
-            leading: user.user != null
+            leading: user.value != null
                 ? IconButton(
                     padding: const EdgeInsets.all(4),
                     onPressed: () => Scaffold.of(context).openDrawer(),
                     icon: CachedNetworkImage(
-                      imageUrl: user.user!.avatar!.large!,
+                      imageUrl: user.value!.avatar!.large!,
                       imageBuilder: (context, imageProvider) =>
                           CircleAvatar(backgroundImage: imageProvider),
                       placeholder: (context, url) =>

@@ -82,34 +82,25 @@ class StaffPage extends HookWidget {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).padding.top,
-                      ),
-                      Title(
-                        meta: meta?.group(0),
-                        staff: result.Staff!,
-                      ),
-                      if (description != null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16, bottom: 8),
-                          child: Container(
-                            constraints: const BoxConstraints(maxHeight: 200),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              color: Color.fromRGBO(92, 114, 138, 0.1),
-                            ),
-                            // width: /,
-                            child: Markdown(
-                              data: description,
-                            ),
-                          ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top,
                         ),
-                    ],
+                        Title(
+                          meta: meta?.group(0),
+                          staff: result.Staff!,
+                        ),
+                        if (description != null)
+                          Markdown(
+                            padding: const EdgeInsets.only(top: 8),
+                            data: description,
+                          ),
+                      ],
+                    ),
                   ),
                 ),
                 Medias(medias: result.Staff!.characterMedia!.edges!)
@@ -257,7 +248,7 @@ class Title extends StatelessWidget {
                           ),
                         ),
                       if (meta != null)
-                        Markdown(
+                        Markdown.transparent(
                           data: meta!.replaceAll('\n', '\n\n'),
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,

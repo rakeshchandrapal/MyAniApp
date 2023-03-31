@@ -3,16 +3,17 @@ import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/widgets/lists/grid_cards.dart';
 import 'package:MyAniApp/widgets/lists/list_cards.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Cards extends StatelessWidget {
+class Cards extends ConsumerWidget {
   final List list;
   final Function(Fragment$MediaListEntry list)? openEditDialog;
   final Function()? updateList;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final Widget Function(Fragment$BasicMedia media, ListStyle style)? underTitle;
-  final List<Widget> Function(Fragment$BasicMedia media)? gridChips;
+  final List<Widget> Function(
+      Fragment$BasicMedia media, Fragment$MediaListEntry? entry)? gridChips;
   final SettingStrings setting;
   const Cards({
     super.key,
@@ -31,8 +32,9 @@ class Cards extends StatelessWidget {
             list);
 
   @override
-  Widget build(BuildContext context) {
-    var settings = context.watch<SettingsProvider>();
+  Widget build(context, ref) {
+    var settings = ref.watch(settingsProvider);
+
     ListStyle style;
 
     switch (setting) {

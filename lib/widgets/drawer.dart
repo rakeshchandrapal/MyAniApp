@@ -5,15 +5,16 @@ import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/widgets/image.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var user = context.watch<User>();
-    var settings = context.watch<SettingsProvider>();
+  Widget build(context, ref) {
+    var user = ref.watch(fetchCurrentUserProvider);
+    // var user = context.watch<User>();
+    // var settings = context.watch<SettingsProvider>();
 
     return Drawer(
       // width: 200,
@@ -22,19 +23,19 @@ class AppDrawer extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () => context.router.push(
-              ProfileRoute(username: user.user!.name),
+              ProfileRoute(username: user.value!.name),
             ),
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surfaceVariant,
               ),
-              accountName: user.user != null ? Text(user.user!.name) : null,
+              accountName: user.value != null ? Text(user.value!.name) : null,
               accountEmail: null,
               currentAccountPictureSize: const Size.square(90),
-              currentAccountPicture: user.user != null
+              currentAccountPicture: user.value != null
                   ? CImage(
                       // height: 90,
-                      imageUrl: user.user!.avatar!.large!,
+                      imageUrl: user.value!.avatar!.large!,
                     )
                   : null,
             ),
@@ -62,6 +63,7 @@ class AppDrawer extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () async {
+                      var settings = ref.read(settingsProvider.notifier);
                       await settings.clearAll();
                       context.router.popAndPush(const LoginRoute());
                     },

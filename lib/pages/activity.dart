@@ -7,6 +7,7 @@ import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/graphql.dart';
+import 'package:MyAniApp/widgets/image.dart';
 import 'package:MyAniApp/widgets/markdown.dart';
 import 'package:MyAniApp/widgets/markdown_editor.dart';
 import 'package:auto_route/auto_route.dart';
@@ -14,8 +15,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 @RoutePage()
@@ -96,7 +97,7 @@ class ActivityPage extends HookWidget {
   }
 }
 
-class ActivityCard extends StatelessWidget {
+class ActivityCard extends ConsumerWidget {
   final dynamic activity;
   final void Function()? refetch;
   const ActivityCard({
@@ -106,8 +107,8 @@ class ActivityCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    var currentUser = context.watch<User>();
+  Widget build(BuildContext context, ref) {
+    var currentUser = ref.watch(userProvider);
     Widget? text;
     String? image;
     Fragment$BasicUser? user;
@@ -147,8 +148,9 @@ class ActivityCard extends StatelessWidget {
       id = i.id;
       createdAt = i.createdAt;
       user = i.user;
-      text = Markdown(
+      text = Markdown.transparent(
         data: i.text!,
+        padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
       );
     } else if (activity is Query$Activity$replies$activityReplies) {
@@ -157,9 +159,10 @@ class ActivityCard extends StatelessWidget {
       isReply = true;
       createdAt = i.createdAt;
       user = i.user;
-      text = Markdown(
+      text = Markdown.transparent(
         data: i.text!,
         physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
       );
     }
 
@@ -175,13 +178,14 @@ class ActivityCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CachedNetworkImage(
-                  imageUrl: user.avatar!.large!,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator.adaptive(),
-                  height: 60,
-                  width: 60,
+                child: GestureDetector(
+                  onTap: () =>
+                      context.router.push(ProfileRoute(username: user!.name)),
+                  child: CImage(
+                    imageUrl: user.avatar!.large!,
+                    height: 60,
+                    width: 60,
+                  ),
                 ),
               ),
               Column(
@@ -278,14 +282,14 @@ class ActivityCard extends StatelessWidget {
                     );
                   },
                 ),
-                if (currentUser.user?.id == user.id)
+                if (currentUser.value?.id == user.id)
                   Mutation$SaveActivityReply$Widget(
                     builder: (p0, p1) => IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.edit),
                     ),
                   ),
-                if (currentUser.user?.id == user.id)
+                if (currentUser.value?.id == user.id)
                   IconButton(
                     onPressed: () async {
                       var result = await _showDeleteConfirmation(context);

@@ -5,25 +5,24 @@ import 'package:MyAniApp/routes.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 @RoutePage()
-class NotificationsPage extends HookWidget {
+class NotificationsPage extends HookConsumerWidget {
   const NotificationsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var user = context.watch<User>();
+  Widget build(BuildContext context, ref) {
+    var user = ref.watch(userProvider);
     var hook = useQuery$Notifications(
       Options$Query$Notifications(
         variables: Variables$Query$Notifications(page: 1),
       ),
     );
 
-    if ((user.user?.unreadNotificationCount ?? 0) > 0) {
-      user.resetNotifCount();
+    if ((user.value?.unreadNotificationCount ?? 0) > 0) {
+      ref.read(userProvider.notifier).resetNotifCount();
     }
 
     return Scaffold(

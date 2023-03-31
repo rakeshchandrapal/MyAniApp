@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:MyAniApp/notification.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/providers/theme.dart';
-import 'package:MyAniApp/providers/user.dart';
 import 'package:MyAniApp/routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -41,17 +41,24 @@ void main() async {
 
   packageInfo = await PackageInfo.fromPlatform();
 
-  runApp(const App());
+  final prefs = await SharedPreferences.getInstance();
+
+  runApp(ProviderScope(
+    overrides: [
+      sharedPrefProvider.overrideWithValue(prefs),
+    ],
+    child: const App(),
+  ));
 }
 
-class App extends StatefulWidget {
+class App extends ConsumerStatefulWidget {
   const App({super.key});
 
   @override
-  State<App> createState() => _AppState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends ConsumerState<ConsumerStatefulWidget> {
   StreamSubscription? _sub;
 
   @override
@@ -83,29 +90,19 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<User>(
-          create: (context) => User(),
-        ),
-        ChangeNotifierProvider<SettingsProvider>(
-          create: (context) => SettingsProvider()..loadSettings(),
-        )
-      ],
-      // create: (context) => User(),
-      child: Consumer<SettingsProvider>(
-        builder: (context, value, child) => MaterialApp.router(
-          title: 'MyAniApp',
-          debugShowCheckedModeBanner: false,
-          scrollBehavior: MyCustomScrollBehavior(),
-          // theme: Styles.themeData(value.theme),
-          theme: Styles.light,
-          darkTheme: Styles.dark,
-          themeMode: value.theme,
-          // themeMode: ThemeMo,
-          routerConfig: appRouter.config(),
-        ),
-      ),
+    var themeMode =
+        ref.watch(settingsProvider.select((settings) => settings.theme));
+
+    return MaterialApp.router(
+      title: 'MyAniApp',
+      debugShowCheckedModeBanner: false,
+      scrollBehavior: MyCustomScrollBehavior(),
+      // theme: Styles.themeData(value.theme),
+      theme: Styles.light,
+      darkTheme: Styles.dark,
+      themeMode: themeMode,
+      // themeMode: ThemeMo,
+      routerConfig: appRouter.config(),
     );
   }
 }

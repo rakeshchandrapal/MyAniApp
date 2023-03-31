@@ -2,121 +2,25 @@ import 'package:MyAniApp/graphql/Media.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/graphql_client.dart';
 import 'package:MyAniApp/providers/graphql.dart';
-import 'package:MyAniApp/providers/settings.dart';
-import 'package:MyAniApp/widgets/app_bar.dart';
-import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-class Tabs extends StatelessWidget {
-  final List<Query$FetchMediaList$MediaListCollection$lists?> lists;
-  final Future<QueryResult<Query$FetchMediaList>?> Function()? refresh;
-  final String title;
-
-  const Tabs({
-    super.key,
-    required this.lists,
-    this.refresh,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: lists.length,
-      child: Appbar(
-        title: Text(title),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: IconButton(
-              // onPressed: () {},
-              onPressed: () => context.router.pushNamed(title == 'Manga List'
-                  ? 'settings/app/lists/manga'
-                  : 'settings/app/lists/anime'),
-              icon: const Icon(Icons.settings),
-            ),
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: TabBar(
-              isScrollable: true,
-              // controller: _tabController,
-              tabs: [
-                for (var list in lists)
-                  Tab(
-                    text: list!.name,
-                  )
-              ],
-            ),
-          ),
-        ),
-        child: MediaQuery.removePadding(
-          context: context,
-          removeTop: true,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TabBarView(
-              // controller: _tabController,
-              children: [
-                for (var list in lists)
-                  ListTab(
-                    list: list!,
-                    updateList: refresh,
-                    isManga: title == 'Manga List',
-                  )
-              ],
-            ),
-          ),
+openEditDialog(BuildContext context, Fragment$MediaListEntry media,
+    void Function()? updateList) {
+  showDialog(
+    context: context,
+    builder: (context) => Dialog.fullscreen(
+      child: GraphQlProvider(
+        child: EditDialog(
+          media: media.media!,
+          entry: media,
+          onSave: () => {if (updateList != null) updateList()},
         ),
       ),
-    );
-  }
-}
-
-class ListTab extends HookWidget {
-  final Query$FetchMediaList$MediaListCollection$lists list;
-  final Future<QueryResult<Query$FetchMediaList>?> Function()? updateList;
-  final bool isManga;
-  const ListTab({
-    super.key,
-    required this.list,
-    required this.updateList,
-    required this.isManga,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    useAutomaticKeepAlive(wantKeepAlive: true);
-    return Cards(
-      list: list.entries!,
-      openEditDialog: (list) => openEditDialog(context, list),
-      updateList: updateList,
-      setting: isManga ? SettingStrings.mangaList : SettingStrings.animeList,
-    );
-  }
-
-  openEditDialog(BuildContext context, Fragment$MediaListEntry media) {
-    showDialog(
-      context: context,
-      builder: (context) => Dialog.fullscreen(
-        child: GraphQlProvider(
-          child: EditDialog(
-            media: media.media!,
-            entry: media,
-            onSave: () => {if (updateList != null) updateList!()},
-          ),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }
 
 class EditDialog extends StatelessWidget {
@@ -144,7 +48,7 @@ class EditDialog extends StatelessWidget {
         ),
       ),
       onSave: (options) {
-        print(options.status);
+        // print(options.status);
         client().then(
           (value) => value.value.mutate$SaveMediaListEntry(
             Options$Mutation$SaveMediaListEntry(
@@ -218,7 +122,7 @@ class _OptionsState extends State<Options> {
             ),
             onPressed: () {
               widget.onSave(options);
-              // context.pop();
+              context.router.pop();
             },
             child: const Icon(Icons.save),
           ),
@@ -311,7 +215,7 @@ class _OptionsState extends State<Options> {
                 child: ElevatedButton(
                   onPressed: () {
                     widget.onDelete(options.id);
-                    // context.pop();
+                    context.router.pop();
                   },
                   // style: ButtonStyle(co),
                   child: const Text(

@@ -1,35 +1,69 @@
-import 'package:MyAniApp/graphql_client.dart';
+import 'package:MyAniApp/providers/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class GraphQlProvider extends StatefulWidget {
+part 'graphql.g.dart';
+
+@Riverpod(keepAlive: true)
+class GraphQL extends _$GraphQL {
+  @override
+  FutureOr<ValueNotifier<GraphQLClient>> build() async {
+    await initHiveForFlutter();
+    var settings = ref.watch(settingsProvider);
+    Link link = HttpLink('https://graphql.anilist.co');
+
+    var token = settings.token;
+    if (token != null) {
+      link = HttpLink(
+        'https://graphql.anilist.co',
+        defaultHeaders: {'Authorization': 'Bearer $token'},
+      );
+    }
+
+    return ValueNotifier(GraphQLClient(
+      cache: GraphQLCache(store: HiveStore()),
+      link: link,
+    ));
+  }
+
+  reset() {
+    var settings = ref.watch(settingsProvider);
+    Link link = HttpLink('https://graphql.anilist.co');
+
+    var token = settings.token;
+    if (token != null) {
+      link = HttpLink(
+        'https://graphql.anilist.co',
+        defaultHeaders: {'Authorization': 'Bearer $token'},
+      );
+    }
+
+    state = AsyncData(ValueNotifier(GraphQLClient(
+      cache: GraphQLCache(store: HiveStore()),
+      link: link,
+    )));
+  }
+}
+
+class GraphQlProvider extends ConsumerWidget {
   final Widget child;
   const GraphQlProvider({super.key, required this.child});
 
   @override
-  State<GraphQlProvider> createState() => _GraphQlProviderState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    var graphql = ref.watch(graphQLProvider);
 
-class _GraphQlProviderState extends State<GraphQlProvider> {
-  static dynamic _client;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_client != null) {
-      return GraphQLProvider(
-        client: _client,
-        child: widget.child,
-      );
-    } else {
-      client().then((value) => setState(() {
-            _client = value;
-          }));
-    }
-    return Container();
+    return graphql.when(
+      data: (data) => GraphQLProvider(
+        client: data,
+        child: child,
+      ),
+      error: (error, stackTrace) => const SizedBox(),
+      loading: () => const SizedBox(),
+      skipLoadingOnRefresh: true,
+      skipLoadingOnReload: true,
+    );
   }
 }

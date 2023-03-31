@@ -174,13 +174,7 @@ query FetchMedia(
 query FetchMediaList($userId: Int, $type: MediaType, $sort: [MediaListSort]) {
   MediaListCollection(userId: $userId, type: $type, sort: $sort) {
     lists {
-      name
-      isCustomList
-      isSplitCompletedList
-      status
-      entries {
-        ...MediaListEntry
-      }
+      ...ListGroup
     }
   }
 }
@@ -253,13 +247,7 @@ query Home($page: Int = 1, $perPage: Int, $userId: Int!, $type: MediaType) {
   }
   list: MediaListCollection(userId: $userId, type: $type, status_in: [CURRENT, PLANNING], sort: [UPDATED_TIME_DESC]) {
     lists {
-      name
-      isCustomList
-      isSplitCompletedList
-      status
-      entries {
-        ...MediaListEntry
-      }
+      ...ListGroup
     }
   }
 }

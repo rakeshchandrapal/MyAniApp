@@ -1,4 +1,5 @@
 import 'Releasing.graphql.dart';
+import 'User.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
@@ -8780,52 +8781,9 @@ const documentNodeQueryFetchMediaList = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'ListGroup'),
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'isCustomList'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'isSplitCompletedList'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'status'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'entries'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'MediaListEntry'),
-                    directives: [],
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -8854,6 +8812,7 @@ const documentNodeQueryFetchMediaList = DocumentNode(definitions: [
       ),
     ]),
   ),
+  fragmentDefinitionListGroup,
   fragmentDefinitionMediaListEntry,
   fragmentDefinitionBasicMedia,
 ]);
@@ -9025,14 +8984,13 @@ class Query$FetchMediaList$MediaListCollection {
       lists: (l$lists as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$FetchMediaList$MediaListCollection$lists.fromJson(
-                  (e as Map<String, dynamic>)))
+              : Fragment$ListGroup.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$FetchMediaList$MediaListCollection$lists?>? lists;
+  final List<Fragment$ListGroup?>? lists;
 
   final String $__typename;
 
@@ -9109,14 +9067,12 @@ abstract class CopyWith$Query$FetchMediaList$MediaListCollection<TRes> {
       _CopyWithStubImpl$Query$FetchMediaList$MediaListCollection;
 
   TRes call({
-    List<Query$FetchMediaList$MediaListCollection$lists?>? lists,
+    List<Fragment$ListGroup?>? lists,
     String? $__typename,
   });
   TRes lists(
-      Iterable<Query$FetchMediaList$MediaListCollection$lists?>? Function(
-              Iterable<
-                  CopyWith$Query$FetchMediaList$MediaListCollection$lists<
-                      Query$FetchMediaList$MediaListCollection$lists>?>?)
+      Iterable<Fragment$ListGroup?>? Function(
+              Iterable<CopyWith$Fragment$ListGroup<Fragment$ListGroup>?>?)
           _fn);
 }
 
@@ -9140,21 +9096,19 @@ class _CopyWithImpl$Query$FetchMediaList$MediaListCollection<TRes>
       _then(Query$FetchMediaList$MediaListCollection(
         lists: lists == _undefined
             ? _instance.lists
-            : (lists as List<Query$FetchMediaList$MediaListCollection$lists?>?),
+            : (lists as List<Fragment$ListGroup?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes lists(
-          Iterable<Query$FetchMediaList$MediaListCollection$lists?>? Function(
-                  Iterable<
-                      CopyWith$Query$FetchMediaList$MediaListCollection$lists<
-                          Query$FetchMediaList$MediaListCollection$lists>?>?)
+          Iterable<Fragment$ListGroup?>? Function(
+                  Iterable<CopyWith$Fragment$ListGroup<Fragment$ListGroup>?>?)
               _fn) =>
       call(
           lists: _fn(_instance.lists?.map((e) => e == null
               ? null
-              : CopyWith$Query$FetchMediaList$MediaListCollection$lists(
+              : CopyWith$Fragment$ListGroup(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -9167,254 +9121,11 @@ class _CopyWithStubImpl$Query$FetchMediaList$MediaListCollection<TRes>
   TRes _res;
 
   call({
-    List<Query$FetchMediaList$MediaListCollection$lists?>? lists,
+    List<Fragment$ListGroup?>? lists,
     String? $__typename,
   }) =>
       _res;
   lists(_fn) => _res;
-}
-
-class Query$FetchMediaList$MediaListCollection$lists {
-  Query$FetchMediaList$MediaListCollection$lists({
-    this.name,
-    this.isCustomList,
-    this.isSplitCompletedList,
-    this.status,
-    this.entries,
-    this.$__typename = 'MediaListGroup',
-  });
-
-  factory Query$FetchMediaList$MediaListCollection$lists.fromJson(
-      Map<String, dynamic> json) {
-    final l$name = json['name'];
-    final l$isCustomList = json['isCustomList'];
-    final l$isSplitCompletedList = json['isSplitCompletedList'];
-    final l$status = json['status'];
-    final l$entries = json['entries'];
-    final l$$__typename = json['__typename'];
-    return Query$FetchMediaList$MediaListCollection$lists(
-      name: (l$name as String?),
-      isCustomList: (l$isCustomList as bool?),
-      isSplitCompletedList: (l$isSplitCompletedList as bool?),
-      status: l$status == null
-          ? null
-          : fromJson$Enum$MediaListStatus((l$status as String)),
-      entries: (l$entries as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : Fragment$MediaListEntry.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? name;
-
-  final bool? isCustomList;
-
-  final bool? isSplitCompletedList;
-
-  final Enum$MediaListStatus? status;
-
-  final List<Fragment$MediaListEntry?>? entries;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$isCustomList = isCustomList;
-    _resultData['isCustomList'] = l$isCustomList;
-    final l$isSplitCompletedList = isSplitCompletedList;
-    _resultData['isSplitCompletedList'] = l$isSplitCompletedList;
-    final l$status = status;
-    _resultData['status'] =
-        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
-    final l$entries = entries;
-    _resultData['entries'] = l$entries?.map((e) => e?.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$isCustomList = isCustomList;
-    final l$isSplitCompletedList = isSplitCompletedList;
-    final l$status = status;
-    final l$entries = entries;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$name,
-      l$isCustomList,
-      l$isSplitCompletedList,
-      l$status,
-      l$entries == null ? null : Object.hashAll(l$entries.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$FetchMediaList$MediaListCollection$lists) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$isCustomList = isCustomList;
-    final lOther$isCustomList = other.isCustomList;
-    if (l$isCustomList != lOther$isCustomList) {
-      return false;
-    }
-    final l$isSplitCompletedList = isSplitCompletedList;
-    final lOther$isSplitCompletedList = other.isSplitCompletedList;
-    if (l$isSplitCompletedList != lOther$isSplitCompletedList) {
-      return false;
-    }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (l$status != lOther$status) {
-      return false;
-    }
-    final l$entries = entries;
-    final lOther$entries = other.entries;
-    if (l$entries != null && lOther$entries != null) {
-      if (l$entries.length != lOther$entries.length) {
-        return false;
-      }
-      for (int i = 0; i < l$entries.length; i++) {
-        final l$entries$entry = l$entries[i];
-        final lOther$entries$entry = lOther$entries[i];
-        if (l$entries$entry != lOther$entries$entry) {
-          return false;
-        }
-      }
-    } else if (l$entries != lOther$entries) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$FetchMediaList$MediaListCollection$lists
-    on Query$FetchMediaList$MediaListCollection$lists {
-  CopyWith$Query$FetchMediaList$MediaListCollection$lists<
-          Query$FetchMediaList$MediaListCollection$lists>
-      get copyWith => CopyWith$Query$FetchMediaList$MediaListCollection$lists(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$FetchMediaList$MediaListCollection$lists<TRes> {
-  factory CopyWith$Query$FetchMediaList$MediaListCollection$lists(
-    Query$FetchMediaList$MediaListCollection$lists instance,
-    TRes Function(Query$FetchMediaList$MediaListCollection$lists) then,
-  ) = _CopyWithImpl$Query$FetchMediaList$MediaListCollection$lists;
-
-  factory CopyWith$Query$FetchMediaList$MediaListCollection$lists.stub(
-          TRes res) =
-      _CopyWithStubImpl$Query$FetchMediaList$MediaListCollection$lists;
-
-  TRes call({
-    String? name,
-    bool? isCustomList,
-    bool? isSplitCompletedList,
-    Enum$MediaListStatus? status,
-    List<Fragment$MediaListEntry?>? entries,
-    String? $__typename,
-  });
-  TRes entries(
-      Iterable<Fragment$MediaListEntry?>? Function(
-              Iterable<
-                  CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry>?>?)
-          _fn);
-}
-
-class _CopyWithImpl$Query$FetchMediaList$MediaListCollection$lists<TRes>
-    implements CopyWith$Query$FetchMediaList$MediaListCollection$lists<TRes> {
-  _CopyWithImpl$Query$FetchMediaList$MediaListCollection$lists(
-    this._instance,
-    this._then,
-  );
-
-  final Query$FetchMediaList$MediaListCollection$lists _instance;
-
-  final TRes Function(Query$FetchMediaList$MediaListCollection$lists) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? isCustomList = _undefined,
-    Object? isSplitCompletedList = _undefined,
-    Object? status = _undefined,
-    Object? entries = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$FetchMediaList$MediaListCollection$lists(
-        name: name == _undefined ? _instance.name : (name as String?),
-        isCustomList: isCustomList == _undefined
-            ? _instance.isCustomList
-            : (isCustomList as bool?),
-        isSplitCompletedList: isSplitCompletedList == _undefined
-            ? _instance.isSplitCompletedList
-            : (isSplitCompletedList as bool?),
-        status: status == _undefined
-            ? _instance.status
-            : (status as Enum$MediaListStatus?),
-        entries: entries == _undefined
-            ? _instance.entries
-            : (entries as List<Fragment$MediaListEntry?>?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes entries(
-          Iterable<Fragment$MediaListEntry?>? Function(
-                  Iterable<
-                      CopyWith$Fragment$MediaListEntry<
-                          Fragment$MediaListEntry>?>?)
-              _fn) =>
-      call(
-          entries: _fn(_instance.entries?.map((e) => e == null
-              ? null
-              : CopyWith$Fragment$MediaListEntry(
-                  e,
-                  (i) => i,
-                )))?.toList());
-}
-
-class _CopyWithStubImpl$Query$FetchMediaList$MediaListCollection$lists<TRes>
-    implements CopyWith$Query$FetchMediaList$MediaListCollection$lists<TRes> {
-  _CopyWithStubImpl$Query$FetchMediaList$MediaListCollection$lists(this._res);
-
-  TRes _res;
-
-  call({
-    String? name,
-    bool? isCustomList,
-    bool? isSplitCompletedList,
-    Enum$MediaListStatus? status,
-    List<Fragment$MediaListEntry?>? entries,
-    String? $__typename,
-  }) =>
-      _res;
-  entries(_fn) => _res;
 }
 
 class Variables$Mutation$SaveMediaListEntry {
@@ -13013,52 +12724,9 @@ const documentNodeQueryHome = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'ListGroup'),
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'isCustomList'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'isSplitCompletedList'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'status'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'entries'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'MediaListEntry'),
-                    directives: [],
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -13089,6 +12757,7 @@ const documentNodeQueryHome = DocumentNode(definitions: [
   ),
   fragmentDefinitionReleasingMedia,
   fragmentDefinitionBasicMedia,
+  fragmentDefinitionListGroup,
   fragmentDefinitionMediaListEntry,
 ]);
 Query$Home _parserFn$Query$Home(Map<String, dynamic> data) =>
@@ -13568,13 +13237,13 @@ class Query$Home$list {
       lists: (l$lists as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Home$list$lists.fromJson((e as Map<String, dynamic>)))
+              : Fragment$ListGroup.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$Home$list$lists?>? lists;
+  final List<Fragment$ListGroup?>? lists;
 
   final String $__typename;
 
@@ -13648,12 +13317,12 @@ abstract class CopyWith$Query$Home$list<TRes> {
       _CopyWithStubImpl$Query$Home$list;
 
   TRes call({
-    List<Query$Home$list$lists?>? lists,
+    List<Fragment$ListGroup?>? lists,
     String? $__typename,
   });
   TRes lists(
-      Iterable<Query$Home$list$lists?>? Function(
-              Iterable<CopyWith$Query$Home$list$lists<Query$Home$list$lists>?>?)
+      Iterable<Fragment$ListGroup?>? Function(
+              Iterable<CopyWith$Fragment$ListGroup<Fragment$ListGroup>?>?)
           _fn);
 }
 
@@ -13677,20 +13346,19 @@ class _CopyWithImpl$Query$Home$list<TRes>
       _then(Query$Home$list(
         lists: lists == _undefined
             ? _instance.lists
-            : (lists as List<Query$Home$list$lists?>?),
+            : (lists as List<Fragment$ListGroup?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes lists(
-          Iterable<Query$Home$list$lists?>? Function(
-                  Iterable<
-                      CopyWith$Query$Home$list$lists<Query$Home$list$lists>?>?)
+          Iterable<Fragment$ListGroup?>? Function(
+                  Iterable<CopyWith$Fragment$ListGroup<Fragment$ListGroup>?>?)
               _fn) =>
       call(
           lists: _fn(_instance.lists?.map((e) => e == null
               ? null
-              : CopyWith$Query$Home$list$lists(
+              : CopyWith$Fragment$ListGroup(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -13703,249 +13371,11 @@ class _CopyWithStubImpl$Query$Home$list<TRes>
   TRes _res;
 
   call({
-    List<Query$Home$list$lists?>? lists,
+    List<Fragment$ListGroup?>? lists,
     String? $__typename,
   }) =>
       _res;
   lists(_fn) => _res;
-}
-
-class Query$Home$list$lists {
-  Query$Home$list$lists({
-    this.name,
-    this.isCustomList,
-    this.isSplitCompletedList,
-    this.status,
-    this.entries,
-    this.$__typename = 'MediaListGroup',
-  });
-
-  factory Query$Home$list$lists.fromJson(Map<String, dynamic> json) {
-    final l$name = json['name'];
-    final l$isCustomList = json['isCustomList'];
-    final l$isSplitCompletedList = json['isSplitCompletedList'];
-    final l$status = json['status'];
-    final l$entries = json['entries'];
-    final l$$__typename = json['__typename'];
-    return Query$Home$list$lists(
-      name: (l$name as String?),
-      isCustomList: (l$isCustomList as bool?),
-      isSplitCompletedList: (l$isSplitCompletedList as bool?),
-      status: l$status == null
-          ? null
-          : fromJson$Enum$MediaListStatus((l$status as String)),
-      entries: (l$entries as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : Fragment$MediaListEntry.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? name;
-
-  final bool? isCustomList;
-
-  final bool? isSplitCompletedList;
-
-  final Enum$MediaListStatus? status;
-
-  final List<Fragment$MediaListEntry?>? entries;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$isCustomList = isCustomList;
-    _resultData['isCustomList'] = l$isCustomList;
-    final l$isSplitCompletedList = isSplitCompletedList;
-    _resultData['isSplitCompletedList'] = l$isSplitCompletedList;
-    final l$status = status;
-    _resultData['status'] =
-        l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
-    final l$entries = entries;
-    _resultData['entries'] = l$entries?.map((e) => e?.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$isCustomList = isCustomList;
-    final l$isSplitCompletedList = isSplitCompletedList;
-    final l$status = status;
-    final l$entries = entries;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$name,
-      l$isCustomList,
-      l$isSplitCompletedList,
-      l$status,
-      l$entries == null ? null : Object.hashAll(l$entries.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Home$list$lists) || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$isCustomList = isCustomList;
-    final lOther$isCustomList = other.isCustomList;
-    if (l$isCustomList != lOther$isCustomList) {
-      return false;
-    }
-    final l$isSplitCompletedList = isSplitCompletedList;
-    final lOther$isSplitCompletedList = other.isSplitCompletedList;
-    if (l$isSplitCompletedList != lOther$isSplitCompletedList) {
-      return false;
-    }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (l$status != lOther$status) {
-      return false;
-    }
-    final l$entries = entries;
-    final lOther$entries = other.entries;
-    if (l$entries != null && lOther$entries != null) {
-      if (l$entries.length != lOther$entries.length) {
-        return false;
-      }
-      for (int i = 0; i < l$entries.length; i++) {
-        final l$entries$entry = l$entries[i];
-        final lOther$entries$entry = lOther$entries[i];
-        if (l$entries$entry != lOther$entries$entry) {
-          return false;
-        }
-      }
-    } else if (l$entries != lOther$entries) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Home$list$lists on Query$Home$list$lists {
-  CopyWith$Query$Home$list$lists<Query$Home$list$lists> get copyWith =>
-      CopyWith$Query$Home$list$lists(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith$Query$Home$list$lists<TRes> {
-  factory CopyWith$Query$Home$list$lists(
-    Query$Home$list$lists instance,
-    TRes Function(Query$Home$list$lists) then,
-  ) = _CopyWithImpl$Query$Home$list$lists;
-
-  factory CopyWith$Query$Home$list$lists.stub(TRes res) =
-      _CopyWithStubImpl$Query$Home$list$lists;
-
-  TRes call({
-    String? name,
-    bool? isCustomList,
-    bool? isSplitCompletedList,
-    Enum$MediaListStatus? status,
-    List<Fragment$MediaListEntry?>? entries,
-    String? $__typename,
-  });
-  TRes entries(
-      Iterable<Fragment$MediaListEntry?>? Function(
-              Iterable<
-                  CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry>?>?)
-          _fn);
-}
-
-class _CopyWithImpl$Query$Home$list$lists<TRes>
-    implements CopyWith$Query$Home$list$lists<TRes> {
-  _CopyWithImpl$Query$Home$list$lists(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Home$list$lists _instance;
-
-  final TRes Function(Query$Home$list$lists) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? isCustomList = _undefined,
-    Object? isSplitCompletedList = _undefined,
-    Object? status = _undefined,
-    Object? entries = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Home$list$lists(
-        name: name == _undefined ? _instance.name : (name as String?),
-        isCustomList: isCustomList == _undefined
-            ? _instance.isCustomList
-            : (isCustomList as bool?),
-        isSplitCompletedList: isSplitCompletedList == _undefined
-            ? _instance.isSplitCompletedList
-            : (isSplitCompletedList as bool?),
-        status: status == _undefined
-            ? _instance.status
-            : (status as Enum$MediaListStatus?),
-        entries: entries == _undefined
-            ? _instance.entries
-            : (entries as List<Fragment$MediaListEntry?>?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-  TRes entries(
-          Iterable<Fragment$MediaListEntry?>? Function(
-                  Iterable<
-                      CopyWith$Fragment$MediaListEntry<
-                          Fragment$MediaListEntry>?>?)
-              _fn) =>
-      call(
-          entries: _fn(_instance.entries?.map((e) => e == null
-              ? null
-              : CopyWith$Fragment$MediaListEntry(
-                  e,
-                  (i) => i,
-                )))?.toList());
-}
-
-class _CopyWithStubImpl$Query$Home$list$lists<TRes>
-    implements CopyWith$Query$Home$list$lists<TRes> {
-  _CopyWithStubImpl$Query$Home$list$lists(this._res);
-
-  TRes _res;
-
-  call({
-    String? name,
-    bool? isCustomList,
-    bool? isSplitCompletedList,
-    Enum$MediaListStatus? status,
-    List<Fragment$MediaListEntry?>? entries,
-    String? $__typename,
-  }) =>
-      _res;
-  entries(_fn) => _res;
 }
 
 class Variables$Query$Discovery {

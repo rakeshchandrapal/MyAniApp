@@ -1,21 +1,23 @@
 import 'package:MyAniApp/graphql/Media.graphql.dart';
+import 'package:MyAniApp/graphql/User.graphql.dart';
 import 'package:MyAniApp/graphql/schema.graphql.dart';
-import 'package:MyAniApp/pages/lists/shared.dart';
 import 'package:MyAniApp/providers/user.dart';
+import 'package:MyAniApp/widgets/drawer.dart';
 import 'package:MyAniApp/widgets/graphql.dart';
+import 'package:MyAniApp/widgets/image.dart';
+import 'package:MyAniApp/widgets/media_list_group.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class AnimeListPage extends HookWidget {
+class AnimeListPage extends HookConsumerWidget {
   const AnimeListPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var user = context.watch<User>();
-    if (user.user == null) {
+  Widget build(context, ref) {
+    var user = ref.watch(fetchCurrentUserProvider);
+    if (user.value == null) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +32,7 @@ class AnimeListPage extends HookWidget {
       Options$Query$FetchMediaList(
         variables: Variables$Query$FetchMediaList(
           type: Enum$MediaType.ANIME,
-          userId: user.user!.id,
+          userId: user.value!.id,
           sort: [Enum$MediaListSort.UPDATED_TIME_DESC],
         ),
       ),
@@ -53,15 +55,40 @@ class AnimeListPage extends HookWidget {
 
     return Graphql(
       hook: hook,
-      builder: (result) => Tabs(
-        lists: result.MediaListCollection!.lists!
+      builder: (result) => MediaListGroups(
+        isEditable: true,
+        type: Enum$MediaType.ANIME,
+        groups: result.MediaListCollection!.lists!
+            .whereType<Fragment$ListGroup>()
+            .toList()
           ..sort(
             (a, b) {
-              return b?.status == Enum$MediaListStatus.CURRENT ? 1 : -1;
+              return b.status == Enum$MediaListStatus.CURRENT ? 1 : -1;
             },
           ),
-        refresh: hook.refetch,
-        title: 'Anime List',
+        drawer: const AppDrawer(),
+        leading: (context) => IconButton(
+          padding: const EdgeInsets.all(4),
+          onPressed: () => Scaffold.of(context).openDrawer(),
+          icon: CImage(
+            imageUrl: user.value!.avatar!.large!,
+            imageBuilder: (context, imageProvider) =>
+                CircleAvatar(backgroundImage: imageProvider),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 4),
+            child: IconButton(
+              // onPressed: () {},
+              onPressed: () =>
+                  context.router.pushNamed('settings/app/lists/anime'),
+              icon: const Icon(Icons.settings),
+            ),
+          ),
+        ],
+        // refresh: hook.refetch,
+        // title: 'Anime List',
       ),
     );
   }

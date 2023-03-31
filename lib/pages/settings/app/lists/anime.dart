@@ -2,15 +2,15 @@ import 'package:MyAniApp/providers/settings.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class AnimeListSettingPage extends StatelessWidget {
+class AnimeListSettingPage extends ConsumerWidget {
   const AnimeListSettingPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var settings = context.watch<SettingsProvider>();
+  Widget build(BuildContext context, ref) {
+    var settings = ref.watch(settingsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -29,10 +29,11 @@ class AnimeListSettingPage extends StatelessWidget {
           ),
           ListSetting(
             list: settings.animeList,
-            onChanged: (style) => settings.changeListView(
-              style ?? ListStyle.grid,
-              SettingStrings.animeList,
-            ),
+            onChanged: (style) =>
+                ref.read(settingsProvider.notifier).changeListView(
+                      style ?? ListStyle.grid,
+                      SettingStrings.animeList,
+                    ),
           ),
         ],
       ),

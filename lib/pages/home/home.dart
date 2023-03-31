@@ -7,25 +7,25 @@ import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/app_bar.dart';
 import 'package:MyAniApp/widgets/graphql.dart';
-import 'package:MyAniApp/widgets/lists/cards.dart';
 import 'package:MyAniApp/widgets/markdown_editor.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
+import 'package:MyAniApp/widgets/media_list_group.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 @RoutePage()
-class HomePage extends StatefulHookWidget {
+class HomePage extends StatefulHookConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _HomePageState extends ConsumerState<ConsumerStatefulWidget>
+    with WidgetsBindingObserver {
   AppLifecycleState? _prevState;
 
   @override
@@ -47,17 +47,18 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    var user = context.watch<User>();
-    if (user.user?.id == null) {
+    var user = ref.watch(fetchCurrentUserProvider);
+    // var user = context.watch<User>();
+    if (user.value?.id == null) {
       return const Center(
         child: CircularProgressIndicator.adaptive(),
       );
     }
-    // todo - if releasing has more pages handle it
+
     var hook = useQuery$Home(
       Options$Query$Home(
         variables: Variables$Query$Home(
-          userId: user.user!.id,
+          userId: user.value!.id,
           type: Enum$MediaType.ANIME,
         ),
       ),
@@ -97,9 +98,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             onPressed: () => context.router.push(const NotificationsRoute()),
             icon: badges.Badge(
               badgeContent: Text(
-                user.user?.unreadNotificationCount?.toString() ?? '0',
+                user.value!.unreadNotificationCount?.toString() ?? '0',
               ),
-              showBadge: (user.user?.unreadNotificationCount ?? 0) > 0,
+              showBadge: (user.value!.unreadNotificationCount ?? 0) > 0,
               // alignment: AlignmentDirectional.bottomCenter,
               // label: Text(
               //   user.user?.unreadNotificationCount?.toString() ?? '0',
@@ -122,104 +123,282 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             await hook.refetch();
             return;
           },
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      // onPressed: () {},
-                      onPressed: () => context.router.push(
-                        SearchRoute(autofoucus: true),
-                      ),
-                      iconSize: 30,
-                      icon: const Icon(Icons.search),
-                    ),
-                    IconButton(
-                      onPressed: () => NotificationApi().show(
-                        details: NotificationApi().releaseDetails(
-                            bigPictureUrl:
-                                'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg'),
-                        title: 'Test',
-                        body: 'W Test',
-                        payload: {'path': '/media/1'},
-                      ),
-                      icon: const Icon(Icons.notification_add),
-                    ),
-                    IconButton(
-                      onPressed: () => showDialog(
-                        context: context,
-                        builder: (context) => Dialog.fullscreen(
-                          child: Editor(),
+                    Row(
+                      children: [
+                        IconButton(
+                          // onPressed: () {},
+                          onPressed: () => context.router.push(
+                            SearchRoute(autofoucus: true),
+                          ),
+                          iconSize: 30,
+                          icon: const Icon(Icons.search),
                         ),
-                      ),
-                      icon: const Icon(Icons.edit),
-                    )
+                        IconButton(
+                          onPressed: () => NotificationApi().show(
+                            details: NotificationApi().releaseDetails(
+                                bigPictureUrl:
+                                    'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg'),
+                            title: 'Test',
+                            body: 'W Test',
+                            payload: {'path': '/media/1'},
+                          ),
+                          icon: const Icon(Icons.notification_add),
+                        ),
+                        IconButton(
+                          onPressed: () => showDialog(
+                            context: context,
+                            builder: (context) => Dialog.fullscreen(
+                              child: Editor(),
+                            ),
+                          ),
+                          icon: const Icon(Icons.edit),
+                        )
+                      ],
+                    ),
+                    _list(
+                      context,
+                      title: 'Releasing',
+                      isLoading: hook.result.isLoading,
+                      list: releases?.toList(),
+                      onViewMore: () =>
+                          context.router.push(const ReleaseCalenderRoute()),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
-                _list(
-                  context,
-                  title: 'Releasing',
-                  isLoading: hook.result.isLoading,
-                  list: releases?.toList(),
-                  onViewMore: () =>
-                      context.router.push(const ReleaseCalenderRoute()),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                if (watching?.entries != null) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      'Watching',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MediaQuery.removePadding(
-                        context: context,
-                        removeTop: true,
-                        child: Cards(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          list: watching!.entries!,
+              ),
+              // SliverList(delegate: SliverChildListDelegate([])),
+              if (watching?.entries?.isNotEmpty == true)
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Watching',
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
-                    ),
-                  )
-                ],
-                if (planning?.entries != null) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      'Planning',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MediaQuery.removePadding(
+                      MediaQuery.removePadding(
                         context: context,
                         removeTop: true,
-                        child: Cards(
+                        child: ListGroup(
+                          isEditable: true,
+                          group: watching!,
+                          type: Enum$MediaType.ANIME,
                           shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          list: planning!.entries!,
+                          // physics: const NeverScrollableScrollPhysics(),
+                          // list: watching!.entries!,
                         ),
-                      ),
-                    ),
-                  )
-                ]
-              ],
-            ),
+                      )
+                    ],
+                  ),
+                ),
+            ],
           ),
+          // child: NestedScrollView(
+          //   // physics: const AlwaysScrollableScrollPhysics(),
+          //   headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          //     // SliverList(
+          //     //   delegate: SliverChildListDelegate(
+          //     //     [
+          //     //       Row(
+          //     //         children: [
+          //     //           IconButton(
+          //     //             // onPressed: () {},
+          //     //             onPressed: () => context.router.push(
+          //     //               SearchRoute(autofoucus: true),
+          //     //             ),
+          //     //             iconSize: 30,
+          //     //             icon: const Icon(Icons.search),
+          //     //           ),
+          //     //           IconButton(
+          //     //             onPressed: () => NotificationApi().show(
+          //     //               details: NotificationApi().releaseDetails(
+          //     //                   bigPictureUrl:
+          //     //                       'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg'),
+          //     //               title: 'Test',
+          //     //               body: 'W Test',
+          //     //               payload: {'path': '/media/1'},
+          //     //             ),
+          //     //             icon: const Icon(Icons.notification_add),
+          //     //           ),
+          //     //           IconButton(
+          //     //             onPressed: () => showDialog(
+          //     //               context: context,
+          //     //               builder: (context) => Dialog.fullscreen(
+          //     //                 child: Editor(),
+          //     //               ),
+          //     //             ),
+          //     //             icon: const Icon(Icons.edit),
+          //     //           )
+          //     //         ],
+          //     //       ),
+          //     //       _list(
+          //     //         context,
+          //     //         title: 'Releasing',
+          //     //         isLoading: hook.result.isLoading,
+          //     //         list: releases?.toList(),
+          //     //         onViewMore: () =>
+          //     //             context.router.push(const ReleaseCalenderRoute()),
+          //     //       ),
+          //     //       const SizedBox(
+          //     //         height: 10,
+          //     //       ),
+          //     //       if (watching?.entries != null) ...[
+          //     //         Padding(
+          //     //           padding: const EdgeInsets.only(left: 8.0),
+          //     //           child: Text(
+          //     //             'Watching',
+          //     //             style: Theme.of(context).textTheme.titleMedium,
+          //     //           ),
+          //     //         ),
+          //     //         Padding(
+          //     //           padding: const EdgeInsets.all(8.0),
+          //     //           child: MediaQuery.removePadding(
+          //     //             context: context,
+          //     //             removeTop: true,
+          //     //             child: ListGroup(
+          //     //               group: watching!,
+          //     //               type: Enum$MediaType.ANIME,
+          //     //               // shrinkWrap: true,
+          //     //               // physics: const NeverScrollableScrollPhysics(),
+          //     //               // list: watching!.entries!,
+          //     //             ),
+          //     //           ),
+          //     //         )
+          //     //       ],
+          //     //       if (planning?.entries != null) ...[
+          //     //         Padding(
+          //     //           padding: const EdgeInsets.only(left: 8.0),
+          //     //           child: Text(
+          //     //             'Planning',
+          //     //             style: Theme.of(context).textTheme.titleMedium,
+          //     //           ),
+          //     //         ),
+          //     //         Flexible(
+          //     //           child: Padding(
+          //     //             padding: const EdgeInsets.all(8.0),
+          //     //             child: MediaQuery.removePadding(
+          //     //               context: context,
+          //     //               removeTop: true,
+          //     //               child: Cards(
+          //     //                 shrinkWrap: true,
+          //     //                 physics: const NeverScrollableScrollPhysics(),
+          //     //                 list: planning!.entries!,
+          //     //               ),
+          //     //             ),
+          //     //           ),
+          //     //         )
+          //     //       ]
+          //     //     ],
+          //     //   ),
+          //     // ),
+          //   ],
+          //   body: ListView(
+          //     // mainAxisSize: MainAxisSize.min,
+          //     // crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Row(
+          //         children: [
+          //           IconButton(
+          //             // onPressed: () {},
+          //             onPressed: () => context.router.push(
+          //               SearchRoute(autofoucus: true),
+          //             ),
+          //             iconSize: 30,
+          //             icon: const Icon(Icons.search),
+          //           ),
+          //           IconButton(
+          //             onPressed: () => NotificationApi().show(
+          //               details: NotificationApi().releaseDetails(
+          //                   bigPictureUrl:
+          //                       'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg'),
+          //               title: 'Test',
+          //               body: 'W Test',
+          //               payload: {'path': '/media/1'},
+          //             ),
+          //             icon: const Icon(Icons.notification_add),
+          //           ),
+          //           IconButton(
+          //             onPressed: () => showDialog(
+          //               context: context,
+          //               builder: (context) => Dialog.fullscreen(
+          //                 child: Editor(),
+          //               ),
+          //             ),
+          //             icon: const Icon(Icons.edit),
+          //           )
+          //         ],
+          //       ),
+          //       _list(
+          //         context,
+          //         title: 'Releasing',
+          //         isLoading: hook.result.isLoading,
+          //         list: releases?.toList(),
+          //         onViewMore: () =>
+          //             context.router.push(const ReleaseCalenderRoute()),
+          //       ),
+          //       const SizedBox(
+          //         height: 10,
+          //       ),
+          //       if (watching?.entries != null) ...[
+          //         Padding(
+          //           padding: const EdgeInsets.only(left: 8.0),
+          //           child: Text(
+          //             'Watching',
+          //             style: Theme.of(context).textTheme.titleMedium,
+          //           ),
+          //         ),
+          //         Padding(
+          //           padding: const EdgeInsets.all(8.0),
+          //           child: MediaQuery.removePadding(
+          //             context: context,
+          //             removeTop: true,
+          //             child: ListGroup(
+          //               group: watching!,
+          //               type: Enum$MediaType.ANIME,
+          //               // shrinkWrap: true,
+          //               // physics: const NeverScrollableScrollPhysics(),
+          //               // list: watching!.entries!,
+          //             ),
+          //           ),
+          //         )
+          //       ],
+          //       if (planning?.entries != null) ...[
+          //         Padding(
+          //           padding: const EdgeInsets.only(left: 8.0),
+          //           child: Text(
+          //             'Planning',
+          //             style: Theme.of(context).textTheme.titleMedium,
+          //           ),
+          //         ),
+          //         Flexible(
+          //           child: Padding(
+          //             padding: const EdgeInsets.all(8.0),
+          //             child: MediaQuery.removePadding(
+          //               context: context,
+          //               removeTop: true,
+          //               child: Cards(
+          //                 shrinkWrap: true,
+          //                 physics: const NeverScrollableScrollPhysics(),
+          //                 list: planning!.entries!,
+          //               ),
+          //             ),
+          //           ),
+          //         )
+          //       ]
+          //     ],
+          //   ),
+          // ),
         ),
       ),
     );

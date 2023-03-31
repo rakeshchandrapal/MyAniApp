@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 var spoilerRegex = RegExp(r'~!(.*?)!~', dotAll: true);
 var routesRegex = RegExp(r'https://anilist.co/((?:character|staff)/[0-9]+)');
-var imageRegex = RegExp(r'img(?<height>[0-9]+)?\((?<url>.*?)\)', dotAll: true);
+var imageRegex = RegExp(r'img\s?(\d+%?)?\s?\((.[\S]+)\)', dotAll: true);
 var centerRegex = RegExp(r'~{3}(.*?)~{3}', dotAll: true);
 
 class Markdown extends StatelessWidget {
@@ -19,6 +19,7 @@ class Markdown extends StatelessWidget {
   final bool shrinkWrap;
   final bool selectable;
   final ScrollPhysics? physics;
+  final Color? color;
   const Markdown({
     super.key,
     required this.data,
@@ -27,10 +28,23 @@ class Markdown extends StatelessWidget {
     this.shrinkWrap = true,
     this.selectable = false,
     this.physics,
+    this.color,
+  });
+
+  const Markdown.transparent({
+    super.key,
+    required this.data,
+    this.padding = const EdgeInsets.all(8),
+    this.hasHtml = false,
+    this.shrinkWrap = true,
+    this.selectable = false,
+    this.physics,
+    this.color = const Color(0x00ffffff),
   });
 
   @override
   Widget build(BuildContext context) {
+    // print(data);
     var markdown = data
         .replaceAllMapped(
           spoilerRegex,
@@ -40,16 +54,22 @@ class Markdown extends StatelessWidget {
         .replaceAllMapped(
           imageRegex,
           (match) =>
-              '<img width="${match.group(1)}" src="${match.group(2)}" />',
+              '\n\n<img ${match.group(1) != null && !match.group(1).toString().contains('%') ? 'width="${match.group(1)}"' : ''} src="${match.group(2)}" />\n\n',
         );
-    // .replaceAll('\n', '\n\n');
 
-    return Padding(
-      padding: padding,
+    return Container(
+      margin: padding,
+      // color: Theme.of(context).colorScheme.onSecondary.withAlpha(160),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: color ??
+            Theme.of(context).colorScheme.secondaryContainer.withAlpha(100),
+      ),
       // child: widget,
       child: MediaQuery.removePadding(
         context: context,
         removeTop: true,
+        removeLeft: true,
         child: MarkdownWidget(
           data: markdown,
           shrinkWrap: shrinkWrap,
@@ -62,7 +82,8 @@ class Markdown extends StatelessWidget {
               ),
               const PConfig(
                 textStyle: TextStyle(),
-              )
+              ),
+              const CodeConfig(style: TextStyle()),
             ],
           ),
           markdownGeneratorConfig: MarkdownGeneratorConfig(
@@ -75,6 +96,8 @@ class Markdown extends StatelessWidget {
   }
 
   onTapLink(BuildContext context, String href) {
+    if (href.isEmpty) return;
+
     if (spoilerRegex.hasMatch(href)) {
       return _openSpoiler(
         context,
@@ -106,7 +129,7 @@ class Markdown extends StatelessWidget {
       builder: (context) => AlertDialog(
         content: SizedBox(
           width: double.maxFinite,
-          child: Markdown(
+          child: Markdown.transparent(
             data: text,
           ),
         ),

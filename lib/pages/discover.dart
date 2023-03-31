@@ -6,17 +6,16 @@ import 'package:MyAniApp/utils.dart';
 import 'package:MyAniApp/widgets/media_card.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql/client.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class DiscoveryPage extends HookWidget {
+class DiscoveryPage extends HookConsumerWidget {
   const DiscoveryPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var user = context.watch<User>();
+  Widget build(BuildContext context, ref) {
+    var user = ref.watch(userProvider);
     var date = formatDate();
 
     var hook = useQuery$Discovery(
@@ -142,7 +141,7 @@ class DiscoveryPage extends HookWidget {
                 Wrap(
                   children: [
                     for (var genre in genre.result.parsedData!.genres!)
-                      if (user.user?.options?.displayAdultContent == false &&
+                      if (user.value?.options?.displayAdultContent == false &&
                           genre == 'Hentai')
                         const SizedBox()
                       else

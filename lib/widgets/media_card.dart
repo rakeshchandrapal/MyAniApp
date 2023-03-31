@@ -136,10 +136,10 @@ class Sheet extends StatelessWidget {
                     ],
                   ),
                 ),
-              Markdown(
+              Markdown.transparent(
                 data: media.description ?? '',
                 // controller: scrollController,
-                padding: const EdgeInsets.all(0),
+                padding: EdgeInsets.zero,
                 hasHtml: true,
               ),
             ],

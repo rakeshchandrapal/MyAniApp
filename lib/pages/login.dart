@@ -5,21 +5,21 @@ import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/routes.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 var accessRegex = RegExp('(?:access_token=)(.+)', dotAll: true);
 
 @RoutePage()
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<ConsumerStatefulWidget> {
   bool clicked = false;
   final Uri toLaunch = Uri(
     scheme: 'https',
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
         var middle = fragment.indexOf('&');
         var accessToken = fragment.substring(start + 1, middle);
         if (accessToken == null) return;
-        var settings = context.read<SettingsProvider>();
+        var settings = ref.read(settingsProvider.notifier);
         // var instance = await SharedPreferences.getInstance();
         settings.login(accessToken);
         // await instance.setString('token', accessToken);
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var settings = context.watch<SettingsProvider>();
+    var settings = ref.watch(settingsProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    // var settings = await SharedPreferences.getInstance();
+                    var settings = ref.read(settingsProvider.notifier);
                     settings.login(myController.text).then((value) {
                       context.router.pushNamed('/');
                     });

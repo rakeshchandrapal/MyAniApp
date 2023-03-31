@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:MyAniApp/graphql/Media.graphql.dart';
-import 'package:MyAniApp/graphql/schema.graphql.dart';
 import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/routes.gr.dart';
 import 'package:MyAniApp/widgets/image.dart';
@@ -16,7 +15,8 @@ class GridCards extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool shrinkWrap;
   final Widget Function(Fragment$BasicMedia media, ListStyle style)? underTitle;
-  final List<Widget> Function(Fragment$BasicMedia media)? gridChips;
+  final List<Widget> Function(
+      Fragment$BasicMedia media, Fragment$MediaListEntry? entry)? gridChips;
   const GridCards({
     super.key,
     required this.list,
@@ -95,92 +95,9 @@ class GridCards extends StatelessWidget {
                             ),
                           ),
                         ),
-                        if (gridChips != null) ...gridChips!(media),
-                        if (entry is Fragment$MediaListEntry) ...[
-                          if (entry.status == Enum$MediaListStatus.CURRENT)
-                            Mutation$SaveMediaListEntry$Widget(
-                              options:
-                                  WidgetOptions$Mutation$SaveMediaListEntry(
-                                onCompleted: (p0, p1) => {updateList?.call()},
-                              ),
-                              builder: (p0, p1) {
-                                return Positioned(
-                                  bottom: 5,
-                                  right: 5,
-                                  child: Container(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(4, 2, 4, 2),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .surfaceVariant
-                                          .withOpacity(0.9),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          height: 18,
-                                          width: 30,
-                                          child: ElevatedButton(
-                                            onPressed: () => p0(
-                                              variables:
-                                                  Variables$Mutation$SaveMediaListEntry(
-                                                id: entry.id,
-                                                progress:
-                                                    (entry.progress ?? 0) + 1,
-                                              ),
-                                            ),
-                                            style: ButtonStyle(
-                                              padding:
-                                                  const MaterialStatePropertyAll<
-                                                          EdgeInsets>(
-                                                      EdgeInsets.zero),
-                                              elevation:
-                                                  const MaterialStatePropertyAll<
-                                                      double>(0),
-                                              shape: MaterialStatePropertyAll<
-                                                  RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                              ),
-                                              backgroundColor:
-                                                  const MaterialStatePropertyAll<
-                                                          Color>(
-                                                      Colors.transparent),
-                                            ),
-                                            child: Text(
-                                              '+1',
-                                              style: TextStyle(
-                                                fontSize: Theme.of(context)
-                                                    .textTheme
-                                                    .labelSmall
-                                                    ?.fontSize,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '${entry.progress}/${entry.media!.episodes ?? entry.media!.chapters ?? '??'}',
-                                          style: TextStyle(
-                                            fontSize: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall
-                                                ?.fontSize,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                        ],
+                        if (gridChips != null)
+                          ...gridChips!(media,
+                              entry is Fragment$MediaListEntry ? entry : null),
                       ],
                     ),
                   ),
@@ -206,6 +123,45 @@ class GridCards extends StatelessWidget {
               );
             })
         ],
+      ),
+    );
+  }
+}
+
+class GridChip extends StatelessWidget {
+  const GridChip({
+    super.key,
+    required this.child,
+    this.top,
+    this.bottom,
+    this.right,
+    this.left,
+  });
+  final Widget child;
+  final double? top;
+  final double? bottom;
+  final double? right;
+  final double? left;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: bottom,
+      top: top,
+      right: right,
+      left: left,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.9),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: DefaultTextStyle(
+          style: TextStyle(
+            fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
+          ),
+          child: child,
+        ),
       ),
     );
   }

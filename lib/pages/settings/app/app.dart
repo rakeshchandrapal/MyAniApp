@@ -2,16 +2,16 @@ import 'package:MyAniApp/providers/settings.dart';
 import 'package:MyAniApp/routes.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:provider/provider.dart';
 
 @RoutePage()
-class AppSettingsPage extends StatelessWidget {
+class AppSettingsPage extends ConsumerWidget {
   const AppSettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var settings = context.watch<SettingsProvider>();
+  Widget build(BuildContext context, ref) {
+    var settings = ref.watch(settingsProvider);
     var theme = settings.theme;
 
     return Scaffold(
@@ -37,7 +37,9 @@ class AppSettingsPage extends StatelessWidget {
               child: RadioGroup<ThemeMode>.builder(
                 groupValue: theme,
                 onChanged: (p0) {
-                  settings.changeTheme(p0 ?? ThemeMode.system);
+                  ref
+                      .read(settingsProvider.notifier)
+                      .changeTheme(p0 ?? ThemeMode.system);
                 },
                 items: ThemeMode.values,
                 itemBuilder: (item) {
@@ -55,6 +57,10 @@ class AppSettingsPage extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            ListTile(
+              title: const Text('View Colors'),
+              onTap: () => context.router.push(const ColorsRoute()),
             ),
             ListTile(
               title: const Text('Anime List Settings'),
