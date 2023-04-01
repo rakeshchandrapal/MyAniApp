@@ -3,7 +3,7 @@
 > **Note** IOS is planned to be supported but as I have no way to test on IOS devices
 
 A Anilist mobile app.
-
+ 
 # Download
 Check [releases](https://github.com/MyAniApp/MyAniApp/releases) for the lasest version. Download the apk and install. 
 
