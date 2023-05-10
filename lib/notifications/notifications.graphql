@@ -1,0 +1,199 @@
+query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = true) {
+  Page(page: $page) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    notifications(type_in: $types, resetNotificationCount: $reset) {
+      ... on AiringNotification {
+        id
+        type
+        episode
+        contexts
+        media {
+          ...Media
+        }
+        createdAt
+      }
+      ... on RelatedMediaAdditionNotification {
+        id
+        type
+        context
+        media {
+          ...Media
+        }
+        createdAt
+      }
+      ... on FollowingNotification {
+        id
+        type
+        context
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ActivityMessageNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ActivityMentionNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ActivityReplyNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ActivityReplySubscribedNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ActivityLikeNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ActivityReplyLikeNotification {
+        id
+        type
+        context
+        activityId
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ThreadCommentMentionNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ThreadCommentReplyNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ThreadCommentSubscribedNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ThreadCommentLikeNotification {
+        id
+        type
+        context
+        commentId
+        thread {
+          id
+          title
+        }
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on ThreadLikeNotification {
+        id
+        type
+        context
+        thread {
+          id
+          title
+        }
+        user {
+          ...User
+        }
+        createdAt
+      }
+      ... on MediaDataChangeNotification {
+        id
+        type
+        context
+        media {
+          ...Media
+        }
+        reason
+        createdAt
+      }
+      ... on MediaMergeNotification {
+        id
+        type
+        context
+        media {
+          ...Media
+        }
+        deletedMediaTitles
+        reason
+        createdAt
+      }
+      ... on MediaDeletionNotification {
+        id
+        type
+        context
+        deletedMediaTitle
+        reason
+        createdAt
+      }
+    }
+  }
+}

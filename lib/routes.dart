@@ -1,75 +1,58 @@
-import 'package:MyAniApp/providers/graphql.dart';
-import 'package:MyAniApp/providers/settings.dart';
-import 'package:MyAniApp/routes.gr.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:myaniapp/providers/settings.dart';
+import 'package:myaniapp/routes.gr.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @AutoRouterConfig()
-class AppRouter extends $AppRouter {
+class Router extends $Router {
   @override
   final List<AutoRoute> routes = [
-    /// routes go here
     AutoRoute(
-      page: EmptyRouterRoute.page,
+      page: EmptyRoute.page,
       path: '/',
       guards: [AuthGuard()],
       children: [
-        AutoRoute(page: LoginRoute.page, path: 'login'),
-        AutoRoute(page: ProfileRoute.page, path: 'profile'),
-        AutoRoute(page: AAnimeListRoute.page, path: 'profile/list/anime'),
-        AutoRoute(page: MMangaListRoute.page, path: 'profile/list/manga'),
-        AutoRoute(page: MediaRoute.page, path: 'media/:id'),
-        AutoRoute(page: ReleaseCalenderRoute.page, path: 'releasing'),
-        AutoRoute(page: ActivityRoute.page, path: 'activity/:id'),
-        AutoRoute(page: CharacterRoute.page, path: 'character/:id'),
-        AutoRoute(page: NotificationsRoute.page, path: 'notifications'),
-        AutoRoute(page: RecommendationsRoute.page, path: 'recommendations'),
-        AutoRoute(page: SearchRoute.page, path: 'search'),
         AutoRoute(
-          page: EmptyRouterRoute.page,
-          path: 'settings',
+          page: HomeRoute.page,
+          path: 'home',
           children: [
-            AutoRoute(page: SettingsRoute.page, path: ''),
-            AutoRoute(
-              page: EmptyRouterRoute.page,
-              path: 'app',
-              children: [
-                AutoRoute(page: AppSettingsRoute.page, path: ''),
-                AutoRoute(
-                  page: FallbackListSettingRoute.page,
-                  path: 'lists/fallback',
-                ),
-                AutoRoute(
-                  page: AnimeListSettingRoute.page,
-                  path: 'lists/anime',
-                ),
-                AutoRoute(
-                  page: MangaListSettingRoute.page,
-                  path: 'lists/manga',
-                ),
-              ],
-            ),
-            AutoRoute(page: AnilistSettingsRoute.page, path: 'anilist'),
-          ],
-        ),
-        AutoRoute(page: StaffRoute.page, path: 'staff/:id'),
-        AutoRoute(page: ThreadRoute.page, path: 'thread/:id'),
-        AutoRoute(page: ColorsRoute.page, path: 'colors'),
-        AutoRoute(
-          page: HomeRouteTabs.page,
-          path: '',
-          guards: [AuthGuard()],
-          children: [
-            AutoRoute(page: HomeRoute.page, path: ''),
-            AutoRoute(page: AnimeListRoute.page, path: 'lists/anime'),
-            AutoRoute(page: MangaListRoute.page, path: 'lists/manga'),
-            AutoRoute(page: DiscoveryRoute.page, path: 'discovery'),
+            AutoRoute(page: OverviewRoute.page, path: ''),
+            AutoRoute(page: AnimeListRoute.page, path: 'animelist'),
+            AutoRoute(page: MangaListRoute.page, path: 'mangalist'),
+            AutoRoute(page: DiscoverRoute.page, path: 'discover'),
             AutoRoute(page: SocialRoute.page, path: 'social'),
           ],
         ),
+        RedirectRoute(path: '', redirectTo: 'home'),
+        AutoRoute(
+          page: SettingsRoute.page,
+          path: 'settings',
+          children: [
+            AutoRoute(page: AppSettingsRoute.page, path: ''),
+            AutoRoute(page: ColorsRoute.page, path: 'colors'),
+          ],
+        ),
+        AutoRoute(page: MediaRoute.page, path: 'media'),
+        AutoRoute(page: CharacterRoute.page, path: 'character'),
+        AutoRoute(page: StaffRoute.page, path: 'staff'),
+        AutoRoute(page: SearchRoute.page, path: 'search'),
+        AutoRoute(page: ReviewRoute.page, path: 'review'),
+        AutoRoute(page: ThreadRoute.page, path: 'thread'),
+        AutoRoute(page: ActivityRoute.page, path: 'activity'),
+        AutoRoute(page: ThreadsRoute.page, path: 'threads'),
+        AutoRoute(page: ProfileRoute.page, path: 'profile'),
+        AutoRoute(page: ProfileAnimeListRoute.page, path: 'profile/list/anime'),
+        AutoRoute(page: ProfileMangaListRoute.page, path: 'profile/list/manga'),
+        AutoRoute(
+            page: FavoriteAnimeRoute.page, path: 'profile/favorite/anime'),
+        AutoRoute(
+            page: FavoriteMangaRoute.page, path: 'profile/favorite/manga'),
+        AutoRoute(page: NotificationsRoute.page, path: 'notifications')
       ],
     ),
+    AutoRoute(page: LoginRoute.page, path: '/login'),
+    AutoRoute(page: AniLoginRoute.page, path: '/login/ani'),
+    AutoRoute(page: TokenLoginRoute.page, path: '/login/token'),
   ];
 }
 
@@ -80,7 +63,7 @@ class AuthGuard extends AutoRouteGuard {
     // true to resume/continue navigation or false to abort navigation
     var settings = await SharedPreferences.getInstance();
     await settings.reload();
-    var token = settings.getString(SettingStrings.token.setting);
+    var token = settings.getString(Setting.token.setting);
     if (token != null) {
       // if user is authenticated we continue
       resolver.next(true);
@@ -91,14 +74,4 @@ class AuthGuard extends AutoRouteGuard {
   }
 }
 
-@RoutePage()
-class EmptyRouterPage extends StatelessWidget {
-  const EmptyRouterPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: GraphQlProvider(child: AutoRouter()));
-  }
-}
-
-final appRouter = AppRouter();
+final appRouter = Router();

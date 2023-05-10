@@ -1,0 +1,15 @@
+query Home($page: Int = 1, $perPage: Int, $userId: Int!, $type: MediaType) {
+  releasing: Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      hasNextPage
+    }
+    media(onList: true, status_in: [RELEASING, NOT_YET_RELEASED]) {
+      ...ReleasingMedia
+    }
+  }
+  list: MediaListCollection(userId: $userId, type: $type, status_in: [CURRENT], sort: [UPDATED_TIME_DESC]) {
+    lists {
+      ...ListGroup
+    }
+  }
+}

@@ -1,0 +1,31 @@
+query Character($id: Int, $page: Int, $onList: Boolean) {
+  Character(id: $id) {
+    id
+    description
+    gender
+    age
+    bloodType
+    isFavourite
+    isFavouriteBlocked
+    favourites
+    name {
+      userPreferred
+    }
+    image {
+      large
+    }
+    dateOfBirth {
+      ...FuzzyDate
+    }
+    media(sort: [POPULARITY_DESC], page: $page, onList: $onList) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        node {
+          ...Media
+        }
+      }
+    }
+  }
+}

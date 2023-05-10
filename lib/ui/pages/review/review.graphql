@@ -1,0 +1,21 @@
+query Review($id: Int) {
+  Review(id: $id) {
+    id
+    body
+    rating
+    ratingAmount
+    userRating
+    score
+    createdAt
+    user {
+      id
+      name
+    }
+    media {
+      bannerImage
+      title {
+        userPreferred
+      }
+    }
+  }
+}

@@ -1,15 +1,16 @@
-# MyAniApp
+# myaniapp
 
-> **Note** IOS is planned to be supported but as I have no way to test on IOS devices
+A new Flutter project.
 
-A Anilist mobile app.
- 
-# Download
-Check [releases](https://github.com/MyAniApp/MyAniApp/releases) for the lasest version. Download the apk and install. 
+## Getting Started
 
-## Until I think the app is finished ill make prs everyday I work on it
+This project is a starting point for a Flutter application.
 
-## Why is Windows suppored?
+A few resources to get you started if this is your first Flutter project:
 
-Technically it is supported but only for testing. Testing on emulators are slow for me.
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

@@ -1,0 +1,122 @@
+fragment FuzzyDate on FuzzyDate {
+  day
+  month
+  year
+}
+
+fragment PageInfo on PageInfo {
+  currentPage
+  hasNextPage
+}
+
+fragment User on User {
+  id
+  name
+  donatorTier
+  donatorBadge
+  moderatorRoles
+  avatar {
+    large
+  }
+}
+
+fragment ReleasingMedia on Media {
+  ...Media
+  nextAiringEpisode {
+    airingAt
+    timeUntilAiring
+    episode
+  }
+  airingSchedule(notYetAired: false) {
+    edges {
+      node {
+        airingAt
+        timeUntilAiring
+        episode
+      }
+    }
+  }
+}
+
+fragment ListGroup on MediaListGroup {
+  name
+  isCustomList
+  isSplitCompletedList
+  status
+  entries {
+    ...MediaListEntry
+  }
+}
+
+fragment MediaListEntry on MediaList {
+  id
+  mediaId
+  status
+  updatedAt
+  status
+  progress
+  progressVolumes
+  priority
+  notes
+  hiddenFromStatusLists
+  private
+  repeat
+  score(format: POINT_100)
+  startedAt {
+    ...FuzzyDate
+  }
+  completedAt {
+    ...FuzzyDate
+  }
+  media {
+    ...Media
+    episodes
+    chapters
+  }
+}
+
+fragment Media on Media {
+  id
+  type
+  isAdult
+  genres
+  episodes
+  format
+  chapters
+  description
+  title {
+    userPreferred
+  }
+  coverImage {
+    large
+  }
+}
+
+fragment Thread on Thread {
+  id
+  title
+  replyCount
+  viewCount
+  replyCommentId
+  repliedAt
+  createdAt
+  isSticky
+  categories {
+    id
+    name
+  }
+  user {
+    id
+    name
+    avatar {
+      large
+    }
+  }
+  replyUser {
+    id
+    name
+    avatar {
+      large
+    }
+  }
+}

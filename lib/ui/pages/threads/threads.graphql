@@ -1,0 +1,10 @@
+query Threads($page: Int, $subscribed: Boolean, $categoryId: Int, $mediaCategoryId: Int, $search: String, $sort: [ThreadSort]) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    threads(subscribed: $subscribed, categoryId: $categoryId, mediaCategoryId: $mediaCategoryId, search: $search, sort: $sort) {
+      ...Thread
+    }
+  }
+}

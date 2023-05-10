@@ -1,0 +1,77 @@
+query Media($id: Int) {
+  Media(id: $id) {
+    ...Media
+    bannerImage
+    favourites
+    averageScore
+    duration
+    status(version: 2)
+    season
+    seasonYear
+    source
+    hashtag
+    volumes
+    coverImage {
+      extraLarge
+    }
+    studios(isMain: true) {
+      nodes {
+        id
+        name
+      }
+    }
+    startDate {
+      ...FuzzyDate
+    }
+    endDate {
+      ...FuzzyDate
+    }
+    tags {
+      name
+      rank
+      isMediaSpoiler
+    }
+    relations {
+      edges {
+        relationType(version: 2)
+        node {
+          ...Media
+        }
+      }
+    }
+    externalLinks {
+      site
+      url
+      color
+      icon
+      isDisabled
+    }
+    trailer {
+      site
+      id
+    }
+    characters {
+      nodes {
+        id
+      }
+    }
+    staff {
+      nodes {
+        id
+      }
+    }
+    recommendations {
+      nodes {
+        id
+      }
+    }
+    reviews {
+      nodes {
+        id
+      }
+    }
+    mediaListEntry {
+      status
+    }
+  }
+}

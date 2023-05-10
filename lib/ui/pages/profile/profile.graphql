@@ -1,0 +1,44 @@
+query User($name: String) {
+  User(name: $name) {
+    ...User
+    bannerImage
+    about
+    statistics {
+      anime {
+        count
+        episodesWatched
+        minutesWatched
+        meanScore
+        genres(limit: 4, sort: COUNT_DESC) {
+          ...GenreStat
+        }
+      }
+      manga {
+        count
+        chaptersRead
+        volumesRead
+        meanScore
+        genres(limit: 4, sort: COUNT_DESC) {
+          ...GenreStat
+        }
+      }
+    }
+    favourites {
+      anime(perPage: 4) {
+        nodes {
+          ...Media
+        }
+      }
+      manga(perPage: 4) {
+        nodes {
+          ...Media
+        }
+      }
+    }
+  }
+}
+
+fragment GenreStat on UserGenreStatistic {
+  genre
+  count
+}

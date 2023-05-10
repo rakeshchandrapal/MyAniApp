@@ -1,0 +1,15 @@
+query FavoriteMangas($name: String, $page: Int) {
+  User(name: $name) {
+    id
+    favourites {
+      manga(page: $page) {
+        pageInfo {
+          ...PageInfo
+        }
+        nodes {
+          ...Media
+        }
+      }
+    }
+  }
+}

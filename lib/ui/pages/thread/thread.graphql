@@ -1,0 +1,39 @@
+query Thread($id: Int) {
+  Thread(id: $id) {
+    id
+    title
+    body
+    userId
+    replyCount
+    viewCount
+    isLocked
+    isSticky
+    isSubscribed
+    isLiked
+    likeCount
+    repliedAt
+    createdAt
+    user {
+      id
+      name
+      avatar {
+        large
+      }
+    }
+    categories {
+      id
+      name
+    }
+    mediaCategories {
+      id
+      title {
+        userPreferred
+      }
+      coverImage {
+        large
+      }
+      type
+      format
+    }
+  }
+}

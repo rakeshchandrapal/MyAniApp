@@ -141,6 +141,34 @@ type Query {
     id_in: [Int]
     sort: [ThreadSort]
   ): Thread
+  Review(id: Int, mediaId: Int, userId: Int, mediaType: MediaType): Review
+  MediaList(
+    id: Int
+    userId: Int
+    userName: String
+    type: MediaType
+    status: MediaListStatus
+    mediaId: Int
+    isFollowing: Boolean
+    notes: String
+    startedAt: Int
+    completedAt: Int
+    compareWithAuthList: Boolean
+    userId_in: [Int]
+    status_in: [MediaListStatus]
+    status_not_in: [MediaListStatus]
+    status_not: MediaListStatus
+    mediaId_in: [Int]
+    mediaId_not_in: [Int]
+    notes_like: String
+    startedAt_greater: Int
+    startedAt_lesser: Int
+    startedAt_like: String
+    completedAt_greater: Int
+    completedAt_lesser: Int
+    completedAt_like: String
+    sort: [MediaListSort]
+  ): MediaList
 }
 
 type Mutation {
@@ -781,6 +809,9 @@ type Page {
     rating_lesser: Int
     sort: [RecommendationSort]
   ): [Recommendation]
+  reviews(id: Int, mediaId: Int, userId: Int, mediaType: MediaType, sort: [ReviewSort]): [Review]
+  followers(userId: Int!, sort: [UserSort]): [User]
+  following(userId: Int!, sort: [UserSort]): [User]
   # likes(likeableId: LikeableType): [User]
 }
 
@@ -893,7 +924,7 @@ enum MediaListSort {
 }
 
 type Media {
-  id: Int
+  id: Int!
   idMal: Int
   title: MediaTitle
   type: MediaType
@@ -1842,4 +1873,10 @@ enum MediaSource {
   COMIC
   MULTIMEDIA_PROJECT
   PICTURE_BOOK
+}
+
+input FuzzyDateInput {
+  year: Int
+  month: Int
+  day: Int
 }

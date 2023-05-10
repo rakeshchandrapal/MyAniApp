@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.jonny" "\0"
-            VALUE "FileDescription", "anilist" "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "myaniapp" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "anilist" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.jonny. All rights reserved." "\0"
-            VALUE "OriginalFilename", "anilist.exe" "\0"
-            VALUE "ProductName", "anilist" "\0"
+            VALUE "InternalName", "myaniapp" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "myaniapp.exe" "\0"
+            VALUE "ProductName", "myaniapp" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

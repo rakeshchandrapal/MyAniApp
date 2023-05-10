@@ -1,0 +1,14 @@
+query Following($id: Int!, $page: Int) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    following(userId: $id, sort: USERNAME) {
+      id
+      name
+      avatar {
+        large
+      }
+    }
+  }
+}

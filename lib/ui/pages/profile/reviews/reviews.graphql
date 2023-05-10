@@ -1,0 +1,19 @@
+query Reviews($userId: Int, $page: Int) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    reviews(userId: $userId, sort: ID_DESC) {
+      id
+      summary
+      rating
+      score
+      media {
+        id
+        title {
+          userPreferred
+        }
+      }
+    }
+  }
+}

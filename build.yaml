@@ -10,9 +10,10 @@ targets:
               type: DateTime
               fromJsonFunctionName: dateTimeFromJson
               toJsonFunctionName: dateTimeToJson
-              import: package:flutter_app_2/graphql/scalars.dart
+              import: package:myaniapp/graphql/scalars.dart
             Json:
-              type: Map<String, dynamic>
+              type: dynamic
           clients:
-            - graphql
             - graphql_flutter
+          outputDirectory: '/lib/graphql/__generated'
+          generatedFileHeader: "// GENERATED FILE\n// DO NOT MODIFY\n// ignore_for_file: type=lint\n"
