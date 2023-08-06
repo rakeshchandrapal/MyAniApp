@@ -1,38 +1,29 @@
+import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-
-class Season {
-  Season() {
-    var date = DateTime.now();
-    var month = date.month;
-
-    year = date.year;
-    nextYear = DateTime(date.year, month + 3).year;
-    season = getSeason(month);
-    nextSeason = getSeason(month + 3);
-  }
-
-  late final Enum$MediaSeason nextSeason;
-  late final int nextYear;
-  late final Enum$MediaSeason season;
-  late final int year;
-
-  Enum$MediaSeason getSeason(int month) {
-    return month >= 0 && month <= 2
-        ? Enum$MediaSeason.WINTER
-        : month >= 3 && month <= 5
-            ? Enum$MediaSeason.SPRING
-            : month >= 6 && month <= 8
-                ? Enum$MediaSeason.SUMMER
-                : month >= 9 && month <= 11
-                    ? Enum$MediaSeason.FALL
-                    : Enum$MediaSeason.FALL;
-  }
-}
 
 DateTime dateFromTimestamp(int timestamp) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
 }
+
+String abbreviateNumber(num number) {
+  var f = NumberFormat.compact(locale: "en_US");
+  return f.format(number);
+}
+
+// String timeAgo(DateTime date) {
+//   var diff = DateTime.now().difference(date);
+
+//   print(diff.inHours);
+
+//   // less then 24 hours
+//   if (diff.inHours < 24) {
+//     return '${diff.inHours}h';
+//   } else if (diff.inDays < 30) {
+//     return '${diff.inDays}d';
+//   } else if (diff.y)
+
+//   return date.toString();
+// }
 
 bool isTodayFromTimestamp(int? timestamp) {
   if (timestamp == null) return false;
@@ -40,7 +31,8 @@ bool isTodayFromTimestamp(int? timestamp) {
   var date = dateFromTimestamp(timestamp);
   return now.year == date.year &&
       now.month == date.month &&
-      (now.day) == (date.day);
+      (now.day == date.day || now.day == (date.day + 1)) &&
+      now.hour < date.hour;
 }
 
 bool hasTimestampPassed(int? timestamp) {
@@ -57,6 +49,18 @@ List<Fragment$ReleasingMedia> sortReleases(
   return releases
       .where((element) {
         if (includeUnreleased) return true;
+        if (element?.airingSchedule != null &&
+            element?.nextAiringEpisode != null &&
+            isTodayFromTimestamp(element!.airingSchedule!.edges!
+                .firstWhere(
+                    (e) =>
+                        e!.node!.episode ==
+                        element.nextAiringEpisode!.episode - 1,
+                    orElse: () => null)
+                ?.node
+                ?.airingAt)) {
+          return true;
+        }
         return element?.airingSchedule != null &&
             element?.nextAiringEpisode != null &&
             dateFromTimestamp((element!.nextAiringEpisode?.airingAt ??

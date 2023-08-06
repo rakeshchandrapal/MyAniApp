@@ -1,0 +1,29 @@
+query DummyData {
+  Media(id: 1) {
+    description(asHtml: false)
+    title {
+      userPreferred
+    }
+    coverImage {
+      extraLarge
+    }
+  }
+}
+
+query Browsing {
+  trending: Page(page: 1, perPage: 10) {
+    media(sort: TRENDING_DESC, type: ANIME) {
+      ...MediaFragment
+    }
+  }
+  popular: Page(page: 1, perPage: 11) {
+    media(sort: POPULARITY_DESC, type: ANIME) {
+      ...MediaFragment
+    }
+  }
+  recent: Page(page: 1, perPage: 12) {
+    media(sort: ID_DESC, isAdult: false) {
+      ...MediaFragment
+    }
+  }
+}

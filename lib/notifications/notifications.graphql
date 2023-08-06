@@ -1,11 +1,7 @@
 query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = true) {
-  Page(page: $page) {
+  Page(page: $page, perPage: 50) {
     pageInfo {
-      total
-      perPage
-      currentPage
-      lastPage
-      hasNextPage
+      ...PageInfo
     }
     notifications(type_in: $types, resetNotificationCount: $reset) {
       ... on AiringNotification {
@@ -14,7 +10,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         episode
         contexts
         media {
-          ...Media
+          ...MediaFragment
         }
         createdAt
       }
@@ -23,7 +19,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         media {
-          ...Media
+          ...MediaFragment
         }
         createdAt
       }
@@ -32,7 +28,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -42,7 +38,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         context
         activityId
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -52,7 +48,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         context
         activityId
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -62,7 +58,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         context
         activityId
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -72,7 +68,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         context
         activityId
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -82,7 +78,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         context
         activityId
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -92,7 +88,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         context
         activityId
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -106,7 +102,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
           title
         }
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -120,7 +116,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
           title
         }
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -134,7 +130,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
           title
         }
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -148,7 +144,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
           title
         }
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -161,7 +157,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
           title
         }
         user {
-          ...User
+          ...UserFragment
         }
         createdAt
       }
@@ -170,7 +166,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         media {
-          ...Media
+          ...MediaFragment
         }
         reason
         createdAt
@@ -180,7 +176,7 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         media {
-          ...Media
+          ...MediaFragment
         }
         deletedMediaTitles
         reason

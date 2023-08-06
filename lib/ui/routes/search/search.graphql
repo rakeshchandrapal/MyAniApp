@@ -1,0 +1,48 @@
+query GenreCollection {
+  genres: GenreCollection
+  tags: MediaTagCollection {
+    name
+    description
+    category
+    isAdult
+  }
+}
+
+query Search(
+  $page: Int
+  $perPage: Int
+  $type: MediaType
+  $format: MediaFormat
+  $sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
+  $season: MediaSeason
+  $seasonYear: Int
+  $search: String
+  $year: String
+  $genres: [String]
+  $with_tags: [String]
+  $without_tags: [String]
+  $isAdult: Boolean = false
+  $onList: Boolean
+) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      ...PageInfo
+    }
+    media(
+      isAdult: $isAdult
+      type: $type
+      sort: $sort
+      format: $format
+      season: $season
+      seasonYear: $seasonYear
+      startDate_like: $year
+      search: $search
+      genre_in: $genres
+      tag_in: $with_tags
+      tag_not_in: $without_tags
+      onList: $onList
+    ) {
+      ...MediaFragment
+    }
+  }
+}

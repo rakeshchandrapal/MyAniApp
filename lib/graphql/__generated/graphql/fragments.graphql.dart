@@ -1,6 +1,7 @@
-// GENERATED FILE
-// DO NOT MODIFY
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'schema.graphql.dart';
@@ -454,8 +455,8 @@ extension ClientExtension$Fragment$PageInfo on graphql.GraphQLClient {
   }
 }
 
-class Fragment$User {
-  Fragment$User({
+class Fragment$UserFragment {
+  Fragment$UserFragment({
     required this.id,
     required this.name,
     this.donatorTier,
@@ -465,7 +466,7 @@ class Fragment$User {
     this.$__typename = 'User',
   });
 
-  factory Fragment$User.fromJson(Map<String, dynamic> json) {
+  factory Fragment$UserFragment.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$donatorTier = json['donatorTier'];
@@ -473,7 +474,7 @@ class Fragment$User {
     final l$moderatorRoles = json['moderatorRoles'];
     final l$avatar = json['avatar'];
     final l$$__typename = json['__typename'];
-    return Fragment$User(
+    return Fragment$UserFragment(
       id: (l$id as int),
       name: (l$name as String),
       donatorTier: (l$donatorTier as int?),
@@ -483,7 +484,8 @@ class Fragment$User {
           .toList(),
       avatar: l$avatar == null
           ? null
-          : Fragment$User$avatar.fromJson((l$avatar as Map<String, dynamic>)),
+          : Fragment$UserFragment$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -498,7 +500,7 @@ class Fragment$User {
 
   final List<Enum$ModRole?>? moderatorRoles;
 
-  final Fragment$User$avatar? avatar;
+  final Fragment$UserFragment$avatar? avatar;
 
   final String $__typename;
 
@@ -550,7 +552,7 @@ class Fragment$User {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$User) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$UserFragment) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -603,21 +605,22 @@ class Fragment$User {
   }
 }
 
-extension UtilityExtension$Fragment$User on Fragment$User {
-  CopyWith$Fragment$User<Fragment$User> get copyWith => CopyWith$Fragment$User(
+extension UtilityExtension$Fragment$UserFragment on Fragment$UserFragment {
+  CopyWith$Fragment$UserFragment<Fragment$UserFragment> get copyWith =>
+      CopyWith$Fragment$UserFragment(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$User<TRes> {
-  factory CopyWith$Fragment$User(
-    Fragment$User instance,
-    TRes Function(Fragment$User) then,
-  ) = _CopyWithImpl$Fragment$User;
+abstract class CopyWith$Fragment$UserFragment<TRes> {
+  factory CopyWith$Fragment$UserFragment(
+    Fragment$UserFragment instance,
+    TRes Function(Fragment$UserFragment) then,
+  ) = _CopyWithImpl$Fragment$UserFragment;
 
-  factory CopyWith$Fragment$User.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$User;
+  factory CopyWith$Fragment$UserFragment.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserFragment;
 
   TRes call({
     int? id,
@@ -625,22 +628,22 @@ abstract class CopyWith$Fragment$User<TRes> {
     int? donatorTier,
     String? donatorBadge,
     List<Enum$ModRole?>? moderatorRoles,
-    Fragment$User$avatar? avatar,
+    Fragment$UserFragment$avatar? avatar,
     String? $__typename,
   });
-  CopyWith$Fragment$User$avatar<TRes> get avatar;
+  CopyWith$Fragment$UserFragment$avatar<TRes> get avatar;
 }
 
-class _CopyWithImpl$Fragment$User<TRes>
-    implements CopyWith$Fragment$User<TRes> {
-  _CopyWithImpl$Fragment$User(
+class _CopyWithImpl$Fragment$UserFragment<TRes>
+    implements CopyWith$Fragment$UserFragment<TRes> {
+  _CopyWithImpl$Fragment$UserFragment(
     this._instance,
     this._then,
   );
 
-  final Fragment$User _instance;
+  final Fragment$UserFragment _instance;
 
-  final TRes Function(Fragment$User) _then;
+  final TRes Function(Fragment$UserFragment) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -653,7 +656,7 @@ class _CopyWithImpl$Fragment$User<TRes>
     Object? avatar = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$User(
+      _then(Fragment$UserFragment(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         name: name == _undefined || name == null
             ? _instance.name
@@ -669,22 +672,23 @@ class _CopyWithImpl$Fragment$User<TRes>
             : (moderatorRoles as List<Enum$ModRole?>?),
         avatar: avatar == _undefined
             ? _instance.avatar
-            : (avatar as Fragment$User$avatar?),
+            : (avatar as Fragment$UserFragment$avatar?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User$avatar<TRes> get avatar {
+  CopyWith$Fragment$UserFragment$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
-        ? CopyWith$Fragment$User$avatar.stub(_then(_instance))
-        : CopyWith$Fragment$User$avatar(local$avatar, (e) => call(avatar: e));
+        ? CopyWith$Fragment$UserFragment$avatar.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment$avatar(
+            local$avatar, (e) => call(avatar: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$User<TRes>
-    implements CopyWith$Fragment$User<TRes> {
-  _CopyWithStubImpl$Fragment$User(this._res);
+class _CopyWithStubImpl$Fragment$UserFragment<TRes>
+    implements CopyWith$Fragment$UserFragment<TRes> {
+  _CopyWithStubImpl$Fragment$UserFragment(this._res);
 
   TRes _res;
 
@@ -694,16 +698,16 @@ class _CopyWithStubImpl$Fragment$User<TRes>
     int? donatorTier,
     String? donatorBadge,
     List<Enum$ModRole?>? moderatorRoles,
-    Fragment$User$avatar? avatar,
+    Fragment$UserFragment$avatar? avatar,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User$avatar<TRes> get avatar =>
-      CopyWith$Fragment$User$avatar.stub(_res);
+  CopyWith$Fragment$UserFragment$avatar<TRes> get avatar =>
+      CopyWith$Fragment$UserFragment$avatar.stub(_res);
 }
 
-const fragmentDefinitionUser = FragmentDefinitionNode(
-  name: NameNode(value: 'User'),
+const fragmentDefinitionUserFragment = FragmentDefinitionNode(
+  name: NameNode(value: 'UserFragment'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
     name: NameNode(value: 'User'),
@@ -777,13 +781,13 @@ const fragmentDefinitionUser = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentUser = DocumentNode(definitions: [
-  fragmentDefinitionUser,
+const documentNodeFragmentUserFragment = DocumentNode(definitions: [
+  fragmentDefinitionUserFragment,
 ]);
 
-extension ClientExtension$Fragment$User on graphql.GraphQLClient {
-  void writeFragment$User({
-    required Fragment$User data,
+extension ClientExtension$Fragment$UserFragment on graphql.GraphQLClient {
+  void writeFragment$UserFragment({
+    required Fragment$UserFragment data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -791,14 +795,14 @@ extension ClientExtension$Fragment$User on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'User',
-            document: documentNodeFragmentUser,
+            fragmentName: 'UserFragment',
+            document: documentNodeFragmentUserFragment,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$User? readFragment$User({
+  Fragment$UserFragment? readFragment$UserFragment({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -806,26 +810,26 @@ extension ClientExtension$Fragment$User on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'User',
-          document: documentNodeFragmentUser,
+          fragmentName: 'UserFragment',
+          document: documentNodeFragmentUserFragment,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$User.fromJson(result);
+    return result == null ? null : Fragment$UserFragment.fromJson(result);
   }
 }
 
-class Fragment$User$avatar {
-  Fragment$User$avatar({
+class Fragment$UserFragment$avatar {
+  Fragment$UserFragment$avatar({
     this.large,
     this.$__typename = 'UserAvatar',
   });
 
-  factory Fragment$User$avatar.fromJson(Map<String, dynamic> json) {
+  factory Fragment$UserFragment$avatar.fromJson(Map<String, dynamic> json) {
     final l$large = json['large'];
     final l$$__typename = json['__typename'];
-    return Fragment$User$avatar(
+    return Fragment$UserFragment$avatar(
       large: (l$large as String?),
       $__typename: (l$$__typename as String),
     );
@@ -859,7 +863,8 @@ class Fragment$User$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$User$avatar) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$UserFragment$avatar) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$large = large;
@@ -876,22 +881,23 @@ class Fragment$User$avatar {
   }
 }
 
-extension UtilityExtension$Fragment$User$avatar on Fragment$User$avatar {
-  CopyWith$Fragment$User$avatar<Fragment$User$avatar> get copyWith =>
-      CopyWith$Fragment$User$avatar(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Fragment$UserFragment$avatar
+    on Fragment$UserFragment$avatar {
+  CopyWith$Fragment$UserFragment$avatar<Fragment$UserFragment$avatar>
+      get copyWith => CopyWith$Fragment$UserFragment$avatar(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Fragment$User$avatar<TRes> {
-  factory CopyWith$Fragment$User$avatar(
-    Fragment$User$avatar instance,
-    TRes Function(Fragment$User$avatar) then,
-  ) = _CopyWithImpl$Fragment$User$avatar;
+abstract class CopyWith$Fragment$UserFragment$avatar<TRes> {
+  factory CopyWith$Fragment$UserFragment$avatar(
+    Fragment$UserFragment$avatar instance,
+    TRes Function(Fragment$UserFragment$avatar) then,
+  ) = _CopyWithImpl$Fragment$UserFragment$avatar;
 
-  factory CopyWith$Fragment$User$avatar.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$User$avatar;
+  factory CopyWith$Fragment$UserFragment$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$UserFragment$avatar;
 
   TRes call({
     String? large,
@@ -899,16 +905,16 @@ abstract class CopyWith$Fragment$User$avatar<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$User$avatar<TRes>
-    implements CopyWith$Fragment$User$avatar<TRes> {
-  _CopyWithImpl$Fragment$User$avatar(
+class _CopyWithImpl$Fragment$UserFragment$avatar<TRes>
+    implements CopyWith$Fragment$UserFragment$avatar<TRes> {
+  _CopyWithImpl$Fragment$UserFragment$avatar(
     this._instance,
     this._then,
   );
 
-  final Fragment$User$avatar _instance;
+  final Fragment$UserFragment$avatar _instance;
 
-  final TRes Function(Fragment$User$avatar) _then;
+  final TRes Function(Fragment$UserFragment$avatar) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -916,7 +922,7 @@ class _CopyWithImpl$Fragment$User$avatar<TRes>
     Object? large = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$User$avatar(
+      _then(Fragment$UserFragment$avatar(
         large: large == _undefined ? _instance.large : (large as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -924,9 +930,9 @@ class _CopyWithImpl$Fragment$User$avatar<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$User$avatar<TRes>
-    implements CopyWith$Fragment$User$avatar<TRes> {
-  _CopyWithStubImpl$Fragment$User$avatar(this._res);
+class _CopyWithStubImpl$Fragment$UserFragment$avatar<TRes>
+    implements CopyWith$Fragment$UserFragment$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$UserFragment$avatar(this._res);
 
   TRes _res;
 
@@ -937,15 +943,13 @@ class _CopyWithStubImpl$Fragment$User$avatar<TRes>
       _res;
 }
 
-class Fragment$ReleasingMedia implements Fragment$Media {
+class Fragment$ReleasingMedia implements Fragment$MediaFragment {
   Fragment$ReleasingMedia({
     required this.id,
     this.type,
     this.isAdult,
     this.genres,
-    this.episodes,
     this.format,
-    this.chapters,
     this.description,
     this.title,
     this.coverImage,
@@ -959,9 +963,7 @@ class Fragment$ReleasingMedia implements Fragment$Media {
     final l$type = json['type'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
-    final l$episodes = json['episodes'];
     final l$format = json['format'];
-    final l$chapters = json['chapters'];
     final l$description = json['description'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
@@ -973,11 +975,9 @@ class Fragment$ReleasingMedia implements Fragment$Media {
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
-      episodes: (l$episodes as int?),
       format: l$format == null
           ? null
           : fromJson$Enum$MediaFormat((l$format as String)),
-      chapters: (l$chapters as int?),
       description: (l$description as String?),
       title: l$title == null
           ? null
@@ -1007,11 +1007,7 @@ class Fragment$ReleasingMedia implements Fragment$Media {
 
   final List<String?>? genres;
 
-  final int? episodes;
-
   final Enum$MediaFormat? format;
-
-  final int? chapters;
 
   final String? description;
 
@@ -1035,13 +1031,9 @@ class Fragment$ReleasingMedia implements Fragment$Media {
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
     _resultData['genres'] = l$genres?.map((e) => e).toList();
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
     final l$format = format;
     _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
     final l$description = description;
     _resultData['description'] = l$description;
     final l$title = title;
@@ -1063,9 +1055,7 @@ class Fragment$ReleasingMedia implements Fragment$Media {
     final l$type = type;
     final l$isAdult = isAdult;
     final l$genres = genres;
-    final l$episodes = episodes;
     final l$format = format;
-    final l$chapters = chapters;
     final l$description = description;
     final l$title = title;
     final l$coverImage = coverImage;
@@ -1077,9 +1067,7 @@ class Fragment$ReleasingMedia implements Fragment$Media {
       l$type,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
-      l$episodes,
       l$format,
-      l$chapters,
       l$description,
       l$title,
       l$coverImage,
@@ -1129,19 +1117,9 @@ class Fragment$ReleasingMedia implements Fragment$Media {
     } else if (l$genres != lOther$genres) {
       return false;
     }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
     final l$format = format;
     final lOther$format = other.format;
     if (l$format != lOther$format) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
       return false;
     }
     final l$description = description;
@@ -1200,9 +1178,7 @@ abstract class CopyWith$Fragment$ReleasingMedia<TRes> {
     Enum$MediaType? type,
     bool? isAdult,
     List<String?>? genres,
-    int? episodes,
     Enum$MediaFormat? format,
-    int? chapters,
     String? description,
     Fragment$ReleasingMedia$title? title,
     Fragment$ReleasingMedia$coverImage? coverImage,
@@ -1235,9 +1211,7 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
     Object? type = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
-    Object? episodes = _undefined,
     Object? format = _undefined,
-    Object? chapters = _undefined,
     Object? description = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
@@ -1252,13 +1226,9 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
         genres: genres == _undefined
             ? _instance.genres
             : (genres as List<String?>?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
         format: format == _undefined
             ? _instance.format
             : (format as Enum$MediaFormat?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
         description: description == _undefined
             ? _instance.description
             : (description as String?),
@@ -1324,9 +1294,7 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia<TRes>
     Enum$MediaType? type,
     bool? isAdult,
     List<String?>? genres,
-    int? episodes,
     Enum$MediaFormat? format,
-    int? chapters,
     String? description,
     Fragment$ReleasingMedia$title? title,
     Fragment$ReleasingMedia$coverImage? coverImage,
@@ -1356,7 +1324,7 @@ const fragmentDefinitionReleasingMedia = FragmentDefinitionNode(
   directives: [],
   selectionSet: SelectionSetNode(selections: [
     FragmentSpreadNode(
-      name: NameNode(value: 'Media'),
+      name: NameNode(value: 'MediaFragment'),
       directives: [],
     ),
     FieldNode(
@@ -1477,7 +1445,7 @@ const fragmentDefinitionReleasingMedia = FragmentDefinitionNode(
 );
 const documentNodeFragmentReleasingMedia = DocumentNode(definitions: [
   fragmentDefinitionReleasingMedia,
-  fragmentDefinitionMedia,
+  fragmentDefinitionMediaFragment,
 ]);
 
 extension ClientExtension$Fragment$ReleasingMedia on graphql.GraphQLClient {
@@ -1515,7 +1483,7 @@ extension ClientExtension$Fragment$ReleasingMedia on graphql.GraphQLClient {
   }
 }
 
-class Fragment$ReleasingMedia$title implements Fragment$Media$title {
+class Fragment$ReleasingMedia$title implements Fragment$MediaFragment$title {
   Fragment$ReleasingMedia$title({
     this.userPreferred,
     this.$__typename = 'MediaTitle',
@@ -1640,30 +1608,31 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$title<TRes>
       _res;
 }
 
-class Fragment$ReleasingMedia$coverImage implements Fragment$Media$coverImage {
+class Fragment$ReleasingMedia$coverImage
+    implements Fragment$MediaFragment$coverImage {
   Fragment$ReleasingMedia$coverImage({
-    this.large,
+    this.extraLarge,
     this.$__typename = 'MediaCoverImage',
   });
 
   factory Fragment$ReleasingMedia$coverImage.fromJson(
       Map<String, dynamic> json) {
-    final l$large = json['large'];
+    final l$extraLarge = json['extraLarge'];
     final l$$__typename = json['__typename'];
     return Fragment$ReleasingMedia$coverImage(
-      large: (l$large as String?),
+      extraLarge: (l$extraLarge as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final String? large;
+  final String? extraLarge;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
+    final l$extraLarge = extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1671,10 +1640,10 @@ class Fragment$ReleasingMedia$coverImage implements Fragment$Media$coverImage {
 
   @override
   int get hashCode {
-    final l$large = large;
+    final l$extraLarge = extraLarge;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$large,
+      l$extraLarge,
       l$$__typename,
     ]);
   }
@@ -1688,9 +1657,9 @@ class Fragment$ReleasingMedia$coverImage implements Fragment$Media$coverImage {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
+    final l$extraLarge = extraLarge;
+    final lOther$extraLarge = other.extraLarge;
+    if (l$extraLarge != lOther$extraLarge) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1722,7 +1691,7 @@ abstract class CopyWith$Fragment$ReleasingMedia$coverImage<TRes> {
       _CopyWithStubImpl$Fragment$ReleasingMedia$coverImage;
 
   TRes call({
-    String? large,
+    String? extraLarge,
     String? $__typename,
   });
 }
@@ -1741,11 +1710,13 @@ class _CopyWithImpl$Fragment$ReleasingMedia$coverImage<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? large = _undefined,
+    Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$ReleasingMedia$coverImage(
-        large: large == _undefined ? _instance.large : (large as String?),
+        extraLarge: extraLarge == _undefined
+            ? _instance.extraLarge
+            : (extraLarge as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1759,7 +1730,7 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$coverImage<TRes>
   TRes _res;
 
   call({
-    String? large,
+    String? extraLarge,
     String? $__typename,
   }) =>
       _res;
@@ -2718,7 +2689,7 @@ const documentNodeFragmentListGroup = DocumentNode(definitions: [
   fragmentDefinitionListGroup,
   fragmentDefinitionMediaListEntry,
   fragmentDefinitionFuzzyDate,
-  fragmentDefinitionMedia,
+  fragmentDefinitionMediaFragment,
 ]);
 
 extension ClientExtension$Fragment$ListGroup on graphql.GraphQLClient {
@@ -2770,6 +2741,7 @@ class Fragment$MediaListEntry {
     this.private,
     this.repeat,
     this.score,
+    this.customLists,
     this.startedAt,
     this.completedAt,
     this.media,
@@ -2789,6 +2761,7 @@ class Fragment$MediaListEntry {
     final l$private = json['private'];
     final l$repeat = json['repeat'];
     final l$score = json['score'];
+    final l$customLists = json['customLists'];
     final l$startedAt = json['startedAt'];
     final l$completedAt = json['completedAt'];
     final l$media = json['media'];
@@ -2808,6 +2781,7 @@ class Fragment$MediaListEntry {
       private: (l$private as bool?),
       repeat: (l$repeat as int?),
       score: (l$score as num?)?.toDouble(),
+      customLists: (l$customLists as dynamic?),
       startedAt: l$startedAt == null
           ? null
           : Fragment$FuzzyDate.fromJson((l$startedAt as Map<String, dynamic>)),
@@ -2847,6 +2821,8 @@ class Fragment$MediaListEntry {
 
   final double? score;
 
+  final dynamic? customLists;
+
   final Fragment$FuzzyDate? startedAt;
 
   final Fragment$FuzzyDate? completedAt;
@@ -2882,6 +2858,8 @@ class Fragment$MediaListEntry {
     _resultData['repeat'] = l$repeat;
     final l$score = score;
     _resultData['score'] = l$score;
+    final l$customLists = customLists;
+    _resultData['customLists'] = l$customLists;
     final l$startedAt = startedAt;
     _resultData['startedAt'] = l$startedAt?.toJson();
     final l$completedAt = completedAt;
@@ -2907,6 +2885,7 @@ class Fragment$MediaListEntry {
     final l$private = private;
     final l$repeat = repeat;
     final l$score = score;
+    final l$customLists = customLists;
     final l$startedAt = startedAt;
     final l$completedAt = completedAt;
     final l$media = media;
@@ -2924,6 +2903,7 @@ class Fragment$MediaListEntry {
       l$private,
       l$repeat,
       l$score,
+      l$customLists,
       l$startedAt,
       l$completedAt,
       l$media,
@@ -3000,6 +2980,11 @@ class Fragment$MediaListEntry {
     if (l$score != lOther$score) {
       return false;
     }
+    final l$customLists = customLists;
+    final lOther$customLists = other.customLists;
+    if (l$customLists != lOther$customLists) {
+      return false;
+    }
     final l$startedAt = startedAt;
     final lOther$startedAt = other.startedAt;
     if (l$startedAt != lOther$startedAt) {
@@ -3054,6 +3039,7 @@ abstract class CopyWith$Fragment$MediaListEntry<TRes> {
     bool? private,
     int? repeat,
     double? score,
+    dynamic? customLists,
     Fragment$FuzzyDate? startedAt,
     Fragment$FuzzyDate? completedAt,
     Fragment$MediaListEntry$media? media,
@@ -3090,6 +3076,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
     Object? private = _undefined,
     Object? repeat = _undefined,
     Object? score = _undefined,
+    Object? customLists = _undefined,
     Object? startedAt = _undefined,
     Object? completedAt = _undefined,
     Object? media = _undefined,
@@ -3119,6 +3106,9 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
         private: private == _undefined ? _instance.private : (private as bool?),
         repeat: repeat == _undefined ? _instance.repeat : (repeat as int?),
         score: score == _undefined ? _instance.score : (score as double?),
+        customLists: customLists == _undefined
+            ? _instance.customLists
+            : (customLists as dynamic?),
         startedAt: startedAt == _undefined
             ? _instance.startedAt
             : (startedAt as Fragment$FuzzyDate?),
@@ -3176,6 +3166,7 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
     bool? private,
     int? repeat,
     double? score,
+    dynamic? customLists,
     Fragment$FuzzyDate? startedAt,
     Fragment$FuzzyDate? completedAt,
     Fragment$MediaListEntry$media? media,
@@ -3286,10 +3277,17 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
     FieldNode(
       name: NameNode(value: 'score'),
       alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'customLists'),
+      alias: null,
       arguments: [
         ArgumentNode(
-          name: NameNode(value: 'format'),
-          value: EnumValueNode(name: NameNode(value: 'POINT_100')),
+          name: NameNode(value: 'asArray'),
+          value: BooleanValueNode(value: true),
         )
       ],
       directives: [],
@@ -3340,7 +3338,7 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FragmentSpreadNode(
-          name: NameNode(value: 'Media'),
+          name: NameNode(value: 'MediaFragment'),
           directives: [],
         ),
         FieldNode(
@@ -3356,6 +3354,51 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
           arguments: [],
           directives: [],
           selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'status'),
+          alias: null,
+          arguments: [
+            ArgumentNode(
+              name: NameNode(value: 'version'),
+              value: IntValueNode(value: '2'),
+            )
+          ],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'averageScore'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'popularity'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'startDate'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: SelectionSetNode(selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'FuzzyDate'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ]),
         ),
         FieldNode(
           name: NameNode(value: '__typename'),
@@ -3378,7 +3421,7 @@ const fragmentDefinitionMediaListEntry = FragmentDefinitionNode(
 const documentNodeFragmentMediaListEntry = DocumentNode(definitions: [
   fragmentDefinitionMediaListEntry,
   fragmentDefinitionFuzzyDate,
-  fragmentDefinitionMedia,
+  fragmentDefinitionMediaFragment,
 ]);
 
 extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
@@ -3416,19 +3459,23 @@ extension ClientExtension$Fragment$MediaListEntry on graphql.GraphQLClient {
   }
 }
 
-class Fragment$MediaListEntry$media implements Fragment$Media {
+class Fragment$MediaListEntry$media implements Fragment$MediaFragment {
   Fragment$MediaListEntry$media({
     required this.id,
     this.type,
     this.isAdult,
     this.genres,
-    this.episodes,
     this.format,
-    this.chapters,
     this.description,
     this.title,
     this.coverImage,
     this.$__typename = 'Media',
+    this.episodes,
+    this.chapters,
+    this.status,
+    this.averageScore,
+    this.popularity,
+    this.startDate,
   });
 
   factory Fragment$MediaListEntry$media.fromJson(Map<String, dynamic> json) {
@@ -3436,23 +3483,25 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
     final l$type = json['type'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
-    final l$episodes = json['episodes'];
     final l$format = json['format'];
-    final l$chapters = json['chapters'];
     final l$description = json['description'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
     final l$$__typename = json['__typename'];
+    final l$episodes = json['episodes'];
+    final l$chapters = json['chapters'];
+    final l$status = json['status'];
+    final l$averageScore = json['averageScore'];
+    final l$popularity = json['popularity'];
+    final l$startDate = json['startDate'];
     return Fragment$MediaListEntry$media(
       id: (l$id as int),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
-      episodes: (l$episodes as int?),
       format: l$format == null
           ? null
           : fromJson$Enum$MediaFormat((l$format as String)),
-      chapters: (l$chapters as int?),
       description: (l$description as String?),
       title: l$title == null
           ? null
@@ -3463,6 +3512,16 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
           : Fragment$MediaListEntry$media$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
+      episodes: (l$episodes as int?),
+      chapters: (l$chapters as int?),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$MediaStatus((l$status as String)),
+      averageScore: (l$averageScore as int?),
+      popularity: (l$popularity as int?),
+      startDate: l$startDate == null
+          ? null
+          : Fragment$FuzzyDate.fromJson((l$startDate as Map<String, dynamic>)),
     );
   }
 
@@ -3474,11 +3533,7 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
 
   final List<String?>? genres;
 
-  final int? episodes;
-
   final Enum$MediaFormat? format;
-
-  final int? chapters;
 
   final String? description;
 
@@ -3487,6 +3542,18 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
   final Fragment$MediaListEntry$media$coverImage? coverImage;
 
   final String $__typename;
+
+  final int? episodes;
+
+  final int? chapters;
+
+  final Enum$MediaStatus? status;
+
+  final int? averageScore;
+
+  final int? popularity;
+
+  final Fragment$FuzzyDate? startDate;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -3498,13 +3565,9 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
     _resultData['genres'] = l$genres?.map((e) => e).toList();
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
     final l$format = format;
     _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
     final l$description = description;
     _resultData['description'] = l$description;
     final l$title = title;
@@ -3513,6 +3576,19 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
     _resultData['coverImage'] = l$coverImage?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
+    final l$episodes = episodes;
+    _resultData['episodes'] = l$episodes;
+    final l$chapters = chapters;
+    _resultData['chapters'] = l$chapters;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$MediaStatus(l$status);
+    final l$averageScore = averageScore;
+    _resultData['averageScore'] = l$averageScore;
+    final l$popularity = popularity;
+    _resultData['popularity'] = l$popularity;
+    final l$startDate = startDate;
+    _resultData['startDate'] = l$startDate?.toJson();
     return _resultData;
   }
 
@@ -3522,25 +3598,33 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
     final l$type = type;
     final l$isAdult = isAdult;
     final l$genres = genres;
-    final l$episodes = episodes;
     final l$format = format;
-    final l$chapters = chapters;
     final l$description = description;
     final l$title = title;
     final l$coverImage = coverImage;
     final l$$__typename = $__typename;
+    final l$episodes = episodes;
+    final l$chapters = chapters;
+    final l$status = status;
+    final l$averageScore = averageScore;
+    final l$popularity = popularity;
+    final l$startDate = startDate;
     return Object.hashAll([
       l$id,
       l$type,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
-      l$episodes,
       l$format,
-      l$chapters,
       l$description,
       l$title,
       l$coverImage,
       l$$__typename,
+      l$episodes,
+      l$chapters,
+      l$status,
+      l$averageScore,
+      l$popularity,
+      l$startDate,
     ]);
   }
 
@@ -3584,19 +3668,9 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
     } else if (l$genres != lOther$genres) {
       return false;
     }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
     final l$format = format;
     final lOther$format = other.format;
     if (l$format != lOther$format) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
       return false;
     }
     final l$description = description;
@@ -3617,6 +3691,36 @@ class Fragment$MediaListEntry$media implements Fragment$Media {
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$episodes = episodes;
+    final lOther$episodes = other.episodes;
+    if (l$episodes != lOther$episodes) {
+      return false;
+    }
+    final l$chapters = chapters;
+    final lOther$chapters = other.chapters;
+    if (l$chapters != lOther$chapters) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$averageScore = averageScore;
+    final lOther$averageScore = other.averageScore;
+    if (l$averageScore != lOther$averageScore) {
+      return false;
+    }
+    final l$popularity = popularity;
+    final lOther$popularity = other.popularity;
+    if (l$popularity != lOther$popularity) {
+      return false;
+    }
+    final l$startDate = startDate;
+    final lOther$startDate = other.startDate;
+    if (l$startDate != lOther$startDate) {
       return false;
     }
     return true;
@@ -3646,16 +3750,21 @@ abstract class CopyWith$Fragment$MediaListEntry$media<TRes> {
     Enum$MediaType? type,
     bool? isAdult,
     List<String?>? genres,
-    int? episodes,
     Enum$MediaFormat? format,
-    int? chapters,
     String? description,
     Fragment$MediaListEntry$media$title? title,
     Fragment$MediaListEntry$media$coverImage? coverImage,
     String? $__typename,
+    int? episodes,
+    int? chapters,
+    Enum$MediaStatus? status,
+    int? averageScore,
+    int? popularity,
+    Fragment$FuzzyDate? startDate,
   });
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title;
   CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$FuzzyDate<TRes> get startDate;
 }
 
 class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
@@ -3676,13 +3785,17 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
     Object? type = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
-    Object? episodes = _undefined,
     Object? format = _undefined,
-    Object? chapters = _undefined,
     Object? description = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
     Object? $__typename = _undefined,
+    Object? episodes = _undefined,
+    Object? chapters = _undefined,
+    Object? status = _undefined,
+    Object? averageScore = _undefined,
+    Object? popularity = _undefined,
+    Object? startDate = _undefined,
   }) =>
       _then(Fragment$MediaListEntry$media(
         id: id == _undefined || id == null ? _instance.id : (id as int),
@@ -3691,13 +3804,9 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
         genres: genres == _undefined
             ? _instance.genres
             : (genres as List<String?>?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
         format: format == _undefined
             ? _instance.format
             : (format as Enum$MediaFormat?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
         description: description == _undefined
             ? _instance.description
             : (description as String?),
@@ -3710,6 +3819,22 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
+        episodes:
+            episodes == _undefined ? _instance.episodes : (episodes as int?),
+        chapters:
+            chapters == _undefined ? _instance.chapters : (chapters as int?),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$MediaStatus?),
+        averageScore: averageScore == _undefined
+            ? _instance.averageScore
+            : (averageScore as int?),
+        popularity: popularity == _undefined
+            ? _instance.popularity
+            : (popularity as int?),
+        startDate: startDate == _undefined
+            ? _instance.startDate
+            : (startDate as Fragment$FuzzyDate?),
       ));
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title {
     final local$title = _instance.title;
@@ -3727,6 +3852,14 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
         : CopyWith$Fragment$MediaListEntry$media$coverImage(
             local$coverImage, (e) => call(coverImage: e));
   }
+
+  CopyWith$Fragment$FuzzyDate<TRes> get startDate {
+    final local$startDate = _instance.startDate;
+    return local$startDate == null
+        ? CopyWith$Fragment$FuzzyDate.stub(_then(_instance))
+        : CopyWith$Fragment$FuzzyDate(
+            local$startDate, (e) => call(startDate: e));
+  }
 }
 
 class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
@@ -3740,22 +3873,29 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
     Enum$MediaType? type,
     bool? isAdult,
     List<String?>? genres,
-    int? episodes,
     Enum$MediaFormat? format,
-    int? chapters,
     String? description,
     Fragment$MediaListEntry$media$title? title,
     Fragment$MediaListEntry$media$coverImage? coverImage,
     String? $__typename,
+    int? episodes,
+    int? chapters,
+    Enum$MediaStatus? status,
+    int? averageScore,
+    int? popularity,
+    Fragment$FuzzyDate? startDate,
   }) =>
       _res;
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title =>
       CopyWith$Fragment$MediaListEntry$media$title.stub(_res);
   CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage =>
       CopyWith$Fragment$MediaListEntry$media$coverImage.stub(_res);
+  CopyWith$Fragment$FuzzyDate<TRes> get startDate =>
+      CopyWith$Fragment$FuzzyDate.stub(_res);
 }
 
-class Fragment$MediaListEntry$media$title implements Fragment$Media$title {
+class Fragment$MediaListEntry$media$title
+    implements Fragment$MediaFragment$title {
   Fragment$MediaListEntry$media$title({
     this.userPreferred,
     this.$__typename = 'MediaTitle',
@@ -3883,30 +4023,30 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$media$title<TRes>
 }
 
 class Fragment$MediaListEntry$media$coverImage
-    implements Fragment$Media$coverImage {
+    implements Fragment$MediaFragment$coverImage {
   Fragment$MediaListEntry$media$coverImage({
-    this.large,
+    this.extraLarge,
     this.$__typename = 'MediaCoverImage',
   });
 
   factory Fragment$MediaListEntry$media$coverImage.fromJson(
       Map<String, dynamic> json) {
-    final l$large = json['large'];
+    final l$extraLarge = json['extraLarge'];
     final l$$__typename = json['__typename'];
     return Fragment$MediaListEntry$media$coverImage(
-      large: (l$large as String?),
+      extraLarge: (l$extraLarge as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final String? large;
+  final String? extraLarge;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
+    final l$extraLarge = extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3914,10 +4054,10 @@ class Fragment$MediaListEntry$media$coverImage
 
   @override
   int get hashCode {
-    final l$large = large;
+    final l$extraLarge = extraLarge;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$large,
+      l$extraLarge,
       l$$__typename,
     ]);
   }
@@ -3931,9 +4071,9 @@ class Fragment$MediaListEntry$media$coverImage
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
+    final l$extraLarge = extraLarge;
+    final lOther$extraLarge = other.extraLarge;
+    if (l$extraLarge != lOther$extraLarge) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3965,7 +4105,7 @@ abstract class CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> {
       _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage;
 
   TRes call({
-    String? large,
+    String? extraLarge,
     String? $__typename,
   });
 }
@@ -3984,11 +4124,13 @@ class _CopyWithImpl$Fragment$MediaListEntry$media$coverImage<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? large = _undefined,
+    Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment$MediaListEntry$media$coverImage(
-        large: large == _undefined ? _instance.large : (large as String?),
+        extraLarge: extraLarge == _undefined
+            ? _instance.extraLarge
+            : (extraLarge as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -4002,56 +4144,261 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$media$coverImage<TRes>
   TRes _res;
 
   call({
-    String? large,
+    String? extraLarge,
     String? $__typename,
   }) =>
       _res;
 }
 
-class Fragment$Media {
-  Fragment$Media({
+class Fragment$CustomList {
+  Fragment$CustomList({
+    this.name,
+    this.enabled,
+    this.$__typename = 'CustomList',
+  });
+
+  factory Fragment$CustomList.fromJson(Map<String, dynamic> json) {
+    final l$name = json['name'];
+    final l$enabled = json['enabled'];
+    final l$$__typename = json['__typename'];
+    return Fragment$CustomList(
+      name: (l$name as String?),
+      enabled: (l$enabled as bool?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? name;
+
+  final bool? enabled;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$enabled = enabled;
+    _resultData['enabled'] = l$enabled;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$enabled = enabled;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$name,
+      l$enabled,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$CustomList) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$enabled = enabled;
+    final lOther$enabled = other.enabled;
+    if (l$enabled != lOther$enabled) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$CustomList on Fragment$CustomList {
+  CopyWith$Fragment$CustomList<Fragment$CustomList> get copyWith =>
+      CopyWith$Fragment$CustomList(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$CustomList<TRes> {
+  factory CopyWith$Fragment$CustomList(
+    Fragment$CustomList instance,
+    TRes Function(Fragment$CustomList) then,
+  ) = _CopyWithImpl$Fragment$CustomList;
+
+  factory CopyWith$Fragment$CustomList.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$CustomList;
+
+  TRes call({
+    String? name,
+    bool? enabled,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$CustomList<TRes>
+    implements CopyWith$Fragment$CustomList<TRes> {
+  _CopyWithImpl$Fragment$CustomList(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$CustomList _instance;
+
+  final TRes Function(Fragment$CustomList) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? enabled = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$CustomList(
+        name: name == _undefined ? _instance.name : (name as String?),
+        enabled: enabled == _undefined ? _instance.enabled : (enabled as bool?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$CustomList<TRes>
+    implements CopyWith$Fragment$CustomList<TRes> {
+  _CopyWithStubImpl$Fragment$CustomList(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    bool? enabled,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const fragmentDefinitionCustomList = FragmentDefinitionNode(
+  name: NameNode(value: 'CustomList'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'CustomList'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'enabled'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentCustomList = DocumentNode(definitions: [
+  fragmentDefinitionCustomList,
+]);
+
+extension ClientExtension$Fragment$CustomList on graphql.GraphQLClient {
+  void writeFragment$CustomList({
+    required Fragment$CustomList data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'CustomList',
+            document: documentNodeFragmentCustomList,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$CustomList? readFragment$CustomList({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'CustomList',
+          document: documentNodeFragmentCustomList,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$CustomList.fromJson(result);
+  }
+}
+
+class Fragment$MediaFragment {
+  Fragment$MediaFragment({
     required this.id,
     this.type,
     this.isAdult,
     this.genres,
-    this.episodes,
     this.format,
-    this.chapters,
     this.description,
     this.title,
     this.coverImage,
     this.$__typename = 'Media',
   });
 
-  factory Fragment$Media.fromJson(Map<String, dynamic> json) {
+  factory Fragment$MediaFragment.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$type = json['type'];
     final l$isAdult = json['isAdult'];
     final l$genres = json['genres'];
-    final l$episodes = json['episodes'];
     final l$format = json['format'];
-    final l$chapters = json['chapters'];
     final l$description = json['description'];
     final l$title = json['title'];
     final l$coverImage = json['coverImage'];
     final l$$__typename = json['__typename'];
-    return Fragment$Media(
+    return Fragment$MediaFragment(
       id: (l$id as int),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
       isAdult: (l$isAdult as bool?),
       genres: (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList(),
-      episodes: (l$episodes as int?),
       format: l$format == null
           ? null
           : fromJson$Enum$MediaFormat((l$format as String)),
-      chapters: (l$chapters as int?),
       description: (l$description as String?),
       title: l$title == null
           ? null
-          : Fragment$Media$title.fromJson((l$title as Map<String, dynamic>)),
+          : Fragment$MediaFragment$title.fromJson(
+              (l$title as Map<String, dynamic>)),
       coverImage: l$coverImage == null
           ? null
-          : Fragment$Media$coverImage.fromJson(
+          : Fragment$MediaFragment$coverImage.fromJson(
               (l$coverImage as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -4065,17 +4412,13 @@ class Fragment$Media {
 
   final List<String?>? genres;
 
-  final int? episodes;
-
   final Enum$MediaFormat? format;
-
-  final int? chapters;
 
   final String? description;
 
-  final Fragment$Media$title? title;
+  final Fragment$MediaFragment$title? title;
 
-  final Fragment$Media$coverImage? coverImage;
+  final Fragment$MediaFragment$coverImage? coverImage;
 
   final String $__typename;
 
@@ -4089,13 +4432,9 @@ class Fragment$Media {
     _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
     _resultData['genres'] = l$genres?.map((e) => e).toList();
-    final l$episodes = episodes;
-    _resultData['episodes'] = l$episodes;
     final l$format = format;
     _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
-    final l$chapters = chapters;
-    _resultData['chapters'] = l$chapters;
     final l$description = description;
     _resultData['description'] = l$description;
     final l$title = title;
@@ -4113,9 +4452,7 @@ class Fragment$Media {
     final l$type = type;
     final l$isAdult = isAdult;
     final l$genres = genres;
-    final l$episodes = episodes;
     final l$format = format;
-    final l$chapters = chapters;
     final l$description = description;
     final l$title = title;
     final l$coverImage = coverImage;
@@ -4125,9 +4462,7 @@ class Fragment$Media {
       l$type,
       l$isAdult,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
-      l$episodes,
       l$format,
-      l$chapters,
       l$description,
       l$title,
       l$coverImage,
@@ -4140,7 +4475,8 @@ class Fragment$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Media) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$MediaFragment) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -4174,19 +4510,9 @@ class Fragment$Media {
     } else if (l$genres != lOther$genres) {
       return false;
     }
-    final l$episodes = episodes;
-    final lOther$episodes = other.episodes;
-    if (l$episodes != lOther$episodes) {
-      return false;
-    }
     final l$format = format;
     final lOther$format = other.format;
     if (l$format != lOther$format) {
-      return false;
-    }
-    final l$chapters = chapters;
-    final lOther$chapters = other.chapters;
-    if (l$chapters != lOther$chapters) {
       return false;
     }
     final l$description = description;
@@ -4213,50 +4539,48 @@ class Fragment$Media {
   }
 }
 
-extension UtilityExtension$Fragment$Media on Fragment$Media {
-  CopyWith$Fragment$Media<Fragment$Media> get copyWith =>
-      CopyWith$Fragment$Media(
+extension UtilityExtension$Fragment$MediaFragment on Fragment$MediaFragment {
+  CopyWith$Fragment$MediaFragment<Fragment$MediaFragment> get copyWith =>
+      CopyWith$Fragment$MediaFragment(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$Media<TRes> {
-  factory CopyWith$Fragment$Media(
-    Fragment$Media instance,
-    TRes Function(Fragment$Media) then,
-  ) = _CopyWithImpl$Fragment$Media;
+abstract class CopyWith$Fragment$MediaFragment<TRes> {
+  factory CopyWith$Fragment$MediaFragment(
+    Fragment$MediaFragment instance,
+    TRes Function(Fragment$MediaFragment) then,
+  ) = _CopyWithImpl$Fragment$MediaFragment;
 
-  factory CopyWith$Fragment$Media.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Media;
+  factory CopyWith$Fragment$MediaFragment.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaFragment;
 
   TRes call({
     int? id,
     Enum$MediaType? type,
     bool? isAdult,
     List<String?>? genres,
-    int? episodes,
     Enum$MediaFormat? format,
-    int? chapters,
     String? description,
-    Fragment$Media$title? title,
-    Fragment$Media$coverImage? coverImage,
+    Fragment$MediaFragment$title? title,
+    Fragment$MediaFragment$coverImage? coverImage,
     String? $__typename,
   });
-  CopyWith$Fragment$Media$title<TRes> get title;
-  CopyWith$Fragment$Media$coverImage<TRes> get coverImage;
+  CopyWith$Fragment$MediaFragment$title<TRes> get title;
+  CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage;
 }
 
-class _CopyWithImpl$Fragment$Media<TRes>
-    implements CopyWith$Fragment$Media<TRes> {
-  _CopyWithImpl$Fragment$Media(
+class _CopyWithImpl$Fragment$MediaFragment<TRes>
+    implements CopyWith$Fragment$MediaFragment<TRes> {
+  _CopyWithImpl$Fragment$MediaFragment(
     this._instance,
     this._then,
   );
 
-  final Fragment$Media _instance;
+  final Fragment$MediaFragment _instance;
 
-  final TRes Function(Fragment$Media) _then;
+  final TRes Function(Fragment$MediaFragment) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4265,60 +4589,55 @@ class _CopyWithImpl$Fragment$Media<TRes>
     Object? type = _undefined,
     Object? isAdult = _undefined,
     Object? genres = _undefined,
-    Object? episodes = _undefined,
     Object? format = _undefined,
-    Object? chapters = _undefined,
     Object? description = _undefined,
     Object? title = _undefined,
     Object? coverImage = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Media(
+      _then(Fragment$MediaFragment(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         type: type == _undefined ? _instance.type : (type as Enum$MediaType?),
         isAdult: isAdult == _undefined ? _instance.isAdult : (isAdult as bool?),
         genres: genres == _undefined
             ? _instance.genres
             : (genres as List<String?>?),
-        episodes:
-            episodes == _undefined ? _instance.episodes : (episodes as int?),
         format: format == _undefined
             ? _instance.format
             : (format as Enum$MediaFormat?),
-        chapters:
-            chapters == _undefined ? _instance.chapters : (chapters as int?),
         description: description == _undefined
             ? _instance.description
             : (description as String?),
         title: title == _undefined
             ? _instance.title
-            : (title as Fragment$Media$title?),
+            : (title as Fragment$MediaFragment$title?),
         coverImage: coverImage == _undefined
             ? _instance.coverImage
-            : (coverImage as Fragment$Media$coverImage?),
+            : (coverImage as Fragment$MediaFragment$coverImage?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Media$title<TRes> get title {
+  CopyWith$Fragment$MediaFragment$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
-        ? CopyWith$Fragment$Media$title.stub(_then(_instance))
-        : CopyWith$Fragment$Media$title(local$title, (e) => call(title: e));
+        ? CopyWith$Fragment$MediaFragment$title.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment$title(
+            local$title, (e) => call(title: e));
   }
 
-  CopyWith$Fragment$Media$coverImage<TRes> get coverImage {
+  CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
-        ? CopyWith$Fragment$Media$coverImage.stub(_then(_instance))
-        : CopyWith$Fragment$Media$coverImage(
+        ? CopyWith$Fragment$MediaFragment$coverImage.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment$coverImage(
             local$coverImage, (e) => call(coverImage: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$Media<TRes>
-    implements CopyWith$Fragment$Media<TRes> {
-  _CopyWithStubImpl$Fragment$Media(this._res);
+class _CopyWithStubImpl$Fragment$MediaFragment<TRes>
+    implements CopyWith$Fragment$MediaFragment<TRes> {
+  _CopyWithStubImpl$Fragment$MediaFragment(this._res);
 
   TRes _res;
 
@@ -4327,23 +4646,21 @@ class _CopyWithStubImpl$Fragment$Media<TRes>
     Enum$MediaType? type,
     bool? isAdult,
     List<String?>? genres,
-    int? episodes,
     Enum$MediaFormat? format,
-    int? chapters,
     String? description,
-    Fragment$Media$title? title,
-    Fragment$Media$coverImage? coverImage,
+    Fragment$MediaFragment$title? title,
+    Fragment$MediaFragment$coverImage? coverImage,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Media$title<TRes> get title =>
-      CopyWith$Fragment$Media$title.stub(_res);
-  CopyWith$Fragment$Media$coverImage<TRes> get coverImage =>
-      CopyWith$Fragment$Media$coverImage.stub(_res);
+  CopyWith$Fragment$MediaFragment$title<TRes> get title =>
+      CopyWith$Fragment$MediaFragment$title.stub(_res);
+  CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage =>
+      CopyWith$Fragment$MediaFragment$coverImage.stub(_res);
 }
 
-const fragmentDefinitionMedia = FragmentDefinitionNode(
-  name: NameNode(value: 'Media'),
+const fragmentDefinitionMediaFragment = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaFragment'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
     name: NameNode(value: 'Media'),
@@ -4380,21 +4697,7 @@ const fragmentDefinitionMedia = FragmentDefinitionNode(
       selectionSet: null,
     ),
     FieldNode(
-      name: NameNode(value: 'episodes'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
       name: NameNode(value: 'format'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'chapters'),
       alias: null,
       arguments: [],
       directives: [],
@@ -4403,7 +4706,12 @@ const fragmentDefinitionMedia = FragmentDefinitionNode(
     FieldNode(
       name: NameNode(value: 'description'),
       alias: null,
-      arguments: [],
+      arguments: [
+        ArgumentNode(
+          name: NameNode(value: 'asHtml'),
+          value: BooleanValueNode(value: false),
+        )
+      ],
       directives: [],
       selectionSet: null,
     ),
@@ -4436,7 +4744,7 @@ const fragmentDefinitionMedia = FragmentDefinitionNode(
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
-          name: NameNode(value: 'large'),
+          name: NameNode(value: 'extraLarge'),
           alias: null,
           arguments: [],
           directives: [],
@@ -4460,13 +4768,13 @@ const fragmentDefinitionMedia = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentMedia = DocumentNode(definitions: [
-  fragmentDefinitionMedia,
+const documentNodeFragmentMediaFragment = DocumentNode(definitions: [
+  fragmentDefinitionMediaFragment,
 ]);
 
-extension ClientExtension$Fragment$Media on graphql.GraphQLClient {
-  void writeFragment$Media({
-    required Fragment$Media data,
+extension ClientExtension$Fragment$MediaFragment on graphql.GraphQLClient {
+  void writeFragment$MediaFragment({
+    required Fragment$MediaFragment data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -4474,14 +4782,14 @@ extension ClientExtension$Fragment$Media on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'Media',
-            document: documentNodeFragmentMedia,
+            fragmentName: 'MediaFragment',
+            document: documentNodeFragmentMediaFragment,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$Media? readFragment$Media({
+  Fragment$MediaFragment? readFragment$MediaFragment({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -4489,26 +4797,26 @@ extension ClientExtension$Fragment$Media on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'Media',
-          document: documentNodeFragmentMedia,
+          fragmentName: 'MediaFragment',
+          document: documentNodeFragmentMediaFragment,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$Media.fromJson(result);
+    return result == null ? null : Fragment$MediaFragment.fromJson(result);
   }
 }
 
-class Fragment$Media$title {
-  Fragment$Media$title({
+class Fragment$MediaFragment$title {
+  Fragment$MediaFragment$title({
     this.userPreferred,
     this.$__typename = 'MediaTitle',
   });
 
-  factory Fragment$Media$title.fromJson(Map<String, dynamic> json) {
+  factory Fragment$MediaFragment$title.fromJson(Map<String, dynamic> json) {
     final l$userPreferred = json['userPreferred'];
     final l$$__typename = json['__typename'];
-    return Fragment$Media$title(
+    return Fragment$MediaFragment$title(
       userPreferred: (l$userPreferred as String?),
       $__typename: (l$$__typename as String),
     );
@@ -4542,7 +4850,8 @@ class Fragment$Media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Media$title) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$MediaFragment$title) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$userPreferred = userPreferred;
@@ -4559,22 +4868,23 @@ class Fragment$Media$title {
   }
 }
 
-extension UtilityExtension$Fragment$Media$title on Fragment$Media$title {
-  CopyWith$Fragment$Media$title<Fragment$Media$title> get copyWith =>
-      CopyWith$Fragment$Media$title(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Fragment$MediaFragment$title
+    on Fragment$MediaFragment$title {
+  CopyWith$Fragment$MediaFragment$title<Fragment$MediaFragment$title>
+      get copyWith => CopyWith$Fragment$MediaFragment$title(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Fragment$Media$title<TRes> {
-  factory CopyWith$Fragment$Media$title(
-    Fragment$Media$title instance,
-    TRes Function(Fragment$Media$title) then,
-  ) = _CopyWithImpl$Fragment$Media$title;
+abstract class CopyWith$Fragment$MediaFragment$title<TRes> {
+  factory CopyWith$Fragment$MediaFragment$title(
+    Fragment$MediaFragment$title instance,
+    TRes Function(Fragment$MediaFragment$title) then,
+  ) = _CopyWithImpl$Fragment$MediaFragment$title;
 
-  factory CopyWith$Fragment$Media$title.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Media$title;
+  factory CopyWith$Fragment$MediaFragment$title.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaFragment$title;
 
   TRes call({
     String? userPreferred,
@@ -4582,16 +4892,16 @@ abstract class CopyWith$Fragment$Media$title<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$Media$title<TRes>
-    implements CopyWith$Fragment$Media$title<TRes> {
-  _CopyWithImpl$Fragment$Media$title(
+class _CopyWithImpl$Fragment$MediaFragment$title<TRes>
+    implements CopyWith$Fragment$MediaFragment$title<TRes> {
+  _CopyWithImpl$Fragment$MediaFragment$title(
     this._instance,
     this._then,
   );
 
-  final Fragment$Media$title _instance;
+  final Fragment$MediaFragment$title _instance;
 
-  final TRes Function(Fragment$Media$title) _then;
+  final TRes Function(Fragment$MediaFragment$title) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4599,7 +4909,7 @@ class _CopyWithImpl$Fragment$Media$title<TRes>
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Media$title(
+      _then(Fragment$MediaFragment$title(
         userPreferred: userPreferred == _undefined
             ? _instance.userPreferred
             : (userPreferred as String?),
@@ -4609,9 +4919,9 @@ class _CopyWithImpl$Fragment$Media$title<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$Media$title<TRes>
-    implements CopyWith$Fragment$Media$title<TRes> {
-  _CopyWithStubImpl$Fragment$Media$title(this._res);
+class _CopyWithStubImpl$Fragment$MediaFragment$title<TRes>
+    implements CopyWith$Fragment$MediaFragment$title<TRes> {
+  _CopyWithStubImpl$Fragment$MediaFragment$title(this._res);
 
   TRes _res;
 
@@ -4622,29 +4932,30 @@ class _CopyWithStubImpl$Fragment$Media$title<TRes>
       _res;
 }
 
-class Fragment$Media$coverImage {
-  Fragment$Media$coverImage({
-    this.large,
+class Fragment$MediaFragment$coverImage {
+  Fragment$MediaFragment$coverImage({
+    this.extraLarge,
     this.$__typename = 'MediaCoverImage',
   });
 
-  factory Fragment$Media$coverImage.fromJson(Map<String, dynamic> json) {
-    final l$large = json['large'];
+  factory Fragment$MediaFragment$coverImage.fromJson(
+      Map<String, dynamic> json) {
+    final l$extraLarge = json['extraLarge'];
     final l$$__typename = json['__typename'];
-    return Fragment$Media$coverImage(
-      large: (l$large as String?),
+    return Fragment$MediaFragment$coverImage(
+      extraLarge: (l$extraLarge as String?),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final String? large;
+  final String? extraLarge;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
+    final l$extraLarge = extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4652,10 +4963,10 @@ class Fragment$Media$coverImage {
 
   @override
   int get hashCode {
-    final l$large = large;
+    final l$extraLarge = extraLarge;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$large,
+      l$extraLarge,
       l$$__typename,
     ]);
   }
@@ -4665,13 +4976,13 @@ class Fragment$Media$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Media$coverImage) ||
+    if (!(other is Fragment$MediaFragment$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
+    final l$extraLarge = extraLarge;
+    final lOther$extraLarge = other.extraLarge;
+    if (l$extraLarge != lOther$extraLarge) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -4683,70 +4994,72 @@ class Fragment$Media$coverImage {
   }
 }
 
-extension UtilityExtension$Fragment$Media$coverImage
-    on Fragment$Media$coverImage {
-  CopyWith$Fragment$Media$coverImage<Fragment$Media$coverImage> get copyWith =>
-      CopyWith$Fragment$Media$coverImage(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Fragment$MediaFragment$coverImage
+    on Fragment$MediaFragment$coverImage {
+  CopyWith$Fragment$MediaFragment$coverImage<Fragment$MediaFragment$coverImage>
+      get copyWith => CopyWith$Fragment$MediaFragment$coverImage(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Fragment$Media$coverImage<TRes> {
-  factory CopyWith$Fragment$Media$coverImage(
-    Fragment$Media$coverImage instance,
-    TRes Function(Fragment$Media$coverImage) then,
-  ) = _CopyWithImpl$Fragment$Media$coverImage;
+abstract class CopyWith$Fragment$MediaFragment$coverImage<TRes> {
+  factory CopyWith$Fragment$MediaFragment$coverImage(
+    Fragment$MediaFragment$coverImage instance,
+    TRes Function(Fragment$MediaFragment$coverImage) then,
+  ) = _CopyWithImpl$Fragment$MediaFragment$coverImage;
 
-  factory CopyWith$Fragment$Media$coverImage.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Media$coverImage;
+  factory CopyWith$Fragment$MediaFragment$coverImage.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaFragment$coverImage;
 
   TRes call({
-    String? large,
+    String? extraLarge,
     String? $__typename,
   });
 }
 
-class _CopyWithImpl$Fragment$Media$coverImage<TRes>
-    implements CopyWith$Fragment$Media$coverImage<TRes> {
-  _CopyWithImpl$Fragment$Media$coverImage(
+class _CopyWithImpl$Fragment$MediaFragment$coverImage<TRes>
+    implements CopyWith$Fragment$MediaFragment$coverImage<TRes> {
+  _CopyWithImpl$Fragment$MediaFragment$coverImage(
     this._instance,
     this._then,
   );
 
-  final Fragment$Media$coverImage _instance;
+  final Fragment$MediaFragment$coverImage _instance;
 
-  final TRes Function(Fragment$Media$coverImage) _then;
+  final TRes Function(Fragment$MediaFragment$coverImage) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? large = _undefined,
+    Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Media$coverImage(
-        large: large == _undefined ? _instance.large : (large as String?),
+      _then(Fragment$MediaFragment$coverImage(
+        extraLarge: extraLarge == _undefined
+            ? _instance.extraLarge
+            : (extraLarge as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 }
 
-class _CopyWithStubImpl$Fragment$Media$coverImage<TRes>
-    implements CopyWith$Fragment$Media$coverImage<TRes> {
-  _CopyWithStubImpl$Fragment$Media$coverImage(this._res);
+class _CopyWithStubImpl$Fragment$MediaFragment$coverImage<TRes>
+    implements CopyWith$Fragment$MediaFragment$coverImage<TRes> {
+  _CopyWithStubImpl$Fragment$MediaFragment$coverImage(this._res);
 
   TRes _res;
 
   call({
-    String? large,
+    String? extraLarge,
     String? $__typename,
   }) =>
       _res;
 }
 
-class Fragment$Thread {
-  Fragment$Thread({
+class Fragment$ThreadFragment {
+  Fragment$ThreadFragment({
     required this.id,
     this.title,
     this.replyCount,
@@ -4755,13 +5068,14 @@ class Fragment$Thread {
     this.repliedAt,
     required this.createdAt,
     this.isSticky,
+    this.mediaCategories,
     this.categories,
     this.user,
     this.replyUser,
     this.$__typename = 'Thread',
   });
 
-  factory Fragment$Thread.fromJson(Map<String, dynamic> json) {
+  factory Fragment$ThreadFragment.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$title = json['title'];
     final l$replyCount = json['replyCount'];
@@ -4770,11 +5084,12 @@ class Fragment$Thread {
     final l$repliedAt = json['repliedAt'];
     final l$createdAt = json['createdAt'];
     final l$isSticky = json['isSticky'];
+    final l$mediaCategories = json['mediaCategories'];
     final l$categories = json['categories'];
     final l$user = json['user'];
     final l$replyUser = json['replyUser'];
     final l$$__typename = json['__typename'];
-    return Fragment$Thread(
+    return Fragment$ThreadFragment(
       id: (l$id as int),
       title: (l$title as String?),
       replyCount: (l$replyCount as int?),
@@ -4783,18 +5098,23 @@ class Fragment$Thread {
       repliedAt: (l$repliedAt as int?),
       createdAt: (l$createdAt as int),
       isSticky: (l$isSticky as bool?),
+      mediaCategories: (l$mediaCategories as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Fragment$MediaFragment.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       categories: (l$categories as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$Thread$categories.fromJson(
+              : Fragment$ThreadFragment$categories.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       user: l$user == null
           ? null
-          : Fragment$Thread$user.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       replyUser: l$replyUser == null
           ? null
-          : Fragment$Thread$replyUser.fromJson(
+          : Fragment$UserFragment.fromJson(
               (l$replyUser as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -4816,11 +5136,13 @@ class Fragment$Thread {
 
   final bool? isSticky;
 
-  final List<Fragment$Thread$categories?>? categories;
+  final List<Fragment$MediaFragment?>? mediaCategories;
 
-  final Fragment$Thread$user? user;
+  final List<Fragment$ThreadFragment$categories?>? categories;
 
-  final Fragment$Thread$replyUser? replyUser;
+  final Fragment$UserFragment? user;
+
+  final Fragment$UserFragment? replyUser;
 
   final String $__typename;
 
@@ -4842,6 +5164,9 @@ class Fragment$Thread {
     _resultData['createdAt'] = l$createdAt;
     final l$isSticky = isSticky;
     _resultData['isSticky'] = l$isSticky;
+    final l$mediaCategories = mediaCategories;
+    _resultData['mediaCategories'] =
+        l$mediaCategories?.map((e) => e?.toJson()).toList();
     final l$categories = categories;
     _resultData['categories'] = l$categories?.map((e) => e?.toJson()).toList();
     final l$user = user;
@@ -4863,6 +5188,7 @@ class Fragment$Thread {
     final l$repliedAt = repliedAt;
     final l$createdAt = createdAt;
     final l$isSticky = isSticky;
+    final l$mediaCategories = mediaCategories;
     final l$categories = categories;
     final l$user = user;
     final l$replyUser = replyUser;
@@ -4876,6 +5202,9 @@ class Fragment$Thread {
       l$repliedAt,
       l$createdAt,
       l$isSticky,
+      l$mediaCategories == null
+          ? null
+          : Object.hashAll(l$mediaCategories.map((v) => v)),
       l$categories == null ? null : Object.hashAll(l$categories.map((v) => v)),
       l$user,
       l$replyUser,
@@ -4888,7 +5217,8 @@ class Fragment$Thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Thread) || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$ThreadFragment) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -4931,6 +5261,22 @@ class Fragment$Thread {
     if (l$isSticky != lOther$isSticky) {
       return false;
     }
+    final l$mediaCategories = mediaCategories;
+    final lOther$mediaCategories = other.mediaCategories;
+    if (l$mediaCategories != null && lOther$mediaCategories != null) {
+      if (l$mediaCategories.length != lOther$mediaCategories.length) {
+        return false;
+      }
+      for (int i = 0; i < l$mediaCategories.length; i++) {
+        final l$mediaCategories$entry = l$mediaCategories[i];
+        final lOther$mediaCategories$entry = lOther$mediaCategories[i];
+        if (l$mediaCategories$entry != lOther$mediaCategories$entry) {
+          return false;
+        }
+      }
+    } else if (l$mediaCategories != lOther$mediaCategories) {
+      return false;
+    }
     final l$categories = categories;
     final lOther$categories = other.categories;
     if (l$categories != null && lOther$categories != null) {
@@ -4966,22 +5312,22 @@ class Fragment$Thread {
   }
 }
 
-extension UtilityExtension$Fragment$Thread on Fragment$Thread {
-  CopyWith$Fragment$Thread<Fragment$Thread> get copyWith =>
-      CopyWith$Fragment$Thread(
+extension UtilityExtension$Fragment$ThreadFragment on Fragment$ThreadFragment {
+  CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment> get copyWith =>
+      CopyWith$Fragment$ThreadFragment(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$Thread<TRes> {
-  factory CopyWith$Fragment$Thread(
-    Fragment$Thread instance,
-    TRes Function(Fragment$Thread) then,
-  ) = _CopyWithImpl$Fragment$Thread;
+abstract class CopyWith$Fragment$ThreadFragment<TRes> {
+  factory CopyWith$Fragment$ThreadFragment(
+    Fragment$ThreadFragment instance,
+    TRes Function(Fragment$ThreadFragment) then,
+  ) = _CopyWithImpl$Fragment$ThreadFragment;
 
-  factory CopyWith$Fragment$Thread.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Thread;
+  factory CopyWith$Fragment$ThreadFragment.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadFragment;
 
   TRes call({
     int? id,
@@ -4992,31 +5338,37 @@ abstract class CopyWith$Fragment$Thread<TRes> {
     int? repliedAt,
     int? createdAt,
     bool? isSticky,
-    List<Fragment$Thread$categories?>? categories,
-    Fragment$Thread$user? user,
-    Fragment$Thread$replyUser? replyUser,
+    List<Fragment$MediaFragment?>? mediaCategories,
+    List<Fragment$ThreadFragment$categories?>? categories,
+    Fragment$UserFragment? user,
+    Fragment$UserFragment? replyUser,
     String? $__typename,
   });
-  TRes categories(
-      Iterable<Fragment$Thread$categories?>? Function(
+  TRes mediaCategories(
+      Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
-                  CopyWith$Fragment$Thread$categories<
-                      Fragment$Thread$categories>?>?)
+                  CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
           _fn);
-  CopyWith$Fragment$Thread$user<TRes> get user;
-  CopyWith$Fragment$Thread$replyUser<TRes> get replyUser;
+  TRes categories(
+      Iterable<Fragment$ThreadFragment$categories?>? Function(
+              Iterable<
+                  CopyWith$Fragment$ThreadFragment$categories<
+                      Fragment$ThreadFragment$categories>?>?)
+          _fn);
+  CopyWith$Fragment$UserFragment<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get replyUser;
 }
 
-class _CopyWithImpl$Fragment$Thread<TRes>
-    implements CopyWith$Fragment$Thread<TRes> {
-  _CopyWithImpl$Fragment$Thread(
+class _CopyWithImpl$Fragment$ThreadFragment<TRes>
+    implements CopyWith$Fragment$ThreadFragment<TRes> {
+  _CopyWithImpl$Fragment$ThreadFragment(
     this._instance,
     this._then,
   );
 
-  final Fragment$Thread _instance;
+  final Fragment$ThreadFragment _instance;
 
-  final TRes Function(Fragment$Thread) _then;
+  final TRes Function(Fragment$ThreadFragment) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5029,12 +5381,13 @@ class _CopyWithImpl$Fragment$Thread<TRes>
     Object? repliedAt = _undefined,
     Object? createdAt = _undefined,
     Object? isSticky = _undefined,
+    Object? mediaCategories = _undefined,
     Object? categories = _undefined,
     Object? user = _undefined,
     Object? replyUser = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Thread(
+      _then(Fragment$ThreadFragment(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         title: title == _undefined ? _instance.title : (title as String?),
         replyCount: replyCount == _undefined
@@ -5052,51 +5405,67 @@ class _CopyWithImpl$Fragment$Thread<TRes>
             : (createdAt as int),
         isSticky:
             isSticky == _undefined ? _instance.isSticky : (isSticky as bool?),
+        mediaCategories: mediaCategories == _undefined
+            ? _instance.mediaCategories
+            : (mediaCategories as List<Fragment$MediaFragment?>?),
         categories: categories == _undefined
             ? _instance.categories
-            : (categories as List<Fragment$Thread$categories?>?),
+            : (categories as List<Fragment$ThreadFragment$categories?>?),
         user: user == _undefined
             ? _instance.user
-            : (user as Fragment$Thread$user?),
+            : (user as Fragment$UserFragment?),
         replyUser: replyUser == _undefined
             ? _instance.replyUser
-            : (replyUser as Fragment$Thread$replyUser?),
+            : (replyUser as Fragment$UserFragment?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  TRes categories(
-          Iterable<Fragment$Thread$categories?>? Function(
+  TRes mediaCategories(
+          Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
-                      CopyWith$Fragment$Thread$categories<
-                          Fragment$Thread$categories>?>?)
+                      CopyWith$Fragment$MediaFragment<
+                          Fragment$MediaFragment>?>?)
+              _fn) =>
+      call(
+          mediaCategories: _fn(_instance.mediaCategories?.map((e) => e == null
+              ? null
+              : CopyWith$Fragment$MediaFragment(
+                  e,
+                  (i) => i,
+                )))?.toList());
+  TRes categories(
+          Iterable<Fragment$ThreadFragment$categories?>? Function(
+                  Iterable<
+                      CopyWith$Fragment$ThreadFragment$categories<
+                          Fragment$ThreadFragment$categories>?>?)
               _fn) =>
       call(
           categories: _fn(_instance.categories?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$Thread$categories(
+              : CopyWith$Fragment$ThreadFragment$categories(
                   e,
                   (i) => i,
                 )))?.toList());
-  CopyWith$Fragment$Thread$user<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$Thread$user.stub(_then(_instance))
-        : CopyWith$Fragment$Thread$user(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 
-  CopyWith$Fragment$Thread$replyUser<TRes> get replyUser {
+  CopyWith$Fragment$UserFragment<TRes> get replyUser {
     final local$replyUser = _instance.replyUser;
     return local$replyUser == null
-        ? CopyWith$Fragment$Thread$replyUser.stub(_then(_instance))
-        : CopyWith$Fragment$Thread$replyUser(
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(
             local$replyUser, (e) => call(replyUser: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$Thread<TRes>
-    implements CopyWith$Fragment$Thread<TRes> {
-  _CopyWithStubImpl$Fragment$Thread(this._res);
+class _CopyWithStubImpl$Fragment$ThreadFragment<TRes>
+    implements CopyWith$Fragment$ThreadFragment<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadFragment(this._res);
 
   TRes _res;
 
@@ -5109,21 +5478,23 @@ class _CopyWithStubImpl$Fragment$Thread<TRes>
     int? repliedAt,
     int? createdAt,
     bool? isSticky,
-    List<Fragment$Thread$categories?>? categories,
-    Fragment$Thread$user? user,
-    Fragment$Thread$replyUser? replyUser,
+    List<Fragment$MediaFragment?>? mediaCategories,
+    List<Fragment$ThreadFragment$categories?>? categories,
+    Fragment$UserFragment? user,
+    Fragment$UserFragment? replyUser,
     String? $__typename,
   }) =>
       _res;
+  mediaCategories(_fn) => _res;
   categories(_fn) => _res;
-  CopyWith$Fragment$Thread$user<TRes> get user =>
-      CopyWith$Fragment$Thread$user.stub(_res);
-  CopyWith$Fragment$Thread$replyUser<TRes> get replyUser =>
-      CopyWith$Fragment$Thread$replyUser.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get replyUser =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
-const fragmentDefinitionThread = FragmentDefinitionNode(
-  name: NameNode(value: 'Thread'),
+const fragmentDefinitionThreadFragment = FragmentDefinitionNode(
+  name: NameNode(value: 'ThreadFragment'),
   typeCondition: TypeConditionNode(
       on: NamedTypeNode(
     name: NameNode(value: 'Thread'),
@@ -5188,6 +5559,25 @@ const fragmentDefinitionThread = FragmentDefinitionNode(
       selectionSet: null,
     ),
     FieldNode(
+      name: NameNode(value: 'mediaCategories'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'MediaFragment'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
       name: NameNode(value: 'categories'),
       alias: null,
       arguments: [],
@@ -5222,41 +5612,9 @@ const fragmentDefinitionThread = FragmentDefinitionNode(
       arguments: [],
       directives: [],
       selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'id'),
-          alias: null,
-          arguments: [],
+        FragmentSpreadNode(
+          name: NameNode(value: 'UserFragment'),
           directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'name'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'avatar'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FieldNode(
-              name: NameNode(value: 'large'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
         ),
         FieldNode(
           name: NameNode(value: '__typename'),
@@ -5273,6 +5631,1684 @@ const fragmentDefinitionThread = FragmentDefinitionNode(
       arguments: [],
       directives: [],
       selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'UserFragment'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentThreadFragment = DocumentNode(definitions: [
+  fragmentDefinitionThreadFragment,
+  fragmentDefinitionMediaFragment,
+  fragmentDefinitionUserFragment,
+]);
+
+extension ClientExtension$Fragment$ThreadFragment on graphql.GraphQLClient {
+  void writeFragment$ThreadFragment({
+    required Fragment$ThreadFragment data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ThreadFragment',
+            document: documentNodeFragmentThreadFragment,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ThreadFragment? readFragment$ThreadFragment({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ThreadFragment',
+          document: documentNodeFragmentThreadFragment,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$ThreadFragment.fromJson(result);
+  }
+}
+
+class Fragment$ThreadFragment$categories {
+  Fragment$ThreadFragment$categories({
+    required this.id,
+    required this.name,
+    this.$__typename = 'ThreadCategory',
+  });
+
+  factory Fragment$ThreadFragment$categories.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ThreadFragment$categories(
+      id: (l$id as int),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ThreadFragment$categories) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ThreadFragment$categories
+    on Fragment$ThreadFragment$categories {
+  CopyWith$Fragment$ThreadFragment$categories<
+          Fragment$ThreadFragment$categories>
+      get copyWith => CopyWith$Fragment$ThreadFragment$categories(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$ThreadFragment$categories<TRes> {
+  factory CopyWith$Fragment$ThreadFragment$categories(
+    Fragment$ThreadFragment$categories instance,
+    TRes Function(Fragment$ThreadFragment$categories) then,
+  ) = _CopyWithImpl$Fragment$ThreadFragment$categories;
+
+  factory CopyWith$Fragment$ThreadFragment$categories.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ThreadFragment$categories;
+
+  TRes call({
+    int? id,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$ThreadFragment$categories<TRes>
+    implements CopyWith$Fragment$ThreadFragment$categories<TRes> {
+  _CopyWithImpl$Fragment$ThreadFragment$categories(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ThreadFragment$categories _instance;
+
+  final TRes Function(Fragment$ThreadFragment$categories) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ThreadFragment$categories(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$ThreadFragment$categories<TRes>
+    implements CopyWith$Fragment$ThreadFragment$categories<TRes> {
+  _CopyWithStubImpl$Fragment$ThreadFragment$categories(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Fragment$TextActivity {
+  Fragment$TextActivity({
+    required this.id,
+    this.userId,
+    this.type,
+    required this.replyCount,
+    this.text,
+    this.isLocked,
+    this.isSubscribed,
+    this.isLiked,
+    required this.likeCount,
+    required this.createdAt,
+    this.user,
+    this.$__typename = 'TextActivity',
+  });
+
+  factory Fragment$TextActivity.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$userId = json['userId'];
+    final l$type = json['type'];
+    final l$replyCount = json['replyCount'];
+    final l$text = json['text'];
+    final l$isLocked = json['isLocked'];
+    final l$isSubscribed = json['isSubscribed'];
+    final l$isLiked = json['isLiked'];
+    final l$likeCount = json['likeCount'];
+    final l$createdAt = json['createdAt'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Fragment$TextActivity(
+      id: (l$id as int),
+      userId: (l$userId as int?),
+      type: l$type == null
+          ? null
+          : fromJson$Enum$ActivityType((l$type as String)),
+      replyCount: (l$replyCount as int),
+      text: (l$text as String?),
+      isLocked: (l$isLocked as bool?),
+      isSubscribed: (l$isSubscribed as bool?),
+      isLiked: (l$isLiked as bool?),
+      likeCount: (l$likeCount as int),
+      createdAt: (l$createdAt as int),
+      user: l$user == null
+          ? null
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int? userId;
+
+  final Enum$ActivityType? type;
+
+  final int replyCount;
+
+  final String? text;
+
+  final bool? isLocked;
+
+  final bool? isSubscribed;
+
+  final bool? isLiked;
+
+  final int likeCount;
+
+  final int createdAt;
+
+  final Fragment$UserFragment? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
+    final l$type = type;
+    _resultData['type'] =
+        l$type == null ? null : toJson$Enum$ActivityType(l$type);
+    final l$replyCount = replyCount;
+    _resultData['replyCount'] = l$replyCount;
+    final l$text = text;
+    _resultData['text'] = l$text;
+    final l$isLocked = isLocked;
+    _resultData['isLocked'] = l$isLocked;
+    final l$isSubscribed = isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
+    final l$isLiked = isLiked;
+    _resultData['isLiked'] = l$isLiked;
+    final l$likeCount = likeCount;
+    _resultData['likeCount'] = l$likeCount;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$userId = userId;
+    final l$type = type;
+    final l$replyCount = replyCount;
+    final l$text = text;
+    final l$isLocked = isLocked;
+    final l$isSubscribed = isSubscribed;
+    final l$isLiked = isLiked;
+    final l$likeCount = likeCount;
+    final l$createdAt = createdAt;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$userId,
+      l$type,
+      l$replyCount,
+      l$text,
+      l$isLocked,
+      l$isSubscribed,
+      l$isLiked,
+      l$likeCount,
+      l$createdAt,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$TextActivity) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$replyCount = replyCount;
+    final lOther$replyCount = other.replyCount;
+    if (l$replyCount != lOther$replyCount) {
+      return false;
+    }
+    final l$text = text;
+    final lOther$text = other.text;
+    if (l$text != lOther$text) {
+      return false;
+    }
+    final l$isLocked = isLocked;
+    final lOther$isLocked = other.isLocked;
+    if (l$isLocked != lOther$isLocked) {
+      return false;
+    }
+    final l$isSubscribed = isSubscribed;
+    final lOther$isSubscribed = other.isSubscribed;
+    if (l$isSubscribed != lOther$isSubscribed) {
+      return false;
+    }
+    final l$isLiked = isLiked;
+    final lOther$isLiked = other.isLiked;
+    if (l$isLiked != lOther$isLiked) {
+      return false;
+    }
+    final l$likeCount = likeCount;
+    final lOther$likeCount = other.likeCount;
+    if (l$likeCount != lOther$likeCount) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$TextActivity on Fragment$TextActivity {
+  CopyWith$Fragment$TextActivity<Fragment$TextActivity> get copyWith =>
+      CopyWith$Fragment$TextActivity(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$TextActivity<TRes> {
+  factory CopyWith$Fragment$TextActivity(
+    Fragment$TextActivity instance,
+    TRes Function(Fragment$TextActivity) then,
+  ) = _CopyWithImpl$Fragment$TextActivity;
+
+  factory CopyWith$Fragment$TextActivity.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$TextActivity;
+
+  TRes call({
+    int? id,
+    int? userId,
+    Enum$ActivityType? type,
+    int? replyCount,
+    String? text,
+    bool? isLocked,
+    bool? isSubscribed,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    Fragment$UserFragment? user,
+    String? $__typename,
+  });
+  CopyWith$Fragment$UserFragment<TRes> get user;
+}
+
+class _CopyWithImpl$Fragment$TextActivity<TRes>
+    implements CopyWith$Fragment$TextActivity<TRes> {
+  _CopyWithImpl$Fragment$TextActivity(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$TextActivity _instance;
+
+  final TRes Function(Fragment$TextActivity) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? userId = _undefined,
+    Object? type = _undefined,
+    Object? replyCount = _undefined,
+    Object? text = _undefined,
+    Object? isLocked = _undefined,
+    Object? isSubscribed = _undefined,
+    Object? isLiked = _undefined,
+    Object? likeCount = _undefined,
+    Object? createdAt = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$TextActivity(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        userId: userId == _undefined ? _instance.userId : (userId as int?),
+        type:
+            type == _undefined ? _instance.type : (type as Enum$ActivityType?),
+        replyCount: replyCount == _undefined || replyCount == null
+            ? _instance.replyCount
+            : (replyCount as int),
+        text: text == _undefined ? _instance.text : (text as String?),
+        isLocked:
+            isLocked == _undefined ? _instance.isLocked : (isLocked as bool?),
+        isSubscribed: isSubscribed == _undefined
+            ? _instance.isSubscribed
+            : (isSubscribed as bool?),
+        isLiked: isLiked == _undefined ? _instance.isLiked : (isLiked as bool?),
+        likeCount: likeCount == _undefined || likeCount == null
+            ? _instance.likeCount
+            : (likeCount as int),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Fragment$UserFragment<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$TextActivity<TRes>
+    implements CopyWith$Fragment$TextActivity<TRes> {
+  _CopyWithStubImpl$Fragment$TextActivity(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? userId,
+    Enum$ActivityType? type,
+    int? replyCount,
+    String? text,
+    bool? isLocked,
+    bool? isSubscribed,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    Fragment$UserFragment? user,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
+}
+
+const fragmentDefinitionTextActivity = FragmentDefinitionNode(
+  name: NameNode(value: 'TextActivity'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'TextActivity'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'userId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'type'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'replyCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'text'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLocked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isSubscribed'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLiked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'likeCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'UserFragment'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentTextActivity = DocumentNode(definitions: [
+  fragmentDefinitionTextActivity,
+  fragmentDefinitionUserFragment,
+]);
+
+extension ClientExtension$Fragment$TextActivity on graphql.GraphQLClient {
+  void writeFragment$TextActivity({
+    required Fragment$TextActivity data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'TextActivity',
+            document: documentNodeFragmentTextActivity,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$TextActivity? readFragment$TextActivity({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'TextActivity',
+          document: documentNodeFragmentTextActivity,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$TextActivity.fromJson(result);
+  }
+}
+
+class Fragment$ListActivity {
+  Fragment$ListActivity({
+    required this.id,
+    this.userId,
+    this.type,
+    this.status,
+    this.progress,
+    required this.replyCount,
+    this.isLocked,
+    this.isSubscribed,
+    this.isLiked,
+    required this.likeCount,
+    required this.createdAt,
+    this.user,
+    this.media,
+    this.$__typename = 'ListActivity',
+  });
+
+  factory Fragment$ListActivity.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$userId = json['userId'];
+    final l$type = json['type'];
+    final l$status = json['status'];
+    final l$progress = json['progress'];
+    final l$replyCount = json['replyCount'];
+    final l$isLocked = json['isLocked'];
+    final l$isSubscribed = json['isSubscribed'];
+    final l$isLiked = json['isLiked'];
+    final l$likeCount = json['likeCount'];
+    final l$createdAt = json['createdAt'];
+    final l$user = json['user'];
+    final l$media = json['media'];
+    final l$$__typename = json['__typename'];
+    return Fragment$ListActivity(
+      id: (l$id as int),
+      userId: (l$userId as int?),
+      type: l$type == null
+          ? null
+          : fromJson$Enum$ActivityType((l$type as String)),
+      status: (l$status as String?),
+      progress: (l$progress as String?),
+      replyCount: (l$replyCount as int),
+      isLocked: (l$isLocked as bool?),
+      isSubscribed: (l$isSubscribed as bool?),
+      isLiked: (l$isLiked as bool?),
+      likeCount: (l$likeCount as int),
+      createdAt: (l$createdAt as int),
+      user: l$user == null
+          ? null
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
+      media: l$media == null
+          ? null
+          : Fragment$MediaFragment.fromJson((l$media as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final int? userId;
+
+  final Enum$ActivityType? type;
+
+  final String? status;
+
+  final String? progress;
+
+  final int replyCount;
+
+  final bool? isLocked;
+
+  final bool? isSubscribed;
+
+  final bool? isLiked;
+
+  final int likeCount;
+
+  final int createdAt;
+
+  final Fragment$UserFragment? user;
+
+  final Fragment$MediaFragment? media;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
+    final l$type = type;
+    _resultData['type'] =
+        l$type == null ? null : toJson$Enum$ActivityType(l$type);
+    final l$status = status;
+    _resultData['status'] = l$status;
+    final l$progress = progress;
+    _resultData['progress'] = l$progress;
+    final l$replyCount = replyCount;
+    _resultData['replyCount'] = l$replyCount;
+    final l$isLocked = isLocked;
+    _resultData['isLocked'] = l$isLocked;
+    final l$isSubscribed = isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
+    final l$isLiked = isLiked;
+    _resultData['isLiked'] = l$isLiked;
+    final l$likeCount = likeCount;
+    _resultData['likeCount'] = l$likeCount;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$media = media;
+    _resultData['media'] = l$media?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$userId = userId;
+    final l$type = type;
+    final l$status = status;
+    final l$progress = progress;
+    final l$replyCount = replyCount;
+    final l$isLocked = isLocked;
+    final l$isSubscribed = isSubscribed;
+    final l$isLiked = isLiked;
+    final l$likeCount = likeCount;
+    final l$createdAt = createdAt;
+    final l$user = user;
+    final l$media = media;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$userId,
+      l$type,
+      l$status,
+      l$progress,
+      l$replyCount,
+      l$isLocked,
+      l$isSubscribed,
+      l$isLiked,
+      l$likeCount,
+      l$createdAt,
+      l$user,
+      l$media,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$ListActivity) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$progress = progress;
+    final lOther$progress = other.progress;
+    if (l$progress != lOther$progress) {
+      return false;
+    }
+    final l$replyCount = replyCount;
+    final lOther$replyCount = other.replyCount;
+    if (l$replyCount != lOther$replyCount) {
+      return false;
+    }
+    final l$isLocked = isLocked;
+    final lOther$isLocked = other.isLocked;
+    if (l$isLocked != lOther$isLocked) {
+      return false;
+    }
+    final l$isSubscribed = isSubscribed;
+    final lOther$isSubscribed = other.isSubscribed;
+    if (l$isSubscribed != lOther$isSubscribed) {
+      return false;
+    }
+    final l$isLiked = isLiked;
+    final lOther$isLiked = other.isLiked;
+    if (l$isLiked != lOther$isLiked) {
+      return false;
+    }
+    final l$likeCount = likeCount;
+    final lOther$likeCount = other.likeCount;
+    if (l$likeCount != lOther$likeCount) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != lOther$media) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$ListActivity on Fragment$ListActivity {
+  CopyWith$Fragment$ListActivity<Fragment$ListActivity> get copyWith =>
+      CopyWith$Fragment$ListActivity(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$ListActivity<TRes> {
+  factory CopyWith$Fragment$ListActivity(
+    Fragment$ListActivity instance,
+    TRes Function(Fragment$ListActivity) then,
+  ) = _CopyWithImpl$Fragment$ListActivity;
+
+  factory CopyWith$Fragment$ListActivity.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$ListActivity;
+
+  TRes call({
+    int? id,
+    int? userId,
+    Enum$ActivityType? type,
+    String? status,
+    String? progress,
+    int? replyCount,
+    bool? isLocked,
+    bool? isSubscribed,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    Fragment$UserFragment? user,
+    Fragment$MediaFragment? media,
+    String? $__typename,
+  });
+  CopyWith$Fragment$UserFragment<TRes> get user;
+  CopyWith$Fragment$MediaFragment<TRes> get media;
+}
+
+class _CopyWithImpl$Fragment$ListActivity<TRes>
+    implements CopyWith$Fragment$ListActivity<TRes> {
+  _CopyWithImpl$Fragment$ListActivity(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$ListActivity _instance;
+
+  final TRes Function(Fragment$ListActivity) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? userId = _undefined,
+    Object? type = _undefined,
+    Object? status = _undefined,
+    Object? progress = _undefined,
+    Object? replyCount = _undefined,
+    Object? isLocked = _undefined,
+    Object? isSubscribed = _undefined,
+    Object? isLiked = _undefined,
+    Object? likeCount = _undefined,
+    Object? createdAt = _undefined,
+    Object? user = _undefined,
+    Object? media = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$ListActivity(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        userId: userId == _undefined ? _instance.userId : (userId as int?),
+        type:
+            type == _undefined ? _instance.type : (type as Enum$ActivityType?),
+        status: status == _undefined ? _instance.status : (status as String?),
+        progress:
+            progress == _undefined ? _instance.progress : (progress as String?),
+        replyCount: replyCount == _undefined || replyCount == null
+            ? _instance.replyCount
+            : (replyCount as int),
+        isLocked:
+            isLocked == _undefined ? _instance.isLocked : (isLocked as bool?),
+        isSubscribed: isSubscribed == _undefined
+            ? _instance.isSubscribed
+            : (isSubscribed as bool?),
+        isLiked: isLiked == _undefined ? _instance.isLiked : (isLiked as bool?),
+        likeCount: likeCount == _undefined || likeCount == null
+            ? _instance.likeCount
+            : (likeCount as int),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaFragment?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Fragment$UserFragment<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
+  }
+
+  CopyWith$Fragment$MediaFragment<TRes> get media {
+    final local$media = _instance.media;
+    return local$media == null
+        ? CopyWith$Fragment$MediaFragment.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$ListActivity<TRes>
+    implements CopyWith$Fragment$ListActivity<TRes> {
+  _CopyWithStubImpl$Fragment$ListActivity(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    int? userId,
+    Enum$ActivityType? type,
+    String? status,
+    String? progress,
+    int? replyCount,
+    bool? isLocked,
+    bool? isSubscribed,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    Fragment$UserFragment? user,
+    Fragment$MediaFragment? media,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
+  CopyWith$Fragment$MediaFragment<TRes> get media =>
+      CopyWith$Fragment$MediaFragment.stub(_res);
+}
+
+const fragmentDefinitionListActivity = FragmentDefinitionNode(
+  name: NameNode(value: 'ListActivity'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'ListActivity'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'userId'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'type'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'status'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'progress'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'replyCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLocked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isSubscribed'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLiked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'likeCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'UserFragment'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'media'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'MediaFragment'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentListActivity = DocumentNode(definitions: [
+  fragmentDefinitionListActivity,
+  fragmentDefinitionUserFragment,
+  fragmentDefinitionMediaFragment,
+]);
+
+extension ClientExtension$Fragment$ListActivity on graphql.GraphQLClient {
+  void writeFragment$ListActivity({
+    required Fragment$ListActivity data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'ListActivity',
+            document: documentNodeFragmentListActivity,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$ListActivity? readFragment$ListActivity({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'ListActivity',
+          document: documentNodeFragmentListActivity,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$ListActivity.fromJson(result);
+  }
+}
+
+class Fragment$MessageActivity {
+  Fragment$MessageActivity({
+    required this.id,
+    this.type,
+    this.message,
+    required this.replyCount,
+    this.isPrivate,
+    this.isLocked,
+    this.isSubscribed,
+    this.isLiked,
+    required this.likeCount,
+    required this.createdAt,
+    this.userId,
+    this.messenger,
+    this.$__typename = 'MessageActivity',
+  });
+
+  factory Fragment$MessageActivity.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$type = json['type'];
+    final l$message = json['message'];
+    final l$replyCount = json['replyCount'];
+    final l$isPrivate = json['isPrivate'];
+    final l$isLocked = json['isLocked'];
+    final l$isSubscribed = json['isSubscribed'];
+    final l$isLiked = json['isLiked'];
+    final l$likeCount = json['likeCount'];
+    final l$createdAt = json['createdAt'];
+    final l$userId = json['userId'];
+    final l$messenger = json['messenger'];
+    final l$$__typename = json['__typename'];
+    return Fragment$MessageActivity(
+      id: (l$id as int),
+      type: l$type == null
+          ? null
+          : fromJson$Enum$ActivityType((l$type as String)),
+      message: (l$message as String?),
+      replyCount: (l$replyCount as int),
+      isPrivate: (l$isPrivate as bool?),
+      isLocked: (l$isLocked as bool?),
+      isSubscribed: (l$isSubscribed as bool?),
+      isLiked: (l$isLiked as bool?),
+      likeCount: (l$likeCount as int),
+      createdAt: (l$createdAt as int),
+      userId: (l$userId as int?),
+      messenger: l$messenger == null
+          ? null
+          : Fragment$MessageActivity$messenger.fromJson(
+              (l$messenger as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final Enum$ActivityType? type;
+
+  final String? message;
+
+  final int replyCount;
+
+  final bool? isPrivate;
+
+  final bool? isLocked;
+
+  final bool? isSubscribed;
+
+  final bool? isLiked;
+
+  final int likeCount;
+
+  final int createdAt;
+
+  final int? userId;
+
+  final Fragment$MessageActivity$messenger? messenger;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$type = type;
+    _resultData['type'] =
+        l$type == null ? null : toJson$Enum$ActivityType(l$type);
+    final l$message = message;
+    _resultData['message'] = l$message;
+    final l$replyCount = replyCount;
+    _resultData['replyCount'] = l$replyCount;
+    final l$isPrivate = isPrivate;
+    _resultData['isPrivate'] = l$isPrivate;
+    final l$isLocked = isLocked;
+    _resultData['isLocked'] = l$isLocked;
+    final l$isSubscribed = isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
+    final l$isLiked = isLiked;
+    _resultData['isLiked'] = l$isLiked;
+    final l$likeCount = likeCount;
+    _resultData['likeCount'] = l$likeCount;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$userId = userId;
+    _resultData['userId'] = l$userId;
+    final l$messenger = messenger;
+    _resultData['messenger'] = l$messenger?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$type = type;
+    final l$message = message;
+    final l$replyCount = replyCount;
+    final l$isPrivate = isPrivate;
+    final l$isLocked = isLocked;
+    final l$isSubscribed = isSubscribed;
+    final l$isLiked = isLiked;
+    final l$likeCount = likeCount;
+    final l$createdAt = createdAt;
+    final l$userId = userId;
+    final l$messenger = messenger;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$type,
+      l$message,
+      l$replyCount,
+      l$isPrivate,
+      l$isLocked,
+      l$isSubscribed,
+      l$isLiked,
+      l$likeCount,
+      l$createdAt,
+      l$userId,
+      l$messenger,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$MessageActivity) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$message = message;
+    final lOther$message = other.message;
+    if (l$message != lOther$message) {
+      return false;
+    }
+    final l$replyCount = replyCount;
+    final lOther$replyCount = other.replyCount;
+    if (l$replyCount != lOther$replyCount) {
+      return false;
+    }
+    final l$isPrivate = isPrivate;
+    final lOther$isPrivate = other.isPrivate;
+    if (l$isPrivate != lOther$isPrivate) {
+      return false;
+    }
+    final l$isLocked = isLocked;
+    final lOther$isLocked = other.isLocked;
+    if (l$isLocked != lOther$isLocked) {
+      return false;
+    }
+    final l$isSubscribed = isSubscribed;
+    final lOther$isSubscribed = other.isSubscribed;
+    if (l$isSubscribed != lOther$isSubscribed) {
+      return false;
+    }
+    final l$isLiked = isLiked;
+    final lOther$isLiked = other.isLiked;
+    if (l$isLiked != lOther$isLiked) {
+      return false;
+    }
+    final l$likeCount = likeCount;
+    final lOther$likeCount = other.likeCount;
+    if (l$likeCount != lOther$likeCount) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) {
+      return false;
+    }
+    final l$messenger = messenger;
+    final lOther$messenger = other.messenger;
+    if (l$messenger != lOther$messenger) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$MessageActivity
+    on Fragment$MessageActivity {
+  CopyWith$Fragment$MessageActivity<Fragment$MessageActivity> get copyWith =>
+      CopyWith$Fragment$MessageActivity(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Fragment$MessageActivity<TRes> {
+  factory CopyWith$Fragment$MessageActivity(
+    Fragment$MessageActivity instance,
+    TRes Function(Fragment$MessageActivity) then,
+  ) = _CopyWithImpl$Fragment$MessageActivity;
+
+  factory CopyWith$Fragment$MessageActivity.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MessageActivity;
+
+  TRes call({
+    int? id,
+    Enum$ActivityType? type,
+    String? message,
+    int? replyCount,
+    bool? isPrivate,
+    bool? isLocked,
+    bool? isSubscribed,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    int? userId,
+    Fragment$MessageActivity$messenger? messenger,
+    String? $__typename,
+  });
+  CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger;
+}
+
+class _CopyWithImpl$Fragment$MessageActivity<TRes>
+    implements CopyWith$Fragment$MessageActivity<TRes> {
+  _CopyWithImpl$Fragment$MessageActivity(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$MessageActivity _instance;
+
+  final TRes Function(Fragment$MessageActivity) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? type = _undefined,
+    Object? message = _undefined,
+    Object? replyCount = _undefined,
+    Object? isPrivate = _undefined,
+    Object? isLocked = _undefined,
+    Object? isSubscribed = _undefined,
+    Object? isLiked = _undefined,
+    Object? likeCount = _undefined,
+    Object? createdAt = _undefined,
+    Object? userId = _undefined,
+    Object? messenger = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$MessageActivity(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        type:
+            type == _undefined ? _instance.type : (type as Enum$ActivityType?),
+        message:
+            message == _undefined ? _instance.message : (message as String?),
+        replyCount: replyCount == _undefined || replyCount == null
+            ? _instance.replyCount
+            : (replyCount as int),
+        isPrivate: isPrivate == _undefined
+            ? _instance.isPrivate
+            : (isPrivate as bool?),
+        isLocked:
+            isLocked == _undefined ? _instance.isLocked : (isLocked as bool?),
+        isSubscribed: isSubscribed == _undefined
+            ? _instance.isSubscribed
+            : (isSubscribed as bool?),
+        isLiked: isLiked == _undefined ? _instance.isLiked : (isLiked as bool?),
+        likeCount: likeCount == _undefined || likeCount == null
+            ? _instance.likeCount
+            : (likeCount as int),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as int),
+        userId: userId == _undefined ? _instance.userId : (userId as int?),
+        messenger: messenger == _undefined
+            ? _instance.messenger
+            : (messenger as Fragment$MessageActivity$messenger?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger {
+    final local$messenger = _instance.messenger;
+    return local$messenger == null
+        ? CopyWith$Fragment$MessageActivity$messenger.stub(_then(_instance))
+        : CopyWith$Fragment$MessageActivity$messenger(
+            local$messenger, (e) => call(messenger: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$MessageActivity<TRes>
+    implements CopyWith$Fragment$MessageActivity<TRes> {
+  _CopyWithStubImpl$Fragment$MessageActivity(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    Enum$ActivityType? type,
+    String? message,
+    int? replyCount,
+    bool? isPrivate,
+    bool? isLocked,
+    bool? isSubscribed,
+    bool? isLiked,
+    int? likeCount,
+    int? createdAt,
+    int? userId,
+    Fragment$MessageActivity$messenger? messenger,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger =>
+      CopyWith$Fragment$MessageActivity$messenger.stub(_res);
+}
+
+const fragmentDefinitionMessageActivity = FragmentDefinitionNode(
+  name: NameNode(value: 'MessageActivity'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'MessageActivity'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'type'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'message'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'replyCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isPrivate'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLocked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isSubscribed'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'isLiked'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'likeCount'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'createdAt'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'messengerId'),
+      alias: NameNode(value: 'userId'),
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'messenger'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
         FieldNode(
           name: NameNode(value: 'id'),
           alias: null,
@@ -5282,6 +7318,27 @@ const fragmentDefinitionThread = FragmentDefinitionNode(
         ),
         FieldNode(
           name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'donatorTier'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'donatorBadge'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'moderatorRoles'),
           alias: null,
           arguments: [],
           directives: [],
@@ -5327,13 +7384,13 @@ const fragmentDefinitionThread = FragmentDefinitionNode(
     ),
   ]),
 );
-const documentNodeFragmentThread = DocumentNode(definitions: [
-  fragmentDefinitionThread,
+const documentNodeFragmentMessageActivity = DocumentNode(definitions: [
+  fragmentDefinitionMessageActivity,
 ]);
 
-extension ClientExtension$Fragment$Thread on graphql.GraphQLClient {
-  void writeFragment$Thread({
-    required Fragment$Thread data,
+extension ClientExtension$Fragment$MessageActivity on graphql.GraphQLClient {
+  void writeFragment$MessageActivity({
+    required Fragment$MessageActivity data,
     required Map<String, dynamic> idFields,
     bool broadcast = true,
   }) =>
@@ -5341,14 +7398,14 @@ extension ClientExtension$Fragment$Thread on graphql.GraphQLClient {
         graphql.FragmentRequest(
           idFields: idFields,
           fragment: const graphql.Fragment(
-            fragmentName: 'Thread',
-            document: documentNodeFragmentThread,
+            fragmentName: 'MessageActivity',
+            document: documentNodeFragmentMessageActivity,
           ),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Fragment$Thread? readFragment$Thread({
+  Fragment$MessageActivity? readFragment$MessageActivity({
     required Map<String, dynamic> idFields,
     bool optimistic = true,
   }) {
@@ -5356,30 +7413,48 @@ extension ClientExtension$Fragment$Thread on graphql.GraphQLClient {
       graphql.FragmentRequest(
         idFields: idFields,
         fragment: const graphql.Fragment(
-          fragmentName: 'Thread',
-          document: documentNodeFragmentThread,
+          fragmentName: 'MessageActivity',
+          document: documentNodeFragmentMessageActivity,
         ),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Fragment$Thread.fromJson(result);
+    return result == null ? null : Fragment$MessageActivity.fromJson(result);
   }
 }
 
-class Fragment$Thread$categories {
-  Fragment$Thread$categories({
+class Fragment$MessageActivity$messenger {
+  Fragment$MessageActivity$messenger({
     required this.id,
     required this.name,
-    this.$__typename = 'ThreadCategory',
+    this.donatorTier,
+    this.donatorBadge,
+    this.moderatorRoles,
+    this.avatar,
+    this.$__typename = 'User',
   });
 
-  factory Fragment$Thread$categories.fromJson(Map<String, dynamic> json) {
+  factory Fragment$MessageActivity$messenger.fromJson(
+      Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$donatorTier = json['donatorTier'];
+    final l$donatorBadge = json['donatorBadge'];
+    final l$moderatorRoles = json['moderatorRoles'];
+    final l$avatar = json['avatar'];
     final l$$__typename = json['__typename'];
-    return Fragment$Thread$categories(
+    return Fragment$MessageActivity$messenger(
       id: (l$id as int),
       name: (l$name as String),
+      donatorTier: (l$donatorTier as int?),
+      donatorBadge: (l$donatorBadge as String?),
+      moderatorRoles: (l$moderatorRoles as List<dynamic>?)
+          ?.map((e) => e == null ? null : fromJson$Enum$ModRole((e as String)))
+          .toList(),
+      avatar: l$avatar == null
+          ? null
+          : Fragment$MessageActivity$messenger$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5387,6 +7462,14 @@ class Fragment$Thread$categories {
   final int id;
 
   final String name;
+
+  final int? donatorTier;
+
+  final String? donatorBadge;
+
+  final List<Enum$ModRole?>? moderatorRoles;
+
+  final Fragment$MessageActivity$messenger$avatar? avatar;
 
   final String $__typename;
 
@@ -5396,6 +7479,16 @@ class Fragment$Thread$categories {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$donatorTier = donatorTier;
+    _resultData['donatorTier'] = l$donatorTier;
+    final l$donatorBadge = donatorBadge;
+    _resultData['donatorBadge'] = l$donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    _resultData['moderatorRoles'] = l$moderatorRoles
+        ?.map((e) => e == null ? null : toJson$Enum$ModRole(e))
+        .toList();
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5405,10 +7498,20 @@ class Fragment$Thread$categories {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$donatorTier = donatorTier;
+    final l$donatorBadge = donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    final l$avatar = avatar;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$donatorTier,
+      l$donatorBadge,
+      l$moderatorRoles == null
+          ? null
+          : Object.hashAll(l$moderatorRoles.map((v) => v)),
+      l$avatar,
       l$$__typename,
     ]);
   }
@@ -5418,7 +7521,7 @@ class Fragment$Thread$categories {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Thread$categories) ||
+    if (!(other is Fragment$MessageActivity$messenger) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5432,158 +7535,30 @@ class Fragment$Thread$categories {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
+    final l$donatorTier = donatorTier;
+    final lOther$donatorTier = other.donatorTier;
+    if (l$donatorTier != lOther$donatorTier) {
       return false;
     }
-    return true;
-  }
-}
-
-extension UtilityExtension$Fragment$Thread$categories
-    on Fragment$Thread$categories {
-  CopyWith$Fragment$Thread$categories<Fragment$Thread$categories>
-      get copyWith => CopyWith$Fragment$Thread$categories(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Fragment$Thread$categories<TRes> {
-  factory CopyWith$Fragment$Thread$categories(
-    Fragment$Thread$categories instance,
-    TRes Function(Fragment$Thread$categories) then,
-  ) = _CopyWithImpl$Fragment$Thread$categories;
-
-  factory CopyWith$Fragment$Thread$categories.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Thread$categories;
-
-  TRes call({
-    int? id,
-    String? name,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Fragment$Thread$categories<TRes>
-    implements CopyWith$Fragment$Thread$categories<TRes> {
-  _CopyWithImpl$Fragment$Thread$categories(
-    this._instance,
-    this._then,
-  );
-
-  final Fragment$Thread$categories _instance;
-
-  final TRes Function(Fragment$Thread$categories) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment$Thread$categories(
-        id: id == _undefined || id == null ? _instance.id : (id as int),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Fragment$Thread$categories<TRes>
-    implements CopyWith$Fragment$Thread$categories<TRes> {
-  _CopyWithStubImpl$Fragment$Thread$categories(this._res);
-
-  TRes _res;
-
-  call({
-    int? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Fragment$Thread$user {
-  Fragment$Thread$user({
-    required this.id,
-    required this.name,
-    this.avatar,
-    this.$__typename = 'User',
-  });
-
-  factory Fragment$Thread$user.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$name = json['name'];
-    final l$avatar = json['avatar'];
-    final l$$__typename = json['__typename'];
-    return Fragment$Thread$user(
-      id: (l$id as int),
-      name: (l$name as String),
-      avatar: l$avatar == null
-          ? null
-          : Fragment$Thread$user$avatar.fromJson(
-              (l$avatar as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int id;
-
-  final String name;
-
-  final Fragment$Thread$user$avatar? avatar;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$avatar = avatar;
-    _resultData['avatar'] = l$avatar?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    final l$avatar = avatar;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$avatar,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Fragment$Thread$user) || runtimeType != other.runtimeType) {
+    final l$donatorBadge = donatorBadge;
+    final lOther$donatorBadge = other.donatorBadge;
+    if (l$donatorBadge != lOther$donatorBadge) {
       return false;
     }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
+    final l$moderatorRoles = moderatorRoles;
+    final lOther$moderatorRoles = other.moderatorRoles;
+    if (l$moderatorRoles != null && lOther$moderatorRoles != null) {
+      if (l$moderatorRoles.length != lOther$moderatorRoles.length) {
+        return false;
+      }
+      for (int i = 0; i < l$moderatorRoles.length; i++) {
+        final l$moderatorRoles$entry = l$moderatorRoles[i];
+        final lOther$moderatorRoles$entry = lOther$moderatorRoles[i];
+        if (l$moderatorRoles$entry != lOther$moderatorRoles$entry) {
+          return false;
+        }
+      }
+    } else if (l$moderatorRoles != lOther$moderatorRoles) {
       return false;
     }
     final l$avatar = avatar;
@@ -5600,99 +7575,121 @@ class Fragment$Thread$user {
   }
 }
 
-extension UtilityExtension$Fragment$Thread$user on Fragment$Thread$user {
-  CopyWith$Fragment$Thread$user<Fragment$Thread$user> get copyWith =>
-      CopyWith$Fragment$Thread$user(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Fragment$MessageActivity$messenger
+    on Fragment$MessageActivity$messenger {
+  CopyWith$Fragment$MessageActivity$messenger<
+          Fragment$MessageActivity$messenger>
+      get copyWith => CopyWith$Fragment$MessageActivity$messenger(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Fragment$Thread$user<TRes> {
-  factory CopyWith$Fragment$Thread$user(
-    Fragment$Thread$user instance,
-    TRes Function(Fragment$Thread$user) then,
-  ) = _CopyWithImpl$Fragment$Thread$user;
+abstract class CopyWith$Fragment$MessageActivity$messenger<TRes> {
+  factory CopyWith$Fragment$MessageActivity$messenger(
+    Fragment$MessageActivity$messenger instance,
+    TRes Function(Fragment$MessageActivity$messenger) then,
+  ) = _CopyWithImpl$Fragment$MessageActivity$messenger;
 
-  factory CopyWith$Fragment$Thread$user.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Thread$user;
+  factory CopyWith$Fragment$MessageActivity$messenger.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MessageActivity$messenger;
 
   TRes call({
     int? id,
     String? name,
-    Fragment$Thread$user$avatar? avatar,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
+    Fragment$MessageActivity$messenger$avatar? avatar,
     String? $__typename,
   });
-  CopyWith$Fragment$Thread$user$avatar<TRes> get avatar;
+  CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> get avatar;
 }
 
-class _CopyWithImpl$Fragment$Thread$user<TRes>
-    implements CopyWith$Fragment$Thread$user<TRes> {
-  _CopyWithImpl$Fragment$Thread$user(
+class _CopyWithImpl$Fragment$MessageActivity$messenger<TRes>
+    implements CopyWith$Fragment$MessageActivity$messenger<TRes> {
+  _CopyWithImpl$Fragment$MessageActivity$messenger(
     this._instance,
     this._then,
   );
 
-  final Fragment$Thread$user _instance;
+  final Fragment$MessageActivity$messenger _instance;
 
-  final TRes Function(Fragment$Thread$user) _then;
+  final TRes Function(Fragment$MessageActivity$messenger) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? donatorTier = _undefined,
+    Object? donatorBadge = _undefined,
+    Object? moderatorRoles = _undefined,
     Object? avatar = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Thread$user(
+      _then(Fragment$MessageActivity$messenger(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        donatorTier: donatorTier == _undefined
+            ? _instance.donatorTier
+            : (donatorTier as int?),
+        donatorBadge: donatorBadge == _undefined
+            ? _instance.donatorBadge
+            : (donatorBadge as String?),
+        moderatorRoles: moderatorRoles == _undefined
+            ? _instance.moderatorRoles
+            : (moderatorRoles as List<Enum$ModRole?>?),
         avatar: avatar == _undefined
             ? _instance.avatar
-            : (avatar as Fragment$Thread$user$avatar?),
+            : (avatar as Fragment$MessageActivity$messenger$avatar?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Thread$user$avatar<TRes> get avatar {
+  CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
-        ? CopyWith$Fragment$Thread$user$avatar.stub(_then(_instance))
-        : CopyWith$Fragment$Thread$user$avatar(
+        ? CopyWith$Fragment$MessageActivity$messenger$avatar.stub(
+            _then(_instance))
+        : CopyWith$Fragment$MessageActivity$messenger$avatar(
             local$avatar, (e) => call(avatar: e));
   }
 }
 
-class _CopyWithStubImpl$Fragment$Thread$user<TRes>
-    implements CopyWith$Fragment$Thread$user<TRes> {
-  _CopyWithStubImpl$Fragment$Thread$user(this._res);
+class _CopyWithStubImpl$Fragment$MessageActivity$messenger<TRes>
+    implements CopyWith$Fragment$MessageActivity$messenger<TRes> {
+  _CopyWithStubImpl$Fragment$MessageActivity$messenger(this._res);
 
   TRes _res;
 
   call({
     int? id,
     String? name,
-    Fragment$Thread$user$avatar? avatar,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
+    Fragment$MessageActivity$messenger$avatar? avatar,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Thread$user$avatar<TRes> get avatar =>
-      CopyWith$Fragment$Thread$user$avatar.stub(_res);
+  CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> get avatar =>
+      CopyWith$Fragment$MessageActivity$messenger$avatar.stub(_res);
 }
 
-class Fragment$Thread$user$avatar {
-  Fragment$Thread$user$avatar({
+class Fragment$MessageActivity$messenger$avatar {
+  Fragment$MessageActivity$messenger$avatar({
     this.large,
     this.$__typename = 'UserAvatar',
   });
 
-  factory Fragment$Thread$user$avatar.fromJson(Map<String, dynamic> json) {
+  factory Fragment$MessageActivity$messenger$avatar.fromJson(
+      Map<String, dynamic> json) {
     final l$large = json['large'];
     final l$$__typename = json['__typename'];
-    return Fragment$Thread$user$avatar(
+    return Fragment$MessageActivity$messenger$avatar(
       large: (l$large as String?),
       $__typename: (l$$__typename as String),
     );
@@ -5726,7 +7723,7 @@ class Fragment$Thread$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Thread$user$avatar) ||
+    if (!(other is Fragment$MessageActivity$messenger$avatar) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5744,23 +7741,24 @@ class Fragment$Thread$user$avatar {
   }
 }
 
-extension UtilityExtension$Fragment$Thread$user$avatar
-    on Fragment$Thread$user$avatar {
-  CopyWith$Fragment$Thread$user$avatar<Fragment$Thread$user$avatar>
-      get copyWith => CopyWith$Fragment$Thread$user$avatar(
+extension UtilityExtension$Fragment$MessageActivity$messenger$avatar
+    on Fragment$MessageActivity$messenger$avatar {
+  CopyWith$Fragment$MessageActivity$messenger$avatar<
+          Fragment$MessageActivity$messenger$avatar>
+      get copyWith => CopyWith$Fragment$MessageActivity$messenger$avatar(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Fragment$Thread$user$avatar<TRes> {
-  factory CopyWith$Fragment$Thread$user$avatar(
-    Fragment$Thread$user$avatar instance,
-    TRes Function(Fragment$Thread$user$avatar) then,
-  ) = _CopyWithImpl$Fragment$Thread$user$avatar;
+abstract class CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> {
+  factory CopyWith$Fragment$MessageActivity$messenger$avatar(
+    Fragment$MessageActivity$messenger$avatar instance,
+    TRes Function(Fragment$MessageActivity$messenger$avatar) then,
+  ) = _CopyWithImpl$Fragment$MessageActivity$messenger$avatar;
 
-  factory CopyWith$Fragment$Thread$user$avatar.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Thread$user$avatar;
+  factory CopyWith$Fragment$MessageActivity$messenger$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MessageActivity$messenger$avatar;
 
   TRes call({
     String? large,
@@ -5768,16 +7766,16 @@ abstract class CopyWith$Fragment$Thread$user$avatar<TRes> {
   });
 }
 
-class _CopyWithImpl$Fragment$Thread$user$avatar<TRes>
-    implements CopyWith$Fragment$Thread$user$avatar<TRes> {
-  _CopyWithImpl$Fragment$Thread$user$avatar(
+class _CopyWithImpl$Fragment$MessageActivity$messenger$avatar<TRes>
+    implements CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> {
+  _CopyWithImpl$Fragment$MessageActivity$messenger$avatar(
     this._instance,
     this._then,
   );
 
-  final Fragment$Thread$user$avatar _instance;
+  final Fragment$MessageActivity$messenger$avatar _instance;
 
-  final TRes Function(Fragment$Thread$user$avatar) _then;
+  final TRes Function(Fragment$MessageActivity$messenger$avatar) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5785,7 +7783,7 @@ class _CopyWithImpl$Fragment$Thread$user$avatar<TRes>
     Object? large = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Thread$user$avatar(
+      _then(Fragment$MessageActivity$messenger$avatar(
         large: large == _undefined ? _instance.large : (large as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -5793,9 +7791,9 @@ class _CopyWithImpl$Fragment$Thread$user$avatar<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Fragment$Thread$user$avatar<TRes>
-    implements CopyWith$Fragment$Thread$user$avatar<TRes> {
-  _CopyWithStubImpl$Fragment$Thread$user$avatar(this._res);
+class _CopyWithStubImpl$Fragment$MessageActivity$messenger$avatar<TRes>
+    implements CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> {
+  _CopyWithStubImpl$Fragment$MessageActivity$messenger$avatar(this._res);
 
   TRes _res;
 
@@ -5806,46 +7804,40 @@ class _CopyWithStubImpl$Fragment$Thread$user$avatar<TRes>
       _res;
 }
 
-class Fragment$Thread$replyUser {
-  Fragment$Thread$replyUser({
-    required this.id,
-    required this.name,
-    this.avatar,
-    this.$__typename = 'User',
+class Fragment$MediaListOptions {
+  Fragment$MediaListOptions({
+    this.sectionOrder,
+    this.customLists,
+    this.$__typename = 'MediaListTypeOptions',
   });
 
-  factory Fragment$Thread$replyUser.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$name = json['name'];
-    final l$avatar = json['avatar'];
+  factory Fragment$MediaListOptions.fromJson(Map<String, dynamic> json) {
+    final l$sectionOrder = json['sectionOrder'];
+    final l$customLists = json['customLists'];
     final l$$__typename = json['__typename'];
-    return Fragment$Thread$replyUser(
-      id: (l$id as int),
-      name: (l$name as String),
-      avatar: l$avatar == null
-          ? null
-          : Fragment$Thread$replyUser$avatar.fromJson(
-              (l$avatar as Map<String, dynamic>)),
+    return Fragment$MediaListOptions(
+      sectionOrder: (l$sectionOrder as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
+      customLists: (l$customLists as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final int id;
+  final List<String?>? sectionOrder;
 
-  final String name;
-
-  final Fragment$Thread$replyUser$avatar? avatar;
+  final List<String?>? customLists;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$avatar = avatar;
-    _resultData['avatar'] = l$avatar?.toJson();
+    final l$sectionOrder = sectionOrder;
+    _resultData['sectionOrder'] = l$sectionOrder?.map((e) => e).toList();
+    final l$customLists = customLists;
+    _resultData['customLists'] = l$customLists?.map((e) => e).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5853,14 +7845,16 @@ class Fragment$Thread$replyUser {
 
   @override
   int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    final l$avatar = avatar;
+    final l$sectionOrder = sectionOrder;
+    final l$customLists = customLists;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$id,
-      l$name,
-      l$avatar,
+      l$sectionOrder == null
+          ? null
+          : Object.hashAll(l$sectionOrder.map((v) => v)),
+      l$customLists == null
+          ? null
+          : Object.hashAll(l$customLists.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -5870,23 +7864,40 @@ class Fragment$Thread$replyUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$Thread$replyUser) ||
+    if (!(other is Fragment$MediaListOptions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
+    final l$sectionOrder = sectionOrder;
+    final lOther$sectionOrder = other.sectionOrder;
+    if (l$sectionOrder != null && lOther$sectionOrder != null) {
+      if (l$sectionOrder.length != lOther$sectionOrder.length) {
+        return false;
+      }
+      for (int i = 0; i < l$sectionOrder.length; i++) {
+        final l$sectionOrder$entry = l$sectionOrder[i];
+        final lOther$sectionOrder$entry = lOther$sectionOrder[i];
+        if (l$sectionOrder$entry != lOther$sectionOrder$entry) {
+          return false;
+        }
+      }
+    } else if (l$sectionOrder != lOther$sectionOrder) {
       return false;
     }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$avatar = avatar;
-    final lOther$avatar = other.avatar;
-    if (l$avatar != lOther$avatar) {
+    final l$customLists = customLists;
+    final lOther$customLists = other.customLists;
+    if (l$customLists != null && lOther$customLists != null) {
+      if (l$customLists.length != lOther$customLists.length) {
+        return false;
+      }
+      for (int i = 0; i < l$customLists.length; i++) {
+        final l$customLists$entry = l$customLists[i];
+        final lOther$customLists$entry = lOther$customLists[i];
+        if (l$customLists$entry != lOther$customLists$entry) {
+          return false;
+        }
+      }
+    } else if (l$customLists != lOther$customLists) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5898,209 +7909,143 @@ class Fragment$Thread$replyUser {
   }
 }
 
-extension UtilityExtension$Fragment$Thread$replyUser
-    on Fragment$Thread$replyUser {
-  CopyWith$Fragment$Thread$replyUser<Fragment$Thread$replyUser> get copyWith =>
-      CopyWith$Fragment$Thread$replyUser(
+extension UtilityExtension$Fragment$MediaListOptions
+    on Fragment$MediaListOptions {
+  CopyWith$Fragment$MediaListOptions<Fragment$MediaListOptions> get copyWith =>
+      CopyWith$Fragment$MediaListOptions(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Fragment$Thread$replyUser<TRes> {
-  factory CopyWith$Fragment$Thread$replyUser(
-    Fragment$Thread$replyUser instance,
-    TRes Function(Fragment$Thread$replyUser) then,
-  ) = _CopyWithImpl$Fragment$Thread$replyUser;
+abstract class CopyWith$Fragment$MediaListOptions<TRes> {
+  factory CopyWith$Fragment$MediaListOptions(
+    Fragment$MediaListOptions instance,
+    TRes Function(Fragment$MediaListOptions) then,
+  ) = _CopyWithImpl$Fragment$MediaListOptions;
 
-  factory CopyWith$Fragment$Thread$replyUser.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Thread$replyUser;
+  factory CopyWith$Fragment$MediaListOptions.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$MediaListOptions;
 
   TRes call({
-    int? id,
-    String? name,
-    Fragment$Thread$replyUser$avatar? avatar,
+    List<String?>? sectionOrder,
+    List<String?>? customLists,
     String? $__typename,
   });
-  CopyWith$Fragment$Thread$replyUser$avatar<TRes> get avatar;
 }
 
-class _CopyWithImpl$Fragment$Thread$replyUser<TRes>
-    implements CopyWith$Fragment$Thread$replyUser<TRes> {
-  _CopyWithImpl$Fragment$Thread$replyUser(
+class _CopyWithImpl$Fragment$MediaListOptions<TRes>
+    implements CopyWith$Fragment$MediaListOptions<TRes> {
+  _CopyWithImpl$Fragment$MediaListOptions(
     this._instance,
     this._then,
   );
 
-  final Fragment$Thread$replyUser _instance;
+  final Fragment$MediaListOptions _instance;
 
-  final TRes Function(Fragment$Thread$replyUser) _then;
+  final TRes Function(Fragment$MediaListOptions) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? avatar = _undefined,
+    Object? sectionOrder = _undefined,
+    Object? customLists = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Fragment$Thread$replyUser(
-        id: id == _undefined || id == null ? _instance.id : (id as int),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        avatar: avatar == _undefined
-            ? _instance.avatar
-            : (avatar as Fragment$Thread$replyUser$avatar?),
+      _then(Fragment$MediaListOptions(
+        sectionOrder: sectionOrder == _undefined
+            ? _instance.sectionOrder
+            : (sectionOrder as List<String?>?),
+        customLists: customLists == _undefined
+            ? _instance.customLists
+            : (customLists as List<String?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Thread$replyUser$avatar<TRes> get avatar {
-    final local$avatar = _instance.avatar;
-    return local$avatar == null
-        ? CopyWith$Fragment$Thread$replyUser$avatar.stub(_then(_instance))
-        : CopyWith$Fragment$Thread$replyUser$avatar(
-            local$avatar, (e) => call(avatar: e));
-  }
 }
 
-class _CopyWithStubImpl$Fragment$Thread$replyUser<TRes>
-    implements CopyWith$Fragment$Thread$replyUser<TRes> {
-  _CopyWithStubImpl$Fragment$Thread$replyUser(this._res);
+class _CopyWithStubImpl$Fragment$MediaListOptions<TRes>
+    implements CopyWith$Fragment$MediaListOptions<TRes> {
+  _CopyWithStubImpl$Fragment$MediaListOptions(this._res);
 
   TRes _res;
 
   call({
-    int? id,
-    String? name,
-    Fragment$Thread$replyUser$avatar? avatar,
+    List<String?>? sectionOrder,
+    List<String?>? customLists,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Thread$replyUser$avatar<TRes> get avatar =>
-      CopyWith$Fragment$Thread$replyUser$avatar.stub(_res);
 }
 
-class Fragment$Thread$replyUser$avatar {
-  Fragment$Thread$replyUser$avatar({
-    this.large,
-    this.$__typename = 'UserAvatar',
-  });
+const fragmentDefinitionMediaListOptions = FragmentDefinitionNode(
+  name: NameNode(value: 'MediaListOptions'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'MediaListTypeOptions'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'sectionOrder'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'customLists'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentMediaListOptions = DocumentNode(definitions: [
+  fragmentDefinitionMediaListOptions,
+]);
 
-  factory Fragment$Thread$replyUser$avatar.fromJson(Map<String, dynamic> json) {
-    final l$large = json['large'];
-    final l$$__typename = json['__typename'];
-    return Fragment$Thread$replyUser$avatar(
-      large: (l$large as String?),
-      $__typename: (l$$__typename as String),
+extension ClientExtension$Fragment$MediaListOptions on graphql.GraphQLClient {
+  void writeFragment$MediaListOptions({
+    required Fragment$MediaListOptions data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'MediaListOptions',
+            document: documentNodeFragmentMediaListOptions,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$MediaListOptions? readFragment$MediaListOptions({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'MediaListOptions',
+          document: documentNodeFragmentMediaListOptions,
+        ),
+      ),
+      optimistic: optimistic,
     );
+    return result == null ? null : Fragment$MediaListOptions.fromJson(result);
   }
-
-  final String? large;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$large = large;
-    _resultData['large'] = l$large;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$large = large;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$large,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Fragment$Thread$replyUser$avatar) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$large = large;
-    final lOther$large = other.large;
-    if (l$large != lOther$large) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Fragment$Thread$replyUser$avatar
-    on Fragment$Thread$replyUser$avatar {
-  CopyWith$Fragment$Thread$replyUser$avatar<Fragment$Thread$replyUser$avatar>
-      get copyWith => CopyWith$Fragment$Thread$replyUser$avatar(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Fragment$Thread$replyUser$avatar<TRes> {
-  factory CopyWith$Fragment$Thread$replyUser$avatar(
-    Fragment$Thread$replyUser$avatar instance,
-    TRes Function(Fragment$Thread$replyUser$avatar) then,
-  ) = _CopyWithImpl$Fragment$Thread$replyUser$avatar;
-
-  factory CopyWith$Fragment$Thread$replyUser$avatar.stub(TRes res) =
-      _CopyWithStubImpl$Fragment$Thread$replyUser$avatar;
-
-  TRes call({
-    String? large,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Fragment$Thread$replyUser$avatar<TRes>
-    implements CopyWith$Fragment$Thread$replyUser$avatar<TRes> {
-  _CopyWithImpl$Fragment$Thread$replyUser$avatar(
-    this._instance,
-    this._then,
-  );
-
-  final Fragment$Thread$replyUser$avatar _instance;
-
-  final TRes Function(Fragment$Thread$replyUser$avatar) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? large = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment$Thread$replyUser$avatar(
-        large: large == _undefined ? _instance.large : (large as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Fragment$Thread$replyUser$avatar<TRes>
-    implements CopyWith$Fragment$Thread$replyUser$avatar<TRes> {
-  _CopyWithStubImpl$Fragment$Thread$replyUser$avatar(this._res);
-
-  TRes _res;
-
-  call({
-    String? large,
-    String? $__typename,
-  }) =>
-      _res;
 }

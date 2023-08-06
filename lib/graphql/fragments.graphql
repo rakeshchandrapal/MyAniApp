@@ -9,7 +9,7 @@ fragment PageInfo on PageInfo {
   hasNextPage
 }
 
-fragment User on User {
+fragment UserFragment on User {
   id
   name
   donatorTier
@@ -21,7 +21,7 @@ fragment User on User {
 }
 
 fragment ReleasingMedia on Media {
-  ...Media
+  ...MediaFragment
   nextAiringEpisode {
     airingAt
     timeUntilAiring
@@ -61,7 +61,8 @@ fragment MediaListEntry on MediaList {
   hiddenFromStatusLists
   private
   repeat
-  score(format: POINT_100)
+  score
+  customLists(asArray: true)
   startedAt {
     ...FuzzyDate
   }
@@ -69,30 +70,39 @@ fragment MediaListEntry on MediaList {
     ...FuzzyDate
   }
   media {
-    ...Media
+    ...MediaFragment
     episodes
     chapters
+    status(version: 2)
+    averageScore
+    popularity
+    startDate {
+      ...FuzzyDate
+    }
   }
 }
 
-fragment Media on Media {
+fragment CustomList on CustomList {
+  name
+  enabled
+}
+
+fragment MediaFragment on Media {
   id
   type
   isAdult
   genres
-  episodes
   format
-  chapters
-  description
+  description(asHtml: false)
   title {
     userPreferred
   }
   coverImage {
-    large
+    extraLarge
   }
 }
 
-fragment Thread on Thread {
+fragment ThreadFragment on Thread {
   id
   title
   replyCount
@@ -101,22 +111,82 @@ fragment Thread on Thread {
   repliedAt
   createdAt
   isSticky
+  mediaCategories {
+    ...MediaFragment
+  }
   categories {
     id
     name
   }
   user {
-    id
-    name
-    avatar {
-      large
-    }
+    ...UserFragment
   }
   replyUser {
+    ...UserFragment
+  }
+}
+
+fragment TextActivity on TextActivity {
+  id
+  userId
+  type
+  replyCount
+  text
+  isLocked
+  isSubscribed
+  isLiked
+  likeCount
+  createdAt
+  user {
+    ...UserFragment
+  }
+}
+
+fragment ListActivity on ListActivity {
+  id
+  userId
+  type
+  status
+  progress
+  replyCount
+  isLocked
+  isSubscribed
+  isLiked
+  likeCount
+  createdAt
+  user {
+    ...UserFragment
+  }
+  media {
+    ...MediaFragment
+  }
+}
+
+fragment MessageActivity on MessageActivity {
+  id
+  type
+  message
+  replyCount
+  isPrivate
+  isLocked
+  isSubscribed
+  isLiked
+  likeCount
+  createdAt
+  userId: messengerId
+  messenger {
     id
     name
+    donatorTier
+    donatorBadge
+    moderatorRoles
     avatar {
       large
     }
   }
+}
+
+fragment MediaListOptions on MediaListTypeOptions {
+  sectionOrder
+  customLists
 }

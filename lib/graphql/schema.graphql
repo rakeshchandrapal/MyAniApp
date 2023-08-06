@@ -215,6 +215,11 @@ type Mutation {
   SaveActivityReply(id: Int, activityId: Int, text: String, asMod: Boolean): ActivityReply
   DeleteActivityReply(id: Int): Deleted
   DeleteActivity(id: Int): Deleted
+  SaveTextActivity(id: Int, text: String, locked: Boolean): TextActivity
+  SaveThreadComment(id: Int, threadId: Int, parentCommentId: Int, comment: String, locked: Boolean): ThreadComment
+  DeleteThreadComment(id: Int): Deleted
+  SaveMessageActivity(id: Int, message: String, recipientId: Int, private: Boolean, locked: Boolean, asMod: Boolean): MessageActivity
+  ToggleActivitySubscription(activityId: Int, subscribe: Boolean): ActivityUnion
 }
 
 scalar ISODateTime
@@ -1126,6 +1131,11 @@ type MediaList {
   user: User
 }
 
+type CustomList {
+  name: String
+  enabled: Boolean
+}
+
 type User {
   id: Int!
   name: String!
@@ -1390,22 +1400,6 @@ type NotificationOption {
 
 enum NotificationType {
   ACTIVITY_MESSAGE
-  ACTIVITY_REPLY
-  FOLLOWING
-  ACTIVITY_MENTION
-  THREAD_COMMENT_MENTION
-  THREAD_SUBSCRIBED
-  THREAD_COMMENT_REPLY
-  AIRING
-  ACTIVITY_LIKE
-  ACTIVITY_REPLY_LIKE
-  THREAD_LIKE
-  THREAD_COMMENT_LIKE
-  ACTIVITY_REPLY_SUBSCRIBED
-  RELATED_MEDIA_ADDITION
-  MEDIA_DATA_CHANGE
-  MEDIA_MERGE
-  MEDIA_DELETIONACTIVITY_MESSAGE
   ACTIVITY_REPLY
   FOLLOWING
   ACTIVITY_MENTION

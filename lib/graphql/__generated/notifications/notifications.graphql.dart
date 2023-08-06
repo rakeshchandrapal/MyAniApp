@@ -1,6 +1,7 @@
-// GENERATED FILE
-// DO NOT MODIFY
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 import '../graphql/fragments.graphql.dart';
 import '../graphql/schema.graphql.dart';
 import 'dart:async';
@@ -373,7 +374,11 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'page'),
             value: VariableNode(name: NameNode(value: 'page')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'perPage'),
+            value: IntValueNode(value: '50'),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
@@ -383,40 +388,9 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'total'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'PageInfo'),
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'perPage'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'currentPage'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'lastPage'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'hasNextPage'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -485,7 +459,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'Media'),
+                        name: NameNode(value: 'MediaFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -549,7 +523,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'Media'),
+                        name: NameNode(value: 'MediaFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -613,7 +587,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -684,7 +658,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -755,7 +729,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -826,7 +800,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -897,7 +871,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -968,7 +942,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1039,7 +1013,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1139,7 +1113,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1239,7 +1213,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1339,7 +1313,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1439,7 +1413,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1532,7 +1506,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'User'),
+                        name: NameNode(value: 'UserFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1596,7 +1570,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'Media'),
+                        name: NameNode(value: 'MediaFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1667,7 +1641,7 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'Media'),
+                        name: NameNode(value: 'MediaFragment'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1795,8 +1769,9 @@ const documentNodeQueryNotifications = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionMedia,
-  fragmentDefinitionUser,
+  fragmentDefinitionPageInfo,
+  fragmentDefinitionMediaFragment,
+  fragmentDefinitionUserFragment,
 ]);
 Query$Notifications _parserFn$Query$Notifications(Map<String, dynamic> data) =>
     Query$Notifications.fromJson(data);
@@ -1965,8 +1940,7 @@ class Query$Notifications$Page {
     return Query$Notifications$Page(
       pageInfo: l$pageInfo == null
           ? null
-          : Query$Notifications$Page$pageInfo.fromJson(
-              (l$pageInfo as Map<String, dynamic>)),
+          : Fragment$PageInfo.fromJson((l$pageInfo as Map<String, dynamic>)),
       notifications: (l$notifications as List<dynamic>?)
           ?.map((e) => e == null
               ? null
@@ -1977,7 +1951,7 @@ class Query$Notifications$Page {
     );
   }
 
-  final Query$Notifications$Page$pageInfo? pageInfo;
+  final Fragment$PageInfo? pageInfo;
 
   final List<Query$Notifications$Page$notifications?>? notifications;
 
@@ -2067,11 +2041,11 @@ abstract class CopyWith$Query$Notifications$Page<TRes> {
       _CopyWithStubImpl$Query$Notifications$Page;
 
   TRes call({
-    Query$Notifications$Page$pageInfo? pageInfo,
+    Fragment$PageInfo? pageInfo,
     List<Query$Notifications$Page$notifications?>? notifications,
     String? $__typename,
   });
-  CopyWith$Query$Notifications$Page$pageInfo<TRes> get pageInfo;
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo;
   TRes notifications(
       Iterable<Query$Notifications$Page$notifications?>? Function(
               Iterable<
@@ -2101,7 +2075,7 @@ class _CopyWithImpl$Query$Notifications$Page<TRes>
       _then(Query$Notifications$Page(
         pageInfo: pageInfo == _undefined
             ? _instance.pageInfo
-            : (pageInfo as Query$Notifications$Page$pageInfo?),
+            : (pageInfo as Fragment$PageInfo?),
         notifications: notifications == _undefined
             ? _instance.notifications
             : (notifications as List<Query$Notifications$Page$notifications?>?),
@@ -2109,12 +2083,11 @@ class _CopyWithImpl$Query$Notifications$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$Notifications$Page$pageInfo<TRes> get pageInfo {
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
-        ? CopyWith$Query$Notifications$Page$pageInfo.stub(_then(_instance))
-        : CopyWith$Query$Notifications$Page$pageInfo(
-            local$pageInfo, (e) => call(pageInfo: e));
+        ? CopyWith$Fragment$PageInfo.stub(_then(_instance))
+        : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
   TRes notifications(
@@ -2139,215 +2112,14 @@ class _CopyWithStubImpl$Query$Notifications$Page<TRes>
   TRes _res;
 
   call({
-    Query$Notifications$Page$pageInfo? pageInfo,
+    Fragment$PageInfo? pageInfo,
     List<Query$Notifications$Page$notifications?>? notifications,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$Notifications$Page$pageInfo<TRes> get pageInfo =>
-      CopyWith$Query$Notifications$Page$pageInfo.stub(_res);
+  CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
+      CopyWith$Fragment$PageInfo.stub(_res);
   notifications(_fn) => _res;
-}
-
-class Query$Notifications$Page$pageInfo {
-  Query$Notifications$Page$pageInfo({
-    this.total,
-    this.perPage,
-    this.currentPage,
-    this.lastPage,
-    this.hasNextPage,
-    this.$__typename = 'PageInfo',
-  });
-
-  factory Query$Notifications$Page$pageInfo.fromJson(
-      Map<String, dynamic> json) {
-    final l$total = json['total'];
-    final l$perPage = json['perPage'];
-    final l$currentPage = json['currentPage'];
-    final l$lastPage = json['lastPage'];
-    final l$hasNextPage = json['hasNextPage'];
-    final l$$__typename = json['__typename'];
-    return Query$Notifications$Page$pageInfo(
-      total: (l$total as int?),
-      perPage: (l$perPage as int?),
-      currentPage: (l$currentPage as int?),
-      lastPage: (l$lastPage as int?),
-      hasNextPage: (l$hasNextPage as bool?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int? total;
-
-  final int? perPage;
-
-  final int? currentPage;
-
-  final int? lastPage;
-
-  final bool? hasNextPage;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$total = total;
-    _resultData['total'] = l$total;
-    final l$perPage = perPage;
-    _resultData['perPage'] = l$perPage;
-    final l$currentPage = currentPage;
-    _resultData['currentPage'] = l$currentPage;
-    final l$lastPage = lastPage;
-    _resultData['lastPage'] = l$lastPage;
-    final l$hasNextPage = hasNextPage;
-    _resultData['hasNextPage'] = l$hasNextPage;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$total = total;
-    final l$perPage = perPage;
-    final l$currentPage = currentPage;
-    final l$lastPage = lastPage;
-    final l$hasNextPage = hasNextPage;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$total,
-      l$perPage,
-      l$currentPage,
-      l$lastPage,
-      l$hasNextPage,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Notifications$Page$pageInfo) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$total = total;
-    final lOther$total = other.total;
-    if (l$total != lOther$total) {
-      return false;
-    }
-    final l$perPage = perPage;
-    final lOther$perPage = other.perPage;
-    if (l$perPage != lOther$perPage) {
-      return false;
-    }
-    final l$currentPage = currentPage;
-    final lOther$currentPage = other.currentPage;
-    if (l$currentPage != lOther$currentPage) {
-      return false;
-    }
-    final l$lastPage = lastPage;
-    final lOther$lastPage = other.lastPage;
-    if (l$lastPage != lOther$lastPage) {
-      return false;
-    }
-    final l$hasNextPage = hasNextPage;
-    final lOther$hasNextPage = other.hasNextPage;
-    if (l$hasNextPage != lOther$hasNextPage) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Notifications$Page$pageInfo
-    on Query$Notifications$Page$pageInfo {
-  CopyWith$Query$Notifications$Page$pageInfo<Query$Notifications$Page$pageInfo>
-      get copyWith => CopyWith$Query$Notifications$Page$pageInfo(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Notifications$Page$pageInfo<TRes> {
-  factory CopyWith$Query$Notifications$Page$pageInfo(
-    Query$Notifications$Page$pageInfo instance,
-    TRes Function(Query$Notifications$Page$pageInfo) then,
-  ) = _CopyWithImpl$Query$Notifications$Page$pageInfo;
-
-  factory CopyWith$Query$Notifications$Page$pageInfo.stub(TRes res) =
-      _CopyWithStubImpl$Query$Notifications$Page$pageInfo;
-
-  TRes call({
-    int? total,
-    int? perPage,
-    int? currentPage,
-    int? lastPage,
-    bool? hasNextPage,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Notifications$Page$pageInfo<TRes>
-    implements CopyWith$Query$Notifications$Page$pageInfo<TRes> {
-  _CopyWithImpl$Query$Notifications$Page$pageInfo(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Notifications$Page$pageInfo _instance;
-
-  final TRes Function(Query$Notifications$Page$pageInfo) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? total = _undefined,
-    Object? perPage = _undefined,
-    Object? currentPage = _undefined,
-    Object? lastPage = _undefined,
-    Object? hasNextPage = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Notifications$Page$pageInfo(
-        total: total == _undefined ? _instance.total : (total as int?),
-        perPage: perPage == _undefined ? _instance.perPage : (perPage as int?),
-        currentPage: currentPage == _undefined
-            ? _instance.currentPage
-            : (currentPage as int?),
-        lastPage:
-            lastPage == _undefined ? _instance.lastPage : (lastPage as int?),
-        hasNextPage: hasNextPage == _undefined
-            ? _instance.hasNextPage
-            : (hasNextPage as bool?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Notifications$Page$pageInfo<TRes>
-    implements CopyWith$Query$Notifications$Page$pageInfo<TRes> {
-  _CopyWithStubImpl$Query$Notifications$Page$pageInfo(this._res);
-
-  TRes _res;
-
-  call({
-    int? total,
-    int? perPage,
-    int? currentPage,
-    int? lastPage,
-    bool? hasNextPage,
-    String? $__typename,
-  }) =>
-      _res;
 }
 
 class Query$Notifications$Page$notifications {
@@ -2472,6 +2244,325 @@ extension UtilityExtension$Query$Notifications$Page$notifications
             this,
             (i) => i,
           );
+  _T when<_T>({
+    required _T Function(
+            Query$Notifications$Page$notifications$$AiringNotification)
+        airingNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification)
+        relatedMediaAdditionNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$FollowingNotification)
+        followingNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ActivityMessageNotification)
+        activityMessageNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ActivityMentionNotification)
+        activityMentionNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ActivityReplyNotification)
+        activityReplyNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification)
+        activityReplySubscribedNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ActivityLikeNotification)
+        activityLikeNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ActivityReplyLikeNotification)
+        activityReplyLikeNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentMentionNotification)
+        threadCommentMentionNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentReplyNotification)
+        threadCommentReplyNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification)
+        threadCommentSubscribedNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentLikeNotification)
+        threadCommentLikeNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$ThreadLikeNotification)
+        threadLikeNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$MediaDataChangeNotification)
+        mediaDataChangeNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$MediaMergeNotification)
+        mediaMergeNotification,
+    required _T Function(
+            Query$Notifications$Page$notifications$$MediaDeletionNotification)
+        mediaDeletionNotification,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "AiringNotification":
+        return airingNotification(
+            this as Query$Notifications$Page$notifications$$AiringNotification);
+
+      case "RelatedMediaAdditionNotification":
+        return relatedMediaAdditionNotification(this
+            as Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification);
+
+      case "FollowingNotification":
+        return followingNotification(this
+            as Query$Notifications$Page$notifications$$FollowingNotification);
+
+      case "ActivityMessageNotification":
+        return activityMessageNotification(this
+            as Query$Notifications$Page$notifications$$ActivityMessageNotification);
+
+      case "ActivityMentionNotification":
+        return activityMentionNotification(this
+            as Query$Notifications$Page$notifications$$ActivityMentionNotification);
+
+      case "ActivityReplyNotification":
+        return activityReplyNotification(this
+            as Query$Notifications$Page$notifications$$ActivityReplyNotification);
+
+      case "ActivityReplySubscribedNotification":
+        return activityReplySubscribedNotification(this
+            as Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification);
+
+      case "ActivityLikeNotification":
+        return activityLikeNotification(this
+            as Query$Notifications$Page$notifications$$ActivityLikeNotification);
+
+      case "ActivityReplyLikeNotification":
+        return activityReplyLikeNotification(this
+            as Query$Notifications$Page$notifications$$ActivityReplyLikeNotification);
+
+      case "ThreadCommentMentionNotification":
+        return threadCommentMentionNotification(this
+            as Query$Notifications$Page$notifications$$ThreadCommentMentionNotification);
+
+      case "ThreadCommentReplyNotification":
+        return threadCommentReplyNotification(this
+            as Query$Notifications$Page$notifications$$ThreadCommentReplyNotification);
+
+      case "ThreadCommentSubscribedNotification":
+        return threadCommentSubscribedNotification(this
+            as Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification);
+
+      case "ThreadCommentLikeNotification":
+        return threadCommentLikeNotification(this
+            as Query$Notifications$Page$notifications$$ThreadCommentLikeNotification);
+
+      case "ThreadLikeNotification":
+        return threadLikeNotification(this
+            as Query$Notifications$Page$notifications$$ThreadLikeNotification);
+
+      case "MediaDataChangeNotification":
+        return mediaDataChangeNotification(this
+            as Query$Notifications$Page$notifications$$MediaDataChangeNotification);
+
+      case "MediaMergeNotification":
+        return mediaMergeNotification(this
+            as Query$Notifications$Page$notifications$$MediaMergeNotification);
+
+      case "MediaDeletionNotification":
+        return mediaDeletionNotification(this
+            as Query$Notifications$Page$notifications$$MediaDeletionNotification);
+
+      default:
+        return orElse();
+    }
+  }
+
+  _T maybeWhen<_T>({
+    _T Function(Query$Notifications$Page$notifications$$AiringNotification)?
+        airingNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification)?
+        relatedMediaAdditionNotification,
+    _T Function(Query$Notifications$Page$notifications$$FollowingNotification)?
+        followingNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ActivityMessageNotification)?
+        activityMessageNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ActivityMentionNotification)?
+        activityMentionNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ActivityReplyNotification)?
+        activityReplyNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification)?
+        activityReplySubscribedNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ActivityLikeNotification)?
+        activityLikeNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ActivityReplyLikeNotification)?
+        activityReplyLikeNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentMentionNotification)?
+        threadCommentMentionNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentReplyNotification)?
+        threadCommentReplyNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification)?
+        threadCommentSubscribedNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$ThreadCommentLikeNotification)?
+        threadCommentLikeNotification,
+    _T Function(Query$Notifications$Page$notifications$$ThreadLikeNotification)?
+        threadLikeNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$MediaDataChangeNotification)?
+        mediaDataChangeNotification,
+    _T Function(Query$Notifications$Page$notifications$$MediaMergeNotification)?
+        mediaMergeNotification,
+    _T Function(
+            Query$Notifications$Page$notifications$$MediaDeletionNotification)?
+        mediaDeletionNotification,
+    required _T Function() orElse,
+  }) {
+    switch ($__typename) {
+      case "AiringNotification":
+        if (airingNotification != null) {
+          return airingNotification(this
+              as Query$Notifications$Page$notifications$$AiringNotification);
+        } else {
+          return orElse();
+        }
+
+      case "RelatedMediaAdditionNotification":
+        if (relatedMediaAdditionNotification != null) {
+          return relatedMediaAdditionNotification(this
+              as Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification);
+        } else {
+          return orElse();
+        }
+
+      case "FollowingNotification":
+        if (followingNotification != null) {
+          return followingNotification(this
+              as Query$Notifications$Page$notifications$$FollowingNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ActivityMessageNotification":
+        if (activityMessageNotification != null) {
+          return activityMessageNotification(this
+              as Query$Notifications$Page$notifications$$ActivityMessageNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ActivityMentionNotification":
+        if (activityMentionNotification != null) {
+          return activityMentionNotification(this
+              as Query$Notifications$Page$notifications$$ActivityMentionNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ActivityReplyNotification":
+        if (activityReplyNotification != null) {
+          return activityReplyNotification(this
+              as Query$Notifications$Page$notifications$$ActivityReplyNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ActivityReplySubscribedNotification":
+        if (activityReplySubscribedNotification != null) {
+          return activityReplySubscribedNotification(this
+              as Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ActivityLikeNotification":
+        if (activityLikeNotification != null) {
+          return activityLikeNotification(this
+              as Query$Notifications$Page$notifications$$ActivityLikeNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ActivityReplyLikeNotification":
+        if (activityReplyLikeNotification != null) {
+          return activityReplyLikeNotification(this
+              as Query$Notifications$Page$notifications$$ActivityReplyLikeNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ThreadCommentMentionNotification":
+        if (threadCommentMentionNotification != null) {
+          return threadCommentMentionNotification(this
+              as Query$Notifications$Page$notifications$$ThreadCommentMentionNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ThreadCommentReplyNotification":
+        if (threadCommentReplyNotification != null) {
+          return threadCommentReplyNotification(this
+              as Query$Notifications$Page$notifications$$ThreadCommentReplyNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ThreadCommentSubscribedNotification":
+        if (threadCommentSubscribedNotification != null) {
+          return threadCommentSubscribedNotification(this
+              as Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ThreadCommentLikeNotification":
+        if (threadCommentLikeNotification != null) {
+          return threadCommentLikeNotification(this
+              as Query$Notifications$Page$notifications$$ThreadCommentLikeNotification);
+        } else {
+          return orElse();
+        }
+
+      case "ThreadLikeNotification":
+        if (threadLikeNotification != null) {
+          return threadLikeNotification(this
+              as Query$Notifications$Page$notifications$$ThreadLikeNotification);
+        } else {
+          return orElse();
+        }
+
+      case "MediaDataChangeNotification":
+        if (mediaDataChangeNotification != null) {
+          return mediaDataChangeNotification(this
+              as Query$Notifications$Page$notifications$$MediaDataChangeNotification);
+        } else {
+          return orElse();
+        }
+
+      case "MediaMergeNotification":
+        if (mediaMergeNotification != null) {
+          return mediaMergeNotification(this
+              as Query$Notifications$Page$notifications$$MediaMergeNotification);
+        } else {
+          return orElse();
+        }
+
+      case "MediaDeletionNotification":
+        if (mediaDeletionNotification != null) {
+          return mediaDeletionNotification(this
+              as Query$Notifications$Page$notifications$$MediaDeletionNotification);
+        } else {
+          return orElse();
+        }
+
+      default:
+        return orElse();
+    }
+  }
 }
 
 abstract class CopyWith$Query$Notifications$Page$notifications<TRes> {
@@ -2546,7 +2637,7 @@ class Query$Notifications$Page$notifications$$AiringNotification
           (l$contexts as List<dynamic>?)?.map((e) => (e as String?)).toList(),
       media: l$media == null
           ? null
-          : Fragment$Media.fromJson((l$media as Map<String, dynamic>)),
+          : Fragment$MediaFragment.fromJson((l$media as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -2560,7 +2651,7 @@ class Query$Notifications$Page$notifications$$AiringNotification
 
   final List<String?>? contexts;
 
-  final Fragment$Media? media;
+  final Fragment$MediaFragment? media;
 
   final int? createdAt;
 
@@ -2694,11 +2785,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$AiringNotificati
     Enum$NotificationType? type,
     int? episode,
     List<String?>? contexts,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$Media<TRes> get media;
+  CopyWith$Fragment$MediaFragment<TRes> get media;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$AiringNotification<
@@ -2738,19 +2829,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$AiringNotification<
         contexts: contexts == _undefined
             ? _instance.contexts
             : (contexts as List<String?>?),
-        media:
-            media == _undefined ? _instance.media : (media as Fragment$Media?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Media<TRes> get media {
+  CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
-        ? CopyWith$Fragment$Media.stub(_then(_instance))
-        : CopyWith$Fragment$Media(local$media, (e) => call(media: e));
+        ? CopyWith$Fragment$MediaFragment.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
   }
 }
 
@@ -2769,12 +2861,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$AiringNotificati
     Enum$NotificationType? type,
     int? episode,
     List<String?>? contexts,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Media<TRes> get media => CopyWith$Fragment$Media.stub(_res);
+  CopyWith$Fragment$MediaFragment<TRes> get media =>
+      CopyWith$Fragment$MediaFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification
@@ -2804,7 +2897,7 @@ class Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification
       context: (l$context as String?),
       media: l$media == null
           ? null
-          : Fragment$Media.fromJson((l$media as Map<String, dynamic>)),
+          : Fragment$MediaFragment.fromJson((l$media as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -2816,7 +2909,7 @@ class Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification
 
   final String? context;
 
-  final Fragment$Media? media;
+  final Fragment$MediaFragment? media;
 
   final int? createdAt;
 
@@ -2931,11 +3024,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$RelatedMediaAddi
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$Media<TRes> get media;
+  CopyWith$Fragment$MediaFragment<TRes> get media;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification<
@@ -2973,19 +3066,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$RelatedMediaAddition
             : (type as Enum$NotificationType?),
         context:
             context == _undefined ? _instance.context : (context as String?),
-        media:
-            media == _undefined ? _instance.media : (media as Fragment$Media?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Media<TRes> get media {
+  CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
-        ? CopyWith$Fragment$Media.stub(_then(_instance))
-        : CopyWith$Fragment$Media(local$media, (e) => call(media: e));
+        ? CopyWith$Fragment$MediaFragment.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
   }
 }
 
@@ -3003,12 +3097,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$RelatedMediaAddi
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Media<TRes> get media => CopyWith$Fragment$Media.stub(_res);
+  CopyWith$Fragment$MediaFragment<TRes> get media =>
+      CopyWith$Fragment$MediaFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$FollowingNotification
@@ -3038,7 +3133,7 @@ class Query$Notifications$Page$notifications$$FollowingNotification
       context: (l$context as String?),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -3050,7 +3145,7 @@ class Query$Notifications$Page$notifications$$FollowingNotification
 
   final String? context;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -3163,11 +3258,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$FollowingNotific
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$FollowingNotification<
@@ -3202,18 +3297,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$FollowingNotificatio
             : (type as Enum$NotificationType?),
         context:
             context == _undefined ? _instance.context : (context as String?),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -3231,12 +3328,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$FollowingNotific
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ActivityMessageNotification
@@ -3269,7 +3367,7 @@ class Query$Notifications$Page$notifications$$ActivityMessageNotification
       activityId: (l$activityId as int),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -3283,7 +3381,7 @@ class Query$Notifications$Page$notifications$$ActivityMessageNotification
 
   final int activityId;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -3408,11 +3506,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ActivityMessageN
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMessageNotification<
@@ -3453,18 +3551,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMessageNotif
         activityId: activityId == _undefined || activityId == null
             ? _instance.activityId
             : (activityId as int),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -3483,12 +3583,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMessageN
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ActivityMentionNotification
@@ -3521,7 +3622,7 @@ class Query$Notifications$Page$notifications$$ActivityMentionNotification
       activityId: (l$activityId as int),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -3535,7 +3636,7 @@ class Query$Notifications$Page$notifications$$ActivityMentionNotification
 
   final int activityId;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -3660,11 +3761,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ActivityMentionN
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMentionNotification<
@@ -3705,18 +3806,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMentionNotif
         activityId: activityId == _undefined || activityId == null
             ? _instance.activityId
             : (activityId as int),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -3735,12 +3838,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMentionN
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ActivityReplyNotification
@@ -3773,7 +3877,7 @@ class Query$Notifications$Page$notifications$$ActivityReplyNotification
       activityId: (l$activityId as int),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -3787,7 +3891,7 @@ class Query$Notifications$Page$notifications$$ActivityReplyNotification
 
   final int activityId;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -3911,11 +4015,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ActivityReplyNot
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyNotification<
@@ -3955,18 +4059,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyNotific
         activityId: activityId == _undefined || activityId == null
             ? _instance.activityId
             : (activityId as int),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -3985,12 +4091,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyNot
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification
@@ -4023,7 +4130,7 @@ class Query$Notifications$Page$notifications$$ActivityReplySubscribedNotificatio
       activityId: (l$activityId as int),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -4037,7 +4144,7 @@ class Query$Notifications$Page$notifications$$ActivityReplySubscribedNotificatio
 
   final int activityId;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -4162,11 +4269,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ActivityReplySub
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification<
@@ -4208,18 +4315,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplySubscri
         activityId: activityId == _undefined || activityId == null
             ? _instance.activityId
             : (activityId as int),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -4238,12 +4347,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplySub
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ActivityLikeNotification
@@ -4276,7 +4386,7 @@ class Query$Notifications$Page$notifications$$ActivityLikeNotification
       activityId: (l$activityId as int),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -4290,7 +4400,7 @@ class Query$Notifications$Page$notifications$$ActivityLikeNotification
 
   final int activityId;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -4414,11 +4524,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ActivityLikeNoti
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityLikeNotification<
@@ -4458,18 +4568,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityLikeNotifica
         activityId: activityId == _undefined || activityId == null
             ? _instance.activityId
             : (activityId as int),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -4488,12 +4600,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityLikeNoti
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ActivityReplyLikeNotification
@@ -4526,7 +4639,7 @@ class Query$Notifications$Page$notifications$$ActivityReplyLikeNotification
       activityId: (l$activityId as int),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -4540,7 +4653,7 @@ class Query$Notifications$Page$notifications$$ActivityReplyLikeNotification
 
   final int activityId;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -4665,11 +4778,11 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ActivityReplyLik
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyLikeNotification<
@@ -4711,18 +4824,20 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyLikeNot
         activityId: activityId == _undefined || activityId == null
             ? _instance.activityId
             : (activityId as int),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -4741,12 +4856,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyLik
     Enum$NotificationType? type,
     String? context,
     int? activityId,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification
@@ -4785,7 +4901,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification
               .fromJson((l$thread as Map<String, dynamic>)),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -4802,7 +4918,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification
   final Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread?
       thread;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -4938,13 +5054,13 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMen
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread<
       TRes> get thread;
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification<
@@ -4991,7 +5107,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
             ? _instance.thread
             : (thread
                 as Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread?),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
@@ -5008,11 +5126,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
             local$thread, (e) => call(thread: e));
   }
 
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -5033,7 +5151,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMen
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
@@ -5043,7 +5161,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMen
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread
               .stub(_res);
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread {
@@ -5243,7 +5362,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification
               .fromJson((l$thread as Map<String, dynamic>)),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -5260,7 +5379,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification
   final Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread?
       thread;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -5396,13 +5515,13 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ThreadCommentRep
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread<
       TRes> get thread;
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification<
@@ -5449,7 +5568,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
             ? _instance.thread
             : (thread
                 as Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread?),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
@@ -5466,11 +5587,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
             local$thread, (e) => call(thread: e));
   }
 
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -5491,7 +5612,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentRep
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
@@ -5501,7 +5622,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentRep
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread
               .stub(_res);
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread {
@@ -5701,7 +5823,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotificatio
               .fromJson((l$thread as Map<String, dynamic>)),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -5718,7 +5840,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotificatio
   final Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread?
       thread;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -5854,13 +5976,13 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSub
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread<
       TRes> get thread;
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification<
@@ -5907,7 +6029,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
             ? _instance.thread
             : (thread
                 as Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread?),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
@@ -5924,11 +6048,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
             local$thread, (e) => call(thread: e));
   }
 
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -5949,7 +6073,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSub
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
@@ -5959,7 +6083,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSub
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread
               .stub(_res);
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread {
@@ -6159,7 +6284,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification
               .fromJson((l$thread as Map<String, dynamic>)),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -6176,7 +6301,7 @@ class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification
   final Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread?
       thread;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -6312,13 +6437,13 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLik
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread<
       TRes> get thread;
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification<
@@ -6365,7 +6490,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
             ? _instance.thread
             : (thread
                 as Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread?),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
@@ -6382,11 +6509,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
             local$thread, (e) => call(thread: e));
   }
 
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -6407,7 +6534,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLik
     int? commentId,
     Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
@@ -6417,7 +6544,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLik
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread
               .stub(_res);
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread {
@@ -6614,7 +6742,7 @@ class Query$Notifications$Page$notifications$$ThreadLikeNotification
               .fromJson((l$thread as Map<String, dynamic>)),
       user: l$user == null
           ? null
-          : Fragment$User.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
     );
@@ -6629,7 +6757,7 @@ class Query$Notifications$Page$notifications$$ThreadLikeNotification
   final Query$Notifications$Page$notifications$$ThreadLikeNotification$thread?
       thread;
 
-  final Fragment$User? user;
+  final Fragment$UserFragment? user;
 
   final int? createdAt;
 
@@ -6754,13 +6882,13 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotifi
     String? context,
     Query$Notifications$Page$notifications$$ThreadLikeNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   });
   CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread<
       TRes> get thread;
-  CopyWith$Fragment$User<TRes> get user;
+  CopyWith$Fragment$UserFragment<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotification<
@@ -6801,7 +6929,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
             ? _instance.thread
             : (thread
                 as Query$Notifications$Page$notifications$$ThreadLikeNotification$thread?),
-        user: user == _undefined ? _instance.user : (user as Fragment$User?),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Fragment$UserFragment?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
         $__typename: $__typename == _undefined || $__typename == null
@@ -6818,11 +6948,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
             local$thread, (e) => call(thread: e));
   }
 
-  CopyWith$Fragment$User<TRes> get user {
+  CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$User.stub(_then(_instance))
-        : CopyWith$Fragment$User(local$user, (e) => call(user: e));
+        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
+        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 }
 
@@ -6842,7 +6972,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotifi
     String? context,
     Query$Notifications$Page$notifications$$ThreadLikeNotification$thread?
         thread,
-    Fragment$User? user,
+    Fragment$UserFragment? user,
     int? createdAt,
     String? $__typename,
   }) =>
@@ -6852,7 +6982,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotifi
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread
               .stub(_res);
-  CopyWith$Fragment$User<TRes> get user => CopyWith$Fragment$User.stub(_res);
+  CopyWith$Fragment$UserFragment<TRes> get user =>
+      CopyWith$Fragment$UserFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$ThreadLikeNotification$thread {
@@ -7045,7 +7176,7 @@ class Query$Notifications$Page$notifications$$MediaDataChangeNotification
       context: (l$context as String?),
       media: l$media == null
           ? null
-          : Fragment$Media.fromJson((l$media as Map<String, dynamic>)),
+          : Fragment$MediaFragment.fromJson((l$media as Map<String, dynamic>)),
       reason: (l$reason as String?),
       createdAt: (l$createdAt as int?),
       $__typename: (l$$__typename as String),
@@ -7058,7 +7189,7 @@ class Query$Notifications$Page$notifications$$MediaDataChangeNotification
 
   final String? context;
 
-  final Fragment$Media? media;
+  final Fragment$MediaFragment? media;
 
   final String? reason;
 
@@ -7184,12 +7315,12 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$MediaDataChangeN
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     String? reason,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$Media<TRes> get media;
+  CopyWith$Fragment$MediaFragment<TRes> get media;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotification<
@@ -7227,8 +7358,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotif
             : (type as Enum$NotificationType?),
         context:
             context == _undefined ? _instance.context : (context as String?),
-        media:
-            media == _undefined ? _instance.media : (media as Fragment$Media?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaFragment?),
         reason: reason == _undefined ? _instance.reason : (reason as String?),
         createdAt:
             createdAt == _undefined ? _instance.createdAt : (createdAt as int?),
@@ -7236,11 +7368,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotif
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Media<TRes> get media {
+  CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
-        ? CopyWith$Fragment$Media.stub(_then(_instance))
-        : CopyWith$Fragment$Media(local$media, (e) => call(media: e));
+        ? CopyWith$Fragment$MediaFragment.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
   }
 }
 
@@ -7258,13 +7390,14 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDataChangeN
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     String? reason,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Media<TRes> get media => CopyWith$Fragment$Media.stub(_res);
+  CopyWith$Fragment$MediaFragment<TRes> get media =>
+      CopyWith$Fragment$MediaFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$MediaMergeNotification
@@ -7298,7 +7431,7 @@ class Query$Notifications$Page$notifications$$MediaMergeNotification
       context: (l$context as String?),
       media: l$media == null
           ? null
-          : Fragment$Media.fromJson((l$media as Map<String, dynamic>)),
+          : Fragment$MediaFragment.fromJson((l$media as Map<String, dynamic>)),
       deletedMediaTitles: (l$deletedMediaTitles as List<dynamic>?)
           ?.map((e) => (e as String?))
           .toList(),
@@ -7314,7 +7447,7 @@ class Query$Notifications$Page$notifications$$MediaMergeNotification
 
   final String? context;
 
-  final Fragment$Media? media;
+  final Fragment$MediaFragment? media;
 
   final List<String?>? deletedMediaTitles;
 
@@ -7464,13 +7597,13 @@ abstract class CopyWith$Query$Notifications$Page$notifications$$MediaMergeNotifi
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     List<String?>? deletedMediaTitles,
     String? reason,
     int? createdAt,
     String? $__typename,
   });
-  CopyWith$Fragment$Media<TRes> get media;
+  CopyWith$Fragment$MediaFragment<TRes> get media;
 }
 
 class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaMergeNotification<
@@ -7508,8 +7641,9 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaMergeNotificati
             : (type as Enum$NotificationType?),
         context:
             context == _undefined ? _instance.context : (context as String?),
-        media:
-            media == _undefined ? _instance.media : (media as Fragment$Media?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as Fragment$MediaFragment?),
         deletedMediaTitles: deletedMediaTitles == _undefined
             ? _instance.deletedMediaTitles
             : (deletedMediaTitles as List<String?>?),
@@ -7520,11 +7654,11 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaMergeNotificati
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Fragment$Media<TRes> get media {
+  CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
-        ? CopyWith$Fragment$Media.stub(_then(_instance))
-        : CopyWith$Fragment$Media(local$media, (e) => call(media: e));
+        ? CopyWith$Fragment$MediaFragment.stub(_then(_instance))
+        : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
   }
 }
 
@@ -7542,14 +7676,15 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaMergeNotifi
     int? id,
     Enum$NotificationType? type,
     String? context,
-    Fragment$Media? media,
+    Fragment$MediaFragment? media,
     List<String?>? deletedMediaTitles,
     String? reason,
     int? createdAt,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Fragment$Media<TRes> get media => CopyWith$Fragment$Media.stub(_res);
+  CopyWith$Fragment$MediaFragment<TRes> get media =>
+      CopyWith$Fragment$MediaFragment.stub(_res);
 }
 
 class Query$Notifications$Page$notifications$$MediaDeletionNotification

@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build APK
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, '[build]')
     permissions:
@@ -39,6 +39,7 @@ jobs:
       - name: Get Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.10.x'
           channel: 'stable'
           cache: true
 

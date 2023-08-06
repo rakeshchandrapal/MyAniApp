@@ -1,0 +1,59 @@
+query Staff($id: Int, $onList: Boolean, $characterPage: Int, $staffPage: Int) {
+  Staff(id: $id) {
+    id
+    description
+    gender
+    language: languageV2
+    dateOfBirth {
+      ...FuzzyDate
+    }
+    dateOfDeath {
+      ...FuzzyDate
+    }
+    age
+    yearsActive
+    homeTown
+    bloodType
+    isFavourite
+    isFavouriteBlocked
+    name {
+      userPreferred
+    }
+    image {
+      large
+    }
+    characterMedia(page: $characterPage, onList: $onList, sort: [START_DATE_DESC]) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        node {
+          ...MediaFragment
+          startDate {
+            year
+          }
+        }
+        characters {
+          id
+          name {
+            userPreferred
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+    staffMedia(page: $staffPage, onList: $onList, sort: [START_DATE_DESC]) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        node {
+          ...MediaFragment
+        }
+        staffRole
+      }
+    }
+  }
+}

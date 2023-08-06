@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 
 extension Capitalize on String {
   String capitalize() {
@@ -31,11 +32,35 @@ extension HexColor on Color {
       '${blue.toRadixString(16).padLeft(2, '0')}';
 }
 
-extension Date on Fragment$FuzzyDate {
+extension FuzzyToDate on Fragment$FuzzyDate {
   DateTime? toDate() {
     if (year == null) return null;
 
-    return DateTime(year!, month ?? 0, day ?? 0);
+    return DateTime(year!, month ?? 1, day ?? 1);
+  }
+
+  String? toDateString() {
+    if (day == null && month == null && year == null) return null;
+    var str = '';
+    if (month != null) str += DateFormat('MMMM').format(DateTime(0, month!));
+    if (day != null) str += ' $day';
+    if (year != null) {
+      if (str.isEmpty) {
+        str += year!.toString();
+      } else {
+        str += ', $year';
+      }
+    }
+
+    return str;
+  }
+}
+
+extension InputFuzzyToDate on Input$FuzzyDateInput {
+  DateTime? toDate() {
+    if (year == null) return null;
+
+    return DateTime(year!, month ?? 1, day ?? 1);
   }
 
   String? toDateString() {

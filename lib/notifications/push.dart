@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart' as http;
 import 'package:myaniapp/routes.dart';
 
 class PushNotifications {
@@ -47,11 +49,12 @@ class PushNotifications {
     NotificationDetails details,
     String? body, {
     Map<String, String>? payload,
+    int? id,
   }) {
     if (!Platform.isAndroid) return Future.value();
 
     return _flutterLocalNotificationsPlugin.show(
-      Random.secure().nextInt(999),
+      id ?? Random.secure().nextInt(999),
       title,
       body,
       details,
@@ -59,8 +62,18 @@ class PushNotifications {
     );
   }
 
-  static NotificationDetails releaseDetails() {
-    return const NotificationDetails(
+  static Future<NotificationDetails> releaseDetails(
+      {String? bigPictureUrl}) async {
+    Uint8List? bigPicture =
+        bigPictureUrl != null ? await getByteArrayFromUrl(bigPictureUrl) : null;
+
+    BigPictureStyleInformation? bigPictureStyleInformation = bigPicture != null
+        ? BigPictureStyleInformation(
+            ByteArrayAndroidBitmap.fromBase64String(base64Encode(bigPicture)),
+          )
+        : null;
+
+    return NotificationDetails(
       android: AndroidNotificationDetails(
         NotificationChannels.releasingId,
         NotificationChannels.releasingName,
@@ -68,27 +81,44 @@ class PushNotifications {
             'A new episode of a anime you\'re watching has released',
         importance: Importance.max,
         priority: Priority.high,
+        styleInformation: bigPictureStyleInformation,
       ),
     );
   }
 
-  static NotificationDetails followingDetails() {
-    return const NotificationDetails(
+  static Future<NotificationDetails> followingDetails({String? avatar}) async {
+    Uint8List? avatarPicture =
+        avatar != null ? await getByteArrayFromUrl(avatar) : null;
+
+    ByteArrayAndroidBitmap? largeIcon = avatarPicture != null
+        ? ByteArrayAndroidBitmap.fromBase64String(base64Encode(avatarPicture))
+        : null;
+
+    return NotificationDetails(
       android: AndroidNotificationDetails(
         NotificationChannels.followingId,
         NotificationChannels.followingName,
         channelDescription: 'Someone followed you',
         importance: Importance.max,
         priority: Priority.high,
+        largeIcon: largeIcon,
       ),
     );
   }
 
-  static NotificationDetails activityDetails() {
-    return const NotificationDetails(
+  static Future<NotificationDetails> activityDetails({String? avatar}) async {
+    Uint8List? avatarPicture =
+        avatar != null ? await getByteArrayFromUrl(avatar) : null;
+
+    ByteArrayAndroidBitmap? largeIcon = avatarPicture != null
+        ? ByteArrayAndroidBitmap.fromBase64String(base64Encode(avatarPicture))
+        : null;
+
+    return NotificationDetails(
       android: AndroidNotificationDetails(
         NotificationChannels.activityId,
         NotificationChannels.activityName,
+        largeIcon: largeIcon,
         importance: Importance.max,
         priority: Priority.high,
       ),
@@ -115,6 +145,25 @@ class PushNotifications {
         priority: Priority.high,
       ),
     );
+  }
+
+  static NotificationDetails testDetails() {
+    return const NotificationDetails(
+      android: AndroidNotificationDetails(
+        NotificationChannels.testId,
+        NotificationChannels.testName,
+        importance: Importance.max,
+        priority: Priority.high,
+      ),
+    );
+  }
+
+  static Future<Uint8List?> getByteArrayFromUrl(String url) async {
+    try {
+      final http.Response response = await http.get(Uri.parse(url));
+      return response.bodyBytes;
+    } catch (err) {}
+    return null;
   }
 }
 
@@ -144,4 +193,7 @@ class NotificationChannels {
 
   static const mediaId = 'media_channel';
   static const mediaName = 'Media';
+
+  static const testId = 'test_channel';
+  static const testName = 'Test';
 }

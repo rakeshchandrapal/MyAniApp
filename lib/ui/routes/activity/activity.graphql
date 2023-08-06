@@ -1,0 +1,71 @@
+query Activity($id: Int, $page: Int) {
+  activity: Activity(id: $id) {
+    ... on TextActivity {
+      ...TextActivity
+    }
+    ... on ListActivity {
+      ...ListActivity
+    }
+    ... on MessageActivity {
+      ...MessageActivity
+    }
+  }
+  replies: Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    activityReplies(activityId: $id) {
+      id
+      userId
+      text
+      createdAt
+      activityId
+      isLiked
+      likeCount
+      user {
+        ...UserFragment
+      }
+    }
+  }
+}
+
+mutation SaveActivityReply($id: Int, $activityId: Int, $text: String) {
+  SaveActivityReply(id: $id, activityId: $activityId, text: $text) {
+    ...TextActivity
+  }
+}
+
+mutation SaveMessageActivity($id: Int, $recipientId: Int, $message: String, $private: Boolean) {
+  SaveMessageActivity(id: $id, recipientId: $recipientId, message: $message, private: $private) {
+    ...MessageActivity
+  }
+}
+
+mutation ToggleActivitySubscription($id: Int, $subscribe: Boolean) {
+  ToggleActivitySubscription(activityId: $id, subscribe: $subscribe) {
+    ... on ListActivity {
+      id
+      isSubscribed
+    }
+    ... on TextActivity {
+      id
+      isSubscribed
+    }
+    ... on MessageActivity {
+      id
+      isSubscribed
+    }
+  }
+}
+
+mutation DeleteActivityReply($id: Int) {
+  DeleteActivityReply(id: $id) {
+    deleted
+  }
+}
+
+mutation DeleteActivity($id: Int) {
+  DeleteActivity(id: $id) {
+    deleted
+  }
+}

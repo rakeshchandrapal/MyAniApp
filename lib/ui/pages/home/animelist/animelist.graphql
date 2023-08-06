@@ -1,7 +1,0 @@
-query MediaList($userId: Int, $type: MediaType, $sort: [MediaListSort]) {
-  MediaListCollection(userId: $userId, type: $type, sort: $sort) {
-    lists {
-      ...ListGroup
-    }
-  }
-}

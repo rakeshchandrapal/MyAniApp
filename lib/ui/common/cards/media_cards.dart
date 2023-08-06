@@ -1,108 +1,108 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:myaniapp/ui/common/cards/card_sheet.dart';
-import 'package:myaniapp/ui/common/cards/detailed_list_card.dart';
+import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
+import 'package:myaniapp/ui/common/cards/sheet_card.dart';
+import 'package:myaniapp/ui/common/cards/simple_list_cards.dart';
 
-class MediaCards extends ConsumerWidget {
+class MediaCards<T extends Fragment$MediaFragment> extends ConsumerWidget {
   const MediaCards({
     super.key,
-    required this.list,
+    this.underTitle,
     this.chips,
     this.onDoubleTap,
     this.onTap,
-    this.underTitle,
-    this.primary,
     this.setting,
-  }) : assert(list is List<Fragment$Media> ||
-            list is List<Fragment$Media?> ||
-            list is List<Fragment$MediaListEntry> ||
-            list is List<Fragment$MediaListEntry?>);
+    required this.list,
+    this.primary,
+    this.aspectRatio = 2 / 3,
+    this.padding = const EdgeInsets.all(8),
+  });
 
-  final Widget Function(int index, ListStyle style)? underTitle;
-  final List<Widget> Function(int index)? chips;
-  final void Function(int index)? onDoubleTap;
-  final void Function(int index)? onTap;
+  final Widget? Function(T media, ListStyle style, int index)? underTitle;
+  final List<Widget> Function(T media, int index)? chips;
+  final void Function(T media, int index)? onDoubleTap;
+  final void Function(T media, int index)? onTap;
   final Setting? setting;
-  final List list;
+  final List<T> list;
   final bool? primary;
+  final double aspectRatio;
+  final EdgeInsets padding;
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var settings = ref.watch(settingsProvider);
 
-    ListStyle style;
+    var style = switch (setting) {
+      Setting.animeList => settings.animeList,
+      Setting.mangaList => settings.mangaList,
+      _ => settings.fallbackList,
+    };
 
-    switch (setting) {
-      case Setting.animeList:
-        style = settings.animeList;
-        break;
+    return switch (style) {
+      ListStyle.grid => GridCards(
+          padding: padding,
+          primary: primary,
+          card: (index) {
+            var media = list[index];
+            var underTitleWidget =
+                underTitle?.call(media, ListStyle.grid, index);
 
-      case Setting.mangaList:
-        style = settings.mangaList;
-        break;
+            return GridCard(
+              imageUrl: media.coverImage!.extraLarge!,
+              title: media.title!.userPreferred,
+              underTitle: underTitleWidget,
+              onTap: onTap != null ? () => onTap!(media, index) : null,
+              chips: chips != null ? chips!(media, index) : null,
+              aspectRatio: aspectRatio,
+              onDoubleTap:
+                  onDoubleTap != null ? () => onDoubleTap!(media, index) : null,
+              onLongPress: () => showMediaCard(context, media),
+            );
+          },
+          itemCount: list.length,
+        ),
+      ListStyle.detailedList => DetailedListCards(
+          padding: padding,
+          primary: primary,
+          card: (index) {
+            var media = list[index];
+            var underTitleWidget =
+                underTitle?.call(media, ListStyle.detailedList, index);
 
-      default:
-        style = settings.fallbackList;
-        break;
-    }
+            return DetailedListCard(
+              imageUrl: media.coverImage!.extraLarge!,
+              title: media.title!.userPreferred,
+              underTitle: underTitleWidget,
+              onTap: onTap != null ? () => onTap!(media, index) : null,
+              onDoubleTap:
+                  onDoubleTap != null ? () => onDoubleTap!(media, index) : null,
+              onLongPress: () => showMediaCard(context, media),
+            );
+          },
+          itemCount: list.length,
+        ),
+      ListStyle.simpleList => SimpleListCards(
+          primary: primary,
+          itemCount: list.length,
+          card: (index) {
+            var media = list[index];
+            var underTitleWidget =
+                underTitle?.call(media, ListStyle.simpleList, index);
 
-    if (style == ListStyle.detailedList) {
-      return DetailedListCards(
-        primary: primary,
-        itemCount: list.length,
-        card: (index) {
-          var entry = list[index];
-          var media = entry is Fragment$Media
-              ? entry
-              : entry is Fragment$MediaListEntry
-                  ? entry.media
-                  : null;
-          if (media == null) {
-            return const SizedBox();
-          }
-
-          return DetailedListCard(
-            imageUrl: media.coverImage!.large!,
-            title: media.title!.userPreferred,
-            index: index,
-            chips: chips,
-            onDoubleTap: onDoubleTap,
-            onTap: onTap,
-            underTitle: underTitle,
-            onLongPress: (index) => showCardSheet(context, media),
-          );
-        },
-      );
-    } else {
-      return GridCards(
-        primary: primary,
-        itemCount: list.length,
-        card: (index) {
-          var entry = list[index];
-          var media = entry is Fragment$Media
-              ? entry
-              : entry is Fragment$MediaListEntry
-                  ? entry.media
-                  : null;
-          if (media == null) {
-            return const SizedBox();
-          }
-
-          return GridCard(
-            imageUrl: media.coverImage!.large!,
-            title: media.title!.userPreferred,
-            index: index,
-            chips: chips,
-            onDoubleTap: onDoubleTap,
-            onTap: onTap,
-            underTitle: underTitle,
-            onLongPress: (index) => showCardSheet(context, media),
-          );
-        },
-      );
-    }
+            return SimpleListCard(
+              title: media.title!.userPreferred!,
+              underTitle: underTitleWidget,
+              onTap: onTap != null ? () => onTap!(media, index) : null,
+              onDoubleTap:
+                  onDoubleTap != null ? () => onDoubleTap!(media, index) : null,
+              onLongPress: () => showMediaCard(context, media),
+            );
+          },
+        )
+    };
   }
 }

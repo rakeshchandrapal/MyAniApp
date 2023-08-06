@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myaniapp/constants.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/providers/shared_preferrences.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,9 +24,11 @@ class Settings extends _$Settings {
     return ref.read(sharedPrefProvider).setString(Setting.token.setting, token);
   }
 
-  Future<bool> logout() {
-    state = state..token = null;
-    return ref.read(sharedPrefProvider).remove(Setting.token.setting);
+  Future<bool> logout() async {
+    await ref.read(sharedPrefProvider).remove('token');
+    state = build();
+    client.value.cache.store.reset();
+    return true;
   }
 
   void changeTheme(ThemeMode theme) {
@@ -75,12 +79,6 @@ class Settings extends _$Settings {
   }
 }
 
-enum ListStyle {
-  grid,
-  detailedList,
-  // simpleList,
-}
-
 enum Setting {
   animeList('list.anime'),
   mangaList('list.manga'),
@@ -106,16 +104,4 @@ class AppSettings {
   ListStyle mangaList;
   ThemeMode theme;
   String? token;
-
-  // AppSettings(SharedPreferences prefs) {
-  //   animeList = ListStyle.values
-  //       .byName(prefs.getString(SettingStrings.animeList.setting) ?? 'grid');
-  //   mangaList = ListStyle.values
-  //       .byName(prefs.getString(SettingStrings.mangaList.setting) ?? 'grid');
-  //   fallbackList = ListStyle.values
-  //       .byName(prefs.getString(SettingStrings.fallbackList.setting) ?? 'grid');
-  //   theme = ThemeMode.values
-  //       .byName(prefs.getString(SettingStrings.theme.setting) ?? 'system');
-  //   token = prefs.getString(SettingStrings.token.setting);
-  // }
 }

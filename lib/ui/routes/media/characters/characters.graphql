@@ -1,0 +1,40 @@
+query Characters($mediaId: Int, $page: Int) {
+  Media(id: $mediaId) {
+    id
+    countryOfOrigin
+    characters(page: $page, sort: [ROLE, RELEVANCE, ID]) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        name
+        role
+        node {
+          id
+          name {
+            first
+            full
+            userPreferred
+          }
+          image {
+            large
+          }
+        }
+        voiceActorRoles(sort: [RELEVANCE, ID]) {
+          roleNotes
+          dubGroup
+          voiceActor {
+            id
+            name {
+              userPreferred
+            }
+            languageV2
+            image {
+              large
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,77 +1,89 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:myaniapp/providers/settings.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/routes.gr.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @AutoRouterConfig()
-class Router extends $Router {
+class AppRouter extends $AppRouter {
+  AppRouter(this.ref);
+
+  final WidgetRef ref;
+
   @override
-  final List<AutoRoute> routes = [
-    AutoRoute(
-      page: EmptyRoute.page,
-      path: '/',
-      guards: [AuthGuard()],
-      children: [
+  List<AutoRoute> get routes => [
         AutoRoute(
-          page: HomeRoute.page,
-          path: 'home',
+          page: MyHomeRoute.page,
+          initial: true,
           children: [
-            AutoRoute(page: OverviewRoute.page, path: ''),
-            AutoRoute(page: AnimeListRoute.page, path: 'animelist'),
-            AutoRoute(page: MangaListRoute.page, path: 'mangalist'),
-            AutoRoute(page: DiscoverRoute.page, path: 'discover'),
-            AutoRoute(page: SocialRoute.page, path: 'social'),
+            AutoRoute(page: HomeOverviewRoute.page, path: ''),
+            AutoRoute(page: HomeAnimeRoute.page, path: 'anime'),
+            AutoRoute(page: ExploreRoute.page, path: 'explore'),
+            AutoRoute(page: HomeMangaRoute.page, path: 'manga'),
+            AutoRoute(page: HomeActivitiesRoute.page, path: 'activities'),
           ],
         ),
-        RedirectRoute(path: '', redirectTo: 'home'),
+        AutoRoute(page: AuthRoute.page, path: '/auth'),
+        AutoRoute(
+          page: MediaRoute.page,
+          path: '/media/:id',
+          children: [
+            AutoRoute(page: MediaOverviewRoute.page, path: ''),
+            AutoRoute(page: MediaRelationsRoute.page, path: 'relations'),
+            AutoRoute(page: MediaSimilarRoute.page, path: 'similar'),
+            AutoRoute(page: MediaReviewsRoute.page, path: 'reviews'),
+            AutoRoute(page: MediaStaffRoute.page, path: 'staff'),
+            AutoRoute(page: MediaCharactersRoute.page, path: 'characters'),
+            AutoRoute(page: MediaSocialRoute.page, path: 'social')
+          ],
+        ),
+        AutoRoute(page: ReviewRoute.page, path: '/review/:id'),
+        AutoRoute(page: SearchRoute.page, path: '/search'),
+        AutoRoute(page: ThreadRoute.page, path: '/thread/:id'),
+        AutoRoute(page: ExploreRoute.page, path: '/explore'),
+        AutoRoute(page: LoginRoute.page, path: '/login'),
+        AutoRoute(page: AniLoginRoute.page, path: '/login/anilist'),
+        AutoRoute(page: TokenLoginRoute.page, path: '/login/token'),
+        AutoRoute(page: ActivityRoute.page, path: '/activity/:id'),
+        AutoRoute(page: CharacterRoute.page, path: '/character/:id'),
+        AutoRoute(
+          page: StaffRoute.page,
+          path: '/staff/:id',
+          children: [
+            AutoRoute(page: StaffVoiceRoute.page, path: 'voice'),
+            AutoRoute(page: StaffProductionRoute.page, path: 'production')
+          ],
+        ),
+        AutoRoute(page: RecommendationsRoute.page, path: '/recommendations'),
+        AutoRoute(
+          page: UserRoute.page,
+          path: '/user/:name',
+          children: [
+            AutoRoute(page: UserOverviewRoute.page, path: ''),
+            AutoRoute(page: UserReviewsRoute.page, path: 'reviews'),
+            AutoRoute(page: UserSocialRoute.page, path: 'social'),
+            AutoRoute(page: UserActivityRoute.page, path: 'activity')
+          ],
+        ),
+        AutoRoute(page: UserAnimeListRoute.page, path: '/user/:name/anime'),
+        AutoRoute(page: UserMangaListRoute.page, path: '/user/:name/manga'),
+        AutoRoute(page: NotificationsRoute.page, path: '/notifications'),
         AutoRoute(
           page: SettingsRoute.page,
-          path: 'settings',
+          path: '/settings',
           children: [
-            AutoRoute(page: AppSettingsRoute.page, path: ''),
-            AutoRoute(page: ColorsRoute.page, path: 'colors'),
+            AutoRoute(page: GeneralSettingsRoute.page, path: ''),
+            AutoRoute(page: AppSettingsRoute.page, path: 'app'),
+            AutoRoute.guarded(
+              page: AnilistSettingsRoute.page,
+              path: 'anilist',
+              onNavigation: (resolver, router) {
+                if (ref.read(userProvider).value != null) resolver.next();
+              },
+            )
           ],
         ),
-        AutoRoute(page: MediaRoute.page, path: 'media'),
-        AutoRoute(page: CharacterRoute.page, path: 'character'),
-        AutoRoute(page: StaffRoute.page, path: 'staff'),
-        AutoRoute(page: SearchRoute.page, path: 'search'),
-        AutoRoute(page: ReviewRoute.page, path: 'review'),
-        AutoRoute(page: ThreadRoute.page, path: 'thread'),
-        AutoRoute(page: ActivityRoute.page, path: 'activity'),
-        AutoRoute(page: ThreadsRoute.page, path: 'threads'),
-        AutoRoute(page: ProfileRoute.page, path: 'profile'),
-        AutoRoute(page: ProfileAnimeListRoute.page, path: 'profile/list/anime'),
-        AutoRoute(page: ProfileMangaListRoute.page, path: 'profile/list/manga'),
-        AutoRoute(
-            page: FavoriteAnimeRoute.page, path: 'profile/favorite/anime'),
-        AutoRoute(
-            page: FavoriteMangaRoute.page, path: 'profile/favorite/manga'),
-        AutoRoute(page: NotificationsRoute.page, path: 'notifications')
-      ],
-    ),
-    AutoRoute(page: LoginRoute.page, path: '/login'),
-    AutoRoute(page: AniLoginRoute.page, path: '/login/ani'),
-    AutoRoute(page: TokenLoginRoute.page, path: '/login/token'),
-  ];
+        AutoRoute(page: RecentThreadsRoute.page, path: '/forum/recent'),
+      ];
 }
 
-class AuthGuard extends AutoRouteGuard {
-  @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    // the navigation is paused until resolver.next() is called with either
-    // true to resume/continue navigation or false to abort navigation
-    var settings = await SharedPreferences.getInstance();
-    await settings.reload();
-    var token = settings.getString(Setting.token.setting);
-    if (token != null) {
-      // if user is authenticated we continue
-      resolver.next(true);
-    } else {
-      // we redirect the user to our login page
-      router.push(const LoginRoute());
-    }
-  }
-}
-
-final appRouter = Router();
+late AppRouter appRouter;

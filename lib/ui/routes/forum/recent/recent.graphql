@@ -1,0 +1,10 @@
+query RecentThreads($page: Int) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    threads(sort: REPLIED_AT_DESC) {
+      ...ThreadFragment
+    }
+  }
+}

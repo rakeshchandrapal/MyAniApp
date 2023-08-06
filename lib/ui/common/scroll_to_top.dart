@@ -71,7 +71,7 @@ class _ScrollToTopState extends State<ScrollToTop> {
               child: Align(
                 alignment: widget.alignment,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16),
                   child: FloatingActionButton(
                     heroTag: widget.builder.hashCode,
                     onPressed: toTop,

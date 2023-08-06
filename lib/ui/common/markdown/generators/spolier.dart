@@ -44,7 +44,7 @@ SpanNodeGeneratorWithTag spoilerWithTag = SpanNodeGeneratorWithTag(
 );
 
 class SpoilerSyntax extends md.InlineSyntax {
-  SpoilerSyntax() : super(r'~!(.*?)!~');
+  SpoilerSyntax() : super(r'~!([\s\S]+?)!~');
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {
