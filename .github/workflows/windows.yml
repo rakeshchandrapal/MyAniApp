@@ -37,6 +37,6 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ github.run_id }}
-          artifacts: 'MyAniApp-${{github.ref_name}}-windows.zip'
+          artifacts: 'build/windows/runner/Release/MyAniApp-${{github.ref_name}}-windows.zip'
           allowUpdates: true
           prerelease: true
