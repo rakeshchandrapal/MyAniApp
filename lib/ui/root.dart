@@ -36,8 +36,10 @@ class _AppState extends ConsumerState<App> {
     if (kIsWeb) return;
     // Attach a listener to the stream
     _sub = uriLinkStream.listen((Uri? uri) {
+      print(uri);
       // Use the uri and warn the user, if it is not correct
     }, onError: (err) {
+      print(err);
       // Handle exception by warning the user their action did not succeed
     });
 

@@ -1,4 +1,4 @@
-name: Build
+name: Build Apk
 
 on:
   push:
@@ -50,4 +50,5 @@ jobs:
         with:
           tag: ${{ github.run_id }}
           artifacts: 'build/app/outputs/flutter-apk/*'
+          allowUpdates: true
           prerelease: true

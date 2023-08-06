@@ -35,6 +35,7 @@ dependencies:
   youtube_player_iframe: ^4.0.4
   workmanager: ^0.5.1
   google_mobile_ads: ^3.0.0
+  uni_links_desktop: ^0.1.6
 
 dependency_overrides:
   # both seem to use the same version but pub still errors

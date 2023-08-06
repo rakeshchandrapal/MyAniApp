@@ -12,6 +12,7 @@ import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/shared_preferrences.dart';
 import 'package:myaniapp/ui/root.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links_desktop/uni_links_desktop.dart';
 import 'package:workmanager/workmanager.dart';
 
 void main() async {
@@ -20,6 +21,10 @@ void main() async {
   await initHiveForFlutter();
 
   final prefs = await SharedPreferences.getInstance();
+
+  if (!kIsWeb && Platform.isWindows) {
+    registerProtocol('myaniapp');
+  }
 
   if (!kIsWeb && Platform.isAndroid) {
     MobileAds.instance.initialize();

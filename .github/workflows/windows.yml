@@ -1,0 +1,42 @@
+name: Build Windows
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: windows-latest
+    if: contains(github.event.head_commit.message, '[build]')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.x'
+          channel: 'stable'
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter build windows
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: MyAniApp-${{github.ref_name}}-windows.zip
+          directory: build/windows/runner/Release
+
+      - uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.run_id }}
+          artifacts: 'MyAniApp-${{github.ref_name}}-windows.zip'
+          allowUpdates: true
+          prerelease: true
