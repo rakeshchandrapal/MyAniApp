@@ -72,6 +72,11 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "MyAniApp-${variant.versionName}.apk"
+                }
+            }
         }
         debug {
             applicationIdSuffix ".debug"
