@@ -36,12 +36,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: MyAniApp-${{env.sha_short}}-windows.zip
+          filename: MyAniApp-${{ env.sha_short }}-windows.zip
           directory: build/windows/runner/Release
 
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.sha_short }}
-          artifacts: 'build/windows/runner/Release/MyAniApp-${{env.sha_short}}-windows.zip'
+          artifacts: 'build/windows/runner/Release/MyAniApp-${{ env.sha_short }}-windows.zip'
           allowUpdates: true
           prerelease: true

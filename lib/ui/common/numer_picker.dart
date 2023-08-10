@@ -10,7 +10,7 @@ class NumberPicker extends StatelessWidget {
     required this.onDecrement,
   });
 
-  final int? number;
+  final num? number;
   final String? hint;
   final void Function() onIncrement;
   final void Function() onDecrement;
@@ -18,6 +18,17 @@ class NumberPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    late String? value;
+
+    if (number != null && number != 0) {
+      if (number == (number ?? 0).roundToDouble()) {
+        value = number!.truncate().toString();
+      } else {
+        value = number!.toString();
+      }
+    } else {
+      value = null;
+    }
 
     return Container(
       height: 50,
@@ -34,11 +45,11 @@ class NumberPicker extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                number?.toString() ?? hint ?? '',
+                value ?? hint ?? '',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: theme.textTheme.titleMedium
-                    ?.copyWith(color: number == null ? theme.hintColor : null),
+                    ?.copyWith(color: value == null ? theme.hintColor : null),
               ),
             ),
             Row(

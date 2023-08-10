@@ -9,7 +9,6 @@ import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/routes.gr.dart';
@@ -116,7 +115,6 @@ class _ListTabsState extends State<ListTabs> {
   @override
   void initState() {
     super.initState();
-    logger.d(widget.user.mediaListOptions!.rowOrder!);
     sort = switch (widget.user.mediaListOptions!.rowOrder!) {
       'score' => Enum$MediaListSort.SCORE_DESC,
       'title' => Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC,
@@ -208,8 +206,6 @@ class _ListTabsState extends State<ListTabs> {
         .where((order) => sorted.any((list) => list.name == order))
         .toList()
       ..addAll(options.customLists!);
-    // .asMap()
-    // logger.d([orders]);
 
     orders.asMap().forEach((index, order) {
       var sortIndex = sorted.indexWhere((element) => element.name == order);
@@ -302,7 +298,12 @@ class _ListTabsState extends State<ListTabs> {
             },
           );
       }
-      sorted.insert(index, list);
+
+      if (sorted.length < index) {
+        sorted.add(list);
+      } else {
+        sorted.insert(index, list);
+      }
     });
 
     return sorted;

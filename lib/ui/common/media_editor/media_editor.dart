@@ -9,6 +9,7 @@ import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
 import 'package:myaniapp/providers/media_editor.dart';
+import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
@@ -261,6 +262,14 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                     );
                   },
                 ),
+                _MediaScore(
+                  score: options.score ?? 0,
+                  onIncrement: (score) {
+                    setState(
+                      () => options = options.copyWith(score: score.toDouble()),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -382,6 +391,73 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
         )),
       );
     }
+  }
+}
+
+class _MediaScore extends ConsumerWidget {
+  const _MediaScore({required this.score, required this.onIncrement});
+
+  final double score;
+  final Function(num score) onIncrement;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var user = ref.watch(userProvider);
+
+    var scoreFormat = user.value!.mediaListOptions!.scoreFormat;
+
+    return NumberPicker(
+      hint: 'Score',
+      number: score,
+      onIncrement: () {
+        switch (scoreFormat) {
+          case Enum$ScoreFormat.POINT_3:
+            if (score >= 3) return;
+            onIncrement(score + 1);
+            break;
+          case Enum$ScoreFormat.POINT_5:
+            if (score >= 5) return;
+            onIncrement(score + 1);
+            break;
+          case Enum$ScoreFormat.POINT_10:
+            if (score >= 10) return;
+            onIncrement(score + 1);
+            break;
+          case Enum$ScoreFormat.POINT_10_DECIMAL:
+            if (score >= 10) return;
+            onIncrement(score + 0.5);
+            break;
+          case Enum$ScoreFormat.POINT_100:
+            if (score >= 100) return;
+            onIncrement(score + 10);
+            break;
+          default:
+            break;
+        }
+      },
+      onDecrement: () {
+        if (score <= 0) return;
+        switch (scoreFormat) {
+          case Enum$ScoreFormat.POINT_3:
+            onIncrement(score - 1);
+            break;
+          case Enum$ScoreFormat.POINT_5:
+            onIncrement(score - 1);
+            break;
+          case Enum$ScoreFormat.POINT_10:
+            onIncrement(score - 1);
+            break;
+          case Enum$ScoreFormat.POINT_10_DECIMAL:
+            onIncrement(score - 0.5);
+            break;
+          case Enum$ScoreFormat.POINT_100:
+            onIncrement(score - 10);
+            break;
+          default:
+            break;
+        }
+      },
+    );
   }
 }
 
