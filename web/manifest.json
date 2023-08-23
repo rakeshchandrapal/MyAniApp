@@ -1,6 +1,6 @@
 {
-  "name": "MyAnuApp",
-  "short_name": "MyAnuApp",
+  "name": "MyAniApp",
+  "short_name": "MyAniApp",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",
