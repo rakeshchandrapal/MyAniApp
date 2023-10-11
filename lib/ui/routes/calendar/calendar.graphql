@@ -1,0 +1,16 @@
+query CalendarSchedule($start: Int, $end: Int) {
+  Page(page: 1, perPage: 50) {
+    pageInfo {
+      total
+      hasNextPage
+    }
+    airingSchedules(airingAt_greater: $start, airingAt_lesser: $end, sort: TIME) {
+      id
+      episode
+      airingAt
+      media {
+        ...MediaFragment
+      }
+    }
+  }
+}

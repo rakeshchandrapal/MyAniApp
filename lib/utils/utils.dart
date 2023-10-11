@@ -31,8 +31,7 @@ bool isTodayFromTimestamp(int? timestamp) {
   var date = dateFromTimestamp(timestamp);
   return now.year == date.year &&
       now.month == date.month &&
-      (now.day == date.day || now.day == (date.day + 1)) &&
-      now.hour < date.hour;
+      (now.day == date.day || now.day == (date.day + 1));
 }
 
 bool hasTimestampPassed(int? timestamp) {

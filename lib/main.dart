@@ -12,8 +12,10 @@ import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/shared_preferrences.dart';
 import 'package:myaniapp/ui/root.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links_desktop/uni_links_desktop.dart';
 import 'package:workmanager/workmanager.dart';
+
+import 'web_url_protocol.dart'
+    if (dart.library.io) 'package:url_protocol/url_protocol.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +25,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
 
   if (!kIsWeb && Platform.isWindows) {
-    registerProtocol('myaniapp');
+    registerProtocolHandler('myaniapp');
   }
 
   if (!kIsWeb && Platform.isAndroid) {

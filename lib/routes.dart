@@ -83,6 +83,7 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(page: RecentThreadsRoute.page, path: '/forum/recent'),
+        AutoRoute(page: CalendarRoute.page, path: '/calendar')
       ];
 }
 

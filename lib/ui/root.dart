@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import 'package:app_links/app_links.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/routes.dart';
 import 'package:myaniapp/ui/theme.dart';
-import 'package:uni_links/uni_links.dart';
 
 class App extends ConsumerStatefulWidget {
   const App({super.key});
@@ -17,33 +17,47 @@ class App extends ConsumerStatefulWidget {
 }
 
 class _AppState extends ConsumerState<App> {
-  StreamSubscription? _sub;
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
 
   @override
   void dispose() {
     super.dispose();
-    _sub?.cancel();
+    _linkSubscription?.cancel();
+    print('gone');
   }
 
   @override
   void initState() {
     super.initState();
     appRouter = AppRouter(ref);
+    initAppLinks();
   }
 
-  Future<void> initUniLinks() async {
-    // ... check initialUri
-    if (kIsWeb) return;
-    // Attach a listener to the stream
-    _sub = uriLinkStream.listen((Uri? uri) {
-      print(uri);
-      // Use the uri and warn the user, if it is not correct
-    }, onError: (err) {
-      print(err);
-      // Handle exception by warning the user their action did not succeed
-    });
+  Future<void> initAppLinks() async {
+    _appLinks = AppLinks();
 
-    // NOTE: Don't forget to call _sub.cancel() in dispose()
+    // Check initial link if app was in cold state (terminated)
+    final appLink = await _appLinks.getInitialAppLink();
+    if (appLink != null) {
+      print('getInitialAppLink: $appLink');
+      openAppLink(appLink);
+    }
+
+    // if (!kIsWeb) return;5
+
+    print('listening...');
+    // Handle link when app is in warm state (front or background)
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      // print('onAppLink: $uri');
+      openAppLink(uri);
+    });
+  }
+
+  void openAppLink(Uri uri) {
+    if (uri.host != 'root') return;
+    logger.i('pushed to ${uri.path}');
+    appRouter.pushNamed(uri.path);
   }
 
   @override

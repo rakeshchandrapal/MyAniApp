@@ -3,8 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  app_links
   connectivity_plus
-  uni_links_desktop
   url_launcher_windows
 )
 

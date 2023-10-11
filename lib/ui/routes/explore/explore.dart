@@ -65,25 +65,37 @@ class ExplorePage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8, left: 8),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: FilterChip(
-                    label: const Row(
-                      mainAxisSize: MainAxisSize.min,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
                       children: [
-                        Icon(
-                          Icons.thumb_up,
-                          size: 17,
+                        SegmentedButton(
+                          segments: const [
+                            ButtonSegment(
+                              value: 0,
+                              icon: Icon(
+                                Icons.thumb_up,
+                                size: 17,
+                              ),
+                              label: Text('Recommendations'),
+                            ),
+                            ButtonSegment(
+                              value: 1,
+                              icon: Icon(Icons.calendar_today),
+                              label: Text('Releases'),
+                            ),
+                          ],
+                          selected: const {9},
+                          onSelectionChanged: (v) {
+                            if (v.firstOrNull == 0) {
+                              context.pushRoute(const RecommendationsRoute());
+                            }
+                            if (v.firstOrNull == 1) {
+                              context.pushRoute(const CalendarRoute());
+                            }
+                          },
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text('Recommendations'),
                       ],
-                    ),
-                    onSelected: (value) => context.pushRoute(
-                      const RecommendationsRoute(),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ),

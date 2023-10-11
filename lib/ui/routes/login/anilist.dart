@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:app_links/app_links.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:uni_links/uni_links.dart';
+import 'package:myaniapp/routes.gr.dart';
 
 @RoutePage()
 class AniLoginPage extends ConsumerStatefulWidget {
@@ -18,12 +19,13 @@ class AniLoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<AniLoginPage> {
   final textController = TextEditingController();
 
-  StreamSubscription? _sub;
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
 
   @override
   void dispose() {
     super.dispose();
-    _sub?.cancel();
+    _linkSubscription?.cancel();
     textController.dispose();
   }
 
@@ -34,11 +36,13 @@ class _LoginPageState extends ConsumerState<AniLoginPage> {
   }
 
   void login() {
-    _sub?.cancel();
+    _appLinks = AppLinks();
+
+    _linkSubscription?.cancel();
     if (kIsWeb) return;
-    _sub = uriLinkStream.listen((uri) async {
-      if (uri?.scheme == 'myaniapp') {
-        var fragment = uri!.toString();
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) async {
+      if (uri.scheme == 'myaniapp' && uri.pathSegments.firstOrNull == 'auth') {
+        var fragment = uri.toString();
         var start = fragment.indexOf('=');
         var middle = fragment.indexOf('&');
         var accessToken = fragment.substring(start + 1, middle);
@@ -46,7 +50,7 @@ class _LoginPageState extends ConsumerState<AniLoginPage> {
         // var instance = await SharedPreferences.getInstance();
         settings
             .login(accessToken)
-            .then((value) => context.router.pushNamed('/'));
+            .then((value) => context.router.popAndPush(const MyHomeRoute()));
         // await instance.setString('token', accessToken);
         // var c = await client(updated: true);
         // print(RegExp('(?:access_token=)(.+)', dotAll: true)
@@ -61,10 +65,8 @@ class _LoginPageState extends ConsumerState<AniLoginPage> {
     return Scaffold(
       appBar: AppBar(),
       body: const SafeArea(
-        child: Column(
-          children: [
-            Text('Login With Anilist'),
-          ],
+        child: Center(
+          child: Text('Go back if the login failed'),
         ),
       ),
     );
