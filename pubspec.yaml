@@ -34,7 +34,7 @@ dependencies:
     git:
       url: https://github.com/BillSchumacher/flutter_url_protocol.git
       ref: d765cfe
-  workmanager: ^0.5.2
+  workmanager: ^0.5.1
   youtube_player_iframe: ^4.0.4
 
 dependency_overrides:
