@@ -50,12 +50,10 @@ jobs:
 
       - run: flutter pub get
       - run: flutter build apk
-      - name: Rename apk
-        run: mv build/app/outputs/flutter-apk/release/app-release.apk build/app/outputs/flutter-apk/release/MyAniApp-${{ env.sha_short }}-android.zip
 
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.sha_short }}
-          artifacts: 'build/app/outputs/flutter-apk/release/MyAniApp-${{ env.sha_short }}-android.zip'
+          artifacts: 'build/app/outputs/apk/release/MyAniApp*.apk'
           allowUpdates: true
           prerelease: true
