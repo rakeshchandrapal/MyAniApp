@@ -37,6 +37,7 @@ class DetailedListCard extends StatelessWidget {
     this.onLongPress,
     required this.imageUrl,
     this.title,
+    this.margin,
   });
 
   final Widget? underTitle;
@@ -45,11 +46,12 @@ class DetailedListCard extends StatelessWidget {
   final void Function()? onLongPress;
   final String imageUrl;
   final String? title;
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      margin: margin ?? const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         borderRadius: imageRadius,
         onLongPress: onLongPress,
@@ -73,7 +75,7 @@ class DetailedListCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
                   if (title != null)
                     Padding(

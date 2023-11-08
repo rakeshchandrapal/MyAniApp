@@ -38,7 +38,9 @@ class Variables$Query$MediaListEntry {
   Map<String, dynamic> _$data;
 
   int? get mediaId => (_$data['mediaId'] as int?);
+
   int? get userId => (_$data['userId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('mediaId')) {
@@ -57,6 +59,7 @@ class Variables$Query$MediaListEntry {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -260,6 +263,7 @@ class _CopyWithImpl$Query$MediaListEntry<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaListEntry<TRes> get MediaList {
     final local$MediaList = _instance.MediaList;
     return local$MediaList == null
@@ -280,6 +284,7 @@ class _CopyWithStubImpl$Query$MediaListEntry<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaListEntry<TRes> get MediaList =>
       CopyWith$Fragment$MediaListEntry.stub(_res);
 }
@@ -631,25 +636,41 @@ class Variables$Mutation$SaveMediaListEntry {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get mediaId => (_$data['mediaId'] as int?);
+
   Enum$MediaListStatus? get status =>
       (_$data['status'] as Enum$MediaListStatus?);
+
   double? get score => (_$data['score'] as double?);
+
   int? get scoreRaw => (_$data['scoreRaw'] as int?);
+
   int? get progress => (_$data['progress'] as int?);
+
   int? get progressVolumes => (_$data['progressVolumes'] as int?);
+
   int? get repeat => (_$data['repeat'] as int?);
+
   int? get priority => (_$data['priority'] as int?);
+
   bool? get private => (_$data['private'] as bool?);
+
   String? get notes => (_$data['notes'] as String?);
+
   bool? get hiddenFromStatusLists => (_$data['hiddenFromStatusLists'] as bool?);
+
   List<String?>? get customLists => (_$data['customLists'] as List<String?>?);
+
   List<double?>? get advancedScores =>
       (_$data['advancedScores'] as List<double?>?);
+
   Input$FuzzyDateInput? get startedAt =>
       (_$data['startedAt'] as Input$FuzzyDateInput?);
+
   Input$FuzzyDateInput? get completedAt =>
       (_$data['completedAt'] as Input$FuzzyDateInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -726,6 +747,7 @@ class Variables$Mutation$SaveMediaListEntry {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1174,6 +1196,7 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaListEntry<TRes> get SaveMediaListEntry {
     final local$SaveMediaListEntry = _instance.SaveMediaListEntry;
     return local$SaveMediaListEntry == null
@@ -1194,6 +1217,7 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaListEntry<TRes> get SaveMediaListEntry =>
       CopyWith$Fragment$MediaListEntry.stub(_res);
 }
@@ -1692,6 +1716,7 @@ class Variables$Mutation$DeleteMediaListEntry {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -1707,6 +1732,7 @@ class Variables$Mutation$DeleteMediaListEntry {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1892,6 +1918,7 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
       get DeleteMediaListEntry {
     final local$DeleteMediaListEntry = _instance.DeleteMediaListEntry;
@@ -1914,6 +1941,7 @@ class _CopyWithStubImpl$Mutation$DeleteMediaListEntry<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
       get DeleteMediaListEntry =>
           CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(

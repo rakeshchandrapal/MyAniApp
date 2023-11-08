@@ -28,6 +28,7 @@ class Variables$Query$Review {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -42,6 +43,7 @@ class Variables$Query$Review {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -217,6 +219,7 @@ class _CopyWithImpl$Query$Review<TRes> implements CopyWith$Query$Review<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Review$Review<TRes> get Review {
     final local$Review = _instance.Review;
     return local$Review == null
@@ -236,6 +239,7 @@ class _CopyWithStubImpl$Query$Review<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Review$Review<TRes> get Review =>
       CopyWith$Query$Review$Review.stub(_res);
 }
@@ -820,6 +824,7 @@ class _CopyWithImpl$Query$Review$Review<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Review$Review$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -855,8 +860,10 @@ class _CopyWithStubImpl$Query$Review$Review<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Review$Review$user<TRes> get user =>
       CopyWith$Query$Review$Review$user.stub(_res);
+
   CopyWith$Query$Review$Review$media<TRes> get media =>
       CopyWith$Query$Review$Review$media.stub(_res);
 }
@@ -1137,6 +1144,7 @@ class _CopyWithImpl$Query$Review$Review$media<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Review$Review$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -1158,6 +1166,7 @@ class _CopyWithStubImpl$Query$Review$Review$media<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Review$Review$media$title<TRes> get title =>
       CopyWith$Query$Review$Review$media$title.stub(_res);
 }

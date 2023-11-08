@@ -32,7 +32,9 @@ class Input$ListActivityOptionInput {
   Map<String, dynamic> _$data;
 
   bool? get disabled => (_$data['disabled'] as bool?);
+
   Enum$MediaListStatus? get type => (_$data['type'] as Enum$MediaListStatus?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('disabled')) {
@@ -52,6 +54,7 @@ class Input$ListActivityOptionInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -207,14 +210,20 @@ class Input$MediaListOptionsInput {
   Map<String, dynamic> _$data;
 
   List<String?>? get sectionOrder => (_$data['sectionOrder'] as List<String?>?);
+
   bool? get splitCompletedSectionByFormat =>
       (_$data['splitCompletedSectionByFormat'] as bool?);
+
   List<String?>? get customLists => (_$data['customLists'] as List<String?>?);
+
   List<String?>? get advancedScoring =>
       (_$data['advancedScoring'] as List<String?>?);
+
   bool? get advancedScoringEnabled =>
       (_$data['advancedScoringEnabled'] as bool?);
+
   String? get theme => (_$data['theme'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('sectionOrder')) {
@@ -251,6 +260,7 @@ class Input$MediaListOptionsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -490,7 +500,9 @@ class Input$NotificationOptionInput {
   Map<String, dynamic> _$data;
 
   Enum$NotificationType? get type => (_$data['type'] as Enum$NotificationType?);
+
   bool? get enabled => (_$data['enabled'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('type')) {
@@ -510,6 +522,7 @@ class Input$NotificationOptionInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -635,8 +648,11 @@ class Input$FuzzyDateInput {
   Map<String, dynamic> _$data;
 
   int? get year => (_$data['year'] as int?);
+
   int? get month => (_$data['month'] as int?);
+
   int? get day => (_$data['day'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('year')) {
@@ -659,6 +675,7 @@ class Input$FuzzyDateInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

@@ -13,6 +13,8 @@ targets:
               import: package:myaniapp/graphql/scalars.dart
             Json:
               type: dynamic
+            FuzzyDateInt:
+              type: int
           clients:
             - graphql_flutter
           outputDirectory: '/lib/graphql/__generated'

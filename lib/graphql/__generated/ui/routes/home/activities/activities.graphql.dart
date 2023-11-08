@@ -52,10 +52,14 @@ class Variables$Query$Activities {
   Map<String, dynamic> _$data;
 
   bool? get isFollowing => (_$data['isFollowing'] as bool?);
+
   bool? get hasReplies => (_$data['hasReplies'] as bool?);
+
   Enum$ActivityType? get activityType =>
       (_$data['activityType'] as Enum$ActivityType?);
+
   int? get page => (_$data['page'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('isFollowing')) {
@@ -84,6 +88,7 @@ class Variables$Query$Activities {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -318,6 +323,7 @@ class _CopyWithImpl$Query$Activities<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Activities$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -337,6 +343,7 @@ class _CopyWithStubImpl$Query$Activities<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Activities$Page<TRes> get Page =>
       CopyWith$Query$Activities$Page.stub(_res);
 }
@@ -826,6 +833,7 @@ class _CopyWithImpl$Query$Activities$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -860,8 +868,10 @@ class _CopyWithStubImpl$Query$Activities$Page<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   activities(_fn) => _res;
 }
 
@@ -1332,6 +1342,7 @@ class _CopyWithImpl$Query$Activities$Page$activities$$TextActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1361,6 +1372,7 @@ class _CopyWithStubImpl$Query$Activities$Page$activities$$TextActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1705,6 +1717,7 @@ class _CopyWithImpl$Query$Activities$Page$activities$$ListActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1743,8 +1756,10 @@ class _CopyWithStubImpl$Query$Activities$Page$activities$$ListActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -1881,7 +1896,9 @@ class Variables$Mutation$ToggleLike {
   Map<String, dynamic> _$data;
 
   Enum$LikeableType? get type => (_$data['type'] as Enum$LikeableType?);
+
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('type')) {
@@ -1901,6 +1918,7 @@ class Variables$Mutation$ToggleLike {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2104,6 +2122,7 @@ class _CopyWithImpl$Mutation$ToggleLike<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleLike$ToggleLikeV2<TRes> get ToggleLikeV2 {
     final local$ToggleLikeV2 = _instance.ToggleLikeV2;
     return local$ToggleLikeV2 == null
@@ -2124,6 +2143,7 @@ class _CopyWithStubImpl$Mutation$ToggleLike<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleLike$ToggleLikeV2<TRes> get ToggleLikeV2 =>
       CopyWith$Mutation$ToggleLike$ToggleLikeV2.stub(_res);
 }
@@ -3865,7 +3885,9 @@ class Variables$Mutation$SaveTextActivity {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   String? get text => (_$data['text'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -3885,6 +3907,7 @@ class Variables$Mutation$SaveTextActivity {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4091,6 +4114,7 @@ class _CopyWithImpl$Mutation$SaveTextActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SaveTextActivity$SaveTextActivity<TRes>
       get SaveTextActivity {
     final local$SaveTextActivity = _instance.SaveTextActivity;
@@ -4113,6 +4137,7 @@ class _CopyWithStubImpl$Mutation$SaveTextActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SaveTextActivity$SaveTextActivity<TRes>
       get SaveTextActivity =>
           CopyWith$Mutation$SaveTextActivity$SaveTextActivity.stub(_res);
@@ -4783,6 +4808,7 @@ class _CopyWithImpl$Mutation$SaveTextActivity$SaveTextActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4812,6 +4838,7 @@ class _CopyWithStubImpl$Mutation$SaveTextActivity$SaveTextActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }

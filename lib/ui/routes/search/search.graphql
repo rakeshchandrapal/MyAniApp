@@ -12,12 +12,14 @@ query Search(
   $page: Int
   $perPage: Int
   $type: MediaType
-  $format: MediaFormat
+  $format: [MediaFormat]
   $sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
   $season: MediaSeason
   $seasonYear: Int
   $search: String
   $year: String
+  $yearGreater: FuzzyDateInt
+  $yearLesser: FuzzyDateInt
   $genres: [String]
   $with_tags: [String]
   $without_tags: [String]
@@ -32,10 +34,12 @@ query Search(
       isAdult: $isAdult
       type: $type
       sort: $sort
-      format: $format
+      format_in: $format
       season: $season
       seasonYear: $seasonYear
       startDate_like: $year
+      startDate_greater: $yearGreater
+      startDate_lesser: $yearLesser
       search: $search
       genre_in: $genres
       tag_in: $with_tags

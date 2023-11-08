@@ -38,7 +38,9 @@ class Variables$Query$Thread {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get page => (_$data['page'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -57,6 +59,7 @@ class Variables$Query$Thread {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -279,6 +282,7 @@ class _CopyWithImpl$Query$Thread<TRes> implements CopyWith$Query$Thread<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Thread$thread<TRes> get thread {
     final local$thread = _instance.thread;
     return local$thread == null
@@ -307,8 +311,10 @@ class _CopyWithStubImpl$Query$Thread<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Thread$thread<TRes> get thread =>
       CopyWith$Query$Thread$thread.stub(_res);
+
   CopyWith$Query$Thread$comments<TRes> get comments =>
       CopyWith$Query$Thread$comments.stub(_res);
 }
@@ -1258,6 +1264,7 @@ class _CopyWithImpl$Query$Thread$thread<TRes>
             ? _instance.likeCount
             : (likeCount as int),
       ));
+
   TRes mediaCategories(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -1271,6 +1278,7 @@ class _CopyWithImpl$Query$Thread$thread<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   TRes categories(
           Iterable<Query$Thread$thread$categories?>? Function(
                   Iterable<
@@ -1284,6 +1292,7 @@ class _CopyWithImpl$Query$Thread$thread<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1328,10 +1337,14 @@ class _CopyWithStubImpl$Query$Thread$thread<TRes>
     int? likeCount,
   }) =>
       _res;
+
   mediaCategories(_fn) => _res;
+
   categories(_fn) => _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get replyUser =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1635,6 +1648,7 @@ class _CopyWithImpl$Query$Thread$comments<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1669,8 +1683,10 @@ class _CopyWithStubImpl$Query$Thread$comments<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   threadComments(_fn) => _res;
 }
 
@@ -1935,6 +1951,7 @@ class _CopyWithImpl$Query$Thread$comments$threadComments<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Thread$comments$threadComments$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1964,6 +1981,7 @@ class _CopyWithStubImpl$Query$Thread$comments$threadComments<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Thread$comments$threadComments$user<TRes> get user =>
       CopyWith$Query$Thread$comments$threadComments$user.stub(_res);
 }
@@ -2120,6 +2138,7 @@ class _CopyWithImpl$Query$Thread$comments$threadComments$user<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Thread$comments$threadComments$user$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -2143,6 +2162,7 @@ class _CopyWithStubImpl$Query$Thread$comments$threadComments$user<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Thread$comments$threadComments$user$avatar<TRes> get avatar =>
       CopyWith$Query$Thread$comments$threadComments$user$avatar.stub(_res);
 }
@@ -2313,9 +2333,13 @@ class Variables$Mutation$SaveComment {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get threadId => (_$data['threadId'] as int?);
+
   int? get parentCommentId => (_$data['parentCommentId'] as int?);
+
   String? get comment => (_$data['comment'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -2342,6 +2366,7 @@ class Variables$Mutation$SaveComment {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2576,6 +2601,7 @@ class _CopyWithImpl$Mutation$SaveComment<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SaveComment$SaveThreadComment<TRes> get SaveThreadComment {
     final local$SaveThreadComment = _instance.SaveThreadComment;
     return local$SaveThreadComment == null
@@ -2596,6 +2622,7 @@ class _CopyWithStubImpl$Mutation$SaveComment<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SaveComment$SaveThreadComment<TRes> get SaveThreadComment =>
       CopyWith$Mutation$SaveComment$SaveThreadComment.stub(_res);
 }
@@ -3284,6 +3311,7 @@ class _CopyWithImpl$Mutation$SaveComment$SaveThreadComment<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SaveComment$SaveThreadComment$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3313,6 +3341,7 @@ class _CopyWithStubImpl$Mutation$SaveComment$SaveThreadComment<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SaveComment$SaveThreadComment$user<TRes> get user =>
       CopyWith$Mutation$SaveComment$SaveThreadComment$user.stub(_res);
 }
@@ -3543,6 +3572,7 @@ class _CopyWithImpl$Mutation$SaveComment$SaveThreadComment$user<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SaveComment$SaveThreadComment$user$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -3569,6 +3599,7 @@ class _CopyWithStubImpl$Mutation$SaveComment$SaveThreadComment$user<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SaveComment$SaveThreadComment$user$avatar<TRes>
       get avatar =>
           CopyWith$Mutation$SaveComment$SaveThreadComment$user$avatar.stub(
@@ -3726,6 +3757,7 @@ class Variables$Mutation$DeleteComment {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -3740,6 +3772,7 @@ class Variables$Mutation$DeleteComment {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3923,6 +3956,7 @@ class _CopyWithImpl$Mutation$DeleteComment<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$DeleteComment$DeleteThreadComment<TRes>
       get DeleteThreadComment {
     final local$DeleteThreadComment = _instance.DeleteThreadComment;
@@ -3945,6 +3979,7 @@ class _CopyWithStubImpl$Mutation$DeleteComment<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$DeleteComment$DeleteThreadComment<TRes>
       get DeleteThreadComment =>
           CopyWith$Mutation$DeleteComment$DeleteThreadComment.stub(_res);

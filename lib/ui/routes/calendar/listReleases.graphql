@@ -1,0 +1,10 @@
+query ReleasesList($page: Int) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    media(onList: true, status_in: [RELEASING, NOT_YET_RELEASED], sort: START_DATE) {
+      ...ReleasingMedia
+    }
+  }
+}

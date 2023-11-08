@@ -76,9 +76,9 @@ List<Fragment$ReleasingMedia> sortReleases(
         if ((a.airingSchedule ?? a.nextAiringEpisode) == null &&
             (b.airingSchedule ?? b.nextAiringEpisode) == null) {
           return 0;
-        } else if ((b.airingSchedule ?? b.nextAiringEpisode) == null) {
+        } else if (b.airingSchedule == null || b.nextAiringEpisode == null) {
           return -1;
-        } else if ((a.airingSchedule ?? a.nextAiringEpisode) == null) {
+        } else if (a.airingSchedule == null || a.nextAiringEpisode == null) {
           return 1;
         }
 

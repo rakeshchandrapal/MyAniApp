@@ -120,6 +120,7 @@ class _CopyWithImpl$Query$DummyData<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$DummyData$Media<TRes> get Media {
     final local$Media = _instance.Media;
     return local$Media == null
@@ -139,6 +140,7 @@ class _CopyWithStubImpl$Query$DummyData<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$DummyData$Media<TRes> get Media =>
       CopyWith$Query$DummyData$Media.stub(_res);
 }
@@ -524,6 +526,7 @@ class _CopyWithImpl$Query$DummyData$Media<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$DummyData$Media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -554,8 +557,10 @@ class _CopyWithStubImpl$Query$DummyData$Media<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$DummyData$Media$title<TRes> get title =>
       CopyWith$Query$DummyData$Media$title.stub(_res);
+
   CopyWith$Query$DummyData$Media$coverImage<TRes> get coverImage =>
       CopyWith$Query$DummyData$Media$coverImage.stub(_res);
 }
@@ -967,6 +972,7 @@ class _CopyWithImpl$Query$Browsing<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Browsing$trending<TRes> get trending {
     final local$trending = _instance.trending;
     return local$trending == null
@@ -1004,10 +1010,13 @@ class _CopyWithStubImpl$Query$Browsing<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Browsing$trending<TRes> get trending =>
       CopyWith$Query$Browsing$trending.stub(_res);
+
   CopyWith$Query$Browsing$popular<TRes> get popular =>
       CopyWith$Query$Browsing$popular.stub(_res);
+
   CopyWith$Query$Browsing$recent<TRes> get recent =>
       CopyWith$Query$Browsing$recent.stub(_res);
 }
@@ -1449,6 +1458,7 @@ class _CopyWithImpl$Query$Browsing$trending<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -1475,6 +1485,7 @@ class _CopyWithStubImpl$Query$Browsing$trending<TRes>
     String? $__typename,
   }) =>
       _res;
+
   media(_fn) => _res;
 }
 
@@ -1607,6 +1618,7 @@ class _CopyWithImpl$Query$Browsing$popular<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -1633,6 +1645,7 @@ class _CopyWithStubImpl$Query$Browsing$popular<TRes>
     String? $__typename,
   }) =>
       _res;
+
   media(_fn) => _res;
 }
 
@@ -1764,6 +1777,7 @@ class _CopyWithImpl$Query$Browsing$recent<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -1790,5 +1804,6 @@ class _CopyWithStubImpl$Query$Browsing$recent<TRes>
     String? $__typename,
   }) =>
       _res;
+
   media(_fn) => _res;
 }

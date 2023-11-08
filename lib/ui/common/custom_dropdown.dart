@@ -34,6 +34,70 @@ class CustomDropdown<T> extends StatelessWidget {
     this.onClear,
   });
 
+  CustomDropdown.checkbox({
+    super.key,
+    required this.hint,
+    List<T>? values,
+    required bool Function(T value) isChecked,
+    required List<DropdownMenuItem<T>> items,
+    this.onChanged,
+    this.selectedItemBuilder,
+    this.hintAlignment,
+    this.valueAlignment,
+    this.buttonHeight,
+    this.buttonWidth,
+    this.buttonPadding,
+    this.buttonDecoration,
+    this.buttonElevation,
+    this.icon,
+    this.iconSize,
+    this.iconEnabledColor,
+    this.iconDisabledColor,
+    this.itemHeight,
+    this.itemPadding,
+    this.dropdownHeight,
+    this.dropdownWidth,
+    this.dropdownPadding,
+    this.dropdownDecoration,
+    this.dropdownElevation,
+    this.scrollbarRadius,
+    this.scrollbarThickness,
+    this.scrollbarAlwaysShow,
+    this.offset = const Offset(0, -5),
+    this.onClear,
+  })  : value = values?.last,
+        dropdownItems = items
+            .map(
+              (e) => DropdownMenuItem(
+                value: e.value,
+                enabled: false,
+                child: StatefulBuilder(
+                  builder: (context, setState) {
+                    return InkWell(
+                      onTap: () {
+                        onChanged?.call(e.value);
+                        setState(() {});
+                      },
+                      child: SizedBox(
+                        height: double.maxFinite,
+                        child: Row(
+                          children: [
+                            if (isChecked(e.value as T))
+                              const Icon(Icons.check_box_outlined)
+                            else
+                              const Icon(Icons.check_box_outline_blank),
+                            const SizedBox(width: 16),
+                            e.child,
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            )
+            .toList();
+
   final String hint;
   final T? value;
   final List<DropdownMenuItem<T>> dropdownItems;

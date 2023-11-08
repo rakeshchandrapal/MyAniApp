@@ -41,8 +41,11 @@ class Variables$Query$Socials {
   Map<String, dynamic> _$data;
 
   int get id => (_$data['id'] as int);
+
   int? get followersPage => (_$data['followersPage'] as int?);
+
   int? get followingPage => (_$data['followingPage'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -63,6 +66,7 @@ class Variables$Query$Socials {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -303,6 +307,7 @@ class _CopyWithImpl$Query$Socials<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Socials$followers<TRes> get followers {
     final local$followers = _instance.followers;
     return local$followers == null
@@ -332,8 +337,10 @@ class _CopyWithStubImpl$Query$Socials<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Socials$followers<TRes> get followers =>
       CopyWith$Query$Socials$followers.stub(_res);
+
   CopyWith$Query$Socials$following<TRes> get following =>
       CopyWith$Query$Socials$following.stub(_res);
 }
@@ -822,6 +829,7 @@ class _CopyWithImpl$Query$Socials$followers<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -855,8 +863,10 @@ class _CopyWithStubImpl$Query$Socials$followers<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   followers(_fn) => _res;
 }
 
@@ -1010,6 +1020,7 @@ class _CopyWithImpl$Query$Socials$following<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1043,7 +1054,9 @@ class _CopyWithStubImpl$Query$Socials$following<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   following(_fn) => _res;
 }

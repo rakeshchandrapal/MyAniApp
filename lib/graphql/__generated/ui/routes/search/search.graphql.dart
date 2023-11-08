@@ -170,6 +170,7 @@ class _CopyWithImpl$Query$GenreCollection<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes tags(
           Iterable<Query$GenreCollection$tags?>? Function(
                   Iterable<
@@ -197,6 +198,7 @@ class _CopyWithStubImpl$Query$GenreCollection<TRes>
     String? $__typename,
   }) =>
       _res;
+
   tags(_fn) => _res;
 }
 
@@ -595,12 +597,14 @@ class Variables$Query$Search {
     int? page,
     int? perPage,
     Enum$MediaType? type,
-    Enum$MediaFormat? format,
+    List<Enum$MediaFormat?>? format,
     List<Enum$MediaSort?>? sort,
     Enum$MediaSeason? season,
     int? seasonYear,
     String? search,
     String? year,
+    int? yearGreater,
+    int? yearLesser,
     List<String?>? genres,
     List<String?>? with_tags,
     List<String?>? without_tags,
@@ -617,6 +621,8 @@ class Variables$Query$Search {
         if (seasonYear != null) r'seasonYear': seasonYear,
         if (search != null) r'search': search,
         if (year != null) r'year': year,
+        if (yearGreater != null) r'yearGreater': yearGreater,
+        if (yearLesser != null) r'yearLesser': yearLesser,
         if (genres != null) r'genres': genres,
         if (with_tags != null) r'with_tags': with_tags,
         if (without_tags != null) r'without_tags': without_tags,
@@ -643,9 +649,10 @@ class Variables$Query$Search {
     }
     if (data.containsKey('format')) {
       final l$format = data['format'];
-      result$data['format'] = l$format == null
-          ? null
-          : fromJson$Enum$MediaFormat((l$format as String));
+      result$data['format'] = (l$format as List<dynamic>?)
+          ?.map((e) =>
+              e == null ? null : fromJson$Enum$MediaFormat((e as String)))
+          .toList();
     }
     if (data.containsKey('sort')) {
       final l$sort = data['sort'];
@@ -671,6 +678,14 @@ class Variables$Query$Search {
     if (data.containsKey('year')) {
       final l$year = data['year'];
       result$data['year'] = (l$year as String?);
+    }
+    if (data.containsKey('yearGreater')) {
+      final l$yearGreater = data['yearGreater'];
+      result$data['yearGreater'] = (l$yearGreater as int?);
+    }
+    if (data.containsKey('yearLesser')) {
+      final l$yearLesser = data['yearLesser'];
+      result$data['yearLesser'] = (l$yearLesser as int?);
     }
     if (data.containsKey('genres')) {
       final l$genres = data['genres'];
@@ -702,19 +717,38 @@ class Variables$Query$Search {
   Map<String, dynamic> _$data;
 
   int? get page => (_$data['page'] as int?);
+
   int? get perPage => (_$data['perPage'] as int?);
+
   Enum$MediaType? get type => (_$data['type'] as Enum$MediaType?);
-  Enum$MediaFormat? get format => (_$data['format'] as Enum$MediaFormat?);
+
+  List<Enum$MediaFormat?>? get format =>
+      (_$data['format'] as List<Enum$MediaFormat?>?);
+
   List<Enum$MediaSort?>? get sort => (_$data['sort'] as List<Enum$MediaSort?>?);
+
   Enum$MediaSeason? get season => (_$data['season'] as Enum$MediaSeason?);
+
   int? get seasonYear => (_$data['seasonYear'] as int?);
+
   String? get search => (_$data['search'] as String?);
+
   String? get year => (_$data['year'] as String?);
+
+  int? get yearGreater => (_$data['yearGreater'] as int?);
+
+  int? get yearLesser => (_$data['yearLesser'] as int?);
+
   List<String?>? get genres => (_$data['genres'] as List<String?>?);
+
   List<String?>? get with_tags => (_$data['with_tags'] as List<String?>?);
+
   List<String?>? get without_tags => (_$data['without_tags'] as List<String?>?);
+
   bool? get isAdult => (_$data['isAdult'] as bool?);
+
   bool? get onList => (_$data['onList'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('page')) {
@@ -732,8 +766,9 @@ class Variables$Query$Search {
     }
     if (_$data.containsKey('format')) {
       final l$format = format;
-      result$data['format'] =
-          l$format == null ? null : toJson$Enum$MediaFormat(l$format);
+      result$data['format'] = l$format
+          ?.map((e) => e == null ? null : toJson$Enum$MediaFormat(e))
+          .toList();
     }
     if (_$data.containsKey('sort')) {
       final l$sort = sort;
@@ -757,6 +792,14 @@ class Variables$Query$Search {
     if (_$data.containsKey('year')) {
       final l$year = year;
       result$data['year'] = l$year;
+    }
+    if (_$data.containsKey('yearGreater')) {
+      final l$yearGreater = yearGreater;
+      result$data['yearGreater'] = l$yearGreater;
+    }
+    if (_$data.containsKey('yearLesser')) {
+      final l$yearLesser = yearLesser;
+      result$data['yearLesser'] = l$yearLesser;
     }
     if (_$data.containsKey('genres')) {
       final l$genres = genres;
@@ -786,6 +829,7 @@ class Variables$Query$Search {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -824,7 +868,18 @@ class Variables$Query$Search {
     if (_$data.containsKey('format') != other._$data.containsKey('format')) {
       return false;
     }
-    if (l$format != lOther$format) {
+    if (l$format != null && lOther$format != null) {
+      if (l$format.length != lOther$format.length) {
+        return false;
+      }
+      for (int i = 0; i < l$format.length; i++) {
+        final l$format$entry = l$format[i];
+        final lOther$format$entry = lOther$format[i];
+        if (l$format$entry != lOther$format$entry) {
+          return false;
+        }
+      }
+    } else if (l$format != lOther$format) {
       return false;
     }
     final l$sort = sort;
@@ -877,6 +932,24 @@ class Variables$Query$Search {
       return false;
     }
     if (l$year != lOther$year) {
+      return false;
+    }
+    final l$yearGreater = yearGreater;
+    final lOther$yearGreater = other.yearGreater;
+    if (_$data.containsKey('yearGreater') !=
+        other._$data.containsKey('yearGreater')) {
+      return false;
+    }
+    if (l$yearGreater != lOther$yearGreater) {
+      return false;
+    }
+    final l$yearLesser = yearLesser;
+    final lOther$yearLesser = other.yearLesser;
+    if (_$data.containsKey('yearLesser') !=
+        other._$data.containsKey('yearLesser')) {
+      return false;
+    }
+    if (l$yearLesser != lOther$yearLesser) {
       return false;
     }
     final l$genres = genres;
@@ -968,6 +1041,8 @@ class Variables$Query$Search {
     final l$seasonYear = seasonYear;
     final l$search = search;
     final l$year = year;
+    final l$yearGreater = yearGreater;
+    final l$yearLesser = yearLesser;
     final l$genres = genres;
     final l$with_tags = with_tags;
     final l$without_tags = without_tags;
@@ -977,7 +1052,11 @@ class Variables$Query$Search {
       _$data.containsKey('page') ? l$page : const {},
       _$data.containsKey('perPage') ? l$perPage : const {},
       _$data.containsKey('type') ? l$type : const {},
-      _$data.containsKey('format') ? l$format : const {},
+      _$data.containsKey('format')
+          ? l$format == null
+              ? null
+              : Object.hashAll(l$format.map((v) => v))
+          : const {},
       _$data.containsKey('sort')
           ? l$sort == null
               ? null
@@ -987,6 +1066,8 @@ class Variables$Query$Search {
       _$data.containsKey('seasonYear') ? l$seasonYear : const {},
       _$data.containsKey('search') ? l$search : const {},
       _$data.containsKey('year') ? l$year : const {},
+      _$data.containsKey('yearGreater') ? l$yearGreater : const {},
+      _$data.containsKey('yearLesser') ? l$yearLesser : const {},
       _$data.containsKey('genres')
           ? l$genres == null
               ? null
@@ -1021,12 +1102,14 @@ abstract class CopyWith$Variables$Query$Search<TRes> {
     int? page,
     int? perPage,
     Enum$MediaType? type,
-    Enum$MediaFormat? format,
+    List<Enum$MediaFormat?>? format,
     List<Enum$MediaSort?>? sort,
     Enum$MediaSeason? season,
     int? seasonYear,
     String? search,
     String? year,
+    int? yearGreater,
+    int? yearLesser,
     List<String?>? genres,
     List<String?>? with_tags,
     List<String?>? without_tags,
@@ -1058,6 +1141,8 @@ class _CopyWithImpl$Variables$Query$Search<TRes>
     Object? seasonYear = _undefined,
     Object? search = _undefined,
     Object? year = _undefined,
+    Object? yearGreater = _undefined,
+    Object? yearLesser = _undefined,
     Object? genres = _undefined,
     Object? with_tags = _undefined,
     Object? without_tags = _undefined,
@@ -1069,12 +1154,15 @@ class _CopyWithImpl$Variables$Query$Search<TRes>
         if (page != _undefined) 'page': (page as int?),
         if (perPage != _undefined) 'perPage': (perPage as int?),
         if (type != _undefined) 'type': (type as Enum$MediaType?),
-        if (format != _undefined) 'format': (format as Enum$MediaFormat?),
+        if (format != _undefined)
+          'format': (format as List<Enum$MediaFormat?>?),
         if (sort != _undefined) 'sort': (sort as List<Enum$MediaSort?>?),
         if (season != _undefined) 'season': (season as Enum$MediaSeason?),
         if (seasonYear != _undefined) 'seasonYear': (seasonYear as int?),
         if (search != _undefined) 'search': (search as String?),
         if (year != _undefined) 'year': (year as String?),
+        if (yearGreater != _undefined) 'yearGreater': (yearGreater as int?),
+        if (yearLesser != _undefined) 'yearLesser': (yearLesser as int?),
         if (genres != _undefined) 'genres': (genres as List<String?>?),
         if (with_tags != _undefined) 'with_tags': (with_tags as List<String?>?),
         if (without_tags != _undefined)
@@ -1094,12 +1182,14 @@ class _CopyWithStubImpl$Variables$Query$Search<TRes>
     int? page,
     int? perPage,
     Enum$MediaType? type,
-    Enum$MediaFormat? format,
+    List<Enum$MediaFormat?>? format,
     List<Enum$MediaSort?>? sort,
     Enum$MediaSeason? season,
     int? seasonYear,
     String? search,
     String? year,
+    int? yearGreater,
+    int? yearLesser,
     List<String?>? genres,
     List<String?>? with_tags,
     List<String?>? without_tags,
@@ -1216,6 +1306,7 @@ class _CopyWithImpl$Query$Search<TRes> implements CopyWith$Query$Search<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Search$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -1235,6 +1326,7 @@ class _CopyWithStubImpl$Query$Search<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Search$Page<TRes> get Page =>
       CopyWith$Query$Search$Page.stub(_res);
 }
@@ -1273,8 +1365,11 @@ const documentNodeQuerySearch = DocumentNode(definitions: [
       ),
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'format')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'MediaFormat'),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'MediaFormat'),
+            isNonNull: false,
+          ),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1327,6 +1422,24 @@ const documentNodeQuerySearch = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'year')),
         type: NamedTypeNode(
           name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'yearGreater')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'FuzzyDateInt'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'yearLesser')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'FuzzyDateInt'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1440,7 +1553,7 @@ const documentNodeQuerySearch = DocumentNode(definitions: [
                 value: VariableNode(name: NameNode(value: 'sort')),
               ),
               ArgumentNode(
-                name: NameNode(value: 'format'),
+                name: NameNode(value: 'format_in'),
                 value: VariableNode(name: NameNode(value: 'format')),
               ),
               ArgumentNode(
@@ -1454,6 +1567,14 @@ const documentNodeQuerySearch = DocumentNode(definitions: [
               ArgumentNode(
                 name: NameNode(value: 'startDate_like'),
                 value: VariableNode(name: NameNode(value: 'year')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'startDate_greater'),
+                value: VariableNode(name: NameNode(value: 'yearGreater')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'startDate_lesser'),
+                value: VariableNode(name: NameNode(value: 'yearLesser')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'search'),
@@ -1811,6 +1932,7 @@ class _CopyWithImpl$Query$Search$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1845,7 +1967,9 @@ class _CopyWithStubImpl$Query$Search$Page<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   media(_fn) => _res;
 }

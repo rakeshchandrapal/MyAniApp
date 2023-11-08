@@ -2,28 +2,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
-import '../../../../graphql/fragments.graphql.dart';
+import '../../../graphql/fragments.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Variables$Query$RecentThreads {
-  factory Variables$Query$RecentThreads({int? page}) =>
-      Variables$Query$RecentThreads._({
+class Variables$Query$ReleasesList {
+  factory Variables$Query$ReleasesList({int? page}) =>
+      Variables$Query$ReleasesList._({
         if (page != null) r'page': page,
       });
 
-  Variables$Query$RecentThreads._(this._$data);
+  Variables$Query$ReleasesList._(this._$data);
 
-  factory Variables$Query$RecentThreads.fromJson(Map<String, dynamic> data) {
+  factory Variables$Query$ReleasesList.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('page')) {
       final l$page = data['page'];
       result$data['page'] = (l$page as int?);
     }
-    return Variables$Query$RecentThreads._(result$data);
+    return Variables$Query$ReleasesList._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -39,8 +39,8 @@ class Variables$Query$RecentThreads {
     return result$data;
   }
 
-  CopyWith$Variables$Query$RecentThreads<Variables$Query$RecentThreads>
-      get copyWith => CopyWith$Variables$Query$RecentThreads(
+  CopyWith$Variables$Query$ReleasesList<Variables$Query$ReleasesList>
+      get copyWith => CopyWith$Variables$Query$ReleasesList(
             this,
             (i) => i,
           );
@@ -50,7 +50,7 @@ class Variables$Query$RecentThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$RecentThreads) ||
+    if (!(other is Variables$Query$ReleasesList) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -72,65 +72,65 @@ class Variables$Query$RecentThreads {
   }
 }
 
-abstract class CopyWith$Variables$Query$RecentThreads<TRes> {
-  factory CopyWith$Variables$Query$RecentThreads(
-    Variables$Query$RecentThreads instance,
-    TRes Function(Variables$Query$RecentThreads) then,
-  ) = _CopyWithImpl$Variables$Query$RecentThreads;
+abstract class CopyWith$Variables$Query$ReleasesList<TRes> {
+  factory CopyWith$Variables$Query$ReleasesList(
+    Variables$Query$ReleasesList instance,
+    TRes Function(Variables$Query$ReleasesList) then,
+  ) = _CopyWithImpl$Variables$Query$ReleasesList;
 
-  factory CopyWith$Variables$Query$RecentThreads.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$RecentThreads;
+  factory CopyWith$Variables$Query$ReleasesList.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$ReleasesList;
 
   TRes call({int? page});
 }
 
-class _CopyWithImpl$Variables$Query$RecentThreads<TRes>
-    implements CopyWith$Variables$Query$RecentThreads<TRes> {
-  _CopyWithImpl$Variables$Query$RecentThreads(
+class _CopyWithImpl$Variables$Query$ReleasesList<TRes>
+    implements CopyWith$Variables$Query$ReleasesList<TRes> {
+  _CopyWithImpl$Variables$Query$ReleasesList(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$RecentThreads _instance;
+  final Variables$Query$ReleasesList _instance;
 
-  final TRes Function(Variables$Query$RecentThreads) _then;
+  final TRes Function(Variables$Query$ReleasesList) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? page = _undefined}) =>
-      _then(Variables$Query$RecentThreads._({
+      _then(Variables$Query$ReleasesList._({
         ..._instance._$data,
         if (page != _undefined) 'page': (page as int?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$RecentThreads<TRes>
-    implements CopyWith$Variables$Query$RecentThreads<TRes> {
-  _CopyWithStubImpl$Variables$Query$RecentThreads(this._res);
+class _CopyWithStubImpl$Variables$Query$ReleasesList<TRes>
+    implements CopyWith$Variables$Query$ReleasesList<TRes> {
+  _CopyWithStubImpl$Variables$Query$ReleasesList(this._res);
 
   TRes _res;
 
   call({int? page}) => _res;
 }
 
-class Query$RecentThreads {
-  Query$RecentThreads({
+class Query$ReleasesList {
+  Query$ReleasesList({
     this.Page,
     this.$__typename = 'Query',
   });
 
-  factory Query$RecentThreads.fromJson(Map<String, dynamic> json) {
+  factory Query$ReleasesList.fromJson(Map<String, dynamic> json) {
     final l$Page = json['Page'];
     final l$$__typename = json['__typename'];
-    return Query$RecentThreads(
+    return Query$ReleasesList(
       Page: l$Page == null
           ? null
-          : Query$RecentThreads$Page.fromJson((l$Page as Map<String, dynamic>)),
+          : Query$ReleasesList$Page.fromJson((l$Page as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$RecentThreads$Page? Page;
+  final Query$ReleasesList$Page? Page;
 
   final String $__typename;
 
@@ -158,7 +158,7 @@ class Query$RecentThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$RecentThreads) || runtimeType != other.runtimeType) {
+    if (!(other is Query$ReleasesList) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -175,40 +175,40 @@ class Query$RecentThreads {
   }
 }
 
-extension UtilityExtension$Query$RecentThreads on Query$RecentThreads {
-  CopyWith$Query$RecentThreads<Query$RecentThreads> get copyWith =>
-      CopyWith$Query$RecentThreads(
+extension UtilityExtension$Query$ReleasesList on Query$ReleasesList {
+  CopyWith$Query$ReleasesList<Query$ReleasesList> get copyWith =>
+      CopyWith$Query$ReleasesList(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$RecentThreads<TRes> {
-  factory CopyWith$Query$RecentThreads(
-    Query$RecentThreads instance,
-    TRes Function(Query$RecentThreads) then,
-  ) = _CopyWithImpl$Query$RecentThreads;
+abstract class CopyWith$Query$ReleasesList<TRes> {
+  factory CopyWith$Query$ReleasesList(
+    Query$ReleasesList instance,
+    TRes Function(Query$ReleasesList) then,
+  ) = _CopyWithImpl$Query$ReleasesList;
 
-  factory CopyWith$Query$RecentThreads.stub(TRes res) =
-      _CopyWithStubImpl$Query$RecentThreads;
+  factory CopyWith$Query$ReleasesList.stub(TRes res) =
+      _CopyWithStubImpl$Query$ReleasesList;
 
   TRes call({
-    Query$RecentThreads$Page? Page,
+    Query$ReleasesList$Page? Page,
     String? $__typename,
   });
-  CopyWith$Query$RecentThreads$Page<TRes> get Page;
+  CopyWith$Query$ReleasesList$Page<TRes> get Page;
 }
 
-class _CopyWithImpl$Query$RecentThreads<TRes>
-    implements CopyWith$Query$RecentThreads<TRes> {
-  _CopyWithImpl$Query$RecentThreads(
+class _CopyWithImpl$Query$ReleasesList<TRes>
+    implements CopyWith$Query$ReleasesList<TRes> {
+  _CopyWithImpl$Query$ReleasesList(
     this._instance,
     this._then,
   );
 
-  final Query$RecentThreads _instance;
+  final Query$ReleasesList _instance;
 
-  final TRes Function(Query$RecentThreads) _then;
+  final TRes Function(Query$ReleasesList) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -216,43 +216,43 @@ class _CopyWithImpl$Query$RecentThreads<TRes>
     Object? Page = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$RecentThreads(
+      _then(Query$ReleasesList(
         Page: Page == _undefined
             ? _instance.Page
-            : (Page as Query$RecentThreads$Page?),
+            : (Page as Query$ReleasesList$Page?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$RecentThreads$Page<TRes> get Page {
+  CopyWith$Query$ReleasesList$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
-        ? CopyWith$Query$RecentThreads$Page.stub(_then(_instance))
-        : CopyWith$Query$RecentThreads$Page(local$Page, (e) => call(Page: e));
+        ? CopyWith$Query$ReleasesList$Page.stub(_then(_instance))
+        : CopyWith$Query$ReleasesList$Page(local$Page, (e) => call(Page: e));
   }
 }
 
-class _CopyWithStubImpl$Query$RecentThreads<TRes>
-    implements CopyWith$Query$RecentThreads<TRes> {
-  _CopyWithStubImpl$Query$RecentThreads(this._res);
+class _CopyWithStubImpl$Query$ReleasesList<TRes>
+    implements CopyWith$Query$ReleasesList<TRes> {
+  _CopyWithStubImpl$Query$ReleasesList(this._res);
 
   TRes _res;
 
   call({
-    Query$RecentThreads$Page? Page,
+    Query$ReleasesList$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$RecentThreads$Page<TRes> get Page =>
-      CopyWith$Query$RecentThreads$Page.stub(_res);
+  CopyWith$Query$ReleasesList$Page<TRes> get Page =>
+      CopyWith$Query$ReleasesList$Page.stub(_res);
 }
 
-const documentNodeQueryRecentThreads = DocumentNode(definitions: [
+const documentNodeQueryReleasesList = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'RecentThreads'),
+    name: NameNode(value: 'ReleasesList'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'page')),
@@ -297,18 +297,29 @@ const documentNodeQueryRecentThreads = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
-            name: NameNode(value: 'threads'),
+            name: NameNode(value: 'media'),
             alias: null,
             arguments: [
               ArgumentNode(
+                name: NameNode(value: 'onList'),
+                value: BooleanValueNode(value: true),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'status_in'),
+                value: ListValueNode(values: [
+                  EnumValueNode(name: NameNode(value: 'RELEASING')),
+                  EnumValueNode(name: NameNode(value: 'NOT_YET_RELEASED')),
+                ]),
+              ),
+              ArgumentNode(
                 name: NameNode(value: 'sort'),
-                value: EnumValueNode(name: NameNode(value: 'REPLIED_AT_DESC')),
-              )
+                value: EnumValueNode(name: NameNode(value: 'START_DATE')),
+              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'ThreadFragment'),
+                name: NameNode(value: 'ReleasingMedia'),
                 directives: [],
               ),
               FieldNode(
@@ -339,30 +350,29 @@ const documentNodeQueryRecentThreads = DocumentNode(definitions: [
     ]),
   ),
   fragmentDefinitionPageInfo,
-  fragmentDefinitionThreadFragment,
+  fragmentDefinitionReleasingMedia,
   fragmentDefinitionMediaFragment,
-  fragmentDefinitionUserFragment,
 ]);
-Query$RecentThreads _parserFn$Query$RecentThreads(Map<String, dynamic> data) =>
-    Query$RecentThreads.fromJson(data);
-typedef OnQueryComplete$Query$RecentThreads = FutureOr<void> Function(
+Query$ReleasesList _parserFn$Query$ReleasesList(Map<String, dynamic> data) =>
+    Query$ReleasesList.fromJson(data);
+typedef OnQueryComplete$Query$ReleasesList = FutureOr<void> Function(
   Map<String, dynamic>?,
-  Query$RecentThreads?,
+  Query$ReleasesList?,
 );
 
-class Options$Query$RecentThreads
-    extends graphql.QueryOptions<Query$RecentThreads> {
-  Options$Query$RecentThreads({
+class Options$Query$ReleasesList
+    extends graphql.QueryOptions<Query$ReleasesList> {
+  Options$Query$ReleasesList({
     String? operationName,
-    Variables$Query$RecentThreads? variables,
+    Variables$Query$ReleasesList? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$RecentThreads? typedOptimisticResult,
+    Query$ReleasesList? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-    OnQueryComplete$Query$RecentThreads? onComplete,
+    OnQueryComplete$Query$ReleasesList? onComplete,
     graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
@@ -378,14 +388,14 @@ class Options$Query$RecentThreads
               ? null
               : (data) => onComplete(
                     data,
-                    data == null ? null : _parserFn$Query$RecentThreads(data),
+                    data == null ? null : _parserFn$Query$ReleasesList(data),
                   ),
           onError: onError,
-          document: documentNodeQueryRecentThreads,
-          parserFn: _parserFn$Query$RecentThreads,
+          document: documentNodeQueryReleasesList,
+          parserFn: _parserFn$Query$ReleasesList,
         );
 
-  final OnQueryComplete$Query$RecentThreads? onCompleteWithParsed;
+  final OnQueryComplete$Query$ReleasesList? onCompleteWithParsed;
 
   @override
   List<Object?> get properties => [
@@ -396,16 +406,16 @@ class Options$Query$RecentThreads
       ];
 }
 
-class WatchOptions$Query$RecentThreads
-    extends graphql.WatchQueryOptions<Query$RecentThreads> {
-  WatchOptions$Query$RecentThreads({
+class WatchOptions$Query$ReleasesList
+    extends graphql.WatchQueryOptions<Query$ReleasesList> {
+  WatchOptions$Query$ReleasesList({
     String? operationName,
-    Variables$Query$RecentThreads? variables,
+    Variables$Query$ReleasesList? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$RecentThreads? typedOptimisticResult,
+    Query$ReleasesList? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -419,102 +429,100 @@ class WatchOptions$Query$RecentThreads
           cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
-          document: documentNodeQueryRecentThreads,
+          document: documentNodeQueryReleasesList,
           pollInterval: pollInterval,
           eagerlyFetchResults: eagerlyFetchResults,
           carryForwardDataOnException: carryForwardDataOnException,
           fetchResults: fetchResults,
-          parserFn: _parserFn$Query$RecentThreads,
+          parserFn: _parserFn$Query$ReleasesList,
         );
 }
 
-class FetchMoreOptions$Query$RecentThreads extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$RecentThreads({
+class FetchMoreOptions$Query$ReleasesList extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$ReleasesList({
     required graphql.UpdateQuery updateQuery,
-    Variables$Query$RecentThreads? variables,
+    Variables$Query$ReleasesList? variables,
   }) : super(
           updateQuery: updateQuery,
           variables: variables?.toJson() ?? {},
-          document: documentNodeQueryRecentThreads,
+          document: documentNodeQueryReleasesList,
         );
 }
 
-extension ClientExtension$Query$RecentThreads on graphql.GraphQLClient {
-  Future<graphql.QueryResult<Query$RecentThreads>> query$RecentThreads(
-          [Options$Query$RecentThreads? options]) async =>
-      await this.query(options ?? Options$Query$RecentThreads());
-  graphql.ObservableQuery<Query$RecentThreads> watchQuery$RecentThreads(
-          [WatchOptions$Query$RecentThreads? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$RecentThreads());
-  void writeQuery$RecentThreads({
-    required Query$RecentThreads data,
-    Variables$Query$RecentThreads? variables,
+extension ClientExtension$Query$ReleasesList on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$ReleasesList>> query$ReleasesList(
+          [Options$Query$ReleasesList? options]) async =>
+      await this.query(options ?? Options$Query$ReleasesList());
+  graphql.ObservableQuery<Query$ReleasesList> watchQuery$ReleasesList(
+          [WatchOptions$Query$ReleasesList? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$ReleasesList());
+  void writeQuery$ReleasesList({
+    required Query$ReleasesList data,
+    Variables$Query$ReleasesList? variables,
     bool broadcast = true,
   }) =>
       this.writeQuery(
         graphql.Request(
-          operation:
-              graphql.Operation(document: documentNodeQueryRecentThreads),
+          operation: graphql.Operation(document: documentNodeQueryReleasesList),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Query$RecentThreads? readQuery$RecentThreads({
-    Variables$Query$RecentThreads? variables,
+  Query$ReleasesList? readQuery$ReleasesList({
+    Variables$Query$ReleasesList? variables,
     bool optimistic = true,
   }) {
     final result = this.readQuery(
       graphql.Request(
-        operation: graphql.Operation(document: documentNodeQueryRecentThreads),
+        operation: graphql.Operation(document: documentNodeQueryReleasesList),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Query$RecentThreads.fromJson(result);
+    return result == null ? null : Query$ReleasesList.fromJson(result);
   }
 }
 
-graphql_flutter.QueryHookResult<Query$RecentThreads> useQuery$RecentThreads(
-        [Options$Query$RecentThreads? options]) =>
-    graphql_flutter.useQuery(options ?? Options$Query$RecentThreads());
-graphql.ObservableQuery<Query$RecentThreads> useWatchQuery$RecentThreads(
-        [WatchOptions$Query$RecentThreads? options]) =>
-    graphql_flutter
-        .useWatchQuery(options ?? WatchOptions$Query$RecentThreads());
+graphql_flutter.QueryHookResult<Query$ReleasesList> useQuery$ReleasesList(
+        [Options$Query$ReleasesList? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$ReleasesList());
+graphql.ObservableQuery<Query$ReleasesList> useWatchQuery$ReleasesList(
+        [WatchOptions$Query$ReleasesList? options]) =>
+    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$ReleasesList());
 
-class Query$RecentThreads$Widget
-    extends graphql_flutter.Query<Query$RecentThreads> {
-  Query$RecentThreads$Widget({
+class Query$ReleasesList$Widget
+    extends graphql_flutter.Query<Query$ReleasesList> {
+  Query$ReleasesList$Widget({
     widgets.Key? key,
-    Options$Query$RecentThreads? options,
-    required graphql_flutter.QueryBuilder<Query$RecentThreads> builder,
+    Options$Query$ReleasesList? options,
+    required graphql_flutter.QueryBuilder<Query$ReleasesList> builder,
   }) : super(
           key: key,
-          options: options ?? Options$Query$RecentThreads(),
+          options: options ?? Options$Query$ReleasesList(),
           builder: builder,
         );
 }
 
-class Query$RecentThreads$Page {
-  Query$RecentThreads$Page({
+class Query$ReleasesList$Page {
+  Query$ReleasesList$Page({
     this.pageInfo,
-    this.threads,
+    this.media,
     this.$__typename = 'Page',
   });
 
-  factory Query$RecentThreads$Page.fromJson(Map<String, dynamic> json) {
+  factory Query$ReleasesList$Page.fromJson(Map<String, dynamic> json) {
     final l$pageInfo = json['pageInfo'];
-    final l$threads = json['threads'];
+    final l$media = json['media'];
     final l$$__typename = json['__typename'];
-    return Query$RecentThreads$Page(
+    return Query$ReleasesList$Page(
       pageInfo: l$pageInfo == null
           ? null
           : Fragment$PageInfo.fromJson((l$pageInfo as Map<String, dynamic>)),
-      threads: (l$threads as List<dynamic>?)
+      media: (l$media as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Fragment$ThreadFragment.fromJson((e as Map<String, dynamic>)))
+              : Fragment$ReleasingMedia.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -522,7 +530,7 @@ class Query$RecentThreads$Page {
 
   final Fragment$PageInfo? pageInfo;
 
-  final List<Fragment$ThreadFragment?>? threads;
+  final List<Fragment$ReleasingMedia?>? media;
 
   final String $__typename;
 
@@ -530,8 +538,8 @@ class Query$RecentThreads$Page {
     final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
     _resultData['pageInfo'] = l$pageInfo?.toJson();
-    final l$threads = threads;
-    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    final l$media = media;
+    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -540,11 +548,11 @@ class Query$RecentThreads$Page {
   @override
   int get hashCode {
     final l$pageInfo = pageInfo;
-    final l$threads = threads;
+    final l$media = media;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$pageInfo,
-      l$threads == null ? null : Object.hashAll(l$threads.map((v) => v)),
+      l$media == null ? null : Object.hashAll(l$media.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -554,7 +562,7 @@ class Query$RecentThreads$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$RecentThreads$Page) ||
+    if (!(other is Query$ReleasesList$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -563,20 +571,20 @@ class Query$RecentThreads$Page {
     if (l$pageInfo != lOther$pageInfo) {
       return false;
     }
-    final l$threads = threads;
-    final lOther$threads = other.threads;
-    if (l$threads != null && lOther$threads != null) {
-      if (l$threads.length != lOther$threads.length) {
+    final l$media = media;
+    final lOther$media = other.media;
+    if (l$media != null && lOther$media != null) {
+      if (l$media.length != lOther$media.length) {
         return false;
       }
-      for (int i = 0; i < l$threads.length; i++) {
-        final l$threads$entry = l$threads[i];
-        final lOther$threads$entry = lOther$threads[i];
-        if (l$threads$entry != lOther$threads$entry) {
+      for (int i = 0; i < l$media.length; i++) {
+        final l$media$entry = l$media[i];
+        final lOther$media$entry = lOther$media[i];
+        if (l$media$entry != lOther$media$entry) {
           return false;
         }
       }
-    } else if (l$threads != lOther$threads) {
+    } else if (l$media != lOther$media) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -588,62 +596,61 @@ class Query$RecentThreads$Page {
   }
 }
 
-extension UtilityExtension$Query$RecentThreads$Page
-    on Query$RecentThreads$Page {
-  CopyWith$Query$RecentThreads$Page<Query$RecentThreads$Page> get copyWith =>
-      CopyWith$Query$RecentThreads$Page(
+extension UtilityExtension$Query$ReleasesList$Page on Query$ReleasesList$Page {
+  CopyWith$Query$ReleasesList$Page<Query$ReleasesList$Page> get copyWith =>
+      CopyWith$Query$ReleasesList$Page(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$RecentThreads$Page<TRes> {
-  factory CopyWith$Query$RecentThreads$Page(
-    Query$RecentThreads$Page instance,
-    TRes Function(Query$RecentThreads$Page) then,
-  ) = _CopyWithImpl$Query$RecentThreads$Page;
+abstract class CopyWith$Query$ReleasesList$Page<TRes> {
+  factory CopyWith$Query$ReleasesList$Page(
+    Query$ReleasesList$Page instance,
+    TRes Function(Query$ReleasesList$Page) then,
+  ) = _CopyWithImpl$Query$ReleasesList$Page;
 
-  factory CopyWith$Query$RecentThreads$Page.stub(TRes res) =
-      _CopyWithStubImpl$Query$RecentThreads$Page;
+  factory CopyWith$Query$ReleasesList$Page.stub(TRes res) =
+      _CopyWithStubImpl$Query$ReleasesList$Page;
 
   TRes call({
     Fragment$PageInfo? pageInfo,
-    List<Fragment$ThreadFragment?>? threads,
+    List<Fragment$ReleasingMedia?>? media,
     String? $__typename,
   });
   CopyWith$Fragment$PageInfo<TRes> get pageInfo;
-  TRes threads(
-      Iterable<Fragment$ThreadFragment?>? Function(
+  TRes media(
+      Iterable<Fragment$ReleasingMedia?>? Function(
               Iterable<
-                  CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
+                  CopyWith$Fragment$ReleasingMedia<Fragment$ReleasingMedia>?>?)
           _fn);
 }
 
-class _CopyWithImpl$Query$RecentThreads$Page<TRes>
-    implements CopyWith$Query$RecentThreads$Page<TRes> {
-  _CopyWithImpl$Query$RecentThreads$Page(
+class _CopyWithImpl$Query$ReleasesList$Page<TRes>
+    implements CopyWith$Query$ReleasesList$Page<TRes> {
+  _CopyWithImpl$Query$ReleasesList$Page(
     this._instance,
     this._then,
   );
 
-  final Query$RecentThreads$Page _instance;
+  final Query$ReleasesList$Page _instance;
 
-  final TRes Function(Query$RecentThreads$Page) _then;
+  final TRes Function(Query$ReleasesList$Page) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? pageInfo = _undefined,
-    Object? threads = _undefined,
+    Object? media = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$RecentThreads$Page(
+      _then(Query$ReleasesList$Page(
         pageInfo: pageInfo == _undefined
             ? _instance.pageInfo
             : (pageInfo as Fragment$PageInfo?),
-        threads: threads == _undefined
-            ? _instance.threads
-            : (threads as List<Fragment$ThreadFragment?>?),
+        media: media == _undefined
+            ? _instance.media
+            : (media as List<Fragment$ReleasingMedia?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -656,30 +663,30 @@ class _CopyWithImpl$Query$RecentThreads$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  TRes threads(
-          Iterable<Fragment$ThreadFragment?>? Function(
+  TRes media(
+          Iterable<Fragment$ReleasingMedia?>? Function(
                   Iterable<
-                      CopyWith$Fragment$ThreadFragment<
-                          Fragment$ThreadFragment>?>?)
+                      CopyWith$Fragment$ReleasingMedia<
+                          Fragment$ReleasingMedia>?>?)
               _fn) =>
       call(
-          threads: _fn(_instance.threads?.map((e) => e == null
+          media: _fn(_instance.media?.map((e) => e == null
               ? null
-              : CopyWith$Fragment$ThreadFragment(
+              : CopyWith$Fragment$ReleasingMedia(
                   e,
                   (i) => i,
                 )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$RecentThreads$Page<TRes>
-    implements CopyWith$Query$RecentThreads$Page<TRes> {
-  _CopyWithStubImpl$Query$RecentThreads$Page(this._res);
+class _CopyWithStubImpl$Query$ReleasesList$Page<TRes>
+    implements CopyWith$Query$ReleasesList$Page<TRes> {
+  _CopyWithStubImpl$Query$ReleasesList$Page(this._res);
 
   TRes _res;
 
   call({
     Fragment$PageInfo? pageInfo,
-    List<Fragment$ThreadFragment?>? threads,
+    List<Fragment$ReleasingMedia?>? media,
     String? $__typename,
   }) =>
       _res;
@@ -687,5 +694,5 @@ class _CopyWithStubImpl$Query$RecentThreads$Page<TRes>
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  threads(_fn) => _res;
+  media(_fn) => _res;
 }

@@ -172,7 +172,6 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
   }
 
   void listener() {
-    print(scrollController?.position.userScrollDirection);
     var direction = scrollController!.position.userScrollDirection;
     if (direction == ScrollDirection.reverse) {
       _controller.forward();

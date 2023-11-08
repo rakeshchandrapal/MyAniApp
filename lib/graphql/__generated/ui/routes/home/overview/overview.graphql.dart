@@ -43,8 +43,11 @@ class Variables$Query$Overview {
   Map<String, dynamic> _$data;
 
   int? get page => (_$data['page'] as int?);
+
   int get userId => (_$data['userId'] as int);
+
   Enum$MediaType? get type => (_$data['type'] as Enum$MediaType?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('page')) {
@@ -66,6 +69,7 @@ class Variables$Query$Overview {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -324,6 +328,7 @@ class _CopyWithImpl$Query$Overview<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Overview$releasing<TRes> get releasing {
     final local$releasing = _instance.releasing;
     return local$releasing == null
@@ -360,10 +365,13 @@ class _CopyWithStubImpl$Query$Overview<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Overview$releasing<TRes> get releasing =>
       CopyWith$Query$Overview$releasing.stub(_res);
+
   CopyWith$Query$Overview$list<TRes> get list =>
       CopyWith$Query$Overview$list.stub(_res);
+
   CopyWith$Query$Overview$forums<TRes> get forums =>
       CopyWith$Query$Overview$forums.stub(_res);
 }
@@ -893,6 +901,7 @@ class _CopyWithImpl$Query$Overview$releasing<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Overview$releasing$pageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -928,8 +937,10 @@ class _CopyWithStubImpl$Query$Overview$releasing<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Overview$releasing$pageInfo<TRes> get pageInfo =>
       CopyWith$Query$Overview$releasing$pageInfo.stub(_res);
+
   media(_fn) => _res;
 }
 
@@ -1187,6 +1198,7 @@ class _CopyWithImpl$Query$Overview$list<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes mediaList(
           Iterable<Fragment$MediaListEntry?>? Function(
                   Iterable<
@@ -1213,6 +1225,7 @@ class _CopyWithStubImpl$Query$Overview$list<TRes>
     String? $__typename,
   }) =>
       _res;
+
   mediaList(_fn) => _res;
 }
 
@@ -1344,6 +1357,7 @@ class _CopyWithImpl$Query$Overview$forums<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
@@ -1370,5 +1384,6 @@ class _CopyWithStubImpl$Query$Overview$forums<TRes>
     String? $__typename,
   }) =>
       _res;
+
   threads(_fn) => _res;
 }

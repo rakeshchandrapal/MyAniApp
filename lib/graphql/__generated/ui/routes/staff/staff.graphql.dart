@@ -50,9 +50,13 @@ class Variables$Query$Staff {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   bool? get onList => (_$data['onList'] as bool?);
+
   int? get characterPage => (_$data['characterPage'] as int?);
+
   int? get staffPage => (_$data['staffPage'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -79,6 +83,7 @@ class Variables$Query$Staff {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -308,6 +313,7 @@ class _CopyWithImpl$Query$Staff<TRes> implements CopyWith$Query$Staff<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Staff$Staff<TRes> get Staff {
     final local$Staff = _instance.Staff;
     return local$Staff == null
@@ -327,6 +333,7 @@ class _CopyWithStubImpl$Query$Staff<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Staff$Staff<TRes> get Staff =>
       CopyWith$Query$Staff$Staff.stub(_res);
 }
@@ -1391,6 +1398,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfBirth {
     final local$dateOfBirth = _instance.dateOfBirth;
     return local$dateOfBirth == null
@@ -1464,16 +1472,22 @@ class _CopyWithStubImpl$Query$Staff$Staff<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfBirth =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfDeath =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   CopyWith$Query$Staff$Staff$name<TRes> get name =>
       CopyWith$Query$Staff$Staff$name.stub(_res);
+
   CopyWith$Query$Staff$Staff$image<TRes> get image =>
       CopyWith$Query$Staff$Staff$image.stub(_res);
+
   CopyWith$Query$Staff$Staff$characterMedia<TRes> get characterMedia =>
       CopyWith$Query$Staff$Staff$characterMedia.stub(_res);
+
   CopyWith$Query$Staff$Staff$staffMedia<TRes> get staffMedia =>
       CopyWith$Query$Staff$Staff$staffMedia.stub(_res);
 }
@@ -1878,6 +1892,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1912,8 +1927,10 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   edges(_fn) => _res;
 }
 
@@ -2075,6 +2092,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -2111,8 +2129,10 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node =>
       CopyWith$Query$Staff$Staff$characterMedia$edges$node.stub(_res);
+
   characters(_fn) => _res;
 }
 
@@ -2405,6 +2425,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
             : (startDate
                 as Query$Staff$Staff$characterMedia$edges$node$startDate?),
       ));
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -2454,12 +2475,15 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
     Query$Staff$Staff$characterMedia$edges$node$startDate? startDate,
   }) =>
       _res;
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title =>
       CopyWith$Query$Staff$Staff$characterMedia$edges$node$title.stub(_res);
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
       get coverImage =>
           CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage.stub(
               _res);
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
       get startDate =>
           CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate.stub(
@@ -3032,6 +3056,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$characters<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes>
       get name {
     final local$name = _instance.name;
@@ -3068,10 +3093,12 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$characters<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name<TRes>
       get name =>
           CopyWith$Query$Staff$Staff$characterMedia$edges$characters$name.stub(
               _res);
+
   CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image<TRes>
       get image =>
           CopyWith$Query$Staff$Staff$characterMedia$edges$characters$image.stub(
@@ -3501,6 +3528,7 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -3535,8 +3563,10 @@ class _CopyWithStubImpl$Query$Staff$Staff$staffMedia<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   edges(_fn) => _res;
 }
 
@@ -3674,6 +3704,7 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia$edges<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -3694,6 +3725,7 @@ class _CopyWithStubImpl$Query$Staff$Staff$staffMedia$edges<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get node =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

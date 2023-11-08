@@ -227,6 +227,7 @@ scalar ISODateTime
 scalar URL
 
 scalar Json
+scalar FuzzyDateInt
 
 enum LikeableType {
   THREAD

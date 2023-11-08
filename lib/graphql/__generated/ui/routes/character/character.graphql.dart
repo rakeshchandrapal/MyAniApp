@@ -43,8 +43,11 @@ class Variables$Query$Character {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get page => (_$data['page'] as int?);
+
   bool? get onList => (_$data['onList'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -67,6 +70,7 @@ class Variables$Query$Character {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -284,6 +288,7 @@ class _CopyWithImpl$Query$Character<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Character$Character<TRes> get Character {
     final local$Character = _instance.Character;
     return local$Character == null
@@ -304,6 +309,7 @@ class _CopyWithStubImpl$Query$Character<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Character$Character<TRes> get Character =>
       CopyWith$Query$Character$Character.stub(_res);
 }
@@ -1057,6 +1063,7 @@ class _CopyWithImpl$Query$Character$Character<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Character$Character$name<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -1112,12 +1119,16 @@ class _CopyWithStubImpl$Query$Character$Character<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Character$Character$name<TRes> get name =>
       CopyWith$Query$Character$Character$name.stub(_res);
+
   CopyWith$Query$Character$Character$image<TRes> get image =>
       CopyWith$Query$Character$Character$image.stub(_res);
+
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfBirth =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   CopyWith$Query$Character$Character$media<TRes> get media =>
       CopyWith$Query$Character$Character$media.stub(_res);
 }
@@ -1524,6 +1535,7 @@ class _CopyWithImpl$Query$Character$Character$media<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1558,8 +1570,10 @@ class _CopyWithStubImpl$Query$Character$Character$media<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   edges(_fn) => _res;
 }
 
@@ -1678,6 +1692,7 @@ class _CopyWithImpl$Query$Character$Character$media$edges<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -1697,6 +1712,7 @@ class _CopyWithStubImpl$Query$Character$Character$media$edges<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get node =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

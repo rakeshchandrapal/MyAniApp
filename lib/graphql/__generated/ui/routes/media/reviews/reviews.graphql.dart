@@ -37,7 +37,9 @@ class Variables$Query$Reviews {
   Map<String, dynamic> _$data;
 
   int? get mediaId => (_$data['mediaId'] as int?);
+
   int? get page => (_$data['page'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('mediaId')) {
@@ -56,6 +58,7 @@ class Variables$Query$Reviews {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -257,6 +260,7 @@ class _CopyWithImpl$Query$Reviews<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Reviews$Media<TRes> get Media {
     final local$Media = _instance.Media;
     return local$Media == null
@@ -276,6 +280,7 @@ class _CopyWithStubImpl$Query$Reviews<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Reviews$Media<TRes> get Media =>
       CopyWith$Query$Reviews$Media.stub(_res);
 }
@@ -762,6 +767,7 @@ class _CopyWithImpl$Query$Reviews$Media<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Reviews$Media$reviews<TRes> get reviews {
     final local$reviews = _instance.reviews;
     return local$reviews == null
@@ -783,6 +789,7 @@ class _CopyWithStubImpl$Query$Reviews$Media<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Reviews$Media$reviews<TRes> get reviews =>
       CopyWith$Query$Reviews$Media$reviews.stub(_res);
 }
@@ -941,6 +948,7 @@ class _CopyWithImpl$Query$Reviews$Media$reviews<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -975,8 +983,10 @@ class _CopyWithStubImpl$Query$Reviews$Media$reviews<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -1164,6 +1174,7 @@ class _CopyWithImpl$Query$Reviews$Media$reviews$nodes<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Reviews$Media$reviews$nodes$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1188,6 +1199,7 @@ class _CopyWithStubImpl$Query$Reviews$Media$reviews$nodes<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Reviews$Media$reviews$nodes$user<TRes> get user =>
       CopyWith$Query$Reviews$Media$reviews$nodes$user.stub(_res);
 }
@@ -1344,6 +1356,7 @@ class _CopyWithImpl$Query$Reviews$Media$reviews$nodes$user<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Reviews$Media$reviews$nodes$user$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -1367,6 +1380,7 @@ class _CopyWithStubImpl$Query$Reviews$Media$reviews$nodes$user<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Reviews$Media$reviews$nodes$user$avatar<TRes> get avatar =>
       CopyWith$Query$Reviews$Media$reviews$nodes$user$avatar.stub(_res);
 }

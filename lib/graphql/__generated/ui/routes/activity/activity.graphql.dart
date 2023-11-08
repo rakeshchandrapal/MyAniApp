@@ -38,7 +38,9 @@ class Variables$Query$Activity {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get page => (_$data['page'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -57,6 +59,7 @@ class Variables$Query$Activity {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -283,6 +286,7 @@ class _CopyWithImpl$Query$Activity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Activity$activity<TRes> get activity {
     final local$activity = _instance.activity;
     return local$activity == null
@@ -312,8 +316,10 @@ class _CopyWithStubImpl$Query$Activity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Activity$activity<TRes> get activity =>
       CopyWith$Query$Activity$activity.stub(_res);
+
   CopyWith$Query$Activity$replies<TRes> get replies =>
       CopyWith$Query$Activity$replies.stub(_res);
 }
@@ -1176,6 +1182,7 @@ class _CopyWithImpl$Query$Activity$activity$$TextActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1205,6 +1212,7 @@ class _CopyWithStubImpl$Query$Activity$activity$$TextActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1548,6 +1556,7 @@ class _CopyWithImpl$Query$Activity$activity$$ListActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1586,8 +1595,10 @@ class _CopyWithStubImpl$Query$Activity$activity$$ListActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -1914,6 +1925,7 @@ class _CopyWithImpl$Query$Activity$activity$$MessageActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Activity$activity$$MessageActivity$messenger<TRes>
       get messenger {
     final local$messenger = _instance.messenger;
@@ -1947,6 +1959,7 @@ class _CopyWithStubImpl$Query$Activity$activity$$MessageActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Activity$activity$$MessageActivity$messenger<TRes>
       get messenger =>
           CopyWith$Query$Activity$activity$$MessageActivity$messenger.stub(
@@ -2186,6 +2199,7 @@ class _CopyWithImpl$Query$Activity$activity$$MessageActivity$messenger<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Activity$activity$$MessageActivity$messenger$avatar<TRes>
       get avatar {
     final local$avatar = _instance.avatar;
@@ -2215,6 +2229,7 @@ class _CopyWithStubImpl$Query$Activity$activity$$MessageActivity$messenger<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Activity$activity$$MessageActivity$messenger$avatar<TRes>
       get avatar =>
           CopyWith$Query$Activity$activity$$MessageActivity$messenger$avatar
@@ -2516,6 +2531,7 @@ class _CopyWithImpl$Query$Activity$replies<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -2550,8 +2566,10 @@ class _CopyWithStubImpl$Query$Activity$replies<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   activityReplies(_fn) => _res;
 }
 
@@ -2795,6 +2813,7 @@ class _CopyWithImpl$Query$Activity$replies$activityReplies<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -2821,6 +2840,7 @@ class _CopyWithStubImpl$Query$Activity$replies$activityReplies<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -2860,8 +2880,11 @@ class Variables$Mutation$SaveActivityReply {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get activityId => (_$data['activityId'] as int?);
+
   String? get text => (_$data['text'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -2885,6 +2908,7 @@ class Variables$Mutation$SaveActivityReply {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3107,6 +3131,7 @@ class _CopyWithImpl$Mutation$SaveActivityReply<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply<TRes>
       get SaveActivityReply {
     final local$SaveActivityReply = _instance.SaveActivityReply;
@@ -3129,6 +3154,7 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply<TRes>
       get SaveActivityReply =>
           CopyWith$Mutation$SaveActivityReply$SaveActivityReply.stub(_res);
@@ -3566,9 +3592,13 @@ class Variables$Mutation$SaveMessageActivity {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   int? get recipientId => (_$data['recipientId'] as int?);
+
   String? get message => (_$data['message'] as String?);
+
   bool? get private => (_$data['private'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -3596,6 +3626,7 @@ class Variables$Mutation$SaveMessageActivity {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3830,6 +3861,7 @@ class _CopyWithImpl$Mutation$SaveMessageActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MessageActivity<TRes> get SaveMessageActivity {
     final local$SaveMessageActivity = _instance.SaveMessageActivity;
     return local$SaveMessageActivity == null
@@ -3850,6 +3882,7 @@ class _CopyWithStubImpl$Mutation$SaveMessageActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MessageActivity<TRes> get SaveMessageActivity =>
       CopyWith$Fragment$MessageActivity.stub(_res);
 }
@@ -4193,7 +4226,9 @@ class Variables$Mutation$ToggleActivitySubscription {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   bool? get subscribe => (_$data['subscribe'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -4213,6 +4248,7 @@ class Variables$Mutation$ToggleActivitySubscription {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4427,6 +4463,7 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleActivitySubscription$ToggleActivitySubscription<TRes>
       get ToggleActivitySubscription {
     final local$ToggleActivitySubscription =
@@ -4452,6 +4489,7 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleActivitySubscription$ToggleActivitySubscription<TRes>
       get ToggleActivitySubscription =>
           CopyWith$Mutation$ToggleActivitySubscription$ToggleActivitySubscription
@@ -5545,6 +5583,7 @@ class Variables$Mutation$DeleteActivityReply {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -5560,6 +5599,7 @@ class Variables$Mutation$DeleteActivityReply {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5744,6 +5784,7 @@ class _CopyWithImpl$Mutation$DeleteActivityReply<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply<TRes>
       get DeleteActivityReply {
     final local$DeleteActivityReply = _instance.DeleteActivityReply;
@@ -5766,6 +5807,7 @@ class _CopyWithStubImpl$Mutation$DeleteActivityReply<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply<TRes>
       get DeleteActivityReply =>
           CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply.stub(_res);
@@ -6191,6 +6233,7 @@ class Variables$Mutation$DeleteActivity {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -6205,6 +6248,7 @@ class Variables$Mutation$DeleteActivity {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -6386,6 +6430,7 @@ class _CopyWithImpl$Mutation$DeleteActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$DeleteActivity$DeleteActivity<TRes> get DeleteActivity {
     final local$DeleteActivity = _instance.DeleteActivity;
     return local$DeleteActivity == null
@@ -6406,6 +6451,7 @@ class _CopyWithStubImpl$Mutation$DeleteActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$DeleteActivity$DeleteActivity<TRes> get DeleteActivity =>
       CopyWith$Mutation$DeleteActivity$DeleteActivity.stub(_res);
 }

@@ -31,7 +31,8 @@ class ExplorePage extends StatelessWidget {
           child: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   onTap: () => context.pushRoute(SearchRoute(autofocus: true)),
@@ -62,7 +63,7 @@ class ExplorePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8),
+                padding: const EdgeInsets.only(left: 8),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: SingleChildScrollView(

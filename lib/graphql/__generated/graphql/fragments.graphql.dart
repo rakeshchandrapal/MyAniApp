@@ -677,6 +677,7 @@ class _CopyWithImpl$Fragment$UserFragment<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -702,6 +703,7 @@ class _CopyWithStubImpl$Fragment$UserFragment<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment$avatar<TRes> get avatar =>
       CopyWith$Fragment$UserFragment$avatar.stub(_res);
 }
@@ -1248,6 +1250,7 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
             ? _instance.airingSchedule
             : (airingSchedule as Fragment$ReleasingMedia$airingSchedule?),
       ));
+
   CopyWith$Fragment$ReleasingMedia$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -1303,13 +1306,17 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia<TRes>
     Fragment$ReleasingMedia$airingSchedule? airingSchedule,
   }) =>
       _res;
+
   CopyWith$Fragment$ReleasingMedia$title<TRes> get title =>
       CopyWith$Fragment$ReleasingMedia$title.stub(_res);
+
   CopyWith$Fragment$ReleasingMedia$coverImage<TRes> get coverImage =>
       CopyWith$Fragment$ReleasingMedia$coverImage.stub(_res);
+
   CopyWith$Fragment$ReleasingMedia$nextAiringEpisode<TRes>
       get nextAiringEpisode =>
           CopyWith$Fragment$ReleasingMedia$nextAiringEpisode.stub(_res);
+
   CopyWith$Fragment$ReleasingMedia$airingSchedule<TRes> get airingSchedule =>
       CopyWith$Fragment$ReleasingMedia$airingSchedule.stub(_res);
 }
@@ -2038,6 +2045,7 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes edges(
           Iterable<Fragment$ReleasingMedia$airingSchedule$edges?>? Function(
                   Iterable<
@@ -2064,6 +2072,7 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule<TRes>
     String? $__typename,
   }) =>
       _res;
+
   edges(_fn) => _res;
 }
 
@@ -2183,6 +2192,7 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule$edges<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$ReleasingMedia$airingSchedule$edges$node<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -2204,6 +2214,7 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule$edges<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$ReleasingMedia$airingSchedule$edges$node<TRes> get node =>
       CopyWith$Fragment$ReleasingMedia$airingSchedule$edges$node.stub(_res);
 }
@@ -2587,6 +2598,7 @@ class _CopyWithImpl$Fragment$ListGroup<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes entries(
           Iterable<Fragment$MediaListEntry?>? Function(
                   Iterable<
@@ -2617,6 +2629,7 @@ class _CopyWithStubImpl$Fragment$ListGroup<TRes>
     String? $__typename,
   }) =>
       _res;
+
   entries(_fn) => _res;
 }
 
@@ -3122,6 +3135,7 @@ class _CopyWithImpl$Fragment$MediaListEntry<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$FuzzyDate<TRes> get startedAt {
     final local$startedAt = _instance.startedAt;
     return local$startedAt == null
@@ -3173,10 +3187,13 @@ class _CopyWithStubImpl$Fragment$MediaListEntry<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$FuzzyDate<TRes> get startedAt =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   CopyWith$Fragment$MediaListEntry$media<TRes> get media =>
       CopyWith$Fragment$MediaListEntry$media.stub(_res);
 }
@@ -3836,6 +3853,7 @@ class _CopyWithImpl$Fragment$MediaListEntry$media<TRes>
             ? _instance.startDate
             : (startDate as Fragment$FuzzyDate?),
       ));
+
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -3886,10 +3904,13 @@ class _CopyWithStubImpl$Fragment$MediaListEntry$media<TRes>
     Fragment$FuzzyDate? startDate,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaListEntry$media$title<TRes> get title =>
       CopyWith$Fragment$MediaListEntry$media$title.stub(_res);
+
   CopyWith$Fragment$MediaListEntry$media$coverImage<TRes> get coverImage =>
       CopyWith$Fragment$MediaListEntry$media$coverImage.stub(_res);
+
   CopyWith$Fragment$FuzzyDate<TRes> get startDate =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
 }
@@ -4618,6 +4639,7 @@ class _CopyWithImpl$Fragment$MediaFragment<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -4653,8 +4675,10 @@ class _CopyWithStubImpl$Fragment$MediaFragment<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment$title<TRes> get title =>
       CopyWith$Fragment$MediaFragment$title.stub(_res);
+
   CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage =>
       CopyWith$Fragment$MediaFragment$coverImage.stub(_res);
 }
@@ -5421,6 +5445,7 @@ class _CopyWithImpl$Fragment$ThreadFragment<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes mediaCategories(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -5434,6 +5459,7 @@ class _CopyWithImpl$Fragment$ThreadFragment<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   TRes categories(
           Iterable<Fragment$ThreadFragment$categories?>? Function(
                   Iterable<
@@ -5447,6 +5473,7 @@ class _CopyWithImpl$Fragment$ThreadFragment<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -5485,10 +5512,14 @@ class _CopyWithStubImpl$Fragment$ThreadFragment<TRes>
     String? $__typename,
   }) =>
       _res;
+
   mediaCategories(_fn) => _res;
+
   categories(_fn) => _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get replyUser =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6133,6 +6164,7 @@ class _CopyWithImpl$Fragment$TextActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -6162,6 +6194,7 @@ class _CopyWithStubImpl$Fragment$TextActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6647,6 +6680,7 @@ class _CopyWithImpl$Fragment$ListActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -6685,8 +6719,10 @@ class _CopyWithStubImpl$Fragment$ListActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -7182,6 +7218,7 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger {
     final local$messenger = _instance.messenger;
     return local$messenger == null
@@ -7213,6 +7250,7 @@ class _CopyWithStubImpl$Fragment$MessageActivity<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MessageActivity$messenger<TRes> get messenger =>
       CopyWith$Fragment$MessageActivity$messenger.stub(_res);
 }
@@ -7649,6 +7687,7 @@ class _CopyWithImpl$Fragment$MessageActivity$messenger<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -7675,6 +7714,7 @@ class _CopyWithStubImpl$Fragment$MessageActivity$messenger<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MessageActivity$messenger$avatar<TRes> get avatar =>
       CopyWith$Fragment$MessageActivity$messenger$avatar.stub(_res);
 }

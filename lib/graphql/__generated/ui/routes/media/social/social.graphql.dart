@@ -43,8 +43,11 @@ class Variables$Query$Threads {
   Map<String, dynamic> _$data;
 
   int? get mediaId => (_$data['mediaId'] as int?);
+
   int? get page => (_$data['page'] as int?);
+
   int? get perPage => (_$data['perPage'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('mediaId')) {
@@ -67,6 +70,7 @@ class Variables$Query$Threads {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -281,6 +285,7 @@ class _CopyWithImpl$Query$Threads<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Threads$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -300,6 +305,7 @@ class _CopyWithStubImpl$Query$Threads<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Threads$Page<TRes> get Page =>
       CopyWith$Query$Threads$Page.stub(_res);
 }
@@ -723,6 +729,7 @@ class _CopyWithImpl$Query$Threads$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -757,7 +764,9 @@ class _CopyWithStubImpl$Query$Threads$Page<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   threads(_fn) => _res;
 }

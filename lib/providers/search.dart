@@ -1,76 +1,29 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
 
-class SearchNotifier extends AutoDisposeNotifier<AsyncValue<Query$Search>> {
-  late ObservableQuery<Query$Search> query;
-  Variables$Query$Search? variables;
+final searchEditorProvider = NotifierProvider.family
+    .autoDispose<SearchEditorNotifier, Variables$Query$Search, String>(
+  SearchEditorNotifier.new,
+);
 
+class SearchEditorNotifier
+    extends AutoDisposeFamilyNotifier<Variables$Query$Search, String> {
   @override
-  build() {
-    query = client.value.watchQuery$Search();
-
-    query.stream.listen((event) {
-      if (event.hasException) {
-        state = AsyncValue.error(event.exception!, StackTrace.current);
-        return;
-      } else if (event.isLoading && event.parsedData == null) {
-        state = const AsyncValue.loading();
-        return;
-      }
-      state = AsyncValue.data(event.parsedData!);
-    });
-
-    ref.onDispose(() {
-      query.close();
-    });
-
-    return const AsyncValue.loading();
+  Variables$Query$Search build(String blah) {
+    return Variables$Query$Search();
   }
 
-  setVariables(Variables$Query$Search vars, {bool fetch = true}) {
-    variables = vars;
-
-    state = const AsyncValue.loading();
-    ref.notifyListeners();
-
-    if (fetch) {
-      query.fetchMore(
-        FetchMoreOptions$Query$Search(
-          updateQuery: (previousResultData, fetchMoreResultData) =>
-              fetchMoreResultData,
-          variables: variables,
-        ),
-      );
-    }
+  void set(Variables$Query$Search vars) {
+    state = removeNulls(vars);
   }
 
-  MultiSourceResult<Query$Search> startFetching() {
-    return query.fetchResults();
+  void merge(Variables$Query$Search vars) {
+    state = removeNulls(
+        Variables$Query$Search.fromJson({...state.toJson(), ...vars.toJson()}));
   }
 
-  void nextPage() {
-    if (query.latestResult?.isLoading == true) return;
-
-    variables = variables!.copyWith(page: (variables!.page ?? 1) + 1);
-    query.fetchMore(
-      FetchMoreOptions$Query$Search(
-        updateQuery: (previousResultData, fetchMoreResultData) {
-          var list = [
-            ...previousResultData!['Page']!['media'],
-            ...fetchMoreResultData!['Page']!['media'],
-          ];
-          fetchMoreResultData['Page']!['media'] = list;
-          return fetchMoreResultData;
-        },
-        variables: variables!.copyWith(page: variables!.page),
-      ),
-    );
+  Variables$Query$Search removeNulls(Variables$Query$Search vars) {
+    return Variables$Query$Search.fromJson(
+        vars.toJson()..removeWhere((key, value) => value == null));
   }
 }
-
-var searchProvider =
-    NotifierProvider.autoDispose<SearchNotifier, AsyncValue<Query$Search>>(
-  () => SearchNotifier(),
-);

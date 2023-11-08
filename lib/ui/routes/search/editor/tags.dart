@@ -1,116 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
+import 'package:myaniapp/providers/search.dart';
 
-class TagsModal extends ConsumerStatefulWidget {
-  const TagsModal({
-    super.key,
-    required this.tags,
-    required this.onAdd,
-    required this.onRemove,
-    this.selected,
-  });
+class TagsSheet extends ConsumerWidget {
+  const TagsSheet({super.key, required this.tags});
 
-  final List<Query$GenreCollection$tags> tags;
-  final void Function(List<String> tag) onAdd;
-  final void Function(List<String> tag) onRemove;
-  final List<String>? selected;
+  final List<Tag> tags;
 
   @override
-  ConsumerState<TagsModal> createState() => _TagsModalState();
-}
-
-class _TagsModalState extends ConsumerState<TagsModal> {
-  List<Query$GenreCollection$tags> selected = [];
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.selected?.isNotEmpty == true) {
-      selected = widget.tags
-          .where((element) => widget.selected!.contains(element.name))
-          .toList();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var sorted = Tag.sort(widget.tags);
+  Widget build(BuildContext context, WidgetRef ref) {
+    var options = ref.watch(searchEditorProvider('side'));
 
     return DraggableScrollableSheet(
+      minChildSize: 0.3,
+      initialChildSize: 1,
       expand: false,
       builder: (context, scrollController) => DefaultTabController(
-        length: sorted.length,
+        length: tags.length,
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            toolbarHeight: 0,
-            centerTitle: true,
             bottom: TabBar(
               isScrollable: true,
               tabs: [
-                for (var tab in sorted)
-                  Tab(
-                    text: tab.category,
-                  )
+                for (var tag in tags) Tab(text: tag.category),
               ],
             ),
           ),
           body: TabBarView(
             children: [
-              for (var tab in sorted)
-                ListView.separated(
+              for (var tab in tags)
+                ListView.builder(
                   controller: scrollController,
-                  itemCount: tab.tags.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 10,
-                  ),
                   itemBuilder: (context, index) {
                     var tag = tab.tags[index];
 
-                    return CheckboxListTile(
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(tag.name),
-                          if (tag.description != null)
-                            Text(
-                              tag.description!,
-                              style: Theme.of(context).textTheme.labelSmall,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                        ],
-                      ),
-                      value: selected.contains(tag),
+                    return CheckboxListTile.adaptive(
+                      title: Text(tag.name),
+                      subtitle: tag.description?.isNotEmpty == true
+                          ? Text(tag.description!)
+                          : null,
+                      value: options.with_tags?.contains(tag.name) == true
+                          ? true
+                          : options.without_tags?.contains(tag.name) == true
+                              ? null
+                              : false,
+                      tristate: true,
                       onChanged: (value) {
-                        // print(value);
-                        // state.setVariables(
-                        //   state.variables!.copyWith(
-                        //     tags: state.variables!.tags!..remove(tag),
-                        //   ),
-                        // );
-                        if (value == true) {
-                          selected.add(tag);
-                          widget.onAdd(selected.map((e) => e.name).toList());
-                          // ref.read(searchProvider.notifier).update(
-                          //       tags: selected.map((e) => e.name).toList(),
-                          //       refetch: false,
-                          //     );
+                        if (value == null) {
+                          ref.read(searchEditorProvider('side').notifier).set(
+                                options.copyWith(
+                                    with_tags: options.with_tags!.length == 1
+                                        ? null
+                                        : options.with_tags
+                                      ?..remove(tag.name),
+                                    without_tags: (options.without_tags ?? [])
+                                      ..add(tag.name)),
+                              );
+                        } else if (value == true) {
+                          ref.read(searchEditorProvider('side').notifier).set(
+                                options.copyWith(
+                                  with_tags: (options.with_tags ?? [])
+                                    ..add(tag.name),
+                                ),
+                              );
                         } else {
-                          selected.remove(tag);
-                          widget.onRemove(selected.map((e) => e.name).toList());
-                          // ref.read(searchProvider.notifier).update(
-                          //       tags: selected.map((e) => e.name).toList(),
-                          //       refetch: false,
-                          //     );
+                          ref.read(searchEditorProvider('side').notifier).set(
+                                options.copyWith(
+                                  without_tags:
+                                      options.without_tags!.length == 1
+                                          ? null
+                                          : options.without_tags
+                                        ?..remove(tag.name),
+                                ),
+                              );
                         }
-
-                        setState(() => selected = selected);
                       },
                     );
                   },
-                )
+                  itemCount: tab.tags.length,
+                ),
             ],
           ),
         ),
@@ -119,22 +89,10 @@ class _TagsModalState extends ConsumerState<TagsModal> {
   }
 }
 
-void showTags(
-  BuildContext context,
-  List<Query$GenreCollection$tags> tags, {
-  List<String>? selected,
-  required void Function(List<String> tags) onAdd,
-  required void Function(List<String> tags) onRemove,
-}) {
+void showTags(BuildContext context, List<Tag> tags) {
   showModalBottomSheet(
     context: context,
-    isScrollControlled: true,
-    builder: (context) => TagsModal(
-      tags: tags,
-      onAdd: onAdd,
-      onRemove: onRemove,
-      selected: selected,
-    ),
+    builder: (context) => TagsSheet(tags: tags),
   );
 }
 
@@ -148,13 +106,17 @@ class Tag {
     List<Tag> lists = [];
 
     for (var tag in tags) {
-      var o = lists.indexWhere((element) => element.category == tag.category);
+      var category = tag.category!.replaceFirst('-', ' / ');
+      var o = lists.indexWhere((element) => element.category == category);
       if (o == -1) {
-        lists.add(Tag(category: tag.category!)..tags.add(tag));
+        lists.add(Tag(category: category)..tags.add(tag));
       } else {
         lists[o].tags.add(tag);
       }
     }
-    return lists;
+    return lists
+      ..sort(
+        (a, b) => a.category.compareTo(b.category),
+      );
   }
 }

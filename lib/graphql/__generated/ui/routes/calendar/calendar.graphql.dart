@@ -37,7 +37,9 @@ class Variables$Query$CalendarSchedule {
   Map<String, dynamic> _$data;
 
   int? get start => (_$data['start'] as int?);
+
   int? get end => (_$data['end'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('start')) {
@@ -56,6 +58,7 @@ class Variables$Query$CalendarSchedule {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -260,6 +263,7 @@ class _CopyWithImpl$Query$CalendarSchedule<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$CalendarSchedule$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -280,6 +284,7 @@ class _CopyWithStubImpl$Query$CalendarSchedule<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$CalendarSchedule$Page<TRes> get Page =>
       CopyWith$Query$CalendarSchedule$Page.stub(_res);
 }
@@ -758,6 +763,7 @@ class _CopyWithImpl$Query$CalendarSchedule$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$CalendarSchedule$Page$pageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -793,8 +799,10 @@ class _CopyWithStubImpl$Query$CalendarSchedule$Page<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$CalendarSchedule$Page$pageInfo<TRes> get pageInfo =>
       CopyWith$Query$CalendarSchedule$Page$pageInfo.stub(_res);
+
   airingSchedules(_fn) => _res;
 }
 
@@ -1113,6 +1121,7 @@ class _CopyWithImpl$Query$CalendarSchedule$Page$airingSchedules<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -1135,6 +1144,7 @@ class _CopyWithStubImpl$Query$CalendarSchedule$Page$airingSchedules<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

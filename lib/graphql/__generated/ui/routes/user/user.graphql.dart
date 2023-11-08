@@ -241,6 +241,7 @@ class Variables$Query$User {
   Map<String, dynamic> _$data;
 
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('name')) {
@@ -255,6 +256,7 @@ class Variables$Query$User {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -427,6 +429,7 @@ class _CopyWithImpl$Query$User<TRes> implements CopyWith$Query$User<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$User$User<TRes> get User {
     final local$User = _instance.User;
     return local$User == null
@@ -445,6 +448,7 @@ class _CopyWithStubImpl$Query$User<TRes> implements CopyWith$Query$User<TRes> {
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$User$User<TRes> get User =>
       CopyWith$Query$User$User.stub(_res);
 }
@@ -1220,6 +1224,7 @@ class _CopyWithImpl$Query$User$User<TRes>
             ? _instance.favourites
             : (favourites as Query$User$User$favourites?),
       ));
+
   CopyWith$Query$User$User$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -1264,10 +1269,13 @@ class _CopyWithStubImpl$Query$User$User<TRes>
     Query$User$User$favourites? favourites,
   }) =>
       _res;
+
   CopyWith$Query$User$User$avatar<TRes> get avatar =>
       CopyWith$Query$User$User$avatar.stub(_res);
+
   CopyWith$Query$User$User$statistics<TRes> get statistics =>
       CopyWith$Query$User$User$statistics.stub(_res);
+
   CopyWith$Query$User$User$favourites<TRes> get favourites =>
       CopyWith$Query$User$User$favourites.stub(_res);
 }
@@ -1531,6 +1539,7 @@ class _CopyWithImpl$Query$User$User$statistics<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$User$User$statistics$anime<TRes> get anime {
     final local$anime = _instance.anime;
     return local$anime == null
@@ -1560,8 +1569,10 @@ class _CopyWithStubImpl$Query$User$User$statistics<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$User$User$statistics$anime<TRes> get anime =>
       CopyWith$Query$User$User$statistics$anime.stub(_res);
+
   CopyWith$Query$User$User$statistics$manga<TRes> get manga =>
       CopyWith$Query$User$User$statistics$manga.stub(_res);
 }
@@ -1772,6 +1783,7 @@ class _CopyWithImpl$Query$User$User$statistics$anime<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes genres(
           Iterable<Fragment$GenreStat?>? Function(
                   Iterable<CopyWith$Fragment$GenreStat<Fragment$GenreStat>?>?)
@@ -1800,6 +1812,7 @@ class _CopyWithStubImpl$Query$User$User$statistics$anime<TRes>
     String? $__typename,
   }) =>
       _res;
+
   genres(_fn) => _res;
 }
 
@@ -2008,6 +2021,7 @@ class _CopyWithImpl$Query$User$User$statistics$manga<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes genres(
           Iterable<Fragment$GenreStat?>? Function(
                   Iterable<CopyWith$Fragment$GenreStat<Fragment$GenreStat>?>?)
@@ -2036,6 +2050,7 @@ class _CopyWithStubImpl$Query$User$User$statistics$manga<TRes>
     String? $__typename,
   }) =>
       _res;
+
   genres(_fn) => _res;
 }
 
@@ -2176,6 +2191,7 @@ class _CopyWithImpl$Query$User$User$favourites<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$User$User$favourites$anime<TRes> get anime {
     final local$anime = _instance.anime;
     return local$anime == null
@@ -2205,8 +2221,10 @@ class _CopyWithStubImpl$Query$User$User$favourites<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$User$User$favourites$anime<TRes> get anime =>
       CopyWith$Query$User$User$favourites$anime.stub(_res);
+
   CopyWith$Query$User$User$favourites$manga<TRes> get manga =>
       CopyWith$Query$User$User$favourites$manga.stub(_res);
 }
@@ -2341,6 +2359,7 @@ class _CopyWithImpl$Query$User$User$favourites$anime<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -2367,6 +2386,7 @@ class _CopyWithStubImpl$Query$User$User$favourites$anime<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }
 
@@ -2500,6 +2520,7 @@ class _CopyWithImpl$Query$User$User$favourites$manga<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
@@ -2526,5 +2547,6 @@ class _CopyWithStubImpl$Query$User$User$favourites$manga<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }

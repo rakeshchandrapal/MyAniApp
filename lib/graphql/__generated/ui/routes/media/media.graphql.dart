@@ -29,6 +29,7 @@ class Variables$Query$Media {
   Map<String, dynamic> _$data;
 
   int? get id => (_$data['id'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -43,6 +44,7 @@ class Variables$Query$Media {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -217,6 +219,7 @@ class _CopyWithImpl$Query$Media<TRes> implements CopyWith$Query$Media<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Media$Media<TRes> get Media {
     final local$Media = _instance.Media;
     return local$Media == null
@@ -236,6 +239,7 @@ class _CopyWithStubImpl$Query$Media<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Media$Media<TRes> get Media =>
       CopyWith$Query$Media$Media.stub(_res);
 }
@@ -1878,6 +1882,7 @@ class _CopyWithImpl$Query$Media$Media<TRes>
             ? _instance.mediaListEntry
             : (mediaListEntry as Query$Media$Media$mediaListEntry?),
       ));
+
   CopyWith$Query$Media$Media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -1929,6 +1934,7 @@ class _CopyWithImpl$Query$Media$Media<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   CopyWith$Query$Media$Media$relations<TRes> get relations {
     final local$relations = _instance.relations;
     return local$relations == null
@@ -1950,6 +1956,7 @@ class _CopyWithImpl$Query$Media$Media<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   CopyWith$Query$Media$Media$trailer<TRes> get trailer {
     final local$trailer = _instance.trailer;
     return local$trailer == null
@@ -2042,30 +2049,44 @@ class _CopyWithStubImpl$Query$Media$Media<TRes>
     Query$Media$Media$mediaListEntry? mediaListEntry,
   }) =>
       _res;
+
   CopyWith$Query$Media$Media$title<TRes> get title =>
       CopyWith$Query$Media$Media$title.stub(_res);
+
   CopyWith$Query$Media$Media$coverImage<TRes> get coverImage =>
       CopyWith$Query$Media$Media$coverImage.stub(_res);
+
   CopyWith$Query$Media$Media$studios<TRes> get studios =>
       CopyWith$Query$Media$Media$studios.stub(_res);
+
   CopyWith$Fragment$FuzzyDate<TRes> get startDate =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   CopyWith$Fragment$FuzzyDate<TRes> get endDate =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
+
   tags(_fn) => _res;
+
   CopyWith$Query$Media$Media$relations<TRes> get relations =>
       CopyWith$Query$Media$Media$relations.stub(_res);
+
   externalLinks(_fn) => _res;
+
   CopyWith$Query$Media$Media$trailer<TRes> get trailer =>
       CopyWith$Query$Media$Media$trailer.stub(_res);
+
   CopyWith$Query$Media$Media$characters<TRes> get characters =>
       CopyWith$Query$Media$Media$characters.stub(_res);
+
   CopyWith$Query$Media$Media$staff<TRes> get staff =>
       CopyWith$Query$Media$Media$staff.stub(_res);
+
   CopyWith$Query$Media$Media$recommendations<TRes> get recommendations =>
       CopyWith$Query$Media$Media$recommendations.stub(_res);
+
   CopyWith$Query$Media$Media$reviews<TRes> get reviews =>
       CopyWith$Query$Media$Media$reviews.stub(_res);
+
   CopyWith$Query$Media$Media$mediaListEntry<TRes> get mediaListEntry =>
       CopyWith$Query$Media$Media$mediaListEntry.stub(_res);
 }
@@ -2507,6 +2528,7 @@ class _CopyWithImpl$Query$Media$Media$studios<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Query$Media$Media$studios$nodes?>? Function(
                   Iterable<
@@ -2533,6 +2555,7 @@ class _CopyWithStubImpl$Query$Media$Media$studios<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }
 
@@ -2973,6 +2996,7 @@ class _CopyWithImpl$Query$Media$Media$relations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes edges(
           Iterable<Query$Media$Media$relations$edges?>? Function(
                   Iterable<
@@ -2999,6 +3023,7 @@ class _CopyWithStubImpl$Query$Media$Media$relations<TRes>
     String? $__typename,
   }) =>
       _res;
+
   edges(_fn) => _res;
 }
 
@@ -3139,6 +3164,7 @@ class _CopyWithImpl$Query$Media$Media$relations$edges<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -3159,6 +3185,7 @@ class _CopyWithStubImpl$Query$Media$Media$relations$edges<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get node =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -3635,6 +3662,7 @@ class _CopyWithImpl$Query$Media$Media$characters<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Query$Media$Media$characters$nodes?>? Function(
                   Iterable<
@@ -3661,6 +3689,7 @@ class _CopyWithStubImpl$Query$Media$Media$characters<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }
 
@@ -3920,6 +3949,7 @@ class _CopyWithImpl$Query$Media$Media$staff<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Query$Media$Media$staff$nodes?>? Function(
                   Iterable<
@@ -3946,6 +3976,7 @@ class _CopyWithStubImpl$Query$Media$Media$staff<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }
 
@@ -4205,6 +4236,7 @@ class _CopyWithImpl$Query$Media$Media$recommendations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Query$Media$Media$recommendations$nodes?>? Function(
                   Iterable<
@@ -4231,6 +4263,7 @@ class _CopyWithStubImpl$Query$Media$Media$recommendations<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }
 
@@ -4491,6 +4524,7 @@ class _CopyWithImpl$Query$Media$Media$reviews<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes nodes(
           Iterable<Query$Media$Media$reviews$nodes?>? Function(
                   Iterable<
@@ -4517,6 +4551,7 @@ class _CopyWithStubImpl$Query$Media$Media$reviews<TRes>
     String? $__typename,
   }) =>
       _res;
+
   nodes(_fn) => _res;
 }
 
@@ -4818,10 +4853,15 @@ class Variables$Mutation$ToggleFavorite {
   Map<String, dynamic> _$data;
 
   int? get animeId => (_$data['animeId'] as int?);
+
   int? get mangaId => (_$data['mangaId'] as int?);
+
   int? get characterId => (_$data['characterId'] as int?);
+
   int? get staffId => (_$data['staffId'] as int?);
+
   int? get studioId => (_$data['studioId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('animeId')) {
@@ -4852,6 +4892,7 @@ class Variables$Mutation$ToggleFavorite {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5100,6 +5141,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite<TRes> get ToggleFavourite {
     final local$ToggleFavourite = _instance.ToggleFavourite;
     return local$ToggleFavourite == null
@@ -5121,6 +5163,7 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite<TRes> get ToggleFavourite =>
       CopyWith$Mutation$ToggleFavorite$ToggleFavourite.stub(_res);
 }
@@ -5833,6 +5876,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite$ToggleFavourite<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$anime<TRes> get anime {
     final local$anime = _instance.anime;
     return local$anime == null
@@ -5895,16 +5939,21 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite$ToggleFavourite<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$anime<TRes> get anime =>
       CopyWith$Mutation$ToggleFavorite$ToggleFavourite$anime.stub(_res);
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$manga<TRes> get manga =>
       CopyWith$Mutation$ToggleFavorite$ToggleFavourite$manga.stub(_res);
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$characters<TRes>
       get characters =>
           CopyWith$Mutation$ToggleFavorite$ToggleFavourite$characters.stub(
               _res);
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$staff<TRes> get staff =>
       CopyWith$Mutation$ToggleFavorite$ToggleFavourite$staff.stub(_res);
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$studios<TRes> get studios =>
       CopyWith$Mutation$ToggleFavorite$ToggleFavourite$studios.stub(_res);
 }
@@ -6028,6 +6077,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite$ToggleFavourite$anime<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$anime$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -6050,6 +6100,7 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite$ToggleFavourite$anime<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$anime$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavorite$ToggleFavourite$anime$pageInfo.stub(
@@ -6308,6 +6359,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite$ToggleFavourite$manga<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$manga$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -6330,6 +6382,7 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite$ToggleFavourite$manga<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$manga$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavorite$ToggleFavourite$manga$pageInfo.stub(
@@ -6591,6 +6644,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite$ToggleFavourite$characters<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$characters$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -6615,6 +6669,7 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite$ToggleFavourite$characters<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$characters$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavorite$ToggleFavourite$characters$pageInfo
@@ -6878,6 +6933,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite$ToggleFavourite$staff<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$staff$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -6900,6 +6956,7 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite$ToggleFavourite$staff<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$staff$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavorite$ToggleFavourite$staff$pageInfo.stub(
@@ -7158,6 +7215,7 @@ class _CopyWithImpl$Mutation$ToggleFavorite$ToggleFavourite$studios<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$studios$pageInfo<TRes>
       get pageInfo {
     final local$pageInfo = _instance.pageInfo;
@@ -7180,6 +7238,7 @@ class _CopyWithStubImpl$Mutation$ToggleFavorite$ToggleFavourite$studios<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$ToggleFavorite$ToggleFavourite$studios$pageInfo<TRes>
       get pageInfo =>
           CopyWith$Mutation$ToggleFavorite$ToggleFavourite$studios$pageInfo

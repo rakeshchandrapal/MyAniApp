@@ -281,6 +281,7 @@ class _CopyWithImpl$Fragment$ThisUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$ThisUser$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -333,12 +334,16 @@ class _CopyWithStubImpl$Fragment$ThisUser<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$ThisUser$avatar<TRes> get avatar =>
       CopyWith$Fragment$ThisUser$avatar.stub(_res);
+
   CopyWith$Fragment$ThisUser$statistics<TRes> get statistics =>
       CopyWith$Fragment$ThisUser$statistics.stub(_res);
+
   CopyWith$Fragment$ThisUser$options<TRes> get options =>
       CopyWith$Fragment$ThisUser$options.stub(_res);
+
   CopyWith$Fragment$ThisUser$mediaListOptions<TRes> get mediaListOptions =>
       CopyWith$Fragment$ThisUser$mediaListOptions.stub(_res);
 }
@@ -940,6 +945,7 @@ class _CopyWithImpl$Fragment$ThisUser$statistics<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$ThisUser$statistics$anime<TRes> get anime {
     final local$anime = _instance.anime;
     return local$anime == null
@@ -969,8 +975,10 @@ class _CopyWithStubImpl$Fragment$ThisUser$statistics<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$ThisUser$statistics$anime<TRes> get anime =>
       CopyWith$Fragment$ThisUser$statistics$anime.stub(_res);
+
   CopyWith$Fragment$ThisUser$statistics$manga<TRes> get manga =>
       CopyWith$Fragment$ThisUser$statistics$manga.stub(_res);
 }
@@ -1783,6 +1791,7 @@ class _CopyWithImpl$Fragment$ThisUser$mediaListOptions<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$ThisUser$mediaListOptions$animeList<TRes> get animeList {
     final local$animeList = _instance.animeList;
     return local$animeList == null
@@ -1806,6 +1815,7 @@ class _CopyWithStubImpl$Fragment$ThisUser$mediaListOptions<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$ThisUser$mediaListOptions$animeList<TRes> get animeList =>
       CopyWith$Fragment$ThisUser$mediaListOptions$animeList.stub(_res);
 }
@@ -2060,6 +2070,7 @@ class _CopyWithImpl$Query$Viewer<TRes> implements CopyWith$Query$Viewer<TRes> {
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$ThisUser<TRes> get Viewer {
     final local$Viewer = _instance.Viewer;
     return local$Viewer == null
@@ -2079,6 +2090,7 @@ class _CopyWithStubImpl$Query$Viewer<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$ThisUser<TRes> get Viewer =>
       CopyWith$Fragment$ThisUser.stub(_res);
 }
@@ -2367,6 +2379,7 @@ class _CopyWithImpl$Query$NotificationCount<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$NotificationCount$Viewer<TRes> get Viewer {
     final local$Viewer = _instance.Viewer;
     return local$Viewer == null
@@ -2387,6 +2400,7 @@ class _CopyWithStubImpl$Query$NotificationCount<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$NotificationCount$Viewer<TRes> get Viewer =>
       CopyWith$Query$NotificationCount$Viewer.stub(_res);
 }
@@ -2731,6 +2745,7 @@ class _CopyWithImpl$Query$NotificationCount$Viewer<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$NotificationCount$Viewer$options<TRes> get options {
     final local$options = _instance.options;
     return local$options == null
@@ -2752,6 +2767,7 @@ class _CopyWithStubImpl$Query$NotificationCount$Viewer<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$NotificationCount$Viewer$options<TRes> get options =>
       CopyWith$Query$NotificationCount$Viewer$options.stub(_res);
 }
@@ -3026,29 +3042,45 @@ class Variables$Mutation$UpdateUser {
   Map<String, dynamic> _$data;
 
   String? get about => (_$data['about'] as String?);
+
   Enum$UserTitleLanguage? get titleLanguage =>
       (_$data['titleLanguage'] as Enum$UserTitleLanguage?);
+
   bool? get displayAdultContent => (_$data['displayAdultContent'] as bool?);
+
   bool? get airingNotifications => (_$data['airingNotifications'] as bool?);
+
   Enum$ScoreFormat? get scoreFormat =>
       (_$data['scoreFormat'] as Enum$ScoreFormat?);
+
   String? get rowOrder => (_$data['rowOrder'] as String?);
+
   String? get profileColor => (_$data['profileColor'] as String?);
+
   String? get donatorBadge => (_$data['donatorBadge'] as String?);
+
   List<Input$NotificationOptionInput?>? get notificationOptions =>
       (_$data['notificationOptions'] as List<Input$NotificationOptionInput?>?);
+
   String? get timezone => (_$data['timezone'] as String?);
+
   int? get activityMergeTime => (_$data['activityMergeTime'] as int?);
+
   Input$MediaListOptionsInput? get animeListOptions =>
       (_$data['animeListOptions'] as Input$MediaListOptionsInput?);
+
   Input$MediaListOptionsInput? get mangaListOptions =>
       (_$data['mangaListOptions'] as Input$MediaListOptionsInput?);
+
   Enum$UserStaffNameLanguage? get staffNameLanguage =>
       (_$data['staffNameLanguage'] as Enum$UserStaffNameLanguage?);
+
   bool? get restrictMessagesToFollowing =>
       (_$data['restrictMessagesToFollowing'] as bool?);
+
   List<Input$ListActivityOptionInput?>? get disabledListActivity =>
       (_$data['disabledListActivity'] as List<Input$ListActivityOptionInput?>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('about')) {
@@ -3131,6 +3163,7 @@ class Variables$Mutation$UpdateUser {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3600,6 +3633,7 @@ class _CopyWithImpl$Mutation$UpdateUser<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$ThisUser<TRes> get UpdateUser {
     final local$UpdateUser = _instance.UpdateUser;
     return local$UpdateUser == null
@@ -3620,6 +3654,7 @@ class _CopyWithStubImpl$Mutation$UpdateUser<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$ThisUser<TRes> get UpdateUser =>
       CopyWith$Fragment$ThisUser.stub(_res);
 }

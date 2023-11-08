@@ -48,9 +48,12 @@ class Variables$Query$MediaList {
   Map<String, dynamic> _$data;
 
   String? get userName => (_$data['userName'] as String?);
+
   Enum$MediaType? get type => (_$data['type'] as Enum$MediaType?);
+
   List<Enum$MediaListSort?>? get sort =>
       (_$data['sort'] as List<Enum$MediaListSort?>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('userName')) {
@@ -76,6 +79,7 @@ class Variables$Query$MediaList {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -309,6 +313,7 @@ class _CopyWithImpl$Query$MediaList<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$MediaList$MediaListCollection<TRes> get MediaListCollection {
     final local$MediaListCollection = _instance.MediaListCollection;
     return local$MediaListCollection == null
@@ -329,6 +334,7 @@ class _CopyWithStubImpl$Query$MediaList<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$MediaList$MediaListCollection<TRes> get MediaListCollection =>
       CopyWith$Query$MediaList$MediaListCollection.stub(_res);
 }
@@ -825,6 +831,7 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes lists(
           Iterable<Fragment$ListGroup?>? Function(
                   Iterable<CopyWith$Fragment$ListGroup<Fragment$ListGroup>?>?)
@@ -836,6 +843,7 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection<TRes>
                   e,
                   (i) => i,
                 )))?.toList());
+
   CopyWith$Query$MediaList$MediaListCollection$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -858,7 +866,9 @@ class _CopyWithStubImpl$Query$MediaList$MediaListCollection<TRes>
     String? $__typename,
   }) =>
       _res;
+
   lists(_fn) => _res;
+
   CopyWith$Query$MediaList$MediaListCollection$user<TRes> get user =>
       CopyWith$Query$MediaList$MediaListCollection$user.stub(_res);
 }
@@ -999,6 +1009,7 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection$user<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$MediaList$MediaListCollection$user$mediaListOptions<TRes>
       get mediaListOptions {
     final local$mediaListOptions = _instance.mediaListOptions;
@@ -1022,6 +1033,7 @@ class _CopyWithStubImpl$Query$MediaList$MediaListCollection$user<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$MediaList$MediaListCollection$user$mediaListOptions<TRes>
       get mediaListOptions =>
           CopyWith$Query$MediaList$MediaListCollection$user$mediaListOptions
@@ -1215,6 +1227,7 @@ class _CopyWithImpl$Query$MediaList$MediaListCollection$user$mediaListOptions<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaListOptions<TRes> get animeList {
     final local$animeList = _instance.animeList;
     return local$animeList == null
@@ -1250,8 +1263,10 @@ class _CopyWithStubImpl$Query$MediaList$MediaListCollection$user$mediaListOption
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaListOptions<TRes> get animeList =>
       CopyWith$Fragment$MediaListOptions.stub(_res);
+
   CopyWith$Fragment$MediaListOptions<TRes> get mangaList =>
       CopyWith$Fragment$MediaListOptions.stub(_res);
 }

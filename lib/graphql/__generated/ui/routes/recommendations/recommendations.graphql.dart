@@ -54,10 +54,14 @@ class Variables$Query$Recommendations {
   Map<String, dynamic> _$data;
 
   int? get page => (_$data['page'] as int?);
+
   int? get perPage => (_$data['perPage'] as int?);
+
   List<Enum$RecommendationSort?>? get sort =>
       (_$data['sort'] as List<Enum$RecommendationSort?>?);
+
   bool? get onList => (_$data['onList'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('page')) {
@@ -86,6 +90,7 @@ class Variables$Query$Recommendations {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -333,6 +338,7 @@ class _CopyWithImpl$Query$Recommendations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Recommendations$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -352,6 +358,7 @@ class _CopyWithStubImpl$Query$Recommendations<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Recommendations$Page<TRes> get Page =>
       CopyWith$Query$Recommendations$Page.stub(_res);
 }
@@ -854,6 +861,7 @@ class _CopyWithImpl$Query$Recommendations$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -888,8 +896,10 @@ class _CopyWithStubImpl$Query$Recommendations$Page<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   recommendations(_fn) => _res;
 }
 
@@ -1088,6 +1098,7 @@ class _CopyWithImpl$Query$Recommendations$Page$recommendations<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -1119,8 +1130,10 @@ class _CopyWithStubImpl$Query$Recommendations$Page$recommendations<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
+
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -1163,9 +1176,12 @@ class Variables$Mutation$SaveRecommendation {
   Map<String, dynamic> _$data;
 
   int? get mediaId => (_$data['mediaId'] as int?);
+
   int? get mediaRecommendationId => (_$data['mediaRecommendationId'] as int?);
+
   Enum$RecommendationRating? get rating =>
       (_$data['rating'] as Enum$RecommendationRating?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('mediaId')) {
@@ -1190,6 +1206,7 @@ class Variables$Mutation$SaveRecommendation {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1416,6 +1433,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Mutation$SaveRecommendation$SaveRecommendation<TRes>
       get SaveRecommendation {
     final local$SaveRecommendation = _instance.SaveRecommendation;
@@ -1438,6 +1456,7 @@ class _CopyWithStubImpl$Mutation$SaveRecommendation<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Mutation$SaveRecommendation$SaveRecommendation<TRes>
       get SaveRecommendation =>
           CopyWith$Mutation$SaveRecommendation$SaveRecommendation.stub(_res);
@@ -1990,6 +2009,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -2021,8 +2041,10 @@ class _CopyWithStubImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
+
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

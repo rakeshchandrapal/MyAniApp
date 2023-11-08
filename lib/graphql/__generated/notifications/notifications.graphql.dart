@@ -47,9 +47,12 @@ class Variables$Query$Notifications {
   Map<String, dynamic> _$data;
 
   int? get page => (_$data['page'] as int?);
+
   List<Enum$NotificationType?>? get types =>
       (_$data['types'] as List<Enum$NotificationType?>?);
+
   bool? get reset => (_$data['reset'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('page')) {
@@ -74,6 +77,7 @@ class Variables$Query$Notifications {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -306,6 +310,7 @@ class _CopyWithImpl$Query$Notifications<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Notifications$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -325,6 +330,7 @@ class _CopyWithStubImpl$Query$Notifications<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Notifications$Page<TRes> get Page =>
       CopyWith$Query$Notifications$Page.stub(_res);
 }
@@ -2083,6 +2089,7 @@ class _CopyWithImpl$Query$Notifications$Page<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -2117,8 +2124,10 @@ class _CopyWithStubImpl$Query$Notifications$Page<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
+
   notifications(_fn) => _res;
 }
 
@@ -2838,6 +2847,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$AiringNotification<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -2866,6 +2876,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$AiringNotificati
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -3075,6 +3086,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$RelatedMediaAddition
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -3102,6 +3114,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$RelatedMediaAddi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -3306,6 +3319,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$FollowingNotificatio
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3333,6 +3347,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$FollowingNotific
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -3560,6 +3575,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMessageNotif
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3588,6 +3604,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMessageN
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -3815,6 +3832,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMentionNotif
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3843,6 +3861,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMentionN
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4068,6 +4087,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyNotific
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4096,6 +4116,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyNot
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4324,6 +4345,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplySubscri
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4352,6 +4374,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplySub
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4577,6 +4600,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityLikeNotifica
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4605,6 +4629,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityLikeNoti
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4833,6 +4858,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyLikeNot
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4861,6 +4887,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyLik
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -5116,6 +5143,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -5156,11 +5184,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMen
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread
               .stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -5577,6 +5607,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -5617,11 +5648,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentRep
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread
               .stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6038,6 +6071,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -6078,11 +6112,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSub
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread
               .stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6499,6 +6535,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -6539,11 +6576,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLik
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread
               .stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6938,6 +6977,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -6977,11 +7017,13 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotifi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread
               .stub(_res);
+
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -7368,6 +7410,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotif
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -7396,6 +7439,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDataChangeN
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -7654,6 +7698,7 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaMergeNotificati
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -7683,6 +7728,7 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaMergeNotifi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
