@@ -3,13 +3,52 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
 import 'package:myaniapp/providers/search.dart';
 
-class TagsSheet extends ConsumerWidget {
+class TagsSheet extends ConsumerStatefulWidget {
   const TagsSheet({super.key, required this.tags});
 
+  @override
+  ConsumerState<TagsSheet> createState() => _TagsSheetState();
   final List<Tag> tags;
+}
+
+class _TagsSheetState extends ConsumerState<TagsSheet> {
+  late List<Tag> tags;
+  final TextEditingController _controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    tags = widget.tags;
+    _controller.addListener(listener);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  void listener() {
+    setState(() {
+      tags = widget.tags
+          .where((element) {
+            return element.tags.any((element) =>
+                element.name.toLowerCase().contains(_controller.text));
+          })
+          .toList()
+          .map((e) {
+            return Tag(category: e.category)
+              ..tags = e.tags
+                  .where((element) =>
+                      element.name.toLowerCase().contains(_controller.text))
+                  .toList();
+          })
+          .toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var options = ref.watch(searchEditorProvider('side'));
 
     return DraggableScrollableSheet(
@@ -20,6 +59,23 @@ class TagsSheet extends ConsumerWidget {
         length: tags.length,
         child: Scaffold(
           appBar: AppBar(
+            toolbarHeight: 65,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _controller,
+                  decoration: const InputDecoration(
+                    hintText: 'Search...',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             automaticallyImplyLeading: false,
             bottom: TabBar(
               isScrollable: true,
