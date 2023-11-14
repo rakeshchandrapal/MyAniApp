@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:app_links/app_links.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +33,7 @@ class _AppState extends ConsumerState<App> {
   void initState() {
     super.initState();
     appRouter = AppRouter(ref);
-    initAppLinks();
+    if (!kIsWeb && !Platform.isLinux) initAppLinks();
   }
 
   Future<void> initAppLinks() async {
