@@ -51,7 +51,9 @@ class _MediaPageState extends ConsumerState<MediaPage> {
 
     var root = Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingButtons(media: media.value),
+      floatingActionButton: media.value != null
+          ? FloatingButtons(id: media.requireValue.id)
+          : null,
       body: AutoTabsRouter.tabBar(
         routes: [
           MediaOverviewRoute(),
@@ -133,10 +135,10 @@ class _MediaPageState extends ConsumerState<MediaPage> {
 class FloatingButtons extends ConsumerStatefulWidget {
   const FloatingButtons({
     super.key,
-    required this.media,
+    required this.id,
   });
 
-  final Query$Media$Media? media;
+  final int id;
 
   @override
   ConsumerState<FloatingButtons> createState() => _FloatingButtonsState();
@@ -183,8 +185,9 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
+    var media = ref.watch(mediaProvider(widget.id));
 
-    if (widget.media == null || user.value == null) return const SizedBox();
+    if (media.value == null || user.value == null) return const SizedBox();
 
     return SlideTransition(
       position: _offsetAnimation,
@@ -199,16 +202,17 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
                 heroTag: 'add-to-list',
                 onPressed: () => showMediaEditor(
                   context,
-                  widget.media!,
+                  media.requireValue,
                   onDelete: () => ref
-                      .read(mediaProvider(widget.media!.id).notifier)
+                      .read(mediaProvider(media.requireValue.id).notifier)
                       .refresh(),
                   onSave: () => ref
-                      .read(mediaProvider(widget.media!.id).notifier)
+                      .read(mediaProvider(media.requireValue.id).notifier)
                       .refresh(),
                 ),
                 child: Text(
-                  widget.media?.mediaListEntry?.status?.name.capitalize() ??
+                  media.requireValue.mediaListEntry?.status?.name
+                          .capitalize() ??
                       'Add To List',
                 ),
               ),
@@ -217,29 +221,30 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
               width: 10,
             ),
             FloatingActionButton(
-              onPressed: widget.media!.isFavouriteBlocked == true
+              onPressed: media.requireValue.isFavouriteBlocked == true
                   ? null
                   : () => client.value
                       .mutate$ToggleFavorite(
                         Options$Mutation$ToggleFavorite(
                           variables: Variables$Mutation$ToggleFavorite(
-                            animeId: widget.media!.id,
+                            animeId: media.requireValue.id,
                           ),
                         ),
                       )
                       .then(
                         (value) => ref
-                            .read(mediaProvider(widget.media!.id).notifier)
+                            .read(mediaProvider(media.requireValue.id).notifier)
                             .refresh(),
                       ),
               heroTag: 'fav',
-              backgroundColor: widget.media!.isFavouriteBlocked == true
+              backgroundColor: media.requireValue.isFavouriteBlocked == true
                   ? Colors.grey[800]
                   : Colors.red,
               child: Icon(
                 Icons.favorite,
-                color:
-                    widget.media!.isFavourite == true ? Colors.red[200] : null,
+                color: media.requireValue.isFavourite == true
+                    ? Colors.red[200]
+                    : null,
               ),
             )
           ],
