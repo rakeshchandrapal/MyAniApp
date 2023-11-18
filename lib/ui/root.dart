@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:myaniapp/routes.dart';
+import 'package:myaniapp/ui/routes/routes.dart';
 import 'package:myaniapp/ui/theme.dart';
 
 class App extends ConsumerStatefulWidget {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/routes.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
+import 'package:myaniapp/ui/routes/routes.dart';
 
 String _tag = 'spoiler';
 

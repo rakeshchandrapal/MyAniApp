@@ -11,12 +11,12 @@ import 'package:myaniapp/graphql/__generated/ui/routes/activity/activity.graphql
 import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/comment.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 class ActivityCard extends ConsumerWidget {

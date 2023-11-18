@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/providers/media.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @RoutePage()
 class MediaRelationsPage extends ConsumerWidget {

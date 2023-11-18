@@ -1,4 +1,4 @@
-name: Build Windows
+name: Build Linux
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
 
 jobs:
   build:
-    name: Build Windows App
-    runs-on: windows-latest
+    name: Build Linux App
+    runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, '[build]')
     permissions:
       contents: write
@@ -30,18 +30,18 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: flutter build windows
+      - run: flutter build linux
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: MyAniApp-${{ env.sha_short }}-windows.zip
-          directory: build/windows/runner/Release
+          filename: MyAniApp-${{ env.sha_short }}-linux-x64.zip
+          directory: build/linux/x64/bundle
 
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.sha_short }}
-          artifacts: 'build/windows/runner/Release/MyAniApp-${{ env.sha_short }}-windows.zip'
+          artifacts: 'build/linux/x64/release/bundle/MyAniApp-${{ env.sha_short }}-linux-x64.zip'
           allowUpdates: true
           prerelease: true

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/routes.gr.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 class LoginDialog extends StatelessWidget {
   const LoginDialog({super.key, required this.action});

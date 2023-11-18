@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:myaniapp/routes.gr.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @RoutePage()
 class AniLoginPage extends ConsumerStatefulWidget {

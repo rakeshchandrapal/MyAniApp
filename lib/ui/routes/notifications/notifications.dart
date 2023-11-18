@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:myaniapp/graphql/__generated/notifications/notifications.graphql.dart';
 import 'package:myaniapp/notifications/notification.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 @RoutePage()

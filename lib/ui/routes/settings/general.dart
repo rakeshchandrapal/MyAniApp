@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/routes.gr.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @RoutePage()
 class GeneralSettingsPage extends ConsumerWidget {

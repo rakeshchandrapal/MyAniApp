@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/social/social.graphql.dart';
 import 'package:myaniapp/providers/userProfile.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @RoutePage()
 class UserSocialPage extends ConsumerStatefulWidget {

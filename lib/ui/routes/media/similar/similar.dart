@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/similar/similar.graphql.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @RoutePage()
 class MediaSimilarPage extends StatelessWidget {

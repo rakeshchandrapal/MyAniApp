@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/calendar/calendar.graphql.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/calendar/listReleases.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/utils.dart';
 
 var dateFormat = DateFormat('EEEE MMMM dd, yyyy');

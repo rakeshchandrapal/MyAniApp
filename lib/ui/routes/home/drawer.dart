@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/image.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 class HomeDrawer extends ConsumerStatefulWidget {
   const HomeDrawer({super.key});

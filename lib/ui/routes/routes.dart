@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/routes.gr.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {
@@ -83,7 +83,7 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(page: RecentThreadsRoute.page, path: '/forum/recent'),
-        AutoRoute(page: CalendarRoute.page, path: '/calendar')
+        AutoRoute(page: CalendarRoute.page, path: '/calendar'),
       ];
 }
 

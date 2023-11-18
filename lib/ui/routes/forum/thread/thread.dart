@@ -6,7 +6,6 @@ import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/forum/thread/thread.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/banner_ad.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/comment.dart';
@@ -15,6 +14,7 @@ import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 @RoutePage()

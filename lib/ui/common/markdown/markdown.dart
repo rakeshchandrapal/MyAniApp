@@ -39,7 +39,7 @@ class Markdown extends StatelessWidget {
         data: markdown,
         shrinkWrap: true,
         selectable: selectable,
-        markdownGeneratorConfig: md2.MarkdownGeneratorConfig(
+        markdownGenerator: md2.MarkdownGenerator(
           generators: [iWithTag, spoilerWithTag, imgWithTag, videoWithTag],
           inlineSyntaxList: [
             ISyntax(),

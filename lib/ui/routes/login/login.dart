@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/routes.gr.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()

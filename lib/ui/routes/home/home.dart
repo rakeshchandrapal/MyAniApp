@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/home/drawer.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @RoutePage()
 class MyHomePage extends ConsumerWidget {
@@ -25,63 +25,24 @@ class MyHomePage extends ConsumerWidget {
           const HomeActivitiesRoute(),
         ],
         builder: (context, child) {
-          var router = AutoTabsRouter.of(context);
-
-          return Scaffold(
-            body: child,
-            drawer: const HomeDrawer(),
-            // appBar: AppBar(),
-            // bottomNavigationBar: NavigationBar(
-            //   elevation: 0,
-            //   onDestinationSelected: router.setActiveIndex,
-            //   selectedIndex: router.activeIndex,
-            //   destinations: const [
-            //     NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-            //     NavigationDestination(
-            //       icon: Icon(Icons.local_movies),
-            //       label: 'Anime',
-            //     ),
-            //     NavigationDestination(
-            //       icon: Icon(Icons.explore),
-            //       label: 'Explore',
-            //     ),
-            //     NavigationDestination(icon: Icon(Icons.book), label: 'Manga'),
-            //     NavigationDestination(
-            //       icon: Icon(Icons.chat_bubble),
-            //       label: 'Activity',
-            //     )
-            //   ],
-            // ),
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: router.setActiveIndex,
-              currentIndex: router.activeIndex,
-              type: BottomNavigationBarType.shifting,
-              fixedColor: Theme.of(context).colorScheme.primary,
-              unselectedItemColor: Theme.of(context).colorScheme.secondary,
-              showUnselectedLabels: false,
-              items: [
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: "home",
-                ),
-                if (data != null)
-                  const BottomNavigationBarItem(
-                    icon: Icon(Icons.local_movies),
-                    label: "Anime",
+          return OrientationBuilder(
+            builder: (context, orientation) => Scaffold(
+              body: switch (orientation) {
+                (Orientation.landscape) => Row(
+                    children: [
+                      Rail(
+                        hasData: data != null,
+                      ),
+                      Expanded(child: child),
+                    ],
                   ),
-                if (data != null)
-                  const BottomNavigationBarItem(
-                      icon: Icon(Icons.explore), label: 'Explore'),
-                if (data != null)
-                  const BottomNavigationBarItem(
-                    icon: Icon(Icons.book),
-                    label: "Manga",
-                  ),
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.chat_bubble),
-                  label: "Activity",
-                ),
-              ],
+                _ => child
+              },
+              drawer: const HomeDrawer(),
+              bottomNavigationBar: switch (orientation) {
+                (Orientation.portrait) => BottomBar(hasData: data != null),
+                _ => null
+              },
             ),
           );
         },
@@ -93,6 +54,96 @@ class MyHomePage extends ConsumerWidget {
           child: CircularProgressIndicator.adaptive(),
         ),
       ),
+    );
+  }
+}
+
+class BottomBar extends StatelessWidget {
+  const BottomBar({
+    super.key,
+    required this.hasData,
+  });
+
+  final bool hasData;
+
+  @override
+  Widget build(BuildContext context) {
+    var router = AutoTabsRouter.of(context);
+
+    return BottomNavigationBar(
+      onTap: router.setActiveIndex,
+      currentIndex: router.activeIndex,
+      type: BottomNavigationBarType.shifting,
+      fixedColor: Theme.of(context).colorScheme.primary,
+      unselectedItemColor: Theme.of(context).colorScheme.secondary,
+      showUnselectedLabels: false,
+      items: [
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "home",
+        ),
+        if (hasData)
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.local_movies),
+            label: "Anime",
+          ),
+        if (hasData)
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.explore), label: 'Explore'),
+        if (hasData)
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: "Manga",
+          ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.chat_bubble),
+          label: "Activity",
+        ),
+      ],
+    );
+  }
+}
+
+class Rail extends StatelessWidget {
+  const Rail({
+    super.key,
+    required this.hasData,
+  });
+
+  final bool hasData;
+
+  @override
+  Widget build(BuildContext context) {
+    var router = AutoTabsRouter.of(context);
+
+    return NavigationRail(
+      destinations: [
+        const NavigationRailDestination(
+          icon: Icon(Icons.home),
+          label: Text("Home"),
+        ),
+        if (hasData)
+          const NavigationRailDestination(
+            icon: Icon(Icons.local_movies),
+            label: Text("Anime"),
+          ),
+        if (hasData)
+          const NavigationRailDestination(
+            icon: Icon(Icons.explore),
+            label: Text('Explore'),
+          ),
+        if (hasData)
+          const NavigationRailDestination(
+            icon: Icon(Icons.book),
+            label: Text("Manga"),
+          ),
+        const NavigationRailDestination(
+          icon: Icon(Icons.chat_bubble),
+          label: Text("Activity"),
+        ),
+      ],
+      selectedIndex: router.activeIndex,
+      onDestinationSelected: router.setActiveIndex,
     );
   }
 }

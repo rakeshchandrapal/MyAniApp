@@ -29,5 +29,5 @@ targets:
         options:
           enable_cached_builds: true
         generate_for:
-          - lib/routes.dart
+          - lib/ui/routes/routes.dart
       # configs for @AutoRouterConfig() generator ...

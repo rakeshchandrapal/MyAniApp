@@ -10,10 +10,10 @@ import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
 import 'package:myaniapp/providers/search.dart';
 import 'package:myaniapp/providers/shared_preferrences.dart';
-import 'package:myaniapp/routes.gr.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/ui/routes/search/editor/sheet.dart';
 
 @RoutePage()
