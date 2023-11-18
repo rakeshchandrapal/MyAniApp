@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:logger/logger.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:myaniapp/background.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/notifications/push.dart';
@@ -19,6 +20,7 @@ import 'web_url_protocol.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
 
   await initHiveForFlutter();
 

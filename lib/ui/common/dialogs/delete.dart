@@ -6,37 +6,40 @@ class DeleteDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          'Are you sure you want to delete?',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () => context.popRoute(false),
-                child: const Text('Cancel'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () => context.popRoute(true),
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.red),
-                  foregroundColor: MaterialStatePropertyAll(Colors.white),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Are you sure you want to delete?',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () => context.popRoute(false),
+                  child: const Text('Cancel'),
                 ),
-                child: const Text('Delete'),
               ),
-            ),
-          ],
-        )
-      ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () => context.popRoute(true),
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.red),
+                    foregroundColor: MaterialStatePropertyAll(Colors.white),
+                  ),
+                  child: const Text('Delete'),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

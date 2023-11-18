@@ -9,6 +9,7 @@ import 'package:myaniapp/ui/common/markdown/generators/br.dart';
 import 'package:myaniapp/ui/common/markdown/generators/i.dart';
 import 'package:myaniapp/ui/common/markdown/generators/img.dart';
 import 'package:myaniapp/ui/common/markdown/generators/spolier.dart';
+import 'package:myaniapp/ui/common/markdown/generators/video.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 var removeRegex = RegExp(r'~{3}([\s\S]*?)~{3}|(<br>)(?:<br>)?', dotAll: true);
@@ -39,12 +40,13 @@ class Markdown extends StatelessWidget {
         shrinkWrap: true,
         selectable: selectable,
         markdownGeneratorConfig: md2.MarkdownGeneratorConfig(
-          generators: [iWithTag, spoilerWithTag, imgWithTag],
+          generators: [iWithTag, spoilerWithTag, imgWithTag, videoWithTag],
           inlineSyntaxList: [
             ISyntax(),
             ImgSyntax(),
             SpoilerSyntax(),
             BrSyntax(),
+            VideoSyntax(),
             md.AutolinkExtensionSyntax(),
           ],
           textGenerator: (node, config, visitor) =>
