@@ -32,7 +32,7 @@ jobs:
       - name: Download deps
         run: |
           sudo apt update
-          sudo apt install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev
+          sudo apt install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev libmpv-dev mpv
 
       - run: flutter pub get
       - run: flutter build linux
