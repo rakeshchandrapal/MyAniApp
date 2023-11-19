@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/forum/thread/thread.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
+import 'package:myaniapp/graphql/__generated/ui/routes/thread/thread.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/banner_ad.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
@@ -237,14 +237,14 @@ class ThreadComment extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
 
-    List<Query$Thread$comments$threadComments>? replies;
+    List<Query$Thread$comments$threadComments> replies = [];
 
     try {
-      replies = comment.childComments
-          ?.map((comment) =>
-              Query$Thread$comments$threadComments.fromJson(comment))
-          .cast<Query$Thread$comments$threadComments>()
-          .toList() as List<Query$Thread$comments$threadComments>?;
+      if (comment.childComments != null) {
+        for (var reply in comment.childComments) {
+          replies.add(Query$Thread$comments$threadComments.fromJson(reply));
+        }
+      }
     } catch (err) {}
 
     return Comment(
@@ -318,15 +318,25 @@ class ThreadComment extends ConsumerWidget {
           ),
         ],
       ),
-      replies: replies
-          ?.map(
-            (e) => ThreadComment(
-              comment: e,
-              isReply: true,
-              refetch: refetch,
-            ),
-          )
-          .toList(),
+      replies: replies.isNotEmpty == true
+          ? [
+              for (var reply in replies)
+                ThreadComment(
+                  comment: reply,
+                  refetch: refetch,
+                  isReply: true,
+                )
+            ]
+          : null,
+      // replies: replies
+      //     ?.map(
+      //       (e) => ThreadComment(
+      //         comment: e,
+      //         isReply: true,
+      //         refetch: refetch,
+      //       ),
+      //     )
+      //     .toList(),
     );
   }
 }

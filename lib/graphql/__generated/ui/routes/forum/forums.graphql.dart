@@ -2,33 +2,72 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
-import '../../../../graphql/fragments.graphql.dart';
+import '../../../graphql/fragments.graphql.dart';
+import '../../../graphql/schema.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Variables$Query$RecentThreads {
-  factory Variables$Query$RecentThreads({int? page}) =>
-      Variables$Query$RecentThreads._({
+class Variables$Query$Forums {
+  factory Variables$Query$Forums({
+    int? page,
+    List<Enum$ThreadSort?>? sort,
+    int? id,
+    bool? subscribed,
+    String? search,
+  }) =>
+      Variables$Query$Forums._({
         if (page != null) r'page': page,
+        if (sort != null) r'sort': sort,
+        if (id != null) r'id': id,
+        if (subscribed != null) r'subscribed': subscribed,
+        if (search != null) r'search': search,
       });
 
-  Variables$Query$RecentThreads._(this._$data);
+  Variables$Query$Forums._(this._$data);
 
-  factory Variables$Query$RecentThreads.fromJson(Map<String, dynamic> data) {
+  factory Variables$Query$Forums.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('page')) {
       final l$page = data['page'];
       result$data['page'] = (l$page as int?);
     }
-    return Variables$Query$RecentThreads._(result$data);
+    if (data.containsKey('sort')) {
+      final l$sort = data['sort'];
+      result$data['sort'] = (l$sort as List<dynamic>?)
+          ?.map(
+              (e) => e == null ? null : fromJson$Enum$ThreadSort((e as String)))
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as int?);
+    }
+    if (data.containsKey('subscribed')) {
+      final l$subscribed = data['subscribed'];
+      result$data['subscribed'] = (l$subscribed as bool?);
+    }
+    if (data.containsKey('search')) {
+      final l$search = data['search'];
+      result$data['search'] = (l$search as String?);
+    }
+    return Variables$Query$Forums._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   int? get page => (_$data['page'] as int?);
+
+  List<Enum$ThreadSort?>? get sort =>
+      (_$data['sort'] as List<Enum$ThreadSort?>?);
+
+  int? get id => (_$data['id'] as int?);
+
+  bool? get subscribed => (_$data['subscribed'] as bool?);
+
+  String? get search => (_$data['search'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -36,21 +75,39 @@ class Variables$Query$RecentThreads {
       final l$page = page;
       result$data['page'] = l$page;
     }
+    if (_$data.containsKey('sort')) {
+      final l$sort = sort;
+      result$data['sort'] = l$sort
+          ?.map((e) => e == null ? null : toJson$Enum$ThreadSort(e))
+          .toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    if (_$data.containsKey('subscribed')) {
+      final l$subscribed = subscribed;
+      result$data['subscribed'] = l$subscribed;
+    }
+    if (_$data.containsKey('search')) {
+      final l$search = search;
+      result$data['search'] = l$search;
+    }
     return result$data;
   }
 
-  CopyWith$Variables$Query$RecentThreads<Variables$Query$RecentThreads>
-      get copyWith => CopyWith$Variables$Query$RecentThreads(
-            this,
-            (i) => i,
-          );
+  CopyWith$Variables$Query$Forums<Variables$Query$Forums> get copyWith =>
+      CopyWith$Variables$Query$Forums(
+        this,
+        (i) => i,
+      );
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$RecentThreads) ||
+    if (!(other is Variables$Query$Forums) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -62,75 +119,156 @@ class Variables$Query$RecentThreads {
     if (l$page != lOther$page) {
       return false;
     }
+    final l$sort = sort;
+    final lOther$sort = other.sort;
+    if (_$data.containsKey('sort') != other._$data.containsKey('sort')) {
+      return false;
+    }
+    if (l$sort != null && lOther$sort != null) {
+      if (l$sort.length != lOther$sort.length) {
+        return false;
+      }
+      for (int i = 0; i < l$sort.length; i++) {
+        final l$sort$entry = l$sort[i];
+        final lOther$sort$entry = lOther$sort[i];
+        if (l$sort$entry != lOther$sort$entry) {
+          return false;
+        }
+      }
+    } else if (l$sort != lOther$sort) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$subscribed = subscribed;
+    final lOther$subscribed = other.subscribed;
+    if (_$data.containsKey('subscribed') !=
+        other._$data.containsKey('subscribed')) {
+      return false;
+    }
+    if (l$subscribed != lOther$subscribed) {
+      return false;
+    }
+    final l$search = search;
+    final lOther$search = other.search;
+    if (_$data.containsKey('search') != other._$data.containsKey('search')) {
+      return false;
+    }
+    if (l$search != lOther$search) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$page = page;
-    return Object.hashAll([_$data.containsKey('page') ? l$page : const {}]);
+    final l$sort = sort;
+    final l$id = id;
+    final l$subscribed = subscribed;
+    final l$search = search;
+    return Object.hashAll([
+      _$data.containsKey('page') ? l$page : const {},
+      _$data.containsKey('sort')
+          ? l$sort == null
+              ? null
+              : Object.hashAll(l$sort.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('subscribed') ? l$subscribed : const {},
+      _$data.containsKey('search') ? l$search : const {},
+    ]);
   }
 }
 
-abstract class CopyWith$Variables$Query$RecentThreads<TRes> {
-  factory CopyWith$Variables$Query$RecentThreads(
-    Variables$Query$RecentThreads instance,
-    TRes Function(Variables$Query$RecentThreads) then,
-  ) = _CopyWithImpl$Variables$Query$RecentThreads;
+abstract class CopyWith$Variables$Query$Forums<TRes> {
+  factory CopyWith$Variables$Query$Forums(
+    Variables$Query$Forums instance,
+    TRes Function(Variables$Query$Forums) then,
+  ) = _CopyWithImpl$Variables$Query$Forums;
 
-  factory CopyWith$Variables$Query$RecentThreads.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$RecentThreads;
+  factory CopyWith$Variables$Query$Forums.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$Forums;
 
-  TRes call({int? page});
+  TRes call({
+    int? page,
+    List<Enum$ThreadSort?>? sort,
+    int? id,
+    bool? subscribed,
+    String? search,
+  });
 }
 
-class _CopyWithImpl$Variables$Query$RecentThreads<TRes>
-    implements CopyWith$Variables$Query$RecentThreads<TRes> {
-  _CopyWithImpl$Variables$Query$RecentThreads(
+class _CopyWithImpl$Variables$Query$Forums<TRes>
+    implements CopyWith$Variables$Query$Forums<TRes> {
+  _CopyWithImpl$Variables$Query$Forums(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$RecentThreads _instance;
+  final Variables$Query$Forums _instance;
 
-  final TRes Function(Variables$Query$RecentThreads) _then;
+  final TRes Function(Variables$Query$Forums) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? page = _undefined}) =>
-      _then(Variables$Query$RecentThreads._({
+  TRes call({
+    Object? page = _undefined,
+    Object? sort = _undefined,
+    Object? id = _undefined,
+    Object? subscribed = _undefined,
+    Object? search = _undefined,
+  }) =>
+      _then(Variables$Query$Forums._({
         ..._instance._$data,
         if (page != _undefined) 'page': (page as int?),
+        if (sort != _undefined) 'sort': (sort as List<Enum$ThreadSort?>?),
+        if (id != _undefined) 'id': (id as int?),
+        if (subscribed != _undefined) 'subscribed': (subscribed as bool?),
+        if (search != _undefined) 'search': (search as String?),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$RecentThreads<TRes>
-    implements CopyWith$Variables$Query$RecentThreads<TRes> {
-  _CopyWithStubImpl$Variables$Query$RecentThreads(this._res);
+class _CopyWithStubImpl$Variables$Query$Forums<TRes>
+    implements CopyWith$Variables$Query$Forums<TRes> {
+  _CopyWithStubImpl$Variables$Query$Forums(this._res);
 
   TRes _res;
 
-  call({int? page}) => _res;
+  call({
+    int? page,
+    List<Enum$ThreadSort?>? sort,
+    int? id,
+    bool? subscribed,
+    String? search,
+  }) =>
+      _res;
 }
 
-class Query$RecentThreads {
-  Query$RecentThreads({
+class Query$Forums {
+  Query$Forums({
     this.Page,
     this.$__typename = 'Query',
   });
 
-  factory Query$RecentThreads.fromJson(Map<String, dynamic> json) {
+  factory Query$Forums.fromJson(Map<String, dynamic> json) {
     final l$Page = json['Page'];
     final l$$__typename = json['__typename'];
-    return Query$RecentThreads(
+    return Query$Forums(
       Page: l$Page == null
           ? null
-          : Query$RecentThreads$Page.fromJson((l$Page as Map<String, dynamic>)),
+          : Query$Forums$Page.fromJson((l$Page as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$RecentThreads$Page? Page;
+  final Query$Forums$Page? Page;
 
   final String $__typename;
 
@@ -158,7 +296,7 @@ class Query$RecentThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$RecentThreads) || runtimeType != other.runtimeType) {
+    if (!(other is Query$Forums) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -175,40 +313,37 @@ class Query$RecentThreads {
   }
 }
 
-extension UtilityExtension$Query$RecentThreads on Query$RecentThreads {
-  CopyWith$Query$RecentThreads<Query$RecentThreads> get copyWith =>
-      CopyWith$Query$RecentThreads(
+extension UtilityExtension$Query$Forums on Query$Forums {
+  CopyWith$Query$Forums<Query$Forums> get copyWith => CopyWith$Query$Forums(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$RecentThreads<TRes> {
-  factory CopyWith$Query$RecentThreads(
-    Query$RecentThreads instance,
-    TRes Function(Query$RecentThreads) then,
-  ) = _CopyWithImpl$Query$RecentThreads;
+abstract class CopyWith$Query$Forums<TRes> {
+  factory CopyWith$Query$Forums(
+    Query$Forums instance,
+    TRes Function(Query$Forums) then,
+  ) = _CopyWithImpl$Query$Forums;
 
-  factory CopyWith$Query$RecentThreads.stub(TRes res) =
-      _CopyWithStubImpl$Query$RecentThreads;
+  factory CopyWith$Query$Forums.stub(TRes res) = _CopyWithStubImpl$Query$Forums;
 
   TRes call({
-    Query$RecentThreads$Page? Page,
+    Query$Forums$Page? Page,
     String? $__typename,
   });
-  CopyWith$Query$RecentThreads$Page<TRes> get Page;
+  CopyWith$Query$Forums$Page<TRes> get Page;
 }
 
-class _CopyWithImpl$Query$RecentThreads<TRes>
-    implements CopyWith$Query$RecentThreads<TRes> {
-  _CopyWithImpl$Query$RecentThreads(
+class _CopyWithImpl$Query$Forums<TRes> implements CopyWith$Query$Forums<TRes> {
+  _CopyWithImpl$Query$Forums(
     this._instance,
     this._then,
   );
 
-  final Query$RecentThreads _instance;
+  final Query$Forums _instance;
 
-  final TRes Function(Query$RecentThreads) _then;
+  final TRes Function(Query$Forums) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -216,43 +351,42 @@ class _CopyWithImpl$Query$RecentThreads<TRes>
     Object? Page = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$RecentThreads(
-        Page: Page == _undefined
-            ? _instance.Page
-            : (Page as Query$RecentThreads$Page?),
+      _then(Query$Forums(
+        Page:
+            Page == _undefined ? _instance.Page : (Page as Query$Forums$Page?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$RecentThreads$Page<TRes> get Page {
+  CopyWith$Query$Forums$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
-        ? CopyWith$Query$RecentThreads$Page.stub(_then(_instance))
-        : CopyWith$Query$RecentThreads$Page(local$Page, (e) => call(Page: e));
+        ? CopyWith$Query$Forums$Page.stub(_then(_instance))
+        : CopyWith$Query$Forums$Page(local$Page, (e) => call(Page: e));
   }
 }
 
-class _CopyWithStubImpl$Query$RecentThreads<TRes>
-    implements CopyWith$Query$RecentThreads<TRes> {
-  _CopyWithStubImpl$Query$RecentThreads(this._res);
+class _CopyWithStubImpl$Query$Forums<TRes>
+    implements CopyWith$Query$Forums<TRes> {
+  _CopyWithStubImpl$Query$Forums(this._res);
 
   TRes _res;
 
   call({
-    Query$RecentThreads$Page? Page,
+    Query$Forums$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$RecentThreads$Page<TRes> get Page =>
-      CopyWith$Query$RecentThreads$Page.stub(_res);
+  CopyWith$Query$Forums$Page<TRes> get Page =>
+      CopyWith$Query$Forums$Page.stub(_res);
 }
 
-const documentNodeQueryRecentThreads = DocumentNode(definitions: [
+const documentNodeQueryForums = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'RecentThreads'),
+    name: NameNode(value: 'Forums'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'page')),
@@ -262,7 +396,46 @@ const documentNodeQueryRecentThreads = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'sort')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'ThreadSort'),
+            isNonNull: false,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'subscribed')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'search')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -302,8 +475,20 @@ const documentNodeQueryRecentThreads = DocumentNode(definitions: [
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'sort'),
-                value: EnumValueNode(name: NameNode(value: 'REPLIED_AT_DESC')),
-              )
+                value: VariableNode(name: NameNode(value: 'sort')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'categoryId'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'subscribed'),
+                value: VariableNode(name: NameNode(value: 'subscribed')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'search'),
+                value: VariableNode(name: NameNode(value: 'search')),
+              ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
@@ -343,26 +528,25 @@ const documentNodeQueryRecentThreads = DocumentNode(definitions: [
   fragmentDefinitionMediaFragment,
   fragmentDefinitionUserFragment,
 ]);
-Query$RecentThreads _parserFn$Query$RecentThreads(Map<String, dynamic> data) =>
-    Query$RecentThreads.fromJson(data);
-typedef OnQueryComplete$Query$RecentThreads = FutureOr<void> Function(
+Query$Forums _parserFn$Query$Forums(Map<String, dynamic> data) =>
+    Query$Forums.fromJson(data);
+typedef OnQueryComplete$Query$Forums = FutureOr<void> Function(
   Map<String, dynamic>?,
-  Query$RecentThreads?,
+  Query$Forums?,
 );
 
-class Options$Query$RecentThreads
-    extends graphql.QueryOptions<Query$RecentThreads> {
-  Options$Query$RecentThreads({
+class Options$Query$Forums extends graphql.QueryOptions<Query$Forums> {
+  Options$Query$Forums({
     String? operationName,
-    Variables$Query$RecentThreads? variables,
+    Variables$Query$Forums? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$RecentThreads? typedOptimisticResult,
+    Query$Forums? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-    OnQueryComplete$Query$RecentThreads? onComplete,
+    OnQueryComplete$Query$Forums? onComplete,
     graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
@@ -378,14 +562,14 @@ class Options$Query$RecentThreads
               ? null
               : (data) => onComplete(
                     data,
-                    data == null ? null : _parserFn$Query$RecentThreads(data),
+                    data == null ? null : _parserFn$Query$Forums(data),
                   ),
           onError: onError,
-          document: documentNodeQueryRecentThreads,
-          parserFn: _parserFn$Query$RecentThreads,
+          document: documentNodeQueryForums,
+          parserFn: _parserFn$Query$Forums,
         );
 
-  final OnQueryComplete$Query$RecentThreads? onCompleteWithParsed;
+  final OnQueryComplete$Query$Forums? onCompleteWithParsed;
 
   @override
   List<Object?> get properties => [
@@ -396,16 +580,16 @@ class Options$Query$RecentThreads
       ];
 }
 
-class WatchOptions$Query$RecentThreads
-    extends graphql.WatchQueryOptions<Query$RecentThreads> {
-  WatchOptions$Query$RecentThreads({
+class WatchOptions$Query$Forums
+    extends graphql.WatchQueryOptions<Query$Forums> {
+  WatchOptions$Query$Forums({
     String? operationName,
-    Variables$Query$RecentThreads? variables,
+    Variables$Query$Forums? variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$RecentThreads? typedOptimisticResult,
+    Query$Forums? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -419,95 +603,92 @@ class WatchOptions$Query$RecentThreads
           cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
-          document: documentNodeQueryRecentThreads,
+          document: documentNodeQueryForums,
           pollInterval: pollInterval,
           eagerlyFetchResults: eagerlyFetchResults,
           carryForwardDataOnException: carryForwardDataOnException,
           fetchResults: fetchResults,
-          parserFn: _parserFn$Query$RecentThreads,
+          parserFn: _parserFn$Query$Forums,
         );
 }
 
-class FetchMoreOptions$Query$RecentThreads extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$RecentThreads({
+class FetchMoreOptions$Query$Forums extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$Forums({
     required graphql.UpdateQuery updateQuery,
-    Variables$Query$RecentThreads? variables,
+    Variables$Query$Forums? variables,
   }) : super(
           updateQuery: updateQuery,
           variables: variables?.toJson() ?? {},
-          document: documentNodeQueryRecentThreads,
+          document: documentNodeQueryForums,
         );
 }
 
-extension ClientExtension$Query$RecentThreads on graphql.GraphQLClient {
-  Future<graphql.QueryResult<Query$RecentThreads>> query$RecentThreads(
-          [Options$Query$RecentThreads? options]) async =>
-      await this.query(options ?? Options$Query$RecentThreads());
-  graphql.ObservableQuery<Query$RecentThreads> watchQuery$RecentThreads(
-          [WatchOptions$Query$RecentThreads? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$RecentThreads());
-  void writeQuery$RecentThreads({
-    required Query$RecentThreads data,
-    Variables$Query$RecentThreads? variables,
+extension ClientExtension$Query$Forums on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$Forums>> query$Forums(
+          [Options$Query$Forums? options]) async =>
+      await this.query(options ?? Options$Query$Forums());
+  graphql.ObservableQuery<Query$Forums> watchQuery$Forums(
+          [WatchOptions$Query$Forums? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$Forums());
+  void writeQuery$Forums({
+    required Query$Forums data,
+    Variables$Query$Forums? variables,
     bool broadcast = true,
   }) =>
       this.writeQuery(
         graphql.Request(
-          operation:
-              graphql.Operation(document: documentNodeQueryRecentThreads),
+          operation: graphql.Operation(document: documentNodeQueryForums),
           variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Query$RecentThreads? readQuery$RecentThreads({
-    Variables$Query$RecentThreads? variables,
+  Query$Forums? readQuery$Forums({
+    Variables$Query$Forums? variables,
     bool optimistic = true,
   }) {
     final result = this.readQuery(
       graphql.Request(
-        operation: graphql.Operation(document: documentNodeQueryRecentThreads),
+        operation: graphql.Operation(document: documentNodeQueryForums),
         variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Query$RecentThreads.fromJson(result);
+    return result == null ? null : Query$Forums.fromJson(result);
   }
 }
 
-graphql_flutter.QueryHookResult<Query$RecentThreads> useQuery$RecentThreads(
-        [Options$Query$RecentThreads? options]) =>
-    graphql_flutter.useQuery(options ?? Options$Query$RecentThreads());
-graphql.ObservableQuery<Query$RecentThreads> useWatchQuery$RecentThreads(
-        [WatchOptions$Query$RecentThreads? options]) =>
-    graphql_flutter
-        .useWatchQuery(options ?? WatchOptions$Query$RecentThreads());
+graphql_flutter.QueryHookResult<Query$Forums> useQuery$Forums(
+        [Options$Query$Forums? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$Forums());
+graphql.ObservableQuery<Query$Forums> useWatchQuery$Forums(
+        [WatchOptions$Query$Forums? options]) =>
+    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$Forums());
 
-class Query$RecentThreads$Widget
-    extends graphql_flutter.Query<Query$RecentThreads> {
-  Query$RecentThreads$Widget({
+class Query$Forums$Widget extends graphql_flutter.Query<Query$Forums> {
+  Query$Forums$Widget({
     widgets.Key? key,
-    Options$Query$RecentThreads? options,
-    required graphql_flutter.QueryBuilder<Query$RecentThreads> builder,
+    Options$Query$Forums? options,
+    required graphql_flutter.QueryBuilder<Query$Forums> builder,
   }) : super(
           key: key,
-          options: options ?? Options$Query$RecentThreads(),
+          options: options ?? Options$Query$Forums(),
           builder: builder,
         );
 }
 
-class Query$RecentThreads$Page {
-  Query$RecentThreads$Page({
+class Query$Forums$Page {
+  Query$Forums$Page({
     this.pageInfo,
     this.threads,
     this.$__typename = 'Page',
   });
 
-  factory Query$RecentThreads$Page.fromJson(Map<String, dynamic> json) {
+  factory Query$Forums$Page.fromJson(Map<String, dynamic> json) {
     final l$pageInfo = json['pageInfo'];
     final l$threads = json['threads'];
     final l$$__typename = json['__typename'];
-    return Query$RecentThreads$Page(
+    return Query$Forums$Page(
       pageInfo: l$pageInfo == null
           ? null
           : Fragment$PageInfo.fromJson((l$pageInfo as Map<String, dynamic>)),
@@ -554,8 +735,7 @@ class Query$RecentThreads$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$RecentThreads$Page) ||
-        runtimeType != other.runtimeType) {
+    if (!(other is Query$Forums$Page) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -588,23 +768,22 @@ class Query$RecentThreads$Page {
   }
 }
 
-extension UtilityExtension$Query$RecentThreads$Page
-    on Query$RecentThreads$Page {
-  CopyWith$Query$RecentThreads$Page<Query$RecentThreads$Page> get copyWith =>
-      CopyWith$Query$RecentThreads$Page(
+extension UtilityExtension$Query$Forums$Page on Query$Forums$Page {
+  CopyWith$Query$Forums$Page<Query$Forums$Page> get copyWith =>
+      CopyWith$Query$Forums$Page(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$RecentThreads$Page<TRes> {
-  factory CopyWith$Query$RecentThreads$Page(
-    Query$RecentThreads$Page instance,
-    TRes Function(Query$RecentThreads$Page) then,
-  ) = _CopyWithImpl$Query$RecentThreads$Page;
+abstract class CopyWith$Query$Forums$Page<TRes> {
+  factory CopyWith$Query$Forums$Page(
+    Query$Forums$Page instance,
+    TRes Function(Query$Forums$Page) then,
+  ) = _CopyWithImpl$Query$Forums$Page;
 
-  factory CopyWith$Query$RecentThreads$Page.stub(TRes res) =
-      _CopyWithStubImpl$Query$RecentThreads$Page;
+  factory CopyWith$Query$Forums$Page.stub(TRes res) =
+      _CopyWithStubImpl$Query$Forums$Page;
 
   TRes call({
     Fragment$PageInfo? pageInfo,
@@ -619,16 +798,16 @@ abstract class CopyWith$Query$RecentThreads$Page<TRes> {
           _fn);
 }
 
-class _CopyWithImpl$Query$RecentThreads$Page<TRes>
-    implements CopyWith$Query$RecentThreads$Page<TRes> {
-  _CopyWithImpl$Query$RecentThreads$Page(
+class _CopyWithImpl$Query$Forums$Page<TRes>
+    implements CopyWith$Query$Forums$Page<TRes> {
+  _CopyWithImpl$Query$Forums$Page(
     this._instance,
     this._then,
   );
 
-  final Query$RecentThreads$Page _instance;
+  final Query$Forums$Page _instance;
 
-  final TRes Function(Query$RecentThreads$Page) _then;
+  final TRes Function(Query$Forums$Page) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -637,7 +816,7 @@ class _CopyWithImpl$Query$RecentThreads$Page<TRes>
     Object? threads = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$RecentThreads$Page(
+      _then(Query$Forums$Page(
         pageInfo: pageInfo == _undefined
             ? _instance.pageInfo
             : (pageInfo as Fragment$PageInfo?),
@@ -671,9 +850,9 @@ class _CopyWithImpl$Query$RecentThreads$Page<TRes>
                 )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$RecentThreads$Page<TRes>
-    implements CopyWith$Query$RecentThreads$Page<TRes> {
-  _CopyWithStubImpl$Query$RecentThreads$Page(this._res);
+class _CopyWithStubImpl$Query$Forums$Page<TRes>
+    implements CopyWith$Query$Forums$Page<TRes> {
+  _CopyWithStubImpl$Query$Forums$Page(this._res);
 
   TRes _res;
 

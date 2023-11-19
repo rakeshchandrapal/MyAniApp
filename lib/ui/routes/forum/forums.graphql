@@ -1,0 +1,10 @@
+query Forums($page: Int, $sort: [ThreadSort], $id: Int, $subscribed: Boolean, $search: String) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    threads(sort: $sort, categoryId: $id, subscribed: $subscribed, search: $search) {
+      ...ThreadFragment
+    }
+  }
+}

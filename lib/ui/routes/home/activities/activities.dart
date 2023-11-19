@@ -9,6 +9,7 @@ import 'package:myaniapp/ui/common/activity_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/forum/overview/overview.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
 import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
@@ -54,6 +55,10 @@ class _HomeActivitiesPageState extends ConsumerState<HomeActivitiesPage> {
         return Scaffold(
           appBar: HomeAppBar(
             actions: [
+              IconButton(
+                  onPressed: () => context.pushRoute(
+                      ForumOverviewRoute(filter: ForumFilter.overview.name)),
+                  icon: const Icon(Icons.forum)),
               if (user.value != null)
                 SizedBox(
                   width: 150,

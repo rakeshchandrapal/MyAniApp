@@ -12,6 +12,7 @@ import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
+import 'package:myaniapp/ui/routes/forum/overview/overview.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
 import 'package:myaniapp/ui/routes/home/overview/guest.dart';
 import 'package:myaniapp/ui/routes/routes.gr.dart';
@@ -108,8 +109,8 @@ class _RecentActivity extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               TextButton(
-                onPressed: () =>
-                    context.router.push(const RecentThreadsRoute()),
+                onPressed: () => context.router
+                    .push(ForumOverviewRoute(filter: ForumFilter.recent.name)),
                 child: const Text('View more'),
               )
             ],

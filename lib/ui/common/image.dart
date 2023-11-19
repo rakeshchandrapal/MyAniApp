@@ -11,7 +11,7 @@ class CImage extends CachedNetworkImage {
       super.cacheManager,
       super.color,
       super.colorBlendMode,
-      super.errorWidget,
+      super.errorWidget = defaultErrorWidget,
       super.fadeInCurve,
       super.fadeInDuration,
       super.fadeOutCurve,
@@ -43,6 +43,10 @@ class CImage extends CachedNetworkImage {
     return const Center(
       child: CircularProgressIndicator.adaptive(),
     );
+  }
+
+  static Widget defaultErrorWidget(BuildContext context, String _, Object __) {
+    return const SizedBox();
   }
 
   @override

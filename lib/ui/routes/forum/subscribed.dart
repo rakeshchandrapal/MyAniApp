@@ -1,36 +1,33 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/forum/recent/recent.graphql.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__generated/ui/routes/forum/forums.graphql.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
-@RoutePage()
-class RecentThreadsPage extends StatelessWidget {
-  const RecentThreadsPage({super.key});
+class SubscribedForums extends StatelessWidget {
+  const SubscribedForums({super.key, this.categoryId});
+
+  final int? categoryId;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Recent Activity'),
+    return Query$Forums$Widget(
+      options: Options$Query$Forums(
+        variables: Variables$Query$Forums(
+          sort: [Enum$ThreadSort.REPLIED_AT_DESC],
+          subscribed: true,
+          id: categoryId,
+        ),
       ),
-      body: Query$RecentThreads$Widget(
-        builder: (result, {fetchMore, refetch}) {
-          if (result.isLoading && result.parsedData == null) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (result.hasException) {
-            return GraphqlError(exception: result.exception!);
-          }
-
+      builder: queryBuilder(
+        (result, {fetchMore, refetch}) {
           return RefreshIndicator.adaptive(
             onRefresh: refetch!,
             child: Pagination(
               fetchMore: fetchMore!,
               pageInfo: result.parsedData!.Page!.pageInfo!,
-              opts: FetchMoreOptions$Query$RecentThreads(
+              opts: FetchMoreOptions$Query$Forums(
                 updateQuery: (previousResultData, fetchMoreResultData) {
                   var list = [
                     ...previousResultData!['Page']['threads'],
@@ -41,7 +38,7 @@ class RecentThreadsPage extends StatelessWidget {
 
                   return fetchMoreResultData;
                 },
-                variables: Variables$Query$RecentThreads(
+                variables: Variables$Query$Forums(
                   page:
                       (result.parsedData!.Page!.pageInfo!.currentPage ?? 1) + 1,
                 ),

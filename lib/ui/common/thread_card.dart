@@ -91,12 +91,15 @@ class ThreadCard extends StatelessWidget {
           ),
           Row(
             children: [
-              CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(
-                    (thread.replyUser?.avatar?.large ??
-                        thread.user!.avatar!.large!)),
-                backgroundColor: Colors.transparent,
-              ),
+              if ((thread.replyUser?.avatar?.large ??
+                      thread.user?.avatar?.large) !=
+                  null)
+                CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(
+                      (thread.replyUser?.avatar?.large ??
+                          thread.user!.avatar!.large!)),
+                  backgroundColor: Colors.transparent,
+                ),
               const SizedBox(
                 width: 10,
               ),

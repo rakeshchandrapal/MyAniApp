@@ -18,36 +18,36 @@ import 'package:myaniapp/ui/routes/auth/auth.dart' as _i5;
 import 'package:myaniapp/ui/routes/calendar/calendar.dart' as _i6;
 import 'package:myaniapp/ui/routes/character/character.dart' as _i7;
 import 'package:myaniapp/ui/routes/explore/explore.dart' as _i8;
-import 'package:myaniapp/ui/routes/forum/recent/recent.dart' as _i25;
-import 'package:myaniapp/ui/routes/forum/thread/thread.dart' as _i33;
-import 'package:myaniapp/ui/routes/home/activities/activities.dart' as _i10;
-import 'package:myaniapp/ui/routes/home/home.dart' as _i23;
-import 'package:myaniapp/ui/routes/home/list/anime.dart' as _i11;
-import 'package:myaniapp/ui/routes/home/list/manga.dart' as _i12;
-import 'package:myaniapp/ui/routes/home/overview/overview.dart' as _i13;
+import 'package:myaniapp/ui/routes/forum/overview/overview.dart' as _i9;
+import 'package:myaniapp/ui/routes/home/activities/activities.dart' as _i11;
+import 'package:myaniapp/ui/routes/home/home.dart' as _i24;
+import 'package:myaniapp/ui/routes/home/list/anime.dart' as _i12;
+import 'package:myaniapp/ui/routes/home/list/manga.dart' as _i13;
+import 'package:myaniapp/ui/routes/home/overview/overview.dart' as _i14;
 import 'package:myaniapp/ui/routes/login/anilist.dart' as _i2;
-import 'package:myaniapp/ui/routes/login/login.dart' as _i14;
+import 'package:myaniapp/ui/routes/login/login.dart' as _i15;
 import 'package:myaniapp/ui/routes/login/token.dart' as _i34;
-import 'package:myaniapp/ui/routes/media/characters/characters.dart' as _i15;
-import 'package:myaniapp/ui/routes/media/media.dart' as _i17;
-import 'package:myaniapp/ui/routes/media/overview.dart' as _i16;
-import 'package:myaniapp/ui/routes/media/relations.dart' as _i18;
-import 'package:myaniapp/ui/routes/media/reviews/reviews.dart' as _i19;
-import 'package:myaniapp/ui/routes/media/similar/similar.dart' as _i20;
-import 'package:myaniapp/ui/routes/media/social/social.dart' as _i21;
-import 'package:myaniapp/ui/routes/media/staff/staff.dart' as _i22;
-import 'package:myaniapp/ui/routes/notifications/notifications.dart' as _i24;
+import 'package:myaniapp/ui/routes/media/characters/characters.dart' as _i16;
+import 'package:myaniapp/ui/routes/media/media.dart' as _i18;
+import 'package:myaniapp/ui/routes/media/overview.dart' as _i17;
+import 'package:myaniapp/ui/routes/media/relations.dart' as _i19;
+import 'package:myaniapp/ui/routes/media/reviews/reviews.dart' as _i20;
+import 'package:myaniapp/ui/routes/media/similar/similar.dart' as _i21;
+import 'package:myaniapp/ui/routes/media/social/social.dart' as _i22;
+import 'package:myaniapp/ui/routes/media/staff/staff.dart' as _i23;
+import 'package:myaniapp/ui/routes/notifications/notifications.dart' as _i25;
 import 'package:myaniapp/ui/routes/recommendations/recommendations.dart'
     as _i26;
 import 'package:myaniapp/ui/routes/review/review.dart' as _i27;
 import 'package:myaniapp/ui/routes/search/search.dart' as _i28;
 import 'package:myaniapp/ui/routes/settings/anilist.dart' as _i3;
 import 'package:myaniapp/ui/routes/settings/app.dart' as _i4;
-import 'package:myaniapp/ui/routes/settings/general.dart' as _i9;
+import 'package:myaniapp/ui/routes/settings/general.dart' as _i10;
 import 'package:myaniapp/ui/routes/settings/settings.dart' as _i29;
 import 'package:myaniapp/ui/routes/staff/production.dart' as _i31;
 import 'package:myaniapp/ui/routes/staff/staff.dart' as _i30;
 import 'package:myaniapp/ui/routes/staff/voice.dart' as _i32;
+import 'package:myaniapp/ui/routes/thread/thread.dart' as _i33;
 import 'package:myaniapp/ui/routes/user/activity/activity.dart' as _i35;
 import 'package:myaniapp/ui/routes/user/list/anime.dart' as _i36;
 import 'package:myaniapp/ui/routes/user/list/manga.dart' as _i37;
@@ -128,40 +128,59 @@ abstract class $AppRouter extends _i42.RootStackRouter {
         child: const _i8.ExplorePage(),
       );
     },
+    ForumOverviewRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ForumOverviewRouteArgs>(
+          orElse: () => ForumOverviewRouteArgs(
+                filter: pathParams.getString('filter'),
+                category: queryParams.optInt('category'),
+                search: queryParams.optString('search'),
+              ));
+      return _i42.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i9.ForumOverviewPage(
+          key: args.key,
+          filter: args.filter,
+          category: args.category,
+          search: args.search,
+        ),
+      );
+    },
     GeneralSettingsRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.GeneralSettingsPage(),
+        child: const _i10.GeneralSettingsPage(),
       );
     },
     HomeActivitiesRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.HomeActivitiesPage(),
+        child: const _i11.HomeActivitiesPage(),
       );
     },
     HomeAnimeRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.HomeAnimePage(),
+        child: const _i12.HomeAnimePage(),
       );
     },
     HomeMangaRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.HomeMangaPage(),
+        child: const _i13.HomeMangaPage(),
       );
     },
     HomeOverviewRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.HomeOverviewPage(),
+        child: const _i14.HomeOverviewPage(),
       );
     },
     LoginRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.LoginPage(),
+        child: const _i15.LoginPage(),
       );
     },
     MediaCharactersRoute.name: (routeData) {
@@ -170,7 +189,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaCharactersRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i15.MediaCharactersPage(
+        child: _i16.MediaCharactersPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -182,7 +201,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaOverviewRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i16.MediaOverviewPage(
+        child: _i17.MediaOverviewPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -194,7 +213,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaRouteArgs(id: pathParams.getInt('id')));
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i17.MediaPage(
+        child: _i18.MediaPage(
           key: args.key,
           id: args.id,
         ),
@@ -206,7 +225,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaRelationsRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.MediaRelationsPage(
+        child: _i19.MediaRelationsPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -218,7 +237,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaReviewsRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i19.MediaReviewsPage(
+        child: _i20.MediaReviewsPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -230,7 +249,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaSimilarRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i20.MediaSimilarPage(
+        child: _i21.MediaSimilarPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -242,7 +261,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaSocialRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i21.MediaSocialPage(
+        child: _i22.MediaSocialPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -254,7 +273,7 @@ abstract class $AppRouter extends _i42.RootStackRouter {
           orElse: () => MediaStaffRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i22.MediaStaffPage(
+        child: _i23.MediaStaffPage(
           key: args.key,
           id: pathParams.getInt('id'),
         ),
@@ -263,19 +282,13 @@ abstract class $AppRouter extends _i42.RootStackRouter {
     MyHomeRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i23.MyHomePage(),
+        child: const _i24.MyHomePage(),
       );
     },
     NotificationsRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i24.NotificationsPage(),
-      );
-    },
-    RecentThreadsRoute.name: (routeData) {
-      return _i42.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i25.RecentThreadsPage(),
+        child: const _i25.NotificationsPage(),
       );
     },
     RecommendationsRoute.name: (routeData) {
@@ -661,7 +674,60 @@ class ExploreRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.GeneralSettingsPage]
+/// [_i9.ForumOverviewPage]
+class ForumOverviewRoute extends _i42.PageRouteInfo<ForumOverviewRouteArgs> {
+  ForumOverviewRoute({
+    _i43.Key? key,
+    required String filter,
+    int? category,
+    String? search,
+    List<_i42.PageRouteInfo>? children,
+  }) : super(
+          ForumOverviewRoute.name,
+          args: ForumOverviewRouteArgs(
+            key: key,
+            filter: filter,
+            category: category,
+            search: search,
+          ),
+          rawPathParams: {'filter': filter},
+          rawQueryParams: {
+            'category': category,
+            'search': search,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'ForumOverviewRoute';
+
+  static const _i42.PageInfo<ForumOverviewRouteArgs> page =
+      _i42.PageInfo<ForumOverviewRouteArgs>(name);
+}
+
+class ForumOverviewRouteArgs {
+  const ForumOverviewRouteArgs({
+    this.key,
+    required this.filter,
+    this.category,
+    this.search,
+  });
+
+  final _i43.Key? key;
+
+  final String filter;
+
+  final int? category;
+
+  final String? search;
+
+  @override
+  String toString() {
+    return 'ForumOverviewRouteArgs{key: $key, filter: $filter, category: $category, search: $search}';
+  }
+}
+
+/// generated route for
+/// [_i10.GeneralSettingsPage]
 class GeneralSettingsRoute extends _i42.PageRouteInfo<void> {
   const GeneralSettingsRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -675,7 +741,7 @@ class GeneralSettingsRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.HomeActivitiesPage]
+/// [_i11.HomeActivitiesPage]
 class HomeActivitiesRoute extends _i42.PageRouteInfo<void> {
   const HomeActivitiesRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -689,7 +755,7 @@ class HomeActivitiesRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.HomeAnimePage]
+/// [_i12.HomeAnimePage]
 class HomeAnimeRoute extends _i42.PageRouteInfo<void> {
   const HomeAnimeRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -703,7 +769,7 @@ class HomeAnimeRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.HomeMangaPage]
+/// [_i13.HomeMangaPage]
 class HomeMangaRoute extends _i42.PageRouteInfo<void> {
   const HomeMangaRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -717,7 +783,7 @@ class HomeMangaRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.HomeOverviewPage]
+/// [_i14.HomeOverviewPage]
 class HomeOverviewRoute extends _i42.PageRouteInfo<void> {
   const HomeOverviewRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -731,7 +797,7 @@ class HomeOverviewRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.LoginPage]
+/// [_i15.LoginPage]
 class LoginRoute extends _i42.PageRouteInfo<void> {
   const LoginRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -745,7 +811,7 @@ class LoginRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.MediaCharactersPage]
+/// [_i16.MediaCharactersPage]
 class MediaCharactersRoute
     extends _i42.PageRouteInfo<MediaCharactersRouteArgs> {
   MediaCharactersRoute({
@@ -775,7 +841,7 @@ class MediaCharactersRouteArgs {
 }
 
 /// generated route for
-/// [_i16.MediaOverviewPage]
+/// [_i17.MediaOverviewPage]
 class MediaOverviewRoute extends _i42.PageRouteInfo<MediaOverviewRouteArgs> {
   MediaOverviewRoute({
     _i44.Key? key,
@@ -804,7 +870,7 @@ class MediaOverviewRouteArgs {
 }
 
 /// generated route for
-/// [_i17.MediaPage]
+/// [_i18.MediaPage]
 class MediaRoute extends _i42.PageRouteInfo<MediaRouteArgs> {
   MediaRoute({
     _i44.Key? key,
@@ -843,7 +909,7 @@ class MediaRouteArgs {
 }
 
 /// generated route for
-/// [_i18.MediaRelationsPage]
+/// [_i19.MediaRelationsPage]
 class MediaRelationsRoute extends _i42.PageRouteInfo<MediaRelationsRouteArgs> {
   MediaRelationsRoute({
     _i43.Key? key,
@@ -872,7 +938,7 @@ class MediaRelationsRouteArgs {
 }
 
 /// generated route for
-/// [_i19.MediaReviewsPage]
+/// [_i20.MediaReviewsPage]
 class MediaReviewsRoute extends _i42.PageRouteInfo<MediaReviewsRouteArgs> {
   MediaReviewsRoute({
     _i43.Key? key,
@@ -901,7 +967,7 @@ class MediaReviewsRouteArgs {
 }
 
 /// generated route for
-/// [_i20.MediaSimilarPage]
+/// [_i21.MediaSimilarPage]
 class MediaSimilarRoute extends _i42.PageRouteInfo<MediaSimilarRouteArgs> {
   MediaSimilarRoute({
     _i43.Key? key,
@@ -930,7 +996,7 @@ class MediaSimilarRouteArgs {
 }
 
 /// generated route for
-/// [_i21.MediaSocialPage]
+/// [_i22.MediaSocialPage]
 class MediaSocialRoute extends _i42.PageRouteInfo<MediaSocialRouteArgs> {
   MediaSocialRoute({
     _i43.Key? key,
@@ -959,7 +1025,7 @@ class MediaSocialRouteArgs {
 }
 
 /// generated route for
-/// [_i22.MediaStaffPage]
+/// [_i23.MediaStaffPage]
 class MediaStaffRoute extends _i42.PageRouteInfo<MediaStaffRouteArgs> {
   MediaStaffRoute({
     _i43.Key? key,
@@ -988,7 +1054,7 @@ class MediaStaffRouteArgs {
 }
 
 /// generated route for
-/// [_i23.MyHomePage]
+/// [_i24.MyHomePage]
 class MyHomeRoute extends _i42.PageRouteInfo<void> {
   const MyHomeRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -1002,7 +1068,7 @@ class MyHomeRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.NotificationsPage]
+/// [_i25.NotificationsPage]
 class NotificationsRoute extends _i42.PageRouteInfo<void> {
   const NotificationsRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -1011,20 +1077,6 @@ class NotificationsRoute extends _i42.PageRouteInfo<void> {
         );
 
   static const String name = 'NotificationsRoute';
-
-  static const _i42.PageInfo<void> page = _i42.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i25.RecentThreadsPage]
-class RecentThreadsRoute extends _i42.PageRouteInfo<void> {
-  const RecentThreadsRoute({List<_i42.PageRouteInfo>? children})
-      : super(
-          RecentThreadsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'RecentThreadsRoute';
 
   static const _i42.PageInfo<void> page = _i42.PageInfo<void>(name);
 }

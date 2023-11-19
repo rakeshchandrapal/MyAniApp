@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/providers/user.dart';
+import 'package:myaniapp/ui/routes/forum/overview/overview.dart';
 import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 @AutoRouterConfig()
@@ -82,8 +83,24 @@ class AppRouter extends $AppRouter {
             )
           ],
         ),
-        AutoRoute(page: RecentThreadsRoute.page, path: '/forum/recent'),
+        // AutoRoute(page: RecentThreadsRoute.page, path: '/forum/recent'),
         AutoRoute(page: CalendarRoute.page, path: '/calendar'),
+        AutoRoute(
+            page: ForumOverviewRoute.page,
+            path: '/forum/:filter',
+            guards: [
+              AutoRouteGuard.redirectPath(
+                (resolver) {
+                  var param = resolver.route.pathParams.getString('filter', '');
+
+                  if (!ForumFilter.values
+                      .any((element) => element.name == param)) {
+                    return '/forum/overview';
+                  }
+                  return null;
+                },
+              ),
+            ])
       ];
 }
 
