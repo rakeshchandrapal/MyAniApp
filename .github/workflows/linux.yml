@@ -42,7 +42,7 @@ jobs:
         with:
           type: 'zip'
           filename: MyAniApp-${{ env.sha_short }}-linux-x64.zip
-          directory: build/linux/x64/bundle
+          directory: build/linux/x64/release/bundle
 
       - uses: ncipollo/release-action@v1
         with:
