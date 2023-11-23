@@ -38,7 +38,6 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(page: ReviewRoute.page, path: '/review/:id'),
-        AutoRoute(page: SearchRoute.page, path: '/search'),
         AutoRoute(page: ThreadRoute.page, path: '/thread/:id'),
         AutoRoute(page: ExploreRoute.page, path: '/explore'),
         AutoRoute(page: LoginRoute.page, path: '/login'),
@@ -86,21 +85,23 @@ class AppRouter extends $AppRouter {
         // AutoRoute(page: RecentThreadsRoute.page, path: '/forum/recent'),
         AutoRoute(page: CalendarRoute.page, path: '/calendar'),
         AutoRoute(
-            page: ForumOverviewRoute.page,
-            path: '/forum/:filter',
-            guards: [
-              AutoRouteGuard.redirectPath(
-                (resolver) {
-                  var param = resolver.route.pathParams.getString('filter', '');
+          page: ForumOverviewRoute.page,
+          path: '/forum/:filter',
+          guards: [
+            AutoRouteGuard.redirectPath(
+              (resolver) {
+                var param = resolver.route.pathParams.getString('filter', '');
 
-                  if (!ForumFilter.values
-                      .any((element) => element.name == param)) {
-                    return '/forum/overview';
-                  }
-                  return null;
-                },
-              ),
-            ])
+                if (!ForumFilter.values
+                    .any((element) => element.name == param)) {
+                  return '/forum/overview';
+                }
+                return null;
+              },
+            ),
+          ],
+        ),
+        AutoRoute(page: SearchRoute.page, path: '/search')
       ];
 }
 

@@ -218,7 +218,7 @@ packages:
     source: hosted
     version: "4.7.0"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
@@ -816,6 +816,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  multi_dropdown:
+    dependency: "direct main"
+    description:
+      name: multi_dropdown
+      sha256: "43f580a3a641462d6962c1dd4bccede40884d9210519b6f8809337e39b62bc2f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   nm:
     dependency: transitive
     description:

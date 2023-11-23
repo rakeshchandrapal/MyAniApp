@@ -2,39 +2,53 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:multi_dropdown/models/value_item.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
-import 'package:myaniapp/providers/search.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/routes/search/editor/tags.dart';
+import 'package:myaniapp/ui/routes/search/search.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
 class EditorSheet extends ConsumerStatefulWidget {
-  const EditorSheet({super.key});
+  const EditorSheet({super.key, required this.query});
+
+  final SearchQuery query;
 
   @override
   ConsumerState<EditorSheet> createState() => _EditorSheetState();
 }
 
-class _EditorSheetState extends ConsumerState<EditorSheet>
-    with SingleTickerProviderStateMixin {
-  late TabController controller;
+class _EditorSheetState extends ConsumerState<EditorSheet> {
+  late SearchQuery temp;
 
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 2, vsync: this);
-    Future(() => ref
-        .read(searchEditorProvider('side').notifier)
-        .set(ref.read(searchEditorProvider('main'))));
+
+    temp = SearchQuery(
+      endDate: widget.query.endDate,
+      format: widget.query.format ?? [],
+      genres: widget.query.genres,
+      isAdult: widget.query.isAdult,
+      onList: widget.query.onList,
+      page: widget.query.page,
+      search: widget.query.search,
+      season: widget.query.season,
+      seasonYear: widget.query.seasonYear,
+      sort: widget.query.sort,
+      startDate: widget.query.startDate,
+      type: widget.query.type,
+      withTags: widget.query.withTags,
+      withoutTags: widget.query.withoutTags,
+      year: widget.query.year,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    var onList =
-        ref.watch(searchEditorProvider('side').select((value) => value.onList));
-
     return DraggableScrollableSheet(
       minChildSize: 0.3,
       initialChildSize: 1,
@@ -42,15 +56,6 @@ class _EditorSheetState extends ConsumerState<EditorSheet>
       builder: (context, scrollController) => ListView(
         controller: scrollController,
         children: [
-          // TabBar.secondary(
-          //   controller: controller,
-          //   splashBorderRadius:
-          //       const BorderRadius.vertical(top: Radius.circular(28)),
-          //   tabs: const [
-          //     Tab(text: 'hi'),
-          //     Tab(text: 'penis'),
-          //   ],
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -58,10 +63,10 @@ class _EditorSheetState extends ConsumerState<EditorSheet>
               children: [
                 TextButton(
                   onPressed: () {
-                    ref
-                        .read(searchEditorProvider('main').notifier)
-                        .set(ref.read(searchEditorProvider('side')));
-                    context.popRoute();
+                    if (mounted) {
+                      context.router.replaceNamed('/search${temp.toString()}');
+                      context.popRoute();
+                    }
                   },
                   child: const Text('Apply'),
                 ),
@@ -73,12 +78,45 @@ class _EditorSheetState extends ConsumerState<EditorSheet>
             child: Row(
               children: wrapAll(
                 [
-                  const TypeButton(),
-                  const SeasonButton(),
-                  const FormatButton(),
-                  const SortButton(),
-                  const GenresButton(),
-                  const YearPicker(),
+                  TypeButton(
+                    type: temp.type,
+                    onChanged: (value) => setState(() => temp.type = value),
+                  ),
+                  SeasonButton(
+                    season: temp.season,
+                    onChanged: (season) => setState(() => temp.season = season),
+                  ),
+                  YearButton(
+                    year: temp.year,
+                    onChanged: (year) => setState(() => temp.year = year),
+                  ),
+                  FormatButton(
+                    format: temp.format,
+                    // setState wont be called because the dropdown menu has it own state
+                    onChanged: (format) => temp.format = format,
+                  ),
+                  SortButton(
+                    sort: temp.sort,
+                    onChanged: (sort) => temp.sort = sort,
+                  ),
+                  GenresButton(
+                    genres: temp.genres,
+                    onChanged: (genres) {
+                      temp.genres = genres;
+
+                      if (temp.genres?.contains('Hentai') == true) {
+                        var displayAdult = ref
+                                .read(userProvider)
+                                .value!
+                                .options!
+                                .displayAdultContent ??
+                            false;
+                        temp.isAdult = displayAdult;
+                      } else {
+                        temp.isAdult = false;
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
@@ -88,29 +126,28 @@ class _EditorSheetState extends ConsumerState<EditorSheet>
           ),
           RadioListTile.adaptive(
             value: false,
-            groupValue: onList,
+            groupValue: temp.onList,
             toggleable: true,
-            onChanged: (value) {
-              ref.read(searchEditorProvider('side').notifier).set(ref
-                  .read(searchEditorProvider('side'))
-                  .copyWith(onList: value == false ? false : null));
-            },
+            onChanged: (value) =>
+                setState(() => temp.onList = value == false ? false : null),
             controlAffinity: ListTileControlAffinity.trailing,
             title: const Text('Not From My List'),
           ),
           RadioListTile.adaptive(
             value: true,
-            groupValue: onList,
+            groupValue: temp.onList,
             controlAffinity: ListTileControlAffinity.trailing,
             toggleable: true,
-            onChanged: (value) {
-              ref.read(searchEditorProvider('side').notifier).set(ref
-                  .read(searchEditorProvider('side'))
-                  .copyWith(onList: value == true ? true : null));
-            },
+            onChanged: (value) =>
+                setState(() => temp.onList = value == true ? true : null),
             title: const Text('Only From My List'),
           ),
-          const TagsButton(),
+          TagsButton(
+            withTags: temp.withTags,
+            withoutTags: temp.withoutTags,
+            onChanged: (tags, withOrWithout) => setState(() =>
+                withOrWithout ? temp.withTags = tags : temp.withoutTags = tags),
+          )
         ],
       ),
     );
@@ -131,24 +168,177 @@ class _EditorSheetState extends ConsumerState<EditorSheet>
   }
 }
 
-class TagsButton extends ConsumerWidget {
-  const TagsButton({super.key});
+class TypeButton extends StatelessWidget {
+  const TypeButton({super.key, this.type, required this.onChanged});
+
+  final Enum$MediaType? type;
+  final void Function(Enum$MediaType? type) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var included = ref
-        .watch(searchEditorProvider('side').select((value) => value.with_tags));
-    var excluded = ref.watch(
-        searchEditorProvider('side').select((value) => value.without_tags));
+  Widget build(BuildContext context) {
+    return CustomDropdown(
+      hint: 'Type',
+      value: type,
+      onClear: () => onChanged(null),
+      dropdownItems: Enum$MediaType.values
+          .take(2)
+          .map((e) => DropdownMenuItem(
+                value: e,
+                child: Text(
+                  e.name.capitalize(),
+                ),
+              ))
+          .toList(),
+      onChanged: onChanged,
+    );
+  }
+}
+
+class SeasonButton extends StatelessWidget {
+  const SeasonButton({super.key, this.season, required this.onChanged});
+
+  final Enum$MediaSeason? season;
+  final void Function(Enum$MediaSeason? season) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomDropdown(
+      hint: 'Season',
+      value: season,
+      onClear: () => onChanged(null),
+      dropdownItems: Enum$MediaSeason.values
+          .take(4)
+          .map((e) => DropdownMenuItem(
+                value: e,
+                child: Text(
+                  e.name.capitalize(),
+                ),
+              ))
+          .toList(),
+      onChanged: onChanged,
+    );
+  }
+}
+
+class YearButton extends StatelessWidget {
+  const YearButton({super.key, this.year, required this.onChanged});
+
+  final int? year;
+  final void Function(int? year) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    var years = List<int>.generate(
+      DateTime.now().year + 2 - 1940,
+      (index) => 1940 + index,
+    );
+
+    return CustomDropdown(
+      hint: 'Year',
+      value: year,
+      onClear: () => onChanged(null),
+      dropdownItems: [
+        for (var year in years.reversed)
+          DropdownMenuItem(value: year, child: Text(year.toString())),
+      ],
+      onChanged: onChanged,
+    );
+  }
+}
+
+class FormatButton extends StatelessWidget {
+  const FormatButton({super.key, this.format, required this.onChanged});
+
+  final List<Enum$MediaFormat>? format;
+  final void Function(List<Enum$MediaFormat>? format) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiDropdown(
+      hint: 'Format',
+      selectedItems: format
+          ?.map((e) => ValueItem(label: e.name.capitalize(), value: e))
+          .toList(),
+      onSelected: (values) => onChanged(values.map((e) => e.value!).toList()),
+      items: Enum$MediaFormat.values
+          .map((e) => ValueItem(label: e.name.capitalize(), value: e))
+          .toList(),
+    );
+  }
+}
+
+class SortButton extends StatelessWidget {
+  const SortButton({super.key, this.sort, required this.onChanged});
+
+  final List<Enum$MediaSort>? sort;
+  final void Function(List<Enum$MediaSort>? format) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiDropdown(
+      hint: 'Sort',
+      selectedItems: sort
+          ?.map((e) => ValueItem(label: e.name.capitalize(), value: e))
+          .toList(),
+      onSelected: (values) => onChanged(values.map((e) => e.value!).toList()),
+      items: Enum$MediaSort.values
+          .map((e) => ValueItem(label: e.name.capitalize(), value: e))
+          .toList(),
+    );
+  }
+}
+
+class GenresButton extends StatelessWidget {
+  const GenresButton({super.key, this.genres, required this.onChanged});
+
+  final List<String>? genres;
+  final void Function(List<String>? format) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Query$GenreCollection$Widget(
+      options:
+          Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
+      builder: queryBuilder((result, {fetchMore, refetch}) {
+        return MultiDropdown(
+          hint: 'Genres',
+          items: result.parsedData!.genres!
+              .map((e) => ValueItem(label: e!, value: e))
+              .toList(),
+          selectedItems: genres
+              ?.map((e) => ValueItem(label: e.capitalize(), value: e))
+              .toList(),
+          onSelected: (values) =>
+              onChanged(values.map((e) => e.value!).toList()),
+          // items: Enum$MediaSort.values
+          //     .map((e) => ValueItem(label: e.name.capitalize(), value: e))
+          //     .toList(),
+        );
+      }),
+    );
+  }
+}
+
+class TagsButton extends StatelessWidget {
+  const TagsButton(
+      {super.key, this.withTags, this.withoutTags, required this.onChanged});
+
+  final List<Query$GenreCollection$tags>? withTags;
+  final List<Query$GenreCollection$tags>? withoutTags;
+  final Function(List<Query$GenreCollection$tags>? tags, bool withOrWithout)
+      onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    // var included = ref
+    //     .watch(searchEditorProvider('side').select((value) => value.with_tags));
+    // var excluded = ref.watch(
+    //     searchEditorProvider('side').select((value) => value.without_tags));
 
     return Query$GenreCollection$Widget(
       options:
           Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
-      builder: (result, {fetchMore, refetch}) {
-        if ((result.isLoading && result.data == null) || result.hasException) {
-          return const SizedBox();
-        }
-
+      builder: queryBuilder((result, {fetchMore, refetch}) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -164,7 +354,12 @@ class TagsButton extends ConsumerWidget {
                   ),
                   IconButton(
                     onPressed: () => showTags(
-                        context, Tag.sort(result.parsedData!.tags!.cast())),
+                      context,
+                      tags: Tag.sort(result.parsedData!.tags!.cast()),
+                      withTags: withTags,
+                      withoutTags: withoutTags,
+                      onChanged: onChanged,
+                    ),
                     icon: const Icon(Icons.add),
                   )
                 ],
@@ -176,40 +371,32 @@ class TagsButton extends ConsumerWidget {
                 spacing: 5,
                 runSpacing: 10,
                 children: [
-                  for (var tag in (included ?? [].cast<String>()))
+                  for (var tag
+                      in (withTags ?? [].cast<Query$GenreCollection$tags>()))
                     TagButton(
-                      tag: tag!,
+                      tag: tag.name,
                       included: true,
-                      onClear: () =>
-                          ref.read(searchEditorProvider('side').notifier).set(
-                                ref.read(searchEditorProvider('side')).copyWith(
-                                      with_tags: included!.length == 1
-                                          ? null
-                                          : included
-                                        ?..remove(tag),
-                                    ),
-                              ),
+                      onClear: () => onChanged(
+                          withTags?.length == 1 ? null : withTags
+                            ?..remove(tag),
+                          true),
                     ),
-                  for (var tag in (excluded ?? [].cast<String>()))
+                  for (var tag
+                      in (withoutTags ?? [].cast<Query$GenreCollection$tags>()))
                     TagButton(
-                      tag: tag!,
+                      tag: tag.name,
                       included: false,
-                      onClear: () =>
-                          ref.read(searchEditorProvider('side').notifier).set(
-                                ref.read(searchEditorProvider('side')).copyWith(
-                                      without_tags: excluded!.length == 1
-                                          ? null
-                                          : excluded
-                                        ?..remove(tag),
-                                    ),
-                              ),
+                      onClear: () => onChanged(
+                          withoutTags?.length == 1 ? null : withoutTags
+                            ?..remove(tag),
+                          false),
                     ),
                 ],
               ),
             )
           ],
         );
-      },
+      }),
     );
   }
 }
@@ -249,331 +436,6 @@ class TagButton extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class GenresButton extends ConsumerWidget {
-  const GenresButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var genres =
-        ref.watch(searchEditorProvider('side').select((value) => value.genres));
-
-    return Query$GenreCollection$Widget(
-      options:
-          Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
-      builder: (result, {fetchMore, refetch}) {
-        if ((result.isLoading && result.data == null) || result.hasException) {
-          return const SizedBox();
-        }
-
-        return CustomDropdown.checkbox(
-          hint: 'Genres',
-          buttonPadding: const EdgeInsets.symmetric(horizontal: 14),
-          dropdownWidth: 230,
-          isChecked: (value) =>
-              ref.read(searchEditorProvider('side')).genres?.contains(value) ??
-              false,
-          values: genres,
-          selectedItemBuilder: (context) => result.parsedData!.genres!
-              .map(
-                (e) => Container(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text(
-                    (genres ?? []).join(', '),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    maxLines: 1,
-                  ),
-                ),
-              )
-              .toList(),
-          items: result.parsedData!.genres!
-              .map(
-                (e) => DropdownMenuItem(
-                  value: e!,
-                  child: Text(e),
-                ),
-              )
-              .toList(),
-          onChanged: (value) {
-            var displayAdult =
-                ref.read(userProvider).value!.options!.displayAdultContent ??
-                    false;
-            var options = ref.read(searchEditorProvider('side'));
-            if (options.genres == null) {
-              return ref.read(searchEditorProvider('side').notifier).merge(
-                    Variables$Query$Search(
-                      genres: [value],
-                      isAdult: value == 'Hentai' && displayAdult,
-                    ),
-                  );
-            }
-
-            if (options.genres!.contains(value) == true) {
-              if (options.genres!.length == 1) {
-                return ref
-                    .read(searchEditorProvider('side').notifier)
-                    .set(options.copyWith(genres: null, isAdult: null));
-              }
-              return ref.read(searchEditorProvider('side').notifier).merge(
-                    Variables$Query$Search(
-                        genres: options.genres!..remove(value),
-                        isAdult: (value == 'Hentai' ||
-                                options.genres!.contains('Hentai')) &&
-                            displayAdult),
-                  );
-            } else {
-              return ref.read(searchEditorProvider('side').notifier).merge(
-                    Variables$Query$Search(
-                        genres: options.genres!..add(value),
-                        isAdult: (value == 'Hentai' ||
-                                options.genres!.contains('Hentai')) &&
-                            displayAdult),
-                  );
-            }
-          },
-        );
-      },
-    );
-  }
-}
-
-class TypeButton extends ConsumerWidget {
-  const TypeButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var type =
-        ref.watch(searchEditorProvider('side').select((value) => value.type));
-
-    return CustomDropdown(
-      hint: 'Type',
-      value: type,
-      onClear: () => ref
-          .read(searchEditorProvider('side').notifier)
-          .set(ref.read(searchEditorProvider('side')).copyWith(type: null)),
-      dropdownItems: Enum$MediaType.values
-          .take(2)
-          .map((e) => DropdownMenuItem(
-                value: e,
-                child: Text(
-                  e.name.capitalize(),
-                ),
-              ))
-          .toList(),
-      onChanged: (value) {
-        ref
-            .read(searchEditorProvider('side').notifier)
-            .merge(Variables$Query$Search(type: value));
-      },
-    );
-  }
-}
-
-class SeasonButton extends ConsumerWidget {
-  const SeasonButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var season =
-        ref.watch(searchEditorProvider('side').select((value) => value.season));
-
-    return CustomDropdown(
-      hint: 'Season',
-      value: season,
-      onClear: () => ref
-          .read(searchEditorProvider('side').notifier)
-          .set(ref.read(searchEditorProvider('side')).copyWith(season: null)),
-      dropdownItems: Enum$MediaSeason.values
-          .take(4)
-          .map((e) => DropdownMenuItem(
-                value: e,
-                child: Text(
-                  e.name.capitalize(),
-                ),
-              ))
-          .toList(),
-      onChanged: (value) {
-        ref
-            .read(searchEditorProvider('side').notifier)
-            .merge(Variables$Query$Search(season: value));
-      },
-    );
-  }
-}
-
-class YearPicker extends ConsumerWidget {
-  const YearPicker({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var vars =
-        ref.watch(searchEditorProvider('side').select((value) => value.year));
-
-    var years = List<int>.generate(
-      DateTime.now().year + 2 - 1940,
-      (index) => 1940 + index,
-    );
-
-    return CustomDropdown(
-      hint: 'Year',
-      value: vars?.replaceAll('%', ''),
-      onChanged: (value) => ref
-          .read(searchEditorProvider('side').notifier)
-          .merge(Variables$Query$Search(year: '$value%')),
-      onClear: () => ref
-          .read(searchEditorProvider('side').notifier)
-          .set(ref.read(searchEditorProvider('side')).copyWith(year: null)),
-      dropdownItems: years.reversed
-          .map(
-            (e) => DropdownMenuItem(
-              value: e.toString(),
-              child: Text(e.toString()),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class FormatButton extends ConsumerWidget {
-  const FormatButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var format =
-        ref.watch(searchEditorProvider('side').select((value) => value.format));
-
-    return CustomDropdown.checkbox(
-      hint: 'Format',
-      buttonPadding: const EdgeInsets.symmetric(horizontal: 14),
-      dropdownWidth: 230,
-      isChecked: (value) =>
-          ref.read(searchEditorProvider('side')).format?.contains(value) ??
-          false,
-      values: format,
-      selectedItemBuilder: (context) => Enum$MediaFormat.values
-          .map(
-            (e) => Container(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                (format ?? []).map((e) => e!.name.capitalize()).join(', '),
-                style: const TextStyle(
-                  fontSize: 14,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                maxLines: 1,
-              ),
-            ),
-          )
-          .toList(),
-      items: Enum$MediaFormat.values
-          .map(
-            (e) => DropdownMenuItem(
-              value: e,
-              child: Text(e.name),
-            ),
-          )
-          .toList(),
-      onChanged: (value) {
-        var options = ref.read(searchEditorProvider('side'));
-        if (options.format == null) {
-          return ref
-              .read(searchEditorProvider('side').notifier)
-              .merge(Variables$Query$Search(format: [value]));
-        }
-
-        if (options.format!.contains(value) == true) {
-          if (options.format!.length == 1) {
-            return ref
-                .read(searchEditorProvider('side').notifier)
-                .set(options.copyWith(format: null));
-            // return menuSetState(() {});
-          }
-          return ref.read(searchEditorProvider('side').notifier).merge(
-              Variables$Query$Search(format: options.format!..remove(value)));
-          // menuSetState(() {});
-        } else {
-          return ref.read(searchEditorProvider('side').notifier).merge(
-              Variables$Query$Search(format: options.format!..add(value)));
-          // menuSetState(() {});
-        }
-      },
-    );
-  }
-}
-
-class SortButton extends ConsumerWidget {
-  const SortButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var sort =
-        ref.watch(searchEditorProvider('side').select((value) => value.sort));
-    // print(sort);
-
-    return CustomDropdown.checkbox(
-      hint: 'Sort',
-      buttonPadding: const EdgeInsets.symmetric(horizontal: 14),
-      dropdownWidth: 230,
-      isChecked: (value) =>
-          ref.read(searchEditorProvider('side')).sort?.contains(value) ?? false,
-      values: sort,
-      selectedItemBuilder: (context) => Enum$MediaSort.values
-          .map(
-            (e) => Container(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                (sort ?? []).map((e) => e!.name.capitalize()).join(', '),
-                style: const TextStyle(
-                  fontSize: 14,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                maxLines: 1,
-              ),
-            ),
-          )
-          .toList(),
-      items: Enum$MediaSort.values
-          .map(
-            (e) => DropdownMenuItem(
-              value: e,
-              child: Text(e.name),
-            ),
-          )
-          .toList(),
-      onChanged: (value) {
-        var options = ref.read(searchEditorProvider('side'));
-        if (options.sort == null) {
-          return ref
-              .read(searchEditorProvider('side').notifier)
-              .merge(Variables$Query$Search(sort: [value]));
-        }
-
-        if (options.sort!.contains(value) == true) {
-          if (options.sort!.length == 1) {
-            return ref
-                .read(searchEditorProvider('side').notifier)
-                .set(options.copyWith(sort: null));
-            // return menuSetState(() {});
-          }
-          return ref.read(searchEditorProvider('side').notifier).merge(
-              Variables$Query$Search(sort: options.sort!..remove(value)));
-          // menuSetState(() {});
-        } else {
-          return ref
-              .read(searchEditorProvider('side').notifier)
-              .merge(Variables$Query$Search(sort: options.sort!..add(value)));
-          // menuSetState(() {});
-        }
-      },
     );
   }
 }

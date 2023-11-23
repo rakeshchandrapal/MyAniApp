@@ -5,20 +5,6 @@ import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 
-// part 'media_editor.g.dart';
-
-// @riverpod
-// class mediaEditor extends _$mediaEditor {
-//   @override
-//   Stream<Query$MediaListEntry> build(int id) async* {
-//     return;
-//   }
-
-//   void updatep() {
-//     print('isjdoas');
-//   }
-// }
-
 class MediaEditorNotifier extends AutoDisposeFamilyStreamNotifier<
     Fragment$MediaListEntry, Fragment$MediaFragment> {
   @override

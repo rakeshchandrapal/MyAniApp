@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_dropdown/multiselect_dropdown.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
   const CustomDropdown({
@@ -65,7 +66,7 @@ class CustomDropdown<T> extends StatelessWidget {
     this.scrollbarAlwaysShow,
     this.offset = const Offset(0, -5),
     this.onClear,
-  })  : value = values?.last,
+  })  : value = values?.lastOrNull,
         dropdownItems = items
             .map(
               (e) => DropdownMenuItem(
@@ -203,6 +204,63 @@ class CustomDropdown<T> extends StatelessWidget {
           height: itemHeight ?? kMinInteractiveDimension,
           padding: itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
         ),
+      ),
+    );
+  }
+}
+
+class MultiDropdown<T> extends StatelessWidget {
+  const MultiDropdown({
+    super.key,
+    required this.items,
+    this.onSelected,
+    this.selectedItems,
+    required this.hint,
+  });
+
+  final List<ValueItem<T>> items;
+  final void Function(List<ValueItem<T>>)? onSelected;
+  final List<ValueItem<T>>? selectedItems;
+  final String hint;
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+
+    return MultiSelectDropDown<T>(
+      selectedOptions: selectedItems ?? [],
+      onOptionSelected: onSelected,
+      options: items,
+      hint: hint,
+      showClearIcon: false,
+      dropdownHeight: 300,
+      optionTextStyle:
+          TextStyle(fontSize: 16, color: theme.colorScheme.onBackground),
+      borderColor: theme.colorScheme.surfaceVariant,
+      focusedBorderColor: theme.colorScheme.surfaceVariant,
+      selectedOptionIcon: const Icon(Icons.check_circle),
+      backgroundColor: theme.colorScheme.background,
+      inputDecoration: BoxDecoration(
+        // color: theme.colorScheme.surfaceVariant,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15),
+        ),
+        border: Border.all(
+          color: theme.hintColor,
+        ),
+      ),
+      optionsBackgroundColor: theme.colorScheme.background,
+      borderRadius: 50,
+      selectedOptionBackgroundColor:
+          theme.colorScheme.surfaceVariant.withOpacity(0.3),
+      hintStyle: theme.textTheme.titleMedium?.copyWith(color: theme.hintColor),
+      selectedOptionTextColor: theme.colorScheme.primary,
+      chipConfig: ChipConfig(labelColor: theme.hintColor),
+      // clearIcon: Icon(Icons.close_outlined, size: 14, color: theme.hintColor),
+      suffixIcon: Icon(
+        Icons.arrow_drop_down,
+        color: theme.hintColor,
+        size: 24,
       ),
     );
   }

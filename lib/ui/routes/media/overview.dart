@@ -274,7 +274,7 @@ class _Tag extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       child: InkWell(
         onTap: () => context.pushRoute(
-          SearchRoute(tag: tag.name),
+          SearchRoute(withTags: [tag.name]),
         ),
         child: Container(
           decoration: BoxDecoration(

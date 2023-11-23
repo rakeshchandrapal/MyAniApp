@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
-import 'package:myaniapp/providers/search.dart';
 
 class TagsSheet extends ConsumerStatefulWidget {
-  const TagsSheet({super.key, required this.tags});
+  const TagsSheet({
+    super.key,
+    required this.tags,
+    required this.withTags,
+    required this.withoutTags,
+    required this.onChanged,
+  });
+
+  final List<Tag> tags;
+  final List<Query$GenreCollection$tags>? withTags;
+  final List<Query$GenreCollection$tags>? withoutTags;
+  // true if its included tags (with tags)
+  final void Function(
+      List<Query$GenreCollection$tags>? tags, bool withOrWithout) onChanged;
 
   @override
   ConsumerState<TagsSheet> createState() => _TagsSheetState();
-  final List<Tag> tags;
 }
 
 class _TagsSheetState extends ConsumerState<TagsSheet> {
   late List<Tag> tags;
+  late List<Query$GenreCollection$tags>? withTags;
+  late List<Query$GenreCollection$tags>? withoutTags;
   final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     tags = widget.tags;
+    withTags = widget.withTags;
+    withoutTags = widget.withoutTags;
     _controller.addListener(listener);
   }
 
@@ -32,15 +47,17 @@ class _TagsSheetState extends ConsumerState<TagsSheet> {
     setState(() {
       tags = widget.tags
           .where((element) {
-            return element.tags.any((element) =>
-                element.name.toLowerCase().contains(_controller.text));
+            return element.tags.any((element) => element.name
+                .toLowerCase()
+                .contains(_controller.text.toLowerCase()));
           })
           .toList()
           .map((e) {
             return Tag(category: e.category)
               ..tags = e.tags
-                  .where((element) =>
-                      element.name.toLowerCase().contains(_controller.text))
+                  .where((element) => element.name
+                      .toLowerCase()
+                      .contains(_controller.text.toLowerCase()))
                   .toList();
           })
           .toList();
@@ -49,8 +66,7 @@ class _TagsSheetState extends ConsumerState<TagsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    var options = ref.watch(searchEditorProvider('side'));
-
+    print(withTags);
     return DraggableScrollableSheet(
       minChildSize: 0.3,
       initialChildSize: 1,
@@ -97,41 +113,29 @@ class _TagsSheetState extends ConsumerState<TagsSheet> {
                       subtitle: tag.description?.isNotEmpty == true
                           ? Text(tag.description!)
                           : null,
-                      value: options.with_tags?.contains(tag.name) == true
+                      value: withTags?.contains(tag) == true
                           ? true
-                          : options.without_tags?.contains(tag.name) == true
+                          : withoutTags?.contains(tag) == true
                               ? null
                               : false,
                       tristate: true,
                       onChanged: (value) {
                         if (value == null) {
-                          ref.read(searchEditorProvider('side').notifier).set(
-                                options.copyWith(
-                                    with_tags: options.with_tags!.length == 1
-                                        ? null
-                                        : options.with_tags
-                                      ?..remove(tag.name),
-                                    without_tags: (options.without_tags ?? [])
-                                      ..add(tag.name)),
-                              );
+                          setState(() {
+                            withTags = withTags!.length == 1 ? null : withTags
+                              ?..remove(tag);
+                            withoutTags = (withoutTags ?? [])..add(tag);
+                          });
                         } else if (value == true) {
-                          ref.read(searchEditorProvider('side').notifier).set(
-                                options.copyWith(
-                                  with_tags: (options.with_tags ?? [])
-                                    ..add(tag.name),
-                                ),
-                              );
+                          setState(() => withTags = (withTags ?? [])..add(tag));
                         } else {
-                          ref.read(searchEditorProvider('side').notifier).set(
-                                options.copyWith(
-                                  without_tags:
-                                      options.without_tags!.length == 1
-                                          ? null
-                                          : options.without_tags
-                                        ?..remove(tag.name),
-                                ),
-                              );
+                          setState(() => withoutTags =
+                              withoutTags!.length == 1 ? null : withoutTags
+                                ?..remove(tag));
                         }
+
+                        widget.onChanged(withTags, true);
+                        widget.onChanged(withoutTags, false);
                       },
                     );
                   },
@@ -145,10 +149,22 @@ class _TagsSheetState extends ConsumerState<TagsSheet> {
   }
 }
 
-void showTags(BuildContext context, List<Tag> tags) {
+void showTags(
+  BuildContext context, {
+  required List<Tag> tags,
+  List<Query$GenreCollection$tags>? withTags,
+  List<Query$GenreCollection$tags>? withoutTags,
+  required Function(List<Query$GenreCollection$tags>? tags, bool withOrWithout)
+      onChanged,
+}) {
   showModalBottomSheet(
     context: context,
-    builder: (context) => TagsSheet(tags: tags),
+    builder: (context) => TagsSheet(
+      tags: tags,
+      withTags: withTags,
+      withoutTags: withoutTags,
+      onChanged: onChanged,
+    ),
   );
 }
 

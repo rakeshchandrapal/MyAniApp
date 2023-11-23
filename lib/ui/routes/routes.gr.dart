@@ -313,18 +313,34 @@ abstract class $AppRouter extends _i42.RootStackRouter {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<SearchRouteArgs>(
           orElse: () => SearchRouteArgs(
+                search: queryParams.optString('search'),
                 sort: queryParams.get(
                   'sort',
                   '',
                 ),
-                search: queryParams.optString('search'),
-                type: queryParams.optString('type'),
+                format: queryParams.get(
+                  'format',
+                  '',
+                ),
                 genre: queryParams.get(
                   'genre',
                   '',
                 ),
-                tag: queryParams.get(
-                  'tag',
+                withTags: queryParams.get(
+                  'withTags',
+                  '',
+                ),
+                type: queryParams.optString('type'),
+                page: queryParams.optInt('page'),
+                season: queryParams.optString('season'),
+                seasonYear: queryParams.optInt('seasonYear'),
+                year: queryParams.optInt('year'),
+                startDate: queryParams.optInt('startDate'),
+                endDate: queryParams.optInt('endDate'),
+                isAdult: queryParams.optBool('isAdult'),
+                onList: queryParams.optBool('onList'),
+                withoutTags: queryParams.get(
+                  'withoutTags',
                   '',
                 ),
               ));
@@ -332,11 +348,21 @@ abstract class $AppRouter extends _i42.RootStackRouter {
         routeData: routeData,
         child: _i28.SearchPage(
           key: args.key,
-          sort: args.sort,
           search: args.search,
-          type: args.type,
+          sort: args.sort,
+          format: args.format,
           genre: args.genre,
-          tag: args.tag,
+          withTags: args.withTags,
+          type: args.type,
+          page: args.page,
+          season: args.season,
+          seasonYear: args.seasonYear,
+          year: args.year,
+          startDate: args.startDate,
+          endDate: args.endDate,
+          isAdult: args.isAdult,
+          onList: args.onList,
+          withoutTags: args.withoutTags,
           autofocus: args.autofocus,
         ),
       );
@@ -1139,30 +1165,60 @@ class ReviewRouteArgs {
 class SearchRoute extends _i42.PageRouteInfo<SearchRouteArgs> {
   SearchRoute({
     _i43.Key? key,
-    dynamic sort = '',
     String? search,
-    String? type,
+    dynamic sort = '',
+    dynamic format = '',
     dynamic genre = '',
-    dynamic tag = '',
+    dynamic withTags = '',
+    String? type,
+    int? page,
+    String? season,
+    int? seasonYear,
+    int? year,
+    int? startDate,
+    int? endDate,
+    bool? isAdult,
+    bool? onList,
+    dynamic withoutTags = '',
     bool? autofocus,
     List<_i42.PageRouteInfo>? children,
   }) : super(
           SearchRoute.name,
           args: SearchRouteArgs(
             key: key,
-            sort: sort,
             search: search,
-            type: type,
+            sort: sort,
+            format: format,
             genre: genre,
-            tag: tag,
+            withTags: withTags,
+            type: type,
+            page: page,
+            season: season,
+            seasonYear: seasonYear,
+            year: year,
+            startDate: startDate,
+            endDate: endDate,
+            isAdult: isAdult,
+            onList: onList,
+            withoutTags: withoutTags,
             autofocus: autofocus,
           ),
           rawQueryParams: {
-            'sort': sort,
             'search': search,
-            'type': type,
+            'sort': sort,
+            'format': format,
             'genre': genre,
-            'tag': tag,
+            'withTags': withTags,
+            'type': type,
+            'page': page,
+            'season': season,
+            'seasonYear': seasonYear,
+            'year': year,
+            'startDate': startDate,
+            'endDate': endDate,
+            'isAdult': isAdult,
+            'onList': onList,
+            'withoutTags': withoutTags,
           },
           initialChildren: children,
         );
@@ -1176,31 +1232,61 @@ class SearchRoute extends _i42.PageRouteInfo<SearchRouteArgs> {
 class SearchRouteArgs {
   const SearchRouteArgs({
     this.key,
-    this.sort = '',
     this.search,
-    this.type,
+    this.sort = '',
+    this.format = '',
     this.genre = '',
-    this.tag = '',
+    this.withTags = '',
+    this.type,
+    this.page,
+    this.season,
+    this.seasonYear,
+    this.year,
+    this.startDate,
+    this.endDate,
+    this.isAdult,
+    this.onList,
+    this.withoutTags = '',
     this.autofocus,
   });
 
   final _i43.Key? key;
 
-  final dynamic sort;
-
   final String? search;
 
-  final String? type;
+  final dynamic sort;
+
+  final dynamic format;
 
   final dynamic genre;
 
-  final dynamic tag;
+  final dynamic withTags;
+
+  final String? type;
+
+  final int? page;
+
+  final String? season;
+
+  final int? seasonYear;
+
+  final int? year;
+
+  final int? startDate;
+
+  final int? endDate;
+
+  final bool? isAdult;
+
+  final bool? onList;
+
+  final dynamic withoutTags;
 
   final bool? autofocus;
 
   @override
   String toString() {
-    return 'SearchRouteArgs{key: $key, sort: $sort, search: $search, type: $type, genre: $genre, tag: $tag, autofocus: $autofocus}';
+    return 'SearchRouteArgs{key: $key, search: $search, sort: $sort, format: $format, genre: $genre, withTags: $withTags, type: $type, page: $page, season: $season, seasonYear: $seasonYear, year: $year, startDate: $startDate, endDate: $endDate, isAdult: $isAdult, onList: $onList, withoutTags: $withoutTags, autofocus: $autofocus}';
   }
 }
 

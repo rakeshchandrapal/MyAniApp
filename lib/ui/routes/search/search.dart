@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -8,31 +9,50 @@ import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
-import 'package:myaniapp/providers/search.dart';
 import 'package:myaniapp/providers/shared_preferrences.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/ui/routes/search/editor/sheet.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
 @RoutePage()
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({
     super.key,
-    @QueryParam('sort') this.sort = '',
-    @QueryParam('search') this.search,
+    @queryParam this.search,
+    @queryParam this.sort = '',
+    @queryParam this.format = '',
+    @queryParam this.genre = '',
+    @queryParam this.withTags = '',
     @queryParam this.type,
-    @QueryParam('genre') this.genre = '',
-    @QueryParam('tag') this.tag = '',
+    @queryParam this.page,
+    @queryParam this.season,
+    @queryParam this.seasonYear,
+    @queryParam this.year,
+    @queryParam this.startDate,
+    @queryParam this.endDate,
+    @queryParam this.isAdult,
+    @queryParam this.onList,
+    @queryParam this.withoutTags = '',
     this.autofocus,
   });
 
   final dynamic sort;
+  final dynamic format;
   final dynamic genre;
-  final dynamic tag;
+  final dynamic withTags;
+  final dynamic withoutTags;
   final String? search;
   final String? type;
+  final int? page;
+  final String? season;
+  final int? seasonYear;
+  final int? year;
+  final int? startDate;
+  final int? endDate;
+  final bool? isAdult;
+  final bool? onList;
   final bool? autofocus;
 
   @override
@@ -40,282 +60,225 @@ class SearchPage extends ConsumerStatefulWidget {
 }
 
 class _SearchPageState extends ConsumerState<SearchPage> {
-  TextEditingController controller = TextEditingController();
+  SearchQuery? query;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
+    _controller = TextEditingController(text: widget.search);
+    setQuery();
+  }
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      if (widget.search == null &&
-          widget.genre == null &&
-          widget.tag == null &&
-          widget.sort == null &&
-          widget.type == null) {
-        return;
-      }
+  Future<void> setQuery() async {
+    var q = await SearchQuery.from(
+      widget.sort,
+      widget.format,
+      widget.genre,
+      widget.withTags,
+      widget.withoutTags,
+      widget.search,
+      widget.type,
+      widget.page,
+      widget.season,
+      widget.seasonYear,
+      widget.year,
+      widget.startDate,
+      widget.endDate,
+      widget.isAdult,
+      widget.onList,
+    );
+    if (q.toString() != query.toString()) {
+      query = q;
+      setState(() {});
+    }
+  }
 
-      if (widget.sort != '') {
-        switch (widget.sort.runtimeType) {
-          case (String):
-            var sort = Enum$MediaSort.values
-                .where((element) => element.name == widget.sort);
-            if (sort.isNotEmpty) {
-              ref
-                  .read(searchEditorProvider('main').notifier)
-                  .merge(Variables$Query$Search(sort: sort.toList()));
-            }
-            break;
-          case const (List<String>):
-            var sort = Enum$MediaSort.values
-                .where((element) => widget.sort.contains(element.name));
-            if (sort.isNotEmpty) {
-              ref
-                  .read(searchEditorProvider('main').notifier)
-                  .merge(Variables$Query$Search(sort: sort.toList()));
-            }
-            break;
-        }
-      }
-
-      if (widget.genre != '') {
-        var genres = (
-          await client.value.query$GenreCollection(
-            Options$Query$GenreCollection(
-              fetchPolicy: FetchPolicy.cacheFirst,
-            ),
-          ),
-        ).$1.parsedData!.genres!;
-
-        switch (widget.genre.runtimeType) {
-          case (String):
-            var genre = genres.where((element) => element == widget.genre);
-            if (genre.isNotEmpty) {
-              ref
-                  .read(searchEditorProvider('main').notifier)
-                  .merge(Variables$Query$Search(genres: genre.toList()));
-            }
-            break;
-          case const (List<String>):
-            var genre =
-                genres.where((element) => widget.genre.contains(element));
-            if (genre.isNotEmpty) {
-              ref.read(searchEditorProvider('main').notifier).merge(
-                    Variables$Query$Search(
-                      genres: genres.toList(),
-                    ),
-                  );
-            }
-            break;
-        }
-      }
-
-      if (widget.tag != '') {
-        var tags = (
-          await client.value.query$GenreCollection(
-            Options$Query$GenreCollection(
-              fetchPolicy: FetchPolicy.cacheFirst,
-            ),
-          ),
-        ).$1.parsedData!.tags!;
-
-        switch (widget.tag.runtimeType) {
-          case (String):
-            var tag = tags
-                .where((element) => element!.name == widget.tag)
-                .map((e) => e!.name);
-            if (tag.isNotEmpty) {
-              ref
-                  .read(searchEditorProvider('main').notifier)
-                  .merge(Variables$Query$Search(with_tags: tag.toList()));
-            }
-            break;
-          case const (List<String>):
-            var tag = tags
-                .where((element) => widget.tag.contains(element))
-                .map((e) => e!.name);
-            if (tag.isNotEmpty) {
-              ref
-                  .read(searchEditorProvider('main').notifier)
-                  .merge(Variables$Query$Search(with_tags: tag.toList()));
-            }
-            break;
-        }
-      }
-
-      if (widget.search != null) {
-        ref
-            .read(searchEditorProvider('main').notifier)
-            .merge(Variables$Query$Search(search: widget.search));
-      }
-
-      if (widget.type != null) {
-        Enum$MediaType type = Enum$MediaType.values.firstWhere(
-          (element) => element.name == widget.type,
-          orElse: () => Enum$MediaType.$unknown,
-        );
-
-        if (type != Enum$MediaType.$unknown) {
-          ref
-              .read(searchEditorProvider('main').notifier)
-              .merge(Variables$Query$Search(type: type));
-        }
-      }
-    });
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var vars = ref.watch(searchEditorProvider('main'));
+    setQuery();
 
-    if (vars.search?.isNotEmpty == true && controller.text != vars.search) {
-      controller.text = vars.search!;
+    print(query.toString());
+
+    if (query?.search?.isNotEmpty == true &&
+        _controller.text != query?.search) {
+      _controller.text = query!.search!;
     }
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: query == null,
         toolbarHeight: 80,
-        flexibleSpace: FlexibleSpaceBar(
-          background: SafeArea(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: TextField(
-                  controller: controller,
-                  onSubmitted: (value) {
-                    ref.read(searchEditorProvider('main').notifier).set(
-                          vars.copyWith(search: value.isEmpty ? null : value),
-                        );
+        flexibleSpace: query == null
+            ? null
+            : FlexibleSpaceBar(
+                background: SafeArea(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: TextField(
+                        controller: _controller,
+                        onSubmitted: (value) {
+                          if (mounted) {
+                            query!.search = value.isNotEmpty ? value : null;
+                            context.router
+                                .replaceNamed('/search${query.toString()}');
 
-                    if (value.isNotEmpty) {
-                      ref.read(sharedPrefProvider).setStringList(
-                          'recentSearches',
-                          (ref
-                                  .read(sharedPrefProvider)
-                                  .getStringList('recentSearch') ??
-                              [])
-                            ..add(value));
-                    }
-                  },
-                  focusNode: FocusNode(canRequestFocus: false),
-                  autofocus: widget.autofocus ?? false,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    prefixIcon: const Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: AutoLeadingButton(),
-                    ),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: IconButton(
-                        onPressed: () => showModalBottomSheet(
-                          builder: (context) => const EditorSheet(),
-                          context: context,
+                            if (value.isNotEmpty) {
+                              ref.read(sharedPrefProvider).setStringList(
+                                  'recentSearches',
+                                  (ref
+                                          .read(sharedPrefProvider)
+                                          .getStringList('recentSearch') ??
+                                      [])
+                                    ..add(value));
+                            }
+                          }
+                        },
+                        // onSubmitted: (value) {
+                        //   ref.read(searchEditorProvider('main').notifier).set(
+                        //         vars.copyWith(search: value.isEmpty ? null : value),
+                        //       );
+
+                        //   if (value.isNotEmpty) {
+                        //     ref.read(sharedPrefProvider).setStringList(
+                        //         'recentSearches',
+                        //         (ref
+                        //                 .read(sharedPrefProvider)
+                        //                 .getStringList('recentSearch') ??
+                        //             [])
+                        //           ..add(value));
+                        //   }
+                        // },
+                        focusNode: FocusNode(canRequestFocus: false),
+                        autofocus: widget.autofocus ?? false,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          prefixIcon: const Padding(
+                            padding: EdgeInsets.only(left: 8),
+                            child: AutoLeadingButton(),
+                          ),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: IconButton(
+                              onPressed: () => showModalBottomSheet(
+                                builder: (context) => EditorSheet(
+                                  query: query!,
+                                ),
+                                context: context,
+                              ),
+                              icon: const Icon(Icons.more_horiz),
+                            ),
+                          ),
                         ),
-                        icon: const Icon(Icons.more_horiz),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-        ),
       ),
-      body: vars != Variables$Query$Search()
-          ? Query$Search$Widget(
-              options: Options$Query$Search(variables: vars),
-              builder: (result, {fetchMore, refetch}) {
-                if (result.isLoading && result.data == null) {
-                  return const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  );
-                } else if (result.hasException) {
-                  return GraphqlError(exception: result.exception!);
-                }
+      body: query == null
+          ? const Center(
+              child: CircularProgressIndicator.adaptive(),
+            )
+          : query.toString() != '?'
+              ? Query$Search$Widget(
+                  options: Options$Query$Search(variables: query!.toVar()),
+                  builder: queryBuilder(
+                    (result, {fetchMore, refetch}) {
+                      if (result.parsedData!.Page!.media!.isEmpty) {
+                        return const Center(
+                          child: Text('No Results Found'),
+                        );
+                      }
 
-                if (result.parsedData!.Page!.media!.isEmpty) {
-                  return const Center(
-                    child: Text('No Results Found'),
-                  );
-                }
+                      return Pagination(
+                        fetchMore: fetchMore!,
+                        opts: FetchMoreOptions$Query$Search(
+                          updateQuery:
+                              (previousResultData, fetchMoreResultData) {
+                            var list = [
+                              ...previousResultData!['Page']!['media'],
+                              ...fetchMoreResultData!['Page']!['media'],
+                            ];
+                            fetchMoreResultData['Page']!['media'] = list;
+                            return fetchMoreResultData;
+                          },
+                          variables: query!.toVar().copyWith(
+                              page: (result.parsedData!.Page!.pageInfo!
+                                          .currentPage ??
+                                      1) +
+                                  1),
+                        ),
+                        pageInfo: result.parsedData!.Page!.pageInfo!,
+                        child: MediaCards(
+                          padding: const EdgeInsets.all(8),
+                          list: result.parsedData!.Page!.media!
+                              .cast<Fragment$MediaFragment>(),
+                          aspectRatio: 1.9 / 3,
+                          onTap: (media, index) => context.pushRoute(
+                            MediaRoute(id: media.id),
+                          ),
+                          underTitle: (media, style, __) {
+                            if (style != ListStyle.detailedList) return null;
 
-                return Pagination(
-                  fetchMore: fetchMore!,
-                  opts: FetchMoreOptions$Query$Search(
-                    updateQuery: (previousResultData, fetchMoreResultData) {
-                      var list = [
-                        ...previousResultData!['Page']!['media'],
-                        ...fetchMoreResultData!['Page']!['media'],
-                      ];
-                      fetchMoreResultData['Page']!['media'] = list;
-                      return fetchMoreResultData;
-                    },
-                    variables: vars.copyWith(
-                        page: (result.parsedData!.Page!.pageInfo!.currentPage ??
-                                1) +
-                            1),
-                  ),
-                  pageInfo: result.parsedData!.Page!.pageInfo!,
-                  child: MediaCards(
-                    padding: const EdgeInsets.all(8),
-                    list: result.parsedData!.Page!.media!
-                        .cast<Fragment$MediaFragment>(),
-                    aspectRatio: 1.9 / 3,
-                    onTap: (media, index) => context.pushRoute(
-                      MediaRoute(id: media.id),
-                    ),
-                    underTitle: (media, style, __) {
-                      if (style != ListStyle.detailedList) return null;
-
-                      return Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              media.genres!.join(', '),
-                            ),
-                            if (media.format != null)
-                              Text.rich(
-                                TextSpan(
-                                  text: media.type!.name.capitalize(),
-                                  children: [
-                                    TextSpan(
-                                        text:
-                                            ' · ${media.format!.name.capitalize()}')
-                                  ],
-                                ),
-                                overflow: TextOverflow.ellipsis,
+                            return Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    media.genres!.join(', '),
+                                  ),
+                                  if (media.format != null)
+                                    Text.rich(
+                                      TextSpan(
+                                        text: media.type!.name.capitalize(),
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  ' · ${media.format!.name.capitalize()}')
+                                        ],
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                ],
                               ),
-                          ],
+                            );
+                          },
                         ),
                       );
                     },
                   ),
-                );
-              },
-            )
-          : const RecentSearches(),
+                )
+              : RecentSearches(
+                  onTap: (s) =>
+                      context.router.replaceNamed('/search?search=$s'),
+                ),
     );
   }
 }
 
 class RecentSearches extends ConsumerWidget {
-  const RecentSearches({super.key});
+  const RecentSearches({super.key, required this.onTap});
+
+  final void Function(String search) onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var list = ref.watch(sharedPrefProvider).getStringList('recentSearches');
-    print(list);
+
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        onTap: () => ref
-            .read(searchEditorProvider('main').notifier)
-            .set(Variables$Query$Search(search: list[index])),
+        onTap: () => onTap(list[index]),
         title: Row(
           children: [
             const Icon(Icons.history),
@@ -331,289 +294,245 @@ class RecentSearches extends ConsumerWidget {
   }
 }
 
+class SearchQuery {
+  SearchQuery({
+    this.withTags,
+    this.withoutTags,
+    this.search,
+    this.sort,
+    this.type,
+    this.format,
+    this.genres,
+    this.page,
+    this.season,
+    this.seasonYear,
+    this.year,
+    this.startDate,
+    this.endDate,
+    this.isAdult,
+    this.onList,
+  });
 
-// class _SearchPageState extends ConsumerState<SearchPage> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-//       bool setVars = false;
+  String? search;
+  List<Enum$MediaSort>? sort;
+  Enum$MediaType? type;
+  List<Enum$MediaFormat>? format;
+  List<String>? genres;
+  List<Query$GenreCollection$tags>? withTags;
+  List<Query$GenreCollection$tags>? withoutTags;
+  int? page;
+  Enum$MediaSeason? season;
+  int? seasonYear;
+  int? year;
+  // yearGreater
+  int? startDate;
+  // yearLesser
+  int? endDate;
+  bool? isAdult;
+  bool? onList;
 
-//       if (widget.sort != '' ||
-//           widget.genre != '' ||
-//           widget.tag != '' ||
-//           widget.search != null ||
-//           widget.type != null) {
-//         ref
-//             .read(searchProvider.notifier)
-//             .setVariables(Variables$Query$Search(), fetch: false);
-//         setVars = true;
-//       }
+  static Future<SearchQuery> from(
+    dynamic sort,
+    dynamic format,
+    dynamic genre,
+    dynamic withTags,
+    dynamic withoutTags,
+    String? search,
+    String? type,
+    int? page,
+    String? season,
+    int? seasonYear,
+    int? year,
+    int? startDate,
+    int? endDate,
+    bool? isAdult,
+    bool? onList,
+  ) async {
+    List<Enum$MediaSort>? sort0;
+    List<Enum$MediaFormat>? format0;
+    List<String>? genre0;
+    List<Query$GenreCollection$tags>? withTag0;
+    List<Query$GenreCollection$tags>? withoutTag0;
+    Enum$MediaType? type0 = Enum$MediaType.values
+        .firstWhereOrNull((element) => element.name == type);
+    Enum$MediaSeason? season0 = Enum$MediaSeason.values
+        .firstWhereOrNull((element) => element.name == season);
 
-//       if (widget.sort != '') {
-//         switch (widget.sort.runtimeType) {
-//           case (String):
-//             var sort = Enum$MediaSort.values
-//                 .where((element) => element.name == widget.sort);
-//             if (sort.isNotEmpty) {
-//               ref.read(searchProvider.notifier).setVariables(
-//                     ref
-//                         .read(searchProvider.notifier)
-//                         .variables!
-//                         .copyWith(sort: sort.toList()),
-//                     fetch: false,
-//                   );
-//             }
-//             break;
-//           case const (List<String>):
-//             var sort = Enum$MediaSort.values
-//                 .where((element) => widget.sort.contains(element.name));
-//             if (sort.isNotEmpty) {
-//               ref.read(searchProvider.notifier).setVariables(
-//                     ref
-//                         .read(searchProvider.notifier)
-//                         .variables!
-//                         .copyWith(sort: sort.toList()),
-//                     fetch: false,
-//                   );
-//             }
-//             break;
-//         }
-//       }
+    Query$GenreCollection? collection;
 
-//       if (widget.genre != '') {
-//         var genres = (
-//           await client.value.query$GenreCollection(
-//             Options$Query$GenreCollection(
-//               fetchPolicy: FetchPolicy.cacheFirst,
-//             ),
-//           ),
-//         ).$1.parsedData!.genres!;
+    if (withTags != null || withoutTags != null || genre != null) {
+      collection = (await client.value.query$GenreCollection(
+        Options$Query$GenreCollection(
+          fetchPolicy: FetchPolicy.cacheFirst,
+        ),
+      ))
+          .parsedData;
+    }
 
-//         switch (widget.genre.runtimeType) {
-//           case (String):
-//             var genre = genres.where((element) => element == widget.genre);
-//             if (genre.isNotEmpty) {
-//               ref.read(searchProvider.notifier).setVariables(
-//                     ref
-//                         .read(searchProvider.notifier)
-//                         .variables!
-//                         .copyWith(genres: genre.toList()),
-//                     fetch: false,
-//                   );
-//             }
-//             break;
-//           case const (List<String>):
-//             var genre =
-//                 genres.where((element) => widget.genre.contains(element));
-//             if (genre.isNotEmpty) {
-//               ref.read(searchProvider.notifier).setVariables(
-//                   ref
-//                       .read(searchProvider.notifier)
-//                       .variables!
-//                       .copyWith(genres: genre.toList()),
-//                   fetch: false);
-//             }
-//             break;
-//         }
-//       }
+    if (sort != '') {
+      switch (sort.runtimeType) {
+        case (String):
+          var s = Enum$MediaSort.values
+              .firstWhereOrNull((element) => element.name == sort);
+          if (s != null) {
+            sort0 = [s];
+          }
+          break;
+        case const (List<String>):
+          var s = Enum$MediaSort.values
+              .where((element) => sort.contains(element.name));
+          if (s.isNotEmpty) {
+            sort0 = s.toList();
+          }
+          break;
+      }
+    }
 
-//       if (widget.tag != '') {
-//         var tags = (
-//           await client.value.query$GenreCollection(
-//             Options$Query$GenreCollection(
-//               fetchPolicy: FetchPolicy.cacheFirst,
-//             ),
-//           ),
-//         ).$1.parsedData!.tags!;
+    if (genre != '') {
+      switch (genre.runtimeType) {
+        case (String):
+          var g = collection!.genres!.firstWhere((element) => element == genre);
+          if (g != null) {
+            genre0 = [g];
+          }
+          break;
+        case const (List<String>):
+          var g =
+              collection!.genres!.where((element) => genre.contains(element));
+          if (g.isNotEmpty) {
+            genre0 = g.cast<String>().toList();
+          }
+          break;
+      }
+    }
 
-//         switch (widget.tag.runtimeType) {
-//           case (String):
-//             var tag = tags
-//                 .where((element) => element!.name == widget.tag)
-//                 .map((e) => e!.name);
-//             if (tag.isNotEmpty) {
-//               ref.read(searchProvider.notifier).setVariables(
-//                     ref
-//                         .read(searchProvider.notifier)
-//                         .variables!
-//                         .copyWith(with_tags: tag.toList()),
-//                     fetch: false,
-//                   );
-//             }
-//             break;
-//           case const (List<String>):
-//             var tag = tags
-//                 .where((element) => widget.tag.contains(element))
-//                 .map((e) => e!.name);
-//             if (tag.isNotEmpty) {
-//               ref.read(searchProvider.notifier).setVariables(
-//                   ref
-//                       .read(searchProvider.notifier)
-//                       .variables!
-//                       .copyWith(with_tags: tag.toList()),
-//                   fetch: false);
-//             }
-//             break;
-//         }
-//       }
+    if (withTags != '') {
+      switch (withTags.runtimeType) {
+        case (String):
+          var t = collection!.tags!
+              .firstWhereOrNull((element) => element!.name == withTags);
+          if (t != null) {
+            withTag0 = [t];
+          }
+          break;
+        case const (List<String>):
+          var t = collection!.tags!
+              .where((element) => withTags.contains(element!.name));
+          if (withTags.isNotEmpty) {
+            withTag0 = t.cast<Query$GenreCollection$tags>().toList();
+          }
+          break;
+      }
+    }
 
-//       if (widget.search != null) {
-//         ref.read(searchProvider.notifier).setVariables(
-//               ref
-//                   .read(searchProvider.notifier)
-//                   .variables!
-//                   .copyWith(search: widget.search),
-//               fetch: false,
-//             );
-//       }
+    if (withoutTags != '') {
+      switch (withTags.runtimeType) {
+        case (String):
+          var t = collection!.tags!
+              .firstWhereOrNull((element) => element!.name == withoutTags);
+          if (t != null) {
+            withoutTag0 = [t];
+          }
+          break;
+        case const (List<String>):
+          var t = collection!.tags!
+              .where((element) => withTags.contains(element!.name));
+          if (withTags.isNotEmpty) {
+            withoutTag0 = t.cast<Query$GenreCollection$tags>().toList();
+          }
+          break;
+      }
+    }
 
-//       if (widget.type != null) {
-//         Enum$MediaType type = Enum$MediaType.values.firstWhere(
-//           (element) => element.name == widget.type,
-//           orElse: () => Enum$MediaType.$unknown,
-//         );
+    if (format != '') {
+      switch (format.runtimeType) {
+        case (String):
+          var f = Enum$MediaFormat.values
+              .firstWhereOrNull((element) => element.name == format);
+          if (f != null) {
+            format0 = [f];
+          }
+          break;
+        case const (List<String>):
+          var f = Enum$MediaFormat.values
+              .where((element) => format.contains(element.name));
+          if (f.isNotEmpty) {
+            format0 = f.toList();
+          }
+          break;
+      }
+    }
 
-//         if (type != Enum$MediaType.$unknown) {
-//           ref.read(searchProvider.notifier).setVariables(
-//                 ref
-//                     .read(searchProvider.notifier)
-//                     .variables!
-//                     .copyWith(type: type),
-//                 fetch: false,
-//               );
-//         }
-//       }
+    return SearchQuery(
+      search: search,
+      sort: sort0,
+      type: type0,
+      format: format0,
+      genres: genre0,
+      withTags: withTag0,
+      withoutTags: withoutTag0,
+      season: season0,
+      endDate: endDate,
+      isAdult: isAdult,
+      onList: onList,
+      page: page,
+      seasonYear: seasonYear,
+      startDate: startDate,
+      year: year,
+    );
+  }
 
-//       if (setVars) {
-//         ref
-//             .read(searchProvider.notifier)
-//             .setVariables(ref.read(searchProvider.notifier).variables!);
-//       }
-//     });
-//   }
+  Variables$Query$Search toVar() {
+    return _removeNulls(Variables$Query$Search(
+      format: format,
+      genres: genres,
+      isAdult: isAdult,
+      onList: onList,
+      page: page,
+      search: search,
+      season: season,
+      seasonYear: seasonYear,
+      sort: sort,
+      type: type,
+      with_tags: withTags?.map((e) => e.name).toList(),
+      without_tags: withoutTags?.map((e) => e.name).toList(),
+      year: year != null ? '$year%' : null,
+      yearGreater: endDate,
+      yearLesser: startDate,
+    ));
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     var search = ref.watch(searchProvider);
+  Variables$Query$Search _removeNulls(Variables$Query$Search vars) {
+    return Variables$Query$Search.fromJson(
+        vars.toJson()..removeWhere((key, value) => value == null));
+  }
 
-//     return Scaffold(
-//       appBar: AppBar(
-//         // backgroundColor: Colors.amber,
-//         automaticallyImplyLeading: false,
-//         toolbarHeight: 80,
-//         flexibleSpace: FlexibleSpaceBar(
-//           background: SafeArea(
-//             child: Center(
-//               child: Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 8),
-//                 child: TextField(
-//                   onSubmitted: (value) =>
-//                       ref.read(searchProvider.notifier).setVariables(
-//                             (ref.read(searchProvider.notifier).variables ??
-//                                     Variables$Query$Search())
-//                                 .copyWith(search: value),
-//                           ),
-//                   focusNode: FocusNode(canRequestFocus: false),
-//                   autofocus: widget.autofocus ?? false,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(30),
-//                     ),
-//                     prefixIcon: const Padding(
-//                       padding: EdgeInsets.only(left: 8),
-//                       child: AutoLeadingButton(),
-//                     ),
-//                     suffixIcon: Padding(
-//                       padding: const EdgeInsets.only(right: 8),
-//                       child: IconButton(
-//                         onPressed: () => showModalBottomSheet(
-//                           builder: (context) => const EditorSheet(),
-//                           context: context,
-//                         ),
-//                         icon: const Icon(Icons.more_horiz),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//       body: search.when(
-//         data: (data) {
-//           if (data.Page?.media?.isEmpty == true) {
-//             return Padding(
-//               padding: const EdgeInsets.all(14),
-//               child: Row(
-//                 // crossAxisAlignment: CrossAxisAlignment.center,
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Text(
-//                     'No Results',
-//                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                   ),
-//                 ],
-//               ),
-//             );
-//           }
+  @override
+  String toString() {
+    List<String> query = [];
 
-//           return NotificationListener<ScrollUpdateNotification>(
-//             onNotification: (notification) {
-//               if (notification.metrics.pixels >
-//                       notification.metrics.maxScrollExtent - 100 &&
-//                   data.Page!.pageInfo!.hasNextPage == true) {
-//                 ref.read(searchProvider.notifier).nextPage();
-//               }
-//               return false;
-//             },
-//             child: MediaCards(
-//               padding: const EdgeInsets.all(8),
-//               list: data.Page!.media!.cast<Fragment$MediaFragment>(),
-//               aspectRatio: 1.9 / 3,
-//               onTap: (media, index) => context.pushRoute(
-//                 MediaRoute(id: media.id),
-//               ),
-//               underTitle: (media, style, __) {
-//                 if (style != ListStyle.detailedList) return null;
+    query.addAll([
+      if (search != null) 'search=$search',
+      if (sort?.isNotEmpty == true)
+        sort!.map((e) => 'sort=${e.name}').join('&'),
+      if (type != null) 'type=${type!.name}',
+      if (format?.isNotEmpty == true)
+        format!.map((e) => 'format=${e.name}').join('&'),
+      if (genres?.isNotEmpty == true) genres!.map((e) => 'genre=$e').join('&'),
+      if (season != null) 'season=${season!.name}',
+      if (endDate != null) 'endDate=$endDate',
+      if (startDate != null) 'startDate=$startDate',
+      if (isAdult == true) 'isAdult=true',
+      if (onList != null) 'onList=$onList',
+      if (page != null) 'page=$page',
+      if (seasonYear != null) 'seasonYear=$seasonYear',
+      if (year != null) 'year=$year',
+      if (withTags?.isNotEmpty == true)
+        withTags!.map((e) => 'withTags=${e.name}').join('&'),
+      if (withoutTags?.isNotEmpty == true)
+        withoutTags!.map((e) => 'withoutTags=${e.name}').join('&'),
+    ]);
 
-//                 return Padding(
-//                   padding: const EdgeInsets.all(8),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(
-//                         media.genres!.join(', '),
-//                       ),
-//                       if (media.format != null)
-//                         Text.rich(
-//                           TextSpan(
-//                             text: media.type!.name.capitalize(),
-//                             children: [
-//                               TextSpan(
-//                                   text: ' · ${media.format!.name.capitalize()}')
-//                             ],
-//                           ),
-//                           overflow: TextOverflow.ellipsis,
-//                         ),
-//                     ],
-//                   ),
-//                 );
-//               },
-//             ),
-//           );
-//         },
-//         error: (error, stackTrace) =>
-//             GraphqlError(exception: error as OperationException),
-//         loading: () => ref.read(searchProvider.notifier).variables != null
-//             ? const Center(
-//                 child: CircularProgressIndicator.adaptive(),
-//               )
-//             : const SizedBox(),
-//       ),
-//     );
-//   }
-// }
+    return '?${query.join('&')}';
+  }
+}
