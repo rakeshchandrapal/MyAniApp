@@ -1,10 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -17,7 +16,7 @@ class ThreadCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (thread.isSticky == true) {
       return ListTile(
-        onTap: () => context.router.push(ThreadRoute(id: thread.id)),
+        onTap: () => context.push('/thread/${thread.id}'),
         title: Text(
           thread.title!,
           maxLines: 3,
@@ -53,7 +52,7 @@ class ThreadCard extends StatelessWidget {
     }
 
     return ListTile(
-      onTap: () => context.pushRoute(ThreadRoute(id: thread.id)),
+      onTap: () => context.push('/thread/${thread.id}'),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -143,7 +142,7 @@ class ThreadCard extends StatelessWidget {
                   onLongPress: () => showMediaCard(context, media),
                   child: ActionChip(
                     onPressed: () =>
-                        context.pushRoute(MediaRoute(id: media.id)),
+                        context.push('/media/${media.id}/overview'),
                     label: Text(media!.title!.userPreferred!),
                     labelPadding: EdgeInsets.zero,
                     labelStyle: Theme.of(context).textTheme.labelSmall,

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/review/review.graphql.dart';
@@ -9,9 +8,8 @@ import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-@RoutePage()
 class ReviewPage extends StatelessWidget {
-  const ReviewPage({super.key, @PathParam('id') required this.id});
+  const ReviewPage({super.key, required this.id});
 
   final int id;
 

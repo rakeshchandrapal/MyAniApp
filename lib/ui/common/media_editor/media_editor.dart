@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
@@ -140,7 +140,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                 var shouldDelete = await showDeleteDialog(context);
 
                 if (shouldDelete == true) {
-                  context.popRoute();
+                  context.pop();
                   client.value
                       .mutate$DeleteMediaListEntry(
                         Options$Mutation$DeleteMediaListEntry(
@@ -165,7 +165,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                     .save(options)
                     .then((_) => widget.onSave?.call());
               }
-              context.popRoute();
+              context.pop();
             },
             icon: const Icon(Icons.save),
           ),

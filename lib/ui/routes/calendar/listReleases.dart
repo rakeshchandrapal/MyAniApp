@@ -1,10 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/calendar/listReleases.graphql.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/calendar/calendar.dart' as c;
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/utils.dart';
 
 class ListReleases extends StatelessWidget {
@@ -34,7 +33,7 @@ class ListReleases extends StatelessWidget {
               var next = media.nextAiringEpisode;
 
               return DetailedListCard(
-                onTap: () => context.pushRoute(MediaRoute(id: media.id)),
+                onTap: () => context.push('/media/${media.id}/overview'),
                 imageUrl: media.coverImage!.extraLarge!,
                 margin: const EdgeInsets.all(4),
                 underTitle: Row(

@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/providers/settings.dart';
 
-@RoutePage()
 class AuthPage extends ConsumerStatefulWidget {
-  const AuthPage({super.key, @QueryParam('access_token') this.accessToken});
+  const AuthPage({super.key, this.accessToken});
 
   final String? accessToken;
 
@@ -18,12 +17,10 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (widget.accessToken == null) context.router.pushNamed('/');
+      if (widget.accessToken == null) context.go('/');
       var settings = ref.read(settingsProvider.notifier);
       // var instance = await SharedPreferences.getInstance();
-      settings
-          .login(widget.accessToken!)
-          .then((value) => context.router.pushNamed('/'));
+      settings.login(widget.accessToken!).then((value) => context.go('/'));
     });
   }
 

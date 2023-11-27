@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
@@ -12,37 +12,35 @@ import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dar
 import 'package:myaniapp/providers/shared_preferrences.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/ui/routes/search/editor/sheet.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-@RoutePage()
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({
     super.key,
-    @queryParam this.search,
-    @queryParam this.sort = '',
-    @queryParam this.format = '',
-    @queryParam this.genre = '',
-    @queryParam this.withTags = '',
-    @queryParam this.type,
-    @queryParam this.page,
-    @queryParam this.season,
-    @queryParam this.seasonYear,
-    @queryParam this.year,
-    @queryParam this.startDate,
-    @queryParam this.endDate,
-    @queryParam this.isAdult,
-    @queryParam this.onList,
-    @queryParam this.withoutTags = '',
+    this.search,
+    this.sort,
+    this.format,
+    this.genre,
+    this.withTags,
+    this.type,
+    this.page,
+    this.season,
+    this.seasonYear,
+    this.year,
+    this.startDate,
+    this.endDate,
+    this.isAdult,
+    this.onList,
+    this.withoutTags,
     this.autofocus,
   });
 
-  final dynamic sort;
-  final dynamic format;
-  final dynamic genre;
-  final dynamic withTags;
-  final dynamic withoutTags;
+  final List<String>? sort;
+  final List<String>? format;
+  final List<String>? genre;
+  final List<String>? withTags;
+  final List<String>? withoutTags;
   final String? search;
   final String? type;
   final int? page;
@@ -127,8 +125,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                         onSubmitted: (value) {
                           if (mounted) {
                             query!.search = value.isNotEmpty ? value : null;
-                            context.router
-                                .replaceNamed('/search${query.toString()}');
+                            context.replace('/search${query.toString()}');
 
                             if (value.isNotEmpty) {
                               ref.read(sharedPrefProvider).setStringList(
@@ -164,7 +161,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                           ),
                           prefixIcon: const Padding(
                             padding: EdgeInsets.only(left: 8),
-                            child: AutoLeadingButton(),
+                            child: BackButton(),
                           ),
                           suffixIcon: Padding(
                             padding: const EdgeInsets.only(right: 8),
@@ -224,9 +221,8 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                           list: result.parsedData!.Page!.media!
                               .cast<Fragment$MediaFragment>(),
                           aspectRatio: 1.9 / 3,
-                          onTap: (media, index) => context.pushRoute(
-                            MediaRoute(id: media.id),
-                          ),
+                          onTap: (media, index) =>
+                              context.push('/media/${media.id}'),
                           underTitle: (media, style, __) {
                             if (style != ListStyle.detailedList) return null;
 
@@ -260,8 +256,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                   ),
                 )
               : RecentSearches(
-                  onTap: (s) =>
-                      context.router.replaceNamed('/search?search=$s'),
+                  onTap: (s) => context.replace('/search?search=$s'),
                 ),
     );
   }
@@ -332,11 +327,11 @@ class SearchQuery {
   bool? onList;
 
   static Future<SearchQuery> from(
-    dynamic sort,
-    dynamic format,
-    dynamic genre,
-    dynamic withTags,
-    dynamic withoutTags,
+    List<String>? sort,
+    List<String>? format,
+    List<String>? genre,
+    List<String>? withTags,
+    List<String>? withoutTags,
     String? search,
     String? type,
     int? page,
@@ -369,97 +364,42 @@ class SearchQuery {
           .parsedData;
     }
 
-    if (sort != '') {
-      switch (sort.runtimeType) {
-        case (String):
-          var s = Enum$MediaSort.values
-              .firstWhereOrNull((element) => element.name == sort);
-          if (s != null) {
-            sort0 = [s];
-          }
-          break;
-        case const (List<String>):
-          var s = Enum$MediaSort.values
-              .where((element) => sort.contains(element.name));
-          if (s.isNotEmpty) {
-            sort0 = s.toList();
-          }
-          break;
+    if (sort != null) {
+      var s =
+          Enum$MediaSort.values.where((element) => sort.contains(element.name));
+      if (s.isNotEmpty) {
+        sort0 = s.toList();
       }
     }
 
-    if (genre != '') {
-      switch (genre.runtimeType) {
-        case (String):
-          var g = collection!.genres!.firstWhere((element) => element == genre);
-          if (g != null) {
-            genre0 = [g];
-          }
-          break;
-        case const (List<String>):
-          var g =
-              collection!.genres!.where((element) => genre.contains(element));
-          if (g.isNotEmpty) {
-            genre0 = g.cast<String>().toList();
-          }
-          break;
+    if (genre != null) {
+      var g = collection!.genres!.where((element) => genre.contains(element));
+      if (g.isNotEmpty) {
+        genre0 = g.cast<String>().toList();
       }
     }
 
-    if (withTags != '') {
-      switch (withTags.runtimeType) {
-        case (String):
-          var t = collection!.tags!
-              .firstWhereOrNull((element) => element!.name == withTags);
-          if (t != null) {
-            withTag0 = [t];
-          }
-          break;
-        case const (List<String>):
-          var t = collection!.tags!
-              .where((element) => withTags.contains(element!.name));
-          if (withTags.isNotEmpty) {
-            withTag0 = t.cast<Query$GenreCollection$tags>().toList();
-          }
-          break;
+    if (withTags != null) {
+      var t = collection!.tags!
+          .where((element) => withTags.contains(element!.name));
+      if (withTags.isNotEmpty) {
+        withTag0 = t.cast<Query$GenreCollection$tags>().toList();
       }
     }
 
-    if (withoutTags != '') {
-      switch (withTags.runtimeType) {
-        case (String):
-          var t = collection!.tags!
-              .firstWhereOrNull((element) => element!.name == withoutTags);
-          if (t != null) {
-            withoutTag0 = [t];
-          }
-          break;
-        case const (List<String>):
-          var t = collection!.tags!
-              .where((element) => withTags.contains(element!.name));
-          if (withTags.isNotEmpty) {
-            withoutTag0 = t.cast<Query$GenreCollection$tags>().toList();
-          }
-          break;
+    if (withoutTags != null) {
+      var t = collection!.tags!
+          .where((element) => withoutTags.contains(element!.name));
+      if (withoutTags.isNotEmpty == true) {
+        withoutTag0 = t.cast<Query$GenreCollection$tags>().toList();
       }
     }
 
-    if (format != '') {
-      switch (format.runtimeType) {
-        case (String):
-          var f = Enum$MediaFormat.values
-              .firstWhereOrNull((element) => element.name == format);
-          if (f != null) {
-            format0 = [f];
-          }
-          break;
-        case const (List<String>):
-          var f = Enum$MediaFormat.values
-              .where((element) => format.contains(element.name));
-          if (f.isNotEmpty) {
-            format0 = f.toList();
-          }
-          break;
+    if (format != null) {
+      var f = Enum$MediaFormat.values
+          .where((element) => format.contains(element.name));
+      if (f.isNotEmpty) {
+        format0 = f.toList();
       }
     }
 

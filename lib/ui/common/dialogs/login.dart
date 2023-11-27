@@ -1,6 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginDialog extends StatelessWidget {
   const LoginDialog({super.key, required this.action});
@@ -25,14 +24,14 @@ class LoginDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
-                onPressed: () => context.popRoute(),
+                onPressed: () => context.pop(),
                 child: const Text('Go back'),
               ),
               const SizedBox(
                 width: 10,
               ),
               ElevatedButton(
-                onPressed: () => context.pushRoute(const LoginRoute()),
+                onPressed: () => context.push('/login'),
                 child: const Text('Login'),
               ),
             ],

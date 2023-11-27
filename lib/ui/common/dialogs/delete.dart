@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DeleteDialog extends StatelessWidget {
   const DeleteDialog({super.key});
@@ -21,14 +21,14 @@ class DeleteDialog extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () => context.popRoute(false),
+                  onPressed: () => context.pop(false),
                   child: const Text('Cancel'),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () => context.popRoute(true),
+                  onPressed: () => context.pop(true),
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.red),
                     foregroundColor: MaterialStatePropertyAll(Colors.white),

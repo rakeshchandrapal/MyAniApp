@@ -1,9 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/staff/staff.graphql.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 
-@RoutePage()
 class StaffProductionPage extends StatelessWidget {
   const StaffProductionPage({
     super.key,
@@ -38,6 +37,7 @@ class StaffProductionPage extends StatelessWidget {
             underTitle: (media, style, index) => Text(
               medias.edges![index]!.staffRole ?? '',
             ),
+            onTap: (media, idx) => context.push('/media/${media.id}/overview'),
           ),
         ),
       ],

@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
 import 'package:myaniapp/providers/settings.dart';
@@ -8,9 +8,7 @@ import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
 import 'package:myaniapp/ui/routes/home/list/anime.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class HomeMangaPage extends ConsumerWidget {
   const HomeMangaPage({super.key});
 
@@ -53,8 +51,8 @@ class HomeMangaPage extends ConsumerWidget {
                           BoxConstraints(minHeight: constraints.maxHeight),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () => context.pushRoute(
-                              SearchRoute(type: Enum$MediaType.MANGA.name)),
+                          onPressed: () => context.push(
+                              '/search?type=${Enum$MediaType.MANGA.name}'),
                           child: const Text('Browse mangas to add'),
                         ),
                       ),

@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart' as md2;
 import 'package:myaniapp/constants.dart';
@@ -64,16 +64,16 @@ class Markdown extends StatelessWidget {
                 // print(uri?.host);
                 if (uri?.host == 'anilist.co') {
                   if (['anime', 'manga'].contains(uri!.pathSegments.first)) {
-                    context.router.pushNamed('/media/${uri.pathSegments[1]}');
+                    context.push('/media/${uri.pathSegments[1]}/overview');
                     return;
                   } else if (['character', 'staff']
                       .contains(uri.pathSegments.first)) {
-                    context.router
-                        .pushNamed('/${uri.pathSegments.take(2).join('/')}');
+                    context.push(
+                        '/${uri.pathSegments.take(2).join('/')}/overview');
                     return;
                   } else if (uri.pathSegments.first == 'forum' &&
                       uri.pathSegments[1] == 'thread') {
-                    context.router.pushNamed('/thread/${uri.pathSegments[2]}');
+                    context.push('/thread/${uri.pathSegments[2]}/overview');
                     return;
                   }
                 }

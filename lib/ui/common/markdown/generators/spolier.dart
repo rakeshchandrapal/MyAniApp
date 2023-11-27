@@ -1,10 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
-import 'package:myaniapp/ui/routes/routes.dart';
 
 String _tag = 'spoiler';
 
@@ -15,14 +13,15 @@ class SpoilerNode extends ElementNode {
 
   @override
   InlineSpan build() {
-    return TextSpan(
-        text: '[Spoiler]',
-        style: const TextStyle(
-          color: linkColor,
-        ),
-        recognizer: TapGestureRecognizer()
-          ..onTap = () =>
-              showSpoiler(appRouter.navigatorKey.currentContext!, spoiler));
+    return const TextSpan(
+      text: '[Spoiler]',
+      style: TextStyle(
+        color: linkColor,
+      ),
+      // recognizer: TapGestureRecognizer()
+      //   ..onTap =
+      //       () => showSpoiler(appRouter.navigatorKey.currentContext!, spoiler),
+    );
   }
 }
 

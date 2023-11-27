@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/user.graphql.dart';
@@ -8,12 +8,9 @@ import 'package:myaniapp/providers/userProfile.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class UserOverviewPage extends ConsumerWidget {
-  const UserOverviewPage(
-      {super.key, @PathParam.inherit('name') required this.name});
+  const UserOverviewPage({super.key, required this.name});
 
   final String name;
 
@@ -36,8 +33,7 @@ class UserOverviewPage extends ConsumerWidget {
         if (user.value!.statistics?.anime != null) ...[
           Stats(
             stats: user.value!.statistics!.anime,
-            onTap: () =>
-                context.router.push(UserAnimeListRoute(name: user.value!.name)),
+            onTap: () => context.push('/user/${user.requireValue.name}/anime'),
           ),
           const SizedBox(
             height: 10,
@@ -46,8 +42,7 @@ class UserOverviewPage extends ConsumerWidget {
         if (user.value!.statistics?.manga != null) ...[
           Stats(
             stats: user.value!.statistics!.manga,
-            onTap: () =>
-                context.router.push(UserMangaListRoute(name: user.value!.name)),
+            onTap: () => context.push('/user/${user.requireValue.name}/manga'),
           ),
           const SizedBox(
             height: 10,
@@ -115,9 +110,7 @@ class FavoriteList extends StatelessWidget {
             imageUrl: media.coverImage!.extraLarge!,
             title: media.title!.userPreferred,
             aspectRatio: 1.9 / 3,
-            onTap: () => context.pushRoute(
-              MediaRoute(id: media.id),
-            ),
+            onTap: () => context.push('/media/${media.id}/overview'),
             onLongPress: () => showMediaCard(context, media),
           );
         },
@@ -195,7 +188,7 @@ class Genres extends StatelessWidget {
                 for (var genre in genres)
                   ActionChip(
                     onPressed: () =>
-                        context.pushRoute(SearchRoute(genre: genre.genre)),
+                        context.push('/search?genre=${genre.genre}'),
                     // padding: EdgeInsets.zero,
                     label: Column(
                       mainAxisSize: MainAxisSize.min,

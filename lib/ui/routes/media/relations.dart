@@ -1,16 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/providers/media.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class MediaRelationsPage extends ConsumerWidget {
-  const MediaRelationsPage(
-      {super.key, @PathParam.inherit('id') required this.id});
+  const MediaRelationsPage({super.key, required this.id});
 
   final int id;
 
@@ -26,7 +23,7 @@ class MediaRelationsPage extends ConsumerWidget {
     return MediaCards(
       list: sorted.map((e) => e!.node!).toList(),
       aspectRatio: 1.8 / 3,
-      onTap: (media, index) => context.pushRoute(MediaRoute(id: media.id)),
+      onTap: (media, index) => context.push('/media/${media.id}/overview'),
       underTitle: (media, style, index) => Padding(
         padding: style == ListStyle.detailedList
             ? const EdgeInsets.all(8)

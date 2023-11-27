@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
@@ -10,10 +10,8 @@ import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
-@RoutePage()
 class RecommendationsPage extends ConsumerStatefulWidget {
   const RecommendationsPage({super.key});
 
@@ -148,11 +146,8 @@ class _RecommendationsPageState extends ConsumerState<RecommendationsPage> {
                                           .media!.coverImage!.extraLarge!,
                                       title: recommendation
                                           .media!.title!.userPreferred,
-                                      onTap: () => context.pushRoute(
-                                        MediaRoute(
-                                          id: recommendation.media!.id,
-                                        ),
-                                      ),
+                                      onTap: () => context.push(
+                                          '/media/${recommendation.media!.id}'),
                                       onLongPress: () => showMediaCard(
                                         context,
                                         recommendation.media!,
@@ -169,12 +164,8 @@ class _RecommendationsPageState extends ConsumerState<RecommendationsPage> {
                                           .extraLarge!,
                                       title: recommendation.mediaRecommendation!
                                           .title!.userPreferred,
-                                      onTap: () => context.pushRoute(
-                                        MediaRoute(
-                                          id: recommendation
-                                              .mediaRecommendation!.id,
-                                        ),
-                                      ),
+                                      onTap: () => context.push(
+                                          '/media/${recommendation.mediaRecommendation!.id}'),
                                       onLongPress: () => showMediaCard(
                                         context,
                                         recommendation.mediaRecommendation!,

@@ -1,14 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/notifications/notifications.graphql.dart';
 import 'package:myaniapp/notifications/notification.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-@RoutePage()
 class NotificationsPage extends HookWidget {
   const NotificationsPage({super.key});
 
@@ -40,10 +38,10 @@ class NotificationsPage extends HookWidget {
                   onTap: (notif.isMedia &&
                           item.$__typename != 'MediaDeletionNotification')
                       ? () => context
-                          .pushRoute(MediaRoute(id: (item as dynamic).media.id))
+                          .push('/media/${(item as dynamic).media.id}/overview')
                       : notif.isActivity
-                          ? () => context.pushRoute(
-                              ActivityRoute(id: (item as dynamic).activityId))
+                          ? () => context
+                              .push('/activity/${(item as dynamic).activityId}')
                           : null,
                   imageUrl: (notif.isMedia &&
                           item.$__typename != 'MediaDeletionNotification')

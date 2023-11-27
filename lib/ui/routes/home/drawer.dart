@@ -1,10 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/image.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
 class HomeDrawer extends ConsumerWidget {
   const HomeDrawer({super.key});
@@ -19,22 +18,19 @@ class HomeDrawer extends ConsumerWidget {
         children: [
           if (user.value == null) ...[
             ListTile(
-              onTap: () => context.pushRoute(const SettingsRoute()),
+              onTap: () => context.push('/settings'),
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
             ),
             ListTile(
-              onTap: () => context.pushRoute(const LoginRoute()),
+              onTap: () => context.push('/login'),
               leading: const Icon(Icons.login),
               title: const Text('Login'),
             ),
           ] else ...[
             InkWell(
-              onTap: () => context.pushRoute(
-                UserRoute(
-                  name: user.value!.name,
-                ),
-              ),
+              onTap: () =>
+                  context.push('/user/${user.requireValue!.name}/overview'),
               child: UserAccountsDrawerHeader(
                 accountName: Text(
                   user.value!.name,
@@ -48,7 +44,7 @@ class HomeDrawer extends ConsumerWidget {
               ),
             ),
             ListTile(
-              onTap: () => context.pushRoute(const SettingsRoute()),
+              onTap: () => context.push('/settings'),
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
             ),
@@ -82,7 +78,7 @@ class LogoutDialog extends ConsumerWidget {
       content: const Text("Are you sure you want to logout?"),
       actions: [
         TextButton(
-          onPressed: () => context.popRoute(),
+          onPressed: () => context.pop(),
           child: const Text(
             'Cancel',
           ),
@@ -92,7 +88,7 @@ class LogoutDialog extends ConsumerWidget {
             ref
                 .read(settingsProvider.notifier)
                 .logout()
-                .then((value) => context.popRoute())
+                .then((value) => context.pop())
           },
           child: Text(
             'Logout',

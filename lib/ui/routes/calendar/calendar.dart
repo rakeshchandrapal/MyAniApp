@@ -1,17 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/calendar/calendar.graphql.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/calendar/listReleases.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/utils.dart';
 
 var dateFormat = DateFormat('EEEE MMMM dd, yyyy');
 var hourFormat = DateFormat.jm();
 
-@RoutePage()
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -119,7 +117,6 @@ class CalendarDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(day);
     return Query$CalendarSchedule$Widget(
       options: Options$Query$CalendarSchedule(
         variables: Variables$Query$CalendarSchedule(
@@ -162,7 +159,7 @@ class CalendarDay extends StatelessWidget {
                   margin: const EdgeInsets.all(4),
                   imageUrl: media.media!.coverImage!.extraLarge!,
                   onTap: () =>
-                      context.pushRoute(MediaRoute(id: media.media!.id)),
+                      context.push('/media/${media.media!.id}/overview'),
                   underTitle: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

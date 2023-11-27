@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
-import 'package:myaniapp/ui/routes/routes.dart';
 
 class PushNotifications {
   factory PushNotifications() => _instance;
@@ -174,7 +173,7 @@ void notificationTap(NotificationResponse notificationResponse) {
   Map<String, dynamic>? decodePayload =
       jsonDecode(notificationResponse.payload!);
   if (decodePayload?['path'] != null) {
-    appRouter.pushNamed(decodePayload!['path'] as String);
+    // appRouter.pushNamed(decodePayload!['path'] as String);
   }
 }
 

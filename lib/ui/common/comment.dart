@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/ui/common/image.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -171,11 +170,7 @@ class CommentHeader extends StatelessWidget {
         if (avatarUrl != null)
           GestureDetector(
             onTap: username != null
-                ? () => context.pushRoute(
-                      UserRoute(
-                        name: username!,
-                      ),
-                    )
+                ? () => context.push('/user/$username/overview')
                 : null,
             child: CImage(
               imageUrl: avatarUrl!,

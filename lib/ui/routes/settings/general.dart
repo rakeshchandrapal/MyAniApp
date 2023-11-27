@@ -1,10 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class GeneralSettingsPage extends ConsumerWidget {
   const GeneralSettingsPage({super.key});
 
@@ -15,19 +13,19 @@ class GeneralSettingsPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
-        automaticallyImplyLeading: true,
-        leading: const AutoLeadingButton(),
+        // automaticallyImplyLeading: true,
+        // leading: const AutoLeadingButton(),
       ),
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
           ListTile(
-            onTap: () => context.pushRoute(const AppSettingsRoute()),
+            onTap: () => context.push('/settings/app'),
             title: const Text('App Settings'),
           ),
           if (user.value != null)
             ListTile(
-              onTap: () => context.pushRoute(const AnilistSettingsRoute()),
+              onTap: () => context.push('/settings/anilist'),
               title: const Text('Anilist Settings'),
             )
         ],

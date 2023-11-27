@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/ui/common/image.dart';
 
 class ImageViewer extends StatelessWidget {
@@ -11,7 +11,7 @@ class ImageViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.router.pop(),
+      onTap: () => context.pop(),
       child: Scaffold(
         backgroundColor: Colors.black.withOpacity(0.3),
         body: Stack(
@@ -33,7 +33,7 @@ class ImageViewer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 24),
                 child: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => context.pop(),
                   icon: Container(
                     width: 40,
                     height: 40,
@@ -57,7 +57,7 @@ class ImageViewer extends StatelessWidget {
 }
 
 void showImage(BuildContext context, String url, {Object? tag}) {
-  context.router.pushNativeRoute(
+  Navigator.of(context).push(
     PageRouteBuilder(
       opaque: false,
       pageBuilder: (_, __, ___) => ImageViewer(

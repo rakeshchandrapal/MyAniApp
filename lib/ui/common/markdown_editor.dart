@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 
@@ -79,7 +79,7 @@ class _EditorState extends State<Editor> {
             IconButton(
               onPressed: () {
                 widget.onSave!(textController.text);
-                context.popRoute();
+                context.pop();
               },
               icon: const Icon(Icons.save),
             ),

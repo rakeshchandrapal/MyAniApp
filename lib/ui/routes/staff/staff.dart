@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
@@ -13,9 +12,8 @@ import 'package:myaniapp/ui/routes/media/overview.dart';
 import 'package:myaniapp/ui/routes/staff/production.dart';
 import 'package:myaniapp/ui/routes/staff/voice.dart';
 
-@RoutePage()
 class StaffPage extends StatelessWidget {
-  const StaffPage({super.key, @PathParam('id') required this.id});
+  const StaffPage({super.key, required this.id});
 
   final int id;
 

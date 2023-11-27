@@ -1,14 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/staff/staff.graphql.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class MediaStaffPage extends StatelessWidget {
-  const MediaStaffPage({super.key, @PathParam.inherit('id') required this.id});
+  const MediaStaffPage({super.key, required this.id});
 
   final int id;
 
@@ -81,7 +79,7 @@ class StaffCard extends StatelessWidget {
       elevation: 1,
       surfaceTintColor: Theme.of(context).colorScheme.surfaceVariant,
       child: InkWell(
-        onTap: () => context.pushRoute(StaffRoute(id: staff.node!.id)),
+        onTap: () => context.push('/staff/${staff.node!.id}'),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

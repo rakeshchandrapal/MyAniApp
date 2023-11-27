@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/constants.dart';
@@ -6,7 +5,6 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 
-@RoutePage()
 class AppSettingsPage extends ConsumerWidget {
   const AppSettingsPage({super.key});
 

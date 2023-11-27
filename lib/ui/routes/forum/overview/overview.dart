@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/forum/overview/overview.graphql.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/ui/routes/forum/new.dart';
@@ -8,13 +8,12 @@ import 'package:myaniapp/ui/routes/forum/search.dart';
 import 'package:myaniapp/ui/routes/forum/subscribed.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-@RoutePage()
 class ForumOverviewPage extends StatelessWidget {
   ForumOverviewPage({
     super.key,
-    @pathParam required this.filter,
-    @queryParam this.category,
-    @queryParam this.search,
+    required this.filter,
+    this.category,
+    this.search,
   });
 
   final String filter;
@@ -33,12 +32,11 @@ class ForumOverviewPage extends StatelessWidget {
         leadingWidth: 100,
         leading: Row(
           children: [
-            AutoLeadingButton(
-              builder: (context, type, d) => BackButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.all(16),
-                  ),
+            BackButton(
+              onPressed: () => context.pop(),
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.all(16),
                 ),
               ),
             ),
@@ -53,18 +51,18 @@ class ForumOverviewPage extends StatelessWidget {
         selected: category,
         onChange: (category) {
           if (inEnum == ForumFilter.overview) {
-            context.router.replaceNamed('/forum/recent?category=$category');
+            context.replace('/forum/recent?category=$category');
             return;
           } else if (category == null) {
-            context.router.replaceNamed('/forum/$filter');
+            context.replace('/forum/$filter');
             return;
           }
-          context.router.replaceNamed('/forum/$filter?category=$category');
+          context.replace('/forum/$filter?category=$category');
         },
       ),
       endDrawer: ForumFilterDrawer(
         selected: inEnum.index,
-        onChange: (index) => context.router.replaceNamed(
+        onChange: (index) => context.replace(
             '/forum/${ForumFilter.values.elementAt(index).name}?category=$category'),
       ),
       body: switch (inEnum) {
@@ -77,11 +75,11 @@ class ForumOverviewPage extends StatelessWidget {
             search: search,
             onChange: (search) {
               if (category == null) {
-                context.router.replaceNamed('/forum/$filter?search=$search');
+                context.replace('/forum/$filter?search=$search');
                 return;
               }
-              context.router.replaceNamed(
-                  '/forum/$filter?category=$category&search=$search');
+              context
+                  .replace('/forum/$filter?category=$category&search=$search');
             },
           ),
         _ => Text(inEnum.name),

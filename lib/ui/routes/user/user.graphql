@@ -8,6 +8,7 @@ query User($name: String) {
         count
         episodesWatched
         minutesWatched
+        standardDeviation
         meanScore
         genres(limit: 4, sort: COUNT_DESC) {
           ...GenreStat
@@ -17,6 +18,7 @@ query User($name: String) {
         count
         chaptersRead
         volumesRead
+        standardDeviation
         meanScore
         genres(limit: 4, sort: COUNT_DESC) {
           ...GenreStat

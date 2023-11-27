@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/activity/activity.graphql.dart';
@@ -6,10 +5,8 @@ import 'package:myaniapp/providers/userProfile.dart';
 import 'package:myaniapp/ui/common/activity_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 
-@RoutePage()
 class UserActivityPage extends ConsumerWidget {
-  const UserActivityPage(
-      {super.key, @PathParam.inherit('name') required this.name});
+  const UserActivityPage({super.key, required this.name});
 
   final String name;
 

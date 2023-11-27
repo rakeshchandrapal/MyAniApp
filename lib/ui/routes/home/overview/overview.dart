@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
@@ -12,14 +12,11 @@ import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
-import 'package:myaniapp/ui/routes/forum/overview/overview.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
 import 'package:myaniapp/ui/routes/home/overview/guest.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-@RoutePage()
 class HomeOverviewPage extends ConsumerWidget {
   const HomeOverviewPage({super.key});
 
@@ -41,7 +38,7 @@ class HomeOverviewPage extends ConsumerWidget {
               isLabelVisible: (user.value!.unreadNotificationCount ?? 0) > 0,
               offset: const Offset(-2, 2),
               child: IconButton(
-                onPressed: () => context.pushRoute(const NotificationsRoute()),
+                onPressed: () => context.push('/notifications'),
                 icon: const Icon(Icons.notifications),
               ),
             ),
@@ -109,8 +106,7 @@ class _RecentActivity extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               TextButton(
-                onPressed: () => context.router
-                    .push(ForumOverviewRoute(filter: ForumFilter.recent.name)),
+                onPressed: () => context.push('/forum/recent'),
                 child: const Text('View more'),
               )
             ],
@@ -170,8 +166,7 @@ class _Watching extends StatelessWidget {
                 child: GridCard(
                   imageUrl: entry.media!.coverImage!.extraLarge!,
                   title: entry.media!.title!.userPreferred,
-                  onTap: () =>
-                      context.pushRoute(MediaRoute(id: entry.media!.id)),
+                  onTap: () => context.push('/media/${entry.mediaId}/overview'),
                   onDoubleTap: () => showMediaEditor(
                     context,
                     entry.media!,
@@ -282,9 +277,7 @@ class _Releases extends StatelessWidget {
                   imageUrl: media.coverImage!.extraLarge!,
                   title: media.title!.userPreferred,
                   aspectRatio: 1.9 / 3,
-                  onTap: () => context.pushRoute(
-                    MediaRoute(id: media.id),
-                  ),
+                  onTap: () => context.push('/media/${media.id}'),
                   onLongPress: () => showMediaCard(context, media),
                   chips: [
                     GridChip(

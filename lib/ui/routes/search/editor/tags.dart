@@ -66,7 +66,6 @@ class _TagsSheetState extends ConsumerState<TagsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    print(withTags);
     return DraggableScrollableSheet(
       minChildSize: 0.3,
       initialChildSize: 1,

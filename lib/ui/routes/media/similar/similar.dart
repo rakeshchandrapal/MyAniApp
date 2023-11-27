@@ -1,15 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/similar/similar.graphql.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class MediaSimilarPage extends StatelessWidget {
-  const MediaSimilarPage(
-      {super.key, @PathParam.inherit('id') required this.id});
+  const MediaSimilarPage({super.key, required this.id});
 
   final int id;
 
@@ -50,9 +47,8 @@ class MediaSimilarPage extends StatelessWidget {
                 .map((e) => e!.mediaRecommendation!)
                 .toList(),
             aspectRatio: 1.9 / 3,
-            onTap: (media, index) => context.pushRoute(
-              MediaRoute(id: media.id),
-            ),
+            onTap: (media, index) =>
+                context.push('/media/${media.id}/overview'),
           ),
         );
       },

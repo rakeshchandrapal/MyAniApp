@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/staff/staff.graphql.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
+import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/image.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class StaffVoicePage extends StatelessWidget {
   const StaffVoicePage({super.key, required this.medias});
 
@@ -38,19 +37,23 @@ class StaffVoicePage extends StatelessWidget {
 
                 return GridCard(
                   imageUrl: media.characters!.first!.image!.large!,
-                  onTap: () => context.pushRoute(
-                    CharacterRoute(id: media.characters!.first!.id),
-                  ),
+                  onTap: () =>
+                      context.push('/character/${media.characters!.first!.id}'),
                   aspectRatio: 1.7 / 3,
                   title: media.characters!.first!.name!.userPreferred,
                   underTitle: Text(media.node!.title!.userPreferred!),
                   chips: [
                     SizedBox(
                       width: 50,
-                      child: AspectRatio(
-                        aspectRatio: 2 / 3,
-                        child: CImage(
-                          imageUrl: media.node!.coverImage!.extraLarge!,
+                      child: GestureDetector(
+                        onTap: () =>
+                            context.push('/media/${media.node!.id}/overview'),
+                        onLongPress: () => showMediaCard(context, media.node!),
+                        child: AspectRatio(
+                          aspectRatio: 2 / 3,
+                          child: CImage(
+                            imageUrl: media.node!.coverImage!.extraLarge!,
+                          ),
                         ),
                       ),
                     ),

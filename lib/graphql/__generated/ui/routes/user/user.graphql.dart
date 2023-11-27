@@ -533,6 +533,13 @@ const documentNodeQueryUser = DocumentNode(definitions: [
                     selectionSet: null,
                   ),
                   FieldNode(
+                    name: NameNode(value: 'standardDeviation'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
                     name: NameNode(value: 'meanScore'),
                     alias: null,
                     arguments: [],
@@ -599,6 +606,13 @@ const documentNodeQueryUser = DocumentNode(definitions: [
                   ),
                   FieldNode(
                     name: NameNode(value: 'volumesRead'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'standardDeviation'),
                     alias: null,
                     arguments: [],
                     directives: [],
@@ -1582,6 +1596,7 @@ class Query$User$User$statistics$anime {
     required this.count,
     required this.episodesWatched,
     required this.minutesWatched,
+    required this.standardDeviation,
     required this.meanScore,
     this.genres,
     this.$__typename = 'UserStatistics',
@@ -1591,6 +1606,7 @@ class Query$User$User$statistics$anime {
     final l$count = json['count'];
     final l$episodesWatched = json['episodesWatched'];
     final l$minutesWatched = json['minutesWatched'];
+    final l$standardDeviation = json['standardDeviation'];
     final l$meanScore = json['meanScore'];
     final l$genres = json['genres'];
     final l$$__typename = json['__typename'];
@@ -1598,6 +1614,7 @@ class Query$User$User$statistics$anime {
       count: (l$count as int),
       episodesWatched: (l$episodesWatched as int),
       minutesWatched: (l$minutesWatched as int),
+      standardDeviation: (l$standardDeviation as num).toDouble(),
       meanScore: (l$meanScore as num).toDouble(),
       genres: (l$genres as List<dynamic>?)
           ?.map((e) => e == null
@@ -1614,6 +1631,8 @@ class Query$User$User$statistics$anime {
 
   final int minutesWatched;
 
+  final double standardDeviation;
+
   final double meanScore;
 
   final List<Fragment$GenreStat?>? genres;
@@ -1628,6 +1647,8 @@ class Query$User$User$statistics$anime {
     _resultData['episodesWatched'] = l$episodesWatched;
     final l$minutesWatched = minutesWatched;
     _resultData['minutesWatched'] = l$minutesWatched;
+    final l$standardDeviation = standardDeviation;
+    _resultData['standardDeviation'] = l$standardDeviation;
     final l$meanScore = meanScore;
     _resultData['meanScore'] = l$meanScore;
     final l$genres = genres;
@@ -1642,6 +1663,7 @@ class Query$User$User$statistics$anime {
     final l$count = count;
     final l$episodesWatched = episodesWatched;
     final l$minutesWatched = minutesWatched;
+    final l$standardDeviation = standardDeviation;
     final l$meanScore = meanScore;
     final l$genres = genres;
     final l$$__typename = $__typename;
@@ -1649,6 +1671,7 @@ class Query$User$User$statistics$anime {
       l$count,
       l$episodesWatched,
       l$minutesWatched,
+      l$standardDeviation,
       l$meanScore,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$$__typename,
@@ -1677,6 +1700,11 @@ class Query$User$User$statistics$anime {
     final l$minutesWatched = minutesWatched;
     final lOther$minutesWatched = other.minutesWatched;
     if (l$minutesWatched != lOther$minutesWatched) {
+      return false;
+    }
+    final l$standardDeviation = standardDeviation;
+    final lOther$standardDeviation = other.standardDeviation;
+    if (l$standardDeviation != lOther$standardDeviation) {
       return false;
     }
     final l$meanScore = meanScore;
@@ -1731,6 +1759,7 @@ abstract class CopyWith$Query$User$User$statistics$anime<TRes> {
     int? count,
     int? episodesWatched,
     int? minutesWatched,
+    double? standardDeviation,
     double? meanScore,
     List<Fragment$GenreStat?>? genres,
     String? $__typename,
@@ -1758,6 +1787,7 @@ class _CopyWithImpl$Query$User$User$statistics$anime<TRes>
     Object? count = _undefined,
     Object? episodesWatched = _undefined,
     Object? minutesWatched = _undefined,
+    Object? standardDeviation = _undefined,
     Object? meanScore = _undefined,
     Object? genres = _undefined,
     Object? $__typename = _undefined,
@@ -1773,6 +1803,10 @@ class _CopyWithImpl$Query$User$User$statistics$anime<TRes>
         minutesWatched: minutesWatched == _undefined || minutesWatched == null
             ? _instance.minutesWatched
             : (minutesWatched as int),
+        standardDeviation:
+            standardDeviation == _undefined || standardDeviation == null
+                ? _instance.standardDeviation
+                : (standardDeviation as double),
         meanScore: meanScore == _undefined || meanScore == null
             ? _instance.meanScore
             : (meanScore as double),
@@ -1807,6 +1841,7 @@ class _CopyWithStubImpl$Query$User$User$statistics$anime<TRes>
     int? count,
     int? episodesWatched,
     int? minutesWatched,
+    double? standardDeviation,
     double? meanScore,
     List<Fragment$GenreStat?>? genres,
     String? $__typename,
@@ -1821,6 +1856,7 @@ class Query$User$User$statistics$manga {
     required this.count,
     required this.chaptersRead,
     required this.volumesRead,
+    required this.standardDeviation,
     required this.meanScore,
     this.genres,
     this.$__typename = 'UserStatistics',
@@ -1830,6 +1866,7 @@ class Query$User$User$statistics$manga {
     final l$count = json['count'];
     final l$chaptersRead = json['chaptersRead'];
     final l$volumesRead = json['volumesRead'];
+    final l$standardDeviation = json['standardDeviation'];
     final l$meanScore = json['meanScore'];
     final l$genres = json['genres'];
     final l$$__typename = json['__typename'];
@@ -1837,6 +1874,7 @@ class Query$User$User$statistics$manga {
       count: (l$count as int),
       chaptersRead: (l$chaptersRead as int),
       volumesRead: (l$volumesRead as int),
+      standardDeviation: (l$standardDeviation as num).toDouble(),
       meanScore: (l$meanScore as num).toDouble(),
       genres: (l$genres as List<dynamic>?)
           ?.map((e) => e == null
@@ -1853,6 +1891,8 @@ class Query$User$User$statistics$manga {
 
   final int volumesRead;
 
+  final double standardDeviation;
+
   final double meanScore;
 
   final List<Fragment$GenreStat?>? genres;
@@ -1867,6 +1907,8 @@ class Query$User$User$statistics$manga {
     _resultData['chaptersRead'] = l$chaptersRead;
     final l$volumesRead = volumesRead;
     _resultData['volumesRead'] = l$volumesRead;
+    final l$standardDeviation = standardDeviation;
+    _resultData['standardDeviation'] = l$standardDeviation;
     final l$meanScore = meanScore;
     _resultData['meanScore'] = l$meanScore;
     final l$genres = genres;
@@ -1881,6 +1923,7 @@ class Query$User$User$statistics$manga {
     final l$count = count;
     final l$chaptersRead = chaptersRead;
     final l$volumesRead = volumesRead;
+    final l$standardDeviation = standardDeviation;
     final l$meanScore = meanScore;
     final l$genres = genres;
     final l$$__typename = $__typename;
@@ -1888,6 +1931,7 @@ class Query$User$User$statistics$manga {
       l$count,
       l$chaptersRead,
       l$volumesRead,
+      l$standardDeviation,
       l$meanScore,
       l$genres == null ? null : Object.hashAll(l$genres.map((v) => v)),
       l$$__typename,
@@ -1916,6 +1960,11 @@ class Query$User$User$statistics$manga {
     final l$volumesRead = volumesRead;
     final lOther$volumesRead = other.volumesRead;
     if (l$volumesRead != lOther$volumesRead) {
+      return false;
+    }
+    final l$standardDeviation = standardDeviation;
+    final lOther$standardDeviation = other.standardDeviation;
+    if (l$standardDeviation != lOther$standardDeviation) {
       return false;
     }
     final l$meanScore = meanScore;
@@ -1970,6 +2019,7 @@ abstract class CopyWith$Query$User$User$statistics$manga<TRes> {
     int? count,
     int? chaptersRead,
     int? volumesRead,
+    double? standardDeviation,
     double? meanScore,
     List<Fragment$GenreStat?>? genres,
     String? $__typename,
@@ -1997,6 +2047,7 @@ class _CopyWithImpl$Query$User$User$statistics$manga<TRes>
     Object? count = _undefined,
     Object? chaptersRead = _undefined,
     Object? volumesRead = _undefined,
+    Object? standardDeviation = _undefined,
     Object? meanScore = _undefined,
     Object? genres = _undefined,
     Object? $__typename = _undefined,
@@ -2011,6 +2062,10 @@ class _CopyWithImpl$Query$User$User$statistics$manga<TRes>
         volumesRead: volumesRead == _undefined || volumesRead == null
             ? _instance.volumesRead
             : (volumesRead as int),
+        standardDeviation:
+            standardDeviation == _undefined || standardDeviation == null
+                ? _instance.standardDeviation
+                : (standardDeviation as double),
         meanScore: meanScore == _undefined || meanScore == null
             ? _instance.meanScore
             : (meanScore as double),
@@ -2045,6 +2100,7 @@ class _CopyWithStubImpl$Query$User$User$statistics$manga<TRes>
     int? count,
     int? chaptersRead,
     int? volumesRead,
+    double? standardDeviation,
     double? meanScore,
     List<Fragment$GenreStat?>? genres,
     String? $__typename,

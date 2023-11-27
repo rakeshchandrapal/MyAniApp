@@ -1,13 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/social/social.graphql.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 
-@RoutePage()
 class MediaSocialPage extends StatelessWidget {
-  const MediaSocialPage({super.key, @PathParam.inherit('id') required this.id});
+  const MediaSocialPage({super.key, required this.id});
 
   final int id;
 

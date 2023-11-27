@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
@@ -6,9 +5,8 @@ import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/home/list/anime.dart';
 
-@RoutePage()
 class UserMangaListPage extends StatelessWidget {
-  const UserMangaListPage({super.key, @PathParam('name') required this.name});
+  const UserMangaListPage({super.key, required this.name});
 
   final String name;
 
@@ -48,7 +46,7 @@ class UserMangaListPage extends StatelessWidget {
           child: DefaultTabController(
             length: lists.length,
             child: ListTabs(
-              leading: const AutoLeadingButton(),
+              leading: const BackButton(),
               lists: lists.cast(),
               refresh: refetch,
               user: result.parsedData!.MediaListCollection!.user!,

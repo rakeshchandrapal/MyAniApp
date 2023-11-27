@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql.dart';
@@ -16,7 +16,6 @@ import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 class ActivityCard extends ConsumerWidget {
@@ -43,7 +42,7 @@ class ActivityCard extends ConsumerWidget {
         createdAt: a.createdAt,
         onTap: inActivity == true
             ? null
-            : () => context.pushRoute(ActivityRoute(id: a.id)).then((value) {
+            : () => context.push('/activity/${a.id}').then((value) {
                   if (value == true) onDelete?.call();
                 }),
         leading: Row(
@@ -137,7 +136,7 @@ class ActivityCard extends ConsumerWidget {
         createdAt: a.createdAt,
         onTap: inActivity == true
             ? null
-            : () => context.pushRoute(ActivityRoute(id: a.id)).then((value) {
+            : () => context.push('/activity/${a.id}').then((value) {
                   if (value == true) onDelete?.call();
                 }),
         leading: Row(
@@ -208,7 +207,7 @@ class ActivityCard extends ConsumerWidget {
         body: Row(
           children: [
             GestureDetector(
-              onTap: () => context.router.push(MediaRoute(id: a.media!.id)),
+              onTap: () => context.push('/media/${a.media!.id}/overview'),
               child: ClipRRect(
                 borderRadius: imageRadius,
                 child: CImage(
@@ -235,9 +234,8 @@ class ActivityCard extends ConsumerWidget {
                         color: linkColor,
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => context.router.push(
-                              MediaRoute(id: a.media!.id),
-                            ),
+                        ..onTap = () =>
+                            context.push('/media/${a.media!.id}/overview'),
                     ),
                   ],
                 ),
@@ -255,7 +253,7 @@ class ActivityCard extends ConsumerWidget {
         createdAt: a.createdAt,
         onTap: inActivity == true
             ? null
-            : () => context.pushRoute(ActivityRoute(id: a.id)).then((value) {
+            : () => context.push('/activity/${a.id}').then((value) {
                   if (value == true) onDelete?.call();
                 }),
         badge:

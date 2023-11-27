@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
@@ -17,9 +17,7 @@ import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/common/numer_picker.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class HomeAnimePage extends ConsumerWidget {
   const HomeAnimePage({super.key});
 
@@ -59,8 +57,8 @@ class HomeAnimePage extends ConsumerWidget {
                           BoxConstraints(minHeight: constraints.maxHeight),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () => context.pushRoute(
-                              SearchRoute(type: Enum$MediaType.ANIME.name)),
+                          onPressed: () => context.push(
+                              '/search?type=${Enum$MediaType.ANIME.name}'),
                           child: const Text('Browse animes to add'),
                         ),
                       ),
@@ -356,7 +354,7 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
       list: widget.list.entries!.map((e) => e!.media!).toList(),
       aspectRatio: 1.9 / 3,
       setting: widget.setting,
-      onTap: (media, index) => context.pushRoute(MediaRoute(id: media.id)),
+      onTap: (media, index) => context.push('/media/${media.id}'),
       onDoubleTap: widget.canEdit
           ? (media, index) => showMediaEditor(
                 context,

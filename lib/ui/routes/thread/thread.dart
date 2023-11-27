@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
@@ -14,12 +14,10 @@ import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
-@RoutePage()
 class ThreadPage extends ConsumerWidget {
-  const ThreadPage({super.key, @PathParam('id') required this.id});
+  const ThreadPage({super.key, required this.id});
 
   final int id;
 
@@ -165,8 +163,8 @@ class ThreadPage extends ConsumerWidget {
                                         onLongPress: () =>
                                             showMediaCard(context, media),
                                         child: ActionChip(
-                                          onPressed: () => context.pushRoute(
-                                              MediaRoute(id: media.id)),
+                                          onPressed: () => context
+                                              .push('/media/${media.id}'),
                                           label: Text(
                                               media!.title!.userPreferred!),
                                           labelPadding: EdgeInsets.zero,

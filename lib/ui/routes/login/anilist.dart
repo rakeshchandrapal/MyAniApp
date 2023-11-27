@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class AniLoginPage extends ConsumerStatefulWidget {
   const AniLoginPage({super.key});
 
@@ -48,9 +46,7 @@ class _LoginPageState extends ConsumerState<AniLoginPage> {
         var accessToken = fragment.substring(start + 1, middle);
         var settings = ref.read(settingsProvider.notifier);
         // var instance = await SharedPreferences.getInstance();
-        settings
-            .login(accessToken)
-            .then((value) => context.router.popAndPush(const MyHomeRoute()));
+        settings.login(accessToken).then((value) => context.go('/'));
         // await instance.setString('token', accessToken);
         // var c = await client(updated: true);
         // print(RegExp('(?:access_token=)(.+)', dotAll: true)

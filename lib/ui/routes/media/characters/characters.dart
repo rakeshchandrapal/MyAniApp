@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/characters/characters.graphql.dart';
@@ -7,12 +7,9 @@ import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class MediaCharactersPage extends StatelessWidget {
-  const MediaCharactersPage(
-      {super.key, @PathParam.inherit('id') required this.id});
+  const MediaCharactersPage({super.key, required this.id});
 
   final int id;
 
@@ -176,7 +173,7 @@ class CharacterCard extends StatelessWidget {
       ),
       surfaceTintColor: Theme.of(context).colorScheme.surfaceVariant,
       child: InkWell(
-        onTap: () => context.pushRoute(CharacterRoute(id: character.node!.id)),
+        onTap: () => context.push('/character/${character.node!.id}'),
         child: Stack(
           children: [
             Row(
@@ -219,8 +216,7 @@ class CharacterCard extends StatelessWidget {
               Positioned(
                 right: 0,
                 child: GestureDetector(
-                  onTap: () =>
-                      context.pushRoute(StaffRoute(id: voice!.voiceActor!.id)),
+                  onTap: () => context.push('/staff/${voice!.voiceActor!.id}'),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [

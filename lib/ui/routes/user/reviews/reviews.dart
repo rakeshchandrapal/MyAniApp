@@ -1,18 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/reviews/reviews.graphql.dart';
 import 'package:myaniapp/providers/userProfile.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class UserReviewsPage extends ConsumerWidget {
-  const UserReviewsPage(
-      {super.key, @PathParam.inherit('name') required this.name});
+  const UserReviewsPage({super.key, required this.name});
 
   final String name;
 
@@ -63,7 +60,7 @@ class UserReviewsPage extends ConsumerWidget {
               var review = result.parsedData!.Page!.reviews![index]!;
 
               return ListTile(
-                onTap: () => context.pushRoute(ReviewRoute(id: review.id)),
+                onTap: () => context.push('/review/${review.id}'),
                 title: Text.rich(
                   TextSpan(
                     children: [
@@ -74,8 +71,8 @@ class UserReviewsPage extends ConsumerWidget {
                         text: review.media!.title!.userPreferred!,
                         style: const TextStyle(color: linkColor),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => context.router
-                              .push(MediaRoute(id: review.media!.id)),
+                          ..onTap = () => context
+                              .push('/media/${review.media!.id}/overview'),
                       ),
                     ],
                   ),

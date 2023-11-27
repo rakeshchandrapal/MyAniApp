@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:myaniapp/ui/routes/routes.dart';
+import 'package:myaniapp/ui/routes/router.dart';
 import 'package:myaniapp/ui/theme.dart';
 
 class App extends ConsumerStatefulWidget {
@@ -26,13 +26,12 @@ class _AppState extends ConsumerState<App> {
   void dispose() {
     super.dispose();
     _linkSubscription?.cancel();
-    print('gone');
   }
 
   @override
   void initState() {
     super.initState();
-    appRouter = AppRouter(ref);
+    // appRouter = AppRouter(ref);
     if (!kIsWeb && !Platform.isLinux) initAppLinks();
   }
 
@@ -59,7 +58,7 @@ class _AppState extends ConsumerState<App> {
   void openAppLink(Uri uri) {
     if (uri.host != 'root') return;
     logger.i('pushed to ${uri.path}');
-    appRouter.pushNamed(uri.path);
+    // appRouter.pushNamed(uri.path);
   }
 
   @override
@@ -68,7 +67,7 @@ class _AppState extends ConsumerState<App> {
 
     return MaterialApp.router(
       title: 'MyAniApp',
-      routerConfig: appRouter.config(),
+      routerConfig: router,
       scrollBehavior: _ScrollBehavior(),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

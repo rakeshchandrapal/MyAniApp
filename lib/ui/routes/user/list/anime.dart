@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
@@ -6,9 +5,8 @@ import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/home/list/anime.dart';
 
-@RoutePage()
 class UserAnimeListPage extends StatelessWidget {
-  const UserAnimeListPage({super.key, @PathParam('name') required this.name});
+  const UserAnimeListPage({super.key, required this.name});
 
   final String name;
 
@@ -48,7 +46,7 @@ class UserAnimeListPage extends StatelessWidget {
           child: DefaultTabController(
             length: lists.length,
             child: ListTabs(
-              leading: const AutoLeadingButton(),
+              leading: const BackButton(),
               lists: lists.cast(),
               refresh: refetch,
               user: result.parsedData!.MediaListCollection!.user!,
@@ -57,32 +55,6 @@ class UserAnimeListPage extends StatelessWidget {
             ),
           ),
         );
-
-        // if (lists.isEmpty) {
-        //   return RefreshIndicator.adaptive(
-        //     onRefresh: refetch!,
-        //     child: Scaffold(
-        //       appBar: const HomeAppBar(),
-        //       body: LayoutBuilder(
-        //         builder: (context, constraints) => ListView(
-        //           children: [
-        //             Container(
-        //               constraints:
-        //                   BoxConstraints(minHeight: constraints.maxHeight),
-        //               child: Center(
-        //                 child: ElevatedButton(
-        //                   onPressed: () => context.pushRoute(
-        //                       SearchRoute(type: Enum$MediaType.ANIME.name)),
-        //                   child: const Text('Browse animes to add'),
-        //                 ),
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //   );
-        // }
       },
     );
   }

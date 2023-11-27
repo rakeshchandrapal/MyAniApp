@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/activity/activity.graphql.dart';
@@ -15,9 +15,8 @@ import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
-@RoutePage()
 class ActivityPage extends ConsumerWidget {
-  const ActivityPage({super.key, @pathParam required this.id});
+  const ActivityPage({super.key, required this.id});
 
   final int id;
 
@@ -100,7 +99,7 @@ class ActivityPage extends ConsumerWidget {
                             children: [
                               ActivityCard(
                                 activity: result.parsedData!.activity!,
-                                onDelete: () => context.popRoute(true),
+                                onDelete: () => context.pop(true),
                                 inActivity: true,
                               ),
                               const SizedBox(

@@ -1,16 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/reviews/reviews.graphql.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class MediaReviewsPage extends StatelessWidget {
-  const MediaReviewsPage(
-      {super.key, @PathParam.inherit('id') required this.id});
+  const MediaReviewsPage({super.key, required this.id});
 
   final int id;
 
@@ -55,15 +52,14 @@ class MediaReviewsPage extends StatelessWidget {
 
                 return ListTile(
                   leading: GestureDetector(
-                    // onTap: () =>
-                    //     context.router.push(ProfileRoute(name: item.user!.name)),
+                    onTap: () => context.push('/user/${item.user!.name}'),
                     child: CircleAvatar(
                       backgroundImage:
                           CachedNetworkImageProvider(item.user!.avatar!.large!),
                       backgroundColor: Colors.transparent,
                     ),
                   ),
-                  onTap: () => context.pushRoute(ReviewRoute(id: item.id)),
+                  onTap: () => context.push('/review/${item.id}'),
                   title: Text(item.summary!),
                   subtitle: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

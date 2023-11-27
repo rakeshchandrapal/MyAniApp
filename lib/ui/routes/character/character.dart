@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
@@ -12,11 +12,9 @@ import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 
-@RoutePage()
 class CharacterPage extends StatefulWidget {
-  const CharacterPage({super.key, @PathParam('id') required this.id});
+  const CharacterPage({super.key, required this.id});
 
   final int id;
 
@@ -285,9 +283,8 @@ class _CharacterPageState extends State<CharacterPage> {
                         aspectRatio: 1.9 / 3,
                         primary: false,
                         padding: const EdgeInsets.all(8),
-                        onTap: (media, index) => context.pushRoute(
-                          MediaRoute(id: media.id),
-                        ),
+                        onTap: (media, index) =>
+                            context.push('/media/${media.id}/overview'),
                       ),
                       // child: GridCards(
                       //   primary: false,

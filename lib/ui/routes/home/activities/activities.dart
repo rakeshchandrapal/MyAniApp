@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
@@ -9,12 +9,9 @@ import 'package:myaniapp/ui/common/activity_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
-import 'package:myaniapp/ui/routes/forum/overview/overview.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
-import 'package:myaniapp/ui/routes/routes.gr.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
-@RoutePage()
 class HomeActivitiesPage extends ConsumerStatefulWidget {
   const HomeActivitiesPage({super.key});
 
@@ -56,8 +53,7 @@ class _HomeActivitiesPageState extends ConsumerState<HomeActivitiesPage> {
           appBar: HomeAppBar(
             actions: [
               IconButton(
-                  onPressed: () => context.pushRoute(
-                      ForumOverviewRoute(filter: ForumFilter.overview.name)),
+                  onPressed: () => context.push('/forum/overview'),
                   icon: const Icon(Icons.forum)),
               if (user.value != null)
                 SizedBox(

@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:logger/logger.dart';
@@ -19,6 +21,7 @@ import 'web_url_protocol.dart'
     if (dart.library.io) 'package:url_protocol/url_protocol.dart';
 
 void main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
 
@@ -44,6 +47,8 @@ void main() async {
 
     PushNotifications().requestPermission();
   }
+
+  GoRouter.optionURLReflectsImperativeAPIs = true;
 
   runApp(
     ProviderScope(
