@@ -4386,11 +4386,10 @@ extension ClientExtension$Mutation$SaveTextActivity on graphql.GraphQLClient {
       mutate$SaveTextActivity(
               [Options$Mutation$SaveTextActivity? options]) async =>
           await this.mutate(options ?? Options$Mutation$SaveTextActivity());
-  graphql.ObservableQuery<Mutation$SaveTextActivity>
-      watchMutation$SaveTextActivity(
-              [WatchOptions$Mutation$SaveTextActivity? options]) =>
-          this.watchMutation(
-              options ?? WatchOptions$Mutation$SaveTextActivity());
+  graphql.ObservableQuery<
+      Mutation$SaveTextActivity> watchMutation$SaveTextActivity(
+          [WatchOptions$Mutation$SaveTextActivity? options]) =>
+      this.watchMutation(options ?? WatchOptions$Mutation$SaveTextActivity());
 }
 
 class Mutation$SaveTextActivity$HookResult {

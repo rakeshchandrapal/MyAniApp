@@ -1571,11 +1571,10 @@ extension ClientExtension$Mutation$SaveMediaListEntry on graphql.GraphQLClient {
       mutate$SaveMediaListEntry(
               [Options$Mutation$SaveMediaListEntry? options]) async =>
           await this.mutate(options ?? Options$Mutation$SaveMediaListEntry());
-  graphql.ObservableQuery<Mutation$SaveMediaListEntry>
-      watchMutation$SaveMediaListEntry(
-              [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
-          this.watchMutation(
-              options ?? WatchOptions$Mutation$SaveMediaListEntry());
+  graphql.ObservableQuery<
+      Mutation$SaveMediaListEntry> watchMutation$SaveMediaListEntry(
+          [WatchOptions$Mutation$SaveMediaListEntry? options]) =>
+      this.watchMutation(options ?? WatchOptions$Mutation$SaveMediaListEntry());
 }
 
 class Mutation$SaveMediaListEntry$HookResult {

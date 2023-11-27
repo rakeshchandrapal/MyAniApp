@@ -3332,11 +3332,10 @@ extension ClientExtension$Mutation$SaveActivityReply on graphql.GraphQLClient {
       mutate$SaveActivityReply(
               [Options$Mutation$SaveActivityReply? options]) async =>
           await this.mutate(options ?? Options$Mutation$SaveActivityReply());
-  graphql.ObservableQuery<Mutation$SaveActivityReply>
-      watchMutation$SaveActivityReply(
-              [WatchOptions$Mutation$SaveActivityReply? options]) =>
-          this.watchMutation(
-              options ?? WatchOptions$Mutation$SaveActivityReply());
+  graphql.ObservableQuery<
+      Mutation$SaveActivityReply> watchMutation$SaveActivityReply(
+          [WatchOptions$Mutation$SaveActivityReply? options]) =>
+      this.watchMutation(options ?? WatchOptions$Mutation$SaveActivityReply());
 }
 
 class Mutation$SaveActivityReply$HookResult {

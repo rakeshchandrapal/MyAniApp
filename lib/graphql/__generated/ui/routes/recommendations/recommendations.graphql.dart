@@ -1689,11 +1689,10 @@ extension ClientExtension$Mutation$SaveRecommendation on graphql.GraphQLClient {
       mutate$SaveRecommendation(
               [Options$Mutation$SaveRecommendation? options]) async =>
           await this.mutate(options ?? Options$Mutation$SaveRecommendation());
-  graphql.ObservableQuery<Mutation$SaveRecommendation>
-      watchMutation$SaveRecommendation(
-              [WatchOptions$Mutation$SaveRecommendation? options]) =>
-          this.watchMutation(
-              options ?? WatchOptions$Mutation$SaveRecommendation());
+  graphql.ObservableQuery<
+      Mutation$SaveRecommendation> watchMutation$SaveRecommendation(
+          [WatchOptions$Mutation$SaveRecommendation? options]) =>
+      this.watchMutation(options ?? WatchOptions$Mutation$SaveRecommendation());
 }
 
 class Mutation$SaveRecommendation$HookResult {
