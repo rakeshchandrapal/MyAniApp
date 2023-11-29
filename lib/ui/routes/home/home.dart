@@ -26,10 +26,12 @@ class GoHomePage extends ConsumerWidget {
                     currentIndex: navigationShell.currentIndex,
                     onTap: _onTap,
                   ),
-                  Expanded(child: navigationShell),
+                  Expanded(
+                    child: FadeInWidget(navigationShell: navigationShell),
+                  ),
                 ],
               ),
-            _ => navigationShell
+            _ => FadeInWidget(navigationShell: navigationShell)
           },
           drawer: const HomeDrawer(),
           bottomNavigationBar: switch (orientation) {
@@ -60,56 +62,54 @@ class GoHomePage extends ConsumerWidget {
   }
 }
 
-// @RoutePage()
-// class MyHomePage extends ConsumerWidget {
-//   const MyHomePage({super.key});
+class FadeInWidget extends StatefulWidget {
+  const FadeInWidget({
+    super.key,
+    required this.navigationShell,
+  });
 
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     var user = ref.watch(userProvider);
+  final StatefulNavigationShell navigationShell;
 
-//     return user.when(
-//       data: (data) => AutoTabsRouter(
-//         routes: [
-//           const HomeOverviewRoute(),
-//           if (data != null) const HomeAnimeRoute(),
-//           if (data != null) const ExploreRoute(),
-//           if (data != null) const HomeMangaRoute(),
-//           const HomeActivitiesRoute(),
-//         ],
-//         builder: (context, child) {
-//           return OrientationBuilder(
-//             builder: (context, orientation) => Scaffold(
-//               body: switch (orientation) {
-//                 // (Orientation.landscape) => Row(
-//                 //     children: [
-//                 //       Rail(
-//                 //         hasData: data != null,
-//                 //       ),
-//                 //       Expanded(child: child),
-//                 //     ],
-//                 //   ),
-//                 _ => child
-//               },
-//               drawer: const HomeDrawer(),
-//               // bottomNavigationBar: switch (orientation) {
-//               //   (Orientation.portrait) => BottomBar(hasData: data != null),
-//               //   _ => null
-//               // },
-//             ),
-//           );
-//         },
-//       ),
-//       error: (error, stackTrace) =>
-//           GraphqlError(exception: error as OperationException),
-//       loading: () => const Scaffold(
-//         body: Center(
-//           child: CircularProgressIndicator.adaptive(),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  State<FadeInWidget> createState() => _FadeInWidgetState();
+}
+
+class _FadeInWidgetState extends State<FadeInWidget>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(milliseconds: 200),
+    vsync: this,
+  )..forward();
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeIn,
+  );
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant FadeInWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.navigationShell.currentIndex !=
+        widget.navigationShell.currentIndex) {
+      _controller
+        ..reset()
+        ..forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _animation,
+      child: widget.navigationShell,
+    );
+  }
+}
 
 class BottomBar extends StatelessWidget {
   const BottomBar({
@@ -132,12 +132,7 @@ class BottomBar extends StatelessWidget {
       onDestinationSelected: (index) =>
           onTap(index == 1 && !hasData ? 4 : index),
       height: 60,
-      // currentIndex: currentIndex == 4 && !hasData ? 1 : currentIndex,
-      // type: BottomNavigationBarType.shifting,
-      // fixedColor: Theme.of(context).colorScheme.primary,
-      // unselectedItemColor: Theme.of(context).colorScheme.secondary,
-      // showUnselectedLabels: false,
-      // labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       destinations: [
         const NavigationDestination(
           icon: Icon(Icons.home),
