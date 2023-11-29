@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
+import 'package:myaniapp/ui/routes/router.dart';
 
 String _tag = 'spoiler';
 
@@ -13,14 +15,14 @@ class SpoilerNode extends ElementNode {
 
   @override
   InlineSpan build() {
-    return const TextSpan(
+    return TextSpan(
       text: '[Spoiler]',
-      style: TextStyle(
+      style: const TextStyle(
         color: linkColor,
       ),
-      // recognizer: TapGestureRecognizer()
-      //   ..onTap =
-      //       () => showSpoiler(appRouter.navigatorKey.currentContext!, spoiler),
+      recognizer: TapGestureRecognizer()
+        ..onTap = () => showSpoiler(
+            router.configuration.navigatorKey.currentContext!, spoiler),
     );
   }
 }
@@ -43,7 +45,7 @@ SpanNodeGeneratorWithTag spoilerWithTag = SpanNodeGeneratorWithTag(
 );
 
 class SpoilerSyntax extends md.InlineSyntax {
-  SpoilerSyntax() : super(r'~!([\s\S]+?)!~');
+  SpoilerSyntax() : super(r'~!([^]+?)!~');
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {

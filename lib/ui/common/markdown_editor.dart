@@ -66,8 +66,10 @@ class _EditorState extends State<Editor> {
         controller.selection.baseOffset > controller.selection.extentOffset
             ? controller.selection.baseOffset
             : controller.selection.extentOffset;
-    var selected = controller.text.substring(start, end);
-    return SelectedText(start, end, selected, controller);
+    var selected =
+        controller.text.substring(start == -1 ? 0 : start, end == -1 ? 0 : end);
+    return SelectedText(
+        start == -1 ? 0 : start, end == -1 ? 0 : end, selected, controller);
   }
 
   @override
@@ -88,102 +90,96 @@ class _EditorState extends State<Editor> {
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: [
-          Wrap(
-            children: [
-              TextButton(
-                onPressed: () {
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('__', '__');
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('__', '__');
 
-                  focus.requestFocus();
-                },
-                child: const Text('Bold'),
-              ),
-              TextButton(
-                onPressed: () {
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('_', '_');
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.format_bold),
+                ),
+                TextButton(
+                  onPressed: () {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('_', '_');
 
-                  focus.requestFocus();
-                },
-                child: const Text('Italic'),
-              ),
-              TextButton(
-                onPressed: () {
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('~~', '~~');
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.format_italic),
+                ),
+                TextButton(
+                  onPressed: () {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('~~', '~~');
 
-                  focus.requestFocus();
-                },
-                child: const Text('Strike through'),
-              ),
-              TextButton(
-                onPressed: () {
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('~!', '!~');
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.format_strikethrough),
+                ),
+                TextButton(
+                  onPressed: () {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('~!', '!~');
 
-                  focus.requestFocus();
-                },
-                child: const Text('Spoiler'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  var result = await _showTextDialog(context, '');
-                  // print(result);
-                  if (result == null || result.isEmpty) return;
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround(
-                      '[${selectedText.text.isEmpty ? 'link' : ''}',
-                      ']($result)');
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.visibility_off),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    var result = await _showTextDialog(context, '');
+                    if (result == null || result.isEmpty) return;
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround(
+                        '[${selectedText.text.isEmpty ? 'link' : ''}',
+                        ']($result)');
 
-                  focus.requestFocus();
-                },
-                child: const Text('Link'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  // var result = await _showTextDialog(context, 'image');
-                  // print(result);
-                  // if (result == null || result.isEmpty) return;
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('# ', null);
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.link),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('# ', null);
 
-                  focus.requestFocus();
-                },
-                child: const Text('Header'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // var result = await _showTextDialog(context, 'image');
-                  // print(result);
-                  // if (result == null || result.isEmpty) return;
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('\n1. ', null);
+                    focus.requestFocus();
+                  },
+                  child: const Text('H'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('\n1. ', null);
 
-                  focus.requestFocus();
-                },
-                child: const Text('Ordered list'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // var result = await _showTextDialog(context, 'image');
-                  // print(result);
-                  // if (result == null || result.isEmpty) return;
-                  var selectedText = _getSelectedText(textController);
-                  selectedText.replaceAround('\n- ', null);
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.format_list_numbered),
+                ),
+                TextButton(
+                  onPressed: () {
+                    var selectedText = _getSelectedText(textController);
+                    selectedText.replaceAround('\n- ', null);
 
-                  focus.requestFocus();
-                },
-                child: const Text('Unordered list'),
-              ),
-            ],
+                    focus.requestFocus();
+                  },
+                  child: const Icon(Icons.format_list_bulleted),
+                ),
+              ],
+            ),
           ),
           TextField(
             focusNode: focus,
             controller: textController,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            decoration: const InputDecoration(border: OutlineInputBorder()),
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(), hintText: 'Type here...'),
           ),
           const Text('Preview:'),
           Preview(controller: textController),

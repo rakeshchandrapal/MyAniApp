@@ -102,6 +102,7 @@ class Markdown extends StatelessWidget {
                   ),
                 );
               },
+              errorBuilder: (_, __, ___) => const SizedBox(),
             ),
             const md2.CodeConfig(style: TextStyle()),
             md2.PreConfig(
