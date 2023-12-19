@@ -163,6 +163,7 @@ class __MediaShellState extends ConsumerState<_MediaShell>
 
     return Scaffold(
       floatingActionButton: FloatingButtons(id: widget.id),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: NestedScrollView(
         headerSliverBuilder: (context, forceElevated) => [
           MediaAppBar(
@@ -240,7 +241,7 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
     return SlideTransition(
       position: _offsetAnimation,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.all(8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

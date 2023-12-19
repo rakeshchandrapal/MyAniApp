@@ -95,7 +95,7 @@ class ForumOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Query$ForumOverview$Widget(
       builder: queryBuilder(
-        (result, {fetchMore, refetch}) {
+        (result, [fetchMore, refetch]) {
           var pinned = result.parsedData!.recent!.threads!
               .where((e) => e!.isSticky == true);
           var recent = result.parsedData!.recent!.threads!

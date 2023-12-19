@@ -74,7 +74,6 @@ class GridCard extends StatelessWidget {
                   CImage(
                     imageUrl: imageUrl,
                     imageBuilder: (context, imageProvider) => Container(
-                      // height: ,
                       decoration: BoxDecoration(
                         borderRadius: imageRadius,
                         image: DecorationImage(

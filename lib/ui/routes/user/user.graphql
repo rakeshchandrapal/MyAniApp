@@ -3,6 +3,9 @@ query User($name: String) {
     ...UserFragment
     bannerImage
     about
+    mediaListOptions {
+      scoreFormat
+    }
     statistics {
       anime {
         count

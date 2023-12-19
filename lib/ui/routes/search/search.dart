@@ -190,7 +190,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               ? Query$Search$Widget(
                   options: Options$Query$Search(variables: query!.toVar()),
                   builder: queryBuilder(
-                    (result, {fetchMore, refetch}) {
+                    (result, [fetchMore, refetch]) {
                       if (result.parsedData!.Page!.media!.isEmpty) {
                         return const Center(
                           child: Text('No Results Found'),

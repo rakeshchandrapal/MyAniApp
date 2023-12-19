@@ -299,7 +299,7 @@ class GenresButton extends StatelessWidget {
     return Query$GenreCollection$Widget(
       options:
           Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
-      builder: queryBuilder((result, {fetchMore, refetch}) {
+      builder: queryBuilder((result, [fetchMore, refetch]) {
         return MultiDropdown(
           hint: 'Genres',
           items: result.parsedData!.genres!
@@ -338,7 +338,7 @@ class TagsButton extends StatelessWidget {
     return Query$GenreCollection$Widget(
       options:
           Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
-      builder: queryBuilder((result, {fetchMore, refetch}) {
+      builder: queryBuilder((result, [fetchMore, refetch]) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

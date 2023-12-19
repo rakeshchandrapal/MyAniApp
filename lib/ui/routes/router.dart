@@ -35,7 +35,7 @@ final router = GoRouter(
   initialLocation: '/',
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (context, state, shell) => GoHomePage(navigationShell: shell),
+      builder: (context, state, shell) => HomePage(navigationShell: shell),
       branches: [
         StatefulShellBranch(
           routes: [

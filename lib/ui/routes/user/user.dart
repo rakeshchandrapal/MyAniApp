@@ -19,6 +19,7 @@ class UserPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProfileProvider(name));
+    // print('d');
 
     return user.when(
       data: (user) => _UserShellPage(name: name),
@@ -52,6 +53,7 @@ class __UserShellPageState extends ConsumerState<_UserShellPage>
 
   @override
   void initState() {
+    // print('ds');
     super.initState();
     routes = [
       ('Overview', UserOverviewPage(name: widget.name)),
@@ -93,6 +95,7 @@ class __UserShellPageState extends ConsumerState<_UserShellPage>
   Widget build(BuildContext context) {
     var user = ref.watch(userProfileProvider(widget.name));
     var theme = Theme.of(context);
+    print('ds');
 
     return Scaffold(
       body: NestedScrollView(

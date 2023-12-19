@@ -5,9 +5,11 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/staff/staff.graphql.dart';
+import 'package:myaniapp/ui/common/HiddenFloatingActionButton.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
 import 'package:myaniapp/ui/routes/staff/production.dart';
 import 'package:myaniapp/ui/routes/staff/voice.dart';
@@ -101,115 +103,124 @@ class _StaffViewState extends State<StaffView>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: [
-            Expanded(
-              child: FloatingActionButton(
-                onPressed: widget.staff.isFavouriteBlocked == true
-                    ? null
-                    : () => client.value
-                        .mutate$ToggleFavorite(
-                          Options$Mutation$ToggleFavorite(
-                            variables: Variables$Mutation$ToggleFavorite(
-                              staffId: widget.staff.id,
-                            ),
-                          ),
-                        )
-                        .then((value) => widget.refetch()),
-                backgroundColor: widget.staff.isFavouriteBlocked == true
-                    ? Colors.grey[800]
-                    : Colors.red,
-                child: Icon(
-                  Icons.favorite,
-                  color:
-                      widget.staff.isFavourite == true ? Colors.red[200] : null,
+    return ScrollToTop(
+      builder: (scrollController) => Scaffold(
+        floatingActionButton: HiddenFloatingActionButton(
+          scrollController: scrollController,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: FloatingActionButton(
+                    onPressed: widget.staff.isFavouriteBlocked == true
+                        ? null
+                        : () => client.value
+                            .mutate$ToggleFavorite(
+                              Options$Mutation$ToggleFavorite(
+                                variables: Variables$Mutation$ToggleFavorite(
+                                  staffId: widget.staff.id,
+                                ),
+                              ),
+                            )
+                            .then((value) => widget.refetch()),
+                    backgroundColor: widget.staff.isFavouriteBlocked == true
+                        ? Colors.grey[800]
+                        : Colors.red,
+                    child: Icon(
+                      Icons.favorite,
+                      color: widget.staff.isFavourite == true
+                          ? Colors.red[200]
+                          : null,
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  width: 65,
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 65,
-            ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          StaffAppBar(
-            staff: widget.staff,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Description(widget.staff.description),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: NestedScrollView(
+          controller: scrollController,
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            StaffAppBar(
+              staff: widget.staff,
             ),
-          ),
-          if (hasTabs(widget.staff))
             SliverToBoxAdapter(
-              child: TabBar(
-                controller: tabController,
-                tabs: const [
-                  Tab(text: 'Voices'),
-                  Tab(text: 'Production'),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Description(widget.staff.description),
               ),
-            )
-        ],
-        body: Pagination(
-          fetchMore: widget.fetchMore,
-          depth: 1,
-          pageInfo: tabController.index == 0
-              ? widget.staff.characterMedia!.pageInfo!
-              : widget.staff.staffMedia!.pageInfo!,
-          opts: tabController.index == 0
-              ? FetchMoreOptions$Query$Staff(
-                  variables: Variables$Query$Staff(
-                      characterPage:
-                          widget.staff.characterMedia!.pageInfo!.currentPage! +
-                              1),
-                  updateQuery: (previousResultData, fetchMoreResultData) {
-                    var list = [
-                      ...previousResultData!['Staff']!['characterMedia']
-                          ['edges'],
-                      ...fetchMoreResultData!['Staff']!['characterMedia']
-                          ['edges'],
-                    ];
-                    fetchMoreResultData['Staff']!['characterMedia']['edges'] =
-                        list;
-                    return fetchMoreResultData;
-                  },
-                )
-              : FetchMoreOptions$Query$Staff(
-                  variables: Variables$Query$Staff(
-                      staffPage:
-                          (widget.staff.staffMedia!.pageInfo!.currentPage ??
-                                  1) +
-                              1),
-                  updateQuery: (previousResultData, fetchMoreResultData) {
-                    var list = [
-                      ...previousResultData!['Staff']!['staffMedia']['edges'],
-                      ...fetchMoreResultData!['Staff']!['staffMedia']['edges'],
-                    ];
-                    fetchMoreResultData['Staff']!['staffMedia']['edges'] = list;
-                    return fetchMoreResultData;
-                  },
+            ),
+            if (hasTabs(widget.staff))
+              SliverToBoxAdapter(
+                child: TabBar(
+                  controller: tabController,
+                  tabs: const [
+                    Tab(text: 'Voices'),
+                    Tab(text: 'Production'),
+                  ],
                 ),
-          child: TabBarView(
-            physics: hasTabs(widget.staff)
-                ? null
-                : const NeverScrollableScrollPhysics(),
-            controller: tabController,
-            children: [
-              StaffVoicePage(
-                medias: widget.staff.characterMedia!,
-              ),
-              StaffProductionPage(
-                medias: widget.staff.staffMedia!,
-              ),
-            ],
+              )
+          ],
+          body: Pagination(
+            fetchMore: widget.fetchMore,
+            depth: 1,
+            pageInfo: tabController.index == 0
+                ? widget.staff.characterMedia!.pageInfo!
+                : widget.staff.staffMedia!.pageInfo!,
+            opts: tabController.index == 0
+                ? FetchMoreOptions$Query$Staff(
+                    variables: Variables$Query$Staff(
+                        characterPage: widget
+                                .staff.characterMedia!.pageInfo!.currentPage! +
+                            1),
+                    updateQuery: (previousResultData, fetchMoreResultData) {
+                      var list = [
+                        ...previousResultData!['Staff']!['characterMedia']
+                            ['edges'],
+                        ...fetchMoreResultData!['Staff']!['characterMedia']
+                            ['edges'],
+                      ];
+                      fetchMoreResultData['Staff']!['characterMedia']['edges'] =
+                          list;
+                      return fetchMoreResultData;
+                    },
+                  )
+                : FetchMoreOptions$Query$Staff(
+                    variables: Variables$Query$Staff(
+                        staffPage:
+                            (widget.staff.staffMedia!.pageInfo!.currentPage ??
+                                    1) +
+                                1),
+                    updateQuery: (previousResultData, fetchMoreResultData) {
+                      var list = [
+                        ...previousResultData!['Staff']!['staffMedia']['edges'],
+                        ...fetchMoreResultData!['Staff']!['staffMedia']
+                            ['edges'],
+                      ];
+                      fetchMoreResultData['Staff']!['staffMedia']['edges'] =
+                          list;
+                      return fetchMoreResultData;
+                    },
+                  ),
+            child: TabBarView(
+              physics: hasTabs(widget.staff)
+                  ? null
+                  : const NeverScrollableScrollPhysics(),
+              controller: tabController,
+              children: [
+                StaffVoicePage(
+                  medias: widget.staff.characterMedia!,
+                ),
+                StaffProductionPage(
+                  medias: widget.staff.staffMedia!,
+                ),
+              ],
+            ),
           ),
         ),
       ),

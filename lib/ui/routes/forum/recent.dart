@@ -20,7 +20,7 @@ class RecentForums extends StatelessWidget {
         ),
       ),
       builder: queryBuilder(
-        (result, {fetchMore, refetch}) {
+        (result, [fetchMore, refetch]) {
           return RefreshIndicator.adaptive(
             onRefresh: refetch!,
             child: Pagination(

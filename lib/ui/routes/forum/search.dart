@@ -49,7 +49,7 @@ class _ForumSearchState extends State<ForumSearch> {
           ),
         ),
         builder: queryBuilder(
-          (result, {fetchMore, refetch}) {
+          (result, [fetchMore, refetch]) {
             return RefreshIndicator.adaptive(
               onRefresh: refetch!,
               child: Pagination(

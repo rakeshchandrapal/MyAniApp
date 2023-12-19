@@ -6,8 +6,8 @@ import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/home/drawer.dart';
 
-class GoHomePage extends ConsumerWidget {
-  const GoHomePage({super.key, required this.navigationShell});
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 

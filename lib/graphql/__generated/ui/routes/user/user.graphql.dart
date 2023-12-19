@@ -500,6 +500,28 @@ const documentNodeQueryUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'mediaListOptions'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'scoreFormat'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: 'statistics'),
             alias: null,
             arguments: [],
@@ -946,6 +968,7 @@ class Query$User$User implements Fragment$UserFragment {
     this.$__typename = 'User',
     this.bannerImage,
     this.about,
+    this.mediaListOptions,
     this.statistics,
     this.favourites,
   });
@@ -960,6 +983,7 @@ class Query$User$User implements Fragment$UserFragment {
     final l$$__typename = json['__typename'];
     final l$bannerImage = json['bannerImage'];
     final l$about = json['about'];
+    final l$mediaListOptions = json['mediaListOptions'];
     final l$statistics = json['statistics'];
     final l$favourites = json['favourites'];
     return Query$User$User(
@@ -976,6 +1000,10 @@ class Query$User$User implements Fragment$UserFragment {
       $__typename: (l$$__typename as String),
       bannerImage: (l$bannerImage as String?),
       about: (l$about as String?),
+      mediaListOptions: l$mediaListOptions == null
+          ? null
+          : Query$User$User$mediaListOptions.fromJson(
+              (l$mediaListOptions as Map<String, dynamic>)),
       statistics: l$statistics == null
           ? null
           : Query$User$User$statistics.fromJson(
@@ -1005,6 +1033,8 @@ class Query$User$User implements Fragment$UserFragment {
 
   final String? about;
 
+  final Query$User$User$mediaListOptions? mediaListOptions;
+
   final Query$User$User$statistics? statistics;
 
   final Query$User$User$favourites? favourites;
@@ -1031,6 +1061,8 @@ class Query$User$User implements Fragment$UserFragment {
     _resultData['bannerImage'] = l$bannerImage;
     final l$about = about;
     _resultData['about'] = l$about;
+    final l$mediaListOptions = mediaListOptions;
+    _resultData['mediaListOptions'] = l$mediaListOptions?.toJson();
     final l$statistics = statistics;
     _resultData['statistics'] = l$statistics?.toJson();
     final l$favourites = favourites;
@@ -1049,6 +1081,7 @@ class Query$User$User implements Fragment$UserFragment {
     final l$$__typename = $__typename;
     final l$bannerImage = bannerImage;
     final l$about = about;
+    final l$mediaListOptions = mediaListOptions;
     final l$statistics = statistics;
     final l$favourites = favourites;
     return Object.hashAll([
@@ -1063,6 +1096,7 @@ class Query$User$User implements Fragment$UserFragment {
       l$$__typename,
       l$bannerImage,
       l$about,
+      l$mediaListOptions,
       l$statistics,
       l$favourites,
     ]);
@@ -1132,6 +1166,11 @@ class Query$User$User implements Fragment$UserFragment {
     if (l$about != lOther$about) {
       return false;
     }
+    final l$mediaListOptions = mediaListOptions;
+    final lOther$mediaListOptions = other.mediaListOptions;
+    if (l$mediaListOptions != lOther$mediaListOptions) {
+      return false;
+    }
     final l$statistics = statistics;
     final lOther$statistics = other.statistics;
     if (l$statistics != lOther$statistics) {
@@ -1173,10 +1212,12 @@ abstract class CopyWith$Query$User$User<TRes> {
     String? $__typename,
     String? bannerImage,
     String? about,
+    Query$User$User$mediaListOptions? mediaListOptions,
     Query$User$User$statistics? statistics,
     Query$User$User$favourites? favourites,
   });
   CopyWith$Query$User$User$avatar<TRes> get avatar;
+  CopyWith$Query$User$User$mediaListOptions<TRes> get mediaListOptions;
   CopyWith$Query$User$User$statistics<TRes> get statistics;
   CopyWith$Query$User$User$favourites<TRes> get favourites;
 }
@@ -1204,6 +1245,7 @@ class _CopyWithImpl$Query$User$User<TRes>
     Object? $__typename = _undefined,
     Object? bannerImage = _undefined,
     Object? about = _undefined,
+    Object? mediaListOptions = _undefined,
     Object? statistics = _undefined,
     Object? favourites = _undefined,
   }) =>
@@ -1231,6 +1273,9 @@ class _CopyWithImpl$Query$User$User<TRes>
             ? _instance.bannerImage
             : (bannerImage as String?),
         about: about == _undefined ? _instance.about : (about as String?),
+        mediaListOptions: mediaListOptions == _undefined
+            ? _instance.mediaListOptions
+            : (mediaListOptions as Query$User$User$mediaListOptions?),
         statistics: statistics == _undefined
             ? _instance.statistics
             : (statistics as Query$User$User$statistics?),
@@ -1244,6 +1289,14 @@ class _CopyWithImpl$Query$User$User<TRes>
     return local$avatar == null
         ? CopyWith$Query$User$User$avatar.stub(_then(_instance))
         : CopyWith$Query$User$User$avatar(local$avatar, (e) => call(avatar: e));
+  }
+
+  CopyWith$Query$User$User$mediaListOptions<TRes> get mediaListOptions {
+    final local$mediaListOptions = _instance.mediaListOptions;
+    return local$mediaListOptions == null
+        ? CopyWith$Query$User$User$mediaListOptions.stub(_then(_instance))
+        : CopyWith$Query$User$User$mediaListOptions(
+            local$mediaListOptions, (e) => call(mediaListOptions: e));
   }
 
   CopyWith$Query$User$User$statistics<TRes> get statistics {
@@ -1279,6 +1332,7 @@ class _CopyWithStubImpl$Query$User$User<TRes>
     String? $__typename,
     String? bannerImage,
     String? about,
+    Query$User$User$mediaListOptions? mediaListOptions,
     Query$User$User$statistics? statistics,
     Query$User$User$favourites? favourites,
   }) =>
@@ -1286,6 +1340,9 @@ class _CopyWithStubImpl$Query$User$User<TRes>
 
   CopyWith$Query$User$User$avatar<TRes> get avatar =>
       CopyWith$Query$User$User$avatar.stub(_res);
+
+  CopyWith$Query$User$User$mediaListOptions<TRes> get mediaListOptions =>
+      CopyWith$Query$User$User$mediaListOptions.stub(_res);
 
   CopyWith$Query$User$User$statistics<TRes> get statistics =>
       CopyWith$Query$User$User$statistics.stub(_res);
@@ -1411,6 +1468,134 @@ class _CopyWithStubImpl$Query$User$User$avatar<TRes>
 
   call({
     String? large,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$User$User$mediaListOptions {
+  Query$User$User$mediaListOptions({
+    this.scoreFormat,
+    this.$__typename = 'MediaListOptions',
+  });
+
+  factory Query$User$User$mediaListOptions.fromJson(Map<String, dynamic> json) {
+    final l$scoreFormat = json['scoreFormat'];
+    final l$$__typename = json['__typename'];
+    return Query$User$User$mediaListOptions(
+      scoreFormat: l$scoreFormat == null
+          ? null
+          : fromJson$Enum$ScoreFormat((l$scoreFormat as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Enum$ScoreFormat? scoreFormat;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$scoreFormat = scoreFormat;
+    _resultData['scoreFormat'] =
+        l$scoreFormat == null ? null : toJson$Enum$ScoreFormat(l$scoreFormat);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$scoreFormat = scoreFormat;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$scoreFormat,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$User$User$mediaListOptions) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$scoreFormat = scoreFormat;
+    final lOther$scoreFormat = other.scoreFormat;
+    if (l$scoreFormat != lOther$scoreFormat) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$User$User$mediaListOptions
+    on Query$User$User$mediaListOptions {
+  CopyWith$Query$User$User$mediaListOptions<Query$User$User$mediaListOptions>
+      get copyWith => CopyWith$Query$User$User$mediaListOptions(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$User$User$mediaListOptions<TRes> {
+  factory CopyWith$Query$User$User$mediaListOptions(
+    Query$User$User$mediaListOptions instance,
+    TRes Function(Query$User$User$mediaListOptions) then,
+  ) = _CopyWithImpl$Query$User$User$mediaListOptions;
+
+  factory CopyWith$Query$User$User$mediaListOptions.stub(TRes res) =
+      _CopyWithStubImpl$Query$User$User$mediaListOptions;
+
+  TRes call({
+    Enum$ScoreFormat? scoreFormat,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$User$User$mediaListOptions<TRes>
+    implements CopyWith$Query$User$User$mediaListOptions<TRes> {
+  _CopyWithImpl$Query$User$User$mediaListOptions(
+    this._instance,
+    this._then,
+  );
+
+  final Query$User$User$mediaListOptions _instance;
+
+  final TRes Function(Query$User$User$mediaListOptions) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? scoreFormat = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$User$User$mediaListOptions(
+        scoreFormat: scoreFormat == _undefined
+            ? _instance.scoreFormat
+            : (scoreFormat as Enum$ScoreFormat?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$User$User$mediaListOptions<TRes>
+    implements CopyWith$Query$User$User$mediaListOptions<TRes> {
+  _CopyWithStubImpl$Query$User$User$mediaListOptions(this._res);
+
+  TRes _res;
+
+  call({
+    Enum$ScoreFormat? scoreFormat,
     String? $__typename,
   }) =>
       _res;
