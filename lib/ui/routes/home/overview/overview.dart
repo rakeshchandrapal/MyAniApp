@@ -14,7 +14,7 @@ import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
-import 'package:myaniapp/ui/routes/homev2/overview/guest.dart';
+import 'package:myaniapp/ui/routes/home/overview/guest.dart';
 import 'package:myaniapp/utils/graphql.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;

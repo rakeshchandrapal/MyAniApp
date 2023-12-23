@@ -56,8 +56,8 @@ class CImage extends CachedNetworkImage {
     var widget = viewer == true
         ? GestureDetector(
             onTap: () =>
-                showImage(context, viewerUrl ?? imageUrl, tag: img.hashCode),
-            child: Hero(tag: img.hashCode, child: img),
+                showImage(context, viewerUrl ?? imageUrl, tag: imageUrl),
+            child: Hero(tag: imageUrl, child: img),
           )
         : img;
 

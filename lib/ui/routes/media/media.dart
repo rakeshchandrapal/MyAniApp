@@ -248,7 +248,7 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
           children: [
             Expanded(
               child: FloatingActionButton(
-                heroTag: 'add-to-list',
+                heroTag: null,
                 onPressed: () => showMediaEditor(
                   context,
                   media.requireValue,
@@ -285,7 +285,7 @@ class _FloatingButtonsState extends ConsumerState<FloatingButtons>
                             .read(mediaProvider(media.requireValue.id).notifier)
                             .refresh(),
                       ),
-              heroTag: 'fav',
+              heroTag: null,
               backgroundColor: media.requireValue.isFavouriteBlocked == true
                   ? Colors.grey[800]
                   : Colors.red,
