@@ -2,31 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/home.graphql.dart';
+import 'package:myaniapp/graphql/__generated/ui/routes/explore/explore.graphql.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
-class ExplorePage extends StatelessWidget {
+class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
+
+  @override
+  State<ExplorePage> createState() => _ExplorePageState();
+}
+
+class _ExplorePageState extends State<ExplorePage> {
+  late final (Enum$MediaSeason season, int year) season;
+  late final (Enum$MediaSeason season, int year) nextSeason;
+
+  @override
+  void initState() {
+    super.initState();
+    var now = DateTime.now();
+    season = getSeason(now);
+    nextSeason = getNextSeason(season);
+  }
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
+    // print([season, nextSeason]);
+
     return Scaffold(
       body: Query$Browsing$Widget(
-        builder: (result, {fetchMore, refetch}) {
-          if (result.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (result.hasException) {
-            return GraphqlError(exception: result.exception!);
-          }
-
+        options: Options$Query$Browsing(
+          variables: Variables$Query$Browsing(
+            season: season.$1,
+            seasonYear: season.$2,
+            nextSeason: nextSeason.$1,
+            nextYear: nextSeason.$2,
+          ),
+        ),
+        builder: queryBuilder((result, [_, refetch]) {
           return RefreshIndicator.adaptive(
-            onRefresh: () => refetch?.call().then((value) {}) ?? Future.value(),
+            onRefresh: refetch!,
             child: ListView(
               children: [
                 Padding(
@@ -129,6 +147,52 @@ class ExplorePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
+                        'Releasing This Season',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      TextButton(
+                        onPressed: () => context.push(
+                            '/search?season=${season.$1.name}&year=${season.$2}'),
+                        child: const Text('View More'),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 180,
+                  child: _List(
+                    medias: result.parsedData!.season!.media!.cast(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, bottom: 5, top: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Releasing Next Season',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      TextButton(
+                        onPressed: () => context.push(
+                            '/search?season=${nextSeason.$1.name}&year=${nextSeason.$2}'),
+                        child: const Text('View More'),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 180,
+                  child: _List(
+                    medias: result.parsedData!.nextSeason!.media!.cast(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, bottom: 5, top: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
                         'All Time Popular',
                         style: theme.textTheme.titleMedium,
                       ),
@@ -172,7 +236,7 @@ class ExplorePage extends StatelessWidget {
               ],
             ),
           );
-        },
+        }),
       ),
     );
   }
@@ -206,4 +270,29 @@ class _List extends StatelessWidget {
       },
     );
   }
+}
+
+(Enum$MediaSeason season, int year) getSeason(DateTime date) {
+  var m = date.month;
+  Enum$MediaSeason season = m >= 0 && m <= 2
+      ? Enum$MediaSeason.WINTER
+      : m >= 3 && m <= 5
+          ? Enum$MediaSeason.SPRING
+          : m >= 6 && m <= 8
+              ? Enum$MediaSeason.SUMMER
+              : Enum$MediaSeason.FALL;
+
+  return (season, date.year);
+}
+
+(Enum$MediaSeason, int) getNextSeason((Enum$MediaSeason, int) season) {
+  int year = DateTime(season.$2, DateTime.now().month + 3).year;
+
+  return switch (season.$1) {
+    Enum$MediaSeason.FALL => (Enum$MediaSeason.WINTER, year),
+    Enum$MediaSeason.WINTER => (Enum$MediaSeason.SPRING, year),
+    Enum$MediaSeason.SPRING => (Enum$MediaSeason.SUMMER, year),
+    Enum$MediaSeason.SUMMER => (Enum$MediaSeason.FALL, year),
+    _ => (Enum$MediaSeason.SUMMER, year),
+  };
 }

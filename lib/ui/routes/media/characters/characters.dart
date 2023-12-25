@@ -7,6 +7,7 @@ import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/common/scroll_to_top.dart';
 
 class MediaCharactersPage extends StatelessWidget {
   const MediaCharactersPage({super.key, required this.id});
@@ -15,24 +16,26 @@ class MediaCharactersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$Characters$Widget(
-      options: Options$Query$Characters(
-        variables: Variables$Query$Characters(mediaId: id),
-      ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.parsedData == null) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
+    return ScrollToTop(
+      builder: (_) => Query$Characters$Widget(
+        options: Options$Query$Characters(
+          variables: Variables$Query$Characters(mediaId: id),
+        ),
+        builder: (result, {fetchMore, refetch}) {
+          if (result.isLoading && result.parsedData == null) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          } else if (result.hasException) {
+            return GraphqlError(exception: result.exception!);
+          }
 
-        return Characters(
-          characters: result.parsedData!.Media!.characters!,
-          fetchMore: fetchMore!,
-        );
-      },
+          return Characters(
+            characters: result.parsedData!.Media!.characters!,
+            fetchMore: fetchMore!,
+          );
+        },
+      ),
     );
   }
 }

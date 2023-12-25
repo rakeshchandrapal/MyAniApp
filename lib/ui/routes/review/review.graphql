@@ -12,6 +12,7 @@ query Review($id: Int) {
       name
     }
     media {
+      id
       bannerImage
       title {
         userPreferred

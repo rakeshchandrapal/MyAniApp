@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -13,6 +12,7 @@ import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart'
 import 'package:myaniapp/providers/media.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/routes/media/characters/characters.dart';
@@ -181,7 +181,7 @@ class __MediaShellState extends ConsumerState<_MediaShell>
   }
 }
 
-class FloatingButtons extends ConsumerStatefulWidget {
+class FloatingButtons extends ConsumerWidget {
   const FloatingButtons({
     super.key,
     required this.id,
@@ -190,56 +190,13 @@ class FloatingButtons extends ConsumerStatefulWidget {
   final int id;
 
   @override
-  ConsumerState<FloatingButtons> createState() => _FloatingButtonsState();
-}
-
-class _FloatingButtonsState extends ConsumerState<FloatingButtons>
-    with SingleTickerProviderStateMixin {
-  ScrollController? scrollController;
-  late final AnimationController _controller = AnimationController(
-    duration: kThemeAnimationDuration,
-    vsync: this,
-  );
-  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
-    begin: Offset.zero,
-    end: const Offset(0, 3),
-  ).animate(CurvedAnimation(
-    parent: _controller,
-    curve: Curves.easeOut,
-  ));
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    scrollController?.removeListener(listener);
-    scrollController = PrimaryScrollController.maybeOf(context);
-    scrollController?.addListener(listener);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
-  void listener() {
-    var direction = scrollController!.position.userScrollDirection;
-    if (direction == ScrollDirection.reverse) {
-      _controller.forward();
-    } else if (direction == ScrollDirection.forward) {
-      _controller.reverse();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
-    var media = ref.watch(mediaProvider(widget.id));
+    var media = ref.watch(mediaProvider(id));
 
     if (media.value == null || user.value == null) return const SizedBox();
 
-    return SlideTransition(
-      position: _offsetAnimation,
+    return HiddenFloatingActionButton(
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(

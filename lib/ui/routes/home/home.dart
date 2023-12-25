@@ -26,6 +26,9 @@ class HomePage extends ConsumerWidget {
                     currentIndex: navigationShell.currentIndex,
                     onTap: _onTap,
                   ),
+                  const VerticalDivider(
+                    width: 1,
+                  ),
                   Expanded(
                     child: FadeInWidget(navigationShell: navigationShell),
                   ),

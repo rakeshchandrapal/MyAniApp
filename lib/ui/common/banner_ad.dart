@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -48,27 +49,31 @@ class _BannerAdWidgetState extends ConsumerState<BannerAdWidget> {
   }
 }
 
-class BannerAdSafeArea extends ConsumerWidget {
+class BannerAdSafeArea extends ConsumerStatefulWidget {
   const BannerAdSafeArea({super.key, required this.child});
 
   final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BannerAdSafeArea> createState() => _BannerAdSafeAreaState();
+}
+
+class _BannerAdSafeAreaState extends ConsumerState<BannerAdSafeArea> {
+  @override
+  Widget build(BuildContext context) {
     var ads = ref.watch(bannerAdsProvider);
 
     // might not get the actual ad being displayed be doesnt matter that much
-    BannerAdInfo? ad = ads.cast<BannerAdInfo?>().firstWhere(
-          (element) => element!.using == true,
-          orElse: () => null,
-        );
+    BannerAdInfo? ad = ads
+        .cast<BannerAdInfo?>()
+        .firstWhereOrNull((element) => element!.using == true);
 
-    if (ad?.currentAd == null) return child;
+    if (ad?.currentAd == null) return widget.child;
 
     return Padding(
       padding:
           EdgeInsets.only(bottom: ad!.currentAd?.size.height.toDouble() ?? 0),
-      child: child,
+      child: widget.child,
     );
   }
 }

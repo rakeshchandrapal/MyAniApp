@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/review/review.graphql.dart';
 import 'package:myaniapp/ui/common/banner_ad.dart';
@@ -90,10 +91,14 @@ class ReviewPage extends StatelessWidget {
                                       ),
                                       style: theme.textTheme.labelSmall,
                                     ),
-                                    Text(
-                                      result.parsedData!.Review!.media!.title!
-                                          .userPreferred!,
-                                      style: theme.textTheme.labelLarge,
+                                    GestureDetector(
+                                      onTap: () => context.push(
+                                          '/media/${result.parsedData!.Review!.media!.id}'),
+                                      child: Text(
+                                        result.parsedData!.Review!.media!.title!
+                                            .userPreferred!,
+                                        style: theme.textTheme.labelLarge,
+                                      ),
                                     ),
                                     Text(
                                       'a review by ${result.parsedData!.Review!.user!.name}',

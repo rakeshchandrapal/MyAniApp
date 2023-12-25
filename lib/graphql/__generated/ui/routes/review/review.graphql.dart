@@ -357,6 +357,13 @@ const documentNodeQueryReview = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'bannerImage'),
                 alias: null,
                 arguments: [],
@@ -1013,16 +1020,19 @@ class _CopyWithStubImpl$Query$Review$Review$user<TRes>
 
 class Query$Review$Review$media {
   Query$Review$Review$media({
+    required this.id,
     this.bannerImage,
     this.title,
     this.$__typename = 'Media',
   });
 
   factory Query$Review$Review$media.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$bannerImage = json['bannerImage'];
     final l$title = json['title'];
     final l$$__typename = json['__typename'];
     return Query$Review$Review$media(
+      id: (l$id as int),
       bannerImage: (l$bannerImage as String?),
       title: l$title == null
           ? null
@@ -1032,6 +1042,8 @@ class Query$Review$Review$media {
     );
   }
 
+  final int id;
+
   final String? bannerImage;
 
   final Query$Review$Review$media$title? title;
@@ -1040,6 +1052,8 @@ class Query$Review$Review$media {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$bannerImage = bannerImage;
     _resultData['bannerImage'] = l$bannerImage;
     final l$title = title;
@@ -1051,10 +1065,12 @@ class Query$Review$Review$media {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$bannerImage = bannerImage;
     final l$title = title;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$bannerImage,
       l$title,
       l$$__typename,
@@ -1068,6 +1084,11 @@ class Query$Review$Review$media {
     }
     if (!(other is Query$Review$Review$media) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$bannerImage = bannerImage;
@@ -1108,6 +1129,7 @@ abstract class CopyWith$Query$Review$Review$media<TRes> {
       _CopyWithStubImpl$Query$Review$Review$media;
 
   TRes call({
+    int? id,
     String? bannerImage,
     Query$Review$Review$media$title? title,
     String? $__typename,
@@ -1129,11 +1151,13 @@ class _CopyWithImpl$Query$Review$Review$media<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? bannerImage = _undefined,
     Object? title = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Review$Review$media(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
         bannerImage: bannerImage == _undefined
             ? _instance.bannerImage
             : (bannerImage as String?),
@@ -1161,6 +1185,7 @@ class _CopyWithStubImpl$Query$Review$Review$media<TRes>
   TRes _res;
 
   call({
+    int? id,
     String? bannerImage,
     Query$Review$Review$media$title? title,
     String? $__typename,
