@@ -115,7 +115,7 @@ class SliverTitle extends StatelessWidget {
           children: [
             Text(
               text,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const Spacer(),
             if (buttonText != null)

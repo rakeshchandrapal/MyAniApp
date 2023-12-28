@@ -33,7 +33,6 @@ class HiddenFloatingActionButtonState extends State<HiddenFloatingActionButton>
     super.initState();
     scrollController = widget.scrollController;
     scrollController?.addListener(listener);
-    print(scrollController);
   }
 
   @override

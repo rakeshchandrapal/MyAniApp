@@ -56,10 +56,19 @@ class ListReleases extends StatelessWidget {
                               children: [
                                 TextSpan(text: 'Episode ${next?.episode} '),
                                 const TextSpan(text: 'airing at '),
-                                if (next?.airingAt != null)
+                                if (next?.airingAt != null) ...[
                                   TextSpan(
-                                      text: c.hourFormat.format(
-                                          dateFromTimestamp(next!.airingAt))),
+                                    text: c.hourFormat.format(
+                                      dateFromTimestamp(next!.airingAt),
+                                    ),
+                                  ),
+                                  const TextSpan(text: ", "),
+                                  TextSpan(
+                                    text: c.dateFormat.format(
+                                      dateFromTimestamp(next.airingAt),
+                                    ),
+                                  ),
+                                ]
                               ],
                             ),
                           ),

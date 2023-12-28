@@ -359,7 +359,10 @@ class Description extends StatelessWidget {
         color: theme.colorScheme.surfaceVariant.withAlpha(150),
         borderRadius: imageRadius,
       ),
-      child: Markdown(data: description ?? '*No Description*'),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Markdown(data: description ?? '*No Description*'),
+      ),
     );
   }
 }

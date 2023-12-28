@@ -56,15 +56,24 @@ class _HomeActivitiesPageState extends ConsumerState<HomeActivitiesPage> {
                   onPressed: () => context.push('/forum/overview'),
                   icon: const Icon(Icons.forum)),
               if (user.value != null)
-                SizedBox(
-                  width: 150,
-                  child: CheckboxListTile.adaptive(
-                    value: !isFollowing,
-                    onChanged: (value) =>
-                        setState(() => isFollowing = !(value ?? false)),
-                    title: const Text('Global'),
-                  ),
+                SegmentedButton(
+                  selected: {isFollowing},
+                  onSelectionChanged: (v) =>
+                      setState(() => isFollowing = v.first),
+                  segments: const [
+                    ButtonSegment(
+                      value: true,
+                      label: Text('Following'),
+                    ),
+                    ButtonSegment(
+                      value: false,
+                      label: Text('Global'),
+                    ),
+                  ],
                 ),
+              const SizedBox(
+                width: 10,
+              ),
             ],
           ),
           floatingActionButton: FloatingActionButton(
@@ -104,7 +113,6 @@ class _HomeActivitiesPageState extends ConsumerState<HomeActivitiesPage> {
 
                   has.addAll(previousResultData!['Page']['activities']
                       .map((a) => a['id']));
-                  // list.addAll(fetchMoreResultData!['Page']['activities']);
 
                   fetchMoreResultData!['Page']['activities']
                       .removeWhere((a) => has.contains(a['id']));

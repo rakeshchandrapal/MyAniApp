@@ -265,26 +265,6 @@ class _CharacterPageState extends State<CharacterPage> {
                       onTap: (media, index) =>
                           context.push('/media/${media.id}/overview'),
                     ),
-                    // child: GridCards(
-                    //   primary: false,
-                    //   padding: const EdgeInsets.all(8),
-                    //   card: (index) {
-                    //     var media = result
-                    //         .parsedData!.Character!.media!.edges![index]!;
-
-                    //     return GridCard(
-                    //       imageUrl: media.node!.coverImage!.extraLarge!,
-                    //       title: media.node!.title!.userPreferred,
-                    //       aspectRatio: 1.9 / 3,
-                    //       onTap: (index) => context
-                    //           .pushRoute(MediaRoute(id: media.node!.id)),
-                    //       onLongPress: (index) =>
-                    //           showMediaCard(context, media.node!),
-                    //     );
-                    //   },
-                    //   itemCount:
-                    //       result.parsedData!.Character!.media!.edges!.length,
-                    // ),
                   ),
                   if (result.isLoading)
                     const SliverToBoxAdapter(

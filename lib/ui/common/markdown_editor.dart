@@ -3,6 +3,17 @@ import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 
+enum EditorButton {
+  bold,
+  italics,
+  strike,
+  spoiler,
+  heading,
+  listNumbered,
+  listUnnumbered,
+  link,
+}
+
 class Editor extends StatefulWidget {
   const Editor({super.key, this.onSave, this.text});
 
@@ -90,88 +101,102 @@ class _EditorState extends State<Editor> {
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('__', '__');
+          SegmentedButton<EditorButton>(
+            segments: const [
+              ButtonSegment(
+                value: EditorButton.bold,
+                icon: Icon(Icons.format_bold),
+              ),
+              ButtonSegment(
+                value: EditorButton.italics,
+                icon: Icon(Icons.format_italic),
+              ),
+              ButtonSegment(
+                value: EditorButton.strike,
+                icon: Icon(Icons.format_strikethrough),
+              ),
+              ButtonSegment(
+                value: EditorButton.spoiler,
+                icon: Icon(Icons.visibility_off),
+              ),
+              ButtonSegment(
+                value: EditorButton.heading,
+                label: Text("H"),
+              ),
+              ButtonSegment(
+                value: EditorButton.listNumbered,
+                icon: Icon(Icons.format_list_numbered),
+              ),
+              ButtonSegment(
+                value: EditorButton.listUnnumbered,
+                icon: Icon(Icons.format_list_bulleted),
+              ),
+              ButtonSegment(
+                value: EditorButton.link,
+                icon: Icon(Icons.link),
+              )
+            ],
+            emptySelectionAllowed: true,
+            selected: const {},
+            onSelectionChanged: (v) async {
+              switch (v.first) {
+                case EditorButton.bold:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('__', '__');
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.format_bold),
-                ),
-                TextButton(
-                  onPressed: () {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('_', '_');
+                  focus.requestFocus();
+                  break;
+                case EditorButton.italics:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('_', '_');
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.format_italic),
-                ),
-                TextButton(
-                  onPressed: () {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('~~', '~~');
+                  focus.requestFocus();
+                  break;
+                case EditorButton.strike:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('~~', '~~');
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.format_strikethrough),
-                ),
-                TextButton(
-                  onPressed: () {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('~!', '!~');
+                  focus.requestFocus();
+                  break;
+                case EditorButton.spoiler:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('~!', '!~');
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.visibility_off),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    var result = await _showTextDialog(context, '');
-                    if (result == null || result.isEmpty) return;
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround(
-                        '[${selectedText.text.isEmpty ? 'link' : ''}',
-                        ']($result)');
+                  focus.requestFocus();
+                  break;
+                case EditorButton.heading:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('# ', null);
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.link),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('# ', null);
+                  focus.requestFocus();
+                  break;
+                case EditorButton.listNumbered:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('\n1. ', null);
 
-                    focus.requestFocus();
-                  },
-                  child: const Text('H'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('\n1. ', null);
+                  focus.requestFocus();
+                  break;
+                case EditorButton.listUnnumbered:
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround('\n- ', null);
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.format_list_numbered),
-                ),
-                TextButton(
-                  onPressed: () {
-                    var selectedText = _getSelectedText(textController);
-                    selectedText.replaceAround('\n- ', null);
+                  focus.requestFocus();
+                  break;
+                case EditorButton.link:
+                  var result = await _showTextDialog(context, '');
+                  if (result == null || result.isEmpty) return;
+                  var selectedText = _getSelectedText(textController);
+                  selectedText.replaceAround(
+                      '[${selectedText.text.isEmpty ? 'link' : ''}',
+                      ']($result)');
 
-                    focus.requestFocus();
-                  },
-                  child: const Icon(Icons.format_list_bulleted),
-                ),
-              ],
-            ),
+                  focus.requestFocus();
+                  break;
+              }
+            },
+          ),
+          const SizedBox(
+            height: 10,
           ),
           TextField(
             focusNode: focus,
@@ -230,8 +255,11 @@ class _PreviewState extends State<Preview> {
         color: Theme.of(context).colorScheme.surfaceVariant.withAlpha(150),
         borderRadius: imageRadius,
       ),
-      child: Markdown(
-        data: text,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Markdown(
+          data: text,
+        ),
       ),
     );
   }
