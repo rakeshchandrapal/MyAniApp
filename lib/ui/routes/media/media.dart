@@ -275,10 +275,12 @@ class MediaAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    // print(Scrollable.of(context).position.);
 
     return SliverAppBar(
       expandedHeight: 255,
-      forceElevated: forceElevated,
+      primary: false,
+      leading: const SafeArea(child: BackButton()),
       bottom: TabBar(
         isScrollable: true,
         tabs: [
@@ -304,9 +306,7 @@ class MediaAppBar extends StatelessWidget {
         controller: controller,
       ),
       pinned: true,
-      stretch: true,
       flexibleSpace: FlexibleSpaceBar(
-        stretchModes: const [StretchMode.blurBackground],
         background: Stack(
           children: [
             ShaderMask(

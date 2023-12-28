@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
@@ -13,6 +14,7 @@ import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
 import 'package:myaniapp/ui/routes/staff/production.dart';
 import 'package:myaniapp/ui/routes/staff/voice.dart';
+import 'package:myaniapp/utils/require_login.dart';
 
 class StaffPage extends StatelessWidget {
   const StaffPage({super.key, required this.id});
@@ -112,28 +114,7 @@ class _StaffViewState extends State<StaffView>
             child: Row(
               children: [
                 Expanded(
-                  child: FloatingActionButton(
-                    onPressed: widget.staff.isFavouriteBlocked == true
-                        ? null
-                        : () => client.value
-                            .mutate$ToggleFavorite(
-                              Options$Mutation$ToggleFavorite(
-                                variables: Variables$Mutation$ToggleFavorite(
-                                  staffId: widget.staff.id,
-                                ),
-                              ),
-                            )
-                            .then((value) => widget.refetch()),
-                    backgroundColor: widget.staff.isFavouriteBlocked == true
-                        ? Colors.grey[800]
-                        : Colors.red,
-                    child: Icon(
-                      Icons.favorite,
-                      color: widget.staff.isFavourite == true
-                          ? Colors.red[200]
-                          : null,
-                    ),
-                  ),
+                  child: FloatingButton(widget.refetch, staff: widget.staff),
                 ),
                 const SizedBox(
                   width: 65,
@@ -230,6 +211,43 @@ class _StaffViewState extends State<StaffView>
   bool hasTabs(Query$Staff$Staff staff) {
     return staff.characterMedia!.edges!.isNotEmpty == true &&
         staff.staffMedia!.edges!.isNotEmpty == true;
+  }
+}
+
+class FloatingButton extends ConsumerWidget {
+  const FloatingButton(
+    this.refetch, {
+    super.key,
+    required this.staff,
+  });
+
+  final Query$Staff$Staff staff;
+  final VoidCallback refetch;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return FloatingActionButton(
+      onPressed: requireLogin(
+          ref,
+          'like',
+          () => staff.isFavouriteBlocked == true
+              ? null
+              : () => client.value
+                  .mutate$ToggleFavorite(
+                    Options$Mutation$ToggleFavorite(
+                      variables: Variables$Mutation$ToggleFavorite(
+                        staffId: staff.id,
+                      ),
+                    ),
+                  )
+                  .then((value) => refetch())),
+      backgroundColor:
+          staff.isFavouriteBlocked == true ? Colors.grey[800] : Colors.red,
+      child: Icon(
+        Icons.favorite,
+        color: staff.isFavourite == true ? Colors.red[200] : null,
+      ),
+    );
   }
 }
 

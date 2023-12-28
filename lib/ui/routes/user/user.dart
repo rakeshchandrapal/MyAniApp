@@ -102,6 +102,8 @@ class __UserShellPageState extends ConsumerState<_UserShellPage>
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
             pinned: true,
+            primary: false,
+            leading: const SafeArea(child: BackButton()),
             expandedHeight: 235,
             bottom: TabBar(
               controller: _tabController,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
@@ -13,6 +14,7 @@ import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
+import 'package:myaniapp/utils/require_login.dart';
 
 class CharacterPage extends StatefulWidget {
   const CharacterPage({super.key, required this.id});
@@ -58,36 +60,9 @@ class _CharacterPageState extends State<CharacterPage> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: FloatingActionButton(
-                        onPressed:
-                            result.parsedData!.Character!.isFavouriteBlocked ==
-                                    true
-                                ? null
-                                : () => client.value
-                                    .mutate$ToggleFavorite(
-                                      Options$Mutation$ToggleFavorite(
-                                        variables:
-                                            Variables$Mutation$ToggleFavorite(
-                                          characterId:
-                                              result.parsedData!.Character!.id,
-                                        ),
-                                      ),
-                                    )
-                                    .then(
-                                      (value) => refetch!(),
-                                    ),
-                        backgroundColor:
-                            result.parsedData!.Character!.isFavouriteBlocked ==
-                                    true
-                                ? Colors.grey[800]
-                                : Colors.red,
-                        child: Icon(
-                          Icons.favorite,
-                          color:
-                              result.parsedData!.Character!.isFavourite == true
-                                  ? Colors.red[200]
-                                  : null,
-                        ),
+                      child: FloatingButton(
+                        character: result.parsedData!.Character!,
+                        refetch: refetch!,
                       ),
                     ),
                   ],
@@ -326,6 +301,46 @@ class _CharacterPageState extends State<CharacterPage> {
           ),
         );
       },
+    );
+  }
+}
+
+class FloatingButton extends ConsumerWidget {
+  const FloatingButton({
+    super.key,
+    required this.character,
+    required this.refetch,
+  });
+
+  final Query$Character$Character character;
+  final VoidCallback refetch;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return FloatingActionButton(
+      onPressed: requireLogin(
+        ref,
+        'like',
+        () => character.isFavouriteBlocked == true
+            ? null
+            : () => client.value
+                .mutate$ToggleFavorite(
+                  Options$Mutation$ToggleFavorite(
+                    variables: Variables$Mutation$ToggleFavorite(
+                      characterId: character.id,
+                    ),
+                  ),
+                )
+                .then(
+                  (value) => refetch(),
+                ),
+      ),
+      backgroundColor:
+          character.isFavouriteBlocked == true ? Colors.grey[800] : Colors.red,
+      child: Icon(
+        Icons.favorite,
+        color: character.isFavourite == true ? Colors.red[200] : null,
+      ),
     );
   }
 }

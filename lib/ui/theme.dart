@@ -8,6 +8,9 @@ class AppTheme {
       seedColor: Colors.blue,
       brightness: Brightness.dark,
     ),
+    tabBarTheme: const TabBarTheme(
+      tabAlignment: TabAlignment.center,
+    ),
   );
 
   static ThemeData light = ThemeData(
@@ -16,6 +19,9 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
       brightness: Brightness.light,
+    ),
+    tabBarTheme: const TabBarTheme(
+      tabAlignment: TabAlignment.center,
     ),
   );
 }
