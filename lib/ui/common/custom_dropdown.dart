@@ -239,7 +239,7 @@ class MultiDropdown<T> extends StatelessWidget {
       borderColor: theme.colorScheme.surfaceVariant,
       focusedBorderColor: theme.colorScheme.surfaceVariant,
       selectedOptionIcon: const Icon(Icons.check_circle),
-      backgroundColor: theme.colorScheme.background,
+      dropdownBackgroundColor: theme.colorScheme.background,
       inputDecoration: BoxDecoration(
         // color: theme.colorScheme.surfaceVariant,
         borderRadius: const BorderRadius.all(

@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:media_kit/media_kit.dart';
@@ -32,7 +31,6 @@ void main() async {
   }
 
   if (!kIsWeb && Platform.isAndroid) {
-    MobileAds.instance.initialize();
     Workmanager().initialize(callbackDispatcher);
     Workmanager().registerPeriodicTask(
       'background-notifs',

@@ -9,7 +9,7 @@ SpanNodeGeneratorWithTag imgWithTag = SpanNodeGeneratorWithTag(
     if (e.attributes['width']?.contains('%') == true) {
       e.attributes.remove('width');
     }
-    return ImageNode(e.attributes, config);
+    return ImageNode(e.attributes, config, visitor);
   },
 );
 
