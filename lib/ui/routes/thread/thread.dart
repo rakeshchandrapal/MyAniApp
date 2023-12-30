@@ -11,15 +11,17 @@ import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/comment.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 class ThreadPage extends ConsumerWidget {
-  const ThreadPage({super.key, required this.id});
+  ThreadPage({super.key, required this.id});
 
   final int id;
+  final ScrollController _controller = ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,28 +55,31 @@ class ThreadPage extends ConsumerWidget {
                     ),
                     titleTextStyle: Theme.of(context).textTheme.titleMedium,
                   ),
-                  floatingActionButton: FloatingActionButton(
-                    onPressed: requireLogin(
-                      ref,
-                      'reply',
-                      () => showMarkdownEditor(
-                        context,
-                        onSave: (text) {
-                          if (text.length > 2) {
-                            client.value.mutate$SaveComment(
-                              Options$Mutation$SaveComment(
-                                variables: Variables$Mutation$SaveComment(
-                                  comment: text,
-                                  threadId: result.parsedData!.thread!.id,
+                  floatingActionButton: HiddenFloatingActionButton(
+                    scrollController: _controller,
+                    child: FloatingActionButton(
+                      onPressed: requireLogin(
+                        ref,
+                        'reply',
+                        () => showMarkdownEditor(
+                          context,
+                          onSave: (text) {
+                            if (text.length > 2) {
+                              client.value.mutate$SaveComment(
+                                Options$Mutation$SaveComment(
+                                  variables: Variables$Mutation$SaveComment(
+                                    comment: text,
+                                    threadId: result.parsedData!.thread!.id,
+                                  ),
+                                  onCompleted: (p0, p1) => refetch,
                                 ),
-                                onCompleted: (p0, p1) => refetch,
-                              ),
-                            );
-                          }
-                        },
+                              );
+                            }
+                          },
+                        ),
                       ),
+                      child: const Icon(Icons.reply),
                     ),
-                    child: const Icon(Icons.reply),
                   ),
                   body: Pagination(
                     fetchMore: fetchMore!,
@@ -99,6 +104,7 @@ class ThreadPage extends ConsumerWidget {
                       ),
                     ),
                     child: CustomScrollView(
+                      controller: _controller,
                       slivers: [
                         SliverToBoxAdapter(
                           child: Column(
@@ -112,79 +118,89 @@ class ThreadPage extends ConsumerWidget {
                                     .parsedData!.thread!.user!.avatar!.large!,
                                 username: result.parsedData!.thread!.user!.name,
                                 createdAt: result.parsedData!.thread!.createdAt,
-                                leading: IconButton(
-                                  icon: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.favorite,
-                                        color: (result.parsedData!.thread!
-                                                    .isLiked ??
-                                                false)
-                                            ? Colors.red
-                                            : null,
+                                footer: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.favorite,
+                                            color: (result.parsedData!.thread!
+                                                        .isLiked ??
+                                                    false)
+                                                ? Colors.red
+                                                : null,
+                                          ),
+                                          if (result.parsedData!.thread!
+                                                  .likeCount >
+                                              0)
+                                            Text(result
+                                                .parsedData!.thread!.likeCount
+                                                .toString()),
+                                        ],
                                       ),
-                                      if (result.parsedData!.thread!.likeCount >
-                                          0)
-                                        Text(result
-                                            .parsedData!.thread!.likeCount
-                                            .toString()),
-                                    ],
-                                  ),
-                                  onPressed: requireLogin(
-                                    ref,
-                                    'like',
-                                    () => client.value.mutate$ToggleLike(
-                                      Options$Mutation$ToggleLike(
-                                        variables:
-                                            Variables$Mutation$ToggleLike(
-                                          id: result.parsedData!.thread!.id,
-                                          type: Enum$LikeableType.THREAD,
+                                      onPressed: requireLogin(
+                                        ref,
+                                        'like',
+                                        () => client.value.mutate$ToggleLike(
+                                          Options$Mutation$ToggleLike(
+                                            variables:
+                                                Variables$Mutation$ToggleLike(
+                                              id: result.parsedData!.thread!.id,
+                                              type: Enum$LikeableType.THREAD,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                footer: Wrap(
-                                  runSpacing: 10,
-                                  spacing: 10,
-                                  children: [
-                                    for (var category in result
-                                        .parsedData!.thread!.categories!)
-                                      Chip(
-                                        label: Text(category!.name),
-                                        labelPadding: EdgeInsets.zero,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall,
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          for (var category in result
+                                              .parsedData!.thread!.categories!)
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              child: Chip(
+                                                label: Text(category!.name),
+                                                labelPadding: EdgeInsets.zero,
+                                                labelStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall,
+                                              ),
+                                            ),
+                                          for (var media in result.parsedData!
+                                              .thread!.mediaCategories!)
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              child: GestureDetector(
+                                                onLongPress: () =>
+                                                    showMediaCard(
+                                                        context, media),
+                                                child: ActionChip(
+                                                  onPressed: () => context.push(
+                                                      '/media/${media.id}'),
+                                                  label: Text(media!
+                                                      .title!.userPreferred!),
+                                                  labelPadding: EdgeInsets.zero,
+                                                  labelStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall,
+                                                ),
+                                              ),
+                                            ),
+                                        ],
                                       ),
-                                    for (var media in result
-                                        .parsedData!.thread!.mediaCategories!)
-                                      GestureDetector(
-                                        onLongPress: () =>
-                                            showMediaCard(context, media),
-                                        child: ActionChip(
-                                          onPressed: () => context
-                                              .push('/media/${media.id}'),
-                                          label: Text(
-                                              media!.title!.userPreferred!),
-                                          labelPadding: EdgeInsets.zero,
-                                          labelStyle: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall,
-                                        ),
-                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                '${result.parsedData!.thread!.replyCount ?? 0} Replies',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(
                                 height: 10,
@@ -251,46 +267,8 @@ class ThreadComment extends ConsumerWidget {
       avatarUrl: comment.user?.avatar?.large,
       username: comment.user?.name,
       isReply: isReply ?? false,
-      leading: Row(
+      footer: Row(
         children: [
-          if (comment.user != null && comment.user!.id == user.value?.id)
-            IconButton(
-              onPressed: () => showDeleteDialog(context).then((value) {
-                if (value == true) {
-                  client.value.mutate$DeleteComment(
-                    Options$Mutation$DeleteComment(
-                      variables:
-                          Variables$Mutation$DeleteComment(id: comment.id),
-                      onCompleted: (p0, p1) => refetch,
-                    ),
-                  );
-                }
-              }),
-              icon: const Icon(Icons.delete),
-            ),
-          IconButton(
-            onPressed: requireLogin(
-              ref,
-              'reply',
-              () => showMarkdownEditor(
-                context,
-                onSave: (text) {
-                  if (text.length > 2) {
-                    client.value.mutate$SaveComment(
-                      Options$Mutation$SaveComment(
-                        variables: Variables$Mutation$SaveComment(
-                          comment: text,
-                          parentCommentId: comment.id,
-                        ),
-                        onCompleted: (p0, p1) => refetch,
-                      ),
-                    );
-                  }
-                },
-              ),
-            ),
-            icon: const Icon(Icons.reply),
-          ),
           IconButton(
             icon: Row(
               children: [
@@ -314,6 +292,44 @@ class ThreadComment extends ConsumerWidget {
               ),
             ),
           ),
+          IconButton(
+            onPressed: requireLogin(
+              ref,
+              'reply',
+              () => showMarkdownEditor(
+                context,
+                onSave: (text) {
+                  if (text.length > 2) {
+                    client.value.mutate$SaveComment(
+                      Options$Mutation$SaveComment(
+                        variables: Variables$Mutation$SaveComment(
+                          comment: text,
+                          parentCommentId: comment.id,
+                        ),
+                        onCompleted: (p0, p1) => refetch,
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+            icon: const Icon(Icons.reply),
+          ),
+          if (comment.user != null && comment.user!.id == user.value?.id)
+            IconButton(
+              onPressed: () => showDeleteDialog(context).then((value) {
+                if (value == true) {
+                  client.value.mutate$DeleteComment(
+                    Options$Mutation$DeleteComment(
+                      variables:
+                          Variables$Mutation$DeleteComment(id: comment.id),
+                      onCompleted: (p0, p1) => refetch,
+                    ),
+                  );
+                }
+              }),
+              icon: const Icon(Icons.delete),
+            ),
         ],
       ),
       replies: replies.isNotEmpty == true
@@ -326,15 +342,6 @@ class ThreadComment extends ConsumerWidget {
                 )
             ]
           : null,
-      // replies: replies
-      //     ?.map(
-      //       (e) => ThreadComment(
-      //         comment: e,
-      //         isReply: true,
-      //         refetch: refetch,
-      //       ),
-      //     )
-      //     .toList(),
     );
   }
 }

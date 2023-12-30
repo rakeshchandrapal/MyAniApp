@@ -75,6 +75,9 @@ class Markdown extends StatelessWidget {
                       uri.pathSegments[1] == 'thread') {
                     context.push('/thread/${uri.pathSegments[2]}/overview');
                     return;
+                  } else if (uri.pathSegments.first == 'activity') {
+                    context.push('/activity/${uri.pathSegments[1]}');
+                    return;
                   }
                 }
                 if (uri != null) {

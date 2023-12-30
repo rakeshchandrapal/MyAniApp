@@ -51,7 +51,6 @@ class HiddenFloatingActionButtonState extends State<HiddenFloatingActionButton>
   }
 
   void listener() {
-    print(scrollController!.position.userScrollDirection);
     var direction = scrollController!.position.userScrollDirection;
     if (direction == ScrollDirection.reverse) {
       _controller.forward();

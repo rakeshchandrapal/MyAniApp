@@ -14,6 +14,8 @@ class ThreadCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+
     if (thread.isSticky == true) {
       return ListTile(
         onTap: () => context.push('/thread/${thread.id}'),
@@ -23,9 +25,13 @@ class ThreadCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         leading: const Icon(Icons.push_pin),
-        tileColor:
-            Theme.of(context).colorScheme.secondaryContainer.withAlpha(100),
-        shape: RoundedRectangleBorder(borderRadius: imageRadius),
+        shape: RoundedRectangleBorder(
+          borderRadius: imageRadius,
+          side: BorderSide(
+            width: 2,
+            color: theme.colorScheme.surfaceVariant,
+          ),
+        ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -53,6 +59,13 @@ class ThreadCard extends StatelessWidget {
 
     return ListTile(
       onTap: () => context.push('/thread/${thread.id}'),
+      shape: RoundedRectangleBorder(
+        borderRadius: imageRadius,
+        side: BorderSide(
+          width: 2,
+          color: theme.colorScheme.surfaceVariant,
+        ),
+      ),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -135,7 +148,7 @@ class ThreadCard extends StatelessWidget {
                 Chip(
                   label: Text(category!.name),
                   labelPadding: EdgeInsets.zero,
-                  labelStyle: Theme.of(context).textTheme.labelSmall,
+                  labelStyle: theme.textTheme.labelSmall,
                 ),
               for (var media in thread.mediaCategories!)
                 GestureDetector(
@@ -145,32 +158,13 @@ class ThreadCard extends StatelessWidget {
                         context.push('/media/${media.id}/overview'),
                     label: Text(media!.title!.userPreferred!),
                     labelPadding: EdgeInsets.zero,
-                    labelStyle: Theme.of(context).textTheme.labelSmall,
+                    labelStyle: theme.textTheme.labelSmall,
                   ),
                 ),
             ],
           )
         ],
       ),
-      tileColor:
-          Theme.of(context).colorScheme.secondaryContainer.withAlpha(100),
-      shape: RoundedRectangleBorder(borderRadius: imageRadius),
-      // trailing: Row(
-      //   mainAxisSize: MainAxisSize.min,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   mainAxisAlignment: MainAxisAlignment.start,
-      //   children: [
-      //     // Text('hi')
-      //     if ((thread.viewCount ?? 0) > 0) ...[
-      //       const Icon(Icons.remove_red_eye),
-      //       Text((thread.viewCount ?? 0).toString()),
-      //     ],
-      //     if ((thread.replyCount ?? 0) > 0) ...[
-      //       const Icon(Icons.chat_bubble),
-      //       Text((thread.replyCount ?? 0).toString()),
-      //     ],
-      //   ],
-      // ),
     );
   }
 }

@@ -266,11 +266,13 @@ class InProgress extends StatelessWidget {
                 GridChip(
                   bottom: 2,
                   right: 2,
+                  maxWidth: 100,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(
                         height: 25,
+                        width: 30,
                         child: IconButton(
                           onPressed: () => client.value.query$MediaListEntry(
                               Options$Query$MediaListEntry()),

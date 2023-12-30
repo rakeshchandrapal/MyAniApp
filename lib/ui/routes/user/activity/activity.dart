@@ -29,18 +29,21 @@ class UserActivityPage extends ConsumerWidget {
           return GraphqlError(exception: result.exception!);
         }
 
-        return ListView.builder(
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) {
-            var activity = result.parsedData!.Page!.activities![index]!;
+        return RefreshIndicator.adaptive(
+          onRefresh: refetch!,
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              var activity = result.parsedData!.Page!.activities![index]!;
 
-            return ActivityCard(
-              activity: activity,
-              showReplyCount: true,
-              onDelete: refetch,
-            );
-          },
-          itemCount: result.parsedData!.Page!.activities!.length,
+              return ActivityCard(
+                activity: activity,
+                showReplyCount: true,
+                onDelete: refetch,
+              );
+            },
+            itemCount: result.parsedData!.Page!.activities!.length,
+          ),
         );
       },
     );

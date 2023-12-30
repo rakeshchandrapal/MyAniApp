@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/constants.dart';
@@ -34,6 +35,117 @@ class ActivityCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var user = ref.watch(userProvider);
+
+    var footer = Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            IconButton(
+              onPressed: requireLogin(
+                ref,
+                "like",
+                () => client.value.mutate$ToggleLike(
+                  Options$Mutation$ToggleLike(
+                    variables: Variables$Mutation$ToggleLike(
+                        id: activity.id, type: Enum$LikeableType.ACTIVITY),
+                  ),
+                ),
+              ),
+              icon: Row(
+                children: [
+                  Icon(
+                    Icons.favorite,
+                    color: (activity.isLiked ?? false) ? Colors.red : null,
+                  ),
+                  if ((activity.likeCount ?? 0) > 0)
+                    Text(activity.likeCount.toString()),
+                ],
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Row(
+                children: [
+                  const FaIcon(FontAwesomeIcons.solidComment),
+                  if ((activity.replyCount ?? 0) > 0)
+                    Text(activity.replyCount.toString()),
+                ],
+              ),
+            ),
+            IconButton(
+              onPressed: requireLogin(
+                ref,
+                "subscribe",
+                () => client.value.mutate$ToggleActivitySubscription(
+                  Options$Mutation$ToggleActivitySubscription(
+                    variables: Variables$Mutation$ToggleActivitySubscription(
+                      id: activity.id,
+                      subscribe: !(activity.isSubscribed ?? false),
+                    ),
+                    onError: (error) => logger.e(error),
+                  ),
+                ),
+              ),
+              icon: Icon(
+                activity.isSubscribed == true
+                    ? Icons.notifications_active
+                    : Icons.notifications,
+                color: activity.isSubscribed == true ? Colors.yellow : null,
+              ),
+            ),
+            if (user.value?.id == activity.userId &&
+                activity is Fragment$TextActivity)
+              IconButton(
+                onPressed: () => showMarkdownEditor(
+                  context,
+                  text: activity.text,
+                  onSave: (text) {
+                    if (text.length > 4) {
+                      client.value.mutate$SaveTextActivity(
+                        Options$Mutation$SaveTextActivity(
+                          variables: Variables$Mutation$SaveTextActivity(
+                            id: activity.id,
+                            text: text,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                icon: const Icon(Icons.edit),
+              ),
+            if (user.value?.id == activity.userId)
+              IconButton(
+                onPressed: () => showDeleteDialog(context).then((value) {
+                  if (value == true) {
+                    client.value.mutate$DeleteActivity(
+                      Options$Mutation$DeleteActivity(
+                        variables: Variables$Mutation$DeleteActivity(
+                          id: activity.id,
+                        ),
+                        onCompleted: (p0, p1) => onDelete?.call(),
+                      ),
+                    );
+                  }
+                }),
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+          ]
+              .map((e) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: e,
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+
     if (activity is Fragment$TextActivity) {
       var a = activity as Fragment$TextActivity;
       return Comment(
@@ -45,84 +157,7 @@ class ActivityCard extends ConsumerWidget {
             : () => context.push('/activity/${a.id}').then((value) {
                   if (value == true) onDelete?.call();
                 }),
-        leading: Row(
-          children: [
-            IconButton(
-              onPressed: requireLogin(
-                ref,
-                'like',
-                () => client.value.mutate$ToggleLike(
-                  Options$Mutation$ToggleLike(
-                    variables: Variables$Mutation$ToggleLike(
-                      id: a.id,
-                      type: Enum$LikeableType.ACTIVITY,
-                    ),
-                  ),
-                ),
-              ),
-              icon: Row(
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    color: (a.isLiked ?? false) ? Colors.red : null,
-                  ),
-                  if (a.likeCount > 0) Text(a.likeCount.toString()),
-                ],
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            if (showReplyCount == true)
-              Row(
-                children: [
-                  Icon(
-                    Icons.forum,
-                    color: Colors.grey[400],
-                  ),
-                  if (a.replyCount > 0) Text(a.replyCount.toString()),
-                ],
-              ),
-            ActivityPopupMenu(
-              subscribed: a.isSubscribed ?? false,
-              text: a.text,
-              userId: a.userId,
-              onSubscribe: () => client.value.mutate$ToggleActivitySubscription(
-                Options$Mutation$ToggleActivitySubscription(
-                  variables: Variables$Mutation$ToggleActivitySubscription(
-                    id: a.id,
-                    subscribe: !(a.isSubscribed ?? false),
-                  ),
-                  onError: (error) => logger.e(error),
-                ),
-              ),
-              onDelete: () => showDeleteDialog(context).then((value) {
-                if (value == true) {
-                  client.value.mutate$DeleteActivity(
-                    Options$Mutation$DeleteActivity(
-                      variables: Variables$Mutation$DeleteActivity(
-                        id: a.id,
-                      ),
-                      onCompleted: (p0, p1) => onDelete?.call(),
-                    ),
-                  );
-                }
-              }),
-              onEdit: (text) {
-                if (text.length > 4) {
-                  client.value.mutate$SaveTextActivity(
-                    Options$Mutation$SaveTextActivity(
-                      variables: Variables$Mutation$SaveTextActivity(
-                        id: a.id,
-                        text: text,
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
-        ),
+        footer: footer,
         body: Markdown(
           data: a.text!,
           selectable: false,
@@ -139,71 +174,7 @@ class ActivityCard extends ConsumerWidget {
             : () => context.push('/activity/${a.id}').then((value) {
                   if (value == true) onDelete?.call();
                 }),
-        leading: Row(
-          children: [
-            IconButton(
-              onPressed: requireLogin(
-                ref,
-                'like',
-                () => client.value.mutate$ToggleLike(
-                  Options$Mutation$ToggleLike(
-                    variables: Variables$Mutation$ToggleLike(
-                      id: a.id,
-                      type: Enum$LikeableType.ACTIVITY,
-                    ),
-                  ),
-                ),
-              ),
-              icon: Row(
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    color: (a.isLiked ?? false) ? Colors.red : null,
-                  ),
-                  if (a.likeCount > 0) Text(a.likeCount.toString()),
-                ],
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            if (showReplyCount == true)
-              Row(
-                children: [
-                  Icon(
-                    Icons.forum,
-                    color: Colors.grey[400],
-                  ),
-                  if (a.replyCount > 0) Text(a.replyCount.toString()),
-                ],
-              ),
-            ActivityPopupMenu(
-              subscribed: a.isSubscribed ?? false,
-              userId: a.userId,
-              onSubscribe: () => client.value.mutate$ToggleActivitySubscription(
-                Options$Mutation$ToggleActivitySubscription(
-                  variables: Variables$Mutation$ToggleActivitySubscription(
-                    id: a.id,
-                    subscribe: !(a.isSubscribed ?? false),
-                  ),
-                  onError: (error) => logger.e(error),
-                ),
-              ),
-              onDelete: () => showDeleteDialog(context).then((value) {
-                if (value == true) {
-                  client.value.mutate$DeleteActivity(
-                    Options$Mutation$DeleteActivity(
-                      variables: Variables$Mutation$DeleteActivity(
-                        id: a.id,
-                      ),
-                      onCompleted: (p0, p1) => onDelete?.call(),
-                    ),
-                  );
-                }
-              }),
-            ),
-          ],
-        ),
+        footer: footer,
         body: Row(
           children: [
             GestureDetector(
@@ -258,84 +229,7 @@ class ActivityCard extends ConsumerWidget {
                 }),
         badge:
             a.isPrivate == true ? const CommentBadge(label: 'Private') : null,
-        leading: Row(
-          children: [
-            IconButton(
-              onPressed: requireLogin(
-                ref,
-                'like',
-                () => client.value.mutate$ToggleLike(
-                  Options$Mutation$ToggleLike(
-                    variables: Variables$Mutation$ToggleLike(
-                      id: a.id,
-                      type: Enum$LikeableType.ACTIVITY,
-                    ),
-                  ),
-                ),
-              ),
-              icon: Row(
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    color: (a.isLiked ?? false) ? Colors.red : null,
-                  ),
-                  if (a.likeCount > 0) Text(a.likeCount.toString()),
-                ],
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            if (showReplyCount == true)
-              Row(
-                children: [
-                  Icon(
-                    Icons.forum,
-                    color: Colors.grey[400],
-                  ),
-                  if (a.replyCount > 0) Text(a.replyCount.toString()),
-                ],
-              ),
-            ActivityPopupMenu(
-              subscribed: a.isSubscribed ?? false,
-              userId: a.userId,
-              text: a.message,
-              onSubscribe: () => client.value.mutate$ToggleActivitySubscription(
-                Options$Mutation$ToggleActivitySubscription(
-                  variables: Variables$Mutation$ToggleActivitySubscription(
-                    id: a.id,
-                    subscribe: !(a.isSubscribed ?? false),
-                  ),
-                  onError: (error) => logger.e(error),
-                ),
-              ),
-              onDelete: () => showDeleteDialog(context).then((value) {
-                if (value == true) {
-                  client.value.mutate$DeleteActivity(
-                    Options$Mutation$DeleteActivity(
-                      variables: Variables$Mutation$DeleteActivity(
-                        id: a.id,
-                      ),
-                      onCompleted: (p0, p1) => onDelete?.call(),
-                    ),
-                  );
-                }
-              }),
-              onEdit: (text) {
-                if (text.length > 4) {
-                  client.value.mutate$SaveMessageActivity(
-                    Options$Mutation$SaveMessageActivity(
-                      variables: Variables$Mutation$SaveMessageActivity(
-                        id: a.id,
-                        message: text,
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
-        ),
+        footer: footer,
         body: Markdown(
           data: a.message!,
           selectable: false,

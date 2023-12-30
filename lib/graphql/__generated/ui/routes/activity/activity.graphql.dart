@@ -3214,9 +3214,91 @@ const documentNodeMutationSaveActivityReply = DocumentNode(definitions: [
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'TextActivity'),
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
             directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'activityId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'text'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'likeCount'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'user'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'avatar'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'large'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -3236,7 +3318,6 @@ const documentNodeMutationSaveActivityReply = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionTextActivity,
 ]);
 Mutation$SaveActivityReply _parserFn$Mutation$SaveActivityReply(
         Map<String, dynamic> data) =>
@@ -3456,20 +3537,67 @@ class Mutation$SaveActivityReply$Widget
 }
 
 class Mutation$SaveActivityReply$SaveActivityReply {
-  Mutation$SaveActivityReply$SaveActivityReply(
-      {this.$__typename = 'ActivityReply'});
+  Mutation$SaveActivityReply$SaveActivityReply({
+    required this.id,
+    this.activityId,
+    this.text,
+    required this.likeCount,
+    required this.createdAt,
+    this.user,
+    this.$__typename = 'ActivityReply',
+  });
 
   factory Mutation$SaveActivityReply$SaveActivityReply.fromJson(
       Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$activityId = json['activityId'];
+    final l$text = json['text'];
+    final l$likeCount = json['likeCount'];
+    final l$createdAt = json['createdAt'];
+    final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Mutation$SaveActivityReply$SaveActivityReply(
-        $__typename: (l$$__typename as String));
+      id: (l$id as int),
+      activityId: (l$activityId as int?),
+      text: (l$text as String?),
+      likeCount: (l$likeCount as int),
+      createdAt: (l$createdAt as int),
+      user: l$user == null
+          ? null
+          : Mutation$SaveActivityReply$SaveActivityReply$user.fromJson(
+              (l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
   }
+
+  final int id;
+
+  final int? activityId;
+
+  final String? text;
+
+  final int likeCount;
+
+  final int createdAt;
+
+  final Mutation$SaveActivityReply$SaveActivityReply$user? user;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$activityId = activityId;
+    _resultData['activityId'] = l$activityId;
+    final l$text = text;
+    _resultData['text'] = l$text;
+    final l$likeCount = likeCount;
+    _resultData['likeCount'] = l$likeCount;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3477,8 +3605,22 @@ class Mutation$SaveActivityReply$SaveActivityReply {
 
   @override
   int get hashCode {
+    final l$id = id;
+    final l$activityId = activityId;
+    final l$text = text;
+    final l$likeCount = likeCount;
+    final l$createdAt = createdAt;
+    final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
+    return Object.hashAll([
+      l$id,
+      l$activityId,
+      l$text,
+      l$likeCount,
+      l$createdAt,
+      l$user,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -3488,6 +3630,36 @@ class Mutation$SaveActivityReply$SaveActivityReply {
     }
     if (!(other is Mutation$SaveActivityReply$SaveActivityReply) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$activityId = activityId;
+    final lOther$activityId = other.activityId;
+    if (l$activityId != lOther$activityId) {
+      return false;
+    }
+    final l$text = text;
+    final lOther$text = other.text;
+    if (l$text != lOther$text) {
+      return false;
+    }
+    final l$likeCount = likeCount;
+    final lOther$likeCount = other.likeCount;
+    if (l$likeCount != lOther$likeCount) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3518,7 +3690,16 @@ abstract class CopyWith$Mutation$SaveActivityReply$SaveActivityReply<TRes> {
   factory CopyWith$Mutation$SaveActivityReply$SaveActivityReply.stub(TRes res) =
       _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply;
 
-  TRes call({String? $__typename});
+  TRes call({
+    int? id,
+    int? activityId,
+    String? text,
+    int? likeCount,
+    int? createdAt,
+    Mutation$SaveActivityReply$SaveActivityReply$user? user,
+    String? $__typename,
+  });
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> get user;
 }
 
 class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
@@ -3534,11 +3715,43 @@ class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? $__typename = _undefined}) =>
+  TRes call({
+    Object? id = _undefined,
+    Object? activityId = _undefined,
+    Object? text = _undefined,
+    Object? likeCount = _undefined,
+    Object? createdAt = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
       _then(Mutation$SaveActivityReply$SaveActivityReply(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        activityId: activityId == _undefined
+            ? _instance.activityId
+            : (activityId as int?),
+        text: text == _undefined ? _instance.text : (text as String?),
+        likeCount: likeCount == _undefined || likeCount == null
+            ? _instance.likeCount
+            : (likeCount as int),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as int),
+        user: user == _undefined
+            ? _instance.user
+            : (user as Mutation$SaveActivityReply$SaveActivityReply$user?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user.stub(
+            _then(_instance))
+        : CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user(
+            local$user, (e) => call(user: e));
+  }
 }
 
 class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
@@ -3547,7 +3760,348 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
 
   TRes _res;
 
-  call({String? $__typename}) => _res;
+  call({
+    int? id,
+    int? activityId,
+    String? text,
+    int? likeCount,
+    int? createdAt,
+    Mutation$SaveActivityReply$SaveActivityReply$user? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> get user =>
+      CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user.stub(_res);
+}
+
+class Mutation$SaveActivityReply$SaveActivityReply$user {
+  Mutation$SaveActivityReply$SaveActivityReply$user({
+    required this.id,
+    required this.name,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Mutation$SaveActivityReply$SaveActivityReply$user.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Mutation$SaveActivityReply$SaveActivityReply$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      avatar: l$avatar == null
+          ? null
+          : Mutation$SaveActivityReply$SaveActivityReply$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final Mutation$SaveActivityReply$SaveActivityReply$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$SaveActivityReply$SaveActivityReply$user) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$SaveActivityReply$SaveActivityReply$user
+    on Mutation$SaveActivityReply$SaveActivityReply$user {
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<
+          Mutation$SaveActivityReply$SaveActivityReply$user>
+      get copyWith =>
+          CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<
+    TRes> {
+  factory CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user(
+    Mutation$SaveActivityReply$SaveActivityReply$user instance,
+    TRes Function(Mutation$SaveActivityReply$SaveActivityReply$user) then,
+  ) = _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user;
+
+  factory CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user.stub(
+          TRes res) =
+      _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    Mutation$SaveActivityReply$SaveActivityReply$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<TRes>
+      get avatar;
+}
+
+class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user<TRes>
+    implements
+        CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> {
+  _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$SaveActivityReply$SaveActivityReply$user _instance;
+
+  final TRes Function(Mutation$SaveActivityReply$SaveActivityReply$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$SaveActivityReply$SaveActivityReply$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar
+                as Mutation$SaveActivityReply$SaveActivityReply$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<TRes>
+      get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar
+            .stub(_then(_instance))
+        : CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user<TRes>
+    implements
+        CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> {
+  _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    Mutation$SaveActivityReply$SaveActivityReply$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<TRes>
+      get avatar =>
+          CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar
+              .stub(_res);
+}
+
+class Mutation$SaveActivityReply$SaveActivityReply$user$avatar {
+  Mutation$SaveActivityReply$SaveActivityReply$user$avatar({
+    this.large,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Mutation$SaveActivityReply$SaveActivityReply$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$SaveActivityReply$SaveActivityReply$user$avatar) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$SaveActivityReply$SaveActivityReply$user$avatar
+    on Mutation$SaveActivityReply$SaveActivityReply$user$avatar {
+  CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
+          Mutation$SaveActivityReply$SaveActivityReply$user$avatar>
+      get copyWith =>
+          CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
+    TRes> {
+  factory CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+    Mutation$SaveActivityReply$SaveActivityReply$user$avatar instance,
+    TRes Function(Mutation$SaveActivityReply$SaveActivityReply$user$avatar)
+        then,
+  ) = _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar;
+
+  factory CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar.stub(
+          TRes res) =
+      _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
+        TRes>
+    implements
+        CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
+            TRes> {
+  _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$SaveActivityReply$SaveActivityReply$user$avatar _instance;
+
+  final TRes Function(Mutation$SaveActivityReply$SaveActivityReply$user$avatar)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
+        TRes>
+    implements
+        CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
+            TRes> {
+  _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
+      this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Variables$Mutation$SaveMessageActivity {
