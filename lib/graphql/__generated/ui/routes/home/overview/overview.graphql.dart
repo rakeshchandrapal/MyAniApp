@@ -631,7 +631,7 @@ const documentNodeQueryOverview = DocumentNode(definitions: [
         arguments: [
           ArgumentNode(
             name: NameNode(value: 'perPage'),
-            value: IntValueNode(value: '5'),
+            value: IntValueNode(value: '6'),
           )
         ],
         directives: [],

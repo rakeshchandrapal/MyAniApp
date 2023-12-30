@@ -8,8 +8,8 @@ import 'package:myaniapp/ui/routes/forum/search.dart';
 import 'package:myaniapp/ui/routes/forum/subscribed.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-class ForumOverviewPage extends StatelessWidget {
-  ForumOverviewPage({
+class ForumOverviewPage extends StatefulWidget {
+  const ForumOverviewPage({
     super.key,
     required this.filter,
     this.category,
@@ -20,11 +20,16 @@ class ForumOverviewPage extends StatelessWidget {
   final int? category;
   final String? search;
 
+  @override
+  State<ForumOverviewPage> createState() => _ForumOverviewPageState();
+}
+
+class _ForumOverviewPageState extends State<ForumOverviewPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    var inEnum = ForumFilter.values.byName(filter);
+    var inEnum = ForumFilter.values.byName(widget.filter);
 
     return Scaffold(
       key: scaffoldKey,
@@ -48,38 +53,39 @@ class ForumOverviewPage extends StatelessWidget {
         ),
       ),
       drawer: ForumCategoriesDrawer(
-        selected: category,
+        selected: widget.category,
         onChange: (category) {
           if (inEnum == ForumFilter.overview) {
             context.replace('/forum/recent?category=$category');
             return;
           } else if (category == null) {
-            context.replace('/forum/$filter');
+            context.replace('/forum/${widget.filter}');
             return;
           }
-          context.replace('/forum/$filter?category=$category');
+          context.replace('/forum/${widget.filter}?category=$category');
         },
       ),
       endDrawer: ForumFilterDrawer(
         selected: inEnum.index,
         onChange: (index) => context.replace(
-            '/forum/${ForumFilter.values.elementAt(index).name}?category=$category'),
+            '/forum/${ForumFilter.values.elementAt(index).name}?category=${widget.category}'),
       ),
       body: switch (inEnum) {
         (ForumFilter.overview) => const ForumOverview(),
-        (ForumFilter.recent) => RecentForums(categoryId: category),
-        (ForumFilter.$new) => NewForums(categoryId: category),
-        (ForumFilter.subscribed) => SubscribedForums(categoryId: category),
+        (ForumFilter.recent) => RecentForums(categoryId: widget.category),
+        (ForumFilter.$new) => NewForums(categoryId: widget.category),
+        (ForumFilter.subscribed) =>
+          SubscribedForums(categoryId: widget.category),
         (ForumFilter.search) => ForumSearch(
-            categoryId: category,
-            search: search,
+            categoryId: widget.category,
+            search: widget.search,
             onChange: (search) {
-              if (category == null) {
-                context.replace('/forum/$filter?search=$search');
+              if (widget.category == null) {
+                context.replace('/forum/${widget.filter}?search=$search');
                 return;
               }
-              context
-                  .replace('/forum/$filter?category=$category&search=$search');
+              context.replace(
+                  '/forum/${widget.filter}?category=${widget.category}&search=$search');
             },
           ),
         _ => Text(inEnum.name),

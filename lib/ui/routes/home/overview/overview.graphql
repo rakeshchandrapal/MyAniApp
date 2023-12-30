@@ -17,7 +17,7 @@ query Overview($page: Int = 1, $userId: Int!, $type: MediaType) {
       ...ThreadFragment
     }
   }
-  reviews: Page(perPage: 5) {
+  reviews: Page(perPage: 6) {
     reviews(sort: ID_DESC) {
       id
       rating
