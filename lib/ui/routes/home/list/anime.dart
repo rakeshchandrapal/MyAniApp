@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
@@ -131,6 +134,14 @@ class _ListTabsState extends State<ListTabs> {
         appBar: HomeAppBar(
           leading: widget.leading,
           actions: [
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.diceFive),
+              onPressed: () {
+                var list = lists.expand((element) => element.entries!);
+                context.push(
+                    '/media/${list.elementAt(Random().nextInt(list.length))!.media!.id}');
+              },
+            ),
             TextButton.icon(
               onPressed: () => showModalBottomSheet(
                 context: context,
@@ -464,13 +475,17 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
                   onIncrement: () => client.value.mutate$SaveMediaListEntry(
                     Options$Mutation$SaveMediaListEntry(
                       variables: Variables$Mutation$SaveMediaListEntry(
-                          id: entry.id, progress: (entry.progress ?? 0) + 1),
+                        id: entry.id,
+                        progress: (entry.progress ?? 0) + 1,
+                      ),
                     ),
                   ),
                   onDecrement: () => client.value.mutate$SaveMediaListEntry(
                     Options$Mutation$SaveMediaListEntry(
                       variables: Variables$Mutation$SaveMediaListEntry(
-                          id: entry.id, progress: (entry.progress ?? 0) - 1),
+                        id: entry.id,
+                        progress: (entry.progress ?? 0) - 1,
+                      ),
                     ),
                   ),
                 ),
