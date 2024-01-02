@@ -1,5 +1,6 @@
-import 'package:markdown/markdown.dart' as md;
+import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import 'package:myaniapp/ui/common/image.dart';
 
 String _tag = 'img';
 
@@ -13,18 +14,70 @@ SpanNodeGeneratorWithTag imgWithTag = SpanNodeGeneratorWithTag(
   },
 );
 
-class ImgSyntax extends md.InlineSyntax {
-  ImgSyntax() : super(r'(?:i|I)mg\s?(\d+%?)?\s?\((.[\S]+)\)');
+class ImageNode extends SpanNode {
+  final Map<String, String> attributes;
+  final MarkdownConfig config;
+  final WidgetVisitor visitor;
+
+  ImgConfig get imgConfig => config.img;
+
+  ImageNode(this.attributes, this.config, this.visitor);
 
   @override
-  bool onMatch(md.InlineParser parser, Match match) {
-    md.Element el = md.Element.withTag(_tag)
-      ..attributes['src'] = match.group(2)!;
-    if (match.group(1) != null &&
-        double.tryParse(match.group(1).toString()) != null) {
-      el.attributes['width'] = match.group(1)!;
+  InlineSpan build() {
+    double? width;
+    double? height;
+    if (attributes['width'] != null) width = double.parse(attributes['width']!);
+    if (attributes['height'] != null) {
+      height = double.parse(attributes['height']!);
     }
-    parser.addNode(el);
-    return true;
+    final imageUrl = attributes['src'] ?? '';
+    final alt = attributes['alt'] ?? '';
+    final isNetImage = imageUrl.startsWith('http');
+    final imgWidget = isNetImage
+        ? Image.network(imageUrl,
+            width: width,
+            height: height,
+            fit: BoxFit.cover, errorBuilder: (ctx, error, stacktrace) {
+            return buildErrorImage(imageUrl, alt, error);
+          })
+        : Image.asset(imageUrl, width: width, height: height, fit: BoxFit.cover,
+            errorBuilder: (ctx, error, stacktrace) {
+            return buildErrorImage(imageUrl, alt, error);
+          });
+    final result = (parent != null && parent is LinkNode)
+        ? imgWidget
+        : Builder(builder: (context) {
+            return CImage(
+              imageUrl: imageUrl,
+              imageBuilder: (_, __) => imgWidget,
+              viewer: true,
+            );
+          });
+    return WidgetSpan(
+      child: result,
+    );
+  }
+
+  Widget buildErrorImage(String url, String alt, Object? error) {
+    return ProxyRichText(
+      TextSpan(children: [
+        WidgetSpan(
+            child: Icon(Icons.broken_image,
+                color: Colors.redAccent,
+                size: (parentStyle?.fontSize ??
+                        config.p.textStyle.fontSize ??
+                        16) *
+                    (parentStyle?.height ?? config.p.textStyle.height ?? 1.2))),
+        TextSpan(text: alt, style: parentStyle ?? config.p.textStyle),
+      ]),
+      richTextBuilder: visitor.richTextBuilder,
+    );
+  }
+
+  ///show image in a new window
+  void _showImage(BuildContext context, Widget child) {
+    Navigator.of(context).push(PageRouteBuilder(
+        opaque: false, pageBuilder: (_, __, ___) => ImageViewer(child: child)));
   }
 }

@@ -109,43 +109,40 @@ class _CharactersState extends State<Characters> {
               ),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.all(8),
-            sliver: SliverList.separated(
-              itemCount: widget.characters.edges!.length,
-              separatorBuilder: (context, index) => const SizedBox(
-                height: 10,
-              ),
-              itemBuilder: (context, index) {
-                var character = widget.characters.edges![index]!;
-                var voices = character.voiceActorRoles!.where(
-                  (element) {
-                    var language =
-                        '${element!.voiceActor!.languageV2!}${element.dubGroup != null ? ' (${element.dubGroup})' : ''}';
-                    return language == selectedLanguage;
-                  },
-                ).toList();
-
-                if (voices.isEmpty) {
-                  return CharacterCard(character: character);
-                }
-
-                return ListView.separated(
-                  primary: false,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: voices.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 10,
-                  ),
-                  itemBuilder: (context, index) {
-                    var voice = voices[index];
-
-                    return CharacterCard(character: character, voice: voice);
-                  },
-                );
-              },
+          SliverList.separated(
+            itemCount: widget.characters.edges!.length,
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 10,
             ),
+            itemBuilder: (context, index) {
+              var character = widget.characters.edges![index]!;
+              var voices = character.voiceActorRoles!.where(
+                (element) {
+                  var language =
+                      '${element!.voiceActor!.languageV2!}${element.dubGroup != null ? ' (${element.dubGroup})' : ''}';
+                  return language == selectedLanguage;
+                },
+              ).toList();
+
+              if (voices.isEmpty) {
+                return CharacterCard(character: character);
+              }
+
+              return ListView.separated(
+                primary: false,
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemCount: voices.length,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
+                ),
+                itemBuilder: (context, index) {
+                  var voice = voices[index];
+
+                  return CharacterCard(character: character, voice: voice);
+                },
+              );
+            },
           ),
         ],
       ),

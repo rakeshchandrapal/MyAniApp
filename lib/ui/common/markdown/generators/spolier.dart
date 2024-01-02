@@ -41,11 +41,11 @@ showSpoiler(BuildContext context, String spoiler) {
 
 SpanNodeGeneratorWithTag spoilerWithTag = SpanNodeGeneratorWithTag(
   tag: _tag,
-  generator: (e, config, visitor) => SpoilerNode(e.attributes['spoiler']!),
+  generator: (e, config, visitor) => SpoilerNode(e.attributes["spoiler"]!),
 );
 
-class SpoilerSyntax extends md.InlineSyntax {
-  SpoilerSyntax() : super(r'~!([^]+?)!~');
+class SpoilerInlineSyntax extends md.InlineSyntax {
+  SpoilerInlineSyntax() : super(r'~!([^]+?)!~');
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {
@@ -53,5 +53,21 @@ class SpoilerSyntax extends md.InlineSyntax {
       ..attributes['spoiler'] = match.group(1)!;
     parser.addNode(el);
     return true;
+  }
+}
+
+class SpoilerBlockSyntax extends md.BlockSyntax {
+  @override
+  get pattern => RegExp(r'^~!(.*)!~$');
+  SpoilerBlockSyntax() : super();
+
+  @override
+  md.Node? parse(md.BlockParser parser) {
+    var text = pattern.firstMatch(parser.current.content)!.group(1)!;
+
+    var element = md.Element("spoiler", []);
+    element.attributes["spoiler"] = text;
+
+    return element;
   }
 }

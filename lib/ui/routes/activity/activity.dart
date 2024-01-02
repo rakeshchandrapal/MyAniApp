@@ -98,13 +98,10 @@ class ActivityPage extends ConsumerWidget {
                 controller: _controller,
                 slivers: [
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: ActivityCard(
-                        activity: result.parsedData!.activity!,
-                        onDelete: () => context.pop(true),
-                        inActivity: true,
-                      ),
+                    child: ActivityCard(
+                      activity: result.parsedData!.activity!,
+                      onDelete: () => context.pop(true),
+                      inActivity: true,
                     ),
                   ),
                   SliverList.builder(

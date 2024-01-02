@@ -15,6 +15,7 @@ import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
+import 'package:myaniapp/ui/common/widget_gradient.dart';
 import 'package:myaniapp/ui/routes/media/characters/characters.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
 import 'package:myaniapp/ui/routes/media/relations.dart';
@@ -309,17 +310,7 @@ class MediaAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           children: [
-            ShaderMask(
-              shaderCallback: (bounds) => LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  theme.colorScheme.surface,
-                ],
-                stops: const [0, 1],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ).createShader(bounds),
-              blendMode: BlendMode.srcOver,
+            WidgetGradient(
               child: media.bannerImage != null
                   ? CImage(
                       imageUrl: media.bannerImage!,
