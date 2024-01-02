@@ -20,3 +20,12 @@ query Review($id: Int) {
     }
   }
 }
+
+mutation RateReview($id: Int, $rating: ReviewRating) {
+  RateReview(reviewId: $id, rating: $rating) {
+    id
+    rating
+    ratingAmount
+    userRating
+  }
+}

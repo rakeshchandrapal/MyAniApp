@@ -37,112 +37,109 @@ class ActivityCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
 
-    var footer = Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: requireLogin(
-                ref,
-                "like",
-                () => client.value.mutate$ToggleLike(
-                  Options$Mutation$ToggleLike(
-                    variables: Variables$Mutation$ToggleLike(
-                        id: activity.id, type: Enum$LikeableType.ACTIVITY),
-                  ),
+    var footer = SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: requireLogin(
+              ref,
+              "like",
+              () => client.value.mutate$ToggleLike(
+                Options$Mutation$ToggleLike(
+                  variables: Variables$Mutation$ToggleLike(
+                      id: activity.id, type: Enum$LikeableType.ACTIVITY),
                 ),
               ),
-              icon: Row(
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    color: (activity.isLiked ?? false) ? Colors.red : null,
-                  ),
-                  if ((activity.likeCount ?? 0) > 0)
-                    Text(activity.likeCount.toString()),
-                ],
-              ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Row(
-                children: [
-                  const FaIcon(FontAwesomeIcons.solidComment),
-                  if ((activity.replyCount ?? 0) > 0)
-                    Text(activity.replyCount.toString()),
-                ],
-              ),
+            icon: Row(
+              children: [
+                Icon(
+                  Icons.favorite,
+                  color: (activity.isLiked ?? false) ? Colors.red : null,
+                ),
+                if ((activity.likeCount ?? 0) > 0)
+                  Text(activity.likeCount.toString()),
+              ],
             ),
-            IconButton(
-              onPressed: requireLogin(
-                ref,
-                "subscribe",
-                () => client.value.mutate$ToggleActivitySubscription(
-                  Options$Mutation$ToggleActivitySubscription(
-                    variables: Variables$Mutation$ToggleActivitySubscription(
-                      id: activity.id,
-                      subscribe: !(activity.isSubscribed ?? false),
-                    ),
-                    onError: (error) => logger.e(error),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Row(
+              children: [
+                const FaIcon(FontAwesomeIcons.solidComment),
+                if ((activity.replyCount ?? 0) > 0)
+                  Text(activity.replyCount.toString()),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: requireLogin(
+              ref,
+              "subscribe",
+              () => client.value.mutate$ToggleActivitySubscription(
+                Options$Mutation$ToggleActivitySubscription(
+                  variables: Variables$Mutation$ToggleActivitySubscription(
+                    id: activity.id,
+                    subscribe: !(activity.isSubscribed ?? false),
                   ),
+                  onError: (error) => logger.e(error),
                 ),
               ),
-              icon: Icon(
-                activity.isSubscribed == true
-                    ? Icons.notifications_active
-                    : Icons.notifications,
-                color: activity.isSubscribed == true ? Colors.yellow : null,
-              ),
             ),
-            if (user.value?.id == activity.userId &&
-                activity is Fragment$TextActivity)
-              IconButton(
-                onPressed: () => showMarkdownEditor(
-                  context,
-                  text: activity.text,
-                  onSave: (text) {
-                    if (text.length > 4) {
-                      client.value.mutate$SaveTextActivity(
-                        Options$Mutation$SaveTextActivity(
-                          variables: Variables$Mutation$SaveTextActivity(
-                            id: activity.id,
-                            text: text,
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                ),
-                icon: const Icon(Icons.edit),
-              ),
-            if (user.value?.id == activity.userId)
-              IconButton(
-                onPressed: () => showDeleteDialog(context).then((value) {
-                  if (value == true) {
-                    client.value.mutate$DeleteActivity(
-                      Options$Mutation$DeleteActivity(
-                        variables: Variables$Mutation$DeleteActivity(
+            icon: Icon(
+              activity.isSubscribed == true
+                  ? Icons.notifications_active
+                  : Icons.notifications,
+              color: activity.isSubscribed == true ? Colors.yellow : null,
+            ),
+          ),
+          if (user.value?.id == activity.userId &&
+              activity is Fragment$TextActivity)
+            IconButton(
+              onPressed: () => showMarkdownEditor(
+                context,
+                text: activity.text,
+                onSave: (text) {
+                  if (text.length > 4) {
+                    client.value.mutate$SaveTextActivity(
+                      Options$Mutation$SaveTextActivity(
+                        variables: Variables$Mutation$SaveTextActivity(
                           id: activity.id,
+                          text: text,
                         ),
-                        onCompleted: (p0, p1) => onDelete?.call(),
                       ),
                     );
                   }
-                }),
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                ),
+                },
               ),
-          ]
-              .map((e) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: e,
-                  ))
-              .toList(),
-        ),
+              icon: const Icon(Icons.edit),
+            ),
+          if (user.value?.id == activity.userId)
+            IconButton(
+              onPressed: () => showDeleteDialog(context).then((value) {
+                if (value == true) {
+                  client.value.mutate$DeleteActivity(
+                    Options$Mutation$DeleteActivity(
+                      variables: Variables$Mutation$DeleteActivity(
+                        id: activity.id,
+                      ),
+                      onCompleted: (p0, p1) => onDelete?.call(),
+                    ),
+                  );
+                }
+              }),
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+            ),
+        ]
+            .map((e) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: e,
+                ))
+            .toList(),
       ),
     );
 
@@ -160,7 +157,6 @@ class ActivityCard extends ConsumerWidget {
         footer: footer,
         body: Markdown(
           data: a.text!,
-          selectable: false,
         ),
       );
     } else if (activity is Fragment$ListActivity) {
@@ -232,7 +228,6 @@ class ActivityCard extends ConsumerWidget {
         footer: footer,
         body: Markdown(
           data: a.message!,
-          selectable: false,
         ),
       );
     }

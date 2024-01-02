@@ -106,7 +106,8 @@ class Comment extends StatelessWidget {
               ),
               if (footer != null)
                 Padding(
-                  padding: const EdgeInsets.only(right: 15, left: 10),
+                  padding:
+                      const EdgeInsets.only(right: 15, left: 10, bottom: 5),
                   child: footer!,
                 ),
               if (replies != null)
