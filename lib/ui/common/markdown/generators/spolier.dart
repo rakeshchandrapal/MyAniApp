@@ -56,18 +56,18 @@ class SpoilerInlineSyntax extends md.InlineSyntax {
   }
 }
 
-class SpoilerBlockSyntax extends md.BlockSyntax {
-  @override
-  get pattern => RegExp(r'^~!(.*)!~$');
-  SpoilerBlockSyntax() : super();
+// class SpoilerBlockSyntax extends md.BlockSyntax {
+//   @override
+//   get pattern => RegExp(r'^~!(.*)!~$');
+//   SpoilerBlockSyntax() : super();
 
-  @override
-  md.Node? parse(md.BlockParser parser) {
-    var text = pattern.firstMatch(parser.current.content)!.group(1)!;
+//   @override
+//   md.Node? parse(md.BlockParser parser) {
+//     var text = pattern.firstMatch(parser.current.content)!.group(1)!;
 
-    var element = md.Element("spoiler", []);
-    element.attributes["spoiler"] = text;
+//     var element = md.Element("spoiler", []);
+//     element.attributes["spoiler"] = text;
 
-    return element;
-  }
-}
+//     return element;
+//   }
+// }

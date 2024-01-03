@@ -5,6 +5,7 @@ import 'package:markdown_widget/markdown_widget.dart' as md2;
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/ui/common/markdown/custom_node.dart';
 import 'package:myaniapp/ui/common/markdown/generators/br.dart';
+import 'package:myaniapp/ui/common/markdown/generators/center.dart';
 import 'package:myaniapp/ui/common/markdown/generators/i.dart';
 import 'package:myaniapp/ui/common/markdown/generators/img.dart';
 import 'package:myaniapp/ui/common/markdown/generators/spolier.dart';
@@ -42,9 +43,14 @@ class Markdown extends StatelessWidget {
         shrinkWrap: true,
         selectable: selectable,
         markdownGenerator: md2.MarkdownGenerator(
-          generators: [iWithTag, spoilerWithTag, imgWithTag, videoWithTag],
+          generators: [
+            iWithTag,
+            spoilerWithTag,
+            imgWithTag,
+            videoWithTag,
+            centerWithTag,
+          ],
           blockSyntaxList: [
-            SpoilerBlockSyntax(),
             const md.HtmlBlockSyntax(),
           ],
           inlineSyntaxList: [
@@ -54,6 +60,7 @@ class Markdown extends StatelessWidget {
             VideoSyntax(),
             md.AutolinkExtensionSyntax(),
             md.InlineHtmlSyntax(),
+            md.ImageSyntax()
           ],
           textGenerator: (node, config, visitor) =>
               CustomTextNode(node.textContent, config, visitor),

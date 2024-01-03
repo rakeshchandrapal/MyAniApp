@@ -52,8 +52,7 @@ List<SpanNode> parseHtml(
 }
 
 class HtmlElement extends m.Element {
-  HtmlElement(String tag, List<m.Node>? children, this.textContent)
-      : super(tag, children);
+  HtmlElement(super.tag, super.children, this.textContent);
 
   @override
   final String textContent;

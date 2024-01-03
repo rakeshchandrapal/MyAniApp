@@ -35,90 +35,86 @@ class Comment extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return Material(
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: isReply ? const EdgeInsets.only(left: 5) : null,
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: isReply
-                  ? BorderSide.none
-                  : BorderSide(color: theme.colorScheme.surfaceVariant),
-              left: isReply
-                  ? BorderSide(
-                      color: theme.colorScheme.secondaryContainer,
-                      width: 2,
-                    )
-                  : BorderSide.none,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: isReply ? const EdgeInsets.only(left: 5) : null,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: isReply
+                ? BorderSide.none
+                : BorderSide(color: theme.colorScheme.surfaceVariant),
+            left: isReply
+                ? BorderSide(
+                    color: theme.colorScheme.secondaryContainer,
+                    width: 2,
+                  )
+                : BorderSide.none,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  if (avatarUrl != null)
+                    GestureDetector(
+                      onTap: () => context.push("/user/$username"),
+                      child: CImage(
+                        imageUrl: avatarUrl!,
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          foregroundImage: imageProvider,
+                          backgroundColor: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          if (username != null) TextSpan(text: username),
+                          const TextSpan(text: " - "),
+                          if (createdAt != null)
+                            TextSpan(
+                              text: timeago.format(
+                                dateFromTimestamp(createdAt!),
+                                locale: "en_short",
+                              ),
+                            )
+                        ],
+                      ),
+                      style: theme.textTheme.bodySmall,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
+                  ),
+                  if (badge != null) badge!,
+                ],
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15, left: 10),
+              child: body,
+            ),
+            if (footer != null)
               Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    if (avatarUrl != null)
-                      GestureDetector(
-                        onTap: () => context.push("/user/$username"),
-                        child: CImage(
-                          imageUrl: avatarUrl!,
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
-                            foregroundImage: imageProvider,
-                            backgroundColor: Colors.transparent,
-                          ),
-                        ),
-                      ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            if (username != null) TextSpan(text: username),
-                            const TextSpan(text: " - "),
-                            if (createdAt != null)
-                              TextSpan(
-                                text: timeago.format(
-                                  dateFromTimestamp(createdAt!),
-                                  locale: "en_short",
-                                ),
-                              )
-                          ],
-                        ),
-                        style: theme.textTheme.bodySmall,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                      ),
-                    ),
-                    if (badge != null) badge!,
-                  ],
-                ),
+                padding: const EdgeInsets.only(right: 15, left: 10, bottom: 5),
+                child: footer!,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15, left: 10),
-                child: body,
-              ),
-              if (footer != null)
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: 15, left: 10, bottom: 5),
-                  child: footer!,
-                ),
-              if (replies != null)
-                ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemBuilder: (context, index) => replies![index],
-                  itemCount: replies!.length,
-                )
-            ],
-          ),
+            if (replies != null)
+              ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                itemBuilder: (context, index) => replies![index],
+                itemCount: replies!.length,
+              )
+          ],
         ),
       ),
     );
