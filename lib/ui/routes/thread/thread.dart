@@ -7,7 +7,8 @@ import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activitie
 import 'package:myaniapp/graphql/__generated/ui/routes/thread/thread.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
-import 'package:myaniapp/ui/common/comment.dart';
+import 'package:myaniapp/ui/common/comment/comment.dart';
+import 'package:myaniapp/ui/common/comment/like.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
@@ -115,7 +116,9 @@ class ThreadPage extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
+                              LikeButton(
+                                id: result.parsedData!.thread!.id,
+                                type: Enum$LikeableType.THREAD,
                                 icon: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -254,7 +257,9 @@ class ThreadComment extends ConsumerWidget {
       isReply: isReply ?? false,
       footer: Row(
         children: [
-          IconButton(
+          LikeButton(
+            id: comment.id,
+            type: Enum$LikeableType.THREAD_COMMENT,
             icon: Row(
               children: [
                 Icon(

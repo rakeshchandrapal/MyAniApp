@@ -819,7 +819,7 @@ type Page {
   reviews(id: Int, mediaId: Int, userId: Int, mediaType: MediaType, sort: [ReviewSort]): [Review]
   followers(userId: Int!, sort: [UserSort]): [User]
   following(userId: Int!, sort: [UserSort]): [User]
-  # likes(likeableId: LikeableType): [User]
+  likes(likeableId: Int, type: LikeableType): [User]
 }
 
 enum ThreadCommentSort {

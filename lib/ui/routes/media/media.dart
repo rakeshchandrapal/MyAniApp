@@ -79,7 +79,9 @@ class _MediaPageState extends ConsumerState<MediaPage> {
     }
 
     return media.when(
-      data: (data) => _MediaShell(id: widget.id),
+      data: (data) => _MediaShell(
+        id: widget.id,
+      ),
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(),
         body: GraphqlError(exception: error as OperationException),

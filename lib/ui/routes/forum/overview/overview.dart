@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/forum/overview/overview.graphql.dart';
+import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/ui/routes/forum/new.dart';
 import 'package:myaniapp/ui/routes/forum/recent.dart';
@@ -35,6 +36,39 @@ class _ForumOverviewPageState extends State<ForumOverviewPage> {
       key: scaffoldKey,
       appBar: AppBar(
         leadingWidth: 100,
+        actions: [
+          SizedBox(
+            width: 200,
+            child: CustomDropdown(
+              hint: "filter",
+              dropdownItems: const [
+                DropdownMenuItem(
+                  value: ForumFilter.overview,
+                  child: Text('Overview'),
+                ),
+                DropdownMenuItem(
+                  value: ForumFilter.recent,
+                  child: Text('Recent'),
+                ),
+                DropdownMenuItem(
+                  value: ForumFilter.$new,
+                  child: Text('New'),
+                ),
+                DropdownMenuItem(
+                  value: ForumFilter.subscribed,
+                  child: Text('Subscribed'),
+                ),
+                DropdownMenuItem(
+                  value: ForumFilter.search,
+                  child: Text('Search'),
+                ),
+              ],
+              onChanged: (v) => context.replace(
+                  '/forum/${(v ?? ForumFilter.overview).name}?category=${widget.category}'),
+              value: inEnum,
+            ),
+          ),
+        ],
         leading: Row(
           children: [
             BackButton(

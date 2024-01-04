@@ -116,6 +116,7 @@ class _ForumSearchState extends State<ForumSearch> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       child: TextField(
+        controller: _controller,
         onSubmitted: widget.onChange,
         decoration: InputDecoration(
           border: OutlineInputBorder(

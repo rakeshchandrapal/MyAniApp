@@ -48,10 +48,13 @@ class ImageNode extends SpanNode {
     final result = (parent != null && parent is LinkNode)
         ? imgWidget
         : Builder(builder: (context) {
-            return CImage(
-              imageUrl: imageUrl,
-              imageBuilder: (_, __) => imgWidget,
-              viewer: true,
+            return ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 300),
+              child: CImage(
+                imageUrl: imageUrl,
+                imageBuilder: (_, __) => imgWidget,
+                viewer: true,
+              ),
             );
           });
     return WidgetSpan(

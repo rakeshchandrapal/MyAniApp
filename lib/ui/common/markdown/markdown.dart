@@ -27,7 +27,7 @@ class Markdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(data);
+    print(data);
     var markdown = data.replaceAllMapped(removeRegex, (match) {
       // logger.i(match.groups([1, 2]));
       return match.group(1) ?? '';
@@ -60,7 +60,7 @@ class Markdown extends StatelessWidget {
             VideoSyntax(),
             md.AutolinkExtensionSyntax(),
             md.InlineHtmlSyntax(),
-            md.ImageSyntax()
+            md.ImageSyntax(),
           ],
           textGenerator: (node, config, visitor) =>
               CustomTextNode(node.textContent, config, visitor),

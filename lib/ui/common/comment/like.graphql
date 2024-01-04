@@ -1,0 +1,10 @@
+query Likes($id: Int, $type: LikeableType, $page: Int) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    likes(likeableId: $id, type: $type) {
+      ...UserFragment
+    }
+  }
+}

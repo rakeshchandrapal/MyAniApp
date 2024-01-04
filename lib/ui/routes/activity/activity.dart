@@ -7,7 +7,8 @@ import 'package:myaniapp/graphql/__generated/ui/routes/activity/activity.graphql
 import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/activity_card.dart';
-import 'package:myaniapp/ui/common/comment.dart';
+import 'package:myaniapp/ui/common/comment/comment.dart';
+import 'package:myaniapp/ui/common/comment/like.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
@@ -118,7 +119,9 @@ class ActivityPage extends ConsumerWidget {
                         username: reply.user?.name,
                         footer: Row(
                           children: [
-                            IconButton(
+                            LikeButton(
+                              id: reply.id,
+                              type: Enum$LikeableType.ACTIVITY_REPLY,
                               icon: Row(
                                 children: [
                                   Icon(
