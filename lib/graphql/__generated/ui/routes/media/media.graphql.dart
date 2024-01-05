@@ -699,6 +699,13 @@ const documentNodeQueryMedia = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'thumbnail'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: '__typename'),
                 alias: null,
                 arguments: [],
@@ -3393,16 +3400,19 @@ class Query$Media$Media$trailer {
   Query$Media$Media$trailer({
     this.site,
     this.id,
+    this.thumbnail,
     this.$__typename = 'MediaTrailer',
   });
 
   factory Query$Media$Media$trailer.fromJson(Map<String, dynamic> json) {
     final l$site = json['site'];
     final l$id = json['id'];
+    final l$thumbnail = json['thumbnail'];
     final l$$__typename = json['__typename'];
     return Query$Media$Media$trailer(
       site: (l$site as String?),
       id: (l$id as String?),
+      thumbnail: (l$thumbnail as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -3410,6 +3420,8 @@ class Query$Media$Media$trailer {
   final String? site;
 
   final String? id;
+
+  final String? thumbnail;
 
   final String $__typename;
 
@@ -3419,6 +3431,8 @@ class Query$Media$Media$trailer {
     _resultData['site'] = l$site;
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$thumbnail = thumbnail;
+    _resultData['thumbnail'] = l$thumbnail;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3428,10 +3442,12 @@ class Query$Media$Media$trailer {
   int get hashCode {
     final l$site = site;
     final l$id = id;
+    final l$thumbnail = thumbnail;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$site,
       l$id,
+      l$thumbnail,
       l$$__typename,
     ]);
   }
@@ -3453,6 +3469,11 @@ class Query$Media$Media$trailer {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$thumbnail = thumbnail;
+    final lOther$thumbnail = other.thumbnail;
+    if (l$thumbnail != lOther$thumbnail) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3485,6 +3506,7 @@ abstract class CopyWith$Query$Media$Media$trailer<TRes> {
   TRes call({
     String? site,
     String? id,
+    String? thumbnail,
     String? $__typename,
   });
 }
@@ -3505,11 +3527,15 @@ class _CopyWithImpl$Query$Media$Media$trailer<TRes>
   TRes call({
     Object? site = _undefined,
     Object? id = _undefined,
+    Object? thumbnail = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Media$Media$trailer(
         site: site == _undefined ? _instance.site : (site as String?),
         id: id == _undefined ? _instance.id : (id as String?),
+        thumbnail: thumbnail == _undefined
+            ? _instance.thumbnail
+            : (thumbnail as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3525,6 +3551,7 @@ class _CopyWithStubImpl$Query$Media$Media$trailer<TRes>
   call({
     String? site,
     String? id,
+    String? thumbnail,
     String? $__typename,
   }) =>
       _res;

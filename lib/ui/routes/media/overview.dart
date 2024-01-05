@@ -11,6 +11,7 @@ import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart'
 import 'package:myaniapp/providers/media.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
+import 'package:myaniapp/ui/common/widget_gradient.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -40,7 +41,11 @@ class MediaOverviewPage extends ConsumerWidget {
           height: 10,
         ),
         _Tags(tags: media.value!.tags!.cast()),
-        if (media.value!.trailer?.site == 'youtube') const Player(),
+        if (media.value!.trailer != null &&
+            (kIsWeb || Platform.isAndroid || Platform.isIOS))
+          const Player()
+        else if (media.value != null)
+          Trailer(trailer: media.value!.trailer!),
         const SizedBox(
           height: 10,
         ),
@@ -66,6 +71,47 @@ class Player extends StatelessWidget {
           height: 10,
         ),
         YoutubePlayer(controller: context.ytController),
+      ],
+    );
+  }
+}
+
+class Trailer extends StatelessWidget {
+  const Trailer({super.key, required this.trailer});
+
+  final Query$Media$Media$trailer trailer;
+
+  @override
+  Widget build(BuildContext context) {
+    if (trailer.site != "youtube" && trailer.site != "dailymotion") {
+      return const SizedBox();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Trailer',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 500),
+          child: InkWell(
+            onTap: () => launchUrlString(trailer.site! == "youtube"
+                ? "https://youtube.com/watch?v=${trailer.id}"
+                : "https://www.dailymotion.com/video/${trailer.id}"),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                WidgetGradient(child: CImage(imageUrl: trailer.thumbnail!)),
+                Text(
+                  "Click to Watch",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

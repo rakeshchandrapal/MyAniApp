@@ -59,6 +59,7 @@ query Media($id: Int) {
     trailer {
       site
       id
+      thumbnail
     }
     characters {
       nodes {

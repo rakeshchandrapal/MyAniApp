@@ -22,10 +22,14 @@ class VideoNode extends SpanNode {
   InlineSpan build() {
     final link = attribute['src'] ?? '';
     return WidgetSpan(
+      child: SizedBox(
+        height: 300,
         child: AspectRatio(
-      aspectRatio: 16 / 9,
-      child: VideoWidget(url: link),
-    ));
+          aspectRatio: 16 / 9,
+          child: VideoWidget(url: link),
+        ),
+      ),
+    );
   }
 }
 
@@ -49,13 +53,23 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    player.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Video(controller: controller);
+    return Video(
+      controller: controller,
+      fit: BoxFit.fitHeight,
+    );
   }
 }
 
 class VideoSyntax extends md.InlineSyntax {
-  VideoSyntax() : super(r'webm\s?(\d+%?)?\s?\((.[\S]+)\)');
+  VideoSyntax()
+      : super(r'webm\s?(\d+%?)?\s?\((.[\S]+)\)', caseSensitive: false);
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {

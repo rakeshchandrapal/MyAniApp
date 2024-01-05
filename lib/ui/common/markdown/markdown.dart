@@ -27,9 +27,7 @@ class Markdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
     var markdown = data.replaceAllMapped(removeRegex, (match) {
-      // logger.i(match.groups([1, 2]));
       return match.group(1) ?? '';
     });
 
