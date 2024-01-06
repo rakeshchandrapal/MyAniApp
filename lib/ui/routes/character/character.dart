@@ -241,9 +241,12 @@ class _CharacterPageState extends State<CharacterPage> {
                           ),
                           const Spacer(),
                           SizedBox(
-                            width: 140,
+                            width: 150,
                             child: CheckboxListTile.adaptive(
-                              title: const Text('On List'),
+                              title: Text(
+                                'On My List',
+                                style: theme.textTheme.bodySmall,
+                              ),
                               value: onList ?? false,
                               onChanged: (value) => setState(
                                   () => onList = value == false ? null : true),
