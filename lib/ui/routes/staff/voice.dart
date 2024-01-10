@@ -18,6 +18,7 @@ class StaffVoicePage extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.all(8),
       shrinkWrap: true,
+      primary: false,
       itemBuilder: (context, index) {
         var year = years[index];
 
