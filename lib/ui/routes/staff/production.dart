@@ -31,6 +31,7 @@ class StaffProductionPage extends StatelessWidget {
           ),
         ),
         MediaCards(
+          primary: false,
           list: medias.edges!.map((e) => e!.node!).toList(),
           aspectRatio: 1.8 / 3,
           underTitle: (media, style, index) => Text(
