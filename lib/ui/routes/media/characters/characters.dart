@@ -90,25 +90,26 @@ class _CharactersState extends State<Characters> {
       fetchMore: widget.fetchMore,
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomDropdown(
-                hint: 'Language',
-                value: selectedLanguage,
-                onChanged: (value) =>
-                    setState(() => selectedLanguage = value ?? 'Japanese'),
-                dropdownItems: availableLanguages
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      ),
-                    )
-                    .toList(),
+          if (availableLanguages.isNotEmpty)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomDropdown(
+                  hint: 'Language',
+                  value: selectedLanguage,
+                  onChanged: (value) =>
+                      setState(() => selectedLanguage = value ?? 'Japanese'),
+                  dropdownItems: availableLanguages
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e),
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
             ),
-          ),
           SliverList.separated(
             itemCount: widget.characters.edges!.length,
             separatorBuilder: (context, index) => const SizedBox(

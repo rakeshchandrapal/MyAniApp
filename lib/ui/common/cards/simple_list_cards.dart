@@ -15,6 +15,7 @@ class SimpleListCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.zero,
       primary: primary,
       shrinkWrap: true,
       itemBuilder: (context, index) => card(index),

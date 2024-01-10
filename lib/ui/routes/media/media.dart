@@ -253,7 +253,7 @@ class FloatingButtons extends ConsumerWidget {
                 Icons.favorite,
                 color: media.requireValue.isFavourite == true
                     ? Colors.red[200]
-                    : null,
+                    : Colors.white,
               ),
             )
           ],

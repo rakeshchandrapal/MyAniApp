@@ -58,7 +58,7 @@ class SpoilerInlineSyntax extends md.InlineSyntax {
 
 // class SpoilerBlockSyntax extends md.BlockSyntax {
 //   @override
-//   get pattern => RegExp(r'^~!(.*)!~$');
+//   get pattern => RegExp(r'^~!(.*)!~$', multiLine: true);
 //   SpoilerBlockSyntax() : super();
 
 //   @override

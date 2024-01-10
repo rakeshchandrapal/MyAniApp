@@ -65,14 +65,18 @@ class _AppState extends ConsumerState<App> {
   Widget build(BuildContext context) {
     var themeMode = ref.watch(settingsProvider.select((value) => value.theme));
 
-    return MaterialApp.router(
-      title: 'MyAniApp',
-      routerConfig: router,
-      scrollBehavior: _ScrollBehavior(),
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: themeMode,
-      debugShowCheckedModeBanner: false,
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: MaterialApp.router(
+        title: 'MyAniApp',
+        routerConfig: router,
+        scrollBehavior: _ScrollBehavior(),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: themeMode,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

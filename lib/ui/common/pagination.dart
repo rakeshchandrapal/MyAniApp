@@ -24,6 +24,7 @@ class Pagination extends StatelessWidget {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
+        print(notification.depth);
         if (depth != null && notification.depth != depth) return false;
 
         if (notification.metrics.pixels >
@@ -32,6 +33,41 @@ class Pagination extends StatelessWidget {
             (isLoading == false || isLoading == null)) {
           isLoading = true;
           fetchMore(opts);
+        }
+        return false;
+      },
+      child: child,
+    );
+  }
+}
+
+class GrapgqlPagination extends StatelessWidget {
+  GrapgqlPagination({
+    super.key,
+    required this.pageInfo,
+    this.depth,
+    required this.fetchMore,
+    required this.child,
+  });
+
+  final Fragment$PageInfo pageInfo;
+  final int? depth;
+  final void Function(int page) fetchMore;
+  final Widget child;
+  bool? isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener<ScrollUpdateNotification>(
+      onNotification: (notification) {
+        if (depth != null && notification.depth != depth) return false;
+
+        if (notification.metrics.pixels >
+                notification.metrics.maxScrollExtent * .95 &&
+            pageInfo.hasNextPage == true &&
+            (isLoading == false || isLoading == null)) {
+          isLoading = true;
+          fetchMore((pageInfo.currentPage ?? 1) + 1);
         }
         return false;
       },

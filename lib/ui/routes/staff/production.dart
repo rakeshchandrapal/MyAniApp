@@ -22,7 +22,7 @@ class StaffProductionPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Staff Roles',
+                'Production Roles',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -30,15 +30,13 @@ class StaffProductionPage extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
-          child: MediaCards(
-            list: medias.edges!.map((e) => e!.node!).toList(),
-            aspectRatio: 1.8 / 3,
-            underTitle: (media, style, index) => Text(
-              medias.edges![index]!.staffRole ?? '',
-            ),
-            onTap: (media, idx) => context.push('/media/${media.id}/overview'),
+        MediaCards(
+          list: medias.edges!.map((e) => e!.node!).toList(),
+          aspectRatio: 1.8 / 3,
+          underTitle: (media, style, index) => Text(
+            medias.edges![index]!.staffRole ?? '',
           ),
+          onTap: (media, idx) => context.push('/media/${media.id}/overview'),
         ),
       ],
     );

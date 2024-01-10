@@ -53,10 +53,7 @@ class _ScrollToTopState extends State<ScrollToTop> {
                 ScrollDirection.reverse &&
             notification.metrics.pixels >= 500) {
           setState(() => show = true);
-        } else if (show &&
-            _controller.positions.last.userScrollDirection ==
-                ScrollDirection.forward &&
-            notification.metrics.pixels <= 500) {
+        } else if (show) {
           setState(() => show = false);
         }
         return false;

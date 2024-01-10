@@ -13,6 +13,7 @@ import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
+import 'package:myaniapp/ui/common/widget_gradient.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
@@ -30,8 +31,6 @@ class _CharacterPageState extends State<CharacterPage> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
     return Query$Character$Widget(
       options: Options$Query$Character(
         variables: Variables$Query$Character(id: widget.id, onList: onList),
@@ -52,21 +51,13 @@ class _CharacterPageState extends State<CharacterPage> {
         }
 
         return ScrollToTop(
+          alignment: Alignment.topRight,
           builder: (scrollController) => Scaffold(
             floatingActionButton: HiddenFloatingActionButton(
               scrollController: scrollController,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: FloatingButton(
-                        character: result.parsedData!.Character!,
-                        refetch: refetch!,
-                      ),
-                    ),
-                  ],
-                ),
+              child: FloatingButton(
+                character: result.parsedData!.Character!,
+                refetch: refetch!,
               ),
             ),
             floatingActionButtonLocation:
@@ -93,165 +84,170 @@ class _CharacterPageState extends State<CharacterPage> {
                 controller: scrollController,
                 slivers: [
                   SliverAppBar(
-                    expandedHeight: 145,
+                    expandedHeight: 210,
                     pinned: true,
-                    flexibleSpace: SafeArea(
-                      child: FlexibleSpaceBar(
-                        background: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 10, left: 5),
-                                child: SizedBox(
-                                  width: 90,
-                                  child: AspectRatio(
-                                    aspectRatio: 2 / 3,
-                                    child: ClipRRect(
-                                      borderRadius: imageRadius,
-                                      child: CImage(
-                                        imageUrl: result.parsedData!.Character!
-                                            .image!.large!,
-                                        viewer: true,
-                                      ),
-                                    ),
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Stack(
+                        children: [
+                          WidgetGradient(
+                            child: Container(
+                              height: 150,
+                              color: Theme.of(context).disabledColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0, top: 50),
+                            child: SizedBox(
+                              width: 100,
+                              height: 150,
+                              child: AspectRatio(
+                                aspectRatio: 2 / 3,
+                                child: ClipRRect(
+                                  borderRadius: imageRadius,
+                                  child: CImage(
+                                    imageUrl: result
+                                        .parsedData!.Character!.image!.large!,
+                                    viewer: true,
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: [
-                                    Text(
-                                      result.parsedData!.Character!.name!
-                                          .userPreferred!,
-                                      style:
-                                          theme.textTheme.bodyLarge?.copyWith(
-                                        fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 96, left: 120),
+                            child: SizedBox(
+                              height: 104,
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: [
+                                  Text(
+                                    result.parsedData!.Character!.name!
+                                        .userPreferred!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                  if (result.parsedData!.Character!
+                                              .dateOfBirth !=
+                                          null &&
+                                      result.parsedData!.Character!.dateOfBirth!
+                                              .toDateString() !=
+                                          null)
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Birthday: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: result.parsedData!.Character!
+                                                .dateOfBirth!
+                                                .toDateString()!,
+                                          )
+                                        ],
                                       ),
                                     ),
-                                    if (result.parsedData!.Character!
-                                                .dateOfBirth !=
-                                            null &&
-                                        result.parsedData!.Character!
-                                                .dateOfBirth!
-                                                .toDateString() !=
-                                            null)
-                                      Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'Birthday: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                  if (result.parsedData!.Character!.age != null)
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Age: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            TextSpan(
-                                              text: result.parsedData!
-                                                  .Character!.dateOfBirth!
-                                                  .toDateString()!,
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          TextSpan(
+                                            text: result
+                                                .parsedData!.Character!.age,
+                                          )
+                                        ],
                                       ),
-                                    if (result.parsedData!.Character!.age !=
-                                        null)
-                                      Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'Age: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                    ),
+                                  if (result.parsedData!.Character!.gender !=
+                                      null)
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Gender: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            TextSpan(
-                                              text: result
-                                                  .parsedData!.Character!.age,
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          TextSpan(
+                                            text: result
+                                                .parsedData!.Character!.gender,
+                                          )
+                                        ],
                                       ),
-                                    if (result.parsedData!.Character!.gender !=
-                                        null)
-                                      Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'Gender: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                    ),
+                                  if (result.parsedData!.Character!.bloodType !=
+                                      null)
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          const TextSpan(
+                                            text: 'Blood Type: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            TextSpan(
-                                              text: result.parsedData!
-                                                  .Character!.gender,
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          TextSpan(
+                                            text: result.parsedData!.Character!
+                                                .bloodType,
+                                          )
+                                        ],
                                       ),
-                                    if (result
-                                            .parsedData!.Character!.bloodType !=
-                                        null)
-                                      Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            const TextSpan(
-                                              text: 'Blood Type: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: result.parsedData!
-                                                  .Character!.bloodType,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              )
-                            ],
+                                    ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                  SliverPadding(
+                    padding: const EdgeInsets.all(8),
+                    sliver: SliverToBoxAdapter(
                       child: Description(
                           result.parsedData!.Character!.description),
                     ),
                   ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    sliver: SliverToBoxAdapter(
                       child: Row(
                         children: [
                           Text(
-                            'Appearances',
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            "Appearances",
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const Spacer(),
                           SizedBox(
-                            width: 150,
+                            width: 120,
                             child: CheckboxListTile.adaptive(
+                              contentPadding: const EdgeInsets.all(2),
                               title: Text(
-                                'On My List',
-                                style: theme.textTheme.bodySmall,
+                                "On My List",
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
+                              visualDensity: VisualDensity.comfortable,
                               value: onList ?? false,
-                              onChanged: (value) => setState(
-                                  () => onList = value == false ? null : true),
+                              onChanged: (v) => setState(
+                                  () => onList = v == false ? null : true),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: imageRadius,
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -264,7 +260,7 @@ class _CharacterPageState extends State<CharacterPage> {
                           .cast<Fragment$MediaFragment>(),
                       aspectRatio: 1.9 / 3,
                       primary: false,
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       onTap: (media, index) =>
                           context.push('/media/${media.id}/overview'),
                     ),
@@ -300,29 +296,38 @@ class FloatingButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return FloatingActionButton(
-      onPressed: requireLogin(
-        ref,
-        'like',
-        () => character.isFavouriteBlocked == true
-            ? null
-            : () => client.value
-                .mutate$ToggleFavorite(
-                  Options$Mutation$ToggleFavorite(
-                    variables: Variables$Mutation$ToggleFavorite(
-                      characterId: character.id,
-                    ),
-                  ),
-                )
-                .then(
-                  (value) => refetch(),
-                ),
-      ),
-      backgroundColor:
-          character.isFavouriteBlocked == true ? Colors.grey[800] : Colors.red,
-      child: Icon(
-        Icons.favorite,
-        color: character.isFavourite == true ? Colors.red[200] : null,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: FloatingActionButton(
+              onPressed: requireLogin(
+                ref,
+                'like',
+                () => character.isFavouriteBlocked == true
+                    ? null
+                    : client.value.mutate$ToggleFavorite(
+                        Options$Mutation$ToggleFavorite(
+                          variables: Variables$Mutation$ToggleFavorite(
+                            characterId: character.id,
+                          ),
+                          onCompleted: (_, __) => refetch(),
+                        ),
+                      ),
+              ),
+              backgroundColor: character.isFavouriteBlocked == true
+                  ? Colors.grey[800]
+                  : Colors.red,
+              child: Icon(
+                Icons.favorite,
+                color: character.isFavourite == true
+                    ? Colors.red[200]
+                    : Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

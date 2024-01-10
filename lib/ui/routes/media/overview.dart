@@ -44,7 +44,7 @@ class MediaOverviewPage extends ConsumerWidget {
         if (media.value!.trailer != null &&
             (kIsWeb || Platform.isAndroid || Platform.isIOS))
           const Player()
-        else if (media.value != null)
+        else if (media.value!.trailer != null)
           Trailer(trailer: media.value!.trailer!),
         const SizedBox(
           height: 10,
