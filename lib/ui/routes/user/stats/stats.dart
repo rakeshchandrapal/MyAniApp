@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/stats/stats.graphql.dart';
-import 'package:myaniapp/providers/userProfile.dart';
+import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
 class UserStatsPage extends ConsumerWidget {

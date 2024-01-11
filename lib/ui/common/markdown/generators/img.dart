@@ -77,10 +77,4 @@ class ImageNode extends SpanNode {
       richTextBuilder: visitor.richTextBuilder,
     );
   }
-
-  ///show image in a new window
-  void _showImage(BuildContext context, Widget child) {
-    Navigator.of(context).push(PageRouteBuilder(
-        opaque: false, pageBuilder: (_, __, ___) => ImageViewer(child: child)));
-  }
 }

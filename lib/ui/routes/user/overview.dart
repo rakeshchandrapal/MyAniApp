@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/user.graphql.dart';
-import 'package:myaniapp/providers/userProfile.dart';
+import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';

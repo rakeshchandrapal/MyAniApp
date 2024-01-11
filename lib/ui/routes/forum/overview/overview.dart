@@ -122,7 +122,6 @@ class _ForumOverviewPageState extends State<ForumOverviewPage> {
                   '/forum/${widget.filter}?category=${widget.category}&search=$search');
             },
           ),
-        _ => Text(inEnum.name),
       },
     );
   }

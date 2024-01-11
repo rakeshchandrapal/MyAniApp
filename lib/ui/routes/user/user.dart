@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:myaniapp/providers/userProfile.dart';
+import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/routes/user/activity/activity.dart';
@@ -95,7 +95,6 @@ class __UserShellPageState extends ConsumerState<_UserShellPage>
   Widget build(BuildContext context) {
     var user = ref.watch(userProfileProvider(widget.name));
     var theme = Theme.of(context);
-    print('ds');
 
     return Scaffold(
       body: NestedScrollView(

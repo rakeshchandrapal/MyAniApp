@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/reviews/reviews.graphql.dart';
-import 'package:myaniapp/providers/userProfile.dart';
+import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/utils/graphql.dart';
 

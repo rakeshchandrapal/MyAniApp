@@ -28,7 +28,6 @@ import 'package:myaniapp/ui/routes/user/list/manga.dart';
 import 'package:myaniapp/ui/routes/user/user.dart';
 
 final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
-final GlobalKey<NavigatorState> _mediaKey = GlobalKey();
 
 final router = GoRouter(
   navigatorKey: _navigatorKey,
@@ -111,12 +110,6 @@ final router = GoRouter(
       // parentNavigatorKey: _navigatorKey,
       path: '/user/:name',
       redirect: (context, state) {
-        print(state.pathParameters['tab'] == null &&
-                (state.uri.pathSegments.contains('anime') ||
-                        state.uri.pathSegments.contains('manga')) ==
-                    false
-            ? 'sdads'
-            : 77);
         return state.pathParameters['tab'] == null &&
                 state.uri.pathSegments.contains('anime') == false &&
                 state.uri.pathSegments.contains('manga') == false

@@ -10,7 +10,7 @@ import 'package:media_kit/media_kit.dart';
 import 'package:myaniapp/background.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/notifications/push.dart';
-import 'package:myaniapp/providers/shared_preferrences.dart';
+import 'package:myaniapp/providers/shared_preferences.dart';
 import 'package:myaniapp/ui/root.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';

@@ -26,7 +26,7 @@ class Editor extends StatefulWidget {
 
 class _EditorState extends State<Editor> {
   final FocusNode focus = FocusNode();
-  late final textController;
+  late final TextEditingController textController;
 
   @override
   void initState() {

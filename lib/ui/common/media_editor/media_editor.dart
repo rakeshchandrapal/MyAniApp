@@ -13,7 +13,7 @@ import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
-import 'package:myaniapp/ui/common/numer_picker.dart';
+import 'package:myaniapp/ui/common/number_picker.dart';
 
 class MediaEditorDialog extends ConsumerWidget {
   const MediaEditorDialog({
@@ -140,7 +140,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                 var shouldDelete = await showDeleteDialog(context);
 
                 if (shouldDelete == true) {
-                  context.pop();
+                  if (mounted) context.pop();
                   client.value
                       .mutate$DeleteMediaListEntry(
                         Options$Mutation$DeleteMediaListEntry(

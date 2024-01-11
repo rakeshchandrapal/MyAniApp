@@ -277,9 +277,6 @@ class MediaAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    // print(Scrollable.of(context).position.);
-
     return SliverAppBar(
       expandedHeight: 255,
       primary: false,

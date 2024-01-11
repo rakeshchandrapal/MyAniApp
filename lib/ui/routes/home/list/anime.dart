@@ -18,7 +18,7 @@ import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
-import 'package:myaniapp/ui/common/numer_picker.dart';
+import 'package:myaniapp/ui/common/number_picker.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
 
 class HomeAnimePage extends ConsumerWidget {

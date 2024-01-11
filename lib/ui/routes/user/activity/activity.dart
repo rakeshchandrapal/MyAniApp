@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/activity/activity.graphql.dart';
-import 'package:myaniapp/providers/userProfile.dart';
+import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/activity_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 
