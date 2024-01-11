@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/similar/similar.graphql.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
 class MediaSimilarPage extends StatelessWidget {
   const MediaSimilarPage({super.key, required this.id});
@@ -16,32 +16,23 @@ class MediaSimilarPage extends StatelessWidget {
       options: Options$Query$Recommendations(
         variables: Variables$Query$Recommendations(mediaId: id),
       ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.parsedData == null) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
-
-        return Pagination(
+      builder: queryBuilder(
+        (result, [fetchMore, refetch]) => GraphqlPagination(
           pageInfo: result.parsedData!.Media!.recommendations!.pageInfo!,
-          opts: FetchMoreOptions$Query$Recommendations(
-            variables: Variables$Query$Recommendations(
-                page: result.parsedData!.Media!.recommendations!.pageInfo!
-                        .currentPage! +
-                    1),
-            updateQuery: (previousResultData, fetchMoreResultData) {
-              var list = [
-                ...previousResultData!['Media']!['recommendations']['nodes'],
-                ...fetchMoreResultData!['Media']!['recommendations']['nodes'],
-              ];
-              fetchMoreResultData['Media']!['recommendations']['nodes'] = list;
-              return fetchMoreResultData;
-            },
+          fetchMore: (nextPage) => fetchMore!(
+            FetchMoreOptions$Query$Recommendations(
+              variables: Variables$Query$Recommendations(page: nextPage),
+              updateQuery: (previousResultData, fetchMoreResultData) {
+                var list = [
+                  ...previousResultData!['Media']!['recommendations']['nodes'],
+                  ...fetchMoreResultData!['Media']!['recommendations']['nodes'],
+                ];
+                fetchMoreResultData['Media']!['recommendations']['nodes'] =
+                    list;
+                return fetchMoreResultData;
+              },
+            ),
           ),
-          fetchMore: fetchMore!,
           child: MediaCards(
             list: result.parsedData!.Media!.recommendations!.nodes!
                 .map((e) => e!.mediaRecommendation!)
@@ -50,8 +41,8 @@ class MediaSimilarPage extends StatelessWidget {
             onTap: (media, index) =>
                 context.push('/media/${media.id}/overview'),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

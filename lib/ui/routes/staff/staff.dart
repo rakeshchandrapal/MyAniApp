@@ -74,43 +74,40 @@ class _StaffViewState extends State<StaffView> {
   Widget build(BuildContext context) {
     return ScrollToTop(
       builder: (scrollController) => Scaffold(
-        body: GrapgqlPagination(
+        body: GraphqlPagination(
           pageInfo: production
               ? widget.staff.staffMedia!.pageInfo!
               : widget.staff.characterMedia!.pageInfo!,
-          fetchMore: (nextPage) {
-            widget.fetchMore(
-              production
-                  ? FetchMoreOptions$Query$Staff(
-                      variables: Variables$Query$Staff(staffPage: nextPage),
-                      updateQuery: (previousResultData, fetchMoreResultData) {
-                        var list = [
-                          ...previousResultData!['Staff']!['staffMedia']
-                              ['edges'],
-                          ...fetchMoreResultData!['Staff']!['staffMedia']
-                              ['edges'],
-                        ];
-                        fetchMoreResultData['Staff']!['staffMedia']['edges'] =
-                            list;
-                        return fetchMoreResultData;
-                      },
-                    )
-                  : FetchMoreOptions$Query$Staff(
-                      variables: Variables$Query$Staff(characterPage: nextPage),
-                      updateQuery: (previousResultData, fetchMoreResultData) {
-                        var list = [
-                          ...previousResultData!['Staff']!['characterMedia']
-                              ['edges'],
-                          ...fetchMoreResultData!['Staff']!['characterMedia']
-                              ['edges'],
-                        ];
-                        fetchMoreResultData['Staff']!['characterMedia']
-                            ['edges'] = list;
-                        return fetchMoreResultData;
-                      },
-                    ),
-            );
-          },
+          fetchMore: (nextPage) => widget.fetchMore(
+            production
+                ? FetchMoreOptions$Query$Staff(
+                    variables: Variables$Query$Staff(staffPage: nextPage),
+                    updateQuery: (previousResultData, fetchMoreResultData) {
+                      var list = [
+                        ...previousResultData!['Staff']!['staffMedia']['edges'],
+                        ...fetchMoreResultData!['Staff']!['staffMedia']
+                            ['edges'],
+                      ];
+                      fetchMoreResultData['Staff']!['staffMedia']['edges'] =
+                          list;
+                      return fetchMoreResultData;
+                    },
+                  )
+                : FetchMoreOptions$Query$Staff(
+                    variables: Variables$Query$Staff(characterPage: nextPage),
+                    updateQuery: (previousResultData, fetchMoreResultData) {
+                      var list = [
+                        ...previousResultData!['Staff']!['characterMedia']
+                            ['edges'],
+                        ...fetchMoreResultData!['Staff']!['characterMedia']
+                            ['edges'],
+                      ];
+                      fetchMoreResultData['Staff']!['characterMedia']['edges'] =
+                          list;
+                      return fetchMoreResultData;
+                    },
+                  ),
+          ),
           child: CustomScrollView(
             controller: scrollController,
             slivers: [

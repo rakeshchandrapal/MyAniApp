@@ -77,26 +77,23 @@ class ThreadPage extends ConsumerWidget {
                 child: const Icon(Icons.reply),
               ),
             ),
-            body: Pagination(
-              fetchMore: fetchMore!,
-              pageInfo: result.parsedData!.comments!.pageInfo!,
-              opts: FetchMoreOptions$Query$Thread(
-                updateQuery: (previousResultData, fetchMoreResultData) {
-                  var list = [
-                    ...previousResultData!['comments']['threadComments'],
-                    ...fetchMoreResultData!['comments']['threadComments']
-                  ];
+            body: GraphqlPagination(
+              fetchMore: (nextPage) => fetchMore!(
+                FetchMoreOptions$Query$Thread(
+                  updateQuery: (previousResultData, fetchMoreResultData) {
+                    var list = [
+                      ...previousResultData!['comments']['threadComments'],
+                      ...fetchMoreResultData!['comments']['threadComments']
+                    ];
 
-                  fetchMoreResultData['comments']['threadComments'] = list;
+                    fetchMoreResultData['comments']['threadComments'] = list;
 
-                  return fetchMoreResultData;
-                },
-                variables: Variables$Query$Thread(
-                  page: (result.parsedData!.comments!.pageInfo!.currentPage ??
-                          1) +
-                      1,
+                    return fetchMoreResultData;
+                  },
+                  variables: Variables$Query$Thread(page: nextPage),
                 ),
               ),
+              pageInfo: result.parsedData!.comments!.pageInfo!,
               child: CustomScrollView(
                 controller: _controller,
                 slivers: [

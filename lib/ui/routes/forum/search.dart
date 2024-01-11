@@ -52,10 +52,9 @@ class _ForumSearchState extends State<ForumSearch> {
           (result, [fetchMore, refetch]) {
             return RefreshIndicator.adaptive(
               onRefresh: refetch!,
-              child: Pagination(
-                  fetchMore: fetchMore!,
-                  pageInfo: result.parsedData!.Page!.pageInfo!,
-                  opts: FetchMoreOptions$Query$Forums(
+              child: GraphqlPagination(
+                fetchMore: (nextPage) => fetchMore!(
+                  FetchMoreOptions$Query$Forums(
                     updateQuery: (previousResultData, fetchMoreResultData) {
                       var list = [
                         ...previousResultData!['Page']['threads'],
@@ -66,47 +65,46 @@ class _ForumSearchState extends State<ForumSearch> {
 
                       return fetchMoreResultData;
                     },
-                    variables: Variables$Query$Forums(
-                      page: (result.parsedData!.Page!.pageInfo!.currentPage ??
-                              1) +
-                          1,
-                    ),
+                    variables: Variables$Query$Forums(page: nextPage),
                   ),
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverPadding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 10),
-                        sliver: SliverToBoxAdapter(
-                          child: TextField(
-                            controller: _controller,
-                            onSubmitted: widget.onChange,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              hintText: 'Search...',
+                ),
+                pageInfo: result.parsedData!.Page!.pageInfo!,
+                child: CustomScrollView(
+                  slivers: [
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 10),
+                      sliver: SliverToBoxAdapter(
+                        child: TextField(
+                          controller: _controller,
+                          onSubmitted: widget.onChange,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
                             ),
+                            hintText: 'Search...',
                           ),
                         ),
                       ),
-                      SliverPadding(
-                        padding: const EdgeInsets.all(8),
-                        sliver: SliverList.separated(
-                          separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
-                          ),
-                          itemBuilder: (context, index) {
-                            var thread =
-                                result.parsedData!.Page!.threads![index]!;
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.all(8),
+                      sliver: SliverList.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 10,
+                        ),
+                        itemBuilder: (context, index) {
+                          var thread =
+                              result.parsedData!.Page!.threads![index]!;
 
-                            return ThreadCard(thread: thread);
-                          },
-                          itemCount: result.parsedData!.Page!.threads!.length,
-                        ),
+                          return ThreadCard(thread: thread);
+                        },
+                        itemCount: result.parsedData!.Page!.threads!.length,
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         ),

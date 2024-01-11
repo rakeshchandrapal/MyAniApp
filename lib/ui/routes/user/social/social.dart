@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/user/social/social.graphql.dart';
 import 'package:myaniapp/providers/userProfile.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
 class UserSocialPage extends ConsumerStatefulWidget {
   const UserSocialPage({
@@ -30,48 +30,35 @@ class _UserSocialPageState extends ConsumerState<UserSocialPage> {
       options: Options$Query$Socials(
         variables: Variables$Query$Socials(id: user.value!.id),
       ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.parsedData == null) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
+      builder: queryBuilder(
+        (result, [fetchMore, refetch]) => GraphqlPagination(
+          fetchMore: (nextPage) => fetchMore!(
+            FetchMoreOptions$Query$Socials(
+              updateQuery: (previousResultData, fetchMoreResultData) {
+                var following = [
+                  ...previousResultData!['following']['following'],
+                  ...fetchMoreResultData!['following']['following']
+                ];
+                var followers = [
+                  ...previousResultData['followers']['followers'],
+                  ...fetchMoreResultData['followers']['followers']
+                ];
 
-        return Pagination(
-          fetchMore: fetchMore!,
-          opts: FetchMoreOptions$Query$Socials(
-            updateQuery: (previousResultData, fetchMoreResultData) {
-              var following = [
-                ...previousResultData!['following']['following'],
-                ...fetchMoreResultData!['following']['following']
-              ];
-              var followers = [
-                ...previousResultData['followers']['followers'],
-                ...fetchMoreResultData['followers']['followers']
-              ];
+                fetchMoreResultData['following']['following'] = following;
+                fetchMoreResultData['followers']['followers'] = followers;
 
-              fetchMoreResultData['following']['following'] = following;
-              fetchMoreResultData['followers']['followers'] = followers;
-
-              return fetchMoreResultData;
-            },
-            variables: isFollowing
-                ? Variables$Query$Socials(
-                    followingPage:
-                        (result.parsedData!.following!.pageInfo!.currentPage ??
-                                1) +
-                            1,
-                    id: user.value!.id,
-                  )
-                : Variables$Query$Socials(
-                    followersPage:
-                        (result.parsedData!.followers!.pageInfo!.currentPage ??
-                                1) +
-                            1,
-                    id: user.value!.id,
-                  ),
+                return fetchMoreResultData;
+              },
+              variables: isFollowing
+                  ? Variables$Query$Socials(
+                      followingPage: nextPage,
+                      id: user.value!.id,
+                    )
+                  : Variables$Query$Socials(
+                      followersPage: nextPage,
+                      id: user.value!.id,
+                    ),
+            ),
           ),
           pageInfo: isFollowing
               ? result.parsedData!.following!.pageInfo!
@@ -137,8 +124,8 @@ class _UserSocialPageState extends ConsumerState<UserSocialPage> {
                 )
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

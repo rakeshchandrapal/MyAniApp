@@ -55,21 +55,20 @@ class LikesSheet extends StatelessWidget {
             );
           }
 
-          return Pagination(
-            fetchMore: fetchMore!,
-            opts: FetchMoreOptions$Query$Likes(
-              updateQuery: (previousResultData, fetchMoreResultData) {
-                var list = [
-                  ...previousResultData!['Page']['likes'],
-                  ...fetchMoreResultData!['Page']['likes'],
-                ];
+          return GraphqlPagination(
+            fetchMore: (nextPage) => fetchMore!(
+              FetchMoreOptions$Query$Likes(
+                updateQuery: (previousResultData, fetchMoreResultData) {
+                  var list = [
+                    ...previousResultData!['Page']['likes'],
+                    ...fetchMoreResultData!['Page']['likes'],
+                  ];
 
-                fetchMoreResultData['Page']['likes'] = list;
+                  fetchMoreResultData['Page']['likes'] = list;
 
-                return fetchMoreResultData;
-              },
-              variables: Variables$Query$Likes(
-                page: (result.parsedData!.Page!.pageInfo!.currentPage ?? 1) + 1,
+                  return fetchMoreResultData;
+                },
+                variables: Variables$Query$Likes(page: nextPage),
               ),
             ),
             pageInfo: result.parsedData!.Page!.pageInfo!,

@@ -7,8 +7,8 @@ import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/recommendations/recommendations.graphql.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/utils/graphql.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 class RecommendationsPage extends ConsumerStatefulWidget {
@@ -87,28 +87,19 @@ class _RecommendationsPageState extends ConsumerState<RecommendationsPage> {
             onList: onList,
           ),
         ),
-        builder: (result, {fetchMore, refetch}) {
-          if (result.isLoading && result.parsedData == null) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (result.hasException) {
-            return GraphqlError(exception: result.exception!);
-          }
-
-          return Pagination(
-            fetchMore: fetchMore!,
-            opts: FetchMoreOptions$Query$Recommendations(
-              updateQuery: (previousResultData, fetchMoreResultData) {
-                var list = [
-                  ...previousResultData!['Page']!['recommendations'],
-                  ...fetchMoreResultData!['Page']!['recommendations'],
-                ];
-                fetchMoreResultData['Page']!['recommendations'] = list;
-                return fetchMoreResultData;
-              },
-              variables: Variables$Query$Recommendations(
-                page: (result.parsedData?.Page?.pageInfo?.currentPage ?? 1) + 1,
+        builder: queryBuilder(
+          (result, [fetchMore, refetch]) => GraphqlPagination(
+            fetchMore: (nextPage) => fetchMore!(
+              FetchMoreOptions$Query$Recommendations(
+                updateQuery: (previousResultData, fetchMoreResultData) {
+                  var list = [
+                    ...previousResultData!['Page']!['recommendations'],
+                    ...fetchMoreResultData!['Page']!['recommendations'],
+                  ];
+                  fetchMoreResultData['Page']!['recommendations'] = list;
+                  return fetchMoreResultData;
+                },
+                variables: Variables$Query$Recommendations(page: nextPage),
               ),
             ),
             pageInfo: result.parsedData!.Page!.pageInfo!,
@@ -247,8 +238,8 @@ class _RecommendationsPageState extends ConsumerState<RecommendationsPage> {
               },
               itemCount: result.parsedData!.Page!.recommendations!.length,
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

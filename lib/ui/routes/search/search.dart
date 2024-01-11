@@ -197,23 +197,20 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                         );
                       }
 
-                      return Pagination(
-                        fetchMore: fetchMore!,
-                        opts: FetchMoreOptions$Query$Search(
-                          updateQuery:
-                              (previousResultData, fetchMoreResultData) {
-                            var list = [
-                              ...previousResultData!['Page']!['media'],
-                              ...fetchMoreResultData!['Page']!['media'],
-                            ];
-                            fetchMoreResultData['Page']!['media'] = list;
-                            return fetchMoreResultData;
-                          },
-                          variables: query!.toVar().copyWith(
-                              page: (result.parsedData!.Page!.pageInfo!
-                                          .currentPage ??
-                                      1) +
-                                  1),
+                      return GraphqlPagination(
+                        fetchMore: (nextPage) => fetchMore!(
+                          FetchMoreOptions$Query$Search(
+                            updateQuery:
+                                (previousResultData, fetchMoreResultData) {
+                              var list = [
+                                ...previousResultData!['Page']!['media'],
+                                ...fetchMoreResultData!['Page']!['media'],
+                              ];
+                              fetchMoreResultData['Page']!['media'] = list;
+                              return fetchMoreResultData;
+                            },
+                            variables: query!.toVar().copyWith(page: nextPage),
+                          ),
                         ),
                         pageInfo: result.parsedData!.Page!.pageInfo!,
                         child: MediaCards(

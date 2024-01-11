@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/staff/staff.graphql.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
 class MediaStaffPage extends StatelessWidget {
   const MediaStaffPage({super.key, required this.id});
@@ -18,32 +18,22 @@ class MediaStaffPage extends StatelessWidget {
         options: Options$Query$Staff(
           variables: Variables$Query$Staff(mediaId: id),
         ),
-        builder: (result, {fetchMore, refetch}) {
-          if (result.isLoading && result.parsedData == null) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (result.hasException) {
-            return GraphqlError(exception: result.exception!);
-          }
-
-          return Pagination(
+        builder: queryBuilder(
+          (result, [fetchMore, refetch]) => GraphqlPagination(
             pageInfo: result.parsedData!.Media!.staff!.pageInfo!,
-            opts: FetchMoreOptions$Query$Staff(
-              variables: Variables$Query$Staff(
-                  page:
-                      result.parsedData!.Media!.staff!.pageInfo!.currentPage! +
-                          1),
-              updateQuery: (previousResultData, fetchMoreResultData) {
-                var list = [
-                  ...previousResultData!['Media']!['staff']['edges'],
-                  ...fetchMoreResultData!['Media']!['staff']['edges'],
-                ];
-                fetchMoreResultData['Media']!['staff']['edges'] = list;
-                return fetchMoreResultData;
-              },
+            fetchMore: (nextPage) => fetchMore!(
+              FetchMoreOptions$Query$Staff(
+                variables: Variables$Query$Staff(page: nextPage),
+                updateQuery: (previousResultData, fetchMoreResultData) {
+                  var list = [
+                    ...previousResultData!['Media']!['staff']['edges'],
+                    ...fetchMoreResultData!['Media']!['staff']['edges'],
+                  ];
+                  fetchMoreResultData['Media']!['staff']['edges'] = list;
+                  return fetchMoreResultData;
+                },
+              ),
             ),
-            fetchMore: fetchMore!,
             child: ListView.builder(
               // controller: scrollController,
               padding: EdgeInsets.zero,
@@ -56,8 +46,8 @@ class MediaStaffPage extends StatelessWidget {
               },
               itemCount: result.parsedData!.Media!.staff!.edges!.length,
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

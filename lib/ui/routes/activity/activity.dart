@@ -46,22 +46,20 @@ class ActivityPage extends ConsumerWidget {
           );
         }
 
-        return Pagination(
-          fetchMore: fetchMore!,
-          opts: FetchMoreOptions$Query$Activity(
-            updateQuery: (previousResultData, fetchMoreResultData) {
-              var list = [
-                ...previousResultData!['replies']['activityReplies'],
-                ...fetchMoreResultData!['replies']['activityReplies'],
-              ];
+        return GraphqlPagination(
+          fetchMore: (nextPage) => fetchMore!(
+            FetchMoreOptions$Query$Activity(
+              updateQuery: (previousResultData, fetchMoreResultData) {
+                var list = [
+                  ...previousResultData!['replies']['activityReplies'],
+                  ...fetchMoreResultData!['replies']['activityReplies'],
+                ];
 
-              fetchMoreResultData['replies']['activityReplies'] = list;
+                fetchMoreResultData['replies']['activityReplies'] = list;
 
-              return fetchMoreResultData;
-            },
-            variables: Variables$Query$Activity(
-              page:
-                  (result.parsedData!.replies!.pageInfo!.currentPage ?? 1) + 1,
+                return fetchMoreResultData;
+              },
+              variables: Variables$Query$Activity(page: nextPage),
             ),
           ),
           pageInfo: result.parsedData!.replies!.pageInfo!,

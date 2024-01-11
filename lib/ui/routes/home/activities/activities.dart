@@ -98,30 +98,30 @@ class Activities extends StatelessWidget {
       builder: queryBuilder(
         (result, [fetchMore, refetch]) => RefreshIndicator.adaptive(
           onRefresh: refetch!,
-          child: Pagination(
-            fetchMore: fetchMore!,
-            pageInfo: result.parsedData!.Page!.pageInfo!,
-            opts: FetchMoreOptions$Query$Activities(
-              variables: Variables$Query$Activities(
-                  page: result.parsedData!.Page!.pageInfo!.currentPage! + 1),
-              updateQuery: (previousResultData, fetchMoreResultData) {
-                var has = <dynamic>{};
+          child: GraphqlPagination(
+            fetchMore: (nextPage) => fetchMore!(
+              FetchMoreOptions$Query$Activities(
+                variables: Variables$Query$Activities(page: nextPage),
+                updateQuery: (previousResultData, fetchMoreResultData) {
+                  var has = <dynamic>{};
 
-                has.addAll(previousResultData!['Page']['activities']
-                    .map((a) => a['id']));
+                  has.addAll(previousResultData!['Page']['activities']
+                      .map((a) => a['id']));
 
-                fetchMoreResultData!['Page']['activities']
-                    .removeWhere((a) => has.contains(a['id']));
+                  fetchMoreResultData!['Page']['activities']
+                      .removeWhere((a) => has.contains(a['id']));
 
-                var list = [
-                  ...previousResultData['Page']['activities'],
-                  ...fetchMoreResultData['Page']['activities']
-                ];
+                  var list = [
+                    ...previousResultData['Page']['activities'],
+                    ...fetchMoreResultData['Page']['activities']
+                  ];
 
-                fetchMoreResultData['Page']['activities'] = list;
-                return fetchMoreResultData;
-              },
+                  fetchMoreResultData['Page']['activities'] = list;
+                  return fetchMoreResultData;
+                },
+              ),
             ),
+            pageInfo: result.parsedData!.Page!.pageInfo!,
             child: ListView.builder(
               itemBuilder: (context, index) {
                 var activity = result.parsedData!.Page!.activities![index]!;

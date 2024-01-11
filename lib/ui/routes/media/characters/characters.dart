@@ -73,21 +73,21 @@ class _CharactersState extends State<Characters> {
 
   @override
   Widget build(BuildContext context) {
-    return Pagination(
+    return GraphqlPagination(
       pageInfo: widget.characters.pageInfo!,
-      opts: FetchMoreOptions$Query$Characters(
-        variables: Variables$Query$Characters(
-            page: widget.characters.pageInfo!.currentPage! + 1),
-        updateQuery: (previousResultData, fetchMoreResultData) {
-          var list = [
-            ...previousResultData!['Media']!['characters']['edges'],
-            ...fetchMoreResultData!['Media']!['characters']['edges'],
-          ];
-          fetchMoreResultData['Media']!['characters']['edges'] = list;
-          return fetchMoreResultData;
-        },
+      fetchMore: (nextPage) => widget.fetchMore(
+        FetchMoreOptions$Query$Characters(
+          variables: Variables$Query$Characters(page: nextPage),
+          updateQuery: (previousResultData, fetchMoreResultData) {
+            var list = [
+              ...previousResultData!['Media']!['characters']['edges'],
+              ...fetchMoreResultData!['Media']!['characters']['edges'],
+            ];
+            fetchMoreResultData['Media']!['characters']['edges'] = list;
+            return fetchMoreResultData;
+          },
+        ),
       ),
-      fetchMore: widget.fetchMore,
       child: CustomScrollView(
         slivers: [
           if (availableLanguages.isNotEmpty)

@@ -23,25 +23,23 @@ class NewForums extends StatelessWidget {
         (result, [fetchMore, refetch]) {
           return RefreshIndicator.adaptive(
             onRefresh: refetch!,
-            child: Pagination(
-              fetchMore: fetchMore!,
-              pageInfo: result.parsedData!.Page!.pageInfo!,
-              opts: FetchMoreOptions$Query$Forums(
-                updateQuery: (previousResultData, fetchMoreResultData) {
-                  var list = [
-                    ...previousResultData!['Page']['threads'],
-                    ...fetchMoreResultData!['Page']['threads']
-                  ];
+            child: GraphqlPagination(
+              fetchMore: (nextPage) => fetchMore!(
+                FetchMoreOptions$Query$Forums(
+                  updateQuery: (previousResultData, fetchMoreResultData) {
+                    var list = [
+                      ...previousResultData!['Page']['threads'],
+                      ...fetchMoreResultData!['Page']['threads']
+                    ];
 
-                  fetchMoreResultData['Page']['threads'] = list;
+                    fetchMoreResultData['Page']['threads'] = list;
 
-                  return fetchMoreResultData;
-                },
-                variables: Variables$Query$Forums(
-                  page:
-                      (result.parsedData!.Page!.pageInfo!.currentPage ?? 1) + 1,
+                    return fetchMoreResultData;
+                  },
+                  variables: Variables$Query$Forums(page: nextPage),
                 ),
               ),
+              pageInfo: result.parsedData!.Page!.pageInfo!,
               child: ListView.separated(
                 padding: const EdgeInsets.all(8),
                 separatorBuilder: (context, index) => const SizedBox(

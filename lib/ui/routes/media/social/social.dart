@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myaniapp/graphql/__generated/ui/routes/media/social/social.graphql.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
+import 'package:myaniapp/utils/graphql.dart';
 
 class MediaSocialPage extends StatelessWidget {
   const MediaSocialPage({super.key, required this.id});
@@ -15,28 +15,20 @@ class MediaSocialPage extends StatelessWidget {
       options: Options$Query$Threads(
         variables: Variables$Query$Threads(mediaId: id),
       ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.parsedData == null) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
-
-        return Pagination(
-          fetchMore: fetchMore!,
-          opts: FetchMoreOptions$Query$Threads(
-            variables: Variables$Query$Threads(
-                page: result.parsedData!.Page!.pageInfo!.currentPage! + 1),
-            updateQuery: (previousResultData, fetchMoreResultData) {
-              var list = [
-                ...previousResultData!['Page']!['threads'],
-                ...fetchMoreResultData!['Page']!['threads'],
-              ];
-              fetchMoreResultData['Page']!['threads'] = list;
-              return fetchMoreResultData;
-            },
+      builder: queryBuilder(
+        (result, [fetchMore, refetch]) => GraphqlPagination(
+          fetchMore: (nextPage) => fetchMore!(
+            FetchMoreOptions$Query$Threads(
+              variables: Variables$Query$Threads(page: nextPage),
+              updateQuery: (previousResultData, fetchMoreResultData) {
+                var list = [
+                  ...previousResultData!['Page']!['threads'],
+                  ...fetchMoreResultData!['Page']!['threads'],
+                ];
+                fetchMoreResultData['Page']!['threads'] = list;
+                return fetchMoreResultData;
+              },
+            ),
           ),
           pageInfo: result.parsedData!.Page!.pageInfo!,
           child: ListView.separated(
@@ -51,8 +43,8 @@ class MediaSocialPage extends StatelessWidget {
             ),
             itemCount: result.parsedData!.Page!.threads!.length,
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

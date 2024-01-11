@@ -62,24 +62,22 @@ class _CharacterPageState extends State<CharacterPage> {
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
-            body: Pagination(
-              fetchMore: fetchMore!,
+            body: GraphqlPagination(
+              fetchMore: (nextPage) => fetchMore!(
+                FetchMoreOptions$Query$Character(
+                  variables: Variables$Query$Character(page: nextPage),
+                  updateQuery: (previousResultData, fetchMoreResultData) {
+                    var list = [
+                      ...previousResultData!['Character']!['media']['edges'],
+                      ...fetchMoreResultData!['Character']!['media']['edges'],
+                    ];
+                    fetchMoreResultData['Character']!['media']['edges'] = list;
+                    return fetchMoreResultData;
+                  },
+                ),
+              ),
               pageInfo: result.parsedData!.Character!.media!.pageInfo!,
               isLoading: result.isLoading,
-              opts: FetchMoreOptions$Query$Character(
-                variables: Variables$Query$Character(
-                    page: result.parsedData!.Character!.media!.pageInfo!
-                            .currentPage! +
-                        1),
-                updateQuery: (previousResultData, fetchMoreResultData) {
-                  var list = [
-                    ...previousResultData!['Character']!['media']['edges'],
-                    ...fetchMoreResultData!['Character']!['media']['edges'],
-                  ];
-                  fetchMoreResultData['Character']!['media']['edges'] = list;
-                  return fetchMoreResultData;
-                },
-              ),
               child: CustomScrollView(
                 controller: scrollController,
                 slivers: [
