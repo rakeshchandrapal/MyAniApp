@@ -9,17 +9,24 @@ import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
 
-class MediaCharactersPage extends StatelessWidget {
+class MediaCharactersPage extends StatefulWidget {
   const MediaCharactersPage({super.key, required this.id});
 
   final int id;
 
   @override
+  State<MediaCharactersPage> createState() => _MediaCharactersPageState();
+}
+
+class _MediaCharactersPageState extends State<MediaCharactersPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ScrollToTop(
       builder: (_) => Query$Characters$Widget(
         options: Options$Query$Characters(
-          variables: Variables$Query$Characters(mediaId: id),
+          variables: Variables$Query$Characters(mediaId: widget.id),
         ),
         builder: (result, {fetchMore, refetch}) {
           if (result.isLoading && result.parsedData == null) {
@@ -38,6 +45,9 @@ class MediaCharactersPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class Characters extends StatefulWidget {

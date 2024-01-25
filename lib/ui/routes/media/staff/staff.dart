@@ -6,17 +6,24 @@ import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-class MediaStaffPage extends StatelessWidget {
+class MediaStaffPage extends StatefulWidget {
   const MediaStaffPage({super.key, required this.id});
 
   final int id;
 
   @override
+  State<MediaStaffPage> createState() => _MediaStaffPageState();
+}
+
+class _MediaStaffPageState extends State<MediaStaffPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ScrollToTop(
       builder: (scrollController) => Query$Staff$Widget(
         options: Options$Query$Staff(
-          variables: Variables$Query$Staff(mediaId: id),
+          variables: Variables$Query$Staff(mediaId: widget.id),
         ),
         builder: queryBuilder(
           (result, [fetchMore, refetch]) => GraphqlPagination(
@@ -51,6 +58,9 @@ class MediaStaffPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class StaffCard extends StatelessWidget {

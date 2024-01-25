@@ -10,7 +10,7 @@ import 'package:myaniapp/graphql/__generated/ui/routes/user/stats/stats.graphql.
 import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-class UserStatsPage extends ConsumerWidget {
+class UserStatsPage extends ConsumerStatefulWidget {
   const UserStatsPage({
     super.key,
     required this.name,
@@ -19,12 +19,19 @@ class UserStatsPage extends ConsumerWidget {
   final String name;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var user = ref.watch(userProfileProvider(name));
+  ConsumerState<UserStatsPage> createState() => _UserStatsPageState();
+}
+
+class _UserStatsPageState extends ConsumerState<UserStatsPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    var user = ref.watch(userProfileProvider(widget.name));
 
     return Query$UserStats$Widget(
       options: Options$Query$UserStats(
-        variables: Variables$Query$UserStats(name: name),
+        variables: Variables$Query$UserStats(name: widget.name),
       ),
       builder: queryBuilder(
         (result, [fetchMore, refetch]) {
@@ -69,7 +76,7 @@ class UserStatsPage extends ConsumerWidget {
               ScoreChart(
                 scoreStats:
                     result.parsedData!.User!.statistics!.anime!.scores!.cast(),
-                username: name,
+                username: widget.name,
               ),
               const SizedBox(
                 height: 50,
@@ -100,6 +107,9 @@ class UserStatsPage extends ConsumerWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class ScoreChart extends ConsumerStatefulWidget {

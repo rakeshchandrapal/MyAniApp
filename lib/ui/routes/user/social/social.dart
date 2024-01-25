@@ -19,11 +19,13 @@ class UserSocialPage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _UserSocialPageState();
 }
 
-class _UserSocialPageState extends ConsumerState<UserSocialPage> {
+class _UserSocialPageState extends ConsumerState<UserSocialPage>
+    with AutomaticKeepAliveClientMixin {
   bool isFollowing = false;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var user = ref.watch(userProfileProvider(widget.name));
 
     return Query$Socials$Widget(
@@ -128,4 +130,7 @@ class _UserSocialPageState extends ConsumerState<UserSocialPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

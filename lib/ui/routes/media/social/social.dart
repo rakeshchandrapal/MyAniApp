@@ -4,16 +4,23 @@ import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-class MediaSocialPage extends StatelessWidget {
+class MediaSocialPage extends StatefulWidget {
   const MediaSocialPage({super.key, required this.id});
 
   final int id;
 
   @override
+  State<MediaSocialPage> createState() => _MediaSocialPageState();
+}
+
+class _MediaSocialPageState extends State<MediaSocialPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Query$Threads$Widget(
       options: Options$Query$Threads(
-        variables: Variables$Query$Threads(mediaId: id),
+        variables: Variables$Query$Threads(mediaId: widget.id),
       ),
       builder: queryBuilder(
         (result, [fetchMore, refetch]) => GraphqlPagination(
@@ -47,4 +54,7 @@ class MediaSocialPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -5,16 +5,23 @@ import 'package:myaniapp/graphql/__generated/ui/routes/media/reviews/reviews.gra
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-class MediaReviewsPage extends StatelessWidget {
+class MediaReviewsPage extends StatefulWidget {
   const MediaReviewsPage({super.key, required this.id});
 
   final int id;
 
   @override
+  State<MediaReviewsPage> createState() => _MediaReviewsPageState();
+}
+
+class _MediaReviewsPageState extends State<MediaReviewsPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Query$Reviews$Widget(
       options: Options$Query$Reviews(
-        variables: Variables$Query$Reviews(mediaId: id),
+        variables: Variables$Query$Reviews(mediaId: widget.id),
       ),
       builder: queryBuilder(
         (result, [fetchMore, refetch]) {
@@ -78,4 +85,7 @@ class MediaReviewsPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

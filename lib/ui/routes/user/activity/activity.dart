@@ -5,14 +5,21 @@ import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/activity_card.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 
-class UserActivityPage extends ConsumerWidget {
+class UserActivityPage extends ConsumerStatefulWidget {
   const UserActivityPage({super.key, required this.name});
 
   final String name;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var user = ref.watch(userProfileProvider(name));
+  ConsumerState<UserActivityPage> createState() => _UserActivityPageState();
+}
+
+class _UserActivityPageState extends ConsumerState<UserActivityPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    var user = ref.watch(userProfileProvider(widget.name));
 
     return Query$Activities$Widget(
       options: Options$Query$Activities(
@@ -48,4 +55,7 @@ class UserActivityPage extends ConsumerWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

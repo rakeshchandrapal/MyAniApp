@@ -5,16 +5,23 @@ import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/utils/graphql.dart';
 
-class MediaSimilarPage extends StatelessWidget {
+class MediaSimilarPage extends StatefulWidget {
   const MediaSimilarPage({super.key, required this.id});
 
   final int id;
 
   @override
+  State<MediaSimilarPage> createState() => _MediaSimilarPageState();
+}
+
+class _MediaSimilarPageState extends State<MediaSimilarPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Query$Recommendations$Widget(
       options: Options$Query$Recommendations(
-        variables: Variables$Query$Recommendations(mediaId: id),
+        variables: Variables$Query$Recommendations(mediaId: widget.id),
       ),
       builder: queryBuilder(
         (result, [fetchMore, refetch]) => GraphqlPagination(
@@ -45,4 +52,7 @@ class MediaSimilarPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
