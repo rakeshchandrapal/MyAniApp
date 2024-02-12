@@ -1,21 +1,21 @@
+import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:multi_dropdown/models/value_item.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
+import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/providers/search.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
+import 'package:myaniapp/ui/routes/search/__generated__/search.data.gql.dart';
+import 'package:myaniapp/ui/routes/search/__generated__/search.req.gql.dart';
 import 'package:myaniapp/ui/routes/search/editor/tags.dart';
 import 'package:myaniapp/ui/routes/search/search.dart';
-import 'package:myaniapp/utils/graphql.dart';
 
 class EditorSheet extends ConsumerStatefulWidget {
-  const EditorSheet({super.key, required this.query});
-
-  final SearchQuery query;
+  const EditorSheet({super.key});
 
   @override
   ConsumerState<EditorSheet> createState() => _EditorSheetState();
@@ -28,22 +28,24 @@ class _EditorSheetState extends ConsumerState<EditorSheet> {
   void initState() {
     super.initState();
 
+    var query = ref.read(searchProvider);
+
     temp = SearchQuery(
-      endDate: widget.query.endDate,
-      format: widget.query.format ?? [],
-      genres: widget.query.genres,
-      isAdult: widget.query.isAdult,
-      onList: widget.query.onList,
-      page: widget.query.page,
-      search: widget.query.search,
-      season: widget.query.season,
-      seasonYear: widget.query.seasonYear,
-      sort: widget.query.sort,
-      startDate: widget.query.startDate,
-      type: widget.query.type,
-      withTags: widget.query.withTags,
-      withoutTags: widget.query.withoutTags,
-      year: widget.query.year,
+      endDate: query.q.endDate,
+      format: query.q.format ?? [],
+      genres: query.q.genres,
+      isAdult: query.q.isAdult,
+      onList: query.q.onList,
+      page: query.q.page,
+      search: query.q.search,
+      season: query.q.season,
+      seasonYear: query.q.seasonYear,
+      sort: query.q.sort,
+      startDate: query.q.startDate,
+      type: query.q.type,
+      withTags: query.q.withTags,
+      withoutTags: query.q.withoutTags,
+      year: query.q.year,
     );
   }
 
@@ -65,7 +67,8 @@ class _EditorSheetState extends ConsumerState<EditorSheet> {
                   onPressed: () {
                     if (mounted) {
                       context.replace('/search${temp.toString()}');
-                      context.pop();
+                      ref.read(searchProvider).update(temp);
+                      context.pop(temp);
                     }
                   },
                   child: const Text('Apply'),
@@ -171,8 +174,8 @@ class _EditorSheetState extends ConsumerState<EditorSheet> {
 class TypeButton extends StatelessWidget {
   const TypeButton({super.key, this.type, required this.onChanged});
 
-  final Enum$MediaType? type;
-  final void Function(Enum$MediaType? type) onChanged;
+  final GMediaType? type;
+  final void Function(GMediaType? type) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +183,7 @@ class TypeButton extends StatelessWidget {
       hint: 'Type',
       value: type,
       onClear: () => onChanged(null),
-      dropdownItems: Enum$MediaType.values
+      dropdownItems: GMediaType.values
           .take(2)
           .map((e) => DropdownMenuItem(
                 value: e,
@@ -197,8 +200,8 @@ class TypeButton extends StatelessWidget {
 class SeasonButton extends StatelessWidget {
   const SeasonButton({super.key, this.season, required this.onChanged});
 
-  final Enum$MediaSeason? season;
-  final void Function(Enum$MediaSeason? season) onChanged;
+  final GMediaSeason? season;
+  final void Function(GMediaSeason? season) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +209,7 @@ class SeasonButton extends StatelessWidget {
       hint: 'Season',
       value: season,
       onClear: () => onChanged(null),
-      dropdownItems: Enum$MediaSeason.values
+      dropdownItems: GMediaSeason.values
           .take(4)
           .map((e) => DropdownMenuItem(
                 value: e,
@@ -249,8 +252,8 @@ class YearButton extends StatelessWidget {
 class FormatButton extends StatelessWidget {
   const FormatButton({super.key, this.format, required this.onChanged});
 
-  final List<Enum$MediaFormat>? format;
-  final void Function(List<Enum$MediaFormat>? format) onChanged;
+  final List<GMediaFormat>? format;
+  final void Function(List<GMediaFormat>? format) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +263,7 @@ class FormatButton extends StatelessWidget {
           ?.map((e) => ValueItem(label: e.name.capitalize(), value: e))
           .toList(),
       onSelected: (values) => onChanged(values.map((e) => e.value!).toList()),
-      items: Enum$MediaFormat.values
+      items: GMediaFormat.values
           .map((e) => ValueItem(label: e.name.capitalize(), value: e))
           .toList(),
     );
@@ -270,8 +273,8 @@ class FormatButton extends StatelessWidget {
 class SortButton extends StatelessWidget {
   const SortButton({super.key, this.sort, required this.onChanged});
 
-  final List<Enum$MediaSort>? sort;
-  final void Function(List<Enum$MediaSort>? format) onChanged;
+  final List<GMediaSort>? sort;
+  final void Function(List<GMediaSort>? format) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +284,7 @@ class SortButton extends StatelessWidget {
           ?.map((e) => ValueItem(label: e.name.capitalize(), value: e))
           .toList(),
       onSelected: (values) => onChanged(values.map((e) => e.value!).toList()),
-      items: Enum$MediaSort.values
+      items: GMediaSort.values
           .map((e) => ValueItem(label: e.name.capitalize(), value: e))
           .toList(),
     );
@@ -296,13 +299,13 @@ class GenresButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$GenreCollection$Widget(
-      options:
-          Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
-      builder: queryBuilder((result, [fetchMore, refetch]) {
+    return GQLRequest(
+      operationRequest:
+          GGenreCollectionReq((b) => b..fetchPolicy = FetchPolicy.CacheFirst),
+      builder: (context, response, error, refetch) {
         return MultiDropdown(
           hint: 'Genres',
-          items: result.parsedData!.genres!
+          items: response!.data!.genres!
               .map((e) => ValueItem(label: e!, value: e))
               .toList(),
           selectedItems: genres
@@ -310,11 +313,8 @@ class GenresButton extends StatelessWidget {
               .toList(),
           onSelected: (values) =>
               onChanged(values.map((e) => e.value!).toList()),
-          // items: Enum$MediaSort.values
-          //     .map((e) => ValueItem(label: e.name.capitalize(), value: e))
-          //     .toList(),
         );
-      }),
+      },
     );
   }
 }
@@ -323,9 +323,9 @@ class TagsButton extends StatelessWidget {
   const TagsButton(
       {super.key, this.withTags, this.withoutTags, required this.onChanged});
 
-  final List<Query$GenreCollection$tags>? withTags;
-  final List<Query$GenreCollection$tags>? withoutTags;
-  final Function(List<Query$GenreCollection$tags>? tags, bool withOrWithout)
+  final List<GGenreCollectionData_tags>? withTags;
+  final List<GGenreCollectionData_tags>? withoutTags;
+  final Function(List<GGenreCollectionData_tags>? tags, bool withOrWithout)
       onChanged;
 
   @override
@@ -335,10 +335,12 @@ class TagsButton extends StatelessWidget {
     // var excluded = ref.watch(
     //     searchEditorProvider('side').select((value) => value.without_tags));
 
-    return Query$GenreCollection$Widget(
-      options:
-          Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
-      builder: queryBuilder((result, [fetchMore, refetch]) {
+    return GQLRequest(
+      operationRequest:
+          GGenreCollectionReq((b) => b..fetchPolicy = FetchPolicy.CacheFirst),
+      // options:
+      //     Options$Query$GenreCollection(fetchPolicy: FetchPolicy.cacheFirst),
+      builder: (context, response, error, refetch) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -355,7 +357,7 @@ class TagsButton extends StatelessWidget {
                   IconButton(
                     onPressed: () => showTags(
                       context,
-                      tags: Tag.sort(result.parsedData!.tags!.cast()),
+                      tags: Tag.sort(response!.data!.tags!),
                       withTags: withTags,
                       withoutTags: withoutTags,
                       onChanged: onChanged,
@@ -372,7 +374,7 @@ class TagsButton extends StatelessWidget {
                 runSpacing: 10,
                 children: [
                   for (var tag
-                      in (withTags ?? [].cast<Query$GenreCollection$tags>()))
+                      in (withTags ?? [].cast<GGenreCollectionData_tags>()))
                     TagButton(
                       tag: tag.name,
                       included: true,
@@ -382,7 +384,7 @@ class TagsButton extends StatelessWidget {
                           true),
                     ),
                   for (var tag
-                      in (withoutTags ?? [].cast<Query$GenreCollection$tags>()))
+                      in (withoutTags ?? [].cast<GGenreCollectionData_tags>()))
                     TagButton(
                       tag: tag.name,
                       included: false,
@@ -396,7 +398,7 @@ class TagsButton extends StatelessWidget {
             )
           ],
         );
-      }),
+      },
     );
   }
 }

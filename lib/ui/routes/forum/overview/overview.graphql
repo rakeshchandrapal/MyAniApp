@@ -1,3 +1,5 @@
+# import '/graphql/fragments/thread.graphql'
+
 query ForumOverview {
   recent: Page(perPage: 14) {
     threads(sort: [IS_STICKY, REPLIED_AT_DESC]) {

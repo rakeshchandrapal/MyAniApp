@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/thread.data.gql.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -10,7 +10,7 @@ import 'package:timeago/timeago.dart' as timeago;
 class ThreadCard extends StatelessWidget {
   const ThreadCard({super.key, required this.thread});
 
-  final Fragment$ThreadFragment thread;
+  final GThreadFragment thread;
 
   @override
   Widget build(BuildContext context) {

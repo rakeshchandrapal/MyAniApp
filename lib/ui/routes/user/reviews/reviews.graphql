@@ -1,4 +1,6 @@
-query Reviews($userId: Int, $page: Int) {
+# import '/graphql/fragments/page_info.graphql'
+
+query UserReviews($userId: Int, $page: Int) {
   Page(page: $page) {
     pageInfo {
       ...PageInfo

@@ -1,13 +1,14 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/user/user.graphql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
 import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
+import 'package:myaniapp/ui/routes/user/__generated__/user.data.gql.dart';
 
 class UserOverviewPage extends ConsumerWidget {
   const UserOverviewPage({super.key, required this.name});
@@ -65,7 +66,7 @@ class UserOverviewPage extends ConsumerWidget {
               const SizedBox(
                 height: 10,
               ),
-              FavoriteList(list: user.value!.favourites!.anime!.nodes!.cast()),
+              FavoriteList(list: user.value!.favourites!.anime!.nodes!),
             ],
           ),
         if (user.value!.favourites?.manga?.nodes?.isNotEmpty == true)
@@ -78,7 +79,7 @@ class UserOverviewPage extends ConsumerWidget {
               const SizedBox(
                 height: 10,
               ),
-              FavoriteList(list: user.value!.favourites!.manga!.nodes!.cast()),
+              FavoriteList(list: user.value!.favourites!.manga!.nodes!),
             ],
           ),
       ],
@@ -92,7 +93,7 @@ class FavoriteList extends StatelessWidget {
     required this.list,
   });
 
-  final List<Fragment$MediaFragment> list;
+  final BuiltList<GMediaFragment?> list;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +108,7 @@ class FavoriteList extends StatelessWidget {
           var media = list[index];
 
           return GridCard(
-            imageUrl: media.coverImage!.extraLarge!,
+            imageUrl: media!.coverImage!.extraLarge!,
             title: media.title!.userPreferred,
             aspectRatio: 1.9 / 3,
             onTap: () => context.push('/media/${media.id}/overview'),
@@ -123,13 +124,13 @@ class FavoriteList extends StatelessWidget {
 class Genres extends StatelessWidget {
   const Genres({super.key, required this.stats});
 
-  final Query$User$User$statistics stats;
+  final GUserData_User_statistics stats;
 
-  List<Fragment$GenreStat> genres() {
-    List<Fragment$GenreStat> genres = [];
+  List<GGenreStat> genres() {
+    List<GGenreStat> genres = [];
 
     if (stats.anime?.genres?.isNotEmpty == true) {
-      genres.addAll(stats.anime!.genres!.whereType<Fragment$GenreStat>());
+      genres.addAll(stats.anime!.genres!.whereType<GGenreStat>());
     }
     if (stats.manga?.genres?.isNotEmpty == true) {
       if (genres.isNotEmpty) {
@@ -138,14 +139,17 @@ class Genres extends StatelessWidget {
             var idx =
                 genres.indexWhere((element) => element.genre == genre!.genre);
 
-            genres[idx] =
-                genres[idx].copyWith(count: genres[idx].count + genre!.count);
+            genres[idx] = GGenreStatData(
+              (b) => b
+                ..count = genres[idx].count + genre!.count
+                ..genre = genres[idx].genre,
+            );
           } else {
             genres.add(genre!);
           }
         }
       } else {
-        genres.addAll(stats.manga!.genres!.whereType<Fragment$GenreStat>());
+        genres.addAll(stats.manga!.genres!.whereType<GGenreStat>());
       }
     }
 
@@ -214,8 +218,8 @@ class Stats extends StatelessWidget {
     super.key,
     required this.stats,
     required this.onTap,
-  }) : assert(stats is Query$User$User$statistics$anime ||
-            stats is Query$User$User$statistics$manga);
+  }) : assert(stats is GUserData_User_statistics_anime ||
+            stats is GUserData_User_statistics_manga);
 
   final dynamic stats;
   final VoidCallback onTap;
@@ -227,15 +231,15 @@ class Stats extends StatelessWidget {
     String left;
     String middle;
     String right;
-    var isAnime = stats is Query$User$User$statistics$anime;
+    var isAnime = stats is GUserData_User_statistics_anime;
 
     if (isAnime) {
-      var s = stats as Query$User$User$statistics$anime;
+      var s = stats as GUserData_User_statistics_anime;
       left = s.count.toString();
       middle = (s.minutesWatched / 1440).toStringAsFixed(1);
       right = s.meanScore.toStringAsFixed(1);
     } else {
-      var s = stats as Query$User$User$statistics$manga;
+      var s = stats as GUserData_User_statistics_manga;
       left = s.count.toString();
       middle = s.chaptersRead.toString();
       right = s.meanScore.toStringAsFixed(1);

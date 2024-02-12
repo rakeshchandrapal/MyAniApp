@@ -1,3 +1,6 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/releasing_media.graphql'
+
 query ReleasesList($page: Int) {
   Page(page: $page) {
     pageInfo {

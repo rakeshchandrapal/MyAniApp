@@ -1,6 +1,7 @@
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/viewer.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/viewer.data.gql.dart';
+import 'package:myaniapp/graphql/__generated__/viewer.req.gql.dart';
+import 'package:myaniapp/graphql/__generated__/viewer.var.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -70,18 +71,20 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 //   }
 // }
 
-class UserNotifier extends AutoDisposeStreamNotifier<Fragment$ThisUser?> {
+class UserNotifier extends AutoDisposeStreamNotifier<GThisUser?> {
   @override
-  Stream<Fragment$ThisUser?> build() async* {
+  Stream<GThisUser?> build() async* {
     ref.watch(settingsProvider);
 
-    var stream = client.value.watchQuery$Viewer(
-      WatchOptions$Query$Viewer(
-        pollInterval: const Duration(minutes: 30),
-        fetchPolicy: FetchPolicy.networkOnly,
-        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
-      ),
-    );
+    // var stream = client.watchQuery$Viewer(
+    //   WatchOptions$Query$Viewer(
+    //     pollInterval: const Duration(minutes: 30),
+    //     fetchPolicy: FetchPolicy.networkOnly,
+    //     cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+    //   ),
+    // );
+
+    var stream = ref.read(ferryClientProvider).request(GViewerReq());
 
     // stream.stream.listen((event) {
     //   if (event.isLoading && event.parsedData == null) {
@@ -92,53 +95,66 @@ class UserNotifier extends AutoDisposeStreamNotifier<Fragment$ThisUser?> {
     // });
 
     state = const AsyncValue.loading();
-    stream.fetchResults();
+    // stream.fetchResults();
     ref.keepAlive();
 
-    await for (final data in stream.stream) {
-      if (data.isLoading) {
+    await for (final data in stream) {
+      if (data.loading) {
         state = const AsyncValue.loading();
         return;
       }
-      yield data.parsedData?.Viewer;
+
+      yield data.data?.Viewer;
     }
   }
 
-  void resetNotifCount() {
-    state = AsyncValue.data(state.value?.copyWith(unreadNotificationCount: 0));
+  // void resetNotifCount() {
+  //   state = AsyncValue.data(state.value!..unreadNotificationCount = 0);
+  // }
+
+  void updateSettings(GUpdateUserVarsBuilder options) {
+    // GUpdateUserVarsBuilder();
+    // state = AsyncValue.data(state.value?.)
+    ref
+        .read(ferryClientProvider)
+        .request(GUpdateUserReq(
+          (b) => b..vars.replace(options.build()),
+        ))
+        .first
+        .then((value) => state = AsyncValue.data(value.data!.UpdateUser!));
   }
 
-  void updateSettings([Variables$Mutation$UpdateUser? options]) async {
-    state = AsyncValue.data(state.value?.copyWith(
-      options: state.value!.options?.copyWith(
-        displayAdultContent: options?.displayAdultContent ??
-            state.value?.options?.displayAdultContent,
-        airingNotifications: options?.airingNotifications ??
-            state.value?.options?.airingNotifications,
-        activityMergeTime: options?.activityMergeTime ??
-            state.value?.options?.activityMergeTime,
-        restrictMessagesToFollowing: options?.restrictMessagesToFollowing ??
-            state.value?.options?.restrictMessagesToFollowing,
-        staffNameLanguage: options?.staffNameLanguage ??
-            state.value?.options?.staffNameLanguage,
-        titleLanguage:
-            options?.titleLanguage ?? state.value?.options?.titleLanguage,
-      ),
-      mediaListOptions: state.value?.mediaListOptions!.copyWith(
-        scoreFormat:
-            options?.scoreFormat ?? state.value?.mediaListOptions?.scoreFormat,
-      ),
-    ));
-    // notifyListeners();
-    var hmh = await client.value.mutate$UpdateUser(
-      Options$Mutation$UpdateUser(variables: options),
-    );
-    state = AsyncValue.data(hmh.parsedData!.UpdateUser!);
-  }
+  // void updateSettings([Variables$Mutation$UpdateUser? options]) async {
+  //   state = AsyncValue.data(state.value?.copyWith(
+  //     options: state.value!.options?.copyWith(
+  //       displayAdultContent: options?.displayAdultContent ??
+  //           state.value?.options?.displayAdultContent,
+  //       airingNotifications: options?.airingNotifications ??
+  //           state.value?.options?.airingNotifications,
+  //       activityMergeTime: options?.activityMergeTime ??
+  //           state.value?.options?.activityMergeTime,
+  //       restrictMessagesToFollowing: options?.restrictMessagesToFollowing ??
+  //           state.value?.options?.restrictMessagesToFollowing,
+  //       staffNameLanguage: options?.staffNameLanguage ??
+  //           state.value?.options?.staffNameLanguage,
+  //       titleLanguage:
+  //           options?.titleLanguage ?? state.value?.options?.titleLanguage,
+  //     ),
+  //     mediaListOptions: state.value?.mediaListOptions!.copyWith(
+  //       scoreFormat:
+  //           options?.scoreFormat ?? state.value?.mediaListOptions?.scoreFormat,
+  //     ),
+  //   ));
+  //   // notifyListeners();
+  //   var hmh = await client.value.mutate$UpdateUser(
+  //     Options$Mutation$UpdateUser(variables: options),
+  //   );
+  //   state = AsyncValue.data(hmh.parsedData!.UpdateUser!);
+  // }
 }
 
 var userProvider =
-    AutoDisposeStreamNotifierProvider<UserNotifier, Fragment$ThisUser?>(() {
+    AutoDisposeStreamNotifierProvider<UserNotifier, GThisUser?>(() {
   // ref.keepAlive();
   return UserNotifier();
 });

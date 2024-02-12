@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/__generated/notifications/notifications.graphql.dart';
+import 'package:myaniapp/notifications/__generated__/notifications.data.gql.dart';
 
 class AnilistNotification {
   AnilistNotification(this._notif);
 
-  final Query$Notifications$Page$notifications _notif;
+  final GNotificationsData_Page_notifications _notif;
 
   bool get isMedia {
-    switch (_notif.$__typename) {
+    switch (_notif.G__typename) {
       case "RelatedMediaAdditionNotification":
       case "MediaDataChangeNotification":
       case "MediaMergeNotification":
@@ -20,7 +20,7 @@ class AnilistNotification {
   }
 
   bool get isActivity {
-    switch (_notif.$__typename) {
+    switch (_notif.G__typename) {
       case "ActivityMessageNotification":
       case "ActivityMentionNotification":
       case "ActivityReplyNotification":
@@ -34,7 +34,7 @@ class AnilistNotification {
   }
 
   bool get isThread {
-    switch (_notif.$__typename) {
+    switch (_notif.G__typename) {
       case "ThreadCommentMentionNotification":
       case "ThreadCommentReplyNotification":
       case "ThreadCommentSubscribedNotification":
@@ -47,11 +47,11 @@ class AnilistNotification {
   }
 
   List<String> extractText() {
-    switch (_notif.$__typename) {
+    switch (_notif.G__typename) {
       case "AiringNotification":
         {
           var n = _notif
-              as Query$Notifications$Page$notifications$$AiringNotification;
+              as GNotificationsData_Page_notifications__asAiringNotification;
           return [
             n.contexts![0]!,
             n.episode.toString(),
@@ -63,7 +63,7 @@ class AnilistNotification {
       case "FollowingNotification":
         {
           var n = _notif
-              as Query$Notifications$Page$notifications$$FollowingNotification;
+              as GNotificationsData_Page_notifications__asFollowingNotification;
           return [n.user!.name, n.context!];
         }
       case "ActivityMessageNotification":
@@ -90,19 +90,19 @@ class AnilistNotification {
       case "RelatedMediaAdditionNotification":
         {
           var n = _notif
-              as Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification;
+              as GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification;
           return [n.media!.title!.userPreferred!, n.context!];
         }
       case "MediaDataChangeNotification":
         {
           var n = _notif
-              as Query$Notifications$Page$notifications$$MediaDataChangeNotification;
+              as GNotificationsData_Page_notifications__asMediaDataChangeNotification;
           return [n.media!.title!.userPreferred!, n.context!];
         }
       case "MediaMergeNotification":
         {
           var n = _notif
-              as Query$Notifications$Page$notifications$$MediaMergeNotification;
+              as GNotificationsData_Page_notifications__asMediaMergeNotification;
           return [
             n.deletedMediaTitles!.join(', '),
             n.context!,
@@ -112,7 +112,7 @@ class AnilistNotification {
       case "MediaDeletionNotification":
         {
           var n = _notif
-              as Query$Notifications$Page$notifications$$MediaDeletionNotification;
+              as GNotificationsData_Page_notifications__asMediaDeletionNotification;
           return [n.deletedMediaTitle!, n.context!];
         }
     }

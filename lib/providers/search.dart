@@ -1,29 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
+import 'package:myaniapp/ui/routes/search/search.dart';
 
-final searchEditorProvider = NotifierProvider.family
-    .autoDispose<SearchEditorNotifier, Variables$Query$Search, String>(
-  SearchEditorNotifier.new,
-);
+Provider<_Query> searchProvider = Provider((ref) => _Query(ref));
 
-class SearchEditorNotifier
-    extends AutoDisposeFamilyNotifier<Variables$Query$Search, String> {
-  @override
-  Variables$Query$Search build(String blah) {
-    return Variables$Query$Search();
-  }
+class _Query {
+  SearchQuery q = SearchQuery();
+  final Ref _ref;
 
-  void set(Variables$Query$Search vars) {
-    state = removeNulls(vars);
-  }
+  _Query(this._ref);
 
-  void merge(Variables$Query$Search vars) {
-    state = removeNulls(
-        Variables$Query$Search.fromJson({...state.toJson(), ...vars.toJson()}));
-  }
-
-  Variables$Query$Search removeNulls(Variables$Query$Search vars) {
-    return Variables$Query$Search.fromJson(
-        vars.toJson()..removeWhere((key, value) => value == null));
+  void update(SearchQuery s) {
+    q = s;
+    _ref.notifyListeners();
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/calendar/calendar.graphql.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/routes/calendar/__generated__/calendar.req.gql.dart';
 import 'package:myaniapp/ui/routes/calendar/list_releases.dart';
 import 'package:myaniapp/utils/utils.dart';
 
@@ -117,38 +117,22 @@ class CalendarDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$CalendarSchedule$Widget(
-      options: Options$Query$CalendarSchedule(
-        variables: Variables$Query$CalendarSchedule(
-            start: day.millisecondsSinceEpoch ~/ 1000,
-            end: (day.millisecondsSinceEpoch ~/ 1000) + 86400),
-      ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
-
-        // result.parsedData?.Page?.airingSchedules?.forEach((element) {
-        //   print(DateTime.fromMillisecondsSinceEpoch(element!.airingAt * 1000));
-        // });
-
-        // logger.d(result.data);
-
+    return GQLRequest(
+      operationRequest: GCalendarScheduleReq((b) => b
+        ..vars.start = day.millisecondsSinceEpoch ~/ 1000
+        ..vars.end = (day.millisecondsSinceEpoch ~/ 1000) + 86400),
+      builder: (context, response, error, refetch) {
         var now = DateTime.now();
 
         return ListView.builder(
           itemBuilder: (context, index) {
-            var media = result.parsedData!.Page!.airingSchedules![index]!;
+            var media = response.data!.Page!.airingSchedules![index]!;
             var airingAt = dateFromTimestamp(media.airingAt);
 
             bool isNext = airingAt.isAfter(now)
                 ? index != 0
-                    ? dateFromTimestamp(result.parsedData!.Page!
-                            .airingSchedules![index - 1]!.airingAt)
+                    ? dateFromTimestamp(response
+                            .data!.Page!.airingSchedules![index - 1]!.airingAt)
                         .isBefore(now)
                     : false
                 : false;
@@ -193,63 +177,6 @@ class CalendarDay extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Card(
-                //   child: InkWell(
-                //     borderRadius: BorderRadius.circular(10),
-                //     onTap: () =>
-                //         context.pushRoute(MediaRoute(id: media.media!.id)),
-                //     child: Row(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         SizedBox(
-                //           width: 110,
-                //           child: AspectRatio(
-                //             aspectRatio: 2 / 3,
-                //             child: ClipRRect(
-                //               borderRadius: const BorderRadius.only(
-                //                 topLeft: Radius.circular(10),
-                //                 bottomLeft: Radius.circular(10),
-                //               ),
-                //               child: CImage(
-                //                 alignment: Alignment.topLeft,
-                //                 imageUrl: media.media!.coverImage!.extraLarge!,
-                //                 fit: BoxFit.fitHeight,
-                //                 // width: 100,
-                //               ),
-                //             ),
-                //           ),
-                //         ),
-                //         const SizedBox(
-                //           width: 10,
-                //         ),
-                //         Expanded(
-                //           child: Column(
-                //             crossAxisAlignment: CrossAxisAlignment.start,
-                //             children: [
-                //               Text(
-                //                 media.media!.title!.userPreferred!,
-                //                 overflow: TextOverflow.ellipsis,
-                //                 maxLines: 5,
-                //               ),
-                //               Text.rich(
-                //                 TextSpan(
-                //                   children: [
-                //                     TextSpan(text: 'Episode ${media.episode} '),
-                //                     TextSpan(
-                //                         text: airingAt.isAfter(DateTime.now())
-                //                             ? 'airing at '
-                //                             : 'aired At '),
-                //                     TextSpan(text: hourFormat.format(airingAt)),
-                //                   ],
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 if (isNext)
                   Container(
                     decoration: BoxDecoration(
@@ -267,7 +194,7 @@ class CalendarDay extends StatelessWidget {
               ],
             );
           },
-          itemCount: result.parsedData!.Page!.airingSchedules!.length,
+          itemCount: response!.data!.Page!.airingSchedules!.length,
         );
       },
     );

@@ -33,77 +33,73 @@ class Markdown extends StatelessWidget {
 
     markdown = _weirdAnilistImageTagToMarkdownImage(markdown);
 
-    return MediaQuery.removePadding(
-      context: context,
-      removeTop: true,
-      child: md2.MarkdownWidget(
-        data: markdown,
-        shrinkWrap: true,
-        selectable: selectable,
-        markdownGenerator: md2.MarkdownGenerator(
-          generators: [
-            iWithTag,
-            spoilerWithTag,
-            imgWithTag,
-            videoWithTag,
-            centerWithTag,
-          ],
-          blockSyntaxList: [
-            const md.HtmlBlockSyntax(),
-          ],
-          inlineSyntaxList: [
-            ISyntax(),
-            SpoilerInlineSyntax(),
-            BrSyntax(),
-            VideoSyntax(),
-            md.AutolinkExtensionSyntax(),
-            md.InlineHtmlSyntax(),
-            md.ImageSyntax(),
-          ],
-          textGenerator: (node, config, visitor) =>
-              CustomTextNode(node.textContent, config, visitor),
-        ),
-        config: md2.MarkdownConfig(
-          configs: [
-            const md2.PConfig(
-              textStyle: TextStyle(),
-            ),
-            md2.LinkConfig(
-              style: const TextStyle(color: linkColor),
-              onTap: (value) {
-                var uri = Uri.tryParse(value);
-                // print(uri?.host);
-                if (uri?.host == 'anilist.co') {
-                  if (['anime', 'manga'].contains(uri!.pathSegments.first)) {
-                    context.push('/media/${uri.pathSegments[1]}/overview');
-                    return;
-                  } else if (['character', 'staff']
-                      .contains(uri.pathSegments.first)) {
-                    context.push('/${uri.pathSegments.take(2).join('/')}');
-                    return;
-                  } else if (uri.pathSegments.first == 'forum' &&
-                      uri.pathSegments[1] == 'thread') {
-                    context.push('/thread/${uri.pathSegments[2]}');
-                    return;
-                  } else if (uri.pathSegments.first == 'activity') {
-                    context.push('/activity/${uri.pathSegments[1]}');
-                    return;
-                  }
+    return md2.MarkdownWidget(
+      data: markdown,
+      shrinkWrap: true,
+      selectable: selectable,
+      markdownGenerator: md2.MarkdownGenerator(
+        generators: [
+          iWithTag,
+          spoilerWithTag,
+          imgWithTag,
+          videoWithTag,
+          centerWithTag,
+        ],
+        blockSyntaxList: [
+          const md.HtmlBlockSyntax(),
+        ],
+        inlineSyntaxList: [
+          ISyntax(),
+          SpoilerInlineSyntax(),
+          BrSyntax(),
+          VideoSyntax(),
+          md.AutolinkExtensionSyntax(),
+          md.InlineHtmlSyntax(),
+          md.ImageSyntax(),
+        ],
+        textGenerator: (node, config, visitor) =>
+            CustomTextNode(node.textContent, config, visitor),
+      ),
+      config: md2.MarkdownConfig(
+        configs: [
+          const md2.PConfig(
+            textStyle: TextStyle(),
+          ),
+          md2.LinkConfig(
+            style: const TextStyle(color: linkColor),
+            onTap: (value) {
+              var uri = Uri.tryParse(value);
+              // print(uri?.host);
+              if (uri?.host == 'anilist.co') {
+                if (['anime', 'manga'].contains(uri!.pathSegments.first)) {
+                  context.push('/media/${uri.pathSegments[1]}/overview');
+                  return;
+                } else if (['character', 'staff']
+                    .contains(uri.pathSegments.first)) {
+                  context.push('/${uri.pathSegments.take(2).join('/')}');
+                  return;
+                } else if (uri.pathSegments.first == 'forum' &&
+                    uri.pathSegments[1] == 'thread') {
+                  context.push('/thread/${uri.pathSegments[2]}');
+                  return;
+                } else if (uri.pathSegments.first == 'activity') {
+                  context.push('/activity/${uri.pathSegments[1]}');
+                  return;
                 }
-                if (uri != null) {
-                  launchUrl(uri, mode: LaunchMode.externalApplication);
-                }
-              },
+              }
+              if (uri != null) {
+                launchUrl(uri, mode: LaunchMode.externalApplication);
+              }
+            },
+          ),
+          const md2.CodeConfig(style: TextStyle()),
+          md2.PreConfig(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Theme.of(context).canvasColor,
             ),
-            const md2.CodeConfig(style: TextStyle()),
-            md2.PreConfig(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Theme.of(context).canvasColor,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

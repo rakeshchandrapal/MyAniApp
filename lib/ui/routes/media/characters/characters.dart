@@ -1,13 +1,14 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/media/characters/characters.graphql.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
+import 'package:myaniapp/ui/routes/media/characters/__generated__/characters.data.gql.dart';
+import 'package:myaniapp/ui/routes/media/characters/__generated__/characters.req.gql.dart';
 
 class MediaCharactersPage extends StatefulWidget {
   const MediaCharactersPage({super.key, required this.id});
@@ -24,25 +25,48 @@ class _MediaCharactersPageState extends State<MediaCharactersPage>
   Widget build(BuildContext context) {
     super.build(context);
     return ScrollToTop(
-      builder: (_) => Query$Characters$Widget(
-        options: Options$Query$Characters(
-          variables: Variables$Query$Characters(mediaId: widget.id),
+      builder: (scrollController) => GQLRequest(
+        operationRequest: GCharactersReq((b) => b
+          ..requestId = "mediaCharacters"
+          ..vars.mediaId = widget.id),
+        builder: (context, response, error, refetch) => GraphqlPagination(
+          pageInfo: response!.data!.Media!.characters!.pageInfo!,
+          req: (nextPage) => GCharactersReq(
+            (b) => b
+              ..replace(response.operationRequest as GCharactersReq)
+              ..vars.page = nextPage
+              ..updateResult = (previous, result) => result?.rebuild((p0) => p0
+                ..Media.characters.edges.insertAll(
+                    0,
+                    previous?.Media?.characters?.edges?.whereNot((p0) =>
+                            result.Media?.characters?.edges?.contains(p0) ??
+                            false) ??
+                        [])),
+          ),
+          child: Characters(
+            characters: response.data!.Media!.characters!,
+          ),
         ),
-        builder: (result, {fetchMore, refetch}) {
-          if (result.isLoading && result.parsedData == null) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (result.hasException) {
-            return GraphqlError(exception: result.exception!);
-          }
-
-          return Characters(
-            characters: result.parsedData!.Media!.characters!,
-            fetchMore: fetchMore!,
-          );
-        },
       ),
+      // builder: (_) => Query$Characters$Widget(
+      //   options: Options$Query$Characters(
+      //     variables: Variables$Query$Characters(mediaId: widget.id),
+      //   ),
+      //   builder: (result, {fetchMore, refetch}) {
+      //     if (result.isLoading && result.parsedData == null) {
+      //       return const Center(
+      //         child: CircularProgressIndicator.adaptive(),
+      //       );
+      //     } else if (result.hasException) {
+      //       return GraphqlError(exception: result.exception!);
+      //     }
+
+      //     return Characters(
+      //       characters: result.parsedData!.Media!.characters!,
+      //       fetchMore: fetchMore!,
+      //     );
+      //   },
+      // ),
     );
   }
 
@@ -54,11 +78,11 @@ class Characters extends StatefulWidget {
   const Characters({
     super.key,
     required this.characters,
-    required this.fetchMore,
+    // required this.fetchMore,
   });
 
-  final Query$Characters$Media$characters characters;
-  final FetchMore fetchMore;
+  final GCharactersData_Media_characters characters;
+  // final FetchMore fetchMore;
 
   @override
   State<Characters> createState() => _CharactersState();
@@ -83,80 +107,64 @@ class _CharactersState extends State<Characters> {
 
   @override
   Widget build(BuildContext context) {
-    return GraphqlPagination(
-      pageInfo: widget.characters.pageInfo!,
-      fetchMore: (nextPage) => widget.fetchMore(
-        FetchMoreOptions$Query$Characters(
-          variables: Variables$Query$Characters(page: nextPage),
-          updateQuery: (previousResultData, fetchMoreResultData) {
-            var list = [
-              ...previousResultData!['Media']!['characters']['edges'],
-              ...fetchMoreResultData!['Media']!['characters']['edges'],
-            ];
-            fetchMoreResultData['Media']!['characters']['edges'] = list;
-            return fetchMoreResultData;
-          },
-        ),
-      ),
-      child: CustomScrollView(
-        slivers: [
-          if (availableLanguages.isNotEmpty)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomDropdown(
-                  hint: 'Language',
-                  value: selectedLanguage,
-                  onChanged: (value) =>
-                      setState(() => selectedLanguage = value ?? 'Japanese'),
-                  dropdownItems: availableLanguages
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(e),
-                        ),
-                      )
-                      .toList(),
-                ),
+    return CustomScrollView(
+      slivers: [
+        if (availableLanguages.isNotEmpty)
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomDropdown(
+                hint: 'Language',
+                value: selectedLanguage,
+                onChanged: (value) =>
+                    setState(() => selectedLanguage = value ?? 'Japanese'),
+                dropdownItems: availableLanguages
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(e),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
-          SliverList.separated(
-            itemCount: widget.characters.edges!.length,
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 10,
-            ),
-            itemBuilder: (context, index) {
-              var character = widget.characters.edges![index]!;
-              var voices = character.voiceActorRoles!.where(
-                (element) {
-                  var language =
-                      '${element!.voiceActor!.languageV2!}${element.dubGroup != null ? ' (${element.dubGroup})' : ''}';
-                  return language == selectedLanguage;
-                },
-              ).toList();
-
-              if (voices.isEmpty) {
-                return CharacterCard(character: character);
-              }
-
-              return ListView.separated(
-                primary: false,
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                itemCount: voices.length,
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 10,
-                ),
-                itemBuilder: (context, index) {
-                  var voice = voices[index];
-
-                  return CharacterCard(character: character, voice: voice);
-                },
-              );
-            },
           ),
-        ],
-      ),
+        SliverList.separated(
+          itemCount: widget.characters.edges!.length,
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 10,
+          ),
+          itemBuilder: (context, index) {
+            var character = widget.characters.edges![index]!;
+            var voices = character.voiceActorRoles!.where(
+              (element) {
+                var language =
+                    '${element!.voiceActor!.languageV2!}${element.dubGroup != null ? ' (${element.dubGroup})' : ''}';
+                return language == selectedLanguage;
+              },
+            ).toList();
+
+            if (voices.isEmpty) {
+              return CharacterCard(character: character);
+            }
+
+            return ListView.separated(
+              primary: false,
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              itemCount: voices.length,
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 10,
+              ),
+              itemBuilder: (context, index) {
+                var voice = voices[index];
+
+                return CharacterCard(character: character, voice: voice);
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -168,8 +176,8 @@ class CharacterCard extends StatelessWidget {
     this.voice,
   });
 
-  final Query$Characters$Media$characters$edges character;
-  final Query$Characters$Media$characters$edges$voiceActorRoles? voice;
+  final GCharactersData_Media_characters_edges character;
+  final GCharactersData_Media_characters_edges_voiceActorRoles? voice;
 
   @override
   Widget build(BuildContext context) {

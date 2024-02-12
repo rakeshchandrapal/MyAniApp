@@ -1,21 +1,23 @@
 targets:
   $default:
     builders:
-      graphql_codegen:
+      ferry_generator|graphql_builder:
+        enabled: true
         options:
-          scalars:
-            URL:
-              type: String
-            ISODateTime:
-              type: DateTime
-              fromJsonFunctionName: dateTimeFromJson
-              toJsonFunctionName: dateTimeToJson
-              import: package:myaniapp/graphql/scalars.dart
+          schema: myaniapp|lib/graphql/schema.graphql
+          type_overrides:
             Json:
-              type: dynamic
+              name: JsonObject
+              import: 'package:built_value/json_object.dart'
             FuzzyDateInt:
-              type: int
-          clients:
-            - graphql_flutter
-          outputDirectory: '/lib/graphql/__generated'
-          generatedFileHeader: "// coverage:ignore-file\n// GENERATED CODE - DO NOT MODIFY BY HAND\n// ignore_for_file: type=lint\n// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark\n"
+              name: int
+      ferry_generator|serializer_builder:
+        enabled: true
+        options:
+          schema: myaniapp|lib/graphql/schema.graphql
+          type_overrides:
+            Json:
+              name: JsonObject
+              import: 'package:built_value/json_object.dart'
+            FuzzyDateInt:
+              name: int

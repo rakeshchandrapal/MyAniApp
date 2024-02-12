@@ -1,8 +1,10 @@
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:ferry_exec/src/fetch_policy.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/viewer.graphql.dart';
-import 'package:myaniapp/graphql/__generated/notifications/notifications.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/viewer.req.gql.dart';
+import 'package:myaniapp/notifications/__generated__/notifications.data.gql.dart';
+import 'package:myaniapp/notifications/__generated__/notifications.req.gql.dart';
 import 'package:myaniapp/notifications/notification.dart';
 import 'package:myaniapp/notifications/push.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,11 +16,13 @@ var _dateFormat = DateFormat('MM/dd/yyyy hh:mm:ss a');
 void callbackDispatcher() {
   Workmanager().executeTask(
     (taskName, inputData) async {
+      final client = await initClient();
+
       try {
         if (!(await PushNotifications().hasPermission())) {
           return true;
         }
-        await initHiveForFlutter();
+        await Hive.initFlutter();
 
         // show debug notification
         PushNotifications().show(
@@ -31,24 +35,25 @@ void callbackDispatcher() {
         var settings = await SharedPreferences.getInstance();
         if (!settings.containsKey('token')) return true;
 
-        var user = await client.value.query$NotificationCount(
-          Options$Query$NotificationCount(fetchPolicy: FetchPolicy.noCache),
-        );
+        var user = await client
+            .request(GNotificationCountReq(
+              (b) => b..fetchPolicy = FetchPolicy.NoCache,
+            ))
+            .first;
 
-        if (user.parsedData?.Viewer?.options?.airingNotifications != true ||
-            (user.parsedData?.Viewer?.unreadNotificationCount ?? 0) == 0) {
+        if (user.data?.Viewer?.options?.airingNotifications != true ||
+            (user.data?.Viewer?.unreadNotificationCount ?? 0) == 0) {
           return true;
         }
 
-        var notifsReq = await client.value.query$Notifications(
-          Options$Query$Notifications(
-            fetchPolicy: FetchPolicy.noCache,
-            variables: Variables$Query$Notifications(),
-          ),
-        );
+        var notifsReq = await client
+            .request(GNotificationsReq(
+              (b) => b..fetchPolicy = FetchPolicy.NoCache,
+            ))
+            .first;
 
-        var notifs = notifsReq.parsedData?.Page?.notifications
-            ?.take(user.parsedData!.Viewer!.unreadNotificationCount!);
+        var notifs = notifsReq.data?.Page?.notifications
+            ?.take(user.data!.Viewer!.unreadNotificationCount!);
 
         if (notifs?.isEmpty == true) return true;
 
@@ -59,7 +64,7 @@ void callbackDispatcher() {
           var texts = parsed.extractText();
 
           if (notif
-              is Query$Notifications$Page$notifications$$AiringNotification) {
+              is GNotificationsData_Page_notifications__asAiringNotification) {
             await PushNotifications().show(
               notif.media?.title?.userPreferred,
               await PushNotifications.releaseDetails(
@@ -78,7 +83,7 @@ void callbackDispatcher() {
               texts[0],
               PushNotifications.mediaDetails(),
               texts.join(),
-              payload: notif.$__typename != 'MediaDeletionNotification'
+              payload: notif.G__typename != 'MediaDeletionNotification'
                   ? {'path': '/media/${(notif as dynamic).animeId}'}
                   : null,
             );
@@ -98,12 +103,12 @@ void callbackDispatcher() {
               texts.join(),
               payload: {'path': '/thread/${(notif as dynamic).thread.id}'},
             );
-          } else if (notif.$__typename == 'FollowingNotification') {
+          } else if (notif.G__typename == 'FollowingNotification') {
             await PushNotifications().show(
               texts[0],
               await PushNotifications.followingDetails(
                 avatar: (notif
-                        as Query$Notifications$Page$notifications$$FollowingNotification)
+                        as GNotificationsData_Page_notifications__asFollowingNotification)
                     .user
                     ?.avatar
                     ?.large,

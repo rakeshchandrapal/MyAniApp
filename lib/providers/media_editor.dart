@@ -1,64 +1,59 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media_entry.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/user.dart';
+import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.req.gql.dart';
+import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.var.gql.dart';
 
-class MediaEditorNotifier extends AutoDisposeFamilyStreamNotifier<
-    Fragment$MediaListEntry, Fragment$MediaFragment> {
+class MediaEditorNotifier
+    extends AutoDisposeFamilyStreamNotifier<GMediaListEntry, GMediaFragment> {
   @override
-  Stream<Fragment$MediaListEntry> build(Fragment$MediaFragment media) async* {
+  Stream<GMediaListEntry> build(GMediaFragment media) async* {
     var user = ref.watch(userProvider);
 
-    var query = client.value.watchQuery$MediaListEntry(
-      WatchOptions$Query$MediaListEntry(
-        fetchPolicy: FetchPolicy.networkOnly,
-        variables: Variables$Query$MediaListEntry(
-          mediaId: media.id,
-          userId: user.value!.id,
-        ),
-      ),
-    );
+    var query = ref.read(ferryClientProvider).request(GMediaEntryReq(
+          (b) => b
+            ..vars.userId = user.value!.id
+            ..vars.mediaId = media.id,
+        ));
 
-    query.fetchResults();
-
-    ref.onDispose(query.close);
-
-    await for (final data in query.stream) {
-      if (data.isLoading) {
+    await for (final data in query) {
+      if (data.loading) {
         state = const AsyncValue.loading();
         return;
       }
-      yield data.parsedData?.MediaList ??
-          Fragment$MediaListEntry(
-            id: -1,
-            mediaId: media.id,
-            media: Fragment$MediaListEntry$media.fromJson(media.toJson()),
+      print(data.linkException);
+      yield data.data?.MediaList ??
+          GMediaListEntryData(
+            (b) => b
+              ..id = -1
+              ..mediaId = media.id
+              ..media = GMediaListEntryData_media.fromJson(media.toJson())
+                  ?.toBuilder(),
           );
     }
   }
 
-  Future<QueryResult<Mutation$SaveMediaListEntry>> save(
-      Variables$Mutation$SaveMediaListEntry options) {
+  Future save(GSaveMediaListEntryVarsBuilder options) {
     var opts = options;
 
     if (state.value?.id == -1) {
-      opts = opts.copyWith(mediaId: arg.id);
+      opts.update((b) => b..mediaId = arg.id);
     } else {
-      opts = opts.copyWith(id: state.value!.id);
+      opts.update((b) => b..id = state.value!.id);
     }
 
-    return client.value.mutate$SaveMediaListEntry(
-      Options$Mutation$SaveMediaListEntry(
-        variables: opts,
-        onError: (error) => print(error),
-      ),
-    );
+    return ref
+        .read(ferryClientProvider)
+        .request(GSaveMediaListEntryReq(
+          (b) => b..vars.replace(options.build()),
+        ))
+        .first;
   }
 }
 
-var mediaEditorProvider = StreamNotifierProvider.autoDispose.family<
-    MediaEditorNotifier, Fragment$MediaListEntry, Fragment$MediaFragment>(
+var mediaEditorProvider = StreamNotifierProvider.autoDispose
+    .family<MediaEditorNotifier, GMediaListEntry, GMediaFragment>(
   MediaEditorNotifier.new,
 );

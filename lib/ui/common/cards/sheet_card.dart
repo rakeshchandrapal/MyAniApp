@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 
 class MediaSheetCard extends StatelessWidget {
   const MediaSheetCard({super.key, required this.media});
 
-  final Fragment$MediaFragment media;
+  final GMediaFragment media;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class MediaSheetCard extends StatelessWidget {
   }
 }
 
-showMediaCard(BuildContext context, Fragment$MediaFragment media) {
+showMediaCard(BuildContext context, GMediaFragment media) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,

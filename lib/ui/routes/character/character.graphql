@@ -1,3 +1,7 @@
+# import '/graphql/fragments/fuzzy_date.graphql'
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/media.graphql'
+
 query Character($id: Int, $page: Int, $onList: Boolean) {
   Character(id: $id) {
     id

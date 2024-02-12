@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media_entry.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/media_editor.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.req.gql.dart';
+import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.var.gql.dart';
 import 'package:myaniapp/ui/common/number_picker.dart';
 
 class MediaEditorDialog extends ConsumerWidget {
@@ -23,7 +23,7 @@ class MediaEditorDialog extends ConsumerWidget {
     this.onSave,
   });
 
-  final Fragment$MediaFragment media;
+  final GMediaFragment media;
   final void Function()? onDelete;
   final void Function()? onSave;
 
@@ -42,7 +42,7 @@ class MediaEditorDialog extends ConsumerWidget {
       ),
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(),
-        body: GraphqlError(exception: error as OperationException),
+        body: const SizedBox(),
       ),
       loading: () => Scaffold(
         appBar: AppBar(),
@@ -63,53 +63,59 @@ class MediaEditor extends ConsumerStatefulWidget {
     this.onSave,
   });
 
-  final Fragment$MediaListEntry entry;
+  final GMediaListEntry entry;
   final void Function()? onDelete;
   final void Function()? onSave;
-  final Fragment$MediaFragment media;
+  final GMediaFragment media;
 
   @override
   ConsumerState<MediaEditor> createState() => _MediaEditorState();
 }
 
 class _MediaEditorState extends ConsumerState<MediaEditor> {
-  late Variables$Mutation$SaveMediaListEntry options;
-  late Variables$Mutation$SaveMediaListEntry og;
+  late GSaveMediaListEntryVarsBuilder options;
+  late GSaveMediaListEntryVars og;
   late TextEditingController textController;
 
   @override
   void initState() {
     super.initState();
-    options = Variables$Mutation$SaveMediaListEntry(
-      completedAt: widget.entry.completedAt != null
-          ? Input$FuzzyDateInput(
-              day: widget.entry.completedAt!.day,
-              month: widget.entry.completedAt!.month,
-              year: widget.entry.completedAt!.year)
-          : null,
-      startedAt: widget.entry.startedAt != null
-          ? Input$FuzzyDateInput(
-              day: widget.entry.startedAt!.day,
-              month: widget.entry.startedAt!.month,
-              year: widget.entry.startedAt!.year)
-          : null,
-      hiddenFromStatusLists: widget.entry.hiddenFromStatusLists,
-      notes: widget.entry.notes,
-      priority: widget.entry.priority,
-      private: widget.entry.private,
-      progress: widget.entry.progress,
-      progressVolumes: widget.entry.progressVolumes,
-      repeat: widget.entry.repeat,
-      score: widget.entry.score,
-      status: widget.entry.status,
-      customLists: widget.entry.customLists
-          ?.where((e) => e['enabled'] == true)
-          ?.map((e) => e['name'])
-          .toList()
-          .cast<String?>(),
-    );
+    // options = GSaveMediaListEntryVars()
+    options = GSaveMediaListEntryVarsBuilder()
+      ..update((p0) => p0
+        ..completedAt = widget.entry.completedAt != null
+            ? GFuzzyDateInput(
+                (b) => b
+                  ..day = widget.entry.completedAt?.day
+                  ..month = widget.entry.completedAt?.month
+                  ..year = widget.entry.completedAt?.year,
+              ).toBuilder()
+            : null
+        ..startedAt = widget.entry.startedAt != null
+            ? GFuzzyDateInput(
+                (b) => b
+                  ..day = widget.entry.startedAt?.day
+                  ..month = widget.entry.startedAt?.month
+                  ..year = widget.entry.startedAt?.year,
+              ).toBuilder()
+            : null
+        ..hiddenFromStatusLists = widget.entry.hiddenFromStatusLists
+        ..notes = widget.entry.notes
+        ..priority = widget.entry.priority
+        ..private = widget.entry.private
+        ..progress = widget.entry.progress
+        ..progressVolumes = widget.entry.progressVolumes
+        ..repeat = widget.entry.repeat
+        ..score = widget.entry.score
+        ..status = widget.entry.status
+        ..customLists.addAll(widget.entry.customLists?.asList
+                .where((e) => e['enabled'] == true)
+                .map((e) => e['name']) ??
+            []));
 
-    og = Variables$Mutation$SaveMediaListEntry.fromJson(options.toJson());
+    og = GSaveMediaListEntryVars(
+      (b) => b..replace(options.build()),
+    );
     textController = TextEditingController.fromValue(
         TextEditingValue(text: options.notes ?? ''));
 
@@ -124,7 +130,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
 
   void textListener() {
     if (options.notes != textController.text) {
-      setState(() => options = options.copyWith(notes: textController.text));
+      setState(() => options.update((p0) => p0..notes = textController.text));
     }
   }
 
@@ -140,16 +146,14 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                 var shouldDelete = await showDeleteDialog(context);
 
                 if (shouldDelete == true) {
-                  if (mounted) context.pop();
-                  client.value
-                      .mutate$DeleteMediaListEntry(
-                        Options$Mutation$DeleteMediaListEntry(
-                          variables: Variables$Mutation$DeleteMediaListEntry(
-                            id: widget.entry.id,
-                          ),
-                        ),
-                      )
+                  ref
+                      .read(ferryClientProvider)
+                      .request(GDeleteMediaListEntryReq(
+                        (b) => b..vars.id = widget.entry.id,
+                      ))
+                      .first
                       .then((value) => widget.onDelete?.call());
+                  if (mounted) context.pop();
                 }
               },
               icon: const Icon(Icons.delete),
@@ -158,7 +162,6 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
           IconButton(
             padding: const EdgeInsets.all(16),
             onPressed: () {
-              // widget.entry.
               if (options != og) {
                 ref
                     .read(mediaEditorProvider(widget.media).notifier)
@@ -186,11 +189,9 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                 CustomDropdown(
                   hint: 'Status',
                   value: options.status,
-                  onChanged: (value) =>
-                      setState(() => options = options.copyWith(status: value)),
-                  dropdownItems: Enum$MediaListStatus.values
-                      .takeWhile(
-                          (value) => value != Enum$MediaListStatus.$unknown)
+                  onChanged: (value) => setState(
+                      () => options.update((p0) => p0..status = value)),
+                  dropdownItems: GMediaListStatus.values
                       .map(
                         (e) => DropdownMenuItem(
                           value: e,
@@ -203,17 +204,18 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                   number:
                       (options.progress ?? 0) == 0 ? null : options.progress,
                   hint:
-                      '${widget.entry.media!.type == Enum$MediaType.ANIME ? 'Episode' : 'Chapter'} Progress',
+                      '${widget.entry.media!.type == GMediaType.ANIME ? 'Episode' : 'Chapter'} Progress',
                   onIncrement: () {
                     var number = (options.progress ?? 0) + 1;
 
                     if (widget.entry.media!.episodes != null &&
                         number >= widget.entry.media!.episodes!) {
-                      if (options.status != Enum$MediaListStatus.COMPLETED) {
+                      if (options.status != GMediaListStatus.COMPLETED) {
                         setState(
-                          () => options = options.copyWith(
-                            progress: number,
-                            status: Enum$MediaListStatus.COMPLETED,
+                          () => options.update(
+                            (p0) => p0
+                              ..progress = number
+                              ..status = GMediaListStatus.COMPLETED,
                           ),
                         );
                       }
@@ -221,8 +223,8 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                     }
 
                     setState(
-                      () => options = options.copyWith(
-                          progress: (options.progress ?? 0) + 1),
+                      () => options.update(
+                          (p0) => p0..progress = (options.progress ?? 0) + 1),
                     );
                   },
                   onDecrement: () {
@@ -231,26 +233,27 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                     if (number < 0) return;
                     if (widget.entry.media!.episodes != null &&
                         options.progress! >= widget.entry.media!.episodes! &&
-                        options.status == Enum$MediaListStatus.COMPLETED) {
+                        options.status == GMediaListStatus.COMPLETED) {
                       return setState(
-                        () => options = options.copyWith(
-                            progress: number, status: og.status),
+                        () => options.update((p0) => p0
+                          ..progress = number
+                          ..status = og.status),
                       );
                     }
 
                     setState(
-                      () => options = options.copyWith(progress: number),
+                      () => options.update((p0) => p0..progress = number),
                     );
                   },
                 ),
                 NumberPicker(
                   number: (options.repeat ?? 0) == 0 ? null : options.repeat,
-                  hint: widget.entry.media!.type == Enum$MediaType.ANIME
+                  hint: widget.entry.media!.type == GMediaType.ANIME
                       ? 'Rewatches'
                       : 'Rereads',
                   onIncrement: () => setState(
-                    () => options =
-                        options.copyWith(repeat: (options.repeat ?? 0) + 1),
+                    () => options
+                        .update((p0) => p0..repeat = (options.repeat ?? 0) + 1),
                   ),
                   onDecrement: () {
                     var number = (options.repeat ?? 0) - 1;
@@ -258,7 +261,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                     if (number < 0) return;
 
                     setState(
-                      () => options = options.copyWith(repeat: number),
+                      () => options.update((p0) => p0..repeat = number),
                     );
                   },
                 ),
@@ -266,7 +269,8 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                   score: options.score ?? 0,
                   onIncrement: (score) {
                     setState(
-                      () => options = options.copyWith(score: score.toDouble()),
+                      () =>
+                          options.update((p0) => p0..score = score.toDouble()),
                     );
                   },
                 ),
@@ -280,54 +284,51 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
             controlAffinity: ListTileControlAffinity.trailing,
             title: const Text('Private'),
             onChanged: (value) =>
-                setState(() => options = options.copyWith(private: value)),
+                setState(() => options.update((p0) => p0..private = value)),
           ),
           _MediaListDate(
             start: true,
-            date: options.startedAt?.toDateString(),
+            date: options.startedAt.toDateString(),
             onTap: _showStartDate,
             onClear: () =>
-                setState(() => options = options.copyWith(startedAt: null)),
+                setState(() => options.update((p0) => p0..startedAt = null)),
           ),
           const SizedBox(
             height: 1,
           ),
           _MediaListDate(
             start: false,
-            date: options.completedAt?.toDateString(),
+            date: options.completedAt.toDateString(),
             onTap: _showCompletedDate,
             onClear: () =>
-                setState(() => options = options.copyWith(completedAt: null)),
+                setState(() => options.update((p0) => p0..completedAt = null)),
           ),
-          if (widget.entry.customLists?.isNotEmpty == true) ...[
+          if (widget.entry.customLists?.asList.isNotEmpty == true) ...[
             Text(
               'Custom Lists',
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            ...widget.entry.customLists!.map(
+            ...widget.entry.customLists!.asList.map(
               (e) => RadioListTile.adaptive(
                 value: true,
-                groupValue: options.customLists?.contains(e['name']),
+                groupValue: options.customLists.build().contains(e['name']),
                 title: Text(e['name']),
                 controlAffinity: ListTileControlAffinity.trailing,
                 toggleable: true,
                 onChanged: (value) {
                   if (value == true) {
                     setState(
-                      () => options = options.copyWith(
-                        customLists: (options.customLists ?? [])
-                          ..add(e['name']),
+                      () => options.update(
+                        (p0) => p0..customLists.add(e['name']),
                       ),
                     );
                   } else {
                     setState(
-                      () => options = options.copyWith(
-                        customLists: (options.customLists ?? [])
-                          ..remove(e['name']),
+                      () => options.update(
+                        (p0) => p0..customLists.remove(e['name']),
                       ),
                     );
                   }
-                  // setState(() => options = options.copyWith(private: value))
                 },
               ),
             ),
@@ -338,7 +339,6 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
           TextField(
             maxLines: null,
             controller: textController,
-            // onChanged: (value) => setState(() => ),
             decoration: const InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(
@@ -356,19 +356,18 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
   void _showStartDate() async {
     var date = await showDatePicker(
       context: context,
-      initialDate: options.startedAt?.toDate() ?? DateTime.now(),
+      initialDate: options.startedAt.toDate() ?? DateTime.now(),
       firstDate: DateTime(1940),
       lastDate: DateTime(2100),
     );
 
     if (date != null && context.mounted) {
       setState(
-        () => options = options.copyWith(
-            startedAt: Input$FuzzyDateInput(
-          year: date.year,
-          month: date.month,
-          day: date.day,
-        )),
+        () => options.update((p0) => p0
+          ..startedAt = GFuzzyDateInput((b) => b
+            ..year = date.year
+            ..month = date.month
+            ..day = date.day).toBuilder()),
       );
     }
   }
@@ -376,19 +375,18 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
   void _showCompletedDate() async {
     var date = await showDatePicker(
       context: context,
-      initialDate: options.completedAt?.toDate() ?? DateTime.now(),
+      initialDate: options.completedAt.toDate() ?? DateTime.now(),
       firstDate: DateTime(1940),
       lastDate: DateTime(2100),
     );
 
     if (date != null && context.mounted) {
       setState(
-        () => options = options.copyWith(
-            completedAt: Input$FuzzyDateInput(
-          year: date.year,
-          month: date.month,
-          day: date.day,
-        )),
+        () => options.update((p0) => p0
+          ..completedAt = GFuzzyDateInput((b) => b
+            ..year = date.year
+            ..month = date.month
+            ..day = date.day).toBuilder()),
       );
     }
   }
@@ -411,23 +409,23 @@ class _MediaScore extends ConsumerWidget {
       number: score,
       onIncrement: () {
         switch (scoreFormat) {
-          case Enum$ScoreFormat.POINT_3:
+          case GScoreFormat.POINT_3:
             if (score >= 3) return;
             onIncrement(score + 1);
             break;
-          case Enum$ScoreFormat.POINT_5:
+          case GScoreFormat.POINT_5:
             if (score >= 5) return;
             onIncrement(score + 1);
             break;
-          case Enum$ScoreFormat.POINT_10:
+          case GScoreFormat.POINT_10:
             if (score >= 10) return;
             onIncrement(score + 1);
             break;
-          case Enum$ScoreFormat.POINT_10_DECIMAL:
+          case GScoreFormat.POINT_10_DECIMAL:
             if (score >= 10) return;
             onIncrement(score + 0.5);
             break;
-          case Enum$ScoreFormat.POINT_100:
+          case GScoreFormat.POINT_100:
             if (score >= 100) return;
             onIncrement(score + 10);
             break;
@@ -438,19 +436,19 @@ class _MediaScore extends ConsumerWidget {
       onDecrement: () {
         if (score <= 0) return;
         switch (scoreFormat) {
-          case Enum$ScoreFormat.POINT_3:
+          case GScoreFormat.POINT_3:
             onIncrement(score - 1);
             break;
-          case Enum$ScoreFormat.POINT_5:
+          case GScoreFormat.POINT_5:
             onIncrement(score - 1);
             break;
-          case Enum$ScoreFormat.POINT_10:
+          case GScoreFormat.POINT_10:
             onIncrement(score - 1);
             break;
-          case Enum$ScoreFormat.POINT_10_DECIMAL:
+          case GScoreFormat.POINT_10_DECIMAL:
             onIncrement(score - 0.5);
             break;
-          case Enum$ScoreFormat.POINT_100:
+          case GScoreFormat.POINT_100:
             onIncrement(score - 10);
             break;
           default:
@@ -504,7 +502,7 @@ class _MediaListDate extends StatelessWidget {
 
 void showMediaEditor(
   BuildContext context,
-  Fragment$MediaFragment media, {
+  GMediaFragment media, {
   final void Function()? onDelete,
   final void Function()? onSave,
 }) {

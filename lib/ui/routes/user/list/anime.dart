@@ -1,8 +1,10 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
+import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/routes/home/list/__generated__/list.req.gql.dart';
 import 'package:myaniapp/ui/routes/home/list/anime.dart';
 
 class UserAnimeListPage extends StatelessWidget {
@@ -12,44 +14,37 @@ class UserAnimeListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$MediaList$Widget(
-      options: Options$Query$MediaList(
-        variables: Variables$Query$MediaList(
-          sort: [
-            Enum$MediaListSort.STATUS,
-            Enum$MediaListSort.UPDATED_TIME_DESC,
-          ],
-          type: Enum$MediaType.ANIME,
-          userName: name,
+    return GQLRequest(
+      operationRequest: GMediaListReq((b) => b
+        ..vars
+            .sort
+            .addAll([GMediaListSort.STATUS, GMediaListSort.UPDATED_TIME_DESC])
+        ..vars.userName = name
+        ..vars.type = GMediaType.ANIME),
+      loading: Scaffold(
+        appBar: AppBar(),
+        body: const Center(
+          child: CircularProgressIndicator.adaptive(),
         ),
       ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.data == null) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: const Center(
-              child: CircularProgressIndicator.adaptive(),
-            ),
-          );
-        } else if (result.hasException) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: GraphqlError(exception: result.exception!),
-          );
-        }
-
-        var lists = result.parsedData!.MediaListCollection!.lists!;
+      error: (response) => Scaffold(
+        appBar: AppBar(),
+        body: GraphqlError(
+            exception: (response!.graphqlErrors, response.linkException)),
+      ),
+      builder: (context, response, error, refetch) {
+        var lists = response!.data!.MediaListCollection!.lists!;
 
         return RefreshIndicator.adaptive(
-          onRefresh: refetch!,
+          onRefresh: refetch,
           notificationPredicate: (notification) => notification.depth == 1,
           child: DefaultTabController(
             length: lists.length,
             child: ListTabs(
               leading: const BackButton(),
-              lists: lists.cast(),
+              lists: lists.nonNulls.toBuiltList(),
               refresh: refetch,
-              user: result.parsedData!.MediaListCollection!.user!,
+              user: response.data!.MediaListCollection!.user!,
               setting: Setting.animeList,
               canEdit: false,
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/shared_preferences.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -27,7 +27,7 @@ class Settings extends _$Settings {
   Future<bool> logout() async {
     await ref.read(sharedPrefProvider).remove('token');
     state = build();
-    client.value.cache.store.reset();
+    ref.read(ferryClientProvider).cache.store.clear();
     return true;
   }
 

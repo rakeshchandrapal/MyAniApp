@@ -3,19 +3,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/overview/overview.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/image.dart';
+import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.req.gql.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
+import 'package:myaniapp/ui/routes/home/overview/__generated__/overview.data.gql.dart';
+import 'package:myaniapp/ui/routes/home/overview/__generated__/overview.req.gql.dart';
 import 'package:myaniapp/ui/routes/home/overview/guest.dart';
-import 'package:myaniapp/utils/graphql.dart';
 import 'package:myaniapp/utils/utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -34,10 +35,10 @@ class HomeOverviewPage extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Badge(
-              label: (user.value!.unreadNotificationCount ?? 0) > 0
+              label: (user.value?.unreadNotificationCount ?? 0) > 0
                   ? Text(user.value!.unreadNotificationCount!.toString())
                   : null,
-              isLabelVisible: (user.value!.unreadNotificationCount ?? 0) > 0,
+              isLabelVisible: (user.value?.unreadNotificationCount ?? 0) > 0,
               offset: const Offset(-2, 2),
               child: IconButton(
                 onPressed: () => context.push('/notifications'),
@@ -47,23 +48,35 @@ class HomeOverviewPage extends ConsumerWidget {
           )
         ],
       ),
-      body: Query$Overview$Widget(
-        options: Options$Query$Overview(
-          variables: Variables$Query$Overview(userId: user.value!.id),
+      body: GQLRequest(
+        operationRequest: GHomeOverviewReq(
+          (b) {
+            b.vars.userId = user.value!.id;
+            return b;
+          },
         ),
-        builder: queryBuilder(
-          (result, [_, refetch]) => RefreshIndicator.adaptive(
-            onRefresh: refetch!,
+        builder: (context, response, error, refetch) {
+          if (response?.loading == true) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
+
+          return RefreshIndicator.adaptive(
+            onRefresh: refetch,
             child: CustomScrollView(
               slivers: [
-                if (result.parsedData!.releasing!.media!.isNotEmpty ==
-                    true) ...[
+                if (response!.data!.releasing!.media!.isNotEmpty == true) ...[
                   const SliverTitle(text: "Releases"),
                   Releasing(
-                      list: sortReleases(result.parsedData!.releasing!.media!))
+                    list: sortReleases(response.data!.releasing!.media!),
+                  ),
                 ],
                 const SliverTitle(text: "In Progress"),
-                InProgress(list: result.parsedData!.list!),
+                InProgress(
+                  list: response.data!.list!,
+                  refresh: refetch,
+                ),
                 SliverTitle(
                   text: "Forum Activity",
                   buttonText: "More",
@@ -71,7 +84,7 @@ class HomeOverviewPage extends ConsumerWidget {
                 ),
                 SliverList.builder(
                   itemBuilder: (context, index) {
-                    var thread = result.parsedData!.forums!.threads![index]!;
+                    var thread = response.data!.forums!.threads![index]!;
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -81,14 +94,14 @@ class HomeOverviewPage extends ConsumerWidget {
                       child: ThreadCard(thread: thread),
                     );
                   },
-                  itemCount: result.parsedData!.forums!.threads!.length,
+                  itemCount: response.data!.forums!.threads!.length,
                 ),
                 const SliverTitle(text: "Recent Reviews"),
-                Reviews(reviews: result.parsedData!.reviews!)
+                Reviews(reviews: response.data!.reviews!)
               ],
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -136,7 +149,7 @@ class Reviews extends StatelessWidget {
     required this.reviews,
   });
 
-  final Query$Overview$reviews reviews;
+  final GHomeOverviewData_reviews reviews;
 
   @override
   Widget build(BuildContext context) {
@@ -235,16 +248,18 @@ class Reviews extends StatelessWidget {
   }
 }
 
-class InProgress extends StatelessWidget {
+class InProgress extends ConsumerWidget {
   const InProgress({
     super.key,
     required this.list,
+    required this.refresh,
   });
 
-  final Query$Overview$list list;
+  final GHomeOverviewData_list list;
+  final VoidCallback refresh;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverToBoxAdapter(
       child: SizedBox(
         height: 180,
@@ -261,7 +276,12 @@ class InProgress extends StatelessWidget {
               onTap: () => context.push('/media/${entry.mediaId}'),
               aspectRatio: 1.9 / 3,
               onLongPress: () => showMediaCard(context, entry.media!),
-              onDoubleTap: () => showMediaEditor(context, entry.media!),
+              onDoubleTap: () => showMediaEditor(
+                context,
+                entry.media!,
+                onDelete: refresh,
+                onSave: refresh,
+              ),
               chips: [
                 GridChip(
                   bottom: 2,
@@ -274,8 +294,14 @@ class InProgress extends StatelessWidget {
                         height: 25,
                         width: 30,
                         child: IconButton(
-                          onPressed: () => client.value.query$MediaListEntry(
-                              Options$Query$MediaListEntry()),
+                          onPressed: () => ref
+                              .read(ferryClientProvider)
+                              .request(GSaveMediaListEntryReq(
+                                (b) => b
+                                  ..vars.id = entry.id
+                                  ..vars.progress = (entry.progress ?? 0) + 1,
+                              ))
+                              .first,
                           icon: const Icon(Icons.add),
                           iconSize: 15,
                           visualDensity: VisualDensity.compact,
@@ -285,7 +311,7 @@ class InProgress extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                          '${entry.progress?.toString() ?? '0'} / ${entry.media!.type == Enum$MediaType.ANIME ? entry.media!.episodes?.toString() ?? '??' : entry.media!.chapters?.toString() ?? '??'}'),
+                          '${entry.progress?.toString() ?? '0'} / ${entry.media!.type == GMediaType.ANIME ? entry.media!.episodes?.toString() ?? '??' : entry.media!.chapters?.toString() ?? '??'}'),
                     ],
                   ),
                 ),
@@ -305,7 +331,7 @@ class Releasing extends StatelessWidget {
     required this.list,
   });
 
-  final List<Fragment$ReleasingMedia> list;
+  final Iterable<GReleasingMedia> list;
 
   @override
   Widget build(BuildContext context) {
@@ -317,7 +343,7 @@ class Releasing extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(width: 10),
           padding: const EdgeInsets.symmetric(horizontal: 2),
           itemBuilder: (context, index) {
-            var media = list[index];
+            var media = list.elementAt(index);
 
             var next = media.nextAiringEpisode;
             var passed = media.airingSchedule?.edges
@@ -342,7 +368,7 @@ class Releasing extends StatelessWidget {
               title: media.title!.userPreferred!,
               onTap: () => context.push('/media/${media.id}'),
               aspectRatio: 1.9 / 3,
-              onLongPress: () => showMediaCard(context, media),
+              // onLongPress: () => showMediaCard(context, media),
               chips: [
                 GridChip(
                   top: 2,

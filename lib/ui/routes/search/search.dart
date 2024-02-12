@@ -1,19 +1,21 @@
 import 'package:collection/collection.dart';
+import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
+import 'package:myaniapp/providers/search.dart';
 import 'package:myaniapp/providers/shared_preferences.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/search/__generated__/search.data.gql.dart';
+import 'package:myaniapp/ui/routes/search/__generated__/search.req.gql.dart';
 import 'package:myaniapp/ui/routes/search/editor/sheet.dart';
-import 'package:myaniapp/utils/graphql.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({
@@ -85,11 +87,9 @@ class _SearchPageState extends ConsumerState<SearchPage> {
       widget.endDate,
       widget.isAdult,
       widget.onList,
+      client: ref.read(ferryClientProvider),
     );
-    if (q.toString() != query.toString()) {
-      query = q;
-      setState(() {});
-    }
+    ref.read(searchProvider).update(q);
   }
 
   @override
@@ -100,161 +100,139 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    setQuery();
-
-    print(query.toString());
-
-    if (query?.search?.isNotEmpty == true &&
-        _controller.text != query?.search) {
-      _controller.text = query!.search!;
-    }
-
+    var provider = ref.watch(searchProvider);
+    print("jhgj");
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: query == null,
+        automaticallyImplyLeading: false,
         toolbarHeight: 80,
-        flexibleSpace: query == null
-            ? null
-            : FlexibleSpaceBar(
-                background: SafeArea(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: TextField(
-                        controller: _controller,
-                        onSubmitted: (value) {
-                          if (mounted) {
-                            query!.search = value.isNotEmpty ? value : null;
-                            context.replace('/search${query.toString()}');
+        flexibleSpace: FlexibleSpaceBar(
+          background: SafeArea(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: TextField(
+                  controller: _controller,
+                  onSubmitted: (value) {
+                    if (mounted) {
+                      ref.read(searchProvider).q.search =
+                          value.isNotEmpty ? value : null;
+                      context.replace(
+                          '/search${ref.read(searchProvider).q.toString()}');
 
-                            if (value.isNotEmpty) {
-                              ref.read(sharedPrefProvider).setStringList(
-                                  'recentSearches',
-                                  (ref
-                                          .read(sharedPrefProvider)
-                                          .getStringList('recentSearch') ??
-                                      [])
-                                    ..add(value));
-                            }
-                          }
-                        },
-                        // onSubmitted: (value) {
-                        //   ref.read(searchEditorProvider('main').notifier).set(
-                        //         vars.copyWith(search: value.isEmpty ? null : value),
-                        //       );
-
-                        //   if (value.isNotEmpty) {
-                        //     ref.read(sharedPrefProvider).setStringList(
-                        //         'recentSearches',
-                        //         (ref
-                        //                 .read(sharedPrefProvider)
-                        //                 .getStringList('recentSearch') ??
-                        //             [])
-                        //           ..add(value));
-                        //   }
-                        // },
-                        focusNode: FocusNode(canRequestFocus: false),
-                        autofocus: widget.autofocus ?? false,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          prefixIcon: const Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: BackButton(),
-                          ),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: IconButton(
-                              onPressed: () => showModalBottomSheet(
-                                builder: (context) => EditorSheet(
-                                  query: query!,
-                                ),
-                                context: context,
-                              ),
-                              icon: const Icon(Icons.more_horiz),
-                            ),
-                          ),
+                      if (value.isNotEmpty) {
+                        ref.read(sharedPrefProvider).setStringList(
+                            'recentSearches',
+                            (ref
+                                    .read(sharedPrefProvider)
+                                    .getStringList('recentSearches') ??
+                                [])
+                              ..add(value));
+                      }
+                    }
+                  },
+                  focusNode: FocusNode(canRequestFocus: false),
+                  autofocus: widget.autofocus ?? false,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.only(left: 8),
+                      child: BackButton(),
+                    ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: IconButton(
+                        onPressed: () => showModalBottomSheet(
+                          builder: (context) => const EditorSheet(),
+                          context: context,
                         ),
+                        icon: const Icon(Icons.more_horiz),
                       ),
                     ),
                   ),
                 ),
               ),
+            ),
+          ),
+        ),
       ),
-      body: query == null
-          ? const Center(
-              child: CircularProgressIndicator.adaptive(),
-            )
-          : query.toString() != '?'
-              ? Query$Search$Widget(
-                  options: Options$Query$Search(variables: query!.toVar()),
-                  builder: queryBuilder(
-                    (result, [fetchMore, refetch]) {
-                      if (result.parsedData!.Page!.media!.isEmpty) {
-                        return const Center(
-                          child: Text('No Results Found'),
-                        );
-                      }
+      body: provider.q.toString() != '?'
+          ? GQLRequest(
+              key: Key(provider.q.toString()),
+              operationRequest: provider.q.toReq(),
+              builder: (context, response, error, refetch) {
+                if (response!.data!.Page!.media!.isEmpty) {
+                  return const Center(
+                    child: Text('No Results Found'),
+                  );
+                }
 
-                      return GraphqlPagination(
-                        fetchMore: (nextPage) => fetchMore!(
-                          FetchMoreOptions$Query$Search(
-                            updateQuery:
-                                (previousResultData, fetchMoreResultData) {
-                              var list = [
-                                ...previousResultData!['Page']!['media'],
-                                ...fetchMoreResultData!['Page']!['media'],
-                              ];
-                              fetchMoreResultData['Page']!['media'] = list;
-                              return fetchMoreResultData;
-                            },
-                            variables: query!.toVar().copyWith(page: nextPage),
-                          ),
-                        ),
-                        pageInfo: result.parsedData!.Page!.pageInfo!,
-                        child: MediaCards(
+                return RefreshIndicator.adaptive(
+                  onRefresh: refetch,
+                  child: GraphqlPagination(
+                    req: (nextPage) => GSearchReq(
+                      (b) => b
+                        ..replace(response.operationRequest as GSearchReq)
+                        ..vars.page = nextPage
+                        ..updateResult = (previous, result) => result?.rebuild(
+                            (p0) => p0
+                              ..Page.media.insertAll(
+                                  0,
+                                  previous?.Page?.media?.whereNot((p0) =>
+                                          result.Page?.media?.contains(p0) ??
+                                          false) ??
+                                      [])),
+                    ),
+                    pageInfo: response.data!.Page!.pageInfo!,
+                    child: MediaCards(
+                      padding: const EdgeInsets.all(8),
+                      list: response.data!.Page!.media!
+                          .toList()
+                          .cast<GMediaFragment>(),
+                      aspectRatio: 1.9 / 3,
+                      onTap: (media, index) =>
+                          context.push('/media/${media.id}'),
+                      underTitle: (media, style, __) {
+                        if (style != ListStyle.detailedList) return null;
+
+                        return Padding(
                           padding: const EdgeInsets.all(8),
-                          list: result.parsedData!.Page!.media!
-                              .cast<Fragment$MediaFragment>(),
-                          aspectRatio: 1.9 / 3,
-                          onTap: (media, index) =>
-                              context.push('/media/${media.id}'),
-                          underTitle: (media, style, __) {
-                            if (style != ListStyle.detailedList) return null;
-
-                            return Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    media.genres!.join(', '),
-                                  ),
-                                  if (media.format != null)
-                                    Text.rich(
-                                      TextSpan(
-                                        text: media.type!.name.capitalize(),
-                                        children: [
-                                          TextSpan(
-                                              text:
-                                                  ' · ${media.format!.name.capitalize()}')
-                                        ],
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                ],
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                media.genres!.join(', '),
                               ),
-                            );
-                          },
-                        ),
-                      );
-                    },
+                              if (media.format != null)
+                                Text.rich(
+                                  TextSpan(
+                                    text: media.type!.name.capitalize(),
+                                    children: [
+                                      TextSpan(
+                                          text:
+                                              ' · ${media.format!.name.capitalize()}')
+                                    ],
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                )
-              : RecentSearches(
-                  onTap: (s) => context.replace('/search?search=$s'),
-                ),
+                );
+              },
+            )
+          : RecentSearches(
+              onTap: (s) {
+                context.replace('/search?search=$s');
+                ref.read(searchProvider).q.search = s;
+                _controller.text = s;
+              },
+            ),
     );
   }
 }
@@ -306,14 +284,14 @@ class SearchQuery {
   });
 
   String? search;
-  List<Enum$MediaSort>? sort;
-  Enum$MediaType? type;
-  List<Enum$MediaFormat>? format;
+  List<GMediaSort>? sort;
+  GMediaType? type;
+  List<GMediaFormat>? format;
   List<String>? genres;
-  List<Query$GenreCollection$tags>? withTags;
-  List<Query$GenreCollection$tags>? withoutTags;
+  List<GGenreCollectionData_tags>? withTags;
+  List<GGenreCollectionData_tags>? withoutTags;
   int? page;
-  Enum$MediaSeason? season;
+  GMediaSeason? season;
   int? seasonYear;
   int? year;
   // yearGreater
@@ -324,46 +302,51 @@ class SearchQuery {
   bool? onList;
 
   static Future<SearchQuery> from(
-    List<String>? sort,
-    List<String>? format,
-    List<String>? genre,
-    List<String>? withTags,
-    List<String>? withoutTags,
-    String? search,
-    String? type,
-    int? page,
-    String? season,
-    int? seasonYear,
-    int? year,
-    int? startDate,
-    int? endDate,
-    bool? isAdult,
-    bool? onList,
-  ) async {
-    List<Enum$MediaSort>? sort0;
-    List<Enum$MediaFormat>? format0;
+      List<String>? sort,
+      List<String>? format,
+      List<String>? genre,
+      List<String>? withTags,
+      List<String>? withoutTags,
+      String? search,
+      String? type,
+      int? page,
+      String? season,
+      int? seasonYear,
+      int? year,
+      int? startDate,
+      int? endDate,
+      bool? isAdult,
+      bool? onList,
+      {required Client client}) async {
+    List<GMediaSort>? sort0;
+    List<GMediaFormat>? format0;
     List<String>? genre0;
-    List<Query$GenreCollection$tags>? withTag0;
-    List<Query$GenreCollection$tags>? withoutTag0;
-    Enum$MediaType? type0 = Enum$MediaType.values
-        .firstWhereOrNull((element) => element.name == type);
-    Enum$MediaSeason? season0 = Enum$MediaSeason.values
+    List<GGenreCollectionData_tags>? withTag0;
+    List<GGenreCollectionData_tags>? withoutTag0;
+    GMediaType? type0 =
+        GMediaType.values.firstWhereOrNull((element) => element.name == type);
+    GMediaSeason? season0 = GMediaSeason.values
         .firstWhereOrNull((element) => element.name == season);
 
-    Query$GenreCollection? collection;
+    GGenreCollectionData? collection;
 
     if (withTags != null || withoutTags != null || genre != null) {
-      collection = (await client.value.query$GenreCollection(
-        Options$Query$GenreCollection(
-          fetchPolicy: FetchPolicy.cacheFirst,
-        ),
-      ))
-          .parsedData;
+      collection = (await client
+              .request(GGenreCollectionReq(
+                (b) => b..fetchPolicy = FetchPolicy.NoCache,
+              ))
+              .first)
+          .data!;
+      // collection = (await client.value.query$GenreCollection(
+      //   Options$Query$GenreCollection(
+      //     fetchPolicy: FetchPolicy.cacheFirst,
+      //   ),
+      // ))
+      //     .parsedData;
     }
 
     if (sort != null) {
-      var s =
-          Enum$MediaSort.values.where((element) => sort.contains(element.name));
+      var s = GMediaSort.values.where((element) => sort.contains(element.name));
       if (s.isNotEmpty) {
         sort0 = s.toList();
       }
@@ -380,7 +363,7 @@ class SearchQuery {
       var t = collection!.tags!
           .where((element) => withTags.contains(element!.name));
       if (withTags.isNotEmpty) {
-        withTag0 = t.cast<Query$GenreCollection$tags>().toList();
+        withTag0 = t.cast<GGenreCollectionData_tags>().toList();
       }
     }
 
@@ -388,13 +371,13 @@ class SearchQuery {
       var t = collection!.tags!
           .where((element) => withoutTags.contains(element!.name));
       if (withoutTags.isNotEmpty == true) {
-        withoutTag0 = t.cast<Query$GenreCollection$tags>().toList();
+        withoutTag0 = t.cast<GGenreCollectionData_tags>().toList();
       }
     }
 
     if (format != null) {
-      var f = Enum$MediaFormat.values
-          .where((element) => format.contains(element.name));
+      var f =
+          GMediaFormat.values.where((element) => format.contains(element.name));
       if (f.isNotEmpty) {
         format0 = f.toList();
       }
@@ -419,30 +402,60 @@ class SearchQuery {
     );
   }
 
-  Variables$Query$Search toVar() {
-    return _removeNulls(Variables$Query$Search(
-      format: format,
-      genres: genres,
-      isAdult: isAdult,
-      onList: onList,
-      page: page,
-      search: search,
-      season: season,
-      seasonYear: seasonYear,
-      sort: sort,
-      type: type,
-      with_tags: withTags?.map((e) => e.name).toList(),
-      without_tags: withoutTags?.map((e) => e.name).toList(),
-      year: year != null ? '$year%' : null,
-      yearGreater: endDate,
-      yearLesser: startDate,
-    ));
+  GSearchReq toReq() {
+    return GSearchReq(
+      (b) {
+        if (format?.isNotEmpty == true) b.vars.format.addAll(format!);
+        if (genres?.isNotEmpty == true) b.vars.genres.addAll(genres!);
+        if (withTags?.isNotEmpty == true) {
+          b.vars.with_tags.addAll(withTags!.map((e) => e.name));
+        }
+        if (withoutTags?.isNotEmpty == true) {
+          b.vars.without_tags.addAll(withoutTags!.map((e) => e.name));
+        }
+        if (sort?.isNotEmpty == true) b.vars.sort.addAll(sort!);
+        if (isAdult != null) b.vars.isAdult = isAdult;
+        if (onList != null) b.vars.onList = onList;
+        if (page != null) b.vars.page = page;
+        if (search != null) b.vars.search = search;
+        if (season != null) b.vars.season = season;
+        if (seasonYear != null) b.vars.seasonYear = seasonYear;
+        if (type != null) b.vars.type = type;
+        if (year != null) b.vars.year = year != null ? '$year%' : null;
+        if (endDate != null) b.vars.yearGreater = endDate;
+        if (startDate != null) b.vars.yearLesser = startDate;
+
+        b.requestId = "search";
+
+        return b;
+      },
+    );
   }
 
-  Variables$Query$Search _removeNulls(Variables$Query$Search vars) {
-    return Variables$Query$Search.fromJson(
-        vars.toJson()..removeWhere((key, value) => value == null));
-  }
+  // Variables$Query$Search toVar() {
+  //   return _removeNulls(Variables$Query$Search(
+  //     format: format,
+  //     genres: genres,
+  //     isAdult: isAdult,
+  //     onList: onList,
+  //     page: page,
+  //     search: search,
+  //     season: season,
+  //     seasonYear: seasonYear,
+  //     sort: sort,
+  //     type: type,
+  //     with_tags: withTags?.map((e) => e.name).toList(),
+  //     without_tags: withoutTags?.map((e) => e.name).toList(),
+  //     year: year != null ? '$year%' : null,
+  //     yearGreater: endDate,
+  //     yearLesser: startDate,
+  //   ));
+  // }
+
+  // Variables$Query$Search _removeNulls(Variables$Query$Search vars) {
+  //   return Variables$Query$Search.fromJson(
+  //       vars.toJson()..removeWhere((key, value) => value == null));
+  // }
 
   @override
   String toString() {

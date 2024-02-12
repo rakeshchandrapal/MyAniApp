@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/character/character.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/media.req.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
@@ -14,6 +14,8 @@ import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/ui/common/widget_gradient.dart';
+import 'package:myaniapp/ui/routes/character/__generated__/character.data.gql.dart';
+import 'package:myaniapp/ui/routes/character/__generated__/character.req.gql.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
@@ -31,253 +33,240 @@ class _CharacterPageState extends State<CharacterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Query$Character$Widget(
-      options: Options$Query$Character(
-        variables: Variables$Query$Character(id: widget.id, onList: onList),
+    return GQLRequest(
+      key: Key("$onList"),
+      operationRequest: GCharacterReq((b) => b
+        ..requestId = "character"
+        ..vars.id = widget.id
+        ..vars.onList = onList),
+      loading: Scaffold(
+        appBar: AppBar(),
+        body: const Center(
+          child: CircularProgressIndicator.adaptive(),
+        ),
       ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.parsedData == null) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: const Center(
-              child: CircularProgressIndicator.adaptive(),
+      error: (response) => Scaffold(
+        appBar: AppBar(),
+        body: GraphqlError(
+            exception: (response!.graphqlErrors, response.linkException)),
+      ),
+      builder: (context, response, error, refetch) => ScrollToTop(
+        alignment: Alignment.topRight,
+        builder: (scrollController) => Scaffold(
+          floatingActionButton: HiddenFloatingActionButton(
+            scrollController: scrollController,
+            child: FloatingButton(
+              character: response!.data!.Character!,
+              refetch: refetch,
             ),
-          );
-        } else if (result.hasException) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: GraphqlError(exception: result.exception!),
-          );
-        }
-
-        return ScrollToTop(
-          alignment: Alignment.topRight,
-          builder: (scrollController) => Scaffold(
-            floatingActionButton: HiddenFloatingActionButton(
-              scrollController: scrollController,
-              child: FloatingButton(
-                character: result.parsedData!.Character!,
-                refetch: refetch!,
-              ),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            body: GraphqlPagination(
-              fetchMore: (nextPage) => fetchMore!(
-                FetchMoreOptions$Query$Character(
-                  variables: Variables$Query$Character(page: nextPage),
-                  updateQuery: (previousResultData, fetchMoreResultData) {
-                    var list = [
-                      ...previousResultData!['Character']!['media']['edges'],
-                      ...fetchMoreResultData!['Character']!['media']['edges'],
-                    ];
-                    fetchMoreResultData['Character']!['media']['edges'] = list;
-                    return fetchMoreResultData;
-                  },
-                ),
-              ),
-              pageInfo: result.parsedData!.Character!.media!.pageInfo!,
-              isLoading: result.isLoading,
-              child: CustomScrollView(
-                controller: scrollController,
-                slivers: [
-                  SliverAppBar(
-                    expandedHeight: 210,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Stack(
-                        children: [
-                          WidgetGradient(
-                            child: Container(
-                              height: 150,
-                              color: Theme.of(context).disabledColor,
-                            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          body: GraphqlPagination(
+            req: (nextPage) => (response.operationRequest as GCharacterReq)
+                .rebuild((b) => b
+                  ..vars.page = nextPage
+                  ..updateResult = (prev, result) => result!.rebuild((p0) => p0
+                      .Character.media.edges
+                      .insertAll(0, prev?.Character?.media?.edges ?? []))),
+            pageInfo: response.data!.Character!.media!.pageInfo!,
+            isLoading: response.loading,
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverAppBar(
+                  expandedHeight: 210,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Stack(
+                      children: [
+                        WidgetGradient(
+                          child: Container(
+                            height: 150,
+                            color: Theme.of(context).disabledColor,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, top: 50),
-                            child: SizedBox(
-                              width: 100,
-                              height: 150,
-                              child: AspectRatio(
-                                aspectRatio: 2 / 3,
-                                child: ClipRRect(
-                                  borderRadius: imageRadius,
-                                  child: CImage(
-                                    imageUrl: result
-                                        .parsedData!.Character!.image!.large!,
-                                    viewer: true,
-                                  ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, top: 50),
+                          child: SizedBox(
+                            width: 100,
+                            height: 150,
+                            child: AspectRatio(
+                              aspectRatio: 2 / 3,
+                              child: ClipRRect(
+                                borderRadius: imageRadius,
+                                child: CImage(
+                                  imageUrl:
+                                      response.data!.Character!.image!.large!,
+                                  viewer: true,
                                 ),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 96, left: 120),
-                            child: SizedBox(
-                              height: 104,
-                              child: ListView(
-                                shrinkWrap: true,
-                                children: [
-                                  Text(
-                                    result.parsedData!.Character!.name!
-                                        .userPreferred!,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  if (result.parsedData!.Character!
-                                              .dateOfBirth !=
-                                          null &&
-                                      result.parsedData!.Character!.dateOfBirth!
-                                              .toDateString() !=
-                                          null)
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          const TextSpan(
-                                            text: 'Birthday: ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: result.parsedData!.Character!
-                                                .dateOfBirth!
-                                                .toDateString()!,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  if (result.parsedData!.Character!.age != null)
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          const TextSpan(
-                                            text: 'Age: ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: result
-                                                .parsedData!.Character!.age,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  if (result.parsedData!.Character!.gender !=
-                                      null)
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          const TextSpan(
-                                            text: 'Gender: ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: result
-                                                .parsedData!.Character!.gender,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  if (result.parsedData!.Character!.bloodType !=
-                                      null)
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          const TextSpan(
-                                            text: 'Blood Type: ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: result.parsedData!.Character!
-                                                .bloodType,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(8),
-                    sliver: SliverToBoxAdapter(
-                      child: Description(
-                          result.parsedData!.Character!.description),
-                    ),
-                  ),
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    sliver: SliverToBoxAdapter(
-                      child: Row(
-                        children: [
-                          Text(
-                            "Appearances",
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const Spacer(),
-                          SizedBox(
-                            width: 120,
-                            child: CheckboxListTile.adaptive(
-                              contentPadding: const EdgeInsets.all(2),
-                              title: Text(
-                                "On My List",
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              visualDensity: VisualDensity.comfortable,
-                              value: onList ?? false,
-                              onChanged: (v) => setState(
-                                  () => onList = v == false ? null : true),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: imageRadius,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: MediaCards(
-                      list: result.parsedData!.Character!.media!.edges!
-                          .map((e) => e!.node!)
-                          .toList()
-                          .cast<Fragment$MediaFragment>(),
-                      aspectRatio: 1.9 / 3,
-                      primary: false,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      onTap: (media, index) =>
-                          context.push('/media/${media.id}/overview'),
-                    ),
-                  ),
-                  if (result.isLoading)
-                    const SliverToBoxAdapter(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator.adaptive(),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 96, left: 120),
+                          child: SizedBox(
+                            height: 104,
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: [
+                                Text(
+                                  response
+                                      .data!.Character!.name!.userPreferred!,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                                if (response.data!.Character!.dateOfBirth !=
+                                        null &&
+                                    response.data!.Character!.dateOfBirth!
+                                            .toDateString() !=
+                                        null)
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Birthday: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: response
+                                              .data!.Character!.dateOfBirth!
+                                              .toDateString()!,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                if (response.data!.Character!.age != null)
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Age: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: response.data!.Character!.age,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                if (response.data!.Character!.gender != null)
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Gender: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              response.data!.Character!.gender,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                if (response.data!.Character!.bloodType != null)
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Blood Type: ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: response
+                                              .data!.Character!.bloodType,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.all(8),
+                  sliver: SliverToBoxAdapter(
+                    child: Description(response.data!.Character!.description),
+                  ),
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  sliver: SliverToBoxAdapter(
+                    child: Row(
+                      children: [
+                        Text(
+                          "Appearances",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 120,
+                          child: CheckboxListTile.adaptive(
+                            contentPadding: const EdgeInsets.all(2),
+                            title: Text(
+                              "On My List",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            visualDensity: VisualDensity.comfortable,
+                            value: onList ?? false,
+                            onChanged: (v) => setState(
+                                () => onList = v == false ? null : true),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: imageRadius,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: MediaCards(
+                    list: response.data!.Character!.media!.edges!
+                        .map((e) => e!.node!)
+                        .toList()
+                        .cast<GMediaFragment>(),
+                    aspectRatio: 1.9 / 3,
+                    primary: false,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    onTap: (media, index) =>
+                        context.push('/media/${media.id}/overview'),
+                  ),
+                ),
+                if (response.loading)
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Center(
+                        child: CircularProgressIndicator.adaptive(),
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+        // );
+        // },
+      ),
     );
   }
 }
@@ -289,7 +278,7 @@ class FloatingButton extends ConsumerWidget {
     required this.refetch,
   });
 
-  final Query$Character$Character character;
+  final GCharacterData_Character character;
   final VoidCallback refetch;
 
   @override
@@ -300,20 +289,19 @@ class FloatingButton extends ConsumerWidget {
         children: [
           Expanded(
             child: FloatingActionButton(
-              onPressed: requireLogin(
-                ref,
-                'like',
-                () => character.isFavouriteBlocked == true
-                    ? null
-                    : client.value.mutate$ToggleFavorite(
-                        Options$Mutation$ToggleFavorite(
-                          variables: Variables$Mutation$ToggleFavorite(
-                            characterId: character.id,
-                          ),
-                          onCompleted: (_, __) => refetch(),
-                        ),
-                      ),
-              ),
+              onPressed: character.isFavouriteBlocked == true
+                  ? null
+                  : requireLogin(
+                      ref,
+                      'like',
+                      () => ref
+                          .read(ferryClientProvider)
+                          .request(GToggleFavoriteReq(
+                            (b) => b..vars.characterId = character.id,
+                          ))
+                          .first
+                          .then((value) => refetch()),
+                    ),
               backgroundColor: character.isFavouriteBlocked == true
                   ? Colors.grey[800]
                   : Colors.red,

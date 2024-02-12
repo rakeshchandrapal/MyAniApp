@@ -1,6 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/search/search.graphql.dart';
+import 'package:myaniapp/ui/routes/search/__generated__/search.data.gql.dart';
 
 class TagsSheet extends ConsumerStatefulWidget {
   const TagsSheet({
@@ -12,11 +13,11 @@ class TagsSheet extends ConsumerStatefulWidget {
   });
 
   final List<Tag> tags;
-  final List<Query$GenreCollection$tags>? withTags;
-  final List<Query$GenreCollection$tags>? withoutTags;
+  final List<GGenreCollectionData_tags>? withTags;
+  final List<GGenreCollectionData_tags>? withoutTags;
   // true if its included tags (with tags)
-  final void Function(
-      List<Query$GenreCollection$tags>? tags, bool withOrWithout) onChanged;
+  final void Function(List<GGenreCollectionData_tags>? tags, bool withOrWithout)
+      onChanged;
 
   @override
   ConsumerState<TagsSheet> createState() => _TagsSheetState();
@@ -24,8 +25,8 @@ class TagsSheet extends ConsumerStatefulWidget {
 
 class _TagsSheetState extends ConsumerState<TagsSheet> {
   late List<Tag> tags;
-  late List<Query$GenreCollection$tags>? withTags;
-  late List<Query$GenreCollection$tags>? withoutTags;
+  late List<GGenreCollectionData_tags>? withTags;
+  late List<GGenreCollectionData_tags>? withoutTags;
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -151,9 +152,9 @@ class _TagsSheetState extends ConsumerState<TagsSheet> {
 void showTags(
   BuildContext context, {
   required List<Tag> tags,
-  List<Query$GenreCollection$tags>? withTags,
-  List<Query$GenreCollection$tags>? withoutTags,
-  required Function(List<Query$GenreCollection$tags>? tags, bool withOrWithout)
+  List<GGenreCollectionData_tags>? withTags,
+  List<GGenreCollectionData_tags>? withoutTags,
+  required Function(List<GGenreCollectionData_tags>? tags, bool withOrWithout)
       onChanged,
 }) {
   showModalBottomSheet(
@@ -171,13 +172,13 @@ class Tag {
   Tag({required this.category});
 
   String category;
-  List<Query$GenreCollection$tags> tags = [];
+  List<GGenreCollectionData_tags> tags = [];
 
-  static List<Tag> sort(List<Query$GenreCollection$tags> tags) {
+  static List<Tag> sort(BuiltList<GGenreCollectionData_tags?> tags) {
     List<Tag> lists = [];
 
     for (var tag in tags) {
-      var category = tag.category!.replaceFirst('-', ' / ');
+      var category = tag!.category!.replaceFirst('-', ' / ');
       var o = lists.indexWhere((element) => element.category == category);
       if (o == -1) {
         lists.add(Tag(category: category)..tags.add(tag));
@@ -185,6 +186,7 @@ class Tag {
         lists[o].tags.add(tag);
       }
     }
+
     return lists
       ..sort(
         (a, b) => a.category.compareTo(b.category),

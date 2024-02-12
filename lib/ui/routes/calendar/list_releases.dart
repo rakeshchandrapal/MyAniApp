@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/calendar/listReleases.graphql.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/routes/calendar/__generated__/listReleases.req.gql.dart';
 import 'package:myaniapp/ui/routes/calendar/calendar.dart' as c;
 import 'package:myaniapp/utils/utils.dart';
 
@@ -11,21 +11,17 @@ class ListReleases extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$ReleasesList$Widget(
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
-
-        var releases = sortReleases(result.parsedData!.Page!.media!,
-            includeUnreleased: true);
+    return GQLRequest(
+      operationRequest:
+          GReleasesListReq((b) => b..requestId = "releaseListCalendar"),
+      builder: (context, response, error, refetch) {
+        var releases =
+            sortReleases(response!.data!.Page!.media!, includeUnreleased: true)
+                .where((element) => element.nextAiringEpisode != null)
+                .toList();
 
         return RefreshIndicator.adaptive(
-          onRefresh: refetch!,
+          onRefresh: refetch,
           child: ListView.separated(
             itemBuilder: (context, index) {
               var media = releases[index];

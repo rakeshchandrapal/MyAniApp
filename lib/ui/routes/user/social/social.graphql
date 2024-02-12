@@ -1,3 +1,6 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/user.graphql'
+
 query Socials($id: Int!, $followersPage: Int, $followingPage: Int) {
   followers: Page(page: $followersPage) {
     pageInfo {

@@ -1,0 +1,18 @@
+# import './user.graphql'
+
+fragment MessageActivity on MessageActivity {
+  id
+  type
+  message
+  replyCount
+  isPrivate
+  isLocked
+  isSubscribed
+  isLiked
+  likeCount
+  createdAt
+  userId: messengerId
+  messenger {
+    ...UserFragment
+  }
+}

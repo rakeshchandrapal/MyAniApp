@@ -4,11 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/media.data.gql.dart';
 import 'package:myaniapp/providers/media.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
@@ -67,7 +65,7 @@ class _MediaPageState extends ConsumerState<MediaPage> {
         ),
         error: (error, stackTrace) => Scaffold(
           appBar: AppBar(),
-          body: GraphqlError(exception: error as OperationException),
+          body: GraphqlError(exception: error as dynamic),
         ),
         loading: () => Scaffold(
           appBar: AppBar(),
@@ -84,7 +82,7 @@ class _MediaPageState extends ConsumerState<MediaPage> {
       ),
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(),
-        body: GraphqlError(exception: error as OperationException),
+        body: GraphqlError(exception: error as dynamic),
       ),
       loading: () => Scaffold(
         appBar: AppBar(),
@@ -209,6 +207,7 @@ class FloatingButtons extends ConsumerWidget {
             Expanded(
               child: FloatingActionButton(
                 heroTag: null,
+                // onPressed: () {},
                 onPressed: () => showMediaEditor(
                   context,
                   media.requireValue,
@@ -230,21 +229,22 @@ class FloatingButtons extends ConsumerWidget {
               width: 10,
             ),
             FloatingActionButton(
-              onPressed: media.requireValue.isFavouriteBlocked == true
-                  ? null
-                  : () => client.value
-                      .mutate$ToggleFavorite(
-                        Options$Mutation$ToggleFavorite(
-                          variables: Variables$Mutation$ToggleFavorite(
-                            animeId: media.requireValue.id,
-                          ),
-                        ),
-                      )
-                      .then(
-                        (value) => ref
-                            .read(mediaProvider(media.requireValue.id).notifier)
-                            .refresh(),
-                      ),
+              onPressed: () {},
+              // onPressed: media.requireValue.isFavouriteBlocked == true
+              //     ? null
+              //     : () => client.value
+              //         .mutate$ToggleFavorite(
+              //           Options$Mutation$ToggleFavorite(
+              //             variables: Variables$Mutation$ToggleFavorite(
+              //               animeId: media.requireValue.id,
+              //             ),
+              //           ),
+              //         )
+              //         .then(
+              //           (value) => ref
+              //               .read(mediaProvider(media.requireValue.id).notifier)
+              //               .refresh(),
+              //         ),
               heroTag: null,
               backgroundColor: media.requireValue.isFavouriteBlocked == true
                   ? Colors.grey[800]
@@ -271,7 +271,7 @@ class MediaAppBar extends StatelessWidget {
     required this.forceElevated,
   });
 
-  final Query$Media$Media media;
+  final GMediaData_Media media;
   final TabController controller;
   final bool forceElevated;
 

@@ -1,10 +1,12 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/media/staff/staff.graphql.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
-import 'package:myaniapp/utils/graphql.dart';
+import 'package:myaniapp/ui/routes/media/staff/__generated__/staff.data.gql.dart';
+import 'package:myaniapp/ui/routes/media/staff/__generated__/staff.req.gql.dart';
 
 class MediaStaffPage extends StatefulWidget {
   const MediaStaffPage({super.key, required this.id});
@@ -21,38 +23,34 @@ class _MediaStaffPageState extends State<MediaStaffPage>
   Widget build(BuildContext context) {
     super.build(context);
     return ScrollToTop(
-      builder: (scrollController) => Query$Staff$Widget(
-        options: Options$Query$Staff(
-          variables: Variables$Query$Staff(mediaId: widget.id),
-        ),
-        builder: queryBuilder(
-          (result, [fetchMore, refetch]) => GraphqlPagination(
-            pageInfo: result.parsedData!.Media!.staff!.pageInfo!,
-            fetchMore: (nextPage) => fetchMore!(
-              FetchMoreOptions$Query$Staff(
-                variables: Variables$Query$Staff(page: nextPage),
-                updateQuery: (previousResultData, fetchMoreResultData) {
-                  var list = [
-                    ...previousResultData!['Media']!['staff']['edges'],
-                    ...fetchMoreResultData!['Media']!['staff']['edges'],
-                  ];
-                  fetchMoreResultData['Media']!['staff']['edges'] = list;
-                  return fetchMoreResultData;
-                },
-              ),
-            ),
-            child: ListView.builder(
-              // controller: scrollController,
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) {
-                var staff = result.parsedData!.Media!.staff!.edges![index]!;
+      builder: (scrollController) => GQLRequest(
+        operationRequest: GMediaStaffReq((b) => b
+          ..requestId = "mediaStaff"
+          ..vars.mediaId = widget.id),
+        builder: (context, response, error, refetch) => GraphqlPagination(
+          pageInfo: response!.data!.Media!.staff!.pageInfo!,
+          req: (nextPage) =>
+              (response.operationRequest as GMediaStaffReq).rebuild(
+            (b) => b
+              ..vars.page = nextPage
+              ..updateResult = (previous, result) => result?.rebuild((p0) => p0
+                ..Media.staff.edges.insertAll(
+                    0,
+                    previous?.Media?.staff?.edges?.whereNot((p0) =>
+                            result.Media?.staff?.edges?.contains(p0) ??
+                            false) ??
+                        [])),
+          ),
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              var staff = response.data!.Media!.staff!.edges![index]!;
 
-                return StaffCard(
-                  staff: staff,
-                );
-              },
-              itemCount: result.parsedData!.Media!.staff!.edges!.length,
-            ),
+              return StaffCard(
+                staff: staff,
+              );
+            },
+            itemCount: response.data!.Media!.staff!.edges!.length,
           ),
         ),
       ),
@@ -69,7 +67,7 @@ class StaffCard extends StatelessWidget {
     required this.staff,
   });
 
-  final Query$Staff$Media$staff$edges staff;
+  final GMediaStaffData_Media_staff_edges staff;
 
   @override
   Widget build(BuildContext context) {

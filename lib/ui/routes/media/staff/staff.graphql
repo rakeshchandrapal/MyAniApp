@@ -1,4 +1,6 @@
-query Staff($mediaId: Int, $page: Int) {
+# import '/graphql/fragments/page_info.graphql'
+
+query MediaStaff($mediaId: Int, $page: Int) {
   Media(id: $mediaId) {
     id
     staff(page: $page, sort: [RELEVANCE, ID]) {

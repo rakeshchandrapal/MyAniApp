@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.data.gql.dart';
 
 DateTime dateFromTimestamp(int timestamp) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
@@ -41,8 +41,8 @@ bool hasTimestampPassed(int? timestamp) {
   return false;
 }
 
-List<Fragment$ReleasingMedia> sortReleases(
-  List<Fragment$ReleasingMedia?> releases, {
+Iterable<GReleasingMedia> sortReleases(
+  Iterable<GReleasingMedia?> releases, {
   bool includeUnreleased = false,
 }) {
   return releases
@@ -68,7 +68,7 @@ List<Fragment$ReleasingMedia> sortReleases(
                     .inDays <=
                 7;
       })
-      .whereType<Fragment$ReleasingMedia>()
+      .whereType<GReleasingMedia>()
       .toList()
     ..sort(
       (a, b) {

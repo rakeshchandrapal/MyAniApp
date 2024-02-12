@@ -1,3 +1,6 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/media.graphql'
+
 query GenreCollection {
   genres: GenreCollection
   tags: MediaTagCollection {

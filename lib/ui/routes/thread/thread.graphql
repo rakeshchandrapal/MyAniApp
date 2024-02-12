@@ -1,3 +1,6 @@
+# import '/graphql/fragments/thread.graphql'
+# import '/graphql/fragments/page_info.graphql'
+
 query Thread($id: Int, $page: Int) {
   thread: Thread(id: $id) {
     ...ThreadFragment

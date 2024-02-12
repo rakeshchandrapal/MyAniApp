@@ -33,6 +33,10 @@ final router = GoRouter(
   navigatorKey: _navigatorKey,
   initialLocation: '/',
   routes: [
+    // GoRoute(
+    //   path: '/',
+    //   builder: (context, state) => const HomeOverviewPage(),
+    // ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => HomePage(navigationShell: shell),
       branches: [
@@ -116,7 +120,6 @@ final router = GoRouter(
             ? '/user/${state.pathParameters['name']}/overview'
             : null;
       },
-      // builder: (context, state) => const SizedBox(),
       routes: [
         GoRoute(
           parentNavigatorKey: _navigatorKey,

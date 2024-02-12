@@ -1,24 +1,28 @@
+import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/page_info.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
+// import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
 
-class GraphqlPagination extends StatelessWidget {
+class GraphqlPagination extends ConsumerWidget {
   const GraphqlPagination({
     super.key,
     required this.pageInfo,
     this.depth,
-    required this.fetchMore,
+    required this.req,
     required this.child,
     this.isLoading,
   });
 
-  final Fragment$PageInfo pageInfo;
+  final GPageInfo pageInfo;
   final int? depth;
-  final Future Function(int nextPage) fetchMore;
+  final OperationRequest Function(int nextPage) req;
   final Widget child;
   final bool? isLoading;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     bool loading = isLoading ?? false;
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
@@ -29,8 +33,11 @@ class GraphqlPagination extends StatelessWidget {
             pageInfo.hasNextPage == true &&
             loading == false) {
           loading = true;
-          fetchMore((pageInfo.currentPage ?? 1) + 1)
-              .then((value) => loading = false);
+          ref
+              .read(ferryClientProvider)
+              .requestController
+              .add(req((pageInfo.currentPage ?? 1) + 1));
+          // print(req((pageInfo.currentPage ?? 1) + 1));
         }
         return false;
       },

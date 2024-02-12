@@ -1,3 +1,7 @@
+# import '/graphql/fragments/fuzzy_date.graphql'
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/media.graphql'
+
 query Staff($id: Int, $onList: Boolean, $characterPage: Int, $staffPage: Int) {
   Staff(id: $id) {
     id

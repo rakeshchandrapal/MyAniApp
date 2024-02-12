@@ -1,42 +1,49 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/__generated__/media.req.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 
 class MediaNotifier
-    extends AutoDisposeFamilyStreamNotifier<Query$Media$Media, int> {
-  late ObservableQuery<Query$Media> query;
+    extends AutoDisposeFamilyStreamNotifier<GMediaData_Media, int> {
+  // late ObservableQuery<Query$Media> query;
   @override
-  Stream<Query$Media$Media> build(int id) async* {
-    query = client.value.watchQuery$Media(
-      WatchOptions$Query$Media(
-        variables: Variables$Query$Media(id: id),
-      ),
-    );
+  Stream<GMediaData_Media> build(int id) async* {
+    final query = ref
+        .watch(ferryClientProvider)
+        .request(GMediaReq(
+          (b) => b..vars.id = id,
+        ))
+        .distinct();
 
-    ref.onDispose(query.close);
-    var cachedResult = query.fetchResults().eagerResult.parsedData?.Media;
+    // ref.onDispose(query.);
 
-    if (cachedResult != null) yield cachedResult;
+    // if (cachedResult != null) yield cachedResult;
 
-    await for (final data in query.stream) {
-      if (data.hasException) {
-        state = AsyncValue.error(data.exception!, StackTrace.current);
+    await for (final data in query) {
+      if (data.hasErrors) {
+        state = AsyncValue.error(
+            (data.graphqlErrors, data.linkException), StackTrace.current);
         return;
-      } else if (data.isLoading && data.parsedData == null) {
+      } else if (data.loading && data.data == null) {
         state = const AsyncValue.loading();
         return;
       }
-      yield data.parsedData!.Media!;
+
+      // if (state.isLoading)
+      // await Future.delayed(const Duration(milliseconds: 1000));
+      yield data.data!.Media!;
     }
   }
 
-  Future<void> refresh() {
-    return query.refetch();
+  Future<void> refresh() async {
+    ref
+        .read(ferryClientProvider)
+        .requestController
+        .add(GMediaReq((b) => b..vars.id = arg));
   }
 }
 
 var mediaProvider = StreamNotifierProvider.autoDispose
-    .family<MediaNotifier, Query$Media$Media, int>(
+    .family<MediaNotifier, GMediaData_Media, int>(
   MediaNotifier.new,
 );

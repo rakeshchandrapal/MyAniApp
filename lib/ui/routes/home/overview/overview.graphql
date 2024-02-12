@@ -1,8 +1,9 @@
-query Overview($page: Int = 1, $userId: Int!, $type: MediaType) {
+# import '/graphql/fragments/thread.graphql'
+# import '/graphql/fragments/releasing_media.graphql'
+# import '/graphql/fragments/media_entry.graphql'
+
+query HomeOverview($page: Int = 1, $userId: Int!, $type: MediaType) {
   releasing: Page(page: $page) {
-    pageInfo {
-      hasNextPage
-    }
     media(onList: true, status_in: [RELEASING, NOT_YET_RELEASED], sort: [STATUS, START_DATE]) {
       ...ReleasingMedia
     }

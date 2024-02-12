@@ -1,0 +1,36 @@
+# import './fuzzy_date.graphql'
+# import './media.graphql'
+
+fragment MediaListEntry on MediaList {
+  id
+  mediaId
+  status
+  updatedAt
+  status
+  progress
+  progressVolumes
+  priority
+  notes
+  hiddenFromStatusLists
+  private
+  repeat
+  score
+  customLists(asArray: true)
+  startedAt {
+    ...FuzzyDate
+  }
+  completedAt {
+    ...FuzzyDate
+  }
+  media {
+    ...MediaFragment
+    episodes
+    chapters
+    status(version: 2)
+    averageScore
+    popularity
+    startDate {
+      ...FuzzyDate
+    }
+  }
+}

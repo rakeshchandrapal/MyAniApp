@@ -1,14 +1,16 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/staff/staff.graphql.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/scroll_to_top.dart';
 import 'package:myaniapp/ui/common/widget_gradient.dart';
 import 'package:myaniapp/ui/routes/media/overview.dart';
+import 'package:myaniapp/ui/routes/staff/__generated__/staff.data.gql.dart';
+import 'package:myaniapp/ui/routes/staff/__generated__/staff.req.gql.dart';
 import 'package:myaniapp/ui/routes/staff/production.dart';
 import 'package:myaniapp/ui/routes/staff/voice.dart';
 
@@ -19,30 +21,25 @@ class StaffPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$Staff$Widget(
-      options: Options$Query$Staff(
-        variables: Variables$Query$Staff(id: id),
+    return GQLRequest(
+      operationRequest: GStaffReq((b) => b
+        ..requestId = "staff"
+        ..vars.id = id),
+      loading: Scaffold(
+        appBar: AppBar(),
+        body: const Center(
+          child: CircularProgressIndicator.adaptive(),
+        ),
       ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.parsedData == null) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: const Center(
-              child: CircularProgressIndicator.adaptive(),
-            ),
-          );
-        } else if (result.hasException) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: GraphqlError(exception: result.exception!),
-          );
-        }
-
-        return StaffView(
-          staff: result.parsedData!.Staff!,
-          fetchMore: fetchMore!,
-        );
-      },
+      error: (response) => Scaffold(
+        appBar: AppBar(),
+        body: GraphqlError(
+            exception: (response!.graphqlErrors, response.linkException)),
+      ),
+      builder: (context, response, error, refetch) => StaffView(
+        staff: response!.data!.Staff!,
+        query: response.operationRequest as GStaffReq,
+      ),
     );
   }
 }
@@ -51,11 +48,11 @@ class StaffView extends StatefulWidget {
   const StaffView({
     super.key,
     required this.staff,
-    required this.fetchMore,
+    required this.query,
   });
 
-  final Query$Staff$Staff staff;
-  final FetchMore fetchMore;
+  final GStaffData_Staff staff;
+  final GStaffReq query;
 
   @override
   State<StaffView> createState() => _StaffViewState();
@@ -78,36 +75,25 @@ class _StaffViewState extends State<StaffView> {
           pageInfo: production
               ? widget.staff.staffMedia!.pageInfo!
               : widget.staff.characterMedia!.pageInfo!,
-          fetchMore: (nextPage) => widget.fetchMore(
-            production
-                ? FetchMoreOptions$Query$Staff(
-                    variables: Variables$Query$Staff(staffPage: nextPage),
-                    updateQuery: (previousResultData, fetchMoreResultData) {
-                      var list = [
-                        ...previousResultData!['Staff']!['staffMedia']['edges'],
-                        ...fetchMoreResultData!['Staff']!['staffMedia']
-                            ['edges'],
-                      ];
-                      fetchMoreResultData['Staff']!['staffMedia']['edges'] =
-                          list;
-                      return fetchMoreResultData;
-                    },
-                  )
-                : FetchMoreOptions$Query$Staff(
-                    variables: Variables$Query$Staff(characterPage: nextPage),
-                    updateQuery: (previousResultData, fetchMoreResultData) {
-                      var list = [
-                        ...previousResultData!['Staff']!['characterMedia']
-                            ['edges'],
-                        ...fetchMoreResultData!['Staff']!['characterMedia']
-                            ['edges'],
-                      ];
-                      fetchMoreResultData['Staff']!['characterMedia']['edges'] =
-                          list;
-                      return fetchMoreResultData;
-                    },
-                  ),
-          ),
+          req: production
+              ? (nextPage) => widget.query.rebuild((p0) => p0
+                ..vars.staffPage = nextPage
+                ..updateResult = (prev, result) => result!.rebuild((p0) => p0
+                  ..Staff.staffMedia.edges.insertAll(
+                      0,
+                      prev?.Staff?.staffMedia?.edges?.whereNot((p0) =>
+                              result.Staff?.staffMedia?.edges?.contains(p0) ??
+                              false) ??
+                          [])))
+              : (nextPage) => widget.query.rebuild((p0) => p0
+                ..vars.characterPage = nextPage
+                ..updateResult = (prev, result) => result!.rebuild((p0) => p0
+                  ..Staff.characterMedia.edges.insertAll(
+                      0,
+                      prev?.Staff?.characterMedia?.edges?.whereNot((p0) =>
+                              result.Staff?.characterMedia?.edges?.contains(p0) ??
+                              false) ??
+                          []))),
           child: CustomScrollView(
             controller: scrollController,
             slivers: [
@@ -318,7 +304,7 @@ class _StaffViewState extends State<StaffView> {
     );
   }
 
-  bool hasTabs(Query$Staff$Staff staff) {
+  bool hasTabs(GStaffData_Staff staff) {
     return staff.characterMedia!.edges!.isNotEmpty == true &&
         staff.staffMedia!.edges!.isNotEmpty == true;
   }

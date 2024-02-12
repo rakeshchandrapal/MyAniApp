@@ -1,19 +1,20 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/staff/staff.graphql.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/image.dart';
+import 'package:myaniapp/ui/routes/staff/__generated__/staff.data.gql.dart';
 
 class StaffVoicePage extends StatelessWidget {
   const StaffVoicePage({super.key, required this.medias});
 
-  final Query$Staff$Staff$characterMedia medias;
+  final GStaffData_Staff_characterMedia medias;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var years = _Media.sort(medias.edges!.cast());
+    var years = _Media.sort(medias.edges!);
 
     return ListView.builder(
       padding: const EdgeInsets.all(8),
@@ -75,19 +76,20 @@ class StaffVoicePage extends StatelessWidget {
 class _Media {
   const _Media(this.medias, this.year);
 
-  final List<Query$Staff$Staff$characterMedia$edges> medias;
+  final List<GStaffData_Staff_characterMedia_edges> medias;
   final int year;
 
-  static List<_Media> sort(List<Query$Staff$Staff$characterMedia$edges> edges) {
+  static List<_Media> sort(
+      BuiltList<GStaffData_Staff_characterMedia_edges?> edges) {
     List<_Media> list = [];
 
     for (var edge in edges) {
       var index = list
-          .indexWhere((element) => element.year == edge.node!.startDate?.year);
+          .indexWhere((element) => element.year == edge!.node!.startDate?.year);
 
       if (index != -1) {
-        list[index].medias.add(edge);
-      } else if (edge.node!.startDate?.year == null) {
+        list[index].medias.add(edge!);
+      } else if (edge!.node!.startDate?.year == null) {
         var tba = list.indexWhere((element) => element.year == 0);
 
         if (tba != -1) {

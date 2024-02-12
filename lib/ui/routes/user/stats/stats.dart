@@ -1,14 +1,16 @@
 import 'dart:math';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/user/stats/stats.graphql.dart';
+import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/providers/user_profile.dart';
-import 'package:myaniapp/utils/graphql.dart';
+import 'package:myaniapp/ui/routes/user/stats/__generated__/stats.data.gql.dart';
+import 'package:myaniapp/ui/routes/user/stats/__generated__/stats.req.gql.dart';
 
 class UserStatsPage extends ConsumerStatefulWidget {
   const UserStatsPage({
@@ -29,81 +31,71 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage>
     super.build(context);
     var user = ref.watch(userProfileProvider(widget.name));
 
-    return Query$UserStats$Widget(
-      options: Options$Query$UserStats(
-        variables: Variables$Query$UserStats(name: widget.name),
-      ),
-      builder: queryBuilder(
-        (result, [fetchMore, refetch]) {
-          return ListView(
+    return GQLRequest(
+      operationRequest: GUserStatsReq((b) => b..vars.name = widget.name),
+      builder: (context, response, error, refetch) => ListView(
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.tv),
-                  Text(
-                    user.requireValue.statistics!.anime!.count.toString(),
-                  ),
-                  const Icon(Icons.play_arrow),
-                  Text(
-                    user.requireValue.statistics!.anime!.episodesWatched
-                        .toString(),
-                  ),
-                  const Icon(Icons.calendar_today),
-                  Text(
-                    (user.requireValue.statistics!.anime!.minutesWatched / 1440)
-                        .toStringAsFixed(1),
-                  ),
-                  const Icon(Icons.hourglass_full),
-                  Text(
-                    user.requireValue.statistics!.anime!.episodesWatched
-                        .toString(),
-                  ),
-                  const Icon(Icons.percent),
-                  Text(
-                    user.requireValue.statistics!.anime!.meanScore.toString(),
-                  ),
-                  const Icon(FontAwesomeIcons.divide),
-                  Text(
-                    user.requireValue.statistics!.anime!.standardDeviation
-                        .toString(),
-                  ),
-                ],
+              const Icon(Icons.tv),
+              Text(
+                user.requireValue.statistics!.anime!.count.toString(),
               ),
-              const SizedBox(
-                height: 100,
+              const Icon(Icons.play_arrow),
+              Text(
+                user.requireValue.statistics!.anime!.episodesWatched.toString(),
               ),
-              const Text('Score'),
-              ScoreChart(
-                scoreStats:
-                    result.parsedData!.User!.statistics!.anime!.scores!.cast(),
-                username: widget.name,
+              const Icon(Icons.calendar_today),
+              Text(
+                (user.requireValue.statistics!.anime!.minutesWatched / 1440)
+                    .toStringAsFixed(1),
               ),
-              const SizedBox(
-                height: 50,
+              const Icon(Icons.hourglass_full),
+              Text(
+                user.requireValue.statistics!.anime!.episodesWatched.toString(),
               ),
-              const Text('Episode Count'),
-              EpisodeChart(
-                scoreStats:
-                    result.parsedData!.User!.statistics!.anime!.lengths!.cast(),
-              )
-              // SizedBox(
-              //   height: 200,
-              //   child: BarChart(
-              //     BarChartData(
-              //       barGroups: [
-              //         BarChartGroupData(
-              //           x: 0,
-              //           barRods: [
-              //             BarChartRodData(toY: 9),
-              //           ],
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              const Icon(Icons.percent),
+              Text(
+                user.requireValue.statistics!.anime!.meanScore.toString(),
+              ),
+              const Icon(FontAwesomeIcons.divide),
+              Text(
+                user.requireValue.statistics!.anime!.standardDeviation
+                    .toString(),
+              ),
             ],
-          );
-        },
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          const Text('Score'),
+          ScoreChart(
+            scoreStats: response!.data!.User!.statistics!.anime!.scores!,
+            username: widget.name,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          const Text('Episode Count'),
+          EpisodeChart(
+            scoreStats: response.data!.User!.statistics!.anime!.lengths!,
+          )
+          // SizedBox(
+          //   height: 200,
+          //   child: BarChart(
+          //     BarChartData(
+          //       barGroups: [
+          //         BarChartGroupData(
+          //           x: 0,
+          //           barRods: [
+          //             BarChartRodData(toY: 9),
+          //           ],
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }
@@ -119,7 +111,7 @@ class ScoreChart extends ConsumerStatefulWidget {
     required this.username,
   });
 
-  final List<Query$UserStats$User$statistics$anime$scores> scoreStats;
+  final BuiltList<GUserStatsData_User_statistics_anime_scores?> scoreStats;
   final String username;
 
   @override
@@ -134,7 +126,7 @@ class _ScoreChartState extends ConsumerState<ScoreChart> {
     super.initState();
     var user = ref.read(userProfileProvider(widget.username));
     xTiles = switch (user.requireValue.mediaListOptions!.scoreFormat!) {
-      (Enum$ScoreFormat.POINT_3) => [
+      (GScoreFormat.POINT_3) => [
           const Icon(FontAwesomeIcons.faceFrown),
           const Icon(FontAwesomeIcons.faceMeh),
           const Icon(FontAwesomeIcons.faceSmile)
@@ -160,7 +152,7 @@ class _ScoreChartState extends ConsumerState<ScoreChart> {
                   "",
                   Theme.of(context).textTheme.bodySmall!,
                   children: [
-                    TextSpan(text: "Score: ${data.score}\n"),
+                    TextSpan(text: "Score: ${data!.score}\n"),
                     TextSpan(text: "Count: ${data.count}\n"),
                     TextSpan(
                       text:
@@ -175,7 +167,7 @@ class _ScoreChartState extends ConsumerState<ScoreChart> {
           barGroups: getDataGroups(),
           backgroundColor: Theme.of(context).colorScheme.surface,
           gridData: const FlGridData(show: false),
-          maxY: widget.scoreStats.map((e) => e.count).reduce(max).toDouble(),
+          maxY: widget.scoreStats.map((e) => e!.count).reduce(max).toDouble(),
           titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
               sideTitles:
@@ -202,7 +194,7 @@ class _ScoreChartState extends ConsumerState<ScoreChart> {
     for (var element in widget.scoreStats.reversed) {
       s.add(
         BarChartGroupData(
-          x: element.score!,
+          x: element!.score!,
           barRods: [
             BarChartRodData(
               toY: element.count.toDouble(),
@@ -232,7 +224,7 @@ class EpisodeChart extends ConsumerStatefulWidget {
     required this.scoreStats,
   });
 
-  final List<Query$UserStats$User$statistics$anime$lengths> scoreStats;
+  final BuiltList<GUserStatsData_User_statistics_anime_lengths?> scoreStats;
 
   @override
   ConsumerState<EpisodeChart> createState() => _EpisodeChartState();
@@ -241,7 +233,7 @@ class EpisodeChart extends ConsumerStatefulWidget {
 final digitRegExp = RegExp('(\\d+)');
 
 class _EpisodeChartState extends ConsumerState<EpisodeChart> {
-  late final List<Query$UserStats$User$statistics$anime$lengths> lengths;
+  late final List<GUserStatsData_User_statistics_anime_lengths?> lengths;
 
   @override
   void initState() {
@@ -249,12 +241,12 @@ class _EpisodeChartState extends ConsumerState<EpisodeChart> {
     lengths = widget.scoreStats.sorted(sorted);
   }
 
-  int sorted(Query$UserStats$User$statistics$anime$lengths a,
-      Query$UserStats$User$statistics$anime$lengths b) {
+  int sorted(GUserStatsData_User_statistics_anime_lengths? a,
+      GUserStatsData_User_statistics_anime_lengths? b) {
     int? lengthA =
-        int.tryParse(digitRegExp.firstMatch(a.length!)?.group(1) ?? '');
+        int.tryParse(digitRegExp.firstMatch(a!.length!)?.group(1) ?? '');
     int? lengthB =
-        int.tryParse(digitRegExp.firstMatch(b.length!)?.group(1) ?? '');
+        int.tryParse(digitRegExp.firstMatch(b!.length!)?.group(1) ?? '');
 
     return (lengthA ?? 0).compareTo(lengthB ?? 0);
   }
@@ -275,7 +267,7 @@ class _EpisodeChartState extends ConsumerState<EpisodeChart> {
                   "",
                   Theme.of(context).textTheme.bodySmall!,
                   children: [
-                    TextSpan(text: "Count: ${data.count}\n"),
+                    TextSpan(text: "Count: ${data!.count}\n"),
                     TextSpan(
                       text:
                           "Hours Watched: ${(data.minutesWatched / 1440).toStringAsFixed(1)}\n",
@@ -289,7 +281,7 @@ class _EpisodeChartState extends ConsumerState<EpisodeChart> {
           barGroups: getDataGroups(),
           backgroundColor: Theme.of(context).colorScheme.surface,
           gridData: const FlGridData(show: false),
-          maxY: lengths.map((e) => e.count).reduce(max).toDouble(),
+          maxY: lengths.map((e) => e!.count).reduce(max).toDouble(),
           titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
               sideTitles:
@@ -319,7 +311,7 @@ class _EpisodeChartState extends ConsumerState<EpisodeChart> {
           x: index,
           barRods: [
             BarChartRodData(
-              toY: element.count.toDouble(),
+              toY: element!.count.toDouble(),
               width: 10,
             ),
           ],
@@ -333,7 +325,7 @@ class _EpisodeChartState extends ConsumerState<EpisodeChart> {
   Widget getBottomTiles(double value, TitleMeta meta) {
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: Text(lengths.elementAt(value.toInt()).length!),
+      child: Text(lengths.elementAt(value.toInt())!.length!),
     );
   }
 }

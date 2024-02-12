@@ -1,9 +1,10 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/forum/forums.graphql.dart';
+import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
-import 'package:myaniapp/utils/graphql.dart';
+import 'package:myaniapp/ui/routes/forum/__generated__/forums.req.gql.dart';
 
 class ForumSearch extends StatefulWidget {
   const ForumSearch({
@@ -40,73 +41,66 @@ class _ForumSearchState extends State<ForumSearch> {
   @override
   Widget build(BuildContext context) {
     if (widget.search?.isNotEmpty == true) {
-      return Query$Forums$Widget(
-        options: Options$Query$Forums(
-          variables: Variables$Query$Forums(
-            search: widget.search,
-            id: widget.categoryId,
-            sort: [Enum$ThreadSort.ID_DESC],
-          ),
-        ),
-        builder: queryBuilder(
-          (result, [fetchMore, refetch]) {
-            return RefreshIndicator.adaptive(
-              onRefresh: refetch!,
-              child: GraphqlPagination(
-                fetchMore: (nextPage) => fetchMore!(
-                  FetchMoreOptions$Query$Forums(
-                    updateQuery: (previousResultData, fetchMoreResultData) {
-                      var list = [
-                        ...previousResultData!['Page']['threads'],
-                        ...fetchMoreResultData!['Page']['threads']
-                      ];
-
-                      fetchMoreResultData['Page']['threads'] = list;
-
-                      return fetchMoreResultData;
-                    },
-                    variables: Variables$Query$Forums(page: nextPage),
+      return GQLRequest(
+        key: Key("${widget.search},${widget.categoryId}"),
+        operationRequest: GForumsReq((b) => b
+          ..requestId = "searchForums"
+          ..vars.search = widget.search
+          ..vars.id = widget.categoryId
+          ..vars.sort.add(GThreadSort.ID_DESC)),
+        builder: (context, response, error, refetch) =>
+            RefreshIndicator.adaptive(
+          onRefresh: refetch,
+          child: GraphqlPagination(
+            req: (nextPage) =>
+                (response.operationRequest as GForumsReq).rebuild(
+              (p0) => p0
+                ..vars.page = nextPage
+                ..updateResult = (previous, result) => result?.rebuild((p0) =>
+                    p0
+                      ..Page.threads.insertAll(
+                          0,
+                          previous?.Page?.threads?.whereNot((p0) =>
+                                  result.Page?.threads?.contains(p0) ??
+                                  false) ??
+                              [])),
+            ),
+            pageInfo: response!.data!.Page!.pageInfo!,
+            child: CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  sliver: SliverToBoxAdapter(
+                    child: TextField(
+                      controller: _controller,
+                      onSubmitted: widget.onChange,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        hintText: 'Search...',
+                      ),
+                    ),
                   ),
                 ),
-                pageInfo: result.parsedData!.Page!.pageInfo!,
-                child: CustomScrollView(
-                  slivers: [
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 10),
-                      sliver: SliverToBoxAdapter(
-                        child: TextField(
-                          controller: _controller,
-                          onSubmitted: widget.onChange,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            hintText: 'Search...',
-                          ),
-                        ),
-                      ),
+                SliverPadding(
+                  padding: const EdgeInsets.all(8),
+                  sliver: SliverList.separated(
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 10,
                     ),
-                    SliverPadding(
-                      padding: const EdgeInsets.all(8),
-                      sliver: SliverList.separated(
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 10,
-                        ),
-                        itemBuilder: (context, index) {
-                          var thread =
-                              result.parsedData!.Page!.threads![index]!;
+                    itemBuilder: (context, index) {
+                      var thread = response.data!.Page!.threads![index]!;
 
-                          return ThreadCard(thread: thread);
-                        },
-                        itemCount: result.parsedData!.Page!.threads!.length,
-                      ),
-                    ),
-                  ],
+                      return ThreadCard(thread: thread);
+                    },
+                    itemCount: response.data!.Page!.threads!.length,
+                  ),
                 ),
-              ),
-            );
-          },
+              ],
+            ),
+          ),
         ),
       );
     }

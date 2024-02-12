@@ -1,4 +1,6 @@
-query MediaListEntry($mediaId: Int, $userId: Int) {
+# import '/graphql/fragments/media_entry.graphql'
+
+query MediaEntry($mediaId: Int, $userId: Int) {
   MediaList(mediaId: $mediaId, userId: $userId) {
     ...MediaListEntry
   }

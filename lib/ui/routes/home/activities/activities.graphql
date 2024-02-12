@@ -1,3 +1,8 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/text_activity.graphql'
+# import '/graphql/fragments/list_activity.graphql'
+# import '/graphql/fragments/user.graphql'
+
 query Activities($isFollowing: Boolean = true, $hasReplies: Boolean = false, $activityType: ActivityType, $page: Int) {
   Page(page: $page, perPage: 25) {
     pageInfo {

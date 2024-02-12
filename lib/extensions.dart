@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/fuzzy_date.data.gql.dart';
 
 extension Capitalize on String {
   String capitalize() {
@@ -32,7 +32,7 @@ extension HexColor on Color {
       '${blue.toRadixString(16).padLeft(2, '0')}';
 }
 
-extension FuzzyToDate on Fragment$FuzzyDate {
+extension FuzzyToDate on GFuzzyDate {
   DateTime? toDate() {
     if (year == null) return null;
 
@@ -56,7 +56,31 @@ extension FuzzyToDate on Fragment$FuzzyDate {
   }
 }
 
-extension InputFuzzyToDate on Input$FuzzyDateInput {
+extension InputFuzzyToDate on GFuzzyDateInput {
+  DateTime? toDate() {
+    if (year == null) return null;
+
+    return DateTime(year!, month ?? 1, day ?? 1);
+  }
+
+  String? toDateString() {
+    if (day == null && month == null && year == null) return null;
+    var str = '';
+    if (month != null) str += DateFormat('MMMM').format(DateTime(0, month!));
+    if (day != null) str += ' $day';
+    if (year != null) {
+      if (str.isEmpty) {
+        str += year!.toString();
+      } else {
+        str += ', $year';
+      }
+    }
+
+    return str;
+  }
+}
+
+extension InputFuzzyBuilderToDate on GFuzzyDateInputBuilder {
   DateTime? toDate() {
     if (year == null) return null;
 

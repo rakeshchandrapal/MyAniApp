@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/viewer.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__generated__/viewer.var.gql.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 
@@ -40,7 +40,7 @@ class AnilistSettingsPage extends ConsumerWidget {
             value: user.value!.options?.airingNotifications ?? false,
             onChanged: (value) =>
                 ref.read(userProvider.notifier).updateSettings(
-                      Variables$Mutation$UpdateUser(airingNotifications: value),
+                      GUpdateUserVarsBuilder()..airingNotifications = value,
                     ),
             title: const Text('Airing Notifications'),
           ),
@@ -48,9 +48,7 @@ class AnilistSettingsPage extends ConsumerWidget {
             value: user.value?.options?.displayAdultContent ?? false,
             onChanged: (value) =>
                 ref.read(userProvider.notifier).updateSettings(
-                      Variables$Mutation$UpdateUser(
-                        displayAdultContent: value,
-                      ),
+                      GUpdateUserVarsBuilder()..displayAdultContent = value,
                     ),
             title: const Text('18+ content'),
           ),
@@ -58,8 +56,8 @@ class AnilistSettingsPage extends ConsumerWidget {
             value: user.value!.options?.restrictMessagesToFollowing,
             onChanged: (value) =>
                 ref.read(userProvider.notifier).updateSettings(
-                      Variables$Mutation$UpdateUser(
-                          restrictMessagesToFollowing: value),
+                      GUpdateUserVarsBuilder()
+                        ..restrictMessagesToFollowing = value,
                     ),
             title: const Text('Allow only users I follow to message me'),
           ),
@@ -77,22 +75,22 @@ class AnilistSettingsPage extends ConsumerWidget {
                   value: user.value!.options?.titleLanguage,
                   onChanged: (value) =>
                       ref.read(userProvider.notifier).updateSettings(
-                            Variables$Mutation$UpdateUser(titleLanguage: value),
+                            GUpdateUserVarsBuilder()..titleLanguage = value,
                           ),
                   dropdownItems: [
-                    Enum$UserTitleLanguage.ENGLISH,
-                    Enum$UserTitleLanguage.ROMAJI,
-                    Enum$UserTitleLanguage.NATIVE,
+                    GUserTitleLanguage.ENGLISH,
+                    GUserTitleLanguage.ROMAJI,
+                    GUserTitleLanguage.NATIVE,
                   ]
                       .map(
                         (e) => DropdownMenuItem(
                           value: e,
                           child: switch (e) {
-                            Enum$UserTitleLanguage.ENGLISH =>
+                            GUserTitleLanguage.ENGLISH =>
                               const Text('English (Attack on Titan)'),
-                            Enum$UserTitleLanguage.ROMAJI =>
+                            GUserTitleLanguage.ROMAJI =>
                               const Text('Romaji (Shingeki no Kyojin)'),
-                            Enum$UserTitleLanguage.NATIVE =>
+                            GUserTitleLanguage.NATIVE =>
                               const Text('Native (進撃の巨人)'),
                             _ => Text(e.name)
                           },
@@ -107,24 +105,20 @@ class AnilistSettingsPage extends ConsumerWidget {
                 CustomDropdown(
                   hint: 'Staff & Character Name Language',
                   value: user.value!.options?.staffNameLanguage,
-                  onChanged: (value) => ref
-                      .read(userProvider.notifier)
-                      .updateSettings(
-                        Variables$Mutation$UpdateUser(staffNameLanguage: value),
-                      ),
-                  dropdownItems: Enum$UserStaffNameLanguage.values
-                      .takeWhile(
-                        (value) => value != Enum$UserStaffNameLanguage.$unknown,
-                      )
+                  onChanged: (value) =>
+                      ref.read(userProvider.notifier).updateSettings(
+                            GUpdateUserVarsBuilder()..staffNameLanguage = value,
+                          ),
+                  dropdownItems: GUserStaffNameLanguage.values
                       .map(
                         (e) => DropdownMenuItem(
                             value: e,
                             child: switch (e) {
-                              Enum$UserStaffNameLanguage.NATIVE =>
+                              GUserStaffNameLanguage.NATIVE =>
                                 const Text('Native (キルア=ゾルディック)'),
-                              Enum$UserStaffNameLanguage.ROMAJI =>
+                              GUserStaffNameLanguage.ROMAJI =>
                                 const Text('Romaji (Zoldyck Killua)'),
-                              Enum$UserStaffNameLanguage.ROMAJI_WESTERN =>
+                              GUserStaffNameLanguage.ROMAJI_WESTERN =>
                                 const Text(
                                     'Romaji, Western Order (Killua Zoldyck)'),
                               _ => Text(e.name.capitalize())
@@ -146,11 +140,10 @@ class AnilistSettingsPage extends ConsumerWidget {
                 CustomDropdown(
                   hint: 'Activity Merge Time',
                   value: user.value!.options?.activityMergeTime,
-                  onChanged: (value) => ref
-                      .read(userProvider.notifier)
-                      .updateSettings(
-                        Variables$Mutation$UpdateUser(activityMergeTime: value),
-                      ),
+                  onChanged: (value) =>
+                      ref.read(userProvider.notifier).updateSettings(
+                            GUpdateUserVarsBuilder()..activityMergeTime = value,
+                          ),
                   dropdownItems: mergeTimes
                       .map(
                         (e) => DropdownMenuItem(

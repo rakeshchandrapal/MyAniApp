@@ -1,0 +1,22 @@
+# import './user.graphql'
+# import './media.graphql'
+
+fragment ListActivity on ListActivity {
+  id
+  userId
+  type
+  status
+  progress
+  replyCount
+  isLocked
+  isSubscribed
+  isLiked
+  likeCount
+  createdAt
+  user {
+    ...UserFragment
+  }
+  media {
+    ...MediaFragment
+  }
+}

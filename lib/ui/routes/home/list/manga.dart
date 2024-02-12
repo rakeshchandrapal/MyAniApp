@@ -1,12 +1,13 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
+import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
+import 'package:myaniapp/ui/routes/home/list/__generated__/list.req.gql.dart';
 import 'package:myaniapp/ui/routes/home/list/anime.dart';
 
 class HomeMangaPage extends ConsumerWidget {
@@ -16,31 +17,23 @@ class HomeMangaPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
 
-    return Query$MediaList$Widget(
-      options: Options$Query$MediaList(
-        variables: Variables$Query$MediaList(
-          sort: [
-            Enum$MediaListSort.STATUS,
-            Enum$MediaListSort.UPDATED_TIME_DESC,
-          ],
-          type: Enum$MediaType.MANGA,
-          userName: user.value!.name,
-        ),
-      ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.data == null) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
-
-        var lists = result.parsedData!.MediaListCollection!.lists!;
+    return GQLRequest(
+      // options: Options$Query$MediaList(
+      //   cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+      //   variables: Variables$Query$MediaList(
+      //     type: GMediaType.ANIME,
+      //     userName: user.value!.name,
+      //   ),
+      // ),
+      operationRequest: GMediaListReq((b) => b
+        ..vars.type = GMediaType.MANGA
+        ..vars.userName = user.value!.name),
+      builder: (context, response, error, refetch) {
+        var lists = response!.data!.MediaListCollection!.lists!;
 
         if (lists.isEmpty) {
           return RefreshIndicator.adaptive(
-            onRefresh: refetch!,
+            onRefresh: refetch,
             child: Scaffold(
               appBar: const HomeAppBar(),
               body: LayoutBuilder(
@@ -51,8 +44,8 @@ class HomeMangaPage extends ConsumerWidget {
                           BoxConstraints(minHeight: constraints.maxHeight),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () => context.push(
-                              '/search?type=${Enum$MediaType.MANGA.name}'),
+                          onPressed: () => context
+                              .push('/search?type=${GMediaType.MANGA.name}'),
                           child: const Text('Browse mangas to add'),
                         ),
                       ),
@@ -65,14 +58,14 @@ class HomeMangaPage extends ConsumerWidget {
         }
 
         return RefreshIndicator.adaptive(
-          onRefresh: refetch!,
+          onRefresh: refetch,
           notificationPredicate: (notification) => notification.depth == 1,
           child: DefaultTabController(
             length: lists.length,
             child: ListTabs(
-              lists: lists.cast(),
+              lists: lists.nonNulls.toBuiltList(),
               refresh: refetch,
-              user: result.parsedData!.MediaListCollection!.user!,
+              user: response.data!.MediaListCollection!.user!,
               setting: Setting.mangaList,
             ),
           ),

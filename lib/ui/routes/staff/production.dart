@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/staff/staff.graphql.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
+import 'package:myaniapp/ui/routes/staff/__generated__/staff.data.gql.dart';
 
 class StaffProductionPage extends StatelessWidget {
   const StaffProductionPage({
@@ -9,7 +9,7 @@ class StaffProductionPage extends StatelessWidget {
     required this.medias,
   });
 
-  final Query$Staff$Staff$staffMedia medias;
+  final GStaffData_Staff_staffMedia medias;
 
   @override
   Widget build(BuildContext context) {

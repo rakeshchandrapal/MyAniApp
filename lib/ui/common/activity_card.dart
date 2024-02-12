@@ -5,12 +5,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/activity/activity.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
-import 'package:myaniapp/main.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/list_activity.data.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/message_activity.data.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/text_activity.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/comment/comment.dart';
 import 'package:myaniapp/ui/common/comment/like.dart';
@@ -18,6 +17,8 @@ import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
+import 'package:myaniapp/ui/routes/activity/__generated__/activity.req.gql.dart';
+import 'package:myaniapp/ui/routes/home/activities/__generated__/activities.req.gql.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 class ActivityCard extends ConsumerWidget {
@@ -44,16 +45,18 @@ class ActivityCard extends ConsumerWidget {
         children: [
           LikeButton(
             id: activity.id,
-            type: Enum$LikeableType.ACTIVITY,
+            type: GLikeableType.ACTIVITY,
             onPressed: requireLogin(
               ref,
               "like",
-              () => client.value.mutate$ToggleLike(
-                Options$Mutation$ToggleLike(
-                  variables: Variables$Mutation$ToggleLike(
-                      id: activity.id, type: Enum$LikeableType.ACTIVITY),
-                ),
-              ),
+              () => ref
+                  .read(ferryClientProvider)
+                  .request(GToggleLikeReq(
+                    (b) => b
+                      ..vars.id = activity.id
+                      ..vars.type = GLikeableType.ACTIVITY,
+                  ))
+                  .first,
             ),
             icon: Row(
               children: [
@@ -80,15 +83,14 @@ class ActivityCard extends ConsumerWidget {
             onPressed: requireLogin(
               ref,
               "subscribe",
-              () => client.value.mutate$ToggleActivitySubscription(
-                Options$Mutation$ToggleActivitySubscription(
-                  variables: Variables$Mutation$ToggleActivitySubscription(
-                    id: activity.id,
-                    subscribe: !(activity.isSubscribed ?? false),
-                  ),
-                  onError: (error) => logger.e(error),
-                ),
-              ),
+              () => ref
+                  .read(ferryClientProvider)
+                  .request(GToggleActivitySubscriptionReq(
+                    (b) => b
+                      ..vars.id = activity.id
+                      ..vars.subscribe = !(activity.isSubscribed ?? false),
+                  ))
+                  .first,
             ),
             icon: Icon(
               activity.isSubscribed == true
@@ -97,22 +99,21 @@ class ActivityCard extends ConsumerWidget {
               color: activity.isSubscribed == true ? Colors.yellow : null,
             ),
           ),
-          if (user.value?.id == activity.userId &&
-              activity is Fragment$TextActivity)
+          if (user.value?.id == activity.userId && activity is GTextActivity)
             IconButton(
               onPressed: () => showMarkdownEditor(
                 context,
                 text: activity.text,
                 onSave: (text) {
                   if (text.length > 4) {
-                    client.value.mutate$SaveTextActivity(
-                      Options$Mutation$SaveTextActivity(
-                        variables: Variables$Mutation$SaveTextActivity(
-                          id: activity.id,
-                          text: text,
-                        ),
-                      ),
-                    );
+                    ref
+                        .read(ferryClientProvider)
+                        .request(GSaveTextActivityReq(
+                          (b) => b
+                            ..vars.id = activity.id
+                            ..vars.text = text,
+                        ))
+                        .first;
                   }
                 },
               ),
@@ -122,14 +123,21 @@ class ActivityCard extends ConsumerWidget {
             IconButton(
               onPressed: () => showDeleteDialog(context).then((value) {
                 if (value == true) {
-                  client.value.mutate$DeleteActivity(
-                    Options$Mutation$DeleteActivity(
-                      variables: Variables$Mutation$DeleteActivity(
-                        id: activity.id,
-                      ),
-                      onCompleted: (p0, p1) => onDelete?.call(),
-                    ),
-                  );
+                  ref
+                      .read(ferryClientProvider)
+                      .request(GDeleteActivityReq(
+                        (b) => b..vars.id = activity.id,
+                      ))
+                      .first
+                      .then((value) => onDelete?.call());
+                  // client.value.mutate$DeleteActivity(
+                  //   Options$Mutation$DeleteActivity(
+                  //     variables: Variables$Mutation$DeleteActivity(
+                  //       id: activity.id,
+                  //     ),
+                  //     onCompleted: (p0, p1) => onDelete?.call(),
+                  //   ),
+                  // );
                 }
               }),
               icon: const Icon(
@@ -146,8 +154,8 @@ class ActivityCard extends ConsumerWidget {
       ),
     );
 
-    if (activity is Fragment$TextActivity) {
-      var a = activity as Fragment$TextActivity;
+    if (activity is GTextActivity) {
+      var a = activity as GTextActivity;
       return Comment(
         avatarUrl: a.user?.avatar?.large,
         username: a.user?.name,
@@ -162,8 +170,8 @@ class ActivityCard extends ConsumerWidget {
           data: a.text!,
         ),
       );
-    } else if (activity is Fragment$ListActivity) {
-      var a = activity as Fragment$ListActivity;
+    } else if (activity is GListActivity) {
+      var a = activity as GListActivity;
       return Comment(
         avatarUrl: a.user?.avatar?.large,
         username: a.user?.name,
@@ -215,8 +223,8 @@ class ActivityCard extends ConsumerWidget {
           ],
         ),
       );
-    } else if (activity is Fragment$MessageActivity) {
-      var a = activity as Fragment$MessageActivity;
+    } else if (activity is GMessageActivity) {
+      var a = activity as GMessageActivity;
       return Comment(
         avatarUrl: a.messenger?.avatar?.large,
         username: a.messenger?.name,

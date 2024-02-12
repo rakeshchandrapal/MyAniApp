@@ -1,4 +1,6 @@
-query Browsing($season: MediaSeason, $seasonYear: Int, $nextSeason: MediaSeason, $nextYear: Int) {
+# import '/graphql/fragments/media.graphql'
+
+query Explore($season: MediaSeason, $seasonYear: Int, $nextSeason: MediaSeason, $nextYear: Int) {
   trending: Page(page: 1, perPage: 10) {
     media(sort: TRENDING_DESC, type: ANIME, isAdult: false) {
       ...MediaFragment

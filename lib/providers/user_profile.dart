@@ -1,42 +1,42 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/user/user.graphql.dart';
+import 'package:myaniapp/providers/ferry.dart';
+import 'package:myaniapp/ui/routes/user/__generated__/user.data.gql.dart';
+import 'package:myaniapp/ui/routes/user/__generated__/user.req.gql.dart';
 
 class UserProfileNotifier
-    extends AutoDisposeFamilyStreamNotifier<Query$User$User, String> {
-  late ObservableQuery<Query$User> query;
+    extends AutoDisposeFamilyStreamNotifier<GUserData_User, String> {
+  // late ObservableQuery<Query$User> query;
   @override
-  Stream<Query$User$User> build(String name) async* {
-    query = client.value.watchQuery$User(
-      WatchOptions$Query$User(
-        variables: Variables$Query$User(name: name),
-      ),
-    );
+  Stream<GUserData_User> build(String name) async* {
+    final query = ref
+        .watch(ferryClientProvider)
+        .request(GUserReq(
+          (b) => b..vars.name = name,
+        ))
+        .distinct();
 
-    ref.onDispose(query.close);
-    var cachedResult = query.fetchResults().eagerResult.parsedData?.User;
-
-    if (cachedResult != null) yield cachedResult;
-
-    await for (final data in query.stream) {
-      if (data.hasException) {
-        state = AsyncValue.error(data.exception!, StackTrace.current);
+    await for (final data in query) {
+      if (data.hasErrors) {
+        state = AsyncValue.error(
+            (data.graphqlErrors, data.linkException), StackTrace.current);
         return;
-      } else if (data.isLoading && data.parsedData == null) {
+      } else if (data.loading && data.data == null) {
         state = const AsyncValue.loading();
         return;
       }
-      yield data.parsedData!.User!;
+
+      yield data.data!.User!;
     }
   }
 
-  Future<void> refresh() {
-    return query.refetch();
+  Future<void> refresh() async {
+    return ref.read(ferryClientProvider).requestController.add(GUserReq(
+          (b) => b..vars.name = arg,
+        ));
   }
 }
 
 var userProfileProvider = StreamNotifierProvider.autoDispose
-    .family<UserProfileNotifier, Query$User$User, String>(
+    .family<UserProfileNotifier, GUserData_User, String>(
   UserProfileNotifier.new,
 );

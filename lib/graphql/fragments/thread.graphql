@@ -1,0 +1,26 @@
+# import './media.graphql'
+# import './user.graphql'
+
+fragment ThreadFragment on Thread {
+  id
+  title
+  replyCount
+  viewCount
+  replyCommentId
+  repliedAt
+  createdAt
+  isSticky
+  mediaCategories {
+    ...MediaFragment
+  }
+  categories {
+    id
+    name
+  }
+  user {
+    ...UserFragment
+  }
+  replyUser {
+    ...UserFragment
+  }
+}

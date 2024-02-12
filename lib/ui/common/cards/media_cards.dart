@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/ui/common/cards/detailed_list_cards.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/cards/simple_list_cards.dart';
 
-class MediaCards<T extends Fragment$MediaFragment> extends ConsumerWidget {
+class MediaCards<T extends GMediaFragment> extends ConsumerWidget {
   const MediaCards({
     super.key,
     this.underTitle,

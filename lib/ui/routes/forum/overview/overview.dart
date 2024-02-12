@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/forum/overview/overview.graphql.dart';
+import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/ui/routes/forum/new.dart';
+import 'package:myaniapp/ui/routes/forum/overview/__generated__/overview.req.gql.dart';
 import 'package:myaniapp/ui/routes/forum/recent.dart';
 import 'package:myaniapp/ui/routes/forum/search.dart';
 import 'package:myaniapp/ui/routes/forum/subscribed.dart';
-import 'package:myaniapp/utils/graphql.dart';
 
 class ForumOverviewPage extends StatefulWidget {
   const ForumOverviewPage({
@@ -132,81 +132,80 @@ class ForumOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$ForumOverview$Widget(
-      builder: queryBuilder(
-        (result, [fetchMore, refetch]) {
-          var pinned = result.parsedData!.recent!.threads!
-              .where((e) => e!.isSticky == true);
-          var recent = result.parsedData!.recent!.threads!
-              .where((e) => e!.isSticky != true)
-              .take(4);
+    return GQLRequest(
+      operationRequest: GForumOverviewReq(),
+      builder: (context, response, error, refetch) {
+        var pinned =
+            response!.data!.recent!.threads!.where((e) => e!.isSticky == true);
+        var recent = response.data!.recent!.threads!
+            .where((e) => e!.isSticky != true)
+            .take(4);
 
-          return RefreshIndicator.adaptive(
-            onRefresh: refetch!,
-            child: ListView(
-              padding: const EdgeInsets.all(8),
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Pinned',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    ...pinned.map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: ThreadCard(thread: e!),
-                        ))
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Recent',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    ...recent.map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: ThreadCard(thread: e!),
-                        ))
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Release Discussion',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    ...result.parsedData!.release!.threads!.map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: ThreadCard(thread: e!),
-                        ))
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'New',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    ...result.parsedData!.$new!.threads!.map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: ThreadCard(thread: e!),
-                        ))
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      ),
+        return RefreshIndicator.adaptive(
+          onRefresh: refetch,
+          child: ListView(
+            padding: const EdgeInsets.all(8),
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Pinned',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  ...pinned.map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: ThreadCard(thread: e!),
+                      ))
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Recent',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  ...recent.map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: ThreadCard(thread: e!),
+                      ))
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Release Discussion',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  ...response.data!.release!.threads!.map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: ThreadCard(thread: e!),
+                      ))
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'New',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  ...response.data!.Gnew!.threads!.map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: ThreadCard(thread: e!),
+                      ))
+                ],
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

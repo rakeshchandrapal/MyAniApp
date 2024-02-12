@@ -1,25 +1,27 @@
 import 'dart:math';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/fragments.graphql.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/common/media_editor/media_editor.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/list/list.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/list_group.data.gql.dart';
+import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/media_cards.dart';
-import 'package:myaniapp/ui/common/graphql_error.dart';
+import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.req.gql.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
 import 'package:myaniapp/ui/common/number_picker.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
+import 'package:myaniapp/ui/routes/home/list/__generated__/list.data.gql.dart';
+import 'package:myaniapp/ui/routes/home/list/__generated__/list.req.gql.dart';
 
 class HomeAnimePage extends ConsumerWidget {
   const HomeAnimePage({super.key});
@@ -28,28 +30,24 @@ class HomeAnimePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
 
-    return Query$MediaList$Widget(
-      options: Options$Query$MediaList(
-        cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
-        variables: Variables$Query$MediaList(
-          type: Enum$MediaType.ANIME,
-          userName: user.value!.name,
-        ),
-      ),
-      builder: (result, {fetchMore, refetch}) {
-        if (result.isLoading && result.data == null) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        } else if (result.hasException) {
-          return GraphqlError(exception: result.exception!);
-        }
-
-        var lists = result.parsedData!.MediaListCollection!.lists!;
+    return GQLRequest(
+      // options: Options$Query$MediaList(
+      //   cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
+      //   variables: Variables$Query$MediaList(
+      //     type: GMediaType.ANIME,
+      //     userName: user.value!.name,
+      //   ),
+      // ),
+      operationRequest: GMediaListReq((b) => b
+        ..vars.type = GMediaType.ANIME
+        ..vars.userName = user.value!.name),
+      builder: (context, response, error, refetch) {
+        print(response!.linkException);
+        var lists = response.data!.MediaListCollection!.lists!;
 
         if (lists.isEmpty) {
           return RefreshIndicator.adaptive(
-            onRefresh: refetch!,
+            onRefresh: refetch,
             child: Scaffold(
               appBar: const HomeAppBar(),
               body: LayoutBuilder(
@@ -60,8 +58,8 @@ class HomeAnimePage extends ConsumerWidget {
                           BoxConstraints(minHeight: constraints.maxHeight),
                       child: Center(
                         child: ElevatedButton(
-                          onPressed: () => context.push(
-                              '/search?type=${Enum$MediaType.ANIME.name}'),
+                          onPressed: () => context
+                              .push('/search?type=${GMediaType.ANIME.name}'),
                           child: const Text('Browse animes to add'),
                         ),
                       ),
@@ -74,12 +72,12 @@ class HomeAnimePage extends ConsumerWidget {
         }
 
         return RefreshIndicator.adaptive(
-          onRefresh: refetch!,
+          onRefresh: refetch,
           notificationPredicate: (notification) => notification.depth == 1,
           child: ListTabs(
-            lists: lists.cast(),
+            lists: lists.nonNulls.toBuiltList(),
             refresh: refetch,
-            user: result.parsedData!.MediaListCollection!.user!,
+            user: response.data!.MediaListCollection!.user!,
             setting: Setting.animeList,
           ),
         );
@@ -99,8 +97,8 @@ class ListTabs extends StatefulWidget {
     this.leading,
   });
 
-  final List<Fragment$ListGroup> lists;
-  final Query$MediaList$MediaListCollection$user user;
+  final BuiltList<GMediaListData_MediaListCollection_lists> lists;
+  final GMediaListData_MediaListCollection_user user;
   final void Function() refresh;
   final bool canEdit;
   final Setting setting;
@@ -111,17 +109,17 @@ class ListTabs extends StatefulWidget {
 }
 
 class _ListTabsState extends State<ListTabs> {
-  late Enum$MediaListSort sort;
+  late GMediaListSort sort;
 
   @override
   void initState() {
     super.initState();
     sort = switch (widget.user.mediaListOptions!.rowOrder!) {
-      'score' => Enum$MediaListSort.SCORE_DESC,
-      'title' => Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC,
-      'updatedAt' => Enum$MediaListSort.UPDATED_TIME_DESC,
-      'id' => Enum$MediaListSort.ADDED_TIME_DESC,
-      _ => Enum$MediaListSort.UPDATED_TIME_DESC,
+      'score' => GMediaListSort.SCORE_DESC,
+      'title' => GMediaListSort.MEDIA_TITLE_NATIVE_DESC,
+      'updatedAt' => GMediaListSort.UPDATED_TIME_DESC,
+      'id' => GMediaListSort.ADDED_TIME_DESC,
+      _ => GMediaListSort.UPDATED_TIME_DESC,
     };
   }
 
@@ -149,14 +147,14 @@ class _ListTabsState extends State<ListTabs> {
                   builder: (context, modalState) => ListView(
                     primary: false,
                     children: [
-                      Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC,
-                      Enum$MediaListSort.ADDED_TIME_DESC,
-                      Enum$MediaListSort.SCORE_DESC,
-                      Enum$MediaListSort.UPDATED_TIME_DESC,
-                      Enum$MediaListSort.PROGRESS_DESC,
-                      Enum$MediaListSort.STARTED_ON_DESC,
-                      Enum$MediaListSort.MEDIA_ID_DESC,
-                      Enum$MediaListSort.MEDIA_POPULARITY_DESC,
+                      GMediaListSort.MEDIA_TITLE_NATIVE_DESC,
+                      GMediaListSort.ADDED_TIME_DESC,
+                      GMediaListSort.SCORE_DESC,
+                      GMediaListSort.UPDATED_TIME_DESC,
+                      GMediaListSort.PROGRESS_DESC,
+                      GMediaListSort.STARTED_ON_DESC,
+                      GMediaListSort.MEDIA_ID_DESC,
+                      GMediaListSort.MEDIA_POPULARITY_DESC,
                     ]
                         .map(
                           (e) => RadioListTile.adaptive(
@@ -164,8 +162,8 @@ class _ListTabsState extends State<ListTabs> {
                             title: Text(mediaListText(e)),
                             groupValue: sort,
                             onChanged: (value) {
-                              setState(() => sort = value ??
-                                  Enum$MediaListSort.UPDATED_TIME_DESC);
+                              setState(() => sort =
+                                  value ?? GMediaListSort.UPDATED_TIME_DESC);
                               modalState(() {});
                             },
                           ),
@@ -206,8 +204,10 @@ class _ListTabsState extends State<ListTabs> {
     );
   }
 
-  List<Fragment$ListGroup> sortList() {
-    var sorted = [...widget.lists];
+  List<GListGroup> sortList() {
+    var sorted = [
+      ...widget.lists.map((p0) => p0..entries?.toList()),
+    ];
     var options = widget.setting == Setting.animeList
         ? widget.user.mediaListOptions!.animeList!
         : widget.user.mediaListOptions!.mangaList!;
@@ -222,14 +222,16 @@ class _ListTabsState extends State<ListTabs> {
 
       var list = sorted.removeAt(sortIndex);
 
+      var entries = list.entries?.toList();
+
       switch (sort) {
-        case Enum$MediaListSort.ADDED_TIME_DESC:
-          list.entries?.sort(
+        case GMediaListSort.ADDED_TIME_DESC:
+          entries?.sort(
             (a, b) => b!.id.compareTo(a!.id),
           );
           break;
-        case Enum$MediaListSort.SCORE_DESC:
-          list.entries?.sort(
+        case GMediaListSort.SCORE_DESC:
+          entries?.sort(
             (a, b) {
               if (a!.score == b!.score) {
                 return a.media!.title!.userPreferred!
@@ -240,15 +242,15 @@ class _ListTabsState extends State<ListTabs> {
             },
           );
           break;
-        case Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC:
-          list.entries?.sort(
+        case GMediaListSort.MEDIA_TITLE_NATIVE_DESC:
+          entries?.sort(
             (a, b) => a!.media!.title!.userPreferred!
                 .toLowerCase()
                 .compareTo(b!.media!.title!.userPreferred!.toLowerCase()),
           );
           break;
-        case Enum$MediaListSort.PROGRESS_DESC:
-          list.entries?.sort(
+        case GMediaListSort.PROGRESS_DESC:
+          entries?.sort(
             (a, b) {
               if (a!.progress == b!.progress) {
                 return a.media!.title!.userPreferred!
@@ -259,8 +261,8 @@ class _ListTabsState extends State<ListTabs> {
             },
           );
           break;
-        case Enum$MediaListSort.STARTED_ON_DESC:
-          list.entries?.sort(
+        case GMediaListSort.STARTED_ON_DESC:
+          entries?.sort(
             (a, b) {
               if (a!.media!.startDate?.toDate() == null ||
                   b!.media!.startDate?.toDate() == null) {
@@ -272,8 +274,8 @@ class _ListTabsState extends State<ListTabs> {
             },
           );
           break;
-        case Enum$MediaListSort.MEDIA_ID_DESC:
-          list.entries?.sort(
+        case GMediaListSort.MEDIA_ID_DESC:
+          entries?.sort(
             (a, b) {
               if (a!.media!.averageScore == b!.media!.averageScore) {
                 return a.media!.title!.userPreferred!
@@ -286,8 +288,8 @@ class _ListTabsState extends State<ListTabs> {
             },
           );
           break;
-        case Enum$MediaListSort.MEDIA_POPULARITY_DESC:
-          list.entries?.sort(
+        case GMediaListSort.MEDIA_POPULARITY_DESC:
+          entries?.sort(
             (a, b) {
               return b!.media!.popularity!.compareTo(a!.media!.popularity!);
             },
@@ -295,7 +297,7 @@ class _ListTabsState extends State<ListTabs> {
           break;
 
         default:
-          list.entries?.sort(
+          entries?.sort(
             (a, b) {
               if (a!.updatedAt == b!.updatedAt) {
                 return a.media!.title!.userPreferred!
@@ -309,9 +311,15 @@ class _ListTabsState extends State<ListTabs> {
       }
 
       if (sorted.length < index) {
-        sorted.add(list);
+        sorted.add(list.rebuild((p0) => p0
+          ..entries.clear()
+          ..entries.addAll(entries ?? [])));
       } else {
-        sorted.insert(index, list);
+        sorted.insert(
+            index,
+            list.rebuild((p0) => p0
+              ..entries.clear()
+              ..entries.addAll(entries ?? [])));
       }
     });
 
@@ -319,21 +327,21 @@ class _ListTabsState extends State<ListTabs> {
   }
 }
 
-String mediaListText(Enum$MediaListSort sort) {
+String mediaListText(GMediaListSort sort) {
   return switch (sort) {
-    Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC => 'Title',
-    Enum$MediaListSort.SCORE_DESC => 'Score',
-    Enum$MediaListSort.PROGRESS_DESC => 'Progress',
-    Enum$MediaListSort.UPDATED_TIME_DESC => 'Last Updated',
-    Enum$MediaListSort.ADDED_TIME_DESC => 'Last Added',
-    Enum$MediaListSort.STARTED_ON_DESC => 'Release Date',
-    Enum$MediaListSort.MEDIA_ID_DESC => 'Average Score',
-    Enum$MediaListSort.MEDIA_POPULARITY_DESC => 'Popularity',
+    GMediaListSort.MEDIA_TITLE_NATIVE_DESC => 'Title',
+    GMediaListSort.SCORE_DESC => 'Score',
+    GMediaListSort.PROGRESS_DESC => 'Progress',
+    GMediaListSort.UPDATED_TIME_DESC => 'Last Updated',
+    GMediaListSort.ADDED_TIME_DESC => 'Last Added',
+    GMediaListSort.STARTED_ON_DESC => 'Release Date',
+    GMediaListSort.MEDIA_ID_DESC => 'Average Score',
+    GMediaListSort.MEDIA_POPULARITY_DESC => 'Popularity',
     _ => sort.name
   };
 }
 
-class Media extends StatefulWidget {
+class Media extends ConsumerStatefulWidget {
   const Media({
     super.key,
     required this.list,
@@ -343,17 +351,18 @@ class Media extends StatefulWidget {
     required this.scoreFormat,
   });
 
-  final Fragment$ListGroup list;
+  final GListGroup list;
   final void Function() refresh;
   final bool canEdit;
   final Setting setting;
-  final Enum$ScoreFormat scoreFormat;
+  final GScoreFormat scoreFormat;
 
   @override
-  State<Media> createState() => _MediaState();
+  ConsumerState<Media> createState() => _MediaState();
 }
 
-class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
+class _MediaState extends ConsumerState<Media>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -369,7 +378,7 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
       onDoubleTap: widget.canEdit
           ? (media, index) => showMediaEditor(
                 context,
-                media as Fragment$MediaFragment,
+                media as GMediaFragment,
                 onDelete: widget.refresh,
                 onSave: widget.refresh,
               )
@@ -390,15 +399,15 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
                     size: 20,
                   ),
                   switch (widget.scoreFormat) {
-                    Enum$ScoreFormat.POINT_100 =>
+                    GScoreFormat.POINT_100 =>
                       Text(entry.score!.toInt().toString()),
-                    Enum$ScoreFormat.POINT_10_DECIMAL =>
+                    GScoreFormat.POINT_10_DECIMAL =>
                       Text(entry.score!.toString()),
-                    Enum$ScoreFormat.POINT_10 =>
+                    GScoreFormat.POINT_10 =>
                       Text(entry.score!.toInt().toString()),
-                    Enum$ScoreFormat.POINT_5 =>
+                    GScoreFormat.POINT_5 =>
                       Text(entry.score!.toInt().toString()),
-                    Enum$ScoreFormat.POINT_3 => RotatedBox(
+                    GScoreFormat.POINT_3 => RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           switch (entry.score!.toInt()) {
@@ -415,7 +424,7 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
                 ],
               ),
             ),
-          if (widget.canEdit && entry.status == Enum$MediaListStatus.CURRENT)
+          if (widget.canEdit && entry.status == GMediaListStatus.CURRENT)
             GridChip(
               maxWidth: 100,
               bottom: 5,
@@ -427,14 +436,22 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
                     height: 25,
                     width: 30,
                     child: IconButton(
-                      onPressed: () => client.value.mutate$SaveMediaListEntry(
-                        Options$Mutation$SaveMediaListEntry(
-                          variables: Variables$Mutation$SaveMediaListEntry(
-                            id: entry.id,
-                            progress: (entry.progress ?? 0) + 1,
-                          ),
-                        ),
-                      ),
+                      onPressed: () => ref
+                          .read(ferryClientProvider)
+                          .request(GSaveMediaListEntryReq(
+                            (b) => b
+                              ..vars.id = entry.id
+                              ..vars.progress = (entry.progress ?? 0) + 1,
+                          ))
+                          .first,
+                      // onPressed: () => client.value.mutate$SaveMediaListEntry(
+                      //   Options$Mutation$SaveMediaListEntry(
+                      //     variables: Variables$Mutation$SaveMediaListEntry(
+                      //       id: entry.id,
+                      //       progress: (entry.progress ?? 0) + 1,
+                      //     ),
+                      //   ),
+                      // ),
                       icon: const Icon(Icons.add),
                       padding: EdgeInsets.zero,
                       iconSize: 15,
@@ -472,22 +489,24 @@ class _MediaState extends State<Media> with AutomaticKeepAliveClientMixin {
                 child: NumberPicker(
                   hint: 'Episode count',
                   number: entry.progress,
-                  onIncrement: () => client.value.mutate$SaveMediaListEntry(
-                    Options$Mutation$SaveMediaListEntry(
-                      variables: Variables$Mutation$SaveMediaListEntry(
-                        id: entry.id,
-                        progress: (entry.progress ?? 0) + 1,
-                      ),
-                    ),
-                  ),
-                  onDecrement: () => client.value.mutate$SaveMediaListEntry(
-                    Options$Mutation$SaveMediaListEntry(
-                      variables: Variables$Mutation$SaveMediaListEntry(
-                        id: entry.id,
-                        progress: (entry.progress ?? 0) - 1,
-                      ),
-                    ),
-                  ),
+                  onIncrement: () {},
+                  onDecrement: () {},
+                  // onIncrement: () => client.value.mutate$SaveMediaListEntry(
+                  //   Options$Mutation$SaveMediaListEntry(
+                  //     variables: Variables$Mutation$SaveMediaListEntry(
+                  //       id: entry.id,
+                  //       progress: (entry.progress ?? 0) + 1,
+                  //     ),
+                  //   ),
+                  // ),
+                  // onDecrement: () => client.value.mutate$SaveMediaListEntry(
+                  //   Options$Mutation$SaveMediaListEntry(
+                  //     variables: Variables$Mutation$SaveMediaListEntry(
+                  //       id: entry.id,
+                  //       progress: (entry.progress ?? 0) - 1,
+                  //     ),
+                  //   ),
+                  // ),
                 ),
               )
           ],

@@ -1,14 +1,14 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/home/activities/activities.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/activity_card.dart';
 import 'package:myaniapp/ui/common/markdown_editor.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/routes/home/activities/__generated__/activities.req.gql.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
-import 'package:myaniapp/utils/graphql.dart';
 import 'package:myaniapp/utils/require_login.dart';
 
 class HomeActivitiesPage extends ConsumerStatefulWidget {
@@ -60,16 +60,16 @@ class _HomeActivitiesPageState extends ConsumerState<HomeActivitiesPage> {
             context,
             onSave: (text) {
               if (text.isNotEmpty) {
-                client.value.mutate$SaveTextActivity(
-                  Options$Mutation$SaveTextActivity(
-                    variables: Variables$Mutation$SaveTextActivity(text: text),
-                    onCompleted: (p0, p1) {
-                      setState(() {
-                        isFollowing = true;
-                      });
-                    },
-                  ),
-                );
+                // client.value.mutate$SaveTextActivity(
+                //   Options$Mutation$SaveTextActivity(
+                //     variables: Variables$Mutation$SaveTextActivity(text: text),
+                //     onCompleted: (p0, p1) {
+                //       setState(() {
+                //         isFollowing = true;
+                //       });
+                //     },
+                //   ),
+                // );
               }
             },
           ),
@@ -88,52 +88,37 @@ class Activities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query$Activities$Widget(
-      options: Options$Query$Activities(
-        variables: Variables$Query$Activities(
-          isFollowing: isFollowing,
-          hasReplies: !isFollowing,
-        ),
-      ),
-      builder: queryBuilder(
-        (result, [fetchMore, refetch]) => RefreshIndicator.adaptive(
-          onRefresh: refetch!,
-          child: GraphqlPagination(
-            fetchMore: (nextPage) => fetchMore!(
-              FetchMoreOptions$Query$Activities(
-                variables: Variables$Query$Activities(page: nextPage),
-                updateQuery: (previousResultData, fetchMoreResultData) {
-                  var has = <dynamic>{};
+    return GQLRequest(
+      operationRequest: GActivitiesReq((b) => b
+        ..requestId = "homeActivities"
+        ..vars.isFollowing = isFollowing
+        ..vars.hasReplies = !isFollowing),
+      builder: (context, response, error, refetch) => RefreshIndicator.adaptive(
+        onRefresh: refetch,
+        child: GraphqlPagination(
+          pageInfo: response!.data!.Page!.pageInfo!,
+          req: (nextPage) =>
+              (response.operationRequest as GActivitiesReq).rebuild(
+            (b) => b
+              ..vars.page = nextPage
+              ..updateResult = (previous, result) => result?.rebuild((p0) => p0
+                ..Page.activities.insertAll(
+                    0,
+                    previous?.Page?.activities?.whereNot((p0) =>
+                            result.Page?.activities?.contains(p0) ?? false) ??
+                        [])),
+          ),
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              var activity = response.data!.Page!.activities![index]!;
 
-                  has.addAll(previousResultData!['Page']['activities']
-                      .map((a) => a['id']));
-
-                  fetchMoreResultData!['Page']['activities']
-                      .removeWhere((a) => has.contains(a['id']));
-
-                  var list = [
-                    ...previousResultData['Page']['activities'],
-                    ...fetchMoreResultData['Page']['activities']
-                  ];
-
-                  fetchMoreResultData['Page']['activities'] = list;
-                  return fetchMoreResultData;
-                },
-              ),
-            ),
-            pageInfo: result.parsedData!.Page!.pageInfo!,
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                var activity = result.parsedData!.Page!.activities![index]!;
-
-                return ActivityCard(
-                  activity: activity,
-                  showReplyCount: true,
-                  onDelete: refetch,
-                );
-              },
-              itemCount: result.parsedData!.Page!.activities!.length,
-            ),
+              return ActivityCard(
+                activity: activity,
+                showReplyCount: true,
+                onDelete: refetch,
+              );
+            },
+            itemCount: response.data!.Page!.activities!.length,
           ),
         ),
       ),

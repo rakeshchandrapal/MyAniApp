@@ -1,3 +1,6 @@
+# import '/graphql/fragments/user.graphql'
+# import '/graphql/fragments/media.graphql'
+
 query User($name: String) {
   User(name: $name) {
     ...UserFragment

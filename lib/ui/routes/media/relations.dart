@@ -15,10 +15,12 @@ class MediaRelationsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var media = ref.watch(mediaProvider(id));
 
-    var sorted = media.value!.relations!.edges!
-      ..sort(
-        (a, b) => a!.relationType!.index.compareTo(b!.relationType!.index),
-      );
+    // GMediaRelation.to
+
+    var sorted = media.value!.relations!.edges!.toList();
+    // ..sort(
+    //   (a, b) => a!.relationType!.index.compareTo(b!.relationType!.index),
+    // );
 
     return MediaCards(
       list: sorted.map((e) => e!.node!).toList(),

@@ -1,3 +1,6 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/user.graphql'
+
 query Likes($id: Int, $type: LikeableType, $page: Int) {
   Page(page: $page) {
     pageInfo {

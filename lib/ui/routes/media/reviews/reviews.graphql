@@ -1,3 +1,5 @@
+# import '/graphql/fragments/page_info.graphql'
+
 query Reviews($mediaId: Int, $page: Int) {
   Media(id: $mediaId) {
     id

@@ -4,12 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:myaniapp/background.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/notifications/push.dart';
+import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/shared_preferences.dart';
 import 'package:myaniapp/ui/root.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,8 +22,6 @@ import 'web_url_protocol.dart'
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
-
-  await initHiveForFlutter();
 
   final prefs = await SharedPreferences.getInstance();
 
@@ -45,16 +44,17 @@ void main() async {
   }
 
   GoRouter.optionURLReflectsImperativeAPIs = true;
+  await Hive.initFlutter();
+
+  final client = await initClient();
 
   runApp(
     ProviderScope(
       overrides: [
         sharedPrefProvider.overrideWithValue(prefs),
+        ferryClientProvider.overrideWithValue(client)
       ],
-      child: GraphQLProvider(
-        client: client,
-        child: const App(),
-      ),
+      child: const App(),
     ),
   );
 }

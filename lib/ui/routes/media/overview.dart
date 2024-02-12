@@ -1,13 +1,14 @@
 import 'dart:io';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated/graphql/schema.graphql.dart';
-import 'package:myaniapp/graphql/__generated/ui/routes/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/providers/media.dart';
 import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/markdown/markdown.dart';
@@ -28,7 +29,7 @@ class MediaOverviewPage extends ConsumerWidget {
       padding: const EdgeInsets.all(8),
       children: [
         if (media.value!.genres?.isNotEmpty == true)
-          Genres(genres: media.value!.genres!.cast()),
+          Genres(genres: media.value!.genres!),
         if (media.value!.description != null)
           Description(media.value!.description),
         const SizedBox(
@@ -40,7 +41,7 @@ class MediaOverviewPage extends ConsumerWidget {
         const SizedBox(
           height: 10,
         ),
-        _Tags(tags: media.value!.tags!.cast()),
+        _Tags(tags: media.value!.tags!),
         if (media.value!.trailer != null &&
             (kIsWeb || Platform.isAndroid || Platform.isIOS))
           const Player()
@@ -79,7 +80,7 @@ class Player extends StatelessWidget {
 class Trailer extends StatelessWidget {
   const Trailer({super.key, required this.trailer});
 
-  final Query$Media$Media$trailer trailer;
+  final GMediaData_Media_trailer trailer;
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +124,7 @@ class Genres extends StatelessWidget {
     required this.genres,
   });
 
-  final List<String> genres;
+  final BuiltList<String?> genres;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +138,7 @@ class Genres extends StatelessWidget {
                 (e) => Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: ActionChip(
-                    label: Text(e),
+                    label: Text(e!),
                     onPressed: () => context.push('/search?genre=$e'),
                   ),
                 ),
@@ -154,7 +155,7 @@ class _InfoSection extends StatelessWidget {
     required this.media,
   });
 
-  final Query$Media$Media media;
+  final GMediaData_Media media;
 
   @override
   Widget build(BuildContext context) {
@@ -177,12 +178,12 @@ class _InfoSection extends StatelessWidget {
             InfoCard(title: 'Format', info: media.format!.name.capitalize()),
           if (media.startDate?.toDateString() != null)
             InfoCard(
-              title: media.status == Enum$MediaStatus.NOT_YET_RELEASED ||
-                      media.status == Enum$MediaStatus.RELEASING
-                  ? media.type == Enum$MediaType.ANIME
+              title: media.status == GMediaStatus.NOT_YET_RELEASED ||
+                      media.status == GMediaStatus.RELEASING
+                  ? media.type == GMediaType.ANIME
                       ? 'Airing'
                       : 'Releasing'
-                  : media.type == Enum$MediaType.ANIME
+                  : media.type == GMediaType.ANIME
                       ? 'Aired'
                       : 'Released',
               info:
@@ -246,7 +247,7 @@ class _Tags extends StatefulWidget {
     required this.tags,
   });
 
-  final List<Query$Media$Media$tags> tags;
+  final BuiltList<GMediaData_Media_tags?> tags;
 
   @override
   State<_Tags> createState() => _TagsState();
@@ -259,7 +260,7 @@ class _TagsState extends State<_Tags> {
   Widget build(BuildContext context) {
     var shown = showSpoilers
         ? widget.tags
-        : widget.tags.where((e) => e.isMediaSpoiler == false);
+        : widget.tags.where((e) => e!.isMediaSpoiler == false);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,7 +269,7 @@ class _TagsState extends State<_Tags> {
           children: [
             Text('Tags', style: Theme.of(context).textTheme.titleMedium),
             const Spacer(),
-            if (widget.tags.any((element) => element.isMediaSpoiler == true))
+            if (widget.tags.any((element) => element!.isMediaSpoiler == true))
               TextButton(
                 onPressed: () => setState(() => showSpoilers = !showSpoilers),
                 child: Text('${showSpoilers ? 'Hide' : 'Show'} Spoilers'),
@@ -284,7 +285,7 @@ class _TagsState extends State<_Tags> {
           children: shown
               .map(
                 (e) => _Tag(
-                  tag: e,
+                  tag: e!,
                 ),
               )
               .toList(),
@@ -302,7 +303,7 @@ class _Tag extends StatelessWidget {
     required this.tag,
   });
 
-  final Query$Media$Media$tags tag;
+  final GMediaData_Media_tags tag;
 
   @override
   Widget build(BuildContext context) {
@@ -418,7 +419,7 @@ class _Links extends StatelessWidget {
     required this.media,
   });
 
-  final Query$Media$Media media;
+  final GMediaData_Media media;
 
   @override
   Widget build(BuildContext context) {
@@ -449,7 +450,7 @@ class _Link extends StatelessWidget {
     required this.link,
   });
 
-  final Query$Media$Media$externalLinks link;
+  final GMediaData_Media_externalLinks link;
 
   @override
   Widget build(BuildContext context) {

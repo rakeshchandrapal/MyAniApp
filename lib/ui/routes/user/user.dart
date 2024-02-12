@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/image.dart';
@@ -25,7 +24,7 @@ class UserPage extends ConsumerWidget {
       data: (user) => _UserShellPage(name: name),
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(),
-        body: GraphqlError(exception: error as OperationException),
+        body: GraphqlError(exception: error as dynamic),
       ),
       loading: () => Scaffold(
         appBar: AppBar(),

@@ -1,3 +1,6 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/thread.graphql'
+
 query Forums($page: Int, $sort: [ThreadSort], $id: Int, $subscribed: Boolean, $search: String) {
   Page(page: $page) {
     pageInfo {
