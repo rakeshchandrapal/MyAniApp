@@ -16,13 +16,12 @@ var _dateFormat = DateFormat('MM/dd/yyyy hh:mm:ss a');
 void callbackDispatcher() {
   Workmanager().executeTask(
     (taskName, inputData) async {
-      final client = await initClient();
-
       try {
         if (!(await PushNotifications().hasPermission())) {
           return true;
         }
         await Hive.initFlutter();
+        final client = await initClient();
 
         // show debug notification
         PushNotifications().show(
