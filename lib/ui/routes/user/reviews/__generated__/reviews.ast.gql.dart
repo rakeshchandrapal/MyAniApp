@@ -5,6 +5,10 @@
 import 'package:gql/ast.dart' as _i1;
 import 'package:myaniapp/graphql/fragments/__generated__/page_info.ast.gql.dart'
     as _i2;
+import 'package:myaniapp/graphql/fragments/__generated__/review.ast.gql.dart'
+    as _i3;
+import 'package:myaniapp/graphql/fragments/__generated__/user.ast.gql.dart'
+    as _i4;
 
 const UserReviews = _i1.OperationDefinitionNode(
   type: _i1.OperationType.query,
@@ -69,64 +73,10 @@ const UserReviews = _i1.OperationDefinitionNode(
           ],
           directives: [],
           selectionSet: _i1.SelectionSetNode(selections: [
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'id'),
-              alias: null,
-              arguments: [],
+            _i1.FragmentSpreadNode(
+              name: _i1.NameNode(value: 'Review'),
               directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'summary'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'rating'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'score'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'media'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: _i1.SelectionSetNode(selections: [
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'title'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: _i1.SelectionSetNode(selections: [
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'userPreferred'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    )
-                  ]),
-                ),
-              ]),
-            ),
+            )
           ]),
         ),
       ]),
@@ -136,4 +86,6 @@ const UserReviews = _i1.OperationDefinitionNode(
 const document = _i1.DocumentNode(definitions: [
   UserReviews,
   _i2.PageInfo,
+  _i3.Review,
+  _i4.UserFragment,
 ]);

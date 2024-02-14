@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.data.gql.dart';
@@ -9,9 +8,9 @@ import 'package:myaniapp/providers/ferry.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/cards/grid_cards.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
-import 'package:myaniapp/ui/common/image.dart';
 import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.req.gql.dart';
 import 'package:myaniapp/ui/common/media_editor/media_editor.dart';
+import 'package:myaniapp/ui/common/review_card.dart';
 import 'package:myaniapp/ui/common/thread_card.dart';
 import 'package:myaniapp/ui/routes/home/app_bar.dart';
 import 'package:myaniapp/ui/routes/home/overview/__generated__/overview.data.gql.dart';
@@ -153,8 +152,6 @@ class Reviews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
     return SliverPadding(
       padding: const EdgeInsets.all(8),
       sliver: SliverGrid.builder(
@@ -167,80 +164,7 @@ class Reviews extends StatelessWidget {
         itemBuilder: (context, index) {
           var review = reviews.reviews![index]!;
 
-          return Card(
-            margin: EdgeInsets.zero,
-            child: InkWell(
-              borderRadius: imageRadius,
-              onTap: () => context.push('/review/${review.id}'),
-              child: SizedBox(
-                height: 100,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (review.media!.bannerImage != null)
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: imageRadius.topLeft,
-                          topRight: imageRadius.topRight,
-                        ),
-                        child: CImage(
-                          imageUrl: review.media!.bannerImage!,
-                          height: 80,
-                          fit: BoxFit.cover,
-                          width: double.maxFinite,
-                        ),
-                      ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text:
-                                  'Review of ${review.media!.title!.userPreferred} by ${review.user!.name}\n',
-                            ),
-                            TextSpan(
-                              text: review.summary,
-                              style: TextStyle(
-                                color: theme.hintColor,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            )
-                          ],
-                        ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        right: 8,
-                        bottom: 8,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(
-                            Icons.thumb_up,
-                            color: theme.hintColor,
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            review.rating!.toString(),
-                            style: theme.textTheme.bodySmall,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return ReviewCard(review: review);
         },
         itemCount: reviews.reviews!.length,
       ),

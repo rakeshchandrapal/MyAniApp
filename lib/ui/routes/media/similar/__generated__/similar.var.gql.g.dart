@@ -6,22 +6,22 @@ part of 'similar.var.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GRecommendationsVars> _$gRecommendationsVarsSerializer =
-    new _$GRecommendationsVarsSerializer();
+Serializer<GMediaRecommendationsVars> _$gMediaRecommendationsVarsSerializer =
+    new _$GMediaRecommendationsVarsSerializer();
 
-class _$GRecommendationsVarsSerializer
-    implements StructuredSerializer<GRecommendationsVars> {
+class _$GMediaRecommendationsVarsSerializer
+    implements StructuredSerializer<GMediaRecommendationsVars> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsVars,
-    _$GRecommendationsVars
+    GMediaRecommendationsVars,
+    _$GMediaRecommendationsVars
   ];
   @override
-  final String wireName = 'GRecommendationsVars';
+  final String wireName = 'GMediaRecommendationsVars';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GRecommendationsVars object,
+      Serializers serializers, GMediaRecommendationsVars object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
@@ -41,10 +41,10 @@ class _$GRecommendationsVarsSerializer
   }
 
   @override
-  GRecommendationsVars deserialize(
+  GMediaRecommendationsVars deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GRecommendationsVarsBuilder();
+    final result = new GMediaRecommendationsVarsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -67,31 +67,31 @@ class _$GRecommendationsVarsSerializer
   }
 }
 
-class _$GRecommendationsVars extends GRecommendationsVars {
+class _$GMediaRecommendationsVars extends GMediaRecommendationsVars {
   @override
   final int? mediaId;
   @override
   final int? page;
 
-  factory _$GRecommendationsVars(
-          [void Function(GRecommendationsVarsBuilder)? updates]) =>
-      (new GRecommendationsVarsBuilder()..update(updates))._build();
+  factory _$GMediaRecommendationsVars(
+          [void Function(GMediaRecommendationsVarsBuilder)? updates]) =>
+      (new GMediaRecommendationsVarsBuilder()..update(updates))._build();
 
-  _$GRecommendationsVars._({this.mediaId, this.page}) : super._();
+  _$GMediaRecommendationsVars._({this.mediaId, this.page}) : super._();
 
   @override
-  GRecommendationsVars rebuild(
-          void Function(GRecommendationsVarsBuilder) updates) =>
+  GMediaRecommendationsVars rebuild(
+          void Function(GMediaRecommendationsVarsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsVarsBuilder toBuilder() =>
-      new GRecommendationsVarsBuilder()..replace(this);
+  GMediaRecommendationsVarsBuilder toBuilder() =>
+      new GMediaRecommendationsVarsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GRecommendationsVars &&
+    return other is GMediaRecommendationsVars &&
         mediaId == other.mediaId &&
         page == other.page;
   }
@@ -107,16 +107,17 @@ class _$GRecommendationsVars extends GRecommendationsVars {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GRecommendationsVars')
+    return (newBuiltValueToStringHelper(r'GMediaRecommendationsVars')
           ..add('mediaId', mediaId)
           ..add('page', page))
         .toString();
   }
 }
 
-class GRecommendationsVarsBuilder
-    implements Builder<GRecommendationsVars, GRecommendationsVarsBuilder> {
-  _$GRecommendationsVars? _$v;
+class GMediaRecommendationsVarsBuilder
+    implements
+        Builder<GMediaRecommendationsVars, GMediaRecommendationsVarsBuilder> {
+  _$GMediaRecommendationsVars? _$v;
 
   int? _mediaId;
   int? get mediaId => _$this._mediaId;
@@ -126,9 +127,9 @@ class GRecommendationsVarsBuilder
   int? get page => _$this._page;
   set page(int? page) => _$this._page = page;
 
-  GRecommendationsVarsBuilder();
+  GMediaRecommendationsVarsBuilder();
 
-  GRecommendationsVarsBuilder get _$this {
+  GMediaRecommendationsVarsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _mediaId = $v.mediaId;
@@ -139,22 +140,22 @@ class GRecommendationsVarsBuilder
   }
 
   @override
-  void replace(GRecommendationsVars other) {
+  void replace(GMediaRecommendationsVars other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsVars;
+    _$v = other as _$GMediaRecommendationsVars;
   }
 
   @override
-  void update(void Function(GRecommendationsVarsBuilder)? updates) {
+  void update(void Function(GMediaRecommendationsVarsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsVars build() => _build();
+  GMediaRecommendationsVars build() => _build();
 
-  _$GRecommendationsVars _build() {
+  _$GMediaRecommendationsVars _build() {
     final _$result =
-        _$v ?? new _$GRecommendationsVars._(mediaId: mediaId, page: page);
+        _$v ?? new _$GMediaRecommendationsVars._(mediaId: mediaId, page: page);
     replace(_$result);
     return _$result;
   }

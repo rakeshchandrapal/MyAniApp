@@ -1,3 +1,5 @@
+# import '/graphql/fragments/user.graphql'
+
 query Review($id: Int) {
   Review(id: $id) {
     id
@@ -8,8 +10,7 @@ query Review($id: Int) {
     score
     createdAt
     user {
-      id
-      name
+      ...UserFragment
     }
     media {
       id

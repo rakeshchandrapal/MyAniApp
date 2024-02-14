@@ -101,7 +101,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   @override
   Widget build(BuildContext context) {
     var provider = ref.watch(searchProvider);
-    print("jhgj");
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -244,7 +244,11 @@ class RecentSearches extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var list = ref.watch(sharedPrefProvider).getStringList('recentSearches');
+    var list = ref
+        .watch(sharedPrefProvider)
+        .getStringList('recentSearches')
+        ?.reversed
+        .toList();
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(

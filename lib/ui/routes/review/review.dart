@@ -71,10 +71,7 @@ class ReviewPage extends ConsumerWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  timeago.format(
-                                    dateFromTimestamp(
-                                        response.data!.Review!.createdAt),
-                                  ),
+                                  "A review on",
                                   style: theme.textTheme.labelSmall,
                                 ),
                                 GestureDetector(
@@ -86,10 +83,6 @@ class ReviewPage extends ConsumerWidget {
                                     style: theme.textTheme.labelLarge,
                                   ),
                                 ),
-                                Text(
-                                  'a review by ${response.data!.Review!.user!.name}',
-                                  style: theme.textTheme.labelMedium,
-                                )
                               ],
                             ),
                           ),
@@ -97,6 +90,56 @@ class ReviewPage extends ConsumerWidget {
                       ],
                     ),
                   ),
+                ),
+                SliverToBoxAdapter(
+                  child: InkWell(
+                    onTap: () => context
+                        .push("/user/${response.data!.Review!.user!.name}"),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      child: Wrap(
+                        spacing: 10,
+                        runSpacing: 5,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CImage(
+                                imageUrl:
+                                    response.data!.Review!.user!.avatar!.large!,
+                                imageBuilder: (context, imageProvider) =>
+                                    CircleAvatar(
+                                        foregroundImage: imageProvider),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(response.data!.Review!.user!.name),
+                            ],
+                          ),
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                const TextSpan(text: "made "),
+                                TextSpan(
+                                  text: timeago.format(
+                                    dateFromTimestamp(
+                                        response.data!.Review!.createdAt),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            style: theme.textTheme.labelSmall,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Divider(),
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.all(8.0),

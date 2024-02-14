@@ -8,27 +8,28 @@ import 'package:myaniapp/graphql/__generated__/serializers.gql.dart' as _i1;
 
 part 'similar.var.gql.g.dart';
 
-abstract class GRecommendationsVars
-    implements Built<GRecommendationsVars, GRecommendationsVarsBuilder> {
-  GRecommendationsVars._();
+abstract class GMediaRecommendationsVars
+    implements
+        Built<GMediaRecommendationsVars, GMediaRecommendationsVarsBuilder> {
+  GMediaRecommendationsVars._();
 
-  factory GRecommendationsVars(
-          [Function(GRecommendationsVarsBuilder b) updates]) =
-      _$GRecommendationsVars;
+  factory GMediaRecommendationsVars(
+          [Function(GMediaRecommendationsVarsBuilder b) updates]) =
+      _$GMediaRecommendationsVars;
 
   int? get mediaId;
   int? get page;
-  static Serializer<GRecommendationsVars> get serializer =>
-      _$gRecommendationsVarsSerializer;
+  static Serializer<GMediaRecommendationsVars> get serializer =>
+      _$gMediaRecommendationsVarsSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsVars.serializer,
+        GMediaRecommendationsVars.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsVars? fromJson(Map<String, dynamic> json) =>
+  static GMediaRecommendationsVars? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GRecommendationsVars.serializer,
+        GMediaRecommendationsVars.serializer,
         json,
       );
 }

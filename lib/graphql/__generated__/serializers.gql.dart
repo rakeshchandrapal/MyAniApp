@@ -227,6 +227,12 @@ import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.req.gql
     show GReleasingMediaReq;
 import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.var.gql.dart'
     show GReleasingMediaVars;
+import 'package:myaniapp/graphql/fragments/__generated__/review.data.gql.dart'
+    show
+        GReviewData_media,
+        GReviewData_media_title,
+        GReviewData_user,
+        GReviewData_user_avatar;
 import 'package:myaniapp/graphql/fragments/__generated__/text_activity.data.gql.dart'
     show
         GTextActivityData,
@@ -670,13 +676,18 @@ import 'package:myaniapp/ui/routes/media/reviews/__generated__/reviews.var.gql.d
     show GReviewsVars;
 import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.data.gql.dart'
     show
-        GRecommendationsData_Media,
-        GRecommendationsData_Media_recommendations,
-        GRecommendationsData_Media_recommendations_nodes,
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-        GRecommendationsData_Media_recommendations_pageInfo;
+        GMediaRecommendationsData,
+        GMediaRecommendationsData_Media,
+        GMediaRecommendationsData_Media_recommendations,
+        GMediaRecommendationsData_Media_recommendations_nodes,
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
+        GMediaRecommendationsData_Media_recommendations_pageInfo;
+import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.req.gql.dart'
+    show GMediaRecommendationsReq;
+import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.var.gql.dart'
+    show GMediaRecommendationsVars;
 import 'package:myaniapp/ui/routes/media/social/__generated__/social.data.gql.dart'
     show
         GThreadsData,
@@ -741,7 +752,8 @@ import 'package:myaniapp/ui/routes/review/__generated__/review.data.gql.dart'
         GReviewData_Review,
         GReviewData_Review_media,
         GReviewData_Review_media_title,
-        GReviewData_Review_user;
+        GReviewData_Review_user,
+        GReviewData_Review_user_avatar;
 import 'package:myaniapp/ui/routes/review/__generated__/review.req.gql.dart'
     show GRateReviewReq, GReviewReq;
 import 'package:myaniapp/ui/routes/review/__generated__/review.var.gql.dart'
@@ -870,7 +882,9 @@ import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.data.gql.d
         GUserReviewsData_Page_pageInfo,
         GUserReviewsData_Page_reviews,
         GUserReviewsData_Page_reviews_media,
-        GUserReviewsData_Page_reviews_media_title;
+        GUserReviewsData_Page_reviews_media_title,
+        GUserReviewsData_Page_reviews_user,
+        GUserReviewsData_Page_reviews_user_avatar;
 import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.req.gql.dart'
     show GUserReviewsReq;
 import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.var.gql.dart'
@@ -1236,6 +1250,16 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GMediaListStatus,
   GMediaListVars,
   GMediaRankType,
+  GMediaRecommendationsData,
+  GMediaRecommendationsData_Media,
+  GMediaRecommendationsData_Media_recommendations,
+  GMediaRecommendationsData_Media_recommendations_nodes,
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
+  GMediaRecommendationsData_Media_recommendations_pageInfo,
+  GMediaRecommendationsReq,
+  GMediaRecommendationsVars,
   GMediaRelation,
   GMediaReq,
   GMediaSeason,
@@ -1344,13 +1368,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GRecommendationRating,
   GRecommendationSort,
   GRecommendationsData,
-  GRecommendationsData_Media,
-  GRecommendationsData_Media_recommendations,
-  GRecommendationsData_Media_recommendations_nodes,
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-  GRecommendationsData_Media_recommendations_pageInfo,
   GRecommendationsData_Page,
   GRecommendationsData_Page_pageInfo,
   GRecommendationsData_Page_recommendations,
@@ -1388,6 +1405,11 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GReviewData_Review_media,
   GReviewData_Review_media_title,
   GReviewData_Review_user,
+  GReviewData_Review_user_avatar,
+  GReviewData_media,
+  GReviewData_media_title,
+  GReviewData_user,
+  GReviewData_user_avatar,
   GReviewRating,
   GReviewReq,
   GReviewSort,
@@ -1645,6 +1667,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUserReviewsData_Page_reviews,
   GUserReviewsData_Page_reviews_media,
   GUserReviewsData_Page_reviews_media_title,
+  GUserReviewsData_Page_reviews_user,
+  GUserReviewsData_Page_reviews_user_avatar,
   GUserReviewsReq,
   GUserReviewsVars,
   GUserSort,

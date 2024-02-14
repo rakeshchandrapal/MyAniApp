@@ -347,6 +347,22 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GMediaListStatus.serializer)
       ..add(GMediaListVars.serializer)
       ..add(GMediaRankType.serializer)
+      ..add(GMediaRecommendationsData.serializer)
+      ..add(GMediaRecommendationsData_Media.serializer)
+      ..add(GMediaRecommendationsData_Media_recommendations.serializer)
+      ..add(GMediaRecommendationsData_Media_recommendations_nodes.serializer)
+      ..add(
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+              .serializer)
+      ..add(
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+              .serializer)
+      ..add(
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+              .serializer)
+      ..add(GMediaRecommendationsData_Media_recommendations_pageInfo.serializer)
+      ..add(GMediaRecommendationsReq.serializer)
+      ..add(GMediaRecommendationsVars.serializer)
       ..add(GMediaRelation.serializer)
       ..add(GMediaReq.serializer)
       ..add(GMediaSeason.serializer)
@@ -558,18 +574,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GRecommendationRating.serializer)
       ..add(GRecommendationSort.serializer)
       ..add(GRecommendationsData.serializer)
-      ..add(GRecommendationsData_Media.serializer)
-      ..add(GRecommendationsData_Media_recommendations.serializer)
-      ..add(GRecommendationsData_Media_recommendations_nodes.serializer)
-      ..add(GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
-          .serializer)
-      ..add(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
-              .serializer)
-      ..add(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
-              .serializer)
-      ..add(GRecommendationsData_Media_recommendations_pageInfo.serializer)
       ..add(GRecommendationsData_Page.serializer)
       ..add(GRecommendationsData_Page_pageInfo.serializer)
       ..add(GRecommendationsData_Page_recommendations.serializer)
@@ -612,6 +616,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GReviewData_Review_media.serializer)
       ..add(GReviewData_Review_media_title.serializer)
       ..add(GReviewData_Review_user.serializer)
+      ..add(GReviewData_Review_user_avatar.serializer)
+      ..add(GReviewData_media.serializer)
+      ..add(GReviewData_media_title.serializer)
+      ..add(GReviewData_user.serializer)
+      ..add(GReviewData_user_avatar.serializer)
       ..add(GReviewRating.serializer)
       ..add(GReviewReq.serializer)
       ..add(GReviewSort.serializer)
@@ -892,6 +901,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GUserReviewsData_Page_reviews.serializer)
       ..add(GUserReviewsData_Page_reviews_media.serializer)
       ..add(GUserReviewsData_Page_reviews_media_title.serializer)
+      ..add(GUserReviewsData_Page_reviews_user.serializer)
+      ..add(GUserReviewsData_Page_reviews_user_avatar.serializer)
       ..add(GUserReviewsReq.serializer)
       ..add(GUserReviewsVars.serializer)
       ..add(GUserSort.serializer)
@@ -1151,9 +1162,25 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GMediaListSort?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
+            const FullType.nullable(
+                GMediaRecommendationsData_Media_recommendations_nodes)
+          ]),
+          () => new ListBuilder<
+              GMediaRecommendationsData_Media_recommendations_nodes?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
             const FullType.nullable(GMediaStaffData_Media_staff_edges)
           ]),
           () => new ListBuilder<GMediaStaffData_Media_staff_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
           () => new ListBuilder<GModRole?>())
@@ -1322,13 +1349,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType.nullable(GRecommendationSort)]),
           () => new ListBuilder<GRecommendationSort?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(
-                GRecommendationsData_Media_recommendations_nodes)
-          ]),
-          () => new ListBuilder<
-              GRecommendationsData_Media_recommendations_nodes?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GRecommendationsData_Page_recommendations)

@@ -1,7 +1,7 @@
 # import '/graphql/fragments/page_info.graphql'
 # import '/graphql/fragments/media.graphql'
 
-query Recommendations($mediaId: Int, $page: Int) {
+query MediaRecommendations($mediaId: Int, $page: Int) {
   Media(id: $mediaId) {
     id
     recommendations(page: $page, sort: [RATING_DESC, ID]) {

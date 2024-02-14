@@ -16,6 +16,8 @@ import 'package:myaniapp/graphql/fragments/__generated__/media_entry.data.gql.da
     as _i4;
 import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.data.gql.dart'
     as _i2;
+import 'package:myaniapp/graphql/fragments/__generated__/review.data.gql.dart'
+    as _i10;
 import 'package:myaniapp/graphql/fragments/__generated__/thread.data.gql.dart'
     as _i8;
 import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
@@ -1206,7 +1208,8 @@ abstract class GHomeOverviewData_reviews
 abstract class GHomeOverviewData_reviews_reviews
     implements
         Built<GHomeOverviewData_reviews_reviews,
-            GHomeOverviewData_reviews_reviewsBuilder> {
+            GHomeOverviewData_reviews_reviewsBuilder>,
+        _i10.GReview {
   GHomeOverviewData_reviews_reviews._();
 
   factory GHomeOverviewData_reviews_reviews(
@@ -1216,17 +1219,25 @@ abstract class GHomeOverviewData_reviews_reviews
   static void _initializeBuilder(GHomeOverviewData_reviews_reviewsBuilder b) =>
       b..G__typename = 'Review';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   int get id;
+  @override
   int? get rating;
+  @override
   int? get ratingAmount;
+  @override
   String? get summary;
+  @override
   GHomeOverviewData_reviews_reviews_media? get media;
+  @override
   GHomeOverviewData_reviews_reviews_user? get user;
   static Serializer<GHomeOverviewData_reviews_reviews> get serializer =>
       _$gHomeOverviewDataReviewsReviewsSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GHomeOverviewData_reviews_reviews.serializer,
         this,
@@ -1243,7 +1254,8 @@ abstract class GHomeOverviewData_reviews_reviews
 abstract class GHomeOverviewData_reviews_reviews_media
     implements
         Built<GHomeOverviewData_reviews_reviews_media,
-            GHomeOverviewData_reviews_reviews_mediaBuilder> {
+            GHomeOverviewData_reviews_reviews_mediaBuilder>,
+        _i10.GReview_media {
   GHomeOverviewData_reviews_reviews_media._();
 
   factory GHomeOverviewData_reviews_reviews_media(
@@ -1254,15 +1266,21 @@ abstract class GHomeOverviewData_reviews_reviews_media
           GHomeOverviewData_reviews_reviews_mediaBuilder b) =>
       b..G__typename = 'Media';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   int get id;
+  @override
   GHomeOverviewData_reviews_reviews_media_title? get title;
+  @override
   _i3.GMediaType? get type;
+  @override
   String? get bannerImage;
   static Serializer<GHomeOverviewData_reviews_reviews_media> get serializer =>
       _$gHomeOverviewDataReviewsReviewsMediaSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GHomeOverviewData_reviews_reviews_media.serializer,
         this,
@@ -1279,7 +1297,8 @@ abstract class GHomeOverviewData_reviews_reviews_media
 abstract class GHomeOverviewData_reviews_reviews_media_title
     implements
         Built<GHomeOverviewData_reviews_reviews_media_title,
-            GHomeOverviewData_reviews_reviews_media_titleBuilder> {
+            GHomeOverviewData_reviews_reviews_media_titleBuilder>,
+        _i10.GReview_media_title {
   GHomeOverviewData_reviews_reviews_media_title._();
 
   factory GHomeOverviewData_reviews_reviews_media_title(
@@ -1290,12 +1309,15 @@ abstract class GHomeOverviewData_reviews_reviews_media_title
           GHomeOverviewData_reviews_reviews_media_titleBuilder b) =>
       b..G__typename = 'MediaTitle';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   String? get userPreferred;
   static Serializer<GHomeOverviewData_reviews_reviews_media_title>
       get serializer => _$gHomeOverviewDataReviewsReviewsMediaTitleSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GHomeOverviewData_reviews_reviews_media_title.serializer,
         this,
@@ -1313,6 +1335,7 @@ abstract class GHomeOverviewData_reviews_reviews_user
     implements
         Built<GHomeOverviewData_reviews_reviews_user,
             GHomeOverviewData_reviews_reviews_userBuilder>,
+        _i10.GReview_user,
         _i9.GUserFragment {
   GHomeOverviewData_reviews_reviews_user._();
 
@@ -1360,6 +1383,7 @@ abstract class GHomeOverviewData_reviews_reviews_user_avatar
     implements
         Built<GHomeOverviewData_reviews_reviews_user_avatar,
             GHomeOverviewData_reviews_reviews_user_avatarBuilder>,
+        _i10.GReview_user_avatar,
         _i9.GUserFragment_avatar {
   GHomeOverviewData_reviews_reviews_user_avatar._();
 

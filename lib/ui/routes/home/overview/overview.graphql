@@ -1,6 +1,7 @@
 # import '/graphql/fragments/thread.graphql'
 # import '/graphql/fragments/releasing_media.graphql'
 # import '/graphql/fragments/media_entry.graphql'
+# import '/graphql/fragments/review.graphql'
 
 query HomeOverview($page: Int = 1, $userId: Int!, $type: MediaType) {
   releasing: Page(page: $page) {
@@ -20,21 +21,7 @@ query HomeOverview($page: Int = 1, $userId: Int!, $type: MediaType) {
   }
   reviews: Page(perPage: 6) {
     reviews(sort: ID_DESC) {
-      id
-      rating
-      ratingAmount
-      summary
-      media {
-        id
-        title {
-          userPreferred
-        }
-        type
-        bannerImage
-      }
-      user {
-        ...UserFragment
-      }
+      ...Review
     }
   }
 }

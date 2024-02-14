@@ -16,25 +16,26 @@ import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.var.gql.d
 
 part 'similar.req.gql.g.dart';
 
-abstract class GRecommendationsReq
+abstract class GMediaRecommendationsReq
     implements
-        Built<GRecommendationsReq, GRecommendationsReqBuilder>,
-        _i1
-        .OperationRequest<_i2.GRecommendationsData, _i3.GRecommendationsVars> {
-  GRecommendationsReq._();
+        Built<GMediaRecommendationsReq, GMediaRecommendationsReqBuilder>,
+        _i1.OperationRequest<_i2.GMediaRecommendationsData,
+            _i3.GMediaRecommendationsVars> {
+  GMediaRecommendationsReq._();
 
-  factory GRecommendationsReq(
-      [Function(GRecommendationsReqBuilder b) updates]) = _$GRecommendationsReq;
+  factory GMediaRecommendationsReq(
+          [Function(GMediaRecommendationsReqBuilder b) updates]) =
+      _$GMediaRecommendationsReq;
 
-  static void _initializeBuilder(GRecommendationsReqBuilder b) => b
+  static void _initializeBuilder(GMediaRecommendationsReqBuilder b) => b
     ..operation = _i4.Operation(
       document: _i5.document,
-      operationName: 'Recommendations',
+      operationName: 'MediaRecommendations',
     )
     ..executeOnListen = true;
 
   @override
-  _i3.GRecommendationsVars get vars;
+  _i3.GMediaRecommendationsVars get vars;
   @override
   _i4.Operation get operation;
   @override
@@ -47,12 +48,12 @@ abstract class GRecommendationsReq
   String? get requestId;
   @override
   @BuiltValueField(serialize: false)
-  _i2.GRecommendationsData? Function(
-    _i2.GRecommendationsData?,
-    _i2.GRecommendationsData?,
+  _i2.GMediaRecommendationsData? Function(
+    _i2.GMediaRecommendationsData?,
+    _i2.GMediaRecommendationsData?,
   )? get updateResult;
   @override
-  _i2.GRecommendationsData? get optimisticResponse;
+  _i2.GMediaRecommendationsData? get optimisticResponse;
   @override
   String? get updateCacheHandlerKey;
   @override
@@ -62,20 +63,20 @@ abstract class GRecommendationsReq
   @override
   bool get executeOnListen;
   @override
-  _i2.GRecommendationsData? parseData(Map<String, dynamic> json) =>
-      _i2.GRecommendationsData.fromJson(json);
+  _i2.GMediaRecommendationsData? parseData(Map<String, dynamic> json) =>
+      _i2.GMediaRecommendationsData.fromJson(json);
 
-  static Serializer<GRecommendationsReq> get serializer =>
-      _$gRecommendationsReqSerializer;
+  static Serializer<GMediaRecommendationsReq> get serializer =>
+      _$gMediaRecommendationsReqSerializer;
 
   Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
-        GRecommendationsReq.serializer,
+        GMediaRecommendationsReq.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsReq? fromJson(Map<String, dynamic> json) =>
+  static GMediaRecommendationsReq? fromJson(Map<String, dynamic> json) =>
       _i6.serializers.deserializeWith(
-        GRecommendationsReq.serializer,
+        GMediaRecommendationsReq.serializer,
         json,
       );
 }

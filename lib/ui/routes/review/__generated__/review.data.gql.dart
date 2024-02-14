@@ -2,10 +2,13 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart' as _i2;
 import 'package:myaniapp/graphql/__generated__/serializers.gql.dart' as _i1;
+import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
+    as _i3;
 
 part 'review.data.gql.g.dart';
 
@@ -71,7 +74,9 @@ abstract class GReviewData_Review
 }
 
 abstract class GReviewData_Review_user
-    implements Built<GReviewData_Review_user, GReviewData_Review_userBuilder> {
+    implements
+        Built<GReviewData_Review_user, GReviewData_Review_userBuilder>,
+        _i3.GUserFragment {
   GReviewData_Review_user._();
 
   factory GReviewData_Review_user(
@@ -81,13 +86,25 @@ abstract class GReviewData_Review_user
   static void _initializeBuilder(GReviewData_Review_userBuilder b) =>
       b..G__typename = 'User';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   int get id;
+  @override
   String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i2.GModRole?>? get moderatorRoles;
+  @override
+  GReviewData_Review_user_avatar? get avatar;
   static Serializer<GReviewData_Review_user> get serializer =>
       _$gReviewDataReviewUserSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GReviewData_Review_user.serializer,
         this,
@@ -96,6 +113,41 @@ abstract class GReviewData_Review_user
   static GReviewData_Review_user? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GReviewData_Review_user.serializer,
+        json,
+      );
+}
+
+abstract class GReviewData_Review_user_avatar
+    implements
+        Built<GReviewData_Review_user_avatar,
+            GReviewData_Review_user_avatarBuilder>,
+        _i3.GUserFragment_avatar {
+  GReviewData_Review_user_avatar._();
+
+  factory GReviewData_Review_user_avatar(
+          [Function(GReviewData_Review_user_avatarBuilder b) updates]) =
+      _$GReviewData_Review_user_avatar;
+
+  static void _initializeBuilder(GReviewData_Review_user_avatarBuilder b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<GReviewData_Review_user_avatar> get serializer =>
+      _$gReviewDataReviewUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GReviewData_Review_user_avatar.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GReviewData_Review_user_avatar? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GReviewData_Review_user_avatar.serializer,
         json,
       );
 }

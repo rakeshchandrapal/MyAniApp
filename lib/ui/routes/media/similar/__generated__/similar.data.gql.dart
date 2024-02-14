@@ -14,113 +14,117 @@ import 'package:myaniapp/graphql/fragments/__generated__/page_info.data.gql.dart
 
 part 'similar.data.gql.g.dart';
 
-abstract class GRecommendationsData
-    implements Built<GRecommendationsData, GRecommendationsDataBuilder> {
-  GRecommendationsData._();
+abstract class GMediaRecommendationsData
+    implements
+        Built<GMediaRecommendationsData, GMediaRecommendationsDataBuilder> {
+  GMediaRecommendationsData._();
 
-  factory GRecommendationsData(
-          [Function(GRecommendationsDataBuilder b) updates]) =
-      _$GRecommendationsData;
+  factory GMediaRecommendationsData(
+          [Function(GMediaRecommendationsDataBuilder b) updates]) =
+      _$GMediaRecommendationsData;
 
-  static void _initializeBuilder(GRecommendationsDataBuilder b) =>
+  static void _initializeBuilder(GMediaRecommendationsDataBuilder b) =>
       b..G__typename = 'Query';
 
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
-  GRecommendationsData_Media? get Media;
-  static Serializer<GRecommendationsData> get serializer =>
-      _$gRecommendationsDataSerializer;
+  GMediaRecommendationsData_Media? get Media;
+  static Serializer<GMediaRecommendationsData> get serializer =>
+      _$gMediaRecommendationsDataSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData.serializer,
+        GMediaRecommendationsData.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData? fromJson(Map<String, dynamic> json) =>
+  static GMediaRecommendationsData? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GRecommendationsData.serializer,
+        GMediaRecommendationsData.serializer,
         json,
       );
 }
 
-abstract class GRecommendationsData_Media
+abstract class GMediaRecommendationsData_Media
     implements
-        Built<GRecommendationsData_Media, GRecommendationsData_MediaBuilder> {
-  GRecommendationsData_Media._();
+        Built<GMediaRecommendationsData_Media,
+            GMediaRecommendationsData_MediaBuilder> {
+  GMediaRecommendationsData_Media._();
 
-  factory GRecommendationsData_Media(
-          [Function(GRecommendationsData_MediaBuilder b) updates]) =
-      _$GRecommendationsData_Media;
+  factory GMediaRecommendationsData_Media(
+          [Function(GMediaRecommendationsData_MediaBuilder b) updates]) =
+      _$GMediaRecommendationsData_Media;
 
-  static void _initializeBuilder(GRecommendationsData_MediaBuilder b) =>
+  static void _initializeBuilder(GMediaRecommendationsData_MediaBuilder b) =>
       b..G__typename = 'Media';
 
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   int get id;
-  GRecommendationsData_Media_recommendations? get recommendations;
-  static Serializer<GRecommendationsData_Media> get serializer =>
-      _$gRecommendationsDataMediaSerializer;
+  GMediaRecommendationsData_Media_recommendations? get recommendations;
+  static Serializer<GMediaRecommendationsData_Media> get serializer =>
+      _$gMediaRecommendationsDataMediaSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media.serializer,
+        GMediaRecommendationsData_Media.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media? fromJson(Map<String, dynamic> json) =>
+  static GMediaRecommendationsData_Media? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GRecommendationsData_Media.serializer,
+        GMediaRecommendationsData_Media.serializer,
         json,
       );
 }
 
-abstract class GRecommendationsData_Media_recommendations
+abstract class GMediaRecommendationsData_Media_recommendations
     implements
-        Built<GRecommendationsData_Media_recommendations,
-            GRecommendationsData_Media_recommendationsBuilder> {
-  GRecommendationsData_Media_recommendations._();
+        Built<GMediaRecommendationsData_Media_recommendations,
+            GMediaRecommendationsData_Media_recommendationsBuilder> {
+  GMediaRecommendationsData_Media_recommendations._();
 
-  factory GRecommendationsData_Media_recommendations(
-      [Function(GRecommendationsData_Media_recommendationsBuilder b)
-          updates]) = _$GRecommendationsData_Media_recommendations;
+  factory GMediaRecommendationsData_Media_recommendations(
+      [Function(GMediaRecommendationsData_Media_recommendationsBuilder b)
+          updates]) = _$GMediaRecommendationsData_Media_recommendations;
 
   static void _initializeBuilder(
-          GRecommendationsData_Media_recommendationsBuilder b) =>
+          GMediaRecommendationsData_Media_recommendationsBuilder b) =>
       b..G__typename = 'RecommendationConnection';
 
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
-  GRecommendationsData_Media_recommendations_pageInfo? get pageInfo;
-  BuiltList<GRecommendationsData_Media_recommendations_nodes?>? get nodes;
-  static Serializer<GRecommendationsData_Media_recommendations>
-      get serializer => _$gRecommendationsDataMediaRecommendationsSerializer;
+  GMediaRecommendationsData_Media_recommendations_pageInfo? get pageInfo;
+  BuiltList<GMediaRecommendationsData_Media_recommendations_nodes?>? get nodes;
+  static Serializer<GMediaRecommendationsData_Media_recommendations>
+      get serializer =>
+          _$gMediaRecommendationsDataMediaRecommendationsSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media_recommendations.serializer,
+        GMediaRecommendationsData_Media_recommendations.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media_recommendations? fromJson(
+  static GMediaRecommendationsData_Media_recommendations? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GRecommendationsData_Media_recommendations.serializer,
+        GMediaRecommendationsData_Media_recommendations.serializer,
         json,
       );
 }
 
-abstract class GRecommendationsData_Media_recommendations_pageInfo
+abstract class GMediaRecommendationsData_Media_recommendations_pageInfo
     implements
-        Built<GRecommendationsData_Media_recommendations_pageInfo,
-            GRecommendationsData_Media_recommendations_pageInfoBuilder>,
+        Built<GMediaRecommendationsData_Media_recommendations_pageInfo,
+            GMediaRecommendationsData_Media_recommendations_pageInfoBuilder>,
         _i2.GPageInfo {
-  GRecommendationsData_Media_recommendations_pageInfo._();
+  GMediaRecommendationsData_Media_recommendations_pageInfo._();
 
-  factory GRecommendationsData_Media_recommendations_pageInfo(
-      [Function(GRecommendationsData_Media_recommendations_pageInfoBuilder b)
-          updates]) = _$GRecommendationsData_Media_recommendations_pageInfo;
+  factory GMediaRecommendationsData_Media_recommendations_pageInfo(
+      [Function(
+              GMediaRecommendationsData_Media_recommendations_pageInfoBuilder b)
+          updates]) = _$GMediaRecommendationsData_Media_recommendations_pageInfo;
 
   static void _initializeBuilder(
-          GRecommendationsData_Media_recommendations_pageInfoBuilder b) =>
+          GMediaRecommendationsData_Media_recommendations_pageInfoBuilder b) =>
       b..G__typename = 'PageInfo';
 
   @override
@@ -130,76 +134,76 @@ abstract class GRecommendationsData_Media_recommendations_pageInfo
   int? get currentPage;
   @override
   bool? get hasNextPage;
-  static Serializer<GRecommendationsData_Media_recommendations_pageInfo>
+  static Serializer<GMediaRecommendationsData_Media_recommendations_pageInfo>
       get serializer =>
-          _$gRecommendationsDataMediaRecommendationsPageInfoSerializer;
+          _$gMediaRecommendationsDataMediaRecommendationsPageInfoSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media_recommendations_pageInfo.serializer,
+        GMediaRecommendationsData_Media_recommendations_pageInfo.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media_recommendations_pageInfo? fromJson(
+  static GMediaRecommendationsData_Media_recommendations_pageInfo? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GRecommendationsData_Media_recommendations_pageInfo.serializer,
+        GMediaRecommendationsData_Media_recommendations_pageInfo.serializer,
         json,
       );
 }
 
-abstract class GRecommendationsData_Media_recommendations_nodes
+abstract class GMediaRecommendationsData_Media_recommendations_nodes
     implements
-        Built<GRecommendationsData_Media_recommendations_nodes,
-            GRecommendationsData_Media_recommendations_nodesBuilder> {
-  GRecommendationsData_Media_recommendations_nodes._();
+        Built<GMediaRecommendationsData_Media_recommendations_nodes,
+            GMediaRecommendationsData_Media_recommendations_nodesBuilder> {
+  GMediaRecommendationsData_Media_recommendations_nodes._();
 
-  factory GRecommendationsData_Media_recommendations_nodes(
-      [Function(GRecommendationsData_Media_recommendations_nodesBuilder b)
-          updates]) = _$GRecommendationsData_Media_recommendations_nodes;
+  factory GMediaRecommendationsData_Media_recommendations_nodes(
+      [Function(GMediaRecommendationsData_Media_recommendations_nodesBuilder b)
+          updates]) = _$GMediaRecommendationsData_Media_recommendations_nodes;
 
   static void _initializeBuilder(
-          GRecommendationsData_Media_recommendations_nodesBuilder b) =>
+          GMediaRecommendationsData_Media_recommendations_nodesBuilder b) =>
       b..G__typename = 'Recommendation';
 
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
       get mediaRecommendation;
-  static Serializer<GRecommendationsData_Media_recommendations_nodes>
+  static Serializer<GMediaRecommendationsData_Media_recommendations_nodes>
       get serializer =>
-          _$gRecommendationsDataMediaRecommendationsNodesSerializer;
+          _$gMediaRecommendationsDataMediaRecommendationsNodesSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media_recommendations_nodes.serializer,
+        GMediaRecommendationsData_Media_recommendations_nodes.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media_recommendations_nodes? fromJson(
+  static GMediaRecommendationsData_Media_recommendations_nodes? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GRecommendationsData_Media_recommendations_nodes.serializer,
+        GMediaRecommendationsData_Media_recommendations_nodes.serializer,
         json,
       );
 }
 
-abstract class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+abstract class GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
     implements
         Built<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder>,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder>,
         _i3.GMediaFragment {
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation._();
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation._();
 
-  factory GRecommendationsData_Media_recommendations_nodes_mediaRecommendation(
+  factory GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation(
           [Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
                       b)
               updates]) =
-      _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation;
+      _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation;
 
   static void _initializeBuilder(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
               b) =>
       b..G__typename = 'Media';
 
@@ -219,48 +223,48 @@ abstract class GRecommendationsData_Media_recommendations_nodes_mediaRecommendat
   @override
   String? get description;
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
       get title;
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
       get coverImage;
   static Serializer<
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation>
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation>
       get serializer =>
-          _$gRecommendationsDataMediaRecommendationsNodesMediaRecommendationSerializer;
+          _$gMediaRecommendationsDataMediaRecommendationsNodesMediaRecommendationSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
             .serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
+  static GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
       fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
                 .serializer,
             json,
           );
 }
 
-abstract class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+abstract class GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
     implements
         Built<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder>,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder>,
         _i3.GMediaFragment_title {
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title._();
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title._();
 
-  factory GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title(
+  factory GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title(
           [Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
                       b)
               updates]) =
-      _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title;
+      _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title;
 
   static void _initializeBuilder(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
               b) =>
       b..G__typename = 'MediaTitle';
 
@@ -270,42 +274,42 @@ abstract class GRecommendationsData_Media_recommendations_nodes_mediaRecommendat
   @override
   String? get userPreferred;
   static Serializer<
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title>
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title>
       get serializer =>
-          _$gRecommendationsDataMediaRecommendationsNodesMediaRecommendationTitleSerializer;
+          _$gMediaRecommendationsDataMediaRecommendationsNodesMediaRecommendationTitleSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
             .serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
+  static GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
       fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
                 .serializer,
             json,
           );
 }
 
-abstract class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+abstract class GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
     implements
         Built<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder>,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder>,
         _i3.GMediaFragment_coverImage {
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage._();
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage._();
 
-  factory GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage(
+  factory GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage(
           [Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
                       b)
               updates]) =
-      _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage;
+      _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage;
 
   static void _initializeBuilder(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
               b) =>
       b..G__typename = 'MediaCoverImage';
 
@@ -315,20 +319,20 @@ abstract class GRecommendationsData_Media_recommendations_nodes_mediaRecommendat
   @override
   String? get extraLarge;
   static Serializer<
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage>
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage>
       get serializer =>
-          _$gRecommendationsDataMediaRecommendationsNodesMediaRecommendationCoverImageSerializer;
+          _$gMediaRecommendationsDataMediaRecommendationsNodesMediaRecommendationCoverImageSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
             .serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
+  static GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
       fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
                 .serializer,
             json,
           );

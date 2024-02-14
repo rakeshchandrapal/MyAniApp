@@ -22,6 +22,12 @@ Serializer<GUserReviewsData_Page_reviews_media>
 Serializer<GUserReviewsData_Page_reviews_media_title>
     _$gUserReviewsDataPageReviewsMediaTitleSerializer =
     new _$GUserReviewsData_Page_reviews_media_titleSerializer();
+Serializer<GUserReviewsData_Page_reviews_user>
+    _$gUserReviewsDataPageReviewsUserSerializer =
+    new _$GUserReviewsData_Page_reviews_userSerializer();
+Serializer<GUserReviewsData_Page_reviews_user_avatar>
+    _$gUserReviewsDataPageReviewsUserAvatarSerializer =
+    new _$GUserReviewsData_Page_reviews_user_avatarSerializer();
 
 class _$GUserReviewsDataSerializer
     implements StructuredSerializer<GUserReviewsData> {
@@ -240,24 +246,24 @@ class _$GUserReviewsData_Page_reviewsSerializer
       serializers.serialize(object.id, specifiedType: const FullType(int)),
     ];
     Object? value;
-    value = object.summary;
-    if (value != null) {
-      result
-        ..add('summary')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.rating;
     if (value != null) {
       result
         ..add('rating')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.score;
+    value = object.ratingAmount;
     if (value != null) {
       result
-        ..add('score')
+        ..add('ratingAmount')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.summary;
+    if (value != null) {
+      result
+        ..add('summary')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.media;
     if (value != null) {
@@ -266,6 +272,13 @@ class _$GUserReviewsData_Page_reviewsSerializer
         ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(GUserReviewsData_Page_reviews_media)));
+    }
+    value = object.user;
+    if (value != null) {
+      result
+        ..add('user')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(GUserReviewsData_Page_reviews_user)));
     }
     return result;
   }
@@ -290,23 +303,29 @@ class _$GUserReviewsData_Page_reviewsSerializer
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'summary':
-          result.summary = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'rating':
           result.rating = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'score':
-          result.score = serializers.deserialize(value,
+        case 'ratingAmount':
+          result.ratingAmount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
+          break;
+        case 'summary':
+          result.summary = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'media':
           result.media.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(GUserReviewsData_Page_reviews_media))!
               as GUserReviewsData_Page_reviews_media);
+          break;
+        case 'user':
+          result.user.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(GUserReviewsData_Page_reviews_user))!
+              as GUserReviewsData_Page_reviews_user);
           break;
       }
     }
@@ -345,6 +364,20 @@ class _$GUserReviewsData_Page_reviews_mediaSerializer
             specifiedType:
                 const FullType(GUserReviewsData_Page_reviews_media_title)));
     }
+    value = object.type;
+    if (value != null) {
+      result
+        ..add('type')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(_i4.GMediaType)));
+    }
+    value = object.bannerImage;
+    if (value != null) {
+      result
+        ..add('bannerImage')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -373,6 +406,14 @@ class _$GUserReviewsData_Page_reviews_mediaSerializer
                   specifiedType: const FullType(
                       GUserReviewsData_Page_reviews_media_title))!
               as GUserReviewsData_Page_reviews_media_title);
+          break;
+        case 'type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(_i4.GMediaType)) as _i4.GMediaType?;
+          break;
+        case 'bannerImage':
+          result.bannerImage = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -429,6 +470,170 @@ class _$GUserReviewsData_Page_reviews_media_titleSerializer
           break;
         case 'userPreferred':
           result.userPreferred = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GUserReviewsData_Page_reviews_userSerializer
+    implements StructuredSerializer<GUserReviewsData_Page_reviews_user> {
+  @override
+  final Iterable<Type> types = const [
+    GUserReviewsData_Page_reviews_user,
+    _$GUserReviewsData_Page_reviews_user
+  ];
+  @override
+  final String wireName = 'GUserReviewsData_Page_reviews_user';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GUserReviewsData_Page_reviews_user object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.donatorTier;
+    if (value != null) {
+      result
+        ..add('donatorTier')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.donatorBadge;
+    if (value != null) {
+      result
+        ..add('donatorBadge')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.moderatorRoles;
+    if (value != null) {
+      result
+        ..add('moderatorRoles')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType.nullable(_i4.GModRole)])));
+    }
+    value = object.avatar;
+    if (value != null) {
+      result
+        ..add('avatar')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(GUserReviewsData_Page_reviews_user_avatar)));
+    }
+    return result;
+  }
+
+  @override
+  GUserReviewsData_Page_reviews_user deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GUserReviewsData_Page_reviews_userBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'donatorTier':
+          result.donatorTier = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'donatorBadge':
+          result.donatorBadge = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'moderatorRoles':
+          result.moderatorRoles.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType.nullable(_i4.GModRole)
+              ]))! as BuiltList<Object?>);
+          break;
+        case 'avatar':
+          result.avatar.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      GUserReviewsData_Page_reviews_user_avatar))!
+              as GUserReviewsData_Page_reviews_user_avatar);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GUserReviewsData_Page_reviews_user_avatarSerializer
+    implements StructuredSerializer<GUserReviewsData_Page_reviews_user_avatar> {
+  @override
+  final Iterable<Type> types = const [
+    GUserReviewsData_Page_reviews_user_avatar,
+    _$GUserReviewsData_Page_reviews_user_avatar
+  ];
+  @override
+  final String wireName = 'GUserReviewsData_Page_reviews_user_avatar';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GUserReviewsData_Page_reviews_user_avatar object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.large;
+    if (value != null) {
+      result
+        ..add('large')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GUserReviewsData_Page_reviews_user_avatar deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GUserReviewsData_Page_reviews_user_avatarBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'large':
+          result.large = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
       }
@@ -807,13 +1012,15 @@ class _$GUserReviewsData_Page_reviews extends GUserReviewsData_Page_reviews {
   @override
   final int id;
   @override
-  final String? summary;
-  @override
   final int? rating;
   @override
-  final int? score;
+  final int? ratingAmount;
+  @override
+  final String? summary;
   @override
   final GUserReviewsData_Page_reviews_media? media;
+  @override
+  final GUserReviewsData_Page_reviews_user? user;
 
   factory _$GUserReviewsData_Page_reviews(
           [void Function(GUserReviewsData_Page_reviewsBuilder)? updates]) =>
@@ -822,10 +1029,11 @@ class _$GUserReviewsData_Page_reviews extends GUserReviewsData_Page_reviews {
   _$GUserReviewsData_Page_reviews._(
       {required this.G__typename,
       required this.id,
-      this.summary,
       this.rating,
-      this.score,
-      this.media})
+      this.ratingAmount,
+      this.summary,
+      this.media,
+      this.user})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GUserReviewsData_Page_reviews', 'G__typename');
@@ -848,10 +1056,11 @@ class _$GUserReviewsData_Page_reviews extends GUserReviewsData_Page_reviews {
     return other is GUserReviewsData_Page_reviews &&
         G__typename == other.G__typename &&
         id == other.id &&
-        summary == other.summary &&
         rating == other.rating &&
-        score == other.score &&
-        media == other.media;
+        ratingAmount == other.ratingAmount &&
+        summary == other.summary &&
+        media == other.media &&
+        user == other.user;
   }
 
   @override
@@ -859,10 +1068,11 @@ class _$GUserReviewsData_Page_reviews extends GUserReviewsData_Page_reviews {
     var _$hash = 0;
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
-    _$hash = $jc(_$hash, summary.hashCode);
     _$hash = $jc(_$hash, rating.hashCode);
-    _$hash = $jc(_$hash, score.hashCode);
+    _$hash = $jc(_$hash, ratingAmount.hashCode);
+    _$hash = $jc(_$hash, summary.hashCode);
     _$hash = $jc(_$hash, media.hashCode);
+    _$hash = $jc(_$hash, user.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -872,10 +1082,11 @@ class _$GUserReviewsData_Page_reviews extends GUserReviewsData_Page_reviews {
     return (newBuiltValueToStringHelper(r'GUserReviewsData_Page_reviews')
           ..add('G__typename', G__typename)
           ..add('id', id)
-          ..add('summary', summary)
           ..add('rating', rating)
-          ..add('score', score)
-          ..add('media', media))
+          ..add('ratingAmount', ratingAmount)
+          ..add('summary', summary)
+          ..add('media', media)
+          ..add('user', user))
         .toString();
   }
 }
@@ -894,23 +1105,29 @@ class GUserReviewsData_Page_reviewsBuilder
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  String? _summary;
-  String? get summary => _$this._summary;
-  set summary(String? summary) => _$this._summary = summary;
-
   int? _rating;
   int? get rating => _$this._rating;
   set rating(int? rating) => _$this._rating = rating;
 
-  int? _score;
-  int? get score => _$this._score;
-  set score(int? score) => _$this._score = score;
+  int? _ratingAmount;
+  int? get ratingAmount => _$this._ratingAmount;
+  set ratingAmount(int? ratingAmount) => _$this._ratingAmount = ratingAmount;
+
+  String? _summary;
+  String? get summary => _$this._summary;
+  set summary(String? summary) => _$this._summary = summary;
 
   GUserReviewsData_Page_reviews_mediaBuilder? _media;
   GUserReviewsData_Page_reviews_mediaBuilder get media =>
       _$this._media ??= new GUserReviewsData_Page_reviews_mediaBuilder();
   set media(GUserReviewsData_Page_reviews_mediaBuilder? media) =>
       _$this._media = media;
+
+  GUserReviewsData_Page_reviews_userBuilder? _user;
+  GUserReviewsData_Page_reviews_userBuilder get user =>
+      _$this._user ??= new GUserReviewsData_Page_reviews_userBuilder();
+  set user(GUserReviewsData_Page_reviews_userBuilder? user) =>
+      _$this._user = user;
 
   GUserReviewsData_Page_reviewsBuilder() {
     GUserReviewsData_Page_reviews._initializeBuilder(this);
@@ -921,10 +1138,11 @@ class GUserReviewsData_Page_reviewsBuilder
     if ($v != null) {
       _G__typename = $v.G__typename;
       _id = $v.id;
-      _summary = $v.summary;
       _rating = $v.rating;
-      _score = $v.score;
+      _ratingAmount = $v.ratingAmount;
+      _summary = $v.summary;
       _media = $v.media?.toBuilder();
+      _user = $v.user?.toBuilder();
       _$v = null;
     }
     return this;
@@ -953,15 +1171,18 @@ class GUserReviewsData_Page_reviewsBuilder
                   G__typename, r'GUserReviewsData_Page_reviews', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
                   id, r'GUserReviewsData_Page_reviews', 'id'),
-              summary: summary,
               rating: rating,
-              score: score,
-              media: _media?.build());
+              ratingAmount: ratingAmount,
+              summary: summary,
+              media: _media?.build(),
+              user: _user?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'media';
         _media?.build();
+        _$failedField = 'user';
+        _user?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GUserReviewsData_Page_reviews', _$failedField, e.toString());
@@ -981,6 +1202,10 @@ class _$GUserReviewsData_Page_reviews_media
   final int id;
   @override
   final GUserReviewsData_Page_reviews_media_title? title;
+  @override
+  final _i4.GMediaType? type;
+  @override
+  final String? bannerImage;
 
   factory _$GUserReviewsData_Page_reviews_media(
           [void Function(GUserReviewsData_Page_reviews_mediaBuilder)?
@@ -989,7 +1214,11 @@ class _$GUserReviewsData_Page_reviews_media
           ._build();
 
   _$GUserReviewsData_Page_reviews_media._(
-      {required this.G__typename, required this.id, this.title})
+      {required this.G__typename,
+      required this.id,
+      this.title,
+      this.type,
+      this.bannerImage})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GUserReviewsData_Page_reviews_media', 'G__typename');
@@ -1012,7 +1241,9 @@ class _$GUserReviewsData_Page_reviews_media
     return other is GUserReviewsData_Page_reviews_media &&
         G__typename == other.G__typename &&
         id == other.id &&
-        title == other.title;
+        title == other.title &&
+        type == other.type &&
+        bannerImage == other.bannerImage;
   }
 
   @override
@@ -1021,6 +1252,8 @@ class _$GUserReviewsData_Page_reviews_media
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, title.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jc(_$hash, bannerImage.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -1030,7 +1263,9 @@ class _$GUserReviewsData_Page_reviews_media
     return (newBuiltValueToStringHelper(r'GUserReviewsData_Page_reviews_media')
           ..add('G__typename', G__typename)
           ..add('id', id)
-          ..add('title', title))
+          ..add('title', title)
+          ..add('type', type)
+          ..add('bannerImage', bannerImage))
         .toString();
   }
 }
@@ -1055,6 +1290,14 @@ class GUserReviewsData_Page_reviews_mediaBuilder
   set title(GUserReviewsData_Page_reviews_media_titleBuilder? title) =>
       _$this._title = title;
 
+  _i4.GMediaType? _type;
+  _i4.GMediaType? get type => _$this._type;
+  set type(_i4.GMediaType? type) => _$this._type = type;
+
+  String? _bannerImage;
+  String? get bannerImage => _$this._bannerImage;
+  set bannerImage(String? bannerImage) => _$this._bannerImage = bannerImage;
+
   GUserReviewsData_Page_reviews_mediaBuilder() {
     GUserReviewsData_Page_reviews_media._initializeBuilder(this);
   }
@@ -1065,6 +1308,8 @@ class GUserReviewsData_Page_reviews_mediaBuilder
       _G__typename = $v.G__typename;
       _id = $v.id;
       _title = $v.title?.toBuilder();
+      _type = $v.type;
+      _bannerImage = $v.bannerImage;
       _$v = null;
     }
     return this;
@@ -1094,7 +1339,9 @@ class GUserReviewsData_Page_reviews_mediaBuilder
                   r'GUserReviewsData_Page_reviews_media', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
                   id, r'GUserReviewsData_Page_reviews_media', 'id'),
-              title: _title?.build());
+              title: _title?.build(),
+              type: type,
+              bannerImage: bannerImage);
     } catch (_) {
       late String _$failedField;
       try {
@@ -1221,6 +1468,313 @@ class GUserReviewsData_Page_reviews_media_titleBuilder
             G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
                 r'GUserReviewsData_Page_reviews_media_title', 'G__typename'),
             userPreferred: userPreferred);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GUserReviewsData_Page_reviews_user
+    extends GUserReviewsData_Page_reviews_user {
+  @override
+  final String G__typename;
+  @override
+  final int id;
+  @override
+  final String name;
+  @override
+  final int? donatorTier;
+  @override
+  final String? donatorBadge;
+  @override
+  final BuiltList<_i4.GModRole?>? moderatorRoles;
+  @override
+  final GUserReviewsData_Page_reviews_user_avatar? avatar;
+
+  factory _$GUserReviewsData_Page_reviews_user(
+          [void Function(GUserReviewsData_Page_reviews_userBuilder)?
+              updates]) =>
+      (new GUserReviewsData_Page_reviews_userBuilder()..update(updates))
+          ._build();
+
+  _$GUserReviewsData_Page_reviews_user._(
+      {required this.G__typename,
+      required this.id,
+      required this.name,
+      this.donatorTier,
+      this.donatorBadge,
+      this.moderatorRoles,
+      this.avatar})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GUserReviewsData_Page_reviews_user', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GUserReviewsData_Page_reviews_user', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        name, r'GUserReviewsData_Page_reviews_user', 'name');
+  }
+
+  @override
+  GUserReviewsData_Page_reviews_user rebuild(
+          void Function(GUserReviewsData_Page_reviews_userBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GUserReviewsData_Page_reviews_userBuilder toBuilder() =>
+      new GUserReviewsData_Page_reviews_userBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GUserReviewsData_Page_reviews_user &&
+        G__typename == other.G__typename &&
+        id == other.id &&
+        name == other.name &&
+        donatorTier == other.donatorTier &&
+        donatorBadge == other.donatorBadge &&
+        moderatorRoles == other.moderatorRoles &&
+        avatar == other.avatar;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, donatorTier.hashCode);
+    _$hash = $jc(_$hash, donatorBadge.hashCode);
+    _$hash = $jc(_$hash, moderatorRoles.hashCode);
+    _$hash = $jc(_$hash, avatar.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GUserReviewsData_Page_reviews_user')
+          ..add('G__typename', G__typename)
+          ..add('id', id)
+          ..add('name', name)
+          ..add('donatorTier', donatorTier)
+          ..add('donatorBadge', donatorBadge)
+          ..add('moderatorRoles', moderatorRoles)
+          ..add('avatar', avatar))
+        .toString();
+  }
+}
+
+class GUserReviewsData_Page_reviews_userBuilder
+    implements
+        Builder<GUserReviewsData_Page_reviews_user,
+            GUserReviewsData_Page_reviews_userBuilder> {
+  _$GUserReviewsData_Page_reviews_user? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  int? _donatorTier;
+  int? get donatorTier => _$this._donatorTier;
+  set donatorTier(int? donatorTier) => _$this._donatorTier = donatorTier;
+
+  String? _donatorBadge;
+  String? get donatorBadge => _$this._donatorBadge;
+  set donatorBadge(String? donatorBadge) => _$this._donatorBadge = donatorBadge;
+
+  ListBuilder<_i4.GModRole?>? _moderatorRoles;
+  ListBuilder<_i4.GModRole?> get moderatorRoles =>
+      _$this._moderatorRoles ??= new ListBuilder<_i4.GModRole?>();
+  set moderatorRoles(ListBuilder<_i4.GModRole?>? moderatorRoles) =>
+      _$this._moderatorRoles = moderatorRoles;
+
+  GUserReviewsData_Page_reviews_user_avatarBuilder? _avatar;
+  GUserReviewsData_Page_reviews_user_avatarBuilder get avatar =>
+      _$this._avatar ??= new GUserReviewsData_Page_reviews_user_avatarBuilder();
+  set avatar(GUserReviewsData_Page_reviews_user_avatarBuilder? avatar) =>
+      _$this._avatar = avatar;
+
+  GUserReviewsData_Page_reviews_userBuilder() {
+    GUserReviewsData_Page_reviews_user._initializeBuilder(this);
+  }
+
+  GUserReviewsData_Page_reviews_userBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _id = $v.id;
+      _name = $v.name;
+      _donatorTier = $v.donatorTier;
+      _donatorBadge = $v.donatorBadge;
+      _moderatorRoles = $v.moderatorRoles?.toBuilder();
+      _avatar = $v.avatar?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GUserReviewsData_Page_reviews_user other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GUserReviewsData_Page_reviews_user;
+  }
+
+  @override
+  void update(
+      void Function(GUserReviewsData_Page_reviews_userBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GUserReviewsData_Page_reviews_user build() => _build();
+
+  _$GUserReviewsData_Page_reviews_user _build() {
+    _$GUserReviewsData_Page_reviews_user _$result;
+    try {
+      _$result = _$v ??
+          new _$GUserReviewsData_Page_reviews_user._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                  r'GUserReviewsData_Page_reviews_user', 'G__typename'),
+              id: BuiltValueNullFieldError.checkNotNull(
+                  id, r'GUserReviewsData_Page_reviews_user', 'id'),
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, r'GUserReviewsData_Page_reviews_user', 'name'),
+              donatorTier: donatorTier,
+              donatorBadge: donatorBadge,
+              moderatorRoles: _moderatorRoles?.build(),
+              avatar: _avatar?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'moderatorRoles';
+        _moderatorRoles?.build();
+        _$failedField = 'avatar';
+        _avatar?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GUserReviewsData_Page_reviews_user', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GUserReviewsData_Page_reviews_user_avatar
+    extends GUserReviewsData_Page_reviews_user_avatar {
+  @override
+  final String G__typename;
+  @override
+  final String? large;
+
+  factory _$GUserReviewsData_Page_reviews_user_avatar(
+          [void Function(GUserReviewsData_Page_reviews_user_avatarBuilder)?
+              updates]) =>
+      (new GUserReviewsData_Page_reviews_user_avatarBuilder()..update(updates))
+          ._build();
+
+  _$GUserReviewsData_Page_reviews_user_avatar._(
+      {required this.G__typename, this.large})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(G__typename,
+        r'GUserReviewsData_Page_reviews_user_avatar', 'G__typename');
+  }
+
+  @override
+  GUserReviewsData_Page_reviews_user_avatar rebuild(
+          void Function(GUserReviewsData_Page_reviews_user_avatarBuilder)
+              updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GUserReviewsData_Page_reviews_user_avatarBuilder toBuilder() =>
+      new GUserReviewsData_Page_reviews_user_avatarBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GUserReviewsData_Page_reviews_user_avatar &&
+        G__typename == other.G__typename &&
+        large == other.large;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, large.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(
+            r'GUserReviewsData_Page_reviews_user_avatar')
+          ..add('G__typename', G__typename)
+          ..add('large', large))
+        .toString();
+  }
+}
+
+class GUserReviewsData_Page_reviews_user_avatarBuilder
+    implements
+        Builder<GUserReviewsData_Page_reviews_user_avatar,
+            GUserReviewsData_Page_reviews_user_avatarBuilder> {
+  _$GUserReviewsData_Page_reviews_user_avatar? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  String? _large;
+  String? get large => _$this._large;
+  set large(String? large) => _$this._large = large;
+
+  GUserReviewsData_Page_reviews_user_avatarBuilder() {
+    GUserReviewsData_Page_reviews_user_avatar._initializeBuilder(this);
+  }
+
+  GUserReviewsData_Page_reviews_user_avatarBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _large = $v.large;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GUserReviewsData_Page_reviews_user_avatar other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GUserReviewsData_Page_reviews_user_avatar;
+  }
+
+  @override
+  void update(
+      void Function(GUserReviewsData_Page_reviews_user_avatarBuilder)?
+          updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GUserReviewsData_Page_reviews_user_avatar build() => _build();
+
+  _$GUserReviewsData_Page_reviews_user_avatar _build() {
+    final _$result = _$v ??
+        new _$GUserReviewsData_Page_reviews_user_avatar._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                r'GUserReviewsData_Page_reviews_user_avatar', 'G__typename'),
+            large: large);
     replace(_$result);
     return _$result;
   }

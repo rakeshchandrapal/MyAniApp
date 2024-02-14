@@ -6,44 +6,46 @@ part of 'similar.data.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GRecommendationsData> _$gRecommendationsDataSerializer =
-    new _$GRecommendationsDataSerializer();
-Serializer<GRecommendationsData_Media> _$gRecommendationsDataMediaSerializer =
-    new _$GRecommendationsData_MediaSerializer();
-Serializer<GRecommendationsData_Media_recommendations>
-    _$gRecommendationsDataMediaRecommendationsSerializer =
-    new _$GRecommendationsData_Media_recommendationsSerializer();
-Serializer<GRecommendationsData_Media_recommendations_pageInfo>
-    _$gRecommendationsDataMediaRecommendationsPageInfoSerializer =
-    new _$GRecommendationsData_Media_recommendations_pageInfoSerializer();
-Serializer<GRecommendationsData_Media_recommendations_nodes>
-    _$gRecommendationsDataMediaRecommendationsNodesSerializer =
-    new _$GRecommendationsData_Media_recommendations_nodesSerializer();
-Serializer<GRecommendationsData_Media_recommendations_nodes_mediaRecommendation>
-    _$gRecommendationsDataMediaRecommendationsNodesMediaRecommendationSerializer =
-    new _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendationSerializer();
+Serializer<GMediaRecommendationsData> _$gMediaRecommendationsDataSerializer =
+    new _$GMediaRecommendationsDataSerializer();
+Serializer<GMediaRecommendationsData_Media>
+    _$gMediaRecommendationsDataMediaSerializer =
+    new _$GMediaRecommendationsData_MediaSerializer();
+Serializer<GMediaRecommendationsData_Media_recommendations>
+    _$gMediaRecommendationsDataMediaRecommendationsSerializer =
+    new _$GMediaRecommendationsData_Media_recommendationsSerializer();
+Serializer<GMediaRecommendationsData_Media_recommendations_pageInfo>
+    _$gMediaRecommendationsDataMediaRecommendationsPageInfoSerializer =
+    new _$GMediaRecommendationsData_Media_recommendations_pageInfoSerializer();
+Serializer<GMediaRecommendationsData_Media_recommendations_nodes>
+    _$gMediaRecommendationsDataMediaRecommendationsNodesSerializer =
+    new _$GMediaRecommendationsData_Media_recommendations_nodesSerializer();
 Serializer<
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title>
-    _$gRecommendationsDataMediaRecommendationsNodesMediaRecommendationTitleSerializer =
-    new _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleSerializer();
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation>
+    _$gMediaRecommendationsDataMediaRecommendationsNodesMediaRecommendationSerializer =
+    new _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationSerializer();
 Serializer<
-        GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage>
-    _$gRecommendationsDataMediaRecommendationsNodesMediaRecommendationCoverImageSerializer =
-    new _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageSerializer();
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title>
+    _$gMediaRecommendationsDataMediaRecommendationsNodesMediaRecommendationTitleSerializer =
+    new _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleSerializer();
+Serializer<
+        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage>
+    _$gMediaRecommendationsDataMediaRecommendationsNodesMediaRecommendationCoverImageSerializer =
+    new _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageSerializer();
 
-class _$GRecommendationsDataSerializer
-    implements StructuredSerializer<GRecommendationsData> {
+class _$GMediaRecommendationsDataSerializer
+    implements StructuredSerializer<GMediaRecommendationsData> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData,
-    _$GRecommendationsData
+    GMediaRecommendationsData,
+    _$GMediaRecommendationsData
   ];
   @override
-  final String wireName = 'GRecommendationsData';
+  final String wireName = 'GMediaRecommendationsData';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GRecommendationsData object,
+      Serializers serializers, GMediaRecommendationsData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -56,16 +58,16 @@ class _$GRecommendationsDataSerializer
       result
         ..add('Media')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GRecommendationsData_Media)));
+            specifiedType: const FullType(GMediaRecommendationsData_Media)));
     }
     return result;
   }
 
   @override
-  GRecommendationsData deserialize(
+  GMediaRecommendationsData deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GRecommendationsDataBuilder();
+    final result = new GMediaRecommendationsDataBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -79,8 +81,9 @@ class _$GRecommendationsDataSerializer
           break;
         case 'Media':
           result.Media.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GRecommendationsData_Media))!
-              as GRecommendationsData_Media);
+                  specifiedType:
+                      const FullType(GMediaRecommendationsData_Media))!
+              as GMediaRecommendationsData_Media);
           break;
       }
     }
@@ -89,19 +92,19 @@ class _$GRecommendationsDataSerializer
   }
 }
 
-class _$GRecommendationsData_MediaSerializer
-    implements StructuredSerializer<GRecommendationsData_Media> {
+class _$GMediaRecommendationsData_MediaSerializer
+    implements StructuredSerializer<GMediaRecommendationsData_Media> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media,
-    _$GRecommendationsData_Media
+    GMediaRecommendationsData_Media,
+    _$GMediaRecommendationsData_Media
   ];
   @override
-  final String wireName = 'GRecommendationsData_Media';
+  final String wireName = 'GMediaRecommendationsData_Media';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GRecommendationsData_Media object,
+      Serializers serializers, GMediaRecommendationsData_Media object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -116,17 +119,17 @@ class _$GRecommendationsData_MediaSerializer
       result
         ..add('recommendations')
         ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(GRecommendationsData_Media_recommendations)));
+            specifiedType: const FullType(
+                GMediaRecommendationsData_Media_recommendations)));
     }
     return result;
   }
 
   @override
-  GRecommendationsData_Media deserialize(
+  GMediaRecommendationsData_Media deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GRecommendationsData_MediaBuilder();
+    final result = new GMediaRecommendationsData_MediaBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -145,8 +148,8 @@ class _$GRecommendationsData_MediaSerializer
         case 'recommendations':
           result.recommendations.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GRecommendationsData_Media_recommendations))!
-              as GRecommendationsData_Media_recommendations);
+                      GMediaRecommendationsData_Media_recommendations))!
+              as GMediaRecommendationsData_Media_recommendations);
           break;
       }
     }
@@ -155,20 +158,20 @@ class _$GRecommendationsData_MediaSerializer
   }
 }
 
-class _$GRecommendationsData_Media_recommendationsSerializer
+class _$GMediaRecommendationsData_Media_recommendationsSerializer
     implements
-        StructuredSerializer<GRecommendationsData_Media_recommendations> {
+        StructuredSerializer<GMediaRecommendationsData_Media_recommendations> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media_recommendations,
-    _$GRecommendationsData_Media_recommendations
+    GMediaRecommendationsData_Media_recommendations,
+    _$GMediaRecommendationsData_Media_recommendations
   ];
   @override
-  final String wireName = 'GRecommendationsData_Media_recommendations';
+  final String wireName = 'GMediaRecommendationsData_Media_recommendations';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GRecommendationsData_Media_recommendations object,
+      GMediaRecommendationsData_Media_recommendations object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -182,7 +185,7 @@ class _$GRecommendationsData_Media_recommendationsSerializer
         ..add('pageInfo')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                GRecommendationsData_Media_recommendations_pageInfo)));
+                GMediaRecommendationsData_Media_recommendations_pageInfo)));
     }
     value = object.nodes;
     if (value != null) {
@@ -191,17 +194,17 @@ class _$GRecommendationsData_Media_recommendationsSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltList, const [
               const FullType.nullable(
-                  GRecommendationsData_Media_recommendations_nodes)
+                  GMediaRecommendationsData_Media_recommendations_nodes)
             ])));
     }
     return result;
   }
 
   @override
-  GRecommendationsData_Media_recommendations deserialize(
+  GMediaRecommendationsData_Media_recommendations deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GRecommendationsData_Media_recommendationsBuilder();
+    final result = new GMediaRecommendationsData_Media_recommendationsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -216,14 +219,14 @@ class _$GRecommendationsData_Media_recommendationsSerializer
         case 'pageInfo':
           result.pageInfo.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GRecommendationsData_Media_recommendations_pageInfo))!
-              as GRecommendationsData_Media_recommendations_pageInfo);
+                      GMediaRecommendationsData_Media_recommendations_pageInfo))!
+              as GMediaRecommendationsData_Media_recommendations_pageInfo);
           break;
         case 'nodes':
           result.nodes.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType.nullable(
-                    GRecommendationsData_Media_recommendations_nodes)
+                    GMediaRecommendationsData_Media_recommendations_nodes)
               ]))! as BuiltList<Object?>);
           break;
       }
@@ -233,21 +236,22 @@ class _$GRecommendationsData_Media_recommendationsSerializer
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_pageInfoSerializer
+class _$GMediaRecommendationsData_Media_recommendations_pageInfoSerializer
     implements
         StructuredSerializer<
-            GRecommendationsData_Media_recommendations_pageInfo> {
+            GMediaRecommendationsData_Media_recommendations_pageInfo> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media_recommendations_pageInfo,
-    _$GRecommendationsData_Media_recommendations_pageInfo
+    GMediaRecommendationsData_Media_recommendations_pageInfo,
+    _$GMediaRecommendationsData_Media_recommendations_pageInfo
   ];
   @override
-  final String wireName = 'GRecommendationsData_Media_recommendations_pageInfo';
+  final String wireName =
+      'GMediaRecommendationsData_Media_recommendations_pageInfo';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GRecommendationsData_Media_recommendations_pageInfo object,
+      GMediaRecommendationsData_Media_recommendations_pageInfo object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -272,11 +276,11 @@ class _$GRecommendationsData_Media_recommendations_pageInfoSerializer
   }
 
   @override
-  GRecommendationsData_Media_recommendations_pageInfo deserialize(
+  GMediaRecommendationsData_Media_recommendations_pageInfo deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GRecommendationsData_Media_recommendations_pageInfoBuilder();
+        new GMediaRecommendationsData_Media_recommendations_pageInfoBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -303,20 +307,22 @@ class _$GRecommendationsData_Media_recommendations_pageInfoSerializer
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodesSerializer
+class _$GMediaRecommendationsData_Media_recommendations_nodesSerializer
     implements
-        StructuredSerializer<GRecommendationsData_Media_recommendations_nodes> {
+        StructuredSerializer<
+            GMediaRecommendationsData_Media_recommendations_nodes> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media_recommendations_nodes,
-    _$GRecommendationsData_Media_recommendations_nodes
+    GMediaRecommendationsData_Media_recommendations_nodes,
+    _$GMediaRecommendationsData_Media_recommendations_nodes
   ];
   @override
-  final String wireName = 'GRecommendationsData_Media_recommendations_nodes';
+  final String wireName =
+      'GMediaRecommendationsData_Media_recommendations_nodes';
 
   @override
   Iterable<Object?> serialize(Serializers serializers,
-      GRecommendationsData_Media_recommendations_nodes object,
+      GMediaRecommendationsData_Media_recommendations_nodes object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -330,17 +336,17 @@ class _$GRecommendationsData_Media_recommendations_nodesSerializer
         ..add('mediaRecommendation')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                GRecommendationsData_Media_recommendations_nodes_mediaRecommendation)));
+                GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation)));
     }
     return result;
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes deserialize(
+  GMediaRecommendationsData_Media_recommendations_nodes deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GRecommendationsData_Media_recommendations_nodesBuilder();
+        new GMediaRecommendationsData_Media_recommendations_nodesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -355,8 +361,8 @@ class _$GRecommendationsData_Media_recommendations_nodesSerializer
         case 'mediaRecommendation':
           result.mediaRecommendation.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation))!
-              as GRecommendationsData_Media_recommendations_nodes_mediaRecommendation);
+                      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation))!
+              as GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation);
           break;
       }
     }
@@ -365,23 +371,23 @@ class _$GRecommendationsData_Media_recommendations_nodesSerializer
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendationSerializer
+class _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationSerializer
     implements
         StructuredSerializer<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation> {
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-    _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+    GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
+    _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
   ];
   @override
   final String wireName =
-      'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation';
+      'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation';
 
   @override
   Iterable<Object?> serialize(
       Serializers serializers,
-      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
           object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
@@ -434,7 +440,7 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendationSeri
         ..add('title')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title)));
+                GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title)));
     }
     value = object.coverImage;
     if (value != null) {
@@ -442,17 +448,17 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendationSeri
         ..add('coverImage')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage)));
+                GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage)));
     }
     return result;
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
       deserialize(Serializers serializers, Iterable<Object?> serialized,
           {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder();
+        new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -494,14 +500,14 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendationSeri
         case 'title':
           result.title.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title))!
-              as GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title);
+                      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title))!
+              as GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title);
           break;
         case 'coverImage':
           result.coverImage.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage))!
-              as GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage);
+                      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage))!
+              as GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage);
           break;
       }
     }
@@ -510,23 +516,23 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendationSeri
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleSerializer
+class _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleSerializer
     implements
         StructuredSerializer<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title> {
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-    _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+    GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
+    _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
   ];
   @override
   final String wireName =
-      'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title';
+      'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title';
 
   @override
   Iterable<Object?> serialize(
       Serializers serializers,
-      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
           object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
@@ -546,11 +552,11 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_tit
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
       deserialize(Serializers serializers, Iterable<Object?> serialized,
           {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder();
+        new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -573,23 +579,23 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_tit
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageSerializer
+class _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageSerializer
     implements
         StructuredSerializer<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage> {
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-    _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+    GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+    _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
   ];
   @override
   final String wireName =
-      'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage';
+      'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage';
 
   @override
   Iterable<Object?> serialize(
       Serializers serializers,
-      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
           object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
@@ -609,11 +615,11 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_cov
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
       deserialize(Serializers serializers, Iterable<Object?> serialized,
           {FullType specifiedType = FullType.unspecified}) {
     final result =
-        new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder();
+        new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -636,35 +642,35 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_cov
   }
 }
 
-class _$GRecommendationsData extends GRecommendationsData {
+class _$GMediaRecommendationsData extends GMediaRecommendationsData {
   @override
   final String G__typename;
   @override
-  final GRecommendationsData_Media? Media;
+  final GMediaRecommendationsData_Media? Media;
 
-  factory _$GRecommendationsData(
-          [void Function(GRecommendationsDataBuilder)? updates]) =>
-      (new GRecommendationsDataBuilder()..update(updates))._build();
+  factory _$GMediaRecommendationsData(
+          [void Function(GMediaRecommendationsDataBuilder)? updates]) =>
+      (new GMediaRecommendationsDataBuilder()..update(updates))._build();
 
-  _$GRecommendationsData._({required this.G__typename, this.Media})
+  _$GMediaRecommendationsData._({required this.G__typename, this.Media})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GRecommendationsData', 'G__typename');
+        G__typename, r'GMediaRecommendationsData', 'G__typename');
   }
 
   @override
-  GRecommendationsData rebuild(
-          void Function(GRecommendationsDataBuilder) updates) =>
+  GMediaRecommendationsData rebuild(
+          void Function(GMediaRecommendationsDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsDataBuilder toBuilder() =>
-      new GRecommendationsDataBuilder()..replace(this);
+  GMediaRecommendationsDataBuilder toBuilder() =>
+      new GMediaRecommendationsDataBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GRecommendationsData &&
+    return other is GMediaRecommendationsData &&
         G__typename == other.G__typename &&
         Media == other.Media;
   }
@@ -680,31 +686,33 @@ class _$GRecommendationsData extends GRecommendationsData {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GRecommendationsData')
+    return (newBuiltValueToStringHelper(r'GMediaRecommendationsData')
           ..add('G__typename', G__typename)
           ..add('Media', Media))
         .toString();
   }
 }
 
-class GRecommendationsDataBuilder
-    implements Builder<GRecommendationsData, GRecommendationsDataBuilder> {
-  _$GRecommendationsData? _$v;
+class GMediaRecommendationsDataBuilder
+    implements
+        Builder<GMediaRecommendationsData, GMediaRecommendationsDataBuilder> {
+  _$GMediaRecommendationsData? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GRecommendationsData_MediaBuilder? _Media;
-  GRecommendationsData_MediaBuilder get Media =>
-      _$this._Media ??= new GRecommendationsData_MediaBuilder();
-  set Media(GRecommendationsData_MediaBuilder? Media) => _$this._Media = Media;
+  GMediaRecommendationsData_MediaBuilder? _Media;
+  GMediaRecommendationsData_MediaBuilder get Media =>
+      _$this._Media ??= new GMediaRecommendationsData_MediaBuilder();
+  set Media(GMediaRecommendationsData_MediaBuilder? Media) =>
+      _$this._Media = Media;
 
-  GRecommendationsDataBuilder() {
-    GRecommendationsData._initializeBuilder(this);
+  GMediaRecommendationsDataBuilder() {
+    GMediaRecommendationsData._initializeBuilder(this);
   }
 
-  GRecommendationsDataBuilder get _$this {
+  GMediaRecommendationsDataBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -715,26 +723,26 @@ class GRecommendationsDataBuilder
   }
 
   @override
-  void replace(GRecommendationsData other) {
+  void replace(GMediaRecommendationsData other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsData;
+    _$v = other as _$GMediaRecommendationsData;
   }
 
   @override
-  void update(void Function(GRecommendationsDataBuilder)? updates) {
+  void update(void Function(GMediaRecommendationsDataBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData build() => _build();
+  GMediaRecommendationsData build() => _build();
 
-  _$GRecommendationsData _build() {
-    _$GRecommendationsData _$result;
+  _$GMediaRecommendationsData _build() {
+    _$GMediaRecommendationsData _$result;
     try {
       _$result = _$v ??
-          new _$GRecommendationsData._(
+          new _$GMediaRecommendationsData._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GRecommendationsData', 'G__typename'),
+                  G__typename, r'GMediaRecommendationsData', 'G__typename'),
               Media: _Media?.build());
     } catch (_) {
       late String _$failedField;
@@ -743,7 +751,7 @@ class GRecommendationsDataBuilder
         _Media?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GRecommendationsData', _$failedField, e.toString());
+            r'GMediaRecommendationsData', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -752,40 +760,41 @@ class GRecommendationsDataBuilder
   }
 }
 
-class _$GRecommendationsData_Media extends GRecommendationsData_Media {
+class _$GMediaRecommendationsData_Media
+    extends GMediaRecommendationsData_Media {
   @override
   final String G__typename;
   @override
   final int id;
   @override
-  final GRecommendationsData_Media_recommendations? recommendations;
+  final GMediaRecommendationsData_Media_recommendations? recommendations;
 
-  factory _$GRecommendationsData_Media(
-          [void Function(GRecommendationsData_MediaBuilder)? updates]) =>
-      (new GRecommendationsData_MediaBuilder()..update(updates))._build();
+  factory _$GMediaRecommendationsData_Media(
+          [void Function(GMediaRecommendationsData_MediaBuilder)? updates]) =>
+      (new GMediaRecommendationsData_MediaBuilder()..update(updates))._build();
 
-  _$GRecommendationsData_Media._(
+  _$GMediaRecommendationsData_Media._(
       {required this.G__typename, required this.id, this.recommendations})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GRecommendationsData_Media', 'G__typename');
+        G__typename, r'GMediaRecommendationsData_Media', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GRecommendationsData_Media', 'id');
+        id, r'GMediaRecommendationsData_Media', 'id');
   }
 
   @override
-  GRecommendationsData_Media rebuild(
-          void Function(GRecommendationsData_MediaBuilder) updates) =>
+  GMediaRecommendationsData_Media rebuild(
+          void Function(GMediaRecommendationsData_MediaBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_MediaBuilder toBuilder() =>
-      new GRecommendationsData_MediaBuilder()..replace(this);
+  GMediaRecommendationsData_MediaBuilder toBuilder() =>
+      new GMediaRecommendationsData_MediaBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GRecommendationsData_Media &&
+    return other is GMediaRecommendationsData_Media &&
         G__typename == other.G__typename &&
         id == other.id &&
         recommendations == other.recommendations;
@@ -803,7 +812,7 @@ class _$GRecommendationsData_Media extends GRecommendationsData_Media {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GRecommendationsData_Media')
+    return (newBuiltValueToStringHelper(r'GMediaRecommendationsData_Media')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('recommendations', recommendations))
@@ -811,10 +820,11 @@ class _$GRecommendationsData_Media extends GRecommendationsData_Media {
   }
 }
 
-class GRecommendationsData_MediaBuilder
+class GMediaRecommendationsData_MediaBuilder
     implements
-        Builder<GRecommendationsData_Media, GRecommendationsData_MediaBuilder> {
-  _$GRecommendationsData_Media? _$v;
+        Builder<GMediaRecommendationsData_Media,
+            GMediaRecommendationsData_MediaBuilder> {
+  _$GMediaRecommendationsData_Media? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -824,19 +834,20 @@ class GRecommendationsData_MediaBuilder
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  GRecommendationsData_Media_recommendationsBuilder? _recommendations;
-  GRecommendationsData_Media_recommendationsBuilder get recommendations =>
+  GMediaRecommendationsData_Media_recommendationsBuilder? _recommendations;
+  GMediaRecommendationsData_Media_recommendationsBuilder get recommendations =>
       _$this._recommendations ??=
-          new GRecommendationsData_Media_recommendationsBuilder();
+          new GMediaRecommendationsData_Media_recommendationsBuilder();
   set recommendations(
-          GRecommendationsData_Media_recommendationsBuilder? recommendations) =>
+          GMediaRecommendationsData_Media_recommendationsBuilder?
+              recommendations) =>
       _$this._recommendations = recommendations;
 
-  GRecommendationsData_MediaBuilder() {
-    GRecommendationsData_Media._initializeBuilder(this);
+  GMediaRecommendationsData_MediaBuilder() {
+    GMediaRecommendationsData_Media._initializeBuilder(this);
   }
 
-  GRecommendationsData_MediaBuilder get _$this {
+  GMediaRecommendationsData_MediaBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -848,28 +859,28 @@ class GRecommendationsData_MediaBuilder
   }
 
   @override
-  void replace(GRecommendationsData_Media other) {
+  void replace(GMediaRecommendationsData_Media other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsData_Media;
+    _$v = other as _$GMediaRecommendationsData_Media;
   }
 
   @override
-  void update(void Function(GRecommendationsData_MediaBuilder)? updates) {
+  void update(void Function(GMediaRecommendationsData_MediaBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media build() => _build();
+  GMediaRecommendationsData_Media build() => _build();
 
-  _$GRecommendationsData_Media _build() {
-    _$GRecommendationsData_Media _$result;
+  _$GMediaRecommendationsData_Media _build() {
+    _$GMediaRecommendationsData_Media _$result;
     try {
       _$result = _$v ??
-          new _$GRecommendationsData_Media._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GRecommendationsData_Media', 'G__typename'),
+          new _$GMediaRecommendationsData_Media._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                  r'GMediaRecommendationsData_Media', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GRecommendationsData_Media', 'id'),
+                  id, r'GMediaRecommendationsData_Media', 'id'),
               recommendations: _recommendations?.build());
     } catch (_) {
       late String _$failedField;
@@ -878,7 +889,7 @@ class GRecommendationsData_MediaBuilder
         _recommendations?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GRecommendationsData_Media', _$failedField, e.toString());
+            r'GMediaRecommendationsData_Media', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -887,42 +898,46 @@ class GRecommendationsData_MediaBuilder
   }
 }
 
-class _$GRecommendationsData_Media_recommendations
-    extends GRecommendationsData_Media_recommendations {
+class _$GMediaRecommendationsData_Media_recommendations
+    extends GMediaRecommendationsData_Media_recommendations {
   @override
   final String G__typename;
   @override
-  final GRecommendationsData_Media_recommendations_pageInfo? pageInfo;
+  final GMediaRecommendationsData_Media_recommendations_pageInfo? pageInfo;
   @override
-  final BuiltList<GRecommendationsData_Media_recommendations_nodes?>? nodes;
+  final BuiltList<GMediaRecommendationsData_Media_recommendations_nodes?>?
+      nodes;
 
-  factory _$GRecommendationsData_Media_recommendations(
-          [void Function(GRecommendationsData_Media_recommendationsBuilder)?
+  factory _$GMediaRecommendationsData_Media_recommendations(
+          [void Function(
+                  GMediaRecommendationsData_Media_recommendationsBuilder)?
               updates]) =>
-      (new GRecommendationsData_Media_recommendationsBuilder()..update(updates))
+      (new GMediaRecommendationsData_Media_recommendationsBuilder()
+            ..update(updates))
           ._build();
 
-  _$GRecommendationsData_Media_recommendations._(
+  _$GMediaRecommendationsData_Media_recommendations._(
       {required this.G__typename, this.pageInfo, this.nodes})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GRecommendationsData_Media_recommendations', 'G__typename');
+        r'GMediaRecommendationsData_Media_recommendations', 'G__typename');
   }
 
   @override
-  GRecommendationsData_Media_recommendations rebuild(
-          void Function(GRecommendationsData_Media_recommendationsBuilder)
+  GMediaRecommendationsData_Media_recommendations rebuild(
+          void Function(GMediaRecommendationsData_Media_recommendationsBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_Media_recommendationsBuilder toBuilder() =>
-      new GRecommendationsData_Media_recommendationsBuilder()..replace(this);
+  GMediaRecommendationsData_Media_recommendationsBuilder toBuilder() =>
+      new GMediaRecommendationsData_Media_recommendationsBuilder()
+        ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GRecommendationsData_Media_recommendations &&
+    return other is GMediaRecommendationsData_Media_recommendations &&
         G__typename == other.G__typename &&
         pageInfo == other.pageInfo &&
         nodes == other.nodes;
@@ -941,7 +956,7 @@ class _$GRecommendationsData_Media_recommendations
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GRecommendationsData_Media_recommendations')
+            r'GMediaRecommendationsData_Media_recommendations')
           ..add('G__typename', G__typename)
           ..add('pageInfo', pageInfo)
           ..add('nodes', nodes))
@@ -949,39 +964,39 @@ class _$GRecommendationsData_Media_recommendations
   }
 }
 
-class GRecommendationsData_Media_recommendationsBuilder
+class GMediaRecommendationsData_Media_recommendationsBuilder
     implements
-        Builder<GRecommendationsData_Media_recommendations,
-            GRecommendationsData_Media_recommendationsBuilder> {
-  _$GRecommendationsData_Media_recommendations? _$v;
+        Builder<GMediaRecommendationsData_Media_recommendations,
+            GMediaRecommendationsData_Media_recommendationsBuilder> {
+  _$GMediaRecommendationsData_Media_recommendations? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GRecommendationsData_Media_recommendations_pageInfoBuilder? _pageInfo;
-  GRecommendationsData_Media_recommendations_pageInfoBuilder get pageInfo =>
-      _$this._pageInfo ??=
-          new GRecommendationsData_Media_recommendations_pageInfoBuilder();
+  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder? _pageInfo;
+  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder
+      get pageInfo => _$this._pageInfo ??=
+          new GMediaRecommendationsData_Media_recommendations_pageInfoBuilder();
   set pageInfo(
-          GRecommendationsData_Media_recommendations_pageInfoBuilder?
+          GMediaRecommendationsData_Media_recommendations_pageInfoBuilder?
               pageInfo) =>
       _$this._pageInfo = pageInfo;
 
-  ListBuilder<GRecommendationsData_Media_recommendations_nodes?>? _nodes;
-  ListBuilder<GRecommendationsData_Media_recommendations_nodes?> get nodes =>
-      _$this._nodes ??=
-          new ListBuilder<GRecommendationsData_Media_recommendations_nodes?>();
+  ListBuilder<GMediaRecommendationsData_Media_recommendations_nodes?>? _nodes;
+  ListBuilder<GMediaRecommendationsData_Media_recommendations_nodes?>
+      get nodes => _$this._nodes ??= new ListBuilder<
+          GMediaRecommendationsData_Media_recommendations_nodes?>();
   set nodes(
-          ListBuilder<GRecommendationsData_Media_recommendations_nodes?>?
+          ListBuilder<GMediaRecommendationsData_Media_recommendations_nodes?>?
               nodes) =>
       _$this._nodes = nodes;
 
-  GRecommendationsData_Media_recommendationsBuilder() {
-    GRecommendationsData_Media_recommendations._initializeBuilder(this);
+  GMediaRecommendationsData_Media_recommendationsBuilder() {
+    GMediaRecommendationsData_Media_recommendations._initializeBuilder(this);
   }
 
-  GRecommendationsData_Media_recommendationsBuilder get _$this {
+  GMediaRecommendationsData_Media_recommendationsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -993,28 +1008,30 @@ class GRecommendationsData_Media_recommendationsBuilder
   }
 
   @override
-  void replace(GRecommendationsData_Media_recommendations other) {
+  void replace(GMediaRecommendationsData_Media_recommendations other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsData_Media_recommendations;
+    _$v = other as _$GMediaRecommendationsData_Media_recommendations;
   }
 
   @override
   void update(
-      void Function(GRecommendationsData_Media_recommendationsBuilder)?
+      void Function(GMediaRecommendationsData_Media_recommendationsBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media_recommendations build() => _build();
+  GMediaRecommendationsData_Media_recommendations build() => _build();
 
-  _$GRecommendationsData_Media_recommendations _build() {
-    _$GRecommendationsData_Media_recommendations _$result;
+  _$GMediaRecommendationsData_Media_recommendations _build() {
+    _$GMediaRecommendationsData_Media_recommendations _$result;
     try {
       _$result = _$v ??
-          new _$GRecommendationsData_Media_recommendations._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                  r'GRecommendationsData_Media_recommendations', 'G__typename'),
+          new _$GMediaRecommendationsData_Media_recommendations._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename,
+                  r'GMediaRecommendationsData_Media_recommendations',
+                  'G__typename'),
               pageInfo: _pageInfo?.build(),
               nodes: _nodes?.build());
     } catch (_) {
@@ -1026,7 +1043,7 @@ class GRecommendationsData_Media_recommendationsBuilder
         _nodes?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GRecommendationsData_Media_recommendations',
+            r'GMediaRecommendationsData_Media_recommendations',
             _$failedField,
             e.toString());
       }
@@ -1037,8 +1054,8 @@ class GRecommendationsData_Media_recommendationsBuilder
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_pageInfo
-    extends GRecommendationsData_Media_recommendations_pageInfo {
+class _$GMediaRecommendationsData_Media_recommendations_pageInfo
+    extends GMediaRecommendationsData_Media_recommendations_pageInfo {
   @override
   final String G__typename;
   @override
@@ -1046,37 +1063,39 @@ class _$GRecommendationsData_Media_recommendations_pageInfo
   @override
   final bool? hasNextPage;
 
-  factory _$GRecommendationsData_Media_recommendations_pageInfo(
+  factory _$GMediaRecommendationsData_Media_recommendations_pageInfo(
           [void Function(
-                  GRecommendationsData_Media_recommendations_pageInfoBuilder)?
+                  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder)?
               updates]) =>
-      (new GRecommendationsData_Media_recommendations_pageInfoBuilder()
+      (new GMediaRecommendationsData_Media_recommendations_pageInfoBuilder()
             ..update(updates))
           ._build();
 
-  _$GRecommendationsData_Media_recommendations_pageInfo._(
+  _$GMediaRecommendationsData_Media_recommendations_pageInfo._(
       {required this.G__typename, this.currentPage, this.hasNextPage})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GRecommendationsData_Media_recommendations_pageInfo', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename,
+        r'GMediaRecommendationsData_Media_recommendations_pageInfo',
+        'G__typename');
   }
 
   @override
-  GRecommendationsData_Media_recommendations_pageInfo rebuild(
+  GMediaRecommendationsData_Media_recommendations_pageInfo rebuild(
           void Function(
-                  GRecommendationsData_Media_recommendations_pageInfoBuilder)
+                  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_Media_recommendations_pageInfoBuilder toBuilder() =>
-      new GRecommendationsData_Media_recommendations_pageInfoBuilder()
+  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder toBuilder() =>
+      new GMediaRecommendationsData_Media_recommendations_pageInfoBuilder()
         ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GRecommendationsData_Media_recommendations_pageInfo &&
+    return other is GMediaRecommendationsData_Media_recommendations_pageInfo &&
         G__typename == other.G__typename &&
         currentPage == other.currentPage &&
         hasNextPage == other.hasNextPage;
@@ -1095,7 +1114,7 @@ class _$GRecommendationsData_Media_recommendations_pageInfo
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GRecommendationsData_Media_recommendations_pageInfo')
+            r'GMediaRecommendationsData_Media_recommendations_pageInfo')
           ..add('G__typename', G__typename)
           ..add('currentPage', currentPage)
           ..add('hasNextPage', hasNextPage))
@@ -1103,11 +1122,11 @@ class _$GRecommendationsData_Media_recommendations_pageInfo
   }
 }
 
-class GRecommendationsData_Media_recommendations_pageInfoBuilder
+class GMediaRecommendationsData_Media_recommendations_pageInfoBuilder
     implements
-        Builder<GRecommendationsData_Media_recommendations_pageInfo,
-            GRecommendationsData_Media_recommendations_pageInfoBuilder> {
-  _$GRecommendationsData_Media_recommendations_pageInfo? _$v;
+        Builder<GMediaRecommendationsData_Media_recommendations_pageInfo,
+            GMediaRecommendationsData_Media_recommendations_pageInfoBuilder> {
+  _$GMediaRecommendationsData_Media_recommendations_pageInfo? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -1121,12 +1140,12 @@ class GRecommendationsData_Media_recommendations_pageInfoBuilder
   bool? get hasNextPage => _$this._hasNextPage;
   set hasNextPage(bool? hasNextPage) => _$this._hasNextPage = hasNextPage;
 
-  GRecommendationsData_Media_recommendations_pageInfoBuilder() {
-    GRecommendationsData_Media_recommendations_pageInfo._initializeBuilder(
+  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder() {
+    GMediaRecommendationsData_Media_recommendations_pageInfo._initializeBuilder(
         this);
   }
 
-  GRecommendationsData_Media_recommendations_pageInfoBuilder get _$this {
+  GMediaRecommendationsData_Media_recommendations_pageInfoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -1138,27 +1157,28 @@ class GRecommendationsData_Media_recommendations_pageInfoBuilder
   }
 
   @override
-  void replace(GRecommendationsData_Media_recommendations_pageInfo other) {
+  void replace(GMediaRecommendationsData_Media_recommendations_pageInfo other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsData_Media_recommendations_pageInfo;
+    _$v = other as _$GMediaRecommendationsData_Media_recommendations_pageInfo;
   }
 
   @override
   void update(
-      void Function(GRecommendationsData_Media_recommendations_pageInfoBuilder)?
+      void Function(
+              GMediaRecommendationsData_Media_recommendations_pageInfoBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media_recommendations_pageInfo build() => _build();
+  GMediaRecommendationsData_Media_recommendations_pageInfo build() => _build();
 
-  _$GRecommendationsData_Media_recommendations_pageInfo _build() {
+  _$GMediaRecommendationsData_Media_recommendations_pageInfo _build() {
     final _$result = _$v ??
-        new _$GRecommendationsData_Media_recommendations_pageInfo._(
+        new _$GMediaRecommendationsData_Media_recommendations_pageInfo._(
             G__typename: BuiltValueNullFieldError.checkNotNull(
                 G__typename,
-                r'GRecommendationsData_Media_recommendations_pageInfo',
+                r'GMediaRecommendationsData_Media_recommendations_pageInfo',
                 'G__typename'),
             currentPage: currentPage,
             hasNextPage: hasNextPage);
@@ -1167,44 +1187,47 @@ class GRecommendationsData_Media_recommendations_pageInfoBuilder
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes
-    extends GRecommendationsData_Media_recommendations_nodes {
+class _$GMediaRecommendationsData_Media_recommendations_nodes
+    extends GMediaRecommendationsData_Media_recommendations_nodes {
   @override
   final String G__typename;
   @override
-  final GRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
+  final GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
       mediaRecommendation;
 
-  factory _$GRecommendationsData_Media_recommendations_nodes(
+  factory _$GMediaRecommendationsData_Media_recommendations_nodes(
           [void Function(
-                  GRecommendationsData_Media_recommendations_nodesBuilder)?
+                  GMediaRecommendationsData_Media_recommendations_nodesBuilder)?
               updates]) =>
-      (new GRecommendationsData_Media_recommendations_nodesBuilder()
+      (new GMediaRecommendationsData_Media_recommendations_nodesBuilder()
             ..update(updates))
           ._build();
 
-  _$GRecommendationsData_Media_recommendations_nodes._(
+  _$GMediaRecommendationsData_Media_recommendations_nodes._(
       {required this.G__typename, this.mediaRecommendation})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GRecommendationsData_Media_recommendations_nodes', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename,
+        r'GMediaRecommendationsData_Media_recommendations_nodes',
+        'G__typename');
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes rebuild(
-          void Function(GRecommendationsData_Media_recommendations_nodesBuilder)
+  GMediaRecommendationsData_Media_recommendations_nodes rebuild(
+          void Function(
+                  GMediaRecommendationsData_Media_recommendations_nodesBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_Media_recommendations_nodesBuilder toBuilder() =>
-      new GRecommendationsData_Media_recommendations_nodesBuilder()
+  GMediaRecommendationsData_Media_recommendations_nodesBuilder toBuilder() =>
+      new GMediaRecommendationsData_Media_recommendations_nodesBuilder()
         ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GRecommendationsData_Media_recommendations_nodes &&
+    return other is GMediaRecommendationsData_Media_recommendations_nodes &&
         G__typename == other.G__typename &&
         mediaRecommendation == other.mediaRecommendation;
   }
@@ -1221,38 +1244,39 @@ class _$GRecommendationsData_Media_recommendations_nodes
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GRecommendationsData_Media_recommendations_nodes')
+            r'GMediaRecommendationsData_Media_recommendations_nodes')
           ..add('G__typename', G__typename)
           ..add('mediaRecommendation', mediaRecommendation))
         .toString();
   }
 }
 
-class GRecommendationsData_Media_recommendations_nodesBuilder
+class GMediaRecommendationsData_Media_recommendations_nodesBuilder
     implements
-        Builder<GRecommendationsData_Media_recommendations_nodes,
-            GRecommendationsData_Media_recommendations_nodesBuilder> {
-  _$GRecommendationsData_Media_recommendations_nodes? _$v;
+        Builder<GMediaRecommendationsData_Media_recommendations_nodes,
+            GMediaRecommendationsData_Media_recommendations_nodesBuilder> {
+  _$GMediaRecommendationsData_Media_recommendations_nodes? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder?
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder?
       _mediaRecommendation;
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
       get mediaRecommendation => _$this._mediaRecommendation ??=
-          new GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder();
+          new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder();
   set mediaRecommendation(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder?
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder?
               mediaRecommendation) =>
       _$this._mediaRecommendation = mediaRecommendation;
 
-  GRecommendationsData_Media_recommendations_nodesBuilder() {
-    GRecommendationsData_Media_recommendations_nodes._initializeBuilder(this);
+  GMediaRecommendationsData_Media_recommendations_nodesBuilder() {
+    GMediaRecommendationsData_Media_recommendations_nodes._initializeBuilder(
+        this);
   }
 
-  GRecommendationsData_Media_recommendations_nodesBuilder get _$this {
+  GMediaRecommendationsData_Media_recommendations_nodesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -1263,29 +1287,30 @@ class GRecommendationsData_Media_recommendations_nodesBuilder
   }
 
   @override
-  void replace(GRecommendationsData_Media_recommendations_nodes other) {
+  void replace(GMediaRecommendationsData_Media_recommendations_nodes other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsData_Media_recommendations_nodes;
+    _$v = other as _$GMediaRecommendationsData_Media_recommendations_nodes;
   }
 
   @override
   void update(
-      void Function(GRecommendationsData_Media_recommendations_nodesBuilder)?
+      void Function(
+              GMediaRecommendationsData_Media_recommendations_nodesBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes build() => _build();
+  GMediaRecommendationsData_Media_recommendations_nodes build() => _build();
 
-  _$GRecommendationsData_Media_recommendations_nodes _build() {
-    _$GRecommendationsData_Media_recommendations_nodes _$result;
+  _$GMediaRecommendationsData_Media_recommendations_nodes _build() {
+    _$GMediaRecommendationsData_Media_recommendations_nodes _$result;
     try {
       _$result = _$v ??
-          new _$GRecommendationsData_Media_recommendations_nodes._(
+          new _$GMediaRecommendationsData_Media_recommendations_nodes._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GRecommendationsData_Media_recommendations_nodes',
+                  r'GMediaRecommendationsData_Media_recommendations_nodes',
                   'G__typename'),
               mediaRecommendation: _mediaRecommendation?.build());
     } catch (_) {
@@ -1295,7 +1320,7 @@ class GRecommendationsData_Media_recommendations_nodesBuilder
         _mediaRecommendation?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GRecommendationsData_Media_recommendations_nodes',
+            r'GMediaRecommendationsData_Media_recommendations_nodes',
             _$failedField,
             e.toString());
       }
@@ -1306,8 +1331,8 @@ class GRecommendationsData_Media_recommendations_nodesBuilder
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
-    extends GRecommendationsData_Media_recommendations_nodes_mediaRecommendation {
+class _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+    extends GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation {
   @override
   final String G__typename;
   @override
@@ -1323,21 +1348,21 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
   @override
   final String? description;
   @override
-  final GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
+  final GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
       title;
   @override
-  final GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
+  final GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
       coverImage;
 
-  factory _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation(
+  factory _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation(
           [void Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder)?
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder)?
               updates]) =>
-      (new GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder()
+      (new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder()
             ..update(updates))
           ._build();
 
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation._(
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation._(
       {required this.G__typename,
       required this.id,
       this.type,
@@ -1350,32 +1375,32 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename,
-        r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
+        r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
         'G__typename');
     BuiltValueNullFieldError.checkNotNull(
         id,
-        r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
+        r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
         'id');
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation rebuild(
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation rebuild(
           void Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder)
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
       toBuilder() =>
-          new GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder()
+          new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder()
             ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other
-            is GRecommendationsData_Media_recommendations_nodes_mediaRecommendation &&
+            is GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation &&
         G__typename == other.G__typename &&
         id == other.id &&
         type == other.type &&
@@ -1406,7 +1431,7 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation')
+            r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('type', type)
@@ -1420,12 +1445,13 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
   }
 }
 
-class GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
+class GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
     implements
         Builder<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder> {
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation? _$v;
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder> {
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation?
+      _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -1456,32 +1482,32 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilde
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder?
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder?
       _title;
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
       get title => _$this._title ??=
-          new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder();
+          new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder();
   set title(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder?
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder?
               title) =>
       _$this._title = title;
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder?
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder?
       _coverImage;
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
       get coverImage => _$this._coverImage ??=
-          new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder();
+          new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder();
   set coverImage(
-          GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder?
+          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder?
               coverImage) =>
       _$this._coverImage = coverImage;
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder() {
-    GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder() {
+    GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
         ._initializeBuilder(this);
   }
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder
       get _$this {
     final $v = _$v;
     if ($v != null) {
@@ -1501,40 +1527,40 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilde
 
   @override
   void replace(
-      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
           other) {
     ArgumentError.checkNotNull(other, 'other');
     _$v = other
-        as _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation;
+        as _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation;
   }
 
   @override
   void update(
       void Function(
-              GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder)?
+              GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
       build() => _build();
 
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
       _build() {
-    _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+    _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
         _$result;
     try {
       _$result = _$v ??
-          new _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation
+          new _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
               ._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
                   G__typename,
-                  r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
+                  r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
                   'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
                   id,
-                  r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
+                  r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
                   'id'),
               type: type,
               isAdult: isAdult,
@@ -1555,7 +1581,7 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilde
         _coverImage?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
+            r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation',
             _$failedField,
             e.toString());
       }
@@ -1566,49 +1592,49 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendationBuilde
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
-    extends GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title {
+class _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+    extends GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title {
   @override
   final String G__typename;
   @override
   final String? userPreferred;
 
-  factory _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title(
+  factory _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title(
           [void Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder)?
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder)?
               updates]) =>
-      (new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder()
+      (new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder()
             ..update(updates))
           ._build();
 
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title._(
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title._(
       {required this.G__typename, this.userPreferred})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename,
-        r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title',
+        r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title',
         'G__typename');
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
       rebuild(
               void Function(
-                      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder)
+                      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder)
                   updates) =>
           (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
       toBuilder() =>
-          new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder()
+          new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder()
             ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other
-            is GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title &&
+            is GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title &&
         G__typename == other.G__typename &&
         userPreferred == other.userPreferred;
   }
@@ -1625,19 +1651,19 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_tit
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title')
+            r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title')
           ..add('G__typename', G__typename)
           ..add('userPreferred', userPreferred))
         .toString();
   }
 }
 
-class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
+class GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
     implements
         Builder<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder> {
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder> {
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title?
       _$v;
 
   String? _G__typename;
@@ -1649,12 +1675,12 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
   set userPreferred(String? userPreferred) =>
       _$this._userPreferred = userPreferred;
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder() {
-    GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder() {
+    GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
         ._initializeBuilder(this);
   }
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder
       get _$this {
     final $v = _$v;
     if ($v != null) {
@@ -1667,33 +1693,33 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
 
   @override
   void replace(
-      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
           other) {
     ArgumentError.checkNotNull(other, 'other');
     _$v = other
-        as _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title;
+        as _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title;
   }
 
   @override
   void update(
       void Function(
-              GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder)?
+              GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_titleBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
       build() => _build();
 
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
       _build() {
     final _$result = _$v ??
-        new _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
+        new _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
             ._(
             G__typename: BuiltValueNullFieldError.checkNotNull(
                 G__typename,
-                r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title',
+                r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title',
                 'G__typename'),
             userPreferred: userPreferred);
     replace(_$result);
@@ -1701,49 +1727,49 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
   }
 }
 
-class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
-    extends GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage {
+class _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+    extends GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage {
   @override
   final String G__typename;
   @override
   final String? extraLarge;
 
-  factory _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage(
+  factory _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage(
           [void Function(
-                  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder)?
+                  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder)?
               updates]) =>
-      (new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder()
+      (new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder()
             ..update(updates))
           ._build();
 
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage._(
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage._(
       {required this.G__typename, this.extraLarge})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename,
-        r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage',
+        r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage',
         'G__typename');
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
       rebuild(
               void Function(
-                      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder)
+                      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder)
                   updates) =>
           (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
       toBuilder() =>
-          new GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder()
+          new GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder()
             ..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other
-            is GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage &&
+            is GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage &&
         G__typename == other.G__typename &&
         extraLarge == other.extraLarge;
   }
@@ -1760,19 +1786,19 @@ class _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_cov
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage')
+            r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage')
           ..add('G__typename', G__typename)
           ..add('extraLarge', extraLarge))
         .toString();
   }
 }
 
-class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
+class GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
     implements
         Builder<
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-            GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder> {
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+            GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder> {
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage?
       _$v;
 
   String? _G__typename;
@@ -1783,12 +1809,12 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_cover
   String? get extraLarge => _$this._extraLarge;
   set extraLarge(String? extraLarge) => _$this._extraLarge = extraLarge;
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder() {
-    GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder() {
+    GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
         ._initializeBuilder(this);
   }
 
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder
       get _$this {
     final $v = _$v;
     if ($v != null) {
@@ -1801,33 +1827,33 @@ class GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_cover
 
   @override
   void replace(
-      GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+      GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
           other) {
     ArgumentError.checkNotNull(other, 'other');
     _$v = other
-        as _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage;
+        as _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage;
   }
 
   @override
   void update(
       void Function(
-              GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder)?
+              GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImageBuilder)?
           updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
       build() => _build();
 
-  _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+  _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
       _build() {
     final _$result = _$v ??
-        new _$GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
+        new _$GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
             ._(
             G__typename: BuiltValueNullFieldError.checkNotNull(
                 G__typename,
-                r'GRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage',
+                r'GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage',
                 'G__typename'),
             extraLarge: extraLarge);
     replace(_$result);

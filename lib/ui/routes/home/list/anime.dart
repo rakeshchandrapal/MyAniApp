@@ -444,14 +444,6 @@ class _MediaState extends ConsumerState<Media>
                               ..vars.progress = (entry.progress ?? 0) + 1,
                           ))
                           .first,
-                      // onPressed: () => client.value.mutate$SaveMediaListEntry(
-                      //   Options$Mutation$SaveMediaListEntry(
-                      //     variables: Variables$Mutation$SaveMediaListEntry(
-                      //       id: entry.id,
-                      //       progress: (entry.progress ?? 0) + 1,
-                      //     ),
-                      //   ),
-                      // ),
                       icon: const Icon(Icons.add),
                       padding: EdgeInsets.zero,
                       iconSize: 15,

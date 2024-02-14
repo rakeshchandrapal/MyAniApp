@@ -1,12 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/providers/user_profile.dart';
 import 'package:myaniapp/ui/common/pagination.dart';
+import 'package:myaniapp/ui/common/review_card.dart';
 import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.req.gql.dart';
 
 class UserReviewsPage extends ConsumerStatefulWidget {
@@ -20,6 +18,9 @@ class UserReviewsPage extends ConsumerStatefulWidget {
 
 class _UserReviewsPageState extends ConsumerState<UserReviewsPage>
     with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -40,20 +41,6 @@ class _UserReviewsPageState extends ConsumerState<UserReviewsPage>
         }
 
         return GraphqlPagination(
-          // fetchMore: (nextPage) => fetchMore!(
-          //   FetchMoreOptions$Query$Reviews(
-          //     variables: Variables$Query$Reviews(
-          //         page: response!.data!.Page!.pageInfo!.currentPage),
-          //     updateQuery: (previousresponse!Ddata, fetchMoreresponse!Ddata) {
-          //       var list = [
-          //         ...previousresponse!Ddata!['Page']!['reviews'],
-          //         ...fetchMoreresponse!Ddata!['Page']!['reviews'],
-          //       ];
-          //       fetchMoreresponse!Ddata['Page']!['reviews'] = list;
-          //       return fetchMoreresponse!Ddata;
-          //     },
-          //   ),
-          // ),
           req: (nextPage) => (response.operationRequest as GUserReviewsReq)
               .rebuild((p0) => p0
                 ..vars.page = nextPage
@@ -64,74 +51,20 @@ class _UserReviewsPageState extends ConsumerState<UserReviewsPage>
                               result.Page?.reviews?.contains(p0) ?? false) ??
                           []))),
           pageInfo: response.data!.Page!.pageInfo!,
-          child: ListView.separated(
+          child: ListView.builder(
             padding: const EdgeInsets.all(8),
             itemBuilder: (context, index) {
               var review = response.data!.Page!.reviews![index]!;
 
-              return ListTile(
-                onTap: () => context.push('/review/${review.id}'),
-                title: Text.rich(
-                  TextSpan(
-                    children: [
-                      const TextSpan(
-                        text: 'Review of ',
-                      ),
-                      TextSpan(
-                        text: review.media!.title!.userPreferred!,
-                        style: const TextStyle(color: linkColor),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => context
-                              .push('/media/${review.media!.id}/overview'),
-                      ),
-                    ],
-                  ),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(review.summary!),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (review.rating != null)
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.thumb_up,
-                                size: 15,
-                              ),
-                              Text(review.rating!.toString()),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                            ],
-                          ),
-                        Text('${review.score!.toString()}/100'),
-                      ],
-                    ),
-                  ],
-                ),
-                tileColor: Theme.of(context)
-                    .colorScheme
-                    .secondaryContainer
-                    .withAlpha(100),
-                shape: RoundedRectangleBorder(borderRadius: imageRadius),
+              return SizedBox(
+                height: 180,
+                child: ReviewCard(review: review),
               );
             },
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 10,
-            ),
             itemCount: response.data!.Page!.reviews!.length,
           ),
         );
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

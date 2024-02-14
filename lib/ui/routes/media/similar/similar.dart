@@ -22,14 +22,14 @@ class _MediaSimilarPageState extends State<MediaSimilarPage>
     super.build(context);
 
     return GQLRequest(
-      operationRequest: GRecommendationsReq((b) => b
+      operationRequest: GMediaRecommendationsReq((b) => b
         ..requestId = "mediaRecommendations"
         ..vars.mediaId = widget.id),
       builder: (context, response, error, refetch) => GraphqlPagination(
         pageInfo: response!.data!.Media!.recommendations!.pageInfo!,
-        req: (nextPage) => GRecommendationsReq(
+        req: (nextPage) => GMediaRecommendationsReq(
           (b) => b
-            ..replace(response.operationRequest as GRecommendationsReq)
+            ..replace(response.operationRequest as GMediaRecommendationsReq)
             ..vars.page = nextPage
             ..updateResult = (previous, result) => result?.rebuild((p0) => p0
               ..Media.recommendations.nodes.insertAll(

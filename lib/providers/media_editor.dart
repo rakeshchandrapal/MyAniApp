@@ -23,7 +23,7 @@ class MediaEditorNotifier
         state = const AsyncValue.loading();
         return;
       }
-      print(data.linkException);
+
       yield data.data?.MediaList ??
           GMediaListEntryData(
             (b) => b

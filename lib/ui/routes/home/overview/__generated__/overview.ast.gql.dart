@@ -11,6 +11,8 @@ import 'package:myaniapp/graphql/fragments/__generated__/media_entry.ast.gql.dar
     as _i6;
 import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.ast.gql.dart'
     as _i5;
+import 'package:myaniapp/graphql/fragments/__generated__/review.ast.gql.dart'
+    as _i8;
 import 'package:myaniapp/graphql/fragments/__generated__/thread.ast.gql.dart'
     as _i2;
 import 'package:myaniapp/graphql/fragments/__generated__/user.ast.gql.dart'
@@ -189,90 +191,10 @@ const HomeOverview = _i1.OperationDefinitionNode(
           ],
           directives: [],
           selectionSet: _i1.SelectionSetNode(selections: [
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'id'),
-              alias: null,
-              arguments: [],
+            _i1.FragmentSpreadNode(
+              name: _i1.NameNode(value: 'Review'),
               directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'rating'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'ratingAmount'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'summary'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'media'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: _i1.SelectionSetNode(selections: [
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'title'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: _i1.SelectionSetNode(selections: [
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'userPreferred'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    )
-                  ]),
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'type'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'bannerImage'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
-            ),
-            _i1.FieldNode(
-              name: _i1.NameNode(value: 'user'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: _i1.SelectionSetNode(selections: [
-                _i1.FragmentSpreadNode(
-                  name: _i1.NameNode(value: 'UserFragment'),
-                  directives: [],
-                )
-              ]),
-            ),
+            )
           ]),
         )
       ]),
@@ -287,4 +209,5 @@ const document = _i1.DocumentNode(definitions: [
   _i5.ReleasingMedia,
   _i6.MediaListEntry,
   _i7.FuzzyDate,
+  _i8.Review,
 ]);

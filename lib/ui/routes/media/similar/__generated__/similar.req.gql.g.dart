@@ -6,27 +6,27 @@ part of 'similar.req.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GRecommendationsReq> _$gRecommendationsReqSerializer =
-    new _$GRecommendationsReqSerializer();
+Serializer<GMediaRecommendationsReq> _$gMediaRecommendationsReqSerializer =
+    new _$GMediaRecommendationsReqSerializer();
 
-class _$GRecommendationsReqSerializer
-    implements StructuredSerializer<GRecommendationsReq> {
+class _$GMediaRecommendationsReqSerializer
+    implements StructuredSerializer<GMediaRecommendationsReq> {
   @override
   final Iterable<Type> types = const [
-    GRecommendationsReq,
-    _$GRecommendationsReq
+    GMediaRecommendationsReq,
+    _$GMediaRecommendationsReq
   ];
   @override
-  final String wireName = 'GRecommendationsReq';
+  final String wireName = 'GMediaRecommendationsReq';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GRecommendationsReq object,
+      Serializers serializers, GMediaRecommendationsReq object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'vars',
       serializers.serialize(object.vars,
-          specifiedType: const FullType(_i3.GRecommendationsVars)),
+          specifiedType: const FullType(_i3.GMediaRecommendationsVars)),
       'operation',
       serializers.serialize(object.operation,
           specifiedType: const FullType(_i4.Operation)),
@@ -47,7 +47,7 @@ class _$GRecommendationsReqSerializer
       result
         ..add('optimisticResponse')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(_i2.GRecommendationsData)));
+            specifiedType: const FullType(_i2.GMediaRecommendationsData)));
     }
     value = object.updateCacheHandlerKey;
     if (value != null) {
@@ -75,10 +75,10 @@ class _$GRecommendationsReqSerializer
   }
 
   @override
-  GRecommendationsReq deserialize(
+  GMediaRecommendationsReq deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GRecommendationsReqBuilder();
+    final result = new GMediaRecommendationsReqBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -88,8 +88,8 @@ class _$GRecommendationsReqSerializer
       switch (key) {
         case 'vars':
           result.vars.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i3.GRecommendationsVars))!
-              as _i3.GRecommendationsVars);
+                  specifiedType: const FullType(_i3.GMediaRecommendationsVars))!
+              as _i3.GMediaRecommendationsVars);
           break;
         case 'operation':
           result.operation = serializers.deserialize(value,
@@ -101,8 +101,8 @@ class _$GRecommendationsReqSerializer
           break;
         case 'optimisticResponse':
           result.optimisticResponse.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GRecommendationsData))!
-              as _i2.GRecommendationsData);
+                  specifiedType: const FullType(_i2.GMediaRecommendationsData))!
+              as _i2.GMediaRecommendationsData);
           break;
         case 'updateCacheHandlerKey':
           result.updateCacheHandlerKey = serializers.deserialize(value,
@@ -131,18 +131,19 @@ class _$GRecommendationsReqSerializer
   }
 }
 
-class _$GRecommendationsReq extends GRecommendationsReq {
+class _$GMediaRecommendationsReq extends GMediaRecommendationsReq {
   @override
-  final _i3.GRecommendationsVars vars;
+  final _i3.GMediaRecommendationsVars vars;
   @override
   final _i4.Operation operation;
   @override
   final String? requestId;
   @override
-  final _i2.GRecommendationsData? Function(
-      _i2.GRecommendationsData?, _i2.GRecommendationsData?)? updateResult;
+  final _i2.GMediaRecommendationsData? Function(
+          _i2.GMediaRecommendationsData?, _i2.GMediaRecommendationsData?)?
+      updateResult;
   @override
-  final _i2.GRecommendationsData? optimisticResponse;
+  final _i2.GMediaRecommendationsData? optimisticResponse;
   @override
   final String? updateCacheHandlerKey;
   @override
@@ -152,11 +153,11 @@ class _$GRecommendationsReq extends GRecommendationsReq {
   @override
   final bool executeOnListen;
 
-  factory _$GRecommendationsReq(
-          [void Function(GRecommendationsReqBuilder)? updates]) =>
-      (new GRecommendationsReqBuilder()..update(updates))._build();
+  factory _$GMediaRecommendationsReq(
+          [void Function(GMediaRecommendationsReqBuilder)? updates]) =>
+      (new GMediaRecommendationsReqBuilder()..update(updates))._build();
 
-  _$GRecommendationsReq._(
+  _$GMediaRecommendationsReq._(
       {required this.vars,
       required this.operation,
       this.requestId,
@@ -167,27 +168,28 @@ class _$GRecommendationsReq extends GRecommendationsReq {
       this.fetchPolicy,
       required this.executeOnListen})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(vars, r'GRecommendationsReq', 'vars');
     BuiltValueNullFieldError.checkNotNull(
-        operation, r'GRecommendationsReq', 'operation');
+        vars, r'GMediaRecommendationsReq', 'vars');
     BuiltValueNullFieldError.checkNotNull(
-        executeOnListen, r'GRecommendationsReq', 'executeOnListen');
+        operation, r'GMediaRecommendationsReq', 'operation');
+    BuiltValueNullFieldError.checkNotNull(
+        executeOnListen, r'GMediaRecommendationsReq', 'executeOnListen');
   }
 
   @override
-  GRecommendationsReq rebuild(
-          void Function(GRecommendationsReqBuilder) updates) =>
+  GMediaRecommendationsReq rebuild(
+          void Function(GMediaRecommendationsReqBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GRecommendationsReqBuilder toBuilder() =>
-      new GRecommendationsReqBuilder()..replace(this);
+  GMediaRecommendationsReqBuilder toBuilder() =>
+      new GMediaRecommendationsReqBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     final dynamic _$dynamicOther = other;
-    return other is GRecommendationsReq &&
+    return other is GMediaRecommendationsReq &&
         vars == other.vars &&
         operation == other.operation &&
         requestId == other.requestId &&
@@ -217,7 +219,7 @@ class _$GRecommendationsReq extends GRecommendationsReq {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GRecommendationsReq')
+    return (newBuiltValueToStringHelper(r'GMediaRecommendationsReq')
           ..add('vars', vars)
           ..add('operation', operation)
           ..add('requestId', requestId)
@@ -231,14 +233,15 @@ class _$GRecommendationsReq extends GRecommendationsReq {
   }
 }
 
-class GRecommendationsReqBuilder
-    implements Builder<GRecommendationsReq, GRecommendationsReqBuilder> {
-  _$GRecommendationsReq? _$v;
+class GMediaRecommendationsReqBuilder
+    implements
+        Builder<GMediaRecommendationsReq, GMediaRecommendationsReqBuilder> {
+  _$GMediaRecommendationsReq? _$v;
 
-  _i3.GRecommendationsVarsBuilder? _vars;
-  _i3.GRecommendationsVarsBuilder get vars =>
-      _$this._vars ??= new _i3.GRecommendationsVarsBuilder();
-  set vars(_i3.GRecommendationsVarsBuilder? vars) => _$this._vars = vars;
+  _i3.GMediaRecommendationsVarsBuilder? _vars;
+  _i3.GMediaRecommendationsVarsBuilder get vars =>
+      _$this._vars ??= new _i3.GMediaRecommendationsVarsBuilder();
+  set vars(_i3.GMediaRecommendationsVarsBuilder? vars) => _$this._vars = vars;
 
   _i4.Operation? _operation;
   _i4.Operation? get operation => _$this._operation;
@@ -248,21 +251,24 @@ class GRecommendationsReqBuilder
   String? get requestId => _$this._requestId;
   set requestId(String? requestId) => _$this._requestId = requestId;
 
-  _i2.GRecommendationsData? Function(
-      _i2.GRecommendationsData?, _i2.GRecommendationsData?)? _updateResult;
-  _i2.GRecommendationsData? Function(
-          _i2.GRecommendationsData?, _i2.GRecommendationsData?)?
+  _i2.GMediaRecommendationsData? Function(
+          _i2.GMediaRecommendationsData?, _i2.GMediaRecommendationsData?)?
+      _updateResult;
+  _i2.GMediaRecommendationsData? Function(
+          _i2.GMediaRecommendationsData?, _i2.GMediaRecommendationsData?)?
       get updateResult => _$this._updateResult;
   set updateResult(
-          _i2.GRecommendationsData? Function(
-                  _i2.GRecommendationsData?, _i2.GRecommendationsData?)?
+          _i2.GMediaRecommendationsData? Function(
+                  _i2.GMediaRecommendationsData?,
+                  _i2.GMediaRecommendationsData?)?
               updateResult) =>
       _$this._updateResult = updateResult;
 
-  _i2.GRecommendationsDataBuilder? _optimisticResponse;
-  _i2.GRecommendationsDataBuilder get optimisticResponse =>
-      _$this._optimisticResponse ??= new _i2.GRecommendationsDataBuilder();
-  set optimisticResponse(_i2.GRecommendationsDataBuilder? optimisticResponse) =>
+  _i2.GMediaRecommendationsDataBuilder? _optimisticResponse;
+  _i2.GMediaRecommendationsDataBuilder get optimisticResponse =>
+      _$this._optimisticResponse ??= new _i2.GMediaRecommendationsDataBuilder();
+  set optimisticResponse(
+          _i2.GMediaRecommendationsDataBuilder? optimisticResponse) =>
       _$this._optimisticResponse = optimisticResponse;
 
   String? _updateCacheHandlerKey;
@@ -287,11 +293,11 @@ class GRecommendationsReqBuilder
   set executeOnListen(bool? executeOnListen) =>
       _$this._executeOnListen = executeOnListen;
 
-  GRecommendationsReqBuilder() {
-    GRecommendationsReq._initializeBuilder(this);
+  GMediaRecommendationsReqBuilder() {
+    GMediaRecommendationsReq._initializeBuilder(this);
   }
 
-  GRecommendationsReqBuilder get _$this {
+  GMediaRecommendationsReqBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _vars = $v.vars.toBuilder();
@@ -309,27 +315,27 @@ class GRecommendationsReqBuilder
   }
 
   @override
-  void replace(GRecommendationsReq other) {
+  void replace(GMediaRecommendationsReq other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GRecommendationsReq;
+    _$v = other as _$GMediaRecommendationsReq;
   }
 
   @override
-  void update(void Function(GRecommendationsReqBuilder)? updates) {
+  void update(void Function(GMediaRecommendationsReqBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GRecommendationsReq build() => _build();
+  GMediaRecommendationsReq build() => _build();
 
-  _$GRecommendationsReq _build() {
-    _$GRecommendationsReq _$result;
+  _$GMediaRecommendationsReq _build() {
+    _$GMediaRecommendationsReq _$result;
     try {
       _$result = _$v ??
-          new _$GRecommendationsReq._(
+          new _$GMediaRecommendationsReq._(
               vars: vars.build(),
               operation: BuiltValueNullFieldError.checkNotNull(
-                  operation, r'GRecommendationsReq', 'operation'),
+                  operation, r'GMediaRecommendationsReq', 'operation'),
               requestId: requestId,
               updateResult: updateResult,
               optimisticResponse: _optimisticResponse?.build(),
@@ -337,7 +343,9 @@ class GRecommendationsReqBuilder
               updateCacheHandlerContext: updateCacheHandlerContext,
               fetchPolicy: fetchPolicy,
               executeOnListen: BuiltValueNullFieldError.checkNotNull(
-                  executeOnListen, r'GRecommendationsReq', 'executeOnListen'));
+                  executeOnListen,
+                  r'GMediaRecommendationsReq',
+                  'executeOnListen'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -348,7 +356,7 @@ class GRecommendationsReqBuilder
         _optimisticResponse?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GRecommendationsReq', _$failedField, e.toString());
+            r'GMediaRecommendationsReq', _$failedField, e.toString());
       }
       rethrow;
     }

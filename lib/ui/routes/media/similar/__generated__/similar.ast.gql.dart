@@ -8,9 +8,9 @@ import 'package:myaniapp/graphql/fragments/__generated__/media.ast.gql.dart'
 import 'package:myaniapp/graphql/fragments/__generated__/page_info.ast.gql.dart'
     as _i2;
 
-const Recommendations = _i1.OperationDefinitionNode(
+const MediaRecommendations = _i1.OperationDefinitionNode(
   type: _i1.OperationType.query,
-  name: _i1.NameNode(value: 'Recommendations'),
+  name: _i1.NameNode(value: 'MediaRecommendations'),
   variableDefinitions: [
     _i1.VariableDefinitionNode(
       variable: _i1.VariableNode(name: _i1.NameNode(value: 'mediaId')),
@@ -108,7 +108,7 @@ const Recommendations = _i1.OperationDefinitionNode(
   ]),
 );
 const document = _i1.DocumentNode(definitions: [
-  Recommendations,
+  MediaRecommendations,
   _i2.PageInfo,
   _i3.MediaFragment,
 ]);

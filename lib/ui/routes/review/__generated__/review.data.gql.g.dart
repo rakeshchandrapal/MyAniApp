@@ -11,6 +11,9 @@ Serializer<GReviewData_Review> _$gReviewDataReviewSerializer =
     new _$GReviewData_ReviewSerializer();
 Serializer<GReviewData_Review_user> _$gReviewDataReviewUserSerializer =
     new _$GReviewData_Review_userSerializer();
+Serializer<GReviewData_Review_user_avatar>
+    _$gReviewDataReviewUserAvatarSerializer =
+    new _$GReviewData_Review_user_avatarSerializer();
 Serializer<GReviewData_Review_media> _$gReviewDataReviewMediaSerializer =
     new _$GReviewData_Review_mediaSerializer();
 Serializer<GReviewData_Review_media_title>
@@ -229,7 +232,35 @@ class _$GReviewData_Review_userSerializer
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
     ];
-
+    Object? value;
+    value = object.donatorTier;
+    if (value != null) {
+      result
+        ..add('donatorTier')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.donatorBadge;
+    if (value != null) {
+      result
+        ..add('donatorBadge')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.moderatorRoles;
+    if (value != null) {
+      result
+        ..add('moderatorRoles')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType.nullable(_i2.GModRole)])));
+    }
+    value = object.avatar;
+    if (value != null) {
+      result
+        ..add('avatar')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(GReviewData_Review_user_avatar)));
+    }
     return result;
   }
 
@@ -256,6 +287,83 @@ class _$GReviewData_Review_userSerializer
         case 'name':
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
+          break;
+        case 'donatorTier':
+          result.donatorTier = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'donatorBadge':
+          result.donatorBadge = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'moderatorRoles':
+          result.moderatorRoles.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType.nullable(_i2.GModRole)
+              ]))! as BuiltList<Object?>);
+          break;
+        case 'avatar':
+          result.avatar.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(GReviewData_Review_user_avatar))!
+              as GReviewData_Review_user_avatar);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GReviewData_Review_user_avatarSerializer
+    implements StructuredSerializer<GReviewData_Review_user_avatar> {
+  @override
+  final Iterable<Type> types = const [
+    GReviewData_Review_user_avatar,
+    _$GReviewData_Review_user_avatar
+  ];
+  @override
+  final String wireName = 'GReviewData_Review_user_avatar';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GReviewData_Review_user_avatar object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.large;
+    if (value != null) {
+      result
+        ..add('large')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GReviewData_Review_user_avatar deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GReviewData_Review_user_avatarBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'large':
+          result.large = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -876,13 +984,27 @@ class _$GReviewData_Review_user extends GReviewData_Review_user {
   final int id;
   @override
   final String name;
+  @override
+  final int? donatorTier;
+  @override
+  final String? donatorBadge;
+  @override
+  final BuiltList<_i2.GModRole?>? moderatorRoles;
+  @override
+  final GReviewData_Review_user_avatar? avatar;
 
   factory _$GReviewData_Review_user(
           [void Function(GReviewData_Review_userBuilder)? updates]) =>
       (new GReviewData_Review_userBuilder()..update(updates))._build();
 
   _$GReviewData_Review_user._(
-      {required this.G__typename, required this.id, required this.name})
+      {required this.G__typename,
+      required this.id,
+      required this.name,
+      this.donatorTier,
+      this.donatorBadge,
+      this.moderatorRoles,
+      this.avatar})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GReviewData_Review_user', 'G__typename');
@@ -906,7 +1028,11 @@ class _$GReviewData_Review_user extends GReviewData_Review_user {
     return other is GReviewData_Review_user &&
         G__typename == other.G__typename &&
         id == other.id &&
-        name == other.name;
+        name == other.name &&
+        donatorTier == other.donatorTier &&
+        donatorBadge == other.donatorBadge &&
+        moderatorRoles == other.moderatorRoles &&
+        avatar == other.avatar;
   }
 
   @override
@@ -915,6 +1041,10 @@ class _$GReviewData_Review_user extends GReviewData_Review_user {
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, donatorTier.hashCode);
+    _$hash = $jc(_$hash, donatorBadge.hashCode);
+    _$hash = $jc(_$hash, moderatorRoles.hashCode);
+    _$hash = $jc(_$hash, avatar.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -924,7 +1054,11 @@ class _$GReviewData_Review_user extends GReviewData_Review_user {
     return (newBuiltValueToStringHelper(r'GReviewData_Review_user')
           ..add('G__typename', G__typename)
           ..add('id', id)
-          ..add('name', name))
+          ..add('name', name)
+          ..add('donatorTier', donatorTier)
+          ..add('donatorBadge', donatorBadge)
+          ..add('moderatorRoles', moderatorRoles)
+          ..add('avatar', avatar))
         .toString();
   }
 }
@@ -946,6 +1080,26 @@ class GReviewData_Review_userBuilder
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  int? _donatorTier;
+  int? get donatorTier => _$this._donatorTier;
+  set donatorTier(int? donatorTier) => _$this._donatorTier = donatorTier;
+
+  String? _donatorBadge;
+  String? get donatorBadge => _$this._donatorBadge;
+  set donatorBadge(String? donatorBadge) => _$this._donatorBadge = donatorBadge;
+
+  ListBuilder<_i2.GModRole?>? _moderatorRoles;
+  ListBuilder<_i2.GModRole?> get moderatorRoles =>
+      _$this._moderatorRoles ??= new ListBuilder<_i2.GModRole?>();
+  set moderatorRoles(ListBuilder<_i2.GModRole?>? moderatorRoles) =>
+      _$this._moderatorRoles = moderatorRoles;
+
+  GReviewData_Review_user_avatarBuilder? _avatar;
+  GReviewData_Review_user_avatarBuilder get avatar =>
+      _$this._avatar ??= new GReviewData_Review_user_avatarBuilder();
+  set avatar(GReviewData_Review_user_avatarBuilder? avatar) =>
+      _$this._avatar = avatar;
+
   GReviewData_Review_userBuilder() {
     GReviewData_Review_user._initializeBuilder(this);
   }
@@ -956,6 +1110,10 @@ class GReviewData_Review_userBuilder
       _G__typename = $v.G__typename;
       _id = $v.id;
       _name = $v.name;
+      _donatorTier = $v.donatorTier;
+      _donatorBadge = $v.donatorBadge;
+      _moderatorRoles = $v.moderatorRoles?.toBuilder();
+      _avatar = $v.avatar?.toBuilder();
       _$v = null;
     }
     return this;
@@ -976,14 +1134,137 @@ class GReviewData_Review_userBuilder
   GReviewData_Review_user build() => _build();
 
   _$GReviewData_Review_user _build() {
+    _$GReviewData_Review_user _$result;
+    try {
+      _$result = _$v ??
+          new _$GReviewData_Review_user._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GReviewData_Review_user', 'G__typename'),
+              id: BuiltValueNullFieldError.checkNotNull(
+                  id, r'GReviewData_Review_user', 'id'),
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, r'GReviewData_Review_user', 'name'),
+              donatorTier: donatorTier,
+              donatorBadge: donatorBadge,
+              moderatorRoles: _moderatorRoles?.build(),
+              avatar: _avatar?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'moderatorRoles';
+        _moderatorRoles?.build();
+        _$failedField = 'avatar';
+        _avatar?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GReviewData_Review_user', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GReviewData_Review_user_avatar extends GReviewData_Review_user_avatar {
+  @override
+  final String G__typename;
+  @override
+  final String? large;
+
+  factory _$GReviewData_Review_user_avatar(
+          [void Function(GReviewData_Review_user_avatarBuilder)? updates]) =>
+      (new GReviewData_Review_user_avatarBuilder()..update(updates))._build();
+
+  _$GReviewData_Review_user_avatar._({required this.G__typename, this.large})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GReviewData_Review_user_avatar', 'G__typename');
+  }
+
+  @override
+  GReviewData_Review_user_avatar rebuild(
+          void Function(GReviewData_Review_user_avatarBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GReviewData_Review_user_avatarBuilder toBuilder() =>
+      new GReviewData_Review_user_avatarBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GReviewData_Review_user_avatar &&
+        G__typename == other.G__typename &&
+        large == other.large;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, large.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GReviewData_Review_user_avatar')
+          ..add('G__typename', G__typename)
+          ..add('large', large))
+        .toString();
+  }
+}
+
+class GReviewData_Review_user_avatarBuilder
+    implements
+        Builder<GReviewData_Review_user_avatar,
+            GReviewData_Review_user_avatarBuilder> {
+  _$GReviewData_Review_user_avatar? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  String? _large;
+  String? get large => _$this._large;
+  set large(String? large) => _$this._large = large;
+
+  GReviewData_Review_user_avatarBuilder() {
+    GReviewData_Review_user_avatar._initializeBuilder(this);
+  }
+
+  GReviewData_Review_user_avatarBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _large = $v.large;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GReviewData_Review_user_avatar other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GReviewData_Review_user_avatar;
+  }
+
+  @override
+  void update(void Function(GReviewData_Review_user_avatarBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GReviewData_Review_user_avatar build() => _build();
+
+  _$GReviewData_Review_user_avatar _build() {
     final _$result = _$v ??
-        new _$GReviewData_Review_user._(
+        new _$GReviewData_Review_user_avatar._(
             G__typename: BuiltValueNullFieldError.checkNotNull(
-                G__typename, r'GReviewData_Review_user', 'G__typename'),
-            id: BuiltValueNullFieldError.checkNotNull(
-                id, r'GReviewData_Review_user', 'id'),
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'GReviewData_Review_user', 'name'));
+                G__typename, r'GReviewData_Review_user_avatar', 'G__typename'),
+            large: large);
     replace(_$result);
     return _$result;
   }
