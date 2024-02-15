@@ -31,7 +31,7 @@ class ActivityPage extends ConsumerWidget {
 
     return GQLRequest(
       operationRequest: GActivityReq((b) => b
-        ..requestId = "activity"
+        ..requestId = "activity$id"
         ..vars.id = id),
       loading: Scaffold(
         appBar: AppBar(),

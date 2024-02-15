@@ -810,3 +810,70 @@ abstract class GDeleteCommentData_DeleteThreadComment
         json,
       );
 }
+
+abstract class GToggleThreadSubscriptionData
+    implements
+        Built<GToggleThreadSubscriptionData,
+            GToggleThreadSubscriptionDataBuilder> {
+  GToggleThreadSubscriptionData._();
+
+  factory GToggleThreadSubscriptionData(
+          [Function(GToggleThreadSubscriptionDataBuilder b) updates]) =
+      _$GToggleThreadSubscriptionData;
+
+  static void _initializeBuilder(GToggleThreadSubscriptionDataBuilder b) =>
+      b..G__typename = 'Mutation';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  GToggleThreadSubscriptionData_ToggleThreadSubscription?
+      get ToggleThreadSubscription;
+  static Serializer<GToggleThreadSubscriptionData> get serializer =>
+      _$gToggleThreadSubscriptionDataSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GToggleThreadSubscriptionData.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GToggleThreadSubscriptionData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GToggleThreadSubscriptionData.serializer,
+        json,
+      );
+}
+
+abstract class GToggleThreadSubscriptionData_ToggleThreadSubscription
+    implements
+        Built<GToggleThreadSubscriptionData_ToggleThreadSubscription,
+            GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder> {
+  GToggleThreadSubscriptionData_ToggleThreadSubscription._();
+
+  factory GToggleThreadSubscriptionData_ToggleThreadSubscription(
+      [Function(GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder b)
+          updates]) = _$GToggleThreadSubscriptionData_ToggleThreadSubscription;
+
+  static void _initializeBuilder(
+          GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder b) =>
+      b..G__typename = 'Thread';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  bool? get isSubscribed;
+  static Serializer<GToggleThreadSubscriptionData_ToggleThreadSubscription>
+      get serializer =>
+          _$gToggleThreadSubscriptionDataToggleThreadSubscriptionSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GToggleThreadSubscriptionData_ToggleThreadSubscription.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GToggleThreadSubscriptionData_ToggleThreadSubscription? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GToggleThreadSubscriptionData_ToggleThreadSubscription.serializer,
+        json,
+      );
+}

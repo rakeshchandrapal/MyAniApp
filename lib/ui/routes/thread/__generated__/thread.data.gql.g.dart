@@ -62,6 +62,12 @@ Serializer<GDeleteCommentData> _$gDeleteCommentDataSerializer =
 Serializer<GDeleteCommentData_DeleteThreadComment>
     _$gDeleteCommentDataDeleteThreadCommentSerializer =
     new _$GDeleteCommentData_DeleteThreadCommentSerializer();
+Serializer<GToggleThreadSubscriptionData>
+    _$gToggleThreadSubscriptionDataSerializer =
+    new _$GToggleThreadSubscriptionDataSerializer();
+Serializer<GToggleThreadSubscriptionData_ToggleThreadSubscription>
+    _$gToggleThreadSubscriptionDataToggleThreadSubscriptionSerializer =
+    new _$GToggleThreadSubscriptionData_ToggleThreadSubscriptionSerializer();
 
 class _$GThreadDataSerializer implements StructuredSerializer<GThreadData> {
   @override
@@ -1858,6 +1864,133 @@ class _$GDeleteCommentData_DeleteThreadCommentSerializer
           break;
         case 'deleted':
           result.deleted = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GToggleThreadSubscriptionDataSerializer
+    implements StructuredSerializer<GToggleThreadSubscriptionData> {
+  @override
+  final Iterable<Type> types = const [
+    GToggleThreadSubscriptionData,
+    _$GToggleThreadSubscriptionData
+  ];
+  @override
+  final String wireName = 'GToggleThreadSubscriptionData';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GToggleThreadSubscriptionData object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.ToggleThreadSubscription;
+    if (value != null) {
+      result
+        ..add('ToggleThreadSubscription')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                GToggleThreadSubscriptionData_ToggleThreadSubscription)));
+    }
+    return result;
+  }
+
+  @override
+  GToggleThreadSubscriptionData deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GToggleThreadSubscriptionDataBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'ToggleThreadSubscription':
+          result.ToggleThreadSubscription.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      GToggleThreadSubscriptionData_ToggleThreadSubscription))!
+              as GToggleThreadSubscriptionData_ToggleThreadSubscription);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GToggleThreadSubscriptionData_ToggleThreadSubscriptionSerializer
+    implements
+        StructuredSerializer<
+            GToggleThreadSubscriptionData_ToggleThreadSubscription> {
+  @override
+  final Iterable<Type> types = const [
+    GToggleThreadSubscriptionData_ToggleThreadSubscription,
+    _$GToggleThreadSubscriptionData_ToggleThreadSubscription
+  ];
+  @override
+  final String wireName =
+      'GToggleThreadSubscriptionData_ToggleThreadSubscription';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers,
+      GToggleThreadSubscriptionData_ToggleThreadSubscription object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+    ];
+    Object? value;
+    value = object.isSubscribed;
+    if (value != null) {
+      result
+        ..add('isSubscribed')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    return result;
+  }
+
+  @override
+  GToggleThreadSubscriptionData_ToggleThreadSubscription deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result =
+        new GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'isSubscribed':
+          result.isSubscribed = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
       }
@@ -5157,6 +5290,269 @@ class GDeleteCommentData_DeleteThreadCommentBuilder
             G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
                 r'GDeleteCommentData_DeleteThreadComment', 'G__typename'),
             deleted: deleted);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GToggleThreadSubscriptionData extends GToggleThreadSubscriptionData {
+  @override
+  final String G__typename;
+  @override
+  final GToggleThreadSubscriptionData_ToggleThreadSubscription?
+      ToggleThreadSubscription;
+
+  factory _$GToggleThreadSubscriptionData(
+          [void Function(GToggleThreadSubscriptionDataBuilder)? updates]) =>
+      (new GToggleThreadSubscriptionDataBuilder()..update(updates))._build();
+
+  _$GToggleThreadSubscriptionData._(
+      {required this.G__typename, this.ToggleThreadSubscription})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GToggleThreadSubscriptionData', 'G__typename');
+  }
+
+  @override
+  GToggleThreadSubscriptionData rebuild(
+          void Function(GToggleThreadSubscriptionDataBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GToggleThreadSubscriptionDataBuilder toBuilder() =>
+      new GToggleThreadSubscriptionDataBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GToggleThreadSubscriptionData &&
+        G__typename == other.G__typename &&
+        ToggleThreadSubscription == other.ToggleThreadSubscription;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, ToggleThreadSubscription.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GToggleThreadSubscriptionData')
+          ..add('G__typename', G__typename)
+          ..add('ToggleThreadSubscription', ToggleThreadSubscription))
+        .toString();
+  }
+}
+
+class GToggleThreadSubscriptionDataBuilder
+    implements
+        Builder<GToggleThreadSubscriptionData,
+            GToggleThreadSubscriptionDataBuilder> {
+  _$GToggleThreadSubscriptionData? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder?
+      _ToggleThreadSubscription;
+  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder
+      get ToggleThreadSubscription => _$this._ToggleThreadSubscription ??=
+          new GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder();
+  set ToggleThreadSubscription(
+          GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder?
+              ToggleThreadSubscription) =>
+      _$this._ToggleThreadSubscription = ToggleThreadSubscription;
+
+  GToggleThreadSubscriptionDataBuilder() {
+    GToggleThreadSubscriptionData._initializeBuilder(this);
+  }
+
+  GToggleThreadSubscriptionDataBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _ToggleThreadSubscription = $v.ToggleThreadSubscription?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GToggleThreadSubscriptionData other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GToggleThreadSubscriptionData;
+  }
+
+  @override
+  void update(void Function(GToggleThreadSubscriptionDataBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GToggleThreadSubscriptionData build() => _build();
+
+  _$GToggleThreadSubscriptionData _build() {
+    _$GToggleThreadSubscriptionData _$result;
+    try {
+      _$result = _$v ??
+          new _$GToggleThreadSubscriptionData._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GToggleThreadSubscriptionData', 'G__typename'),
+              ToggleThreadSubscription: _ToggleThreadSubscription?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'ToggleThreadSubscription';
+        _ToggleThreadSubscription?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GToggleThreadSubscriptionData', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GToggleThreadSubscriptionData_ToggleThreadSubscription
+    extends GToggleThreadSubscriptionData_ToggleThreadSubscription {
+  @override
+  final String G__typename;
+  @override
+  final int id;
+  @override
+  final bool? isSubscribed;
+
+  factory _$GToggleThreadSubscriptionData_ToggleThreadSubscription(
+          [void Function(
+                  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder)?
+              updates]) =>
+      (new GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder()
+            ..update(updates))
+          ._build();
+
+  _$GToggleThreadSubscriptionData_ToggleThreadSubscription._(
+      {required this.G__typename, required this.id, this.isSubscribed})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename,
+        r'GToggleThreadSubscriptionData_ToggleThreadSubscription',
+        'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GToggleThreadSubscriptionData_ToggleThreadSubscription', 'id');
+  }
+
+  @override
+  GToggleThreadSubscriptionData_ToggleThreadSubscription rebuild(
+          void Function(
+                  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder)
+              updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder toBuilder() =>
+      new GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder()
+        ..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GToggleThreadSubscriptionData_ToggleThreadSubscription &&
+        G__typename == other.G__typename &&
+        id == other.id &&
+        isSubscribed == other.isSubscribed;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, isSubscribed.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(
+            r'GToggleThreadSubscriptionData_ToggleThreadSubscription')
+          ..add('G__typename', G__typename)
+          ..add('id', id)
+          ..add('isSubscribed', isSubscribed))
+        .toString();
+  }
+}
+
+class GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder
+    implements
+        Builder<GToggleThreadSubscriptionData_ToggleThreadSubscription,
+            GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder> {
+  _$GToggleThreadSubscriptionData_ToggleThreadSubscription? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  bool? _isSubscribed;
+  bool? get isSubscribed => _$this._isSubscribed;
+  set isSubscribed(bool? isSubscribed) => _$this._isSubscribed = isSubscribed;
+
+  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder() {
+    GToggleThreadSubscriptionData_ToggleThreadSubscription._initializeBuilder(
+        this);
+  }
+
+  GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _id = $v.id;
+      _isSubscribed = $v.isSubscribed;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GToggleThreadSubscriptionData_ToggleThreadSubscription other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GToggleThreadSubscriptionData_ToggleThreadSubscription;
+  }
+
+  @override
+  void update(
+      void Function(
+              GToggleThreadSubscriptionData_ToggleThreadSubscriptionBuilder)?
+          updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GToggleThreadSubscriptionData_ToggleThreadSubscription build() => _build();
+
+  _$GToggleThreadSubscriptionData_ToggleThreadSubscription _build() {
+    final _$result = _$v ??
+        new _$GToggleThreadSubscriptionData_ToggleThreadSubscription._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(
+                G__typename,
+                r'GToggleThreadSubscriptionData_ToggleThreadSubscription',
+                'G__typename'),
+            id: BuiltValueNullFieldError.checkNotNull(
+                id,
+                r'GToggleThreadSubscriptionData_ToggleThreadSubscription',
+                'id'),
+            isSubscribed: isSubscribed);
     replace(_$result);
     return _$result;
   }

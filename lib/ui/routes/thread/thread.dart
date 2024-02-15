@@ -29,7 +29,7 @@ class ThreadPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GQLRequest(
       operationRequest: GThreadReq((b) => b
-        ..requestId = "thread"
+        ..requestId = "thread$id"
         ..vars.id = id),
       loading: Scaffold(
         appBar: AppBar(),
@@ -105,19 +105,18 @@ class ThreadPage extends ConsumerWidget {
             controller: _controller,
             slivers: [
               SliverToBoxAdapter(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Comment(
-                      body: Markdown(
-                        data: response.data!.thread!.body!,
-                      ),
-                      avatarUrl: response.data!.thread!.user!.avatar!.large!,
-                      username: response.data!.thread!.user!.name,
-                      createdAt: response.data!.thread!.createdAt,
-                      footer: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
+                child: Comment(
+                  body: Markdown(
+                    data: response.data!.thread!.body!,
+                  ),
+                  avatarUrl: response.data!.thread!.user?.avatar?.large,
+                  username: response.data!.thread!.user?.name,
+                  createdAt: response.data!.thread!.createdAt,
+                  footer: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
                         children: [
                           LikeButton(
                             id: response.data!.thread!.id,
@@ -148,65 +147,78 @@ class ThreadPage extends ConsumerWidget {
                                       ..vars.type = GLikeableType.THREAD,
                                   ))
                                   .first,
-                              // () => client.value.mutate$ToggleLike(
-                              //   Options$Mutation$ToggleLike(
-                              //     variables: Variables$Mutation$ToggleLike(
-                              //       id: response.data!.thread!.id,
-                              //       type: GLikeableType.THREAD,
-                              //     ),
-                              //   ),
-                              // ),
                             ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                for (var category
-                                    in response.data!.thread!.categories!)
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 10,
-                                    ),
-                                    child: Chip(
-                                      label: Text(category!.name),
-                                      labelPadding: EdgeInsets.zero,
-                                      labelStyle: Theme.of(context)
-                                          .textTheme
-                                          .labelSmall,
-                                    ),
-                                  ),
-                                for (var media
-                                    in response.data!.thread!.mediaCategories!)
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 10,
-                                    ),
-                                    child: GestureDetector(
-                                      onLongPress: () =>
-                                          showMediaCard(context, media),
-                                      child: ActionChip(
-                                        onPressed: () =>
-                                            context.push('/media/${media.id}'),
-                                        label:
-                                            Text(media!.title!.userPreferred!),
-                                        labelPadding: EdgeInsets.zero,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall,
-                                      ),
-                                    ),
-                                  ),
-                              ],
+                          IconButton(
+                            onPressed: requireLogin(
+                              ref,
+                              "subscribe",
+                              () => ref
+                                  .read(ferryClientProvider)
+                                  .request(GToggleThreadSubscriptionReq(
+                                    (b) => b
+                                      ..vars.id = response.data!.thread!.id
+                                      ..vars.subscribe = !(response
+                                              .data!.thread!.isSubscribed ??
+                                          false),
+                                  ))
+                                  .first
+                                  .then((value) => print(value.data)),
                             ),
-                          ),
+                            icon: Icon(
+                              response.data!.thread!.isSubscribed == true
+                                  ? Icons.notifications_active
+                                  : Icons.notifications,
+                              color: response.data!.thread!.isSubscribed == true
+                                  ? Colors.yellow
+                                  : null,
+                            ),
+                          )
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (var category
+                                in response.data!.thread!.categories!)
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 10,
+                                ),
+                                child: ActionChip(
+                                  onPressed: () => context.push(
+                                      "/forum/recent?category=${category.id}"),
+                                  label: Text(category!.name),
+                                  labelPadding: EdgeInsets.zero,
+                                  labelStyle:
+                                      Theme.of(context).textTheme.labelSmall,
+                                ),
+                              ),
+                            for (var media
+                                in response.data!.thread!.mediaCategories!)
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 10,
+                                ),
+                                child: GestureDetector(
+                                  onLongPress: () =>
+                                      showMediaCard(context, media),
+                                  child: ActionChip(
+                                    onPressed: () =>
+                                        context.push('/media/${media.id}'),
+                                    label: Text(media!.title!.userPreferred!),
+                                    labelPadding: EdgeInsets.zero,
+                                    labelStyle:
+                                        Theme.of(context).textTheme.labelSmall,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SliverList.builder(
@@ -229,6 +241,8 @@ class ThreadPage extends ConsumerWidget {
   }
 }
 
+// remember to update this same class in comment/comment.dart
+// for some reason using a fragment for thread comment its doesn't get replies
 class ThreadComment extends ConsumerWidget {
   const ThreadComment({
     super.key,
@@ -288,14 +302,6 @@ class ThreadComment extends ConsumerWidget {
                       ..vars.type = GLikeableType.THREAD_COMMENT,
                   ))
                   .first,
-              // () => client.value.mutate$ToggleLike(
-              //   Options$Mutation$ToggleLike(
-              //     variables: Variables$Mutation$ToggleLike(
-              //       id: comment.id,
-              //       type: GLikeableType.THREAD_COMMENT,
-              //     ),
-              //   ),
-              // ),
             ),
           ),
           IconButton(
@@ -338,16 +344,14 @@ class ThreadComment extends ConsumerWidget {
             ),
         ],
       ),
-      replies: replies.isNotEmpty == true
-          ? [
-              for (var reply in replies)
-                ThreadComment(
-                  comment: reply,
-                  refetch: refetch,
-                  isReply: true,
-                )
-            ]
-          : null,
+      replies: [
+        for (var reply in replies)
+          ThreadComment(
+            comment: reply,
+            refetch: refetch,
+            isReply: true,
+          )
+      ],
     );
   }
 }

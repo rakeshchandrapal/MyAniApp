@@ -257,6 +257,8 @@ import 'package:myaniapp/graphql/fragments/__generated__/thread.req.gql.dart'
     show GThreadFragmentReq;
 import 'package:myaniapp/graphql/fragments/__generated__/thread.var.gql.dart'
     show GThreadFragmentVars;
+import 'package:myaniapp/graphql/fragments/__generated__/thread_comment.data.gql.dart'
+    show GThreadCommentData_user, GThreadCommentData_user_avatar;
 import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
     show GUserFragmentData, GUserFragmentData_avatar;
 import 'package:myaniapp/graphql/fragments/__generated__/user.req.gql.dart'
@@ -822,11 +824,31 @@ import 'package:myaniapp/ui/routes/thread/__generated__/thread.data.gql.dart'
         GThreadData_thread_replyUser,
         GThreadData_thread_replyUser_avatar,
         GThreadData_thread_user,
-        GThreadData_thread_user_avatar;
+        GThreadData_thread_user_avatar,
+        GToggleThreadSubscriptionData,
+        GToggleThreadSubscriptionData_ToggleThreadSubscription;
 import 'package:myaniapp/ui/routes/thread/__generated__/thread.req.gql.dart'
-    show GDeleteCommentReq, GSaveCommentReq, GThreadReq;
+    show
+        GDeleteCommentReq,
+        GSaveCommentReq,
+        GThreadReq,
+        GToggleThreadSubscriptionReq;
 import 'package:myaniapp/ui/routes/thread/__generated__/thread.var.gql.dart'
-    show GDeleteCommentVars, GSaveCommentVars, GThreadVars;
+    show
+        GDeleteCommentVars,
+        GSaveCommentVars,
+        GThreadVars,
+        GToggleThreadSubscriptionVars;
+import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.data.gql.dart'
+    show
+        GThreadCommentData,
+        GThreadCommentData_ThreadComment,
+        GThreadCommentData_ThreadComment_user,
+        GThreadCommentData_ThreadComment_user_avatar;
+import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.req.gql.dart'
+    show GThreadCommentReq;
+import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.var.gql.dart'
+    show GThreadCommentVars;
 import 'package:myaniapp/ui/routes/user/__generated__/user.data.gql.dart'
     show
         GGenreStatData,
@@ -1534,7 +1556,15 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GThisUserData_statistics_manga,
   GThisUserReq,
   GThisUserVars,
+  GThreadCommentData,
+  GThreadCommentData_ThreadComment,
+  GThreadCommentData_ThreadComment_user,
+  GThreadCommentData_ThreadComment_user_avatar,
+  GThreadCommentData_user,
+  GThreadCommentData_user_avatar,
+  GThreadCommentReq,
   GThreadCommentSort,
+  GThreadCommentVars,
   GThreadData,
   GThreadData_comments,
   GThreadData_comments_pageInfo,
@@ -1609,6 +1639,10 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GToggleLikeData_ToggleLikeV2__base,
   GToggleLikeReq,
   GToggleLikeVars,
+  GToggleThreadSubscriptionData,
+  GToggleThreadSubscriptionData_ToggleThreadSubscription,
+  GToggleThreadSubscriptionReq,
+  GToggleThreadSubscriptionVars,
   GUpdateUserData,
   GUpdateUserData_UpdateUser,
   GUpdateUserData_UpdateUser_avatar,

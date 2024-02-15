@@ -77,3 +77,30 @@ abstract class GDeleteCommentVars
         json,
       );
 }
+
+abstract class GToggleThreadSubscriptionVars
+    implements
+        Built<GToggleThreadSubscriptionVars,
+            GToggleThreadSubscriptionVarsBuilder> {
+  GToggleThreadSubscriptionVars._();
+
+  factory GToggleThreadSubscriptionVars(
+          [Function(GToggleThreadSubscriptionVarsBuilder b) updates]) =
+      _$GToggleThreadSubscriptionVars;
+
+  int? get id;
+  bool? get subscribe;
+  static Serializer<GToggleThreadSubscriptionVars> get serializer =>
+      _$gToggleThreadSubscriptionVarsSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GToggleThreadSubscriptionVars.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GToggleThreadSubscriptionVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GToggleThreadSubscriptionVars.serializer,
+        json,
+      );
+}

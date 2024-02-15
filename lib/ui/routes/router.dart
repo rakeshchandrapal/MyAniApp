@@ -22,6 +22,7 @@ import 'package:myaniapp/ui/routes/settings/anilist.dart';
 import 'package:myaniapp/ui/routes/settings/app.dart';
 import 'package:myaniapp/ui/routes/settings/general.dart';
 import 'package:myaniapp/ui/routes/staff/staff.dart';
+import 'package:myaniapp/ui/routes/thread/comment/comment.dart';
 import 'package:myaniapp/ui/routes/thread/thread.dart';
 import 'package:myaniapp/ui/routes/user/list/anime.dart';
 import 'package:myaniapp/ui/routes/user/list/manga.dart';
@@ -33,10 +34,6 @@ final router = GoRouter(
   navigatorKey: _navigatorKey,
   initialLocation: '/',
   routes: [
-    // GoRoute(
-    //   path: '/',
-    //   builder: (context, state) => const HomeOverviewPage(),
-    // ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => HomePage(navigationShell: shell),
       branches: [
@@ -94,7 +91,7 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      // parentNavigatorKey: _navigatorKey,
+      parentNavigatorKey: _navigatorKey,
       path: '/media/:id',
       redirect: (context, state) => state.pathParameters['tab'] == null
           ? '/media/${state.pathParameters['id']}/overview'
@@ -145,12 +142,18 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
-      parentNavigatorKey: _navigatorKey,
-      path: '/thread/:id',
-      builder: (context, state) => ThreadPage(
-        id: int.parse(state.pathParameters['id']!),
-      ),
-    ),
+        parentNavigatorKey: _navigatorKey,
+        path: '/thread/:id',
+        builder: (context, state) => ThreadPage(
+              id: int.parse(state.pathParameters['id']!),
+            ),
+        routes: [
+          GoRoute(
+            path: 'comment/:commentId',
+            builder: (context, state) => ThreadCommentPage(
+                id: int.parse(state.pathParameters['commentId']!)),
+          )
+        ]),
     GoRoute(
       parentNavigatorKey: _navigatorKey,
       path: '/activity/:id',

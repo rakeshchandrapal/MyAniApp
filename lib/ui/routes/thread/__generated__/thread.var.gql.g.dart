@@ -11,6 +11,9 @@ Serializer<GSaveCommentVars> _$gSaveCommentVarsSerializer =
     new _$GSaveCommentVarsSerializer();
 Serializer<GDeleteCommentVars> _$gDeleteCommentVarsSerializer =
     new _$GDeleteCommentVarsSerializer();
+Serializer<GToggleThreadSubscriptionVars>
+    _$gToggleThreadSubscriptionVarsSerializer =
+    new _$GToggleThreadSubscriptionVarsSerializer();
 
 class _$GThreadVarsSerializer implements StructuredSerializer<GThreadVars> {
   @override
@@ -176,6 +179,65 @@ class _$GDeleteCommentVarsSerializer
         case 'id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GToggleThreadSubscriptionVarsSerializer
+    implements StructuredSerializer<GToggleThreadSubscriptionVars> {
+  @override
+  final Iterable<Type> types = const [
+    GToggleThreadSubscriptionVars,
+    _$GToggleThreadSubscriptionVars
+  ];
+  @override
+  final String wireName = 'GToggleThreadSubscriptionVars';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GToggleThreadSubscriptionVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.id;
+    if (value != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.subscribe;
+    if (value != null) {
+      result
+        ..add('subscribe')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    return result;
+  }
+
+  @override
+  GToggleThreadSubscriptionVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GToggleThreadSubscriptionVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'subscribe':
+          result.subscribe = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
           break;
       }
     }
@@ -464,6 +526,101 @@ class GDeleteCommentVarsBuilder
 
   _$GDeleteCommentVars _build() {
     final _$result = _$v ?? new _$GDeleteCommentVars._(id: id);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GToggleThreadSubscriptionVars extends GToggleThreadSubscriptionVars {
+  @override
+  final int? id;
+  @override
+  final bool? subscribe;
+
+  factory _$GToggleThreadSubscriptionVars(
+          [void Function(GToggleThreadSubscriptionVarsBuilder)? updates]) =>
+      (new GToggleThreadSubscriptionVarsBuilder()..update(updates))._build();
+
+  _$GToggleThreadSubscriptionVars._({this.id, this.subscribe}) : super._();
+
+  @override
+  GToggleThreadSubscriptionVars rebuild(
+          void Function(GToggleThreadSubscriptionVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GToggleThreadSubscriptionVarsBuilder toBuilder() =>
+      new GToggleThreadSubscriptionVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GToggleThreadSubscriptionVars &&
+        id == other.id &&
+        subscribe == other.subscribe;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, subscribe.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GToggleThreadSubscriptionVars')
+          ..add('id', id)
+          ..add('subscribe', subscribe))
+        .toString();
+  }
+}
+
+class GToggleThreadSubscriptionVarsBuilder
+    implements
+        Builder<GToggleThreadSubscriptionVars,
+            GToggleThreadSubscriptionVarsBuilder> {
+  _$GToggleThreadSubscriptionVars? _$v;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  bool? _subscribe;
+  bool? get subscribe => _$this._subscribe;
+  set subscribe(bool? subscribe) => _$this._subscribe = subscribe;
+
+  GToggleThreadSubscriptionVarsBuilder();
+
+  GToggleThreadSubscriptionVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _subscribe = $v.subscribe;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GToggleThreadSubscriptionVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GToggleThreadSubscriptionVars;
+  }
+
+  @override
+  void update(void Function(GToggleThreadSubscriptionVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GToggleThreadSubscriptionVars build() => _build();
+
+  _$GToggleThreadSubscriptionVars _build() {
+    final _$result = _$v ??
+        new _$GToggleThreadSubscriptionVars._(id: id, subscribe: subscribe);
     replace(_$result);
     return _$result;
   }

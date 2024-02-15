@@ -36,7 +36,7 @@ class _CharacterPageState extends State<CharacterPage> {
     return GQLRequest(
       key: Key("$onList"),
       operationRequest: GCharacterReq((b) => b
-        ..requestId = "character"
+        ..requestId = "character${widget.id}"
         ..vars.id = widget.id
         ..vars.onList = onList),
       loading: Scaffold(
@@ -75,6 +75,9 @@ class _CharacterPageState extends State<CharacterPage> {
               controller: scrollController,
               slivers: [
                 SliverAppBar(
+                  leading: const BackButton(
+                      // onPressed: () => context.push('/character/13021'),
+                      ),
                   expandedHeight: 210,
                   pinned: true,
                   flexibleSpace: FlexibleSpaceBar(

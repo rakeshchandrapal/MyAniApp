@@ -753,7 +753,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GThisUserData_statistics_manga.serializer)
       ..add(GThisUserReq.serializer)
       ..add(GThisUserVars.serializer)
+      ..add(GThreadCommentData.serializer)
+      ..add(GThreadCommentData_ThreadComment.serializer)
+      ..add(GThreadCommentData_ThreadComment_user.serializer)
+      ..add(GThreadCommentData_ThreadComment_user_avatar.serializer)
+      ..add(GThreadCommentData_user.serializer)
+      ..add(GThreadCommentData_user_avatar.serializer)
+      ..add(GThreadCommentReq.serializer)
       ..add(GThreadCommentSort.serializer)
+      ..add(GThreadCommentVars.serializer)
       ..add(GThreadData.serializer)
       ..add(GThreadData_comments.serializer)
       ..add(GThreadData_comments_pageInfo.serializer)
@@ -835,6 +843,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GToggleLikeData_ToggleLikeV2__base.serializer)
       ..add(GToggleLikeReq.serializer)
       ..add(GToggleLikeVars.serializer)
+      ..add(GToggleThreadSubscriptionData.serializer)
+      ..add(GToggleThreadSubscriptionData_ToggleThreadSubscription.serializer)
+      ..add(GToggleThreadSubscriptionReq.serializer)
+      ..add(GToggleThreadSubscriptionVars.serializer)
       ..add(GUpdateUserData.serializer)
       ..add(GUpdateUserData_UpdateUser.serializer)
       ..add(GUpdateUserData_UpdateUser_avatar.serializer)
@@ -1329,6 +1341,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
           () => new ListBuilder<GModRole?>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType.nullable(GNotificationOptionInput)]),
           () => new ListBuilder<GNotificationOptionInput?>())
@@ -1406,6 +1424,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType.nullable(GStaffData_Staff_staffMedia_edges)
           ]),
           () => new ListBuilder<GStaffData_Staff_staffMedia_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GThreadCommentData_ThreadComment)
+          ]),
+          () => new ListBuilder<GThreadCommentData_ThreadComment?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GThreadData_comments_threadComments)

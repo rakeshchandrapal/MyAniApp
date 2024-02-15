@@ -202,3 +202,69 @@ abstract class GDeleteCommentReq
         json,
       );
 }
+
+abstract class GToggleThreadSubscriptionReq
+    implements
+        Built<GToggleThreadSubscriptionReq,
+            GToggleThreadSubscriptionReqBuilder>,
+        _i1.OperationRequest<_i2.GToggleThreadSubscriptionData,
+            _i3.GToggleThreadSubscriptionVars> {
+  GToggleThreadSubscriptionReq._();
+
+  factory GToggleThreadSubscriptionReq(
+          [Function(GToggleThreadSubscriptionReqBuilder b) updates]) =
+      _$GToggleThreadSubscriptionReq;
+
+  static void _initializeBuilder(GToggleThreadSubscriptionReqBuilder b) => b
+    ..operation = _i4.Operation(
+      document: _i5.document,
+      operationName: 'ToggleThreadSubscription',
+    )
+    ..executeOnListen = true;
+
+  @override
+  _i3.GToggleThreadSubscriptionVars get vars;
+  @override
+  _i4.Operation get operation;
+  @override
+  _i4.Request get execRequest => _i4.Request(
+        operation: operation,
+        variables: vars.toJson(),
+      );
+
+  @override
+  String? get requestId;
+  @override
+  @BuiltValueField(serialize: false)
+  _i2.GToggleThreadSubscriptionData? Function(
+    _i2.GToggleThreadSubscriptionData?,
+    _i2.GToggleThreadSubscriptionData?,
+  )? get updateResult;
+  @override
+  _i2.GToggleThreadSubscriptionData? get optimisticResponse;
+  @override
+  String? get updateCacheHandlerKey;
+  @override
+  Map<String, dynamic>? get updateCacheHandlerContext;
+  @override
+  _i1.FetchPolicy? get fetchPolicy;
+  @override
+  bool get executeOnListen;
+  @override
+  _i2.GToggleThreadSubscriptionData? parseData(Map<String, dynamic> json) =>
+      _i2.GToggleThreadSubscriptionData.fromJson(json);
+
+  static Serializer<GToggleThreadSubscriptionReq> get serializer =>
+      _$gToggleThreadSubscriptionReqSerializer;
+
+  Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
+        GToggleThreadSubscriptionReq.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GToggleThreadSubscriptionReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers.deserializeWith(
+        GToggleThreadSubscriptionReq.serializer,
+        json,
+      );
+}

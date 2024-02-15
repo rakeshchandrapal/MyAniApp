@@ -1,0 +1,14 @@
+# import '/graphql/fragments/user.graphql'
+
+fragment ThreadComment on ThreadComment {
+  id
+  threadId
+  comment
+  isLiked
+  likeCount
+  createdAt
+  user {
+    ...UserFragment
+  }
+  isLocked
+}

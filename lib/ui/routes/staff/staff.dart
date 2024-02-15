@@ -23,7 +23,7 @@ class StaffPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GQLRequest(
       operationRequest: GStaffReq((b) => b
-        ..requestId = "staff"
+        ..requestId = "staff$id"
         ..vars.id = id),
       loading: Scaffold(
         appBar: AppBar(),

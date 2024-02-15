@@ -145,7 +145,9 @@ class ThreadCard extends StatelessWidget {
             spacing: 10,
             children: [
               for (var category in thread.categories!)
-                Chip(
+                ActionChip(
+                  onPressed: () =>
+                      context.push("/forum/recent?category=${category.id}"),
                   label: Text(category!.name),
                   labelPadding: EdgeInsets.zero,
                   labelStyle: theme.textTheme.labelSmall,

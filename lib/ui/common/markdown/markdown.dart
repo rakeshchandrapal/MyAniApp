@@ -83,7 +83,8 @@ class Markdown extends StatelessWidget {
                     return;
                   } else if (uri.pathSegments.first == 'forum' &&
                       uri.pathSegments[1] == 'thread') {
-                    context.push('/thread/${uri.pathSegments[2]}');
+                    var segments = uri.pathSegments.toList()..removeAt(0);
+                    context.push('/${segments.join("/")}');
                     return;
                   } else if (uri.pathSegments.first == 'activity') {
                     context.push('/activity/${uri.pathSegments[1]}');
