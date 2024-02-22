@@ -1,15 +1,14 @@
-name: Build Windows
+name: Build and Release Linux
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   build:
-    name: Build Windows App
-    runs-on: windows-latest
-    if: contains(github.event.head_commit.message, '[build]')
+    name: Build Linux App
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
@@ -29,19 +28,24 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Download deps
+        run: |
+          sudo apt update
+          sudo apt install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev libmpv-dev mpv
+
       - run: flutter pub get
-      - run: flutter build windows
+      - run: flutter build linux
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: MyAniApp-${{ env.sha_short }}-windows.zip
-          directory: build/windows/x64/runner/Release
+          filename: MyAniApp-${{ env.sha_short }}-linux-x64.zip
+          directory: build/linux/x64/release/bundle
 
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.sha_short }}
-          artifacts: 'build/windows/x64/runner/Release/MyAniApp-${{ env.sha_short }}-windows.zip'
+          artifacts: 'build/linux/x64/release/bundle/MyAniApp-${{ env.sha_short }}-linux-x64.zip'
           allowUpdates: true
           prerelease: true
