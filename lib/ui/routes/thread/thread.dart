@@ -77,13 +77,14 @@ class ThreadPage extends ConsumerWidget {
                   ),
                   isMulti: false,
                   label: "Page",
-                  onChanged: (values) => ref
-                      .read(ferryClientProvider)
-                      .requestController
-                      .add((response.operationRequest as GThreadReq)
-                          .rebuild((p0) => p0
-                            ..vars.page = values.first
-                            ..updateResult = (p0, p1) => p1)),
+                  onChanged: (values) {
+                    _controller.jumpTo(0);
+                    ref.read(ferryClientProvider).requestController.add(
+                        (response.operationRequest as GThreadReq)
+                            .rebuild((p0) => p0
+                              ..vars.page = values.first
+                              ..updateResult = (p0, p1) => p1));
+                  },
                 ),
               ),
               FloatingActionButton(

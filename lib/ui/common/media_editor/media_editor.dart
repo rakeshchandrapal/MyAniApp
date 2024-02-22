@@ -278,6 +278,9 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
               ],
             ),
           ),
+          const SizedBox(
+            height: 10,
+          ),
           _MediaListDate(
             start: true,
             date: options.startedAt.toDateString(),
@@ -286,7 +289,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
                 setState(() => options.update((p0) => p0..startedAt = null)),
           ),
           const SizedBox(
-            height: 1,
+            height: 5,
           ),
           _MediaListDate(
             start: false,
@@ -295,16 +298,10 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
             onClear: () =>
                 setState(() => options.update((p0) => p0..completedAt = null)),
           ),
-          RadioListTile.adaptive(
-            value: true,
-            groupValue: options.private,
-            toggleable: true,
-            controlAffinity: ListTileControlAffinity.trailing,
-            title: const Text('Private'),
-            onChanged: (value) =>
-                setState(() => options.update((p0) => p0..private = value)),
-          ),
           if (widget.entry.customLists?.asList.isNotEmpty == true) ...[
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               'Custom Lists',
               style: Theme.of(context).textTheme.titleMedium,
@@ -335,7 +332,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
             ),
           ],
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           TextField(
             maxLines: null,
@@ -348,7 +345,28 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
               ),
               labelText: 'Notes',
             ),
-          )
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          RadioListTile.adaptive(
+            value: true,
+            groupValue: options.private,
+            toggleable: true,
+            controlAffinity: ListTileControlAffinity.trailing,
+            title: const Text('Private'),
+            onChanged: (value) =>
+                setState(() => options.update((p0) => p0..private = value)),
+          ),
+          RadioListTile.adaptive(
+            value: true,
+            groupValue: options.private,
+            toggleable: true,
+            controlAffinity: ListTileControlAffinity.trailing,
+            title: const Text('Hide From Status List'),
+            onChanged: (value) => setState(() =>
+                options.update((p0) => p0..hiddenFromStatusLists = value)),
+          ),
         ],
       ),
     );
@@ -480,7 +498,7 @@ class _MediaListDate extends StatelessWidget {
       children: [
         Text(
           '${start ? 'Start' : 'Completed'} Date:',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
         ),
@@ -488,12 +506,13 @@ class _MediaListDate extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: onTap,
-              child: Text(date ?? ''),
+              child: Text(date ?? '           '),
             ),
-            IconButton(
-              onPressed: onClear,
-              icon: const Icon(Icons.clear),
-            )
+            if (date != null)
+              IconButton(
+                onPressed: onClear,
+                icon: const Icon(Icons.clear),
+              )
           ],
         ),
       ],

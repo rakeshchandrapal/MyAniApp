@@ -36,21 +36,12 @@ class AnilistSettingsPage extends ConsumerWidget {
       ),
       body: ListView(
         children: [
-          SwitchListTile.adaptive(
-            value: user.value!.options?.airingNotifications ?? false,
-            onChanged: (value) =>
-                ref.read(userProvider.notifier).updateSettings(
-                      GUpdateUserVarsBuilder()..airingNotifications = value,
-                    ),
-            title: const Text('Airing Notifications'),
-          ),
-          SwitchListTile.adaptive(
-            value: user.value?.options?.displayAdultContent ?? false,
-            onChanged: (value) =>
-                ref.read(userProvider.notifier).updateSettings(
-                      GUpdateUserVarsBuilder()..displayAdultContent = value,
-                    ),
-            title: const Text('18+ content'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Profile",
+              style: theme.textTheme.titleLarge,
+            ),
           ),
           CheckboxListTile.adaptive(
             value: user.value!.options?.restrictMessagesToFollowing,
@@ -60,6 +51,13 @@ class AnilistSettingsPage extends ConsumerWidget {
                         ..restrictMessagesToFollowing = value,
                     ),
             title: const Text('Allow only users I follow to message me'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Anime & Manga",
+              style: theme.textTheme.titleLarge,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
@@ -170,6 +168,58 @@ class AnilistSettingsPage extends ConsumerWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          SwitchListTile.adaptive(
+            value: user.value!.options?.airingNotifications ?? false,
+            onChanged: (value) =>
+                ref.read(userProvider.notifier).updateSettings(
+                      GUpdateUserVarsBuilder()..airingNotifications = value,
+                    ),
+            title: const Text('Airing Notifications'),
+          ),
+          SwitchListTile.adaptive(
+            value: user.value?.options?.displayAdultContent ?? false,
+            onChanged: (value) =>
+                ref.read(userProvider.notifier).updateSettings(
+                      GUpdateUserVarsBuilder()..displayAdultContent = value,
+                    ),
+            title: const Text('18+ content'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Lists",
+              style: theme.textTheme.titleLarge,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Scoring System',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          SheetDropdownMenu(
+            hint: 'Activity Merge Time',
+            values: [user.value!.mediaListOptions?.scoreFormat],
+            onChanged: (value) =>
+                ref.read(userProvider.notifier).updateSettings(
+                      GUpdateUserVarsBuilder()..scoreFormat = value.first,
+                    ),
+            isMulti: false,
+            items: GScoreFormat.values.map(
+              (e) => DropdownMenuEntry(
+                value: e,
+                label: switch (e) {
+                  GScoreFormat.POINT_3 => '3 point :)',
+                  GScoreFormat.POINT_5 => '5 point (2/5)',
+                  GScoreFormat.POINT_10 => '10 point (6/10)',
+                  GScoreFormat.POINT_10_DECIMAL => '10 point decimal (3.5/10)',
+                  GScoreFormat.POINT_100 => '100 point (37/100)',
+                  _ => e.toString(),
+                },
+              ),
             ),
           ),
         ],

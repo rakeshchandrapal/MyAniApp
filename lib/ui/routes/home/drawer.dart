@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myaniapp/providers/app_info.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/image.dart';
@@ -47,6 +48,18 @@ class HomeDrawer extends ConsumerWidget {
               onTap: () => context.push('/settings'),
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
+            ),
+            ListTile(
+              onTap: () => showAboutDialog(
+                context: context,
+                applicationVersion: ref.read(appInfoProvider).version,
+                applicationIcon: Image.asset(
+                  "assets/web/icon-512.png",
+                  height: 40,
+                ),
+              ),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
             ),
             ListTile(
               onTap: () => showDialog(
