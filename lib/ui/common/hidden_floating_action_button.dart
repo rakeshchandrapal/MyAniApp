@@ -25,7 +25,7 @@ class HiddenFloatingActionButtonState extends State<HiddenFloatingActionButton>
     end: const Offset(0, 3),
   ).animate(CurvedAnimation(
     parent: _controller,
-    curve: Curves.easeOut,
+    curve: Curves.ease,
   ));
 
   @override
@@ -52,9 +52,9 @@ class HiddenFloatingActionButtonState extends State<HiddenFloatingActionButton>
 
   void listener() {
     var direction = scrollController!.position.userScrollDirection;
-    if (direction == ScrollDirection.reverse) {
+    if (_controller.value < 1 && direction == ScrollDirection.reverse) {
       _controller.forward();
-    } else if (direction == ScrollDirection.forward) {
+    } else if (_controller.value > 0 && direction == ScrollDirection.forward) {
       _controller.reverse();
     }
   }

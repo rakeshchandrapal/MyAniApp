@@ -70,29 +70,29 @@ class AnilistSettingsPage extends ConsumerWidget {
                   'Title Language',
                   style: theme.textTheme.titleMedium,
                 ),
-                CustomDropdown(
+                SheetDropdownMenu(
                   hint: 'Title Language',
-                  value: user.value!.options?.titleLanguage,
+                  values: [user.value!.options?.titleLanguage],
                   onChanged: (value) =>
                       ref.read(userProvider.notifier).updateSettings(
-                            GUpdateUserVarsBuilder()..titleLanguage = value,
+                            GUpdateUserVarsBuilder()
+                              ..titleLanguage = value.first,
                           ),
-                  dropdownItems: [
+                  items: [
                     GUserTitleLanguage.ENGLISH,
                     GUserTitleLanguage.ROMAJI,
                     GUserTitleLanguage.NATIVE,
                   ]
                       .map(
-                        (e) => DropdownMenuItem(
+                        (e) => DropdownMenuEntry(
                           value: e,
-                          child: switch (e) {
+                          label: switch (e) {
                             GUserTitleLanguage.ENGLISH =>
-                              const Text('English (Attack on Titan)'),
+                              'English (Attack on Titan)',
                             GUserTitleLanguage.ROMAJI =>
-                              const Text('Romaji (Shingeki no Kyojin)'),
-                            GUserTitleLanguage.NATIVE =>
-                              const Text('Native (進撃の巨人)'),
-                            _ => Text(e.name)
+                              'Romaji (Shingeki no Kyojin)',
+                            GUserTitleLanguage.NATIVE => 'Native (進撃の巨人)',
+                            _ => (e.name)
                           },
                         ),
                       )
@@ -102,26 +102,27 @@ class AnilistSettingsPage extends ConsumerWidget {
                   'Staff & Character Name Language',
                   style: theme.textTheme.titleMedium,
                 ),
-                CustomDropdown(
+                SheetDropdownMenu(
                   hint: 'Staff & Character Name Language',
-                  value: user.value!.options?.staffNameLanguage,
+                  values: [user.value!.options?.staffNameLanguage],
+                  isMulti: false,
                   onChanged: (value) =>
                       ref.read(userProvider.notifier).updateSettings(
-                            GUpdateUserVarsBuilder()..staffNameLanguage = value,
+                            GUpdateUserVarsBuilder()
+                              ..staffNameLanguage = value.first,
                           ),
-                  dropdownItems: GUserStaffNameLanguage.values
+                  items: GUserStaffNameLanguage.values
                       .map(
-                        (e) => DropdownMenuItem(
+                        (e) => DropdownMenuEntry(
                             value: e,
-                            child: switch (e) {
+                            label: switch (e) {
                               GUserStaffNameLanguage.NATIVE =>
-                                const Text('Native (キルア=ゾルディック)'),
+                                'Native (キルア=ゾルディック)',
                               GUserStaffNameLanguage.ROMAJI =>
-                                const Text('Romaji (Zoldyck Killua)'),
+                                'Romaji (Zoldyck Killua)',
                               GUserStaffNameLanguage.ROMAJI_WESTERN =>
-                                const Text(
-                                    'Romaji, Western Order (Killua Zoldyck)'),
-                              _ => Text(e.name.capitalize())
+                                'Romaji, Western Order (Killua Zoldyck)',
+                              _ => e.name.capitalize()
                             }),
                       )
                       .toList(),
@@ -137,36 +138,36 @@ class AnilistSettingsPage extends ConsumerWidget {
                     style: Theme.of(context).primaryTextTheme.bodySmall,
                   ),
                 ),
-                CustomDropdown(
+                SheetDropdownMenu(
                   hint: 'Activity Merge Time',
-                  value: user.value!.options?.activityMergeTime,
+                  values: [user.value!.options?.activityMergeTime],
                   onChanged: (value) =>
                       ref.read(userProvider.notifier).updateSettings(
-                            GUpdateUserVarsBuilder()..activityMergeTime = value,
+                            GUpdateUserVarsBuilder()
+                              ..activityMergeTime = value.first,
                           ),
-                  dropdownItems: mergeTimes
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(switch (e) {
-                            0 => 'Never',
-                            30 => '30 Minutes',
-                            60 => '1 Hour',
-                            120 => '2 Hours',
-                            180 => '3 Hours',
-                            360 => '6 Hours',
-                            720 => '12 Hours',
-                            1440 => '1 Day',
-                            2880 => '2 Days',
-                            4320 => '3 Days',
-                            10080 => '1 Week',
-                            20160 => '2 Weeks',
-                            29160 => 'Always',
-                            _ => e.toString(),
-                          }),
-                        ),
-                      )
-                      .toList(),
+                  isMulti: false,
+                  items: mergeTimes.map(
+                    (e) => DropdownMenuEntry(
+                      value: e,
+                      label: switch (e) {
+                        0 => 'Never',
+                        30 => '30 Minutes',
+                        60 => '1 Hour',
+                        120 => '2 Hours',
+                        180 => '3 Hours',
+                        360 => '6 Hours',
+                        720 => '12 Hours',
+                        1440 => '1 Day',
+                        2880 => '2 Days',
+                        4320 => '3 Days',
+                        10080 => '1 Week',
+                        20160 => '2 Weeks',
+                        29160 => 'Always',
+                        _ => e.toString(),
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),

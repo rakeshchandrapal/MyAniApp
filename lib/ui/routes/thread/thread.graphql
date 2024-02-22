@@ -19,9 +19,11 @@ query Thread($id: Int, $page: Int) {
     repliedAt
     createdAt
   }
-  comments: Page(page: $page, perPage: 15) {
+  comments: Page(page: $page, perPage: 30) {
     pageInfo {
       ...PageInfo
+      total
+      lastPage
     }
     threadComments(threadId: $id) {
       id

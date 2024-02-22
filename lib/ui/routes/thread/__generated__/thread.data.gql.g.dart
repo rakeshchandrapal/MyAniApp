@@ -1107,6 +1107,18 @@ class _$GThreadData_comments_pageInfoSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.total;
+    if (value != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.lastPage;
+    if (value != null) {
+      result
+        ..add('lastPage')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -1133,6 +1145,14 @@ class _$GThreadData_comments_pageInfoSerializer
         case 'hasNextPage':
           result.hasNextPage = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'total':
+          result.total = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'lastPage':
+          result.lastPage = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
           break;
       }
     }
@@ -3781,13 +3801,21 @@ class _$GThreadData_comments_pageInfo extends GThreadData_comments_pageInfo {
   final int? currentPage;
   @override
   final bool? hasNextPage;
+  @override
+  final int? total;
+  @override
+  final int? lastPage;
 
   factory _$GThreadData_comments_pageInfo(
           [void Function(GThreadData_comments_pageInfoBuilder)? updates]) =>
       (new GThreadData_comments_pageInfoBuilder()..update(updates))._build();
 
   _$GThreadData_comments_pageInfo._(
-      {required this.G__typename, this.currentPage, this.hasNextPage})
+      {required this.G__typename,
+      this.currentPage,
+      this.hasNextPage,
+      this.total,
+      this.lastPage})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GThreadData_comments_pageInfo', 'G__typename');
@@ -3808,7 +3836,9 @@ class _$GThreadData_comments_pageInfo extends GThreadData_comments_pageInfo {
     return other is GThreadData_comments_pageInfo &&
         G__typename == other.G__typename &&
         currentPage == other.currentPage &&
-        hasNextPage == other.hasNextPage;
+        hasNextPage == other.hasNextPage &&
+        total == other.total &&
+        lastPage == other.lastPage;
   }
 
   @override
@@ -3817,6 +3847,8 @@ class _$GThreadData_comments_pageInfo extends GThreadData_comments_pageInfo {
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, currentPage.hashCode);
     _$hash = $jc(_$hash, hasNextPage.hashCode);
+    _$hash = $jc(_$hash, total.hashCode);
+    _$hash = $jc(_$hash, lastPage.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -3826,7 +3858,9 @@ class _$GThreadData_comments_pageInfo extends GThreadData_comments_pageInfo {
     return (newBuiltValueToStringHelper(r'GThreadData_comments_pageInfo')
           ..add('G__typename', G__typename)
           ..add('currentPage', currentPage)
-          ..add('hasNextPage', hasNextPage))
+          ..add('hasNextPage', hasNextPage)
+          ..add('total', total)
+          ..add('lastPage', lastPage))
         .toString();
   }
 }
@@ -3849,6 +3883,14 @@ class GThreadData_comments_pageInfoBuilder
   bool? get hasNextPage => _$this._hasNextPage;
   set hasNextPage(bool? hasNextPage) => _$this._hasNextPage = hasNextPage;
 
+  int? _total;
+  int? get total => _$this._total;
+  set total(int? total) => _$this._total = total;
+
+  int? _lastPage;
+  int? get lastPage => _$this._lastPage;
+  set lastPage(int? lastPage) => _$this._lastPage = lastPage;
+
   GThreadData_comments_pageInfoBuilder() {
     GThreadData_comments_pageInfo._initializeBuilder(this);
   }
@@ -3859,6 +3901,8 @@ class GThreadData_comments_pageInfoBuilder
       _G__typename = $v.G__typename;
       _currentPage = $v.currentPage;
       _hasNextPage = $v.hasNextPage;
+      _total = $v.total;
+      _lastPage = $v.lastPage;
       _$v = null;
     }
     return this;
@@ -3884,7 +3928,9 @@ class GThreadData_comments_pageInfoBuilder
             G__typename: BuiltValueNullFieldError.checkNotNull(
                 G__typename, r'GThreadData_comments_pageInfo', 'G__typename'),
             currentPage: currentPage,
-            hasNextPage: hasNextPage);
+            hasNextPage: hasNextPage,
+            total: total,
+            lastPage: lastPage);
     replace(_$result);
     return _$result;
   }

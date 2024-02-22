@@ -16,6 +16,7 @@ class GraphqlError extends StatelessWidget {
           .parsedResponse
           ?.response['errors']
           ?.first);
+      logger.e(exception.$1);
 
       // logger.e(exception);
     }

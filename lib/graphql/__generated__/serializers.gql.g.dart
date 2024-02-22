@@ -1426,11 +1426,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GStaffData_Staff_staffMedia_edges?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType.nullable(GThreadCommentData_ThreadComment)
-          ]),
-          () => new ListBuilder<GThreadCommentData_ThreadComment?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
             const FullType.nullable(GThreadData_comments_threadComments)
           ]),
           () => new ListBuilder<GThreadData_comments_threadComments?>())

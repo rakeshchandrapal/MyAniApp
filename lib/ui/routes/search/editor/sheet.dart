@@ -2,7 +2,6 @@ import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:multi_dropdown/models/value_item.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
@@ -95,8 +94,7 @@ class _EditorSheetState extends ConsumerState<EditorSheet> {
                   ),
                   FormatButton(
                     format: temp.format,
-                    // setState wont be called because the dropdown menu has it own state
-                    onChanged: (format) => temp.format = format,
+                    onChanged: (format) => setState(() => temp.format = format),
                   ),
                   SortButton(
                     sort: temp.sort,
@@ -179,20 +177,19 @@ class TypeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown(
+    return SheetDropdownMenu(
       hint: 'Type',
-      value: type,
+      values: [type],
       onClear: () => onChanged(null),
-      dropdownItems: GMediaType.values
+      items: GMediaType.values
           .take(2)
-          .map((e) => DropdownMenuItem(
+          .map((e) => DropdownMenuEntry(
                 value: e,
-                child: Text(
-                  e.name.capitalize(),
-                ),
+                label: e.name.capitalize(),
               ))
           .toList(),
-      onChanged: onChanged,
+      isMulti: false,
+      onChanged: (v) => onChanged(v.first),
     );
   }
 }
@@ -205,20 +202,19 @@ class SeasonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown(
+    return SheetDropdownMenu(
       hint: 'Season',
-      value: season,
+      values: [season],
       onClear: () => onChanged(null),
-      dropdownItems: GMediaSeason.values
+      items: GMediaSeason.values
           .take(4)
-          .map((e) => DropdownMenuItem(
+          .map((e) => DropdownMenuEntry(
                 value: e,
-                child: Text(
-                  e.name.capitalize(),
-                ),
+                label: e.name.capitalize(),
               ))
           .toList(),
-      onChanged: onChanged,
+      isMulti: false,
+      onChanged: (v) => onChanged(v.first),
     );
   }
 }
@@ -236,15 +232,16 @@ class YearButton extends StatelessWidget {
       (index) => 1940 + index,
     );
 
-    return CustomDropdown(
+    return SheetDropdownMenu(
       hint: 'Year',
-      value: year,
+      values: [year],
       onClear: () => onChanged(null),
-      dropdownItems: [
+      items: [
         for (var year in years.reversed)
-          DropdownMenuItem(value: year, child: Text(year.toString())),
+          DropdownMenuEntry(value: year, label: year.toString()),
       ],
-      onChanged: onChanged,
+      isMulti: false,
+      onChanged: (v) => onChanged(v.first),
     );
   }
 }
@@ -257,14 +254,12 @@ class FormatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiDropdown(
+    return SheetDropdownMenu<GMediaFormat>(
       hint: 'Format',
-      selectedItems: format
-          ?.map((e) => ValueItem(label: e.name.capitalize(), value: e))
-          .toList(),
-      onSelected: (values) => onChanged(values.map((e) => e.value!).toList()),
+      values: format ?? [],
+      onChanged: (values) => onChanged(values.toList()),
       items: GMediaFormat.values
-          .map((e) => ValueItem(label: e.name.capitalize(), value: e))
+          .map((e) => DropdownMenuEntry(label: e.name.capitalize(), value: e))
           .toList(),
     );
   }
@@ -278,15 +273,13 @@ class SortButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiDropdown(
+    return SheetDropdownMenu<GMediaSort>(
       hint: 'Sort',
-      selectedItems: sort
-          ?.map((e) => ValueItem(label: e.name.capitalize(), value: e))
-          .toList(),
-      onSelected: (values) => onChanged(values.map((e) => e.value!).toList()),
+      values: sort ?? [],
+      onChanged: (values) => onChanged(values.toList()),
+      onClear: () => onChanged(null),
       items: GMediaSort.values
-          .map((e) => ValueItem(label: e.name.capitalize(), value: e))
-          .toList(),
+          .map((e) => DropdownMenuEntry(label: e.name.capitalize(), value: e)),
     );
   }
 }
@@ -303,16 +296,13 @@ class GenresButton extends StatelessWidget {
       operationRequest:
           GGenreCollectionReq((b) => b..fetchPolicy = FetchPolicy.CacheFirst),
       builder: (context, response, error, refetch) {
-        return MultiDropdown(
+        return SheetDropdownMenu<String>(
           hint: 'Genres',
           items: response!.data!.genres!
-              .map((e) => ValueItem(label: e!, value: e))
-              .toList(),
-          selectedItems: genres
-              ?.map((e) => ValueItem(label: e.capitalize(), value: e))
-              .toList(),
-          onSelected: (values) =>
-              onChanged(values.map((e) => e.value!).toList()),
+              .map((e) => DropdownMenuEntry(label: e!, value: e)),
+          values: genres ?? [],
+          onChanged: (values) => onChanged(values.toList()),
+          onClear: () => onChanged(null),
         );
       },
     );

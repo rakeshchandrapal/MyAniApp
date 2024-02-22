@@ -25,84 +25,76 @@ class AppSettingsPage extends ConsumerWidget {
             const Text(
               'Theme',
             ),
-            CustomDropdown(
+            SheetDropdownMenu(
               hint: 'Theme',
-              value: settings.theme,
-              onChanged: (value) => ref
-                  .read(settingsProvider.notifier)
-                  .changeTheme(value ?? settings.theme),
-              dropdownItems: ThemeMode.values
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: Text(e.name.capitalize()),
-                    ),
-                  )
-                  .toList(),
+              values: [settings.theme],
+              onChanged: (value) =>
+                  ref.read(settingsProvider.notifier).changeTheme(value.first),
+              isMulti: false,
+              items: ThemeMode.values.map(
+                (e) => DropdownMenuEntry(
+                  value: e,
+                  label: e.name.capitalize(),
+                ),
+              ),
             ),
             const Text('Anime List Style'),
-            CustomDropdown(
+            SheetDropdownMenu(
               hint: 'List Style',
-              value: settings.animeList,
+              values: [settings.animeList],
+              isMulti: false,
               onChanged: (value) => ref
                   .read(settingsProvider.notifier)
-                  .changeListStyle(
-                      Setting.animeList, value ?? settings.animeList),
-              dropdownItems: ListStyle.values
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: switch (e) {
-                        ListStyle.grid => Text(e.name.capitalize()),
-                        ListStyle.detailedList => const Text('Detailed List'),
-                        ListStyle.simpleList => const Text('Simple List')
-                      },
-                    ),
-                  )
-                  .toList(),
+                  .changeListStyle(Setting.animeList, value.first),
+              items: ListStyle.values.map(
+                (e) => DropdownMenuEntry(
+                  value: e,
+                  label: switch (e) {
+                    ListStyle.grid => e.name.capitalize(),
+                    ListStyle.detailedList => 'Detailed List',
+                    ListStyle.simpleList => 'Simple List'
+                  },
+                ),
+              ),
             ),
             const Text('Manga List Style'),
-            CustomDropdown(
+            SheetDropdownMenu(
               hint: 'List Style',
-              value: settings.mangaList,
+              isMulti: false,
+              values: [settings.mangaList],
               onChanged: (value) => ref
                   .read(settingsProvider.notifier)
-                  .changeListStyle(
-                      Setting.mangaList, value ?? settings.mangaList),
-              dropdownItems: ListStyle.values
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: switch (e) {
-                        ListStyle.grid => Text(e.name.capitalize()),
-                        ListStyle.detailedList => const Text('Detailed List'),
-                        ListStyle.simpleList => const Text('Simple List')
-                      },
-                    ),
-                  )
-                  .toList(),
+                  .changeListStyle(Setting.mangaList, value.first),
+              items: ListStyle.values.map(
+                (e) => DropdownMenuEntry(
+                  value: e,
+                  label: switch (e) {
+                    ListStyle.grid => e.name.capitalize(),
+                    ListStyle.detailedList => 'Detailed List',
+                    ListStyle.simpleList => 'Simple List'
+                  },
+                ),
+              ),
             ),
             const Text(
                 'Fallback List Style (where anime and manga list aren\'t applicable)'),
-            CustomDropdown(
+            SheetDropdownMenu(
               hint: 'List Style',
-              value: settings.fallbackList,
+              isMulti: false,
+              values: [settings.fallbackList],
               onChanged: (value) => ref
                   .read(settingsProvider.notifier)
-                  .changeListStyle(
-                      Setting.fallbackList, value ?? settings.fallbackList),
-              dropdownItems: ListStyle.values
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: switch (e) {
-                        ListStyle.grid => Text(e.name.capitalize()),
-                        ListStyle.detailedList => const Text('Detailed List'),
-                        ListStyle.simpleList => const Text('Simple List')
-                      },
-                    ),
-                  )
-                  .toList(),
+                  .changeListStyle(Setting.fallbackList, value.first),
+              items: ListStyle.values.map(
+                (e) => DropdownMenuEntry(
+                  value: e,
+                  label: switch (e) {
+                    ListStyle.grid => e.name.capitalize(),
+                    ListStyle.detailedList => 'Detailed List',
+                    ListStyle.simpleList => 'Simple List'
+                  },
+                ),
+              ),
             ),
           ],
         ),

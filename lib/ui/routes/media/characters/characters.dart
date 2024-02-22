@@ -113,16 +113,17 @@ class _CharactersState extends State<Characters> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: CustomDropdown(
+              child: SheetDropdownMenu(
                 hint: 'Language',
-                value: selectedLanguage,
+                values: [selectedLanguage],
+                isMulti: false,
                 onChanged: (value) =>
-                    setState(() => selectedLanguage = value ?? 'Japanese'),
-                dropdownItems: availableLanguages
+                    setState(() => selectedLanguage = value.first),
+                items: availableLanguages
                     .map(
-                      (e) => DropdownMenuItem(
+                      (e) => DropdownMenuEntry(
                         value: e,
-                        child: Text(e),
+                        label: e,
                       ),
                     )
                     .toList(),

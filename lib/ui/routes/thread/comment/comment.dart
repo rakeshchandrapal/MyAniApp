@@ -77,8 +77,6 @@ class _ThreadComment extends ConsumerWidget {
 
     List<GThreadCommentData_ThreadComment> replies = [];
 
-    // print(comment.childComments);
-
     try {
       if (comment.childComments != null) {
         for (var reply in comment.childComments!.asList) {

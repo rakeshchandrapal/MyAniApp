@@ -98,8 +98,12 @@ class _StaffViewState extends State<StaffView> {
             controller: scrollController,
             slivers: [
               SliverAppBar(
+                leading: const SafeArea(
+                  child: BackButton(),
+                ),
                 expandedHeight: 210,
                 pinned: true,
+                primary: false,
                 actions: [
                   if (hasTabs(widget.staff))
                     ElevatedButton(

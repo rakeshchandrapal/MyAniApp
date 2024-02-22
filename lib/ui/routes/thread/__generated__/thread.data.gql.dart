@@ -486,6 +486,8 @@ abstract class GThreadData_comments_pageInfo
   int? get currentPage;
   @override
   bool? get hasNextPage;
+  int? get total;
+  int? get lastPage;
   static Serializer<GThreadData_comments_pageInfo> get serializer =>
       _$gThreadDataCommentsPageInfoSerializer;
 

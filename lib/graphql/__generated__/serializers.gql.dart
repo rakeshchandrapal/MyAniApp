@@ -229,10 +229,15 @@ import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.var.gql
     show GReleasingMediaVars;
 import 'package:myaniapp/graphql/fragments/__generated__/review.data.gql.dart'
     show
+        GReviewData,
         GReviewData_media,
         GReviewData_media_title,
         GReviewData_user,
         GReviewData_user_avatar;
+import 'package:myaniapp/graphql/fragments/__generated__/review.req.gql.dart'
+    show GReviewReq;
+import 'package:myaniapp/graphql/fragments/__generated__/review.var.gql.dart'
+    show GReviewVars;
 import 'package:myaniapp/graphql/fragments/__generated__/text_activity.data.gql.dart'
     show
         GTextActivityData,
@@ -258,7 +263,14 @@ import 'package:myaniapp/graphql/fragments/__generated__/thread.req.gql.dart'
 import 'package:myaniapp/graphql/fragments/__generated__/thread.var.gql.dart'
     show GThreadFragmentVars;
 import 'package:myaniapp/graphql/fragments/__generated__/thread_comment.data.gql.dart'
-    show GThreadCommentData_user, GThreadCommentData_user_avatar;
+    show
+        GThreadCommentData,
+        GThreadCommentData_user,
+        GThreadCommentData_user_avatar;
+import 'package:myaniapp/graphql/fragments/__generated__/thread_comment.req.gql.dart'
+    show GThreadCommentReq;
+import 'package:myaniapp/graphql/fragments/__generated__/thread_comment.var.gql.dart'
+    show GThreadCommentVars;
 import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
     show GUserFragmentData, GUserFragmentData_avatar;
 import 'package:myaniapp/graphql/fragments/__generated__/user.req.gql.dart'
@@ -750,16 +762,15 @@ import 'package:myaniapp/ui/routes/review/__generated__/review.data.gql.dart'
     show
         GRateReviewData,
         GRateReviewData_RateReview,
-        GReviewData,
         GReviewData_Review,
         GReviewData_Review_media,
         GReviewData_Review_media_title,
         GReviewData_Review_user,
         GReviewData_Review_user_avatar;
 import 'package:myaniapp/ui/routes/review/__generated__/review.req.gql.dart'
-    show GRateReviewReq, GReviewReq;
+    show GRateReviewReq;
 import 'package:myaniapp/ui/routes/review/__generated__/review.var.gql.dart'
-    show GRateReviewVars, GReviewVars;
+    show GRateReviewVars;
 import 'package:myaniapp/ui/routes/search/__generated__/search.data.gql.dart'
     show
         GGenreCollectionData,
@@ -841,14 +852,9 @@ import 'package:myaniapp/ui/routes/thread/__generated__/thread.var.gql.dart'
         GToggleThreadSubscriptionVars;
 import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.data.gql.dart'
     show
-        GThreadCommentData,
         GThreadCommentData_ThreadComment,
         GThreadCommentData_ThreadComment_user,
         GThreadCommentData_ThreadComment_user_avatar;
-import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.req.gql.dart'
-    show GThreadCommentReq;
-import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.var.gql.dart'
-    show GThreadCommentVars;
 import 'package:myaniapp/ui/routes/user/__generated__/user.data.gql.dart'
     show
         GGenreStatData,

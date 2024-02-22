@@ -8,6 +8,7 @@ import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/ui/common/cards/sheet_card.dart';
 import 'package:myaniapp/ui/common/comment/comment.dart';
 import 'package:myaniapp/ui/common/comment/like.dart';
+import 'package:myaniapp/ui/common/custom_dropdown.dart';
 import 'package:myaniapp/ui/common/dialogs/delete.dart';
 import 'package:myaniapp/ui/common/graphql_error.dart';
 import 'package:myaniapp/ui/common/hidden_floating_action_button.dart';
@@ -54,28 +55,61 @@ class ThreadPage extends ConsumerWidget {
         ),
         floatingActionButton: HiddenFloatingActionButton(
           scrollController: _controller,
-          child: FloatingActionButton(
-            onPressed: requireLogin(
-              ref,
-              'reply',
-              () => showMarkdownEditor(
-                context,
-                onSave: (text) {
-                  if (text.length > 2) {
-                    ref
-                        .read(ferryClientProvider)
-                        .request(GSaveCommentReq(
-                          (b) => b
-                            ..vars.comment = text
-                            ..vars.threadId = response.data!.thread!.id,
-                        ))
-                        .first
-                        .then((value) => refetch());
-                  }
-                },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  color: Theme.of(context).colorScheme.background,
+                ),
+                // height: 90,
+                padding: const EdgeInsets.only(top: 10),
+                child: SheetDropdownMenu(
+                  values: [response.data!.comments!.pageInfo!.currentPage ?? 1],
+                  items: List.generate(
+                    response.data!.comments!.pageInfo!.lastPage ?? 1,
+                    (index) => DropdownMenuEntry(
+                      value: index + 1,
+                      label: (index + 1).toString(),
+                    ),
+                  ),
+                  isMulti: false,
+                  label: "Page",
+                  onChanged: (values) => ref
+                      .read(ferryClientProvider)
+                      .requestController
+                      .add((response.operationRequest as GThreadReq)
+                          .rebuild((p0) => p0
+                            ..vars.page = values.first
+                            ..updateResult = (p0, p1) => p1)),
+                ),
               ),
-            ),
-            child: const Icon(Icons.reply),
+              FloatingActionButton(
+                onPressed: requireLogin(
+                  ref,
+                  'reply',
+                  () => showMarkdownEditor(
+                    context,
+                    onSave: (text) {
+                      if (text.length > 2) {
+                        ref
+                            .read(ferryClientProvider)
+                            .request(GSaveCommentReq(
+                              (b) => b
+                                ..vars.comment = text
+                                ..vars.threadId = response.data!.thread!.id,
+                            ))
+                            .first
+                            .then((value) => refetch());
+                      }
+                    },
+                  ),
+                ),
+                child: const Icon(Icons.reply),
+              ),
+            ],
           ),
         ),
         body: GraphqlPagination(
@@ -85,21 +119,6 @@ class ThreadPage extends ConsumerWidget {
                 ..updateResult = (prev, result) => result!.rebuild((p0) => p0
                     .comments.threadComments
                     .insertAll(0, prev?.comments?.threadComments ?? []))),
-          // fetchMore: (nextPage) => fetchMore!(
-          //   FetchMoreOptions$Query$Thread(
-          //     updateQuery: !(previousresponseDdata,! fetchMoreresponseDdata) {
-          //       var list = [
-          //         ..!.previousresponseDdata!['comments']['threadComments'],
-          //         ..!.fetchMoreresponseDdata!['comments']['threadComments']
-          //       ];
-
-          //      ! fetchMoreresponseDdata['comments']['threadComments'] = list;
-
-          //       return! fetchMoreresponseDdata;
-          //     },
-          //     variables: Variables$Query$Thread(page: nextPage),
-          //   ),
-          // ),
           pageInfo: response.data!.comments!.pageInfo!,
           child: CustomScrollView(
             controller: _controller,
@@ -162,8 +181,7 @@ class ThreadPage extends ConsumerWidget {
                                               .data!.thread!.isSubscribed ??
                                           false),
                                   ))
-                                  .first
-                                  .then((value) => print(value.data)),
+                                  .first,
                             ),
                             icon: Icon(
                               response.data!.thread!.isSubscribed == true

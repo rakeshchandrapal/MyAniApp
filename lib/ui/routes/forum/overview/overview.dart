@@ -39,33 +39,34 @@ class _ForumOverviewPageState extends State<ForumOverviewPage> {
         actions: [
           SizedBox(
             width: 200,
-            child: CustomDropdown(
+            child: SheetDropdownMenu(
               hint: "filter",
-              dropdownItems: const [
-                DropdownMenuItem(
+              items: const [
+                DropdownMenuEntry(
                   value: ForumFilter.overview,
-                  child: Text('Overview'),
+                  label: 'Overview',
                 ),
-                DropdownMenuItem(
+                DropdownMenuEntry(
                   value: ForumFilter.recent,
-                  child: Text('Recent'),
+                  label: 'Recent',
                 ),
-                DropdownMenuItem(
+                DropdownMenuEntry(
                   value: ForumFilter.$new,
-                  child: Text('New'),
+                  label: 'New',
                 ),
-                DropdownMenuItem(
+                DropdownMenuEntry(
                   value: ForumFilter.subscribed,
-                  child: Text('Subscribed'),
+                  label: 'Subscribed',
                 ),
-                DropdownMenuItem(
+                DropdownMenuEntry(
                   value: ForumFilter.search,
-                  child: Text('Search'),
+                  label: 'Search',
                 ),
               ],
               onChanged: (v) => context.replace(
-                  '/forum/${(v ?? ForumFilter.overview).name}?category=${widget.category}'),
-              value: inEnum,
+                  '/forum/${v.first.name}?category=${widget.category}'),
+              values: [inEnum],
+              isMulti: false,
             ),
           ),
         ],

@@ -162,7 +162,7 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
           IconButton(
             padding: const EdgeInsets.all(16),
             onPressed: () {
-              if (options != og) {
+              if (options.build() != og) {
                 ref
                     .read(mediaEditorProvider(widget.media).notifier)
                     .save(options)
@@ -186,16 +186,17 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
             crossAxisSpacing: 10,
             childrenDelegate: SliverChildListDelegate(
               [
-                CustomDropdown(
+                SheetDropdownMenu(
                   hint: 'Status',
-                  value: options.status,
+                  values: [options.status],
+                  isMulti: false,
                   onChanged: (value) => setState(
-                      () => options.update((p0) => p0..status = value)),
-                  dropdownItems: GMediaListStatus.values
+                      () => options.update((p0) => p0..status = value.first)),
+                  items: GMediaListStatus.values
                       .map(
-                        (e) => DropdownMenuItem(
+                        (e) => DropdownMenuEntry(
                           value: e,
-                          child: Text(e.name.capitalize()),
+                          label: e.name.capitalize(),
                         ),
                       )
                       .toList(),
@@ -277,15 +278,6 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
               ],
             ),
           ),
-          RadioListTile.adaptive(
-            value: true,
-            groupValue: options.private,
-            toggleable: true,
-            controlAffinity: ListTileControlAffinity.trailing,
-            title: const Text('Private'),
-            onChanged: (value) =>
-                setState(() => options.update((p0) => p0..private = value)),
-          ),
           _MediaListDate(
             start: true,
             date: options.startedAt.toDateString(),
@@ -302,6 +294,15 @@ class _MediaEditorState extends ConsumerState<MediaEditor> {
             onTap: _showCompletedDate,
             onClear: () =>
                 setState(() => options.update((p0) => p0..completedAt = null)),
+          ),
+          RadioListTile.adaptive(
+            value: true,
+            groupValue: options.private,
+            toggleable: true,
+            controlAffinity: ListTileControlAffinity.trailing,
+            title: const Text('Private'),
+            onChanged: (value) =>
+                setState(() => options.update((p0) => p0..private = value)),
           ),
           if (widget.entry.customLists?.asList.isNotEmpty == true) ...[
             Text(

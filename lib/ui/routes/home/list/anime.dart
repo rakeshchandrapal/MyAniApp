@@ -42,8 +42,7 @@ class HomeAnimePage extends ConsumerWidget {
         ..vars.type = GMediaType.ANIME
         ..vars.userName = user.value!.name),
       builder: (context, response, error, refetch) {
-        print(response!.linkException);
-        var lists = response.data!.MediaListCollection!.lists!;
+        var lists = response!.data!.MediaListCollection!.lists!;
 
         if (lists.isEmpty) {
           return RefreshIndicator.adaptive(

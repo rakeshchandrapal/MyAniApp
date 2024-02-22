@@ -75,11 +75,12 @@ class _CharacterPageState extends State<CharacterPage> {
               controller: scrollController,
               slivers: [
                 SliverAppBar(
-                  leading: const BackButton(
-                      // onPressed: () => context.push('/character/13021'),
-                      ),
+                  leading: const SafeArea(
+                    child: BackButton(),
+                  ),
                   expandedHeight: 210,
                   pinned: true,
+                  primary: false,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Stack(
                       children: [

@@ -155,7 +155,7 @@ const Thread = _i1.OperationDefinitionNode(
         ),
         _i1.ArgumentNode(
           name: _i1.NameNode(value: 'perPage'),
-          value: _i1.IntValueNode(value: '15'),
+          value: _i1.IntValueNode(value: '30'),
         ),
       ],
       directives: [],
@@ -169,7 +169,21 @@ const Thread = _i1.OperationDefinitionNode(
             _i1.FragmentSpreadNode(
               name: _i1.NameNode(value: 'PageInfo'),
               directives: [],
-            )
+            ),
+            _i1.FieldNode(
+              name: _i1.NameNode(value: 'total'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            _i1.FieldNode(
+              name: _i1.NameNode(value: 'lastPage'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
           ]),
         ),
         _i1.FieldNode(
