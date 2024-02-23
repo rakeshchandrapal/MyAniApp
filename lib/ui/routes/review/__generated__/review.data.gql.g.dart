@@ -9,16 +9,16 @@ part of 'review.data.gql.dart';
 Serializer<GReviewData> _$gReviewDataSerializer = new _$GReviewDataSerializer();
 Serializer<GReviewData_Review> _$gReviewDataReviewSerializer =
     new _$GReviewData_ReviewSerializer();
-Serializer<GReviewData_Review_user> _$gReviewDataReviewUserSerializer =
-    new _$GReviewData_Review_userSerializer();
-Serializer<GReviewData_Review_user_avatar>
-    _$gReviewDataReviewUserAvatarSerializer =
-    new _$GReviewData_Review_user_avatarSerializer();
 Serializer<GReviewData_Review_media> _$gReviewDataReviewMediaSerializer =
     new _$GReviewData_Review_mediaSerializer();
 Serializer<GReviewData_Review_media_title>
     _$gReviewDataReviewMediaTitleSerializer =
     new _$GReviewData_Review_media_titleSerializer();
+Serializer<GReviewData_Review_user> _$gReviewDataReviewUserSerializer =
+    new _$GReviewData_Review_userSerializer();
+Serializer<GReviewData_Review_user_avatar>
+    _$gReviewDataReviewUserAvatarSerializer =
+    new _$GReviewData_Review_user_avatarSerializer();
 Serializer<GRateReviewData> _$gRateReviewDataSerializer =
     new _$GRateReviewDataSerializer();
 Serializer<GRateReviewData_RateReview> _$gRateReviewDataRateReviewSerializer =
@@ -98,13 +98,6 @@ class _$GReviewData_ReviewSerializer
           specifiedType: const FullType(int)),
     ];
     Object? value;
-    value = object.body;
-    if (value != null) {
-      result
-        ..add('body')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.rating;
     if (value != null) {
       result
@@ -117,18 +110,19 @@ class _$GReviewData_ReviewSerializer
         ..add('ratingAmount')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.userRating;
+    value = object.summary;
     if (value != null) {
       result
-        ..add('userRating')
+        ..add('summary')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(_i2.GReviewRating)));
+            specifiedType: const FullType(String)));
     }
-    value = object.score;
+    value = object.media;
     if (value != null) {
       result
-        ..add('score')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add('media')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(GReviewData_Review_media)));
     }
     value = object.user;
     if (value != null) {
@@ -137,12 +131,25 @@ class _$GReviewData_ReviewSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(GReviewData_Review_user)));
     }
-    value = object.media;
+    value = object.body;
     if (value != null) {
       result
-        ..add('media')
+        ..add('body')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GReviewData_Review_media)));
+            specifiedType: const FullType(String)));
+    }
+    value = object.userRating;
+    if (value != null) {
+      result
+        ..add('userRating')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(_i3.GReviewRating)));
+    }
+    value = object.score;
+    if (value != null) {
+      result
+        ..add('score')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     return result;
   }
@@ -167,10 +174,6 @@ class _$GReviewData_ReviewSerializer
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'body':
-          result.body = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'rating':
           result.rating = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
@@ -179,10 +182,28 @@ class _$GReviewData_ReviewSerializer
           result.ratingAmount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'summary':
+          result.summary = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'media':
+          result.media.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(GReviewData_Review_media))!
+              as GReviewData_Review_media);
+          break;
+        case 'user':
+          result.user.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(GReviewData_Review_user))!
+              as GReviewData_Review_user);
+          break;
+        case 'body':
+          result.body = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'userRating':
           result.userRating = serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GReviewRating))
-              as _i2.GReviewRating?;
+                  specifiedType: const FullType(_i3.GReviewRating))
+              as _i3.GReviewRating?;
           break;
         case 'score':
           result.score = serializers.deserialize(value,
@@ -192,15 +213,149 @@ class _$GReviewData_ReviewSerializer
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
           break;
-        case 'user':
-          result.user.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GReviewData_Review_user))!
-              as GReviewData_Review_user);
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GReviewData_Review_mediaSerializer
+    implements StructuredSerializer<GReviewData_Review_media> {
+  @override
+  final Iterable<Type> types = const [
+    GReviewData_Review_media,
+    _$GReviewData_Review_media
+  ];
+  @override
+  final String wireName = 'GReviewData_Review_media';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GReviewData_Review_media object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+    ];
+    Object? value;
+    value = object.title;
+    if (value != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(GReviewData_Review_media_title)));
+    }
+    value = object.type;
+    if (value != null) {
+      result
+        ..add('type')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(_i3.GMediaType)));
+    }
+    value = object.bannerImage;
+    if (value != null) {
+      result
+        ..add('bannerImage')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GReviewData_Review_media deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GReviewData_Review_mediaBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
           break;
-        case 'media':
-          result.media.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GReviewData_Review_media))!
-              as GReviewData_Review_media);
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'title':
+          result.title.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(GReviewData_Review_media_title))!
+              as GReviewData_Review_media_title);
+          break;
+        case 'type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(_i3.GMediaType)) as _i3.GMediaType?;
+          break;
+        case 'bannerImage':
+          result.bannerImage = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GReviewData_Review_media_titleSerializer
+    implements StructuredSerializer<GReviewData_Review_media_title> {
+  @override
+  final Iterable<Type> types = const [
+    GReviewData_Review_media_title,
+    _$GReviewData_Review_media_title
+  ];
+  @override
+  final String wireName = 'GReviewData_Review_media_title';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GReviewData_Review_media_title object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.userPreferred;
+    if (value != null) {
+      result
+        ..add('userPreferred')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GReviewData_Review_media_title deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GReviewData_Review_media_titleBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'userPreferred':
+          result.userPreferred = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -252,7 +407,7 @@ class _$GReviewData_Review_userSerializer
         ..add('moderatorRoles')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                BuiltList, const [const FullType.nullable(_i2.GModRole)])));
+                BuiltList, const [const FullType.nullable(_i3.GModRole)])));
     }
     value = object.avatar;
     if (value != null) {
@@ -299,7 +454,7 @@ class _$GReviewData_Review_userSerializer
         case 'moderatorRoles':
           result.moderatorRoles.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType.nullable(_i2.GModRole)
+                const FullType.nullable(_i3.GModRole)
               ]))! as BuiltList<Object?>);
           break;
         case 'avatar':
@@ -363,139 +518,6 @@ class _$GReviewData_Review_user_avatarSerializer
           break;
         case 'large':
           result.large = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$GReviewData_Review_mediaSerializer
-    implements StructuredSerializer<GReviewData_Review_media> {
-  @override
-  final Iterable<Type> types = const [
-    GReviewData_Review_media,
-    _$GReviewData_Review_media
-  ];
-  @override
-  final String wireName = 'GReviewData_Review_media';
-
-  @override
-  Iterable<Object?> serialize(
-      Serializers serializers, GReviewData_Review_media object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      '__typename',
-      serializers.serialize(object.G__typename,
-          specifiedType: const FullType(String)),
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
-    ];
-    Object? value;
-    value = object.bannerImage;
-    if (value != null) {
-      result
-        ..add('bannerImage')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.title;
-    if (value != null) {
-      result
-        ..add('title')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(GReviewData_Review_media_title)));
-    }
-    return result;
-  }
-
-  @override
-  GReviewData_Review_media deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewData_Review_mediaBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case '__typename':
-          result.G__typename = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
-        case 'id':
-          result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int))! as int;
-          break;
-        case 'bannerImage':
-          result.bannerImage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'title':
-          result.title.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(GReviewData_Review_media_title))!
-              as GReviewData_Review_media_title);
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
-class _$GReviewData_Review_media_titleSerializer
-    implements StructuredSerializer<GReviewData_Review_media_title> {
-  @override
-  final Iterable<Type> types = const [
-    GReviewData_Review_media_title,
-    _$GReviewData_Review_media_title
-  ];
-  @override
-  final String wireName = 'GReviewData_Review_media_title';
-
-  @override
-  Iterable<Object?> serialize(
-      Serializers serializers, GReviewData_Review_media_title object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      '__typename',
-      serializers.serialize(object.G__typename,
-          specifiedType: const FullType(String)),
-    ];
-    Object? value;
-    value = object.userPreferred;
-    if (value != null) {
-      result
-        ..add('userPreferred')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    return result;
-  }
-
-  @override
-  GReviewData_Review_media_title deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewData_Review_media_titleBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case '__typename':
-          result.G__typename = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
-        case 'userPreferred':
-          result.userPreferred = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
       }
@@ -598,7 +620,7 @@ class _$GRateReviewData_RateReviewSerializer
       result
         ..add('userRating')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(_i2.GReviewRating)));
+            specifiedType: const FullType(_i3.GReviewRating)));
     }
     return result;
   }
@@ -633,8 +655,8 @@ class _$GRateReviewData_RateReviewSerializer
           break;
         case 'userRating':
           result.userRating = serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GReviewRating))
-              as _i2.GReviewRating?;
+                  specifiedType: const FullType(_i3.GReviewRating))
+              as _i3.GReviewRating?;
           break;
       }
     }
@@ -760,21 +782,23 @@ class _$GReviewData_Review extends GReviewData_Review {
   @override
   final int id;
   @override
-  final String? body;
-  @override
   final int? rating;
   @override
   final int? ratingAmount;
   @override
-  final _i2.GReviewRating? userRating;
+  final String? summary;
+  @override
+  final GReviewData_Review_media? media;
+  @override
+  final GReviewData_Review_user? user;
+  @override
+  final String? body;
+  @override
+  final _i3.GReviewRating? userRating;
   @override
   final int? score;
   @override
   final int createdAt;
-  @override
-  final GReviewData_Review_user? user;
-  @override
-  final GReviewData_Review_media? media;
 
   factory _$GReviewData_Review(
           [void Function(GReviewData_ReviewBuilder)? updates]) =>
@@ -783,14 +807,15 @@ class _$GReviewData_Review extends GReviewData_Review {
   _$GReviewData_Review._(
       {required this.G__typename,
       required this.id,
-      this.body,
       this.rating,
       this.ratingAmount,
+      this.summary,
+      this.media,
+      this.user,
+      this.body,
       this.userRating,
       this.score,
-      required this.createdAt,
-      this.user,
-      this.media})
+      required this.createdAt})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GReviewData_Review', 'G__typename');
@@ -814,14 +839,15 @@ class _$GReviewData_Review extends GReviewData_Review {
     return other is GReviewData_Review &&
         G__typename == other.G__typename &&
         id == other.id &&
-        body == other.body &&
         rating == other.rating &&
         ratingAmount == other.ratingAmount &&
+        summary == other.summary &&
+        media == other.media &&
+        user == other.user &&
+        body == other.body &&
         userRating == other.userRating &&
         score == other.score &&
-        createdAt == other.createdAt &&
-        user == other.user &&
-        media == other.media;
+        createdAt == other.createdAt;
   }
 
   @override
@@ -829,14 +855,15 @@ class _$GReviewData_Review extends GReviewData_Review {
     var _$hash = 0;
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
-    _$hash = $jc(_$hash, body.hashCode);
     _$hash = $jc(_$hash, rating.hashCode);
     _$hash = $jc(_$hash, ratingAmount.hashCode);
+    _$hash = $jc(_$hash, summary.hashCode);
+    _$hash = $jc(_$hash, media.hashCode);
+    _$hash = $jc(_$hash, user.hashCode);
+    _$hash = $jc(_$hash, body.hashCode);
     _$hash = $jc(_$hash, userRating.hashCode);
     _$hash = $jc(_$hash, score.hashCode);
     _$hash = $jc(_$hash, createdAt.hashCode);
-    _$hash = $jc(_$hash, user.hashCode);
-    _$hash = $jc(_$hash, media.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -846,14 +873,15 @@ class _$GReviewData_Review extends GReviewData_Review {
     return (newBuiltValueToStringHelper(r'GReviewData_Review')
           ..add('G__typename', G__typename)
           ..add('id', id)
-          ..add('body', body)
           ..add('rating', rating)
           ..add('ratingAmount', ratingAmount)
+          ..add('summary', summary)
+          ..add('media', media)
+          ..add('user', user)
+          ..add('body', body)
           ..add('userRating', userRating)
           ..add('score', score)
-          ..add('createdAt', createdAt)
-          ..add('user', user)
-          ..add('media', media))
+          ..add('createdAt', createdAt))
         .toString();
   }
 }
@@ -870,10 +898,6 @@ class GReviewData_ReviewBuilder
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  String? _body;
-  String? get body => _$this._body;
-  set body(String? body) => _$this._body = body;
-
   int? _rating;
   int? get rating => _$this._rating;
   set rating(int? rating) => _$this._rating = rating;
@@ -882,9 +906,27 @@ class GReviewData_ReviewBuilder
   int? get ratingAmount => _$this._ratingAmount;
   set ratingAmount(int? ratingAmount) => _$this._ratingAmount = ratingAmount;
 
-  _i2.GReviewRating? _userRating;
-  _i2.GReviewRating? get userRating => _$this._userRating;
-  set userRating(_i2.GReviewRating? userRating) =>
+  String? _summary;
+  String? get summary => _$this._summary;
+  set summary(String? summary) => _$this._summary = summary;
+
+  GReviewData_Review_mediaBuilder? _media;
+  GReviewData_Review_mediaBuilder get media =>
+      _$this._media ??= new GReviewData_Review_mediaBuilder();
+  set media(GReviewData_Review_mediaBuilder? media) => _$this._media = media;
+
+  GReviewData_Review_userBuilder? _user;
+  GReviewData_Review_userBuilder get user =>
+      _$this._user ??= new GReviewData_Review_userBuilder();
+  set user(GReviewData_Review_userBuilder? user) => _$this._user = user;
+
+  String? _body;
+  String? get body => _$this._body;
+  set body(String? body) => _$this._body = body;
+
+  _i3.GReviewRating? _userRating;
+  _i3.GReviewRating? get userRating => _$this._userRating;
+  set userRating(_i3.GReviewRating? userRating) =>
       _$this._userRating = userRating;
 
   int? _score;
@@ -895,16 +937,6 @@ class GReviewData_ReviewBuilder
   int? get createdAt => _$this._createdAt;
   set createdAt(int? createdAt) => _$this._createdAt = createdAt;
 
-  GReviewData_Review_userBuilder? _user;
-  GReviewData_Review_userBuilder get user =>
-      _$this._user ??= new GReviewData_Review_userBuilder();
-  set user(GReviewData_Review_userBuilder? user) => _$this._user = user;
-
-  GReviewData_Review_mediaBuilder? _media;
-  GReviewData_Review_mediaBuilder get media =>
-      _$this._media ??= new GReviewData_Review_mediaBuilder();
-  set media(GReviewData_Review_mediaBuilder? media) => _$this._media = media;
-
   GReviewData_ReviewBuilder() {
     GReviewData_Review._initializeBuilder(this);
   }
@@ -914,14 +946,15 @@ class GReviewData_ReviewBuilder
     if ($v != null) {
       _G__typename = $v.G__typename;
       _id = $v.id;
-      _body = $v.body;
       _rating = $v.rating;
       _ratingAmount = $v.ratingAmount;
+      _summary = $v.summary;
+      _media = $v.media?.toBuilder();
+      _user = $v.user?.toBuilder();
+      _body = $v.body;
       _userRating = $v.userRating;
       _score = $v.score;
       _createdAt = $v.createdAt;
-      _user = $v.user?.toBuilder();
-      _media = $v.media?.toBuilder();
       _$v = null;
     }
     return this;
@@ -950,28 +983,294 @@ class GReviewData_ReviewBuilder
                   G__typename, r'GReviewData_Review', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
                   id, r'GReviewData_Review', 'id'),
-              body: body,
               rating: rating,
               ratingAmount: ratingAmount,
+              summary: summary,
+              media: _media?.build(),
+              user: _user?.build(),
+              body: body,
               userRating: userRating,
               score: score,
               createdAt: BuiltValueNullFieldError.checkNotNull(
-                  createdAt, r'GReviewData_Review', 'createdAt'),
-              user: _user?.build(),
-              media: _media?.build());
+                  createdAt, r'GReviewData_Review', 'createdAt'));
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'user';
-        _user?.build();
         _$failedField = 'media';
         _media?.build();
+        _$failedField = 'user';
+        _user?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GReviewData_Review', _$failedField, e.toString());
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GReviewData_Review_media extends GReviewData_Review_media {
+  @override
+  final String G__typename;
+  @override
+  final int id;
+  @override
+  final GReviewData_Review_media_title? title;
+  @override
+  final _i3.GMediaType? type;
+  @override
+  final String? bannerImage;
+
+  factory _$GReviewData_Review_media(
+          [void Function(GReviewData_Review_mediaBuilder)? updates]) =>
+      (new GReviewData_Review_mediaBuilder()..update(updates))._build();
+
+  _$GReviewData_Review_media._(
+      {required this.G__typename,
+      required this.id,
+      this.title,
+      this.type,
+      this.bannerImage})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GReviewData_Review_media', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GReviewData_Review_media', 'id');
+  }
+
+  @override
+  GReviewData_Review_media rebuild(
+          void Function(GReviewData_Review_mediaBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GReviewData_Review_mediaBuilder toBuilder() =>
+      new GReviewData_Review_mediaBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GReviewData_Review_media &&
+        G__typename == other.G__typename &&
+        id == other.id &&
+        title == other.title &&
+        type == other.type &&
+        bannerImage == other.bannerImage;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, title.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jc(_$hash, bannerImage.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GReviewData_Review_media')
+          ..add('G__typename', G__typename)
+          ..add('id', id)
+          ..add('title', title)
+          ..add('type', type)
+          ..add('bannerImage', bannerImage))
+        .toString();
+  }
+}
+
+class GReviewData_Review_mediaBuilder
+    implements
+        Builder<GReviewData_Review_media, GReviewData_Review_mediaBuilder> {
+  _$GReviewData_Review_media? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  GReviewData_Review_media_titleBuilder? _title;
+  GReviewData_Review_media_titleBuilder get title =>
+      _$this._title ??= new GReviewData_Review_media_titleBuilder();
+  set title(GReviewData_Review_media_titleBuilder? title) =>
+      _$this._title = title;
+
+  _i3.GMediaType? _type;
+  _i3.GMediaType? get type => _$this._type;
+  set type(_i3.GMediaType? type) => _$this._type = type;
+
+  String? _bannerImage;
+  String? get bannerImage => _$this._bannerImage;
+  set bannerImage(String? bannerImage) => _$this._bannerImage = bannerImage;
+
+  GReviewData_Review_mediaBuilder() {
+    GReviewData_Review_media._initializeBuilder(this);
+  }
+
+  GReviewData_Review_mediaBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _id = $v.id;
+      _title = $v.title?.toBuilder();
+      _type = $v.type;
+      _bannerImage = $v.bannerImage;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GReviewData_Review_media other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GReviewData_Review_media;
+  }
+
+  @override
+  void update(void Function(GReviewData_Review_mediaBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GReviewData_Review_media build() => _build();
+
+  _$GReviewData_Review_media _build() {
+    _$GReviewData_Review_media _$result;
+    try {
+      _$result = _$v ??
+          new _$GReviewData_Review_media._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GReviewData_Review_media', 'G__typename'),
+              id: BuiltValueNullFieldError.checkNotNull(
+                  id, r'GReviewData_Review_media', 'id'),
+              title: _title?.build(),
+              type: type,
+              bannerImage: bannerImage);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'title';
+        _title?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GReviewData_Review_media', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GReviewData_Review_media_title extends GReviewData_Review_media_title {
+  @override
+  final String G__typename;
+  @override
+  final String? userPreferred;
+
+  factory _$GReviewData_Review_media_title(
+          [void Function(GReviewData_Review_media_titleBuilder)? updates]) =>
+      (new GReviewData_Review_media_titleBuilder()..update(updates))._build();
+
+  _$GReviewData_Review_media_title._(
+      {required this.G__typename, this.userPreferred})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GReviewData_Review_media_title', 'G__typename');
+  }
+
+  @override
+  GReviewData_Review_media_title rebuild(
+          void Function(GReviewData_Review_media_titleBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GReviewData_Review_media_titleBuilder toBuilder() =>
+      new GReviewData_Review_media_titleBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GReviewData_Review_media_title &&
+        G__typename == other.G__typename &&
+        userPreferred == other.userPreferred;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, userPreferred.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GReviewData_Review_media_title')
+          ..add('G__typename', G__typename)
+          ..add('userPreferred', userPreferred))
+        .toString();
+  }
+}
+
+class GReviewData_Review_media_titleBuilder
+    implements
+        Builder<GReviewData_Review_media_title,
+            GReviewData_Review_media_titleBuilder> {
+  _$GReviewData_Review_media_title? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  String? _userPreferred;
+  String? get userPreferred => _$this._userPreferred;
+  set userPreferred(String? userPreferred) =>
+      _$this._userPreferred = userPreferred;
+
+  GReviewData_Review_media_titleBuilder() {
+    GReviewData_Review_media_title._initializeBuilder(this);
+  }
+
+  GReviewData_Review_media_titleBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _userPreferred = $v.userPreferred;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GReviewData_Review_media_title other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GReviewData_Review_media_title;
+  }
+
+  @override
+  void update(void Function(GReviewData_Review_media_titleBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GReviewData_Review_media_title build() => _build();
+
+  _$GReviewData_Review_media_title _build() {
+    final _$result = _$v ??
+        new _$GReviewData_Review_media_title._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(
+                G__typename, r'GReviewData_Review_media_title', 'G__typename'),
+            userPreferred: userPreferred);
     replace(_$result);
     return _$result;
   }
@@ -989,7 +1288,7 @@ class _$GReviewData_Review_user extends GReviewData_Review_user {
   @override
   final String? donatorBadge;
   @override
-  final BuiltList<_i2.GModRole?>? moderatorRoles;
+  final BuiltList<_i3.GModRole?>? moderatorRoles;
   @override
   final GReviewData_Review_user_avatar? avatar;
 
@@ -1088,10 +1387,10 @@ class GReviewData_Review_userBuilder
   String? get donatorBadge => _$this._donatorBadge;
   set donatorBadge(String? donatorBadge) => _$this._donatorBadge = donatorBadge;
 
-  ListBuilder<_i2.GModRole?>? _moderatorRoles;
-  ListBuilder<_i2.GModRole?> get moderatorRoles =>
-      _$this._moderatorRoles ??= new ListBuilder<_i2.GModRole?>();
-  set moderatorRoles(ListBuilder<_i2.GModRole?>? moderatorRoles) =>
+  ListBuilder<_i3.GModRole?>? _moderatorRoles;
+  ListBuilder<_i3.GModRole?> get moderatorRoles =>
+      _$this._moderatorRoles ??= new ListBuilder<_i3.GModRole?>();
+  set moderatorRoles(ListBuilder<_i3.GModRole?>? moderatorRoles) =>
       _$this._moderatorRoles = moderatorRoles;
 
   GReviewData_Review_user_avatarBuilder? _avatar;
@@ -1270,259 +1569,6 @@ class GReviewData_Review_user_avatarBuilder
   }
 }
 
-class _$GReviewData_Review_media extends GReviewData_Review_media {
-  @override
-  final String G__typename;
-  @override
-  final int id;
-  @override
-  final String? bannerImage;
-  @override
-  final GReviewData_Review_media_title? title;
-
-  factory _$GReviewData_Review_media(
-          [void Function(GReviewData_Review_mediaBuilder)? updates]) =>
-      (new GReviewData_Review_mediaBuilder()..update(updates))._build();
-
-  _$GReviewData_Review_media._(
-      {required this.G__typename,
-      required this.id,
-      this.bannerImage,
-      this.title})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData_Review_media', 'G__typename');
-    BuiltValueNullFieldError.checkNotNull(
-        id, r'GReviewData_Review_media', 'id');
-  }
-
-  @override
-  GReviewData_Review_media rebuild(
-          void Function(GReviewData_Review_mediaBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GReviewData_Review_mediaBuilder toBuilder() =>
-      new GReviewData_Review_mediaBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is GReviewData_Review_media &&
-        G__typename == other.G__typename &&
-        id == other.id &&
-        bannerImage == other.bannerImage &&
-        title == other.title;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, G__typename.hashCode);
-    _$hash = $jc(_$hash, id.hashCode);
-    _$hash = $jc(_$hash, bannerImage.hashCode);
-    _$hash = $jc(_$hash, title.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData_Review_media')
-          ..add('G__typename', G__typename)
-          ..add('id', id)
-          ..add('bannerImage', bannerImage)
-          ..add('title', title))
-        .toString();
-  }
-}
-
-class GReviewData_Review_mediaBuilder
-    implements
-        Builder<GReviewData_Review_media, GReviewData_Review_mediaBuilder> {
-  _$GReviewData_Review_media? _$v;
-
-  String? _G__typename;
-  String? get G__typename => _$this._G__typename;
-  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
-
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
-
-  String? _bannerImage;
-  String? get bannerImage => _$this._bannerImage;
-  set bannerImage(String? bannerImage) => _$this._bannerImage = bannerImage;
-
-  GReviewData_Review_media_titleBuilder? _title;
-  GReviewData_Review_media_titleBuilder get title =>
-      _$this._title ??= new GReviewData_Review_media_titleBuilder();
-  set title(GReviewData_Review_media_titleBuilder? title) =>
-      _$this._title = title;
-
-  GReviewData_Review_mediaBuilder() {
-    GReviewData_Review_media._initializeBuilder(this);
-  }
-
-  GReviewData_Review_mediaBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _G__typename = $v.G__typename;
-      _id = $v.id;
-      _bannerImage = $v.bannerImage;
-      _title = $v.title?.toBuilder();
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(GReviewData_Review_media other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData_Review_media;
-  }
-
-  @override
-  void update(void Function(GReviewData_Review_mediaBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  GReviewData_Review_media build() => _build();
-
-  _$GReviewData_Review_media _build() {
-    _$GReviewData_Review_media _$result;
-    try {
-      _$result = _$v ??
-          new _$GReviewData_Review_media._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GReviewData_Review_media', 'G__typename'),
-              id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GReviewData_Review_media', 'id'),
-              bannerImage: bannerImage,
-              title: _title?.build());
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'title';
-        _title?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'GReviewData_Review_media', _$failedField, e.toString());
-      }
-      rethrow;
-    }
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$GReviewData_Review_media_title extends GReviewData_Review_media_title {
-  @override
-  final String G__typename;
-  @override
-  final String? userPreferred;
-
-  factory _$GReviewData_Review_media_title(
-          [void Function(GReviewData_Review_media_titleBuilder)? updates]) =>
-      (new GReviewData_Review_media_titleBuilder()..update(updates))._build();
-
-  _$GReviewData_Review_media_title._(
-      {required this.G__typename, this.userPreferred})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData_Review_media_title', 'G__typename');
-  }
-
-  @override
-  GReviewData_Review_media_title rebuild(
-          void Function(GReviewData_Review_media_titleBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  GReviewData_Review_media_titleBuilder toBuilder() =>
-      new GReviewData_Review_media_titleBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is GReviewData_Review_media_title &&
-        G__typename == other.G__typename &&
-        userPreferred == other.userPreferred;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, G__typename.hashCode);
-    _$hash = $jc(_$hash, userPreferred.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData_Review_media_title')
-          ..add('G__typename', G__typename)
-          ..add('userPreferred', userPreferred))
-        .toString();
-  }
-}
-
-class GReviewData_Review_media_titleBuilder
-    implements
-        Builder<GReviewData_Review_media_title,
-            GReviewData_Review_media_titleBuilder> {
-  _$GReviewData_Review_media_title? _$v;
-
-  String? _G__typename;
-  String? get G__typename => _$this._G__typename;
-  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
-
-  String? _userPreferred;
-  String? get userPreferred => _$this._userPreferred;
-  set userPreferred(String? userPreferred) =>
-      _$this._userPreferred = userPreferred;
-
-  GReviewData_Review_media_titleBuilder() {
-    GReviewData_Review_media_title._initializeBuilder(this);
-  }
-
-  GReviewData_Review_media_titleBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _G__typename = $v.G__typename;
-      _userPreferred = $v.userPreferred;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(GReviewData_Review_media_title other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData_Review_media_title;
-  }
-
-  @override
-  void update(void Function(GReviewData_Review_media_titleBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  GReviewData_Review_media_title build() => _build();
-
-  _$GReviewData_Review_media_title _build() {
-    final _$result = _$v ??
-        new _$GReviewData_Review_media_title._(
-            G__typename: BuiltValueNullFieldError.checkNotNull(
-                G__typename, r'GReviewData_Review_media_title', 'G__typename'),
-            userPreferred: userPreferred);
-    replace(_$result);
-    return _$result;
-  }
-}
-
 class _$GRateReviewData extends GRateReviewData {
   @override
   final String G__typename;
@@ -1648,7 +1694,7 @@ class _$GRateReviewData_RateReview extends GRateReviewData_RateReview {
   @override
   final int? ratingAmount;
   @override
-  final _i2.GReviewRating? userRating;
+  final _i3.GReviewRating? userRating;
 
   factory _$GRateReviewData_RateReview(
           [void Function(GRateReviewData_RateReviewBuilder)? updates]) =>
@@ -1732,9 +1778,9 @@ class GRateReviewData_RateReviewBuilder
   int? get ratingAmount => _$this._ratingAmount;
   set ratingAmount(int? ratingAmount) => _$this._ratingAmount = ratingAmount;
 
-  _i2.GReviewRating? _userRating;
-  _i2.GReviewRating? get userRating => _$this._userRating;
-  set userRating(_i2.GReviewRating? userRating) =>
+  _i3.GReviewRating? _userRating;
+  _i3.GReviewRating? get userRating => _$this._userRating;
+  set userRating(_i3.GReviewRating? userRating) =>
       _$this._userRating = userRating;
 
   GRateReviewData_RateReviewBuilder() {

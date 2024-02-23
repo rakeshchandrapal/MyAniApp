@@ -6,23 +6,21 @@ part of 'comment.req.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GThreadCommentReq> _$gThreadCommentReqSerializer =
-    new _$GThreadCommentReqSerializer();
+Serializer<GCommentReq> _$gCommentReqSerializer = new _$GCommentReqSerializer();
 
-class _$GThreadCommentReqSerializer
-    implements StructuredSerializer<GThreadCommentReq> {
+class _$GCommentReqSerializer implements StructuredSerializer<GCommentReq> {
   @override
-  final Iterable<Type> types = const [GThreadCommentReq, _$GThreadCommentReq];
+  final Iterable<Type> types = const [GCommentReq, _$GCommentReq];
   @override
-  final String wireName = 'GThreadCommentReq';
+  final String wireName = 'GCommentReq';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GThreadCommentReq object,
+  Iterable<Object?> serialize(Serializers serializers, GCommentReq object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'vars',
       serializers.serialize(object.vars,
-          specifiedType: const FullType(_i3.GThreadCommentVars)),
+          specifiedType: const FullType(_i3.GCommentVars)),
       'operation',
       serializers.serialize(object.operation,
           specifiedType: const FullType(_i4.Operation)),
@@ -43,7 +41,7 @@ class _$GThreadCommentReqSerializer
       result
         ..add('optimisticResponse')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(_i2.GThreadCommentData)));
+            specifiedType: const FullType(_i2.GCommentData)));
     }
     value = object.updateCacheHandlerKey;
     if (value != null) {
@@ -71,10 +69,9 @@ class _$GThreadCommentReqSerializer
   }
 
   @override
-  GThreadCommentReq deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
+  GCommentReq deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GThreadCommentReqBuilder();
+    final result = new GCommentReqBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -84,8 +81,8 @@ class _$GThreadCommentReqSerializer
       switch (key) {
         case 'vars':
           result.vars.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i3.GThreadCommentVars))!
-              as _i3.GThreadCommentVars);
+                  specifiedType: const FullType(_i3.GCommentVars))!
+              as _i3.GCommentVars);
           break;
         case 'operation':
           result.operation = serializers.deserialize(value,
@@ -97,8 +94,8 @@ class _$GThreadCommentReqSerializer
           break;
         case 'optimisticResponse':
           result.optimisticResponse.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GThreadCommentData))!
-              as _i2.GThreadCommentData);
+                  specifiedType: const FullType(_i2.GCommentData))!
+              as _i2.GCommentData);
           break;
         case 'updateCacheHandlerKey':
           result.updateCacheHandlerKey = serializers.deserialize(value,
@@ -127,18 +124,18 @@ class _$GThreadCommentReqSerializer
   }
 }
 
-class _$GThreadCommentReq extends GThreadCommentReq {
+class _$GCommentReq extends GCommentReq {
   @override
-  final _i3.GThreadCommentVars vars;
+  final _i3.GCommentVars vars;
   @override
   final _i4.Operation operation;
   @override
   final String? requestId;
   @override
-  final _i2.GThreadCommentData? Function(
-      _i2.GThreadCommentData?, _i2.GThreadCommentData?)? updateResult;
+  final _i2.GCommentData? Function(_i2.GCommentData?, _i2.GCommentData?)?
+      updateResult;
   @override
-  final _i2.GThreadCommentData? optimisticResponse;
+  final _i2.GCommentData? optimisticResponse;
   @override
   final String? updateCacheHandlerKey;
   @override
@@ -148,11 +145,10 @@ class _$GThreadCommentReq extends GThreadCommentReq {
   @override
   final bool executeOnListen;
 
-  factory _$GThreadCommentReq(
-          [void Function(GThreadCommentReqBuilder)? updates]) =>
-      (new GThreadCommentReqBuilder()..update(updates))._build();
+  factory _$GCommentReq([void Function(GCommentReqBuilder)? updates]) =>
+      (new GCommentReqBuilder()..update(updates))._build();
 
-  _$GThreadCommentReq._(
+  _$GCommentReq._(
       {required this.vars,
       required this.operation,
       this.requestId,
@@ -163,26 +159,25 @@ class _$GThreadCommentReq extends GThreadCommentReq {
       this.fetchPolicy,
       required this.executeOnListen})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(vars, r'GThreadCommentReq', 'vars');
+    BuiltValueNullFieldError.checkNotNull(vars, r'GCommentReq', 'vars');
     BuiltValueNullFieldError.checkNotNull(
-        operation, r'GThreadCommentReq', 'operation');
+        operation, r'GCommentReq', 'operation');
     BuiltValueNullFieldError.checkNotNull(
-        executeOnListen, r'GThreadCommentReq', 'executeOnListen');
+        executeOnListen, r'GCommentReq', 'executeOnListen');
   }
 
   @override
-  GThreadCommentReq rebuild(void Function(GThreadCommentReqBuilder) updates) =>
+  GCommentReq rebuild(void Function(GCommentReqBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GThreadCommentReqBuilder toBuilder() =>
-      new GThreadCommentReqBuilder()..replace(this);
+  GCommentReqBuilder toBuilder() => new GCommentReqBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     final dynamic _$dynamicOther = other;
-    return other is GThreadCommentReq &&
+    return other is GCommentReq &&
         vars == other.vars &&
         operation == other.operation &&
         requestId == other.requestId &&
@@ -212,7 +207,7 @@ class _$GThreadCommentReq extends GThreadCommentReq {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GThreadCommentReq')
+    return (newBuiltValueToStringHelper(r'GCommentReq')
           ..add('vars', vars)
           ..add('operation', operation)
           ..add('requestId', requestId)
@@ -226,14 +221,13 @@ class _$GThreadCommentReq extends GThreadCommentReq {
   }
 }
 
-class GThreadCommentReqBuilder
-    implements Builder<GThreadCommentReq, GThreadCommentReqBuilder> {
-  _$GThreadCommentReq? _$v;
+class GCommentReqBuilder implements Builder<GCommentReq, GCommentReqBuilder> {
+  _$GCommentReq? _$v;
 
-  _i3.GThreadCommentVarsBuilder? _vars;
-  _i3.GThreadCommentVarsBuilder get vars =>
-      _$this._vars ??= new _i3.GThreadCommentVarsBuilder();
-  set vars(_i3.GThreadCommentVarsBuilder? vars) => _$this._vars = vars;
+  _i3.GCommentVarsBuilder? _vars;
+  _i3.GCommentVarsBuilder get vars =>
+      _$this._vars ??= new _i3.GCommentVarsBuilder();
+  set vars(_i3.GCommentVarsBuilder? vars) => _$this._vars = vars;
 
   _i4.Operation? _operation;
   _i4.Operation? get operation => _$this._operation;
@@ -243,21 +237,19 @@ class GThreadCommentReqBuilder
   String? get requestId => _$this._requestId;
   set requestId(String? requestId) => _$this._requestId = requestId;
 
-  _i2.GThreadCommentData? Function(
-      _i2.GThreadCommentData?, _i2.GThreadCommentData?)? _updateResult;
-  _i2.GThreadCommentData? Function(
-          _i2.GThreadCommentData?, _i2.GThreadCommentData?)?
+  _i2.GCommentData? Function(_i2.GCommentData?, _i2.GCommentData?)?
+      _updateResult;
+  _i2.GCommentData? Function(_i2.GCommentData?, _i2.GCommentData?)?
       get updateResult => _$this._updateResult;
   set updateResult(
-          _i2.GThreadCommentData? Function(
-                  _i2.GThreadCommentData?, _i2.GThreadCommentData?)?
+          _i2.GCommentData? Function(_i2.GCommentData?, _i2.GCommentData?)?
               updateResult) =>
       _$this._updateResult = updateResult;
 
-  _i2.GThreadCommentDataBuilder? _optimisticResponse;
-  _i2.GThreadCommentDataBuilder get optimisticResponse =>
-      _$this._optimisticResponse ??= new _i2.GThreadCommentDataBuilder();
-  set optimisticResponse(_i2.GThreadCommentDataBuilder? optimisticResponse) =>
+  _i2.GCommentDataBuilder? _optimisticResponse;
+  _i2.GCommentDataBuilder get optimisticResponse =>
+      _$this._optimisticResponse ??= new _i2.GCommentDataBuilder();
+  set optimisticResponse(_i2.GCommentDataBuilder? optimisticResponse) =>
       _$this._optimisticResponse = optimisticResponse;
 
   String? _updateCacheHandlerKey;
@@ -282,11 +274,11 @@ class GThreadCommentReqBuilder
   set executeOnListen(bool? executeOnListen) =>
       _$this._executeOnListen = executeOnListen;
 
-  GThreadCommentReqBuilder() {
-    GThreadCommentReq._initializeBuilder(this);
+  GCommentReqBuilder() {
+    GCommentReq._initializeBuilder(this);
   }
 
-  GThreadCommentReqBuilder get _$this {
+  GCommentReqBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _vars = $v.vars.toBuilder();
@@ -304,27 +296,27 @@ class GThreadCommentReqBuilder
   }
 
   @override
-  void replace(GThreadCommentReq other) {
+  void replace(GCommentReq other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GThreadCommentReq;
+    _$v = other as _$GCommentReq;
   }
 
   @override
-  void update(void Function(GThreadCommentReqBuilder)? updates) {
+  void update(void Function(GCommentReqBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GThreadCommentReq build() => _build();
+  GCommentReq build() => _build();
 
-  _$GThreadCommentReq _build() {
-    _$GThreadCommentReq _$result;
+  _$GCommentReq _build() {
+    _$GCommentReq _$result;
     try {
       _$result = _$v ??
-          new _$GThreadCommentReq._(
+          new _$GCommentReq._(
               vars: vars.build(),
               operation: BuiltValueNullFieldError.checkNotNull(
-                  operation, r'GThreadCommentReq', 'operation'),
+                  operation, r'GCommentReq', 'operation'),
               requestId: requestId,
               updateResult: updateResult,
               optimisticResponse: _optimisticResponse?.build(),
@@ -332,7 +324,7 @@ class GThreadCommentReqBuilder
               updateCacheHandlerContext: updateCacheHandlerContext,
               fetchPolicy: fetchPolicy,
               executeOnListen: BuiltValueNullFieldError.checkNotNull(
-                  executeOnListen, r'GThreadCommentReq', 'executeOnListen'));
+                  executeOnListen, r'GCommentReq', 'executeOnListen'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -343,7 +335,7 @@ class GThreadCommentReqBuilder
         _optimisticResponse?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GThreadCommentReq', _$failedField, e.toString());
+            r'GCommentReq', _$failedField, e.toString());
       }
       rethrow;
     }

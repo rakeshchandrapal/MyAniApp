@@ -21,7 +21,7 @@ query HomeOverview($page: Int = 1, $userId: Int!, $type: MediaType) {
   }
   reviews: Page(perPage: 6) {
     reviews(sort: ID_DESC) {
-      ...Review
+      ...ReviewFragment
     }
   }
 }

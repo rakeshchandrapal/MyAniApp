@@ -12,33 +12,33 @@ import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
 
 part 'review.data.gql.g.dart';
 
-abstract class GReview {
+abstract class GReviewFragment {
   String get G__typename;
   int get id;
   int? get rating;
   int? get ratingAmount;
   String? get summary;
-  GReview_media? get media;
-  GReview_user? get user;
+  GReviewFragment_media? get media;
+  GReviewFragment_user? get user;
   Map<String, dynamic> toJson();
 }
 
-abstract class GReview_media {
+abstract class GReviewFragment_media {
   String get G__typename;
   int get id;
-  GReview_media_title? get title;
+  GReviewFragment_media_title? get title;
   _i1.GMediaType? get type;
   String? get bannerImage;
   Map<String, dynamic> toJson();
 }
 
-abstract class GReview_media_title {
+abstract class GReviewFragment_media_title {
   String get G__typename;
   String? get userPreferred;
   Map<String, dynamic> toJson();
 }
 
-abstract class GReview_user implements _i2.GUserFragment {
+abstract class GReviewFragment_user implements _i2.GUserFragment {
   @override
   String get G__typename;
   @override
@@ -52,12 +52,12 @@ abstract class GReview_user implements _i2.GUserFragment {
   @override
   BuiltList<_i1.GModRole?>? get moderatorRoles;
   @override
-  GReview_user_avatar? get avatar;
+  GReviewFragment_user_avatar? get avatar;
   @override
   Map<String, dynamic> toJson();
 }
 
-abstract class GReview_user_avatar implements _i2.GUserFragment_avatar {
+abstract class GReviewFragment_user_avatar implements _i2.GUserFragment_avatar {
   @override
   String get G__typename;
   @override
@@ -66,13 +66,16 @@ abstract class GReview_user_avatar implements _i2.GUserFragment_avatar {
   Map<String, dynamic> toJson();
 }
 
-abstract class GReviewData
-    implements Built<GReviewData, GReviewDataBuilder>, GReview {
-  GReviewData._();
+abstract class GReviewFragmentData
+    implements
+        Built<GReviewFragmentData, GReviewFragmentDataBuilder>,
+        GReviewFragment {
+  GReviewFragmentData._();
 
-  factory GReviewData([Function(GReviewDataBuilder b) updates]) = _$GReviewData;
+  factory GReviewFragmentData(
+      [Function(GReviewFragmentDataBuilder b) updates]) = _$GReviewFragmentData;
 
-  static void _initializeBuilder(GReviewDataBuilder b) =>
+  static void _initializeBuilder(GReviewFragmentDataBuilder b) =>
       b..G__typename = 'Review';
 
   @override
@@ -87,34 +90,36 @@ abstract class GReviewData
   @override
   String? get summary;
   @override
-  GReviewData_media? get media;
+  GReviewFragmentData_media? get media;
   @override
-  GReviewData_user? get user;
-  static Serializer<GReviewData> get serializer => _$gReviewDataSerializer;
+  GReviewFragmentData_user? get user;
+  static Serializer<GReviewFragmentData> get serializer =>
+      _$gReviewFragmentDataSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
-        GReviewData.serializer,
+        GReviewFragmentData.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewData? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentData? fromJson(Map<String, dynamic> json) =>
       _i3.serializers.deserializeWith(
-        GReviewData.serializer,
+        GReviewFragmentData.serializer,
         json,
       );
 }
 
-abstract class GReviewData_media
+abstract class GReviewFragmentData_media
     implements
-        Built<GReviewData_media, GReviewData_mediaBuilder>,
-        GReview_media {
-  GReviewData_media._();
+        Built<GReviewFragmentData_media, GReviewFragmentData_mediaBuilder>,
+        GReviewFragment_media {
+  GReviewFragmentData_media._();
 
-  factory GReviewData_media([Function(GReviewData_mediaBuilder b) updates]) =
-      _$GReviewData_media;
+  factory GReviewFragmentData_media(
+          [Function(GReviewFragmentData_mediaBuilder b) updates]) =
+      _$GReviewFragmentData_media;
 
-  static void _initializeBuilder(GReviewData_mediaBuilder b) =>
+  static void _initializeBuilder(GReviewFragmentData_mediaBuilder b) =>
       b..G__typename = 'Media';
 
   @override
@@ -123,38 +128,39 @@ abstract class GReviewData_media
   @override
   int get id;
   @override
-  GReviewData_media_title? get title;
+  GReviewFragmentData_media_title? get title;
   @override
   _i1.GMediaType? get type;
   @override
   String? get bannerImage;
-  static Serializer<GReviewData_media> get serializer =>
-      _$gReviewDataMediaSerializer;
+  static Serializer<GReviewFragmentData_media> get serializer =>
+      _$gReviewFragmentDataMediaSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
-        GReviewData_media.serializer,
+        GReviewFragmentData_media.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewData_media? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentData_media? fromJson(Map<String, dynamic> json) =>
       _i3.serializers.deserializeWith(
-        GReviewData_media.serializer,
+        GReviewFragmentData_media.serializer,
         json,
       );
 }
 
-abstract class GReviewData_media_title
+abstract class GReviewFragmentData_media_title
     implements
-        Built<GReviewData_media_title, GReviewData_media_titleBuilder>,
-        GReview_media_title {
-  GReviewData_media_title._();
+        Built<GReviewFragmentData_media_title,
+            GReviewFragmentData_media_titleBuilder>,
+        GReviewFragment_media_title {
+  GReviewFragmentData_media_title._();
 
-  factory GReviewData_media_title(
-          [Function(GReviewData_media_titleBuilder b) updates]) =
-      _$GReviewData_media_title;
+  factory GReviewFragmentData_media_title(
+          [Function(GReviewFragmentData_media_titleBuilder b) updates]) =
+      _$GReviewFragmentData_media_title;
 
-  static void _initializeBuilder(GReviewData_media_titleBuilder b) =>
+  static void _initializeBuilder(GReviewFragmentData_media_titleBuilder b) =>
       b..G__typename = 'MediaTitle';
 
   @override
@@ -162,33 +168,34 @@ abstract class GReviewData_media_title
   String get G__typename;
   @override
   String? get userPreferred;
-  static Serializer<GReviewData_media_title> get serializer =>
-      _$gReviewDataMediaTitleSerializer;
+  static Serializer<GReviewFragmentData_media_title> get serializer =>
+      _$gReviewFragmentDataMediaTitleSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
-        GReviewData_media_title.serializer,
+        GReviewFragmentData_media_title.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewData_media_title? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentData_media_title? fromJson(Map<String, dynamic> json) =>
       _i3.serializers.deserializeWith(
-        GReviewData_media_title.serializer,
+        GReviewFragmentData_media_title.serializer,
         json,
       );
 }
 
-abstract class GReviewData_user
+abstract class GReviewFragmentData_user
     implements
-        Built<GReviewData_user, GReviewData_userBuilder>,
-        GReview_user,
+        Built<GReviewFragmentData_user, GReviewFragmentData_userBuilder>,
+        GReviewFragment_user,
         _i2.GUserFragment {
-  GReviewData_user._();
+  GReviewFragmentData_user._();
 
-  factory GReviewData_user([Function(GReviewData_userBuilder b) updates]) =
-      _$GReviewData_user;
+  factory GReviewFragmentData_user(
+          [Function(GReviewFragmentData_userBuilder b) updates]) =
+      _$GReviewFragmentData_user;
 
-  static void _initializeBuilder(GReviewData_userBuilder b) =>
+  static void _initializeBuilder(GReviewFragmentData_userBuilder b) =>
       b..G__typename = 'User';
 
   @override
@@ -205,35 +212,36 @@ abstract class GReviewData_user
   @override
   BuiltList<_i1.GModRole?>? get moderatorRoles;
   @override
-  GReviewData_user_avatar? get avatar;
-  static Serializer<GReviewData_user> get serializer =>
-      _$gReviewDataUserSerializer;
+  GReviewFragmentData_user_avatar? get avatar;
+  static Serializer<GReviewFragmentData_user> get serializer =>
+      _$gReviewFragmentDataUserSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
-        GReviewData_user.serializer,
+        GReviewFragmentData_user.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewData_user? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentData_user? fromJson(Map<String, dynamic> json) =>
       _i3.serializers.deserializeWith(
-        GReviewData_user.serializer,
+        GReviewFragmentData_user.serializer,
         json,
       );
 }
 
-abstract class GReviewData_user_avatar
+abstract class GReviewFragmentData_user_avatar
     implements
-        Built<GReviewData_user_avatar, GReviewData_user_avatarBuilder>,
-        GReview_user_avatar,
+        Built<GReviewFragmentData_user_avatar,
+            GReviewFragmentData_user_avatarBuilder>,
+        GReviewFragment_user_avatar,
         _i2.GUserFragment_avatar {
-  GReviewData_user_avatar._();
+  GReviewFragmentData_user_avatar._();
 
-  factory GReviewData_user_avatar(
-          [Function(GReviewData_user_avatarBuilder b) updates]) =
-      _$GReviewData_user_avatar;
+  factory GReviewFragmentData_user_avatar(
+          [Function(GReviewFragmentData_user_avatarBuilder b) updates]) =
+      _$GReviewFragmentData_user_avatar;
 
-  static void _initializeBuilder(GReviewData_user_avatarBuilder b) =>
+  static void _initializeBuilder(GReviewFragmentData_user_avatarBuilder b) =>
       b..G__typename = 'UserAvatar';
 
   @override
@@ -241,18 +249,18 @@ abstract class GReviewData_user_avatar
   String get G__typename;
   @override
   String? get large;
-  static Serializer<GReviewData_user_avatar> get serializer =>
-      _$gReviewDataUserAvatarSerializer;
+  static Serializer<GReviewFragmentData_user_avatar> get serializer =>
+      _$gReviewFragmentDataUserAvatarSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
-        GReviewData_user_avatar.serializer,
+        GReviewFragmentData_user_avatar.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewData_user_avatar? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentData_user_avatar? fromJson(Map<String, dynamic> json) =>
       _i3.serializers.deserializeWith(
-        GReviewData_user_avatar.serializer,
+        GReviewFragmentData_user_avatar.serializer,
         json,
       );
 }

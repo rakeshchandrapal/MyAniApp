@@ -6,24 +6,32 @@ part of 'review.data.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GReviewData> _$gReviewDataSerializer = new _$GReviewDataSerializer();
-Serializer<GReviewData_media> _$gReviewDataMediaSerializer =
-    new _$GReviewData_mediaSerializer();
-Serializer<GReviewData_media_title> _$gReviewDataMediaTitleSerializer =
-    new _$GReviewData_media_titleSerializer();
-Serializer<GReviewData_user> _$gReviewDataUserSerializer =
-    new _$GReviewData_userSerializer();
-Serializer<GReviewData_user_avatar> _$gReviewDataUserAvatarSerializer =
-    new _$GReviewData_user_avatarSerializer();
+Serializer<GReviewFragmentData> _$gReviewFragmentDataSerializer =
+    new _$GReviewFragmentDataSerializer();
+Serializer<GReviewFragmentData_media> _$gReviewFragmentDataMediaSerializer =
+    new _$GReviewFragmentData_mediaSerializer();
+Serializer<GReviewFragmentData_media_title>
+    _$gReviewFragmentDataMediaTitleSerializer =
+    new _$GReviewFragmentData_media_titleSerializer();
+Serializer<GReviewFragmentData_user> _$gReviewFragmentDataUserSerializer =
+    new _$GReviewFragmentData_userSerializer();
+Serializer<GReviewFragmentData_user_avatar>
+    _$gReviewFragmentDataUserAvatarSerializer =
+    new _$GReviewFragmentData_user_avatarSerializer();
 
-class _$GReviewDataSerializer implements StructuredSerializer<GReviewData> {
+class _$GReviewFragmentDataSerializer
+    implements StructuredSerializer<GReviewFragmentData> {
   @override
-  final Iterable<Type> types = const [GReviewData, _$GReviewData];
+  final Iterable<Type> types = const [
+    GReviewFragmentData,
+    _$GReviewFragmentData
+  ];
   @override
-  final String wireName = 'GReviewData';
+  final String wireName = 'GReviewFragmentData';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GReviewData object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GReviewFragmentData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -57,22 +65,23 @@ class _$GReviewDataSerializer implements StructuredSerializer<GReviewData> {
       result
         ..add('media')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GReviewData_media)));
+            specifiedType: const FullType(GReviewFragmentData_media)));
     }
     value = object.user;
     if (value != null) {
       result
         ..add('user')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GReviewData_user)));
+            specifiedType: const FullType(GReviewFragmentData_user)));
     }
     return result;
   }
 
   @override
-  GReviewData deserialize(Serializers serializers, Iterable<Object?> serialized,
+  GReviewFragmentData deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewDataBuilder();
+    final result = new GReviewFragmentDataBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -102,13 +111,13 @@ class _$GReviewDataSerializer implements StructuredSerializer<GReviewData> {
           break;
         case 'media':
           result.media.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GReviewData_media))!
-              as GReviewData_media);
+                  specifiedType: const FullType(GReviewFragmentData_media))!
+              as GReviewFragmentData_media);
           break;
         case 'user':
           result.user.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GReviewData_user))!
-              as GReviewData_user);
+                  specifiedType: const FullType(GReviewFragmentData_user))!
+              as GReviewFragmentData_user);
           break;
       }
     }
@@ -117,15 +126,19 @@ class _$GReviewDataSerializer implements StructuredSerializer<GReviewData> {
   }
 }
 
-class _$GReviewData_mediaSerializer
-    implements StructuredSerializer<GReviewData_media> {
+class _$GReviewFragmentData_mediaSerializer
+    implements StructuredSerializer<GReviewFragmentData_media> {
   @override
-  final Iterable<Type> types = const [GReviewData_media, _$GReviewData_media];
+  final Iterable<Type> types = const [
+    GReviewFragmentData_media,
+    _$GReviewFragmentData_media
+  ];
   @override
-  final String wireName = 'GReviewData_media';
+  final String wireName = 'GReviewFragmentData_media';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GReviewData_media object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GReviewFragmentData_media object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -140,7 +153,7 @@ class _$GReviewData_mediaSerializer
       result
         ..add('title')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GReviewData_media_title)));
+            specifiedType: const FullType(GReviewFragmentData_media_title)));
     }
     value = object.type;
     if (value != null) {
@@ -160,10 +173,10 @@ class _$GReviewData_mediaSerializer
   }
 
   @override
-  GReviewData_media deserialize(
+  GReviewFragmentData_media deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewData_mediaBuilder();
+    final result = new GReviewFragmentData_mediaBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -181,8 +194,9 @@ class _$GReviewData_mediaSerializer
           break;
         case 'title':
           result.title.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GReviewData_media_title))!
-              as GReviewData_media_title);
+                  specifiedType:
+                      const FullType(GReviewFragmentData_media_title))!
+              as GReviewFragmentData_media_title);
           break;
         case 'type':
           result.type = serializers.deserialize(value,
@@ -199,19 +213,19 @@ class _$GReviewData_mediaSerializer
   }
 }
 
-class _$GReviewData_media_titleSerializer
-    implements StructuredSerializer<GReviewData_media_title> {
+class _$GReviewFragmentData_media_titleSerializer
+    implements StructuredSerializer<GReviewFragmentData_media_title> {
   @override
   final Iterable<Type> types = const [
-    GReviewData_media_title,
-    _$GReviewData_media_title
+    GReviewFragmentData_media_title,
+    _$GReviewFragmentData_media_title
   ];
   @override
-  final String wireName = 'GReviewData_media_title';
+  final String wireName = 'GReviewFragmentData_media_title';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GReviewData_media_title object,
+      Serializers serializers, GReviewFragmentData_media_title object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -230,10 +244,10 @@ class _$GReviewData_media_titleSerializer
   }
 
   @override
-  GReviewData_media_title deserialize(
+  GReviewFragmentData_media_title deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewData_media_titleBuilder();
+    final result = new GReviewFragmentData_media_titleBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -256,15 +270,19 @@ class _$GReviewData_media_titleSerializer
   }
 }
 
-class _$GReviewData_userSerializer
-    implements StructuredSerializer<GReviewData_user> {
+class _$GReviewFragmentData_userSerializer
+    implements StructuredSerializer<GReviewFragmentData_user> {
   @override
-  final Iterable<Type> types = const [GReviewData_user, _$GReviewData_user];
+  final Iterable<Type> types = const [
+    GReviewFragmentData_user,
+    _$GReviewFragmentData_user
+  ];
   @override
-  final String wireName = 'GReviewData_user';
+  final String wireName = 'GReviewFragmentData_user';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GReviewData_user object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GReviewFragmentData_user object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -302,16 +320,16 @@ class _$GReviewData_userSerializer
       result
         ..add('avatar')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GReviewData_user_avatar)));
+            specifiedType: const FullType(GReviewFragmentData_user_avatar)));
     }
     return result;
   }
 
   @override
-  GReviewData_user deserialize(
+  GReviewFragmentData_user deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewData_userBuilder();
+    final result = new GReviewFragmentData_userBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -347,8 +365,9 @@ class _$GReviewData_userSerializer
           break;
         case 'avatar':
           result.avatar.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GReviewData_user_avatar))!
-              as GReviewData_user_avatar);
+                  specifiedType:
+                      const FullType(GReviewFragmentData_user_avatar))!
+              as GReviewFragmentData_user_avatar);
           break;
       }
     }
@@ -357,19 +376,19 @@ class _$GReviewData_userSerializer
   }
 }
 
-class _$GReviewData_user_avatarSerializer
-    implements StructuredSerializer<GReviewData_user_avatar> {
+class _$GReviewFragmentData_user_avatarSerializer
+    implements StructuredSerializer<GReviewFragmentData_user_avatar> {
   @override
   final Iterable<Type> types = const [
-    GReviewData_user_avatar,
-    _$GReviewData_user_avatar
+    GReviewFragmentData_user_avatar,
+    _$GReviewFragmentData_user_avatar
   ];
   @override
-  final String wireName = 'GReviewData_user_avatar';
+  final String wireName = 'GReviewFragmentData_user_avatar';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GReviewData_user_avatar object,
+      Serializers serializers, GReviewFragmentData_user_avatar object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -388,10 +407,10 @@ class _$GReviewData_user_avatarSerializer
   }
 
   @override
-  GReviewData_user_avatar deserialize(
+  GReviewFragmentData_user_avatar deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GReviewData_user_avatarBuilder();
+    final result = new GReviewFragmentData_user_avatarBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -414,7 +433,7 @@ class _$GReviewData_user_avatarSerializer
   }
 }
 
-class _$GReviewData extends GReviewData {
+class _$GReviewFragmentData extends GReviewFragmentData {
   @override
   final String G__typename;
   @override
@@ -426,14 +445,15 @@ class _$GReviewData extends GReviewData {
   @override
   final String? summary;
   @override
-  final GReviewData_media? media;
+  final GReviewFragmentData_media? media;
   @override
-  final GReviewData_user? user;
+  final GReviewFragmentData_user? user;
 
-  factory _$GReviewData([void Function(GReviewDataBuilder)? updates]) =>
-      (new GReviewDataBuilder()..update(updates))._build();
+  factory _$GReviewFragmentData(
+          [void Function(GReviewFragmentDataBuilder)? updates]) =>
+      (new GReviewFragmentDataBuilder()..update(updates))._build();
 
-  _$GReviewData._(
+  _$GReviewFragmentData._(
       {required this.G__typename,
       required this.id,
       this.rating,
@@ -443,21 +463,23 @@ class _$GReviewData extends GReviewData {
       this.user})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData', 'G__typename');
-    BuiltValueNullFieldError.checkNotNull(id, r'GReviewData', 'id');
+        G__typename, r'GReviewFragmentData', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(id, r'GReviewFragmentData', 'id');
   }
 
   @override
-  GReviewData rebuild(void Function(GReviewDataBuilder) updates) =>
+  GReviewFragmentData rebuild(
+          void Function(GReviewFragmentDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GReviewDataBuilder toBuilder() => new GReviewDataBuilder()..replace(this);
+  GReviewFragmentDataBuilder toBuilder() =>
+      new GReviewFragmentDataBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GReviewData &&
+    return other is GReviewFragmentData &&
         G__typename == other.G__typename &&
         id == other.id &&
         rating == other.rating &&
@@ -483,7 +505,7 @@ class _$GReviewData extends GReviewData {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData')
+    return (newBuiltValueToStringHelper(r'GReviewFragmentData')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('rating', rating)
@@ -495,8 +517,9 @@ class _$GReviewData extends GReviewData {
   }
 }
 
-class GReviewDataBuilder implements Builder<GReviewData, GReviewDataBuilder> {
-  _$GReviewData? _$v;
+class GReviewFragmentDataBuilder
+    implements Builder<GReviewFragmentData, GReviewFragmentDataBuilder> {
+  _$GReviewFragmentData? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -518,21 +541,21 @@ class GReviewDataBuilder implements Builder<GReviewData, GReviewDataBuilder> {
   String? get summary => _$this._summary;
   set summary(String? summary) => _$this._summary = summary;
 
-  GReviewData_mediaBuilder? _media;
-  GReviewData_mediaBuilder get media =>
-      _$this._media ??= new GReviewData_mediaBuilder();
-  set media(GReviewData_mediaBuilder? media) => _$this._media = media;
+  GReviewFragmentData_mediaBuilder? _media;
+  GReviewFragmentData_mediaBuilder get media =>
+      _$this._media ??= new GReviewFragmentData_mediaBuilder();
+  set media(GReviewFragmentData_mediaBuilder? media) => _$this._media = media;
 
-  GReviewData_userBuilder? _user;
-  GReviewData_userBuilder get user =>
-      _$this._user ??= new GReviewData_userBuilder();
-  set user(GReviewData_userBuilder? user) => _$this._user = user;
+  GReviewFragmentData_userBuilder? _user;
+  GReviewFragmentData_userBuilder get user =>
+      _$this._user ??= new GReviewFragmentData_userBuilder();
+  set user(GReviewFragmentData_userBuilder? user) => _$this._user = user;
 
-  GReviewDataBuilder() {
-    GReviewData._initializeBuilder(this);
+  GReviewFragmentDataBuilder() {
+    GReviewFragmentData._initializeBuilder(this);
   }
 
-  GReviewDataBuilder get _$this {
+  GReviewFragmentDataBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -548,28 +571,28 @@ class GReviewDataBuilder implements Builder<GReviewData, GReviewDataBuilder> {
   }
 
   @override
-  void replace(GReviewData other) {
+  void replace(GReviewFragmentData other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData;
+    _$v = other as _$GReviewFragmentData;
   }
 
   @override
-  void update(void Function(GReviewDataBuilder)? updates) {
+  void update(void Function(GReviewFragmentDataBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GReviewData build() => _build();
+  GReviewFragmentData build() => _build();
 
-  _$GReviewData _build() {
-    _$GReviewData _$result;
+  _$GReviewFragmentData _build() {
+    _$GReviewFragmentData _$result;
     try {
       _$result = _$v ??
-          new _$GReviewData._(
+          new _$GReviewFragmentData._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GReviewData', 'G__typename'),
+                  G__typename, r'GReviewFragmentData', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GReviewData', 'id'),
+                  id, r'GReviewFragmentData', 'id'),
               rating: rating,
               ratingAmount: ratingAmount,
               summary: summary,
@@ -584,7 +607,7 @@ class GReviewDataBuilder implements Builder<GReviewData, GReviewDataBuilder> {
         _user?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GReviewData', _$failedField, e.toString());
+            r'GReviewFragmentData', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -593,23 +616,23 @@ class GReviewDataBuilder implements Builder<GReviewData, GReviewDataBuilder> {
   }
 }
 
-class _$GReviewData_media extends GReviewData_media {
+class _$GReviewFragmentData_media extends GReviewFragmentData_media {
   @override
   final String G__typename;
   @override
   final int id;
   @override
-  final GReviewData_media_title? title;
+  final GReviewFragmentData_media_title? title;
   @override
   final _i1.GMediaType? type;
   @override
   final String? bannerImage;
 
-  factory _$GReviewData_media(
-          [void Function(GReviewData_mediaBuilder)? updates]) =>
-      (new GReviewData_mediaBuilder()..update(updates))._build();
+  factory _$GReviewFragmentData_media(
+          [void Function(GReviewFragmentData_mediaBuilder)? updates]) =>
+      (new GReviewFragmentData_mediaBuilder()..update(updates))._build();
 
-  _$GReviewData_media._(
+  _$GReviewFragmentData_media._(
       {required this.G__typename,
       required this.id,
       this.title,
@@ -617,22 +640,24 @@ class _$GReviewData_media extends GReviewData_media {
       this.bannerImage})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData_media', 'G__typename');
-    BuiltValueNullFieldError.checkNotNull(id, r'GReviewData_media', 'id');
+        G__typename, r'GReviewFragmentData_media', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GReviewFragmentData_media', 'id');
   }
 
   @override
-  GReviewData_media rebuild(void Function(GReviewData_mediaBuilder) updates) =>
+  GReviewFragmentData_media rebuild(
+          void Function(GReviewFragmentData_mediaBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GReviewData_mediaBuilder toBuilder() =>
-      new GReviewData_mediaBuilder()..replace(this);
+  GReviewFragmentData_mediaBuilder toBuilder() =>
+      new GReviewFragmentData_mediaBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GReviewData_media &&
+    return other is GReviewFragmentData_media &&
         G__typename == other.G__typename &&
         id == other.id &&
         title == other.title &&
@@ -654,7 +679,7 @@ class _$GReviewData_media extends GReviewData_media {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData_media')
+    return (newBuiltValueToStringHelper(r'GReviewFragmentData_media')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('title', title)
@@ -664,9 +689,10 @@ class _$GReviewData_media extends GReviewData_media {
   }
 }
 
-class GReviewData_mediaBuilder
-    implements Builder<GReviewData_media, GReviewData_mediaBuilder> {
-  _$GReviewData_media? _$v;
+class GReviewFragmentData_mediaBuilder
+    implements
+        Builder<GReviewFragmentData_media, GReviewFragmentData_mediaBuilder> {
+  _$GReviewFragmentData_media? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -676,10 +702,11 @@ class GReviewData_mediaBuilder
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  GReviewData_media_titleBuilder? _title;
-  GReviewData_media_titleBuilder get title =>
-      _$this._title ??= new GReviewData_media_titleBuilder();
-  set title(GReviewData_media_titleBuilder? title) => _$this._title = title;
+  GReviewFragmentData_media_titleBuilder? _title;
+  GReviewFragmentData_media_titleBuilder get title =>
+      _$this._title ??= new GReviewFragmentData_media_titleBuilder();
+  set title(GReviewFragmentData_media_titleBuilder? title) =>
+      _$this._title = title;
 
   _i1.GMediaType? _type;
   _i1.GMediaType? get type => _$this._type;
@@ -689,11 +716,11 @@ class GReviewData_mediaBuilder
   String? get bannerImage => _$this._bannerImage;
   set bannerImage(String? bannerImage) => _$this._bannerImage = bannerImage;
 
-  GReviewData_mediaBuilder() {
-    GReviewData_media._initializeBuilder(this);
+  GReviewFragmentData_mediaBuilder() {
+    GReviewFragmentData_media._initializeBuilder(this);
   }
 
-  GReviewData_mediaBuilder get _$this {
+  GReviewFragmentData_mediaBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -707,28 +734,28 @@ class GReviewData_mediaBuilder
   }
 
   @override
-  void replace(GReviewData_media other) {
+  void replace(GReviewFragmentData_media other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData_media;
+    _$v = other as _$GReviewFragmentData_media;
   }
 
   @override
-  void update(void Function(GReviewData_mediaBuilder)? updates) {
+  void update(void Function(GReviewFragmentData_mediaBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GReviewData_media build() => _build();
+  GReviewFragmentData_media build() => _build();
 
-  _$GReviewData_media _build() {
-    _$GReviewData_media _$result;
+  _$GReviewFragmentData_media _build() {
+    _$GReviewFragmentData_media _$result;
     try {
       _$result = _$v ??
-          new _$GReviewData_media._(
+          new _$GReviewFragmentData_media._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GReviewData_media', 'G__typename'),
+                  G__typename, r'GReviewFragmentData_media', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GReviewData_media', 'id'),
+                  id, r'GReviewFragmentData_media', 'id'),
               title: _title?.build(),
               type: type,
               bannerImage: bannerImage);
@@ -739,7 +766,7 @@ class GReviewData_mediaBuilder
         _title?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GReviewData_media', _$failedField, e.toString());
+            r'GReviewFragmentData_media', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -748,35 +775,37 @@ class GReviewData_mediaBuilder
   }
 }
 
-class _$GReviewData_media_title extends GReviewData_media_title {
+class _$GReviewFragmentData_media_title
+    extends GReviewFragmentData_media_title {
   @override
   final String G__typename;
   @override
   final String? userPreferred;
 
-  factory _$GReviewData_media_title(
-          [void Function(GReviewData_media_titleBuilder)? updates]) =>
-      (new GReviewData_media_titleBuilder()..update(updates))._build();
+  factory _$GReviewFragmentData_media_title(
+          [void Function(GReviewFragmentData_media_titleBuilder)? updates]) =>
+      (new GReviewFragmentData_media_titleBuilder()..update(updates))._build();
 
-  _$GReviewData_media_title._({required this.G__typename, this.userPreferred})
+  _$GReviewFragmentData_media_title._(
+      {required this.G__typename, this.userPreferred})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData_media_title', 'G__typename');
+        G__typename, r'GReviewFragmentData_media_title', 'G__typename');
   }
 
   @override
-  GReviewData_media_title rebuild(
-          void Function(GReviewData_media_titleBuilder) updates) =>
+  GReviewFragmentData_media_title rebuild(
+          void Function(GReviewFragmentData_media_titleBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GReviewData_media_titleBuilder toBuilder() =>
-      new GReviewData_media_titleBuilder()..replace(this);
+  GReviewFragmentData_media_titleBuilder toBuilder() =>
+      new GReviewFragmentData_media_titleBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GReviewData_media_title &&
+    return other is GReviewFragmentData_media_title &&
         G__typename == other.G__typename &&
         userPreferred == other.userPreferred;
   }
@@ -792,17 +821,18 @@ class _$GReviewData_media_title extends GReviewData_media_title {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData_media_title')
+    return (newBuiltValueToStringHelper(r'GReviewFragmentData_media_title')
           ..add('G__typename', G__typename)
           ..add('userPreferred', userPreferred))
         .toString();
   }
 }
 
-class GReviewData_media_titleBuilder
+class GReviewFragmentData_media_titleBuilder
     implements
-        Builder<GReviewData_media_title, GReviewData_media_titleBuilder> {
-  _$GReviewData_media_title? _$v;
+        Builder<GReviewFragmentData_media_title,
+            GReviewFragmentData_media_titleBuilder> {
+  _$GReviewFragmentData_media_title? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -813,11 +843,11 @@ class GReviewData_media_titleBuilder
   set userPreferred(String? userPreferred) =>
       _$this._userPreferred = userPreferred;
 
-  GReviewData_media_titleBuilder() {
-    GReviewData_media_title._initializeBuilder(this);
+  GReviewFragmentData_media_titleBuilder() {
+    GReviewFragmentData_media_title._initializeBuilder(this);
   }
 
-  GReviewData_media_titleBuilder get _$this {
+  GReviewFragmentData_media_titleBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -828,31 +858,31 @@ class GReviewData_media_titleBuilder
   }
 
   @override
-  void replace(GReviewData_media_title other) {
+  void replace(GReviewFragmentData_media_title other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData_media_title;
+    _$v = other as _$GReviewFragmentData_media_title;
   }
 
   @override
-  void update(void Function(GReviewData_media_titleBuilder)? updates) {
+  void update(void Function(GReviewFragmentData_media_titleBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GReviewData_media_title build() => _build();
+  GReviewFragmentData_media_title build() => _build();
 
-  _$GReviewData_media_title _build() {
+  _$GReviewFragmentData_media_title _build() {
     final _$result = _$v ??
-        new _$GReviewData_media_title._(
+        new _$GReviewFragmentData_media_title._(
             G__typename: BuiltValueNullFieldError.checkNotNull(
-                G__typename, r'GReviewData_media_title', 'G__typename'),
+                G__typename, r'GReviewFragmentData_media_title', 'G__typename'),
             userPreferred: userPreferred);
     replace(_$result);
     return _$result;
   }
 }
 
-class _$GReviewData_user extends GReviewData_user {
+class _$GReviewFragmentData_user extends GReviewFragmentData_user {
   @override
   final String G__typename;
   @override
@@ -866,13 +896,13 @@ class _$GReviewData_user extends GReviewData_user {
   @override
   final BuiltList<_i1.GModRole?>? moderatorRoles;
   @override
-  final GReviewData_user_avatar? avatar;
+  final GReviewFragmentData_user_avatar? avatar;
 
-  factory _$GReviewData_user(
-          [void Function(GReviewData_userBuilder)? updates]) =>
-      (new GReviewData_userBuilder()..update(updates))._build();
+  factory _$GReviewFragmentData_user(
+          [void Function(GReviewFragmentData_userBuilder)? updates]) =>
+      (new GReviewFragmentData_userBuilder()..update(updates))._build();
 
-  _$GReviewData_user._(
+  _$GReviewFragmentData_user._(
       {required this.G__typename,
       required this.id,
       required this.name,
@@ -882,23 +912,26 @@ class _$GReviewData_user extends GReviewData_user {
       this.avatar})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData_user', 'G__typename');
-    BuiltValueNullFieldError.checkNotNull(id, r'GReviewData_user', 'id');
-    BuiltValueNullFieldError.checkNotNull(name, r'GReviewData_user', 'name');
+        G__typename, r'GReviewFragmentData_user', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GReviewFragmentData_user', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        name, r'GReviewFragmentData_user', 'name');
   }
 
   @override
-  GReviewData_user rebuild(void Function(GReviewData_userBuilder) updates) =>
+  GReviewFragmentData_user rebuild(
+          void Function(GReviewFragmentData_userBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GReviewData_userBuilder toBuilder() =>
-      new GReviewData_userBuilder()..replace(this);
+  GReviewFragmentData_userBuilder toBuilder() =>
+      new GReviewFragmentData_userBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GReviewData_user &&
+    return other is GReviewFragmentData_user &&
         G__typename == other.G__typename &&
         id == other.id &&
         name == other.name &&
@@ -924,7 +957,7 @@ class _$GReviewData_user extends GReviewData_user {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData_user')
+    return (newBuiltValueToStringHelper(r'GReviewFragmentData_user')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('name', name)
@@ -936,9 +969,10 @@ class _$GReviewData_user extends GReviewData_user {
   }
 }
 
-class GReviewData_userBuilder
-    implements Builder<GReviewData_user, GReviewData_userBuilder> {
-  _$GReviewData_user? _$v;
+class GReviewFragmentData_userBuilder
+    implements
+        Builder<GReviewFragmentData_user, GReviewFragmentData_userBuilder> {
+  _$GReviewFragmentData_user? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -966,16 +1000,17 @@ class GReviewData_userBuilder
   set moderatorRoles(ListBuilder<_i1.GModRole?>? moderatorRoles) =>
       _$this._moderatorRoles = moderatorRoles;
 
-  GReviewData_user_avatarBuilder? _avatar;
-  GReviewData_user_avatarBuilder get avatar =>
-      _$this._avatar ??= new GReviewData_user_avatarBuilder();
-  set avatar(GReviewData_user_avatarBuilder? avatar) => _$this._avatar = avatar;
+  GReviewFragmentData_user_avatarBuilder? _avatar;
+  GReviewFragmentData_user_avatarBuilder get avatar =>
+      _$this._avatar ??= new GReviewFragmentData_user_avatarBuilder();
+  set avatar(GReviewFragmentData_user_avatarBuilder? avatar) =>
+      _$this._avatar = avatar;
 
-  GReviewData_userBuilder() {
-    GReviewData_user._initializeBuilder(this);
+  GReviewFragmentData_userBuilder() {
+    GReviewFragmentData_user._initializeBuilder(this);
   }
 
-  GReviewData_userBuilder get _$this {
+  GReviewFragmentData_userBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -991,30 +1026,30 @@ class GReviewData_userBuilder
   }
 
   @override
-  void replace(GReviewData_user other) {
+  void replace(GReviewFragmentData_user other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData_user;
+    _$v = other as _$GReviewFragmentData_user;
   }
 
   @override
-  void update(void Function(GReviewData_userBuilder)? updates) {
+  void update(void Function(GReviewFragmentData_userBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GReviewData_user build() => _build();
+  GReviewFragmentData_user build() => _build();
 
-  _$GReviewData_user _build() {
-    _$GReviewData_user _$result;
+  _$GReviewFragmentData_user _build() {
+    _$GReviewFragmentData_user _$result;
     try {
       _$result = _$v ??
-          new _$GReviewData_user._(
+          new _$GReviewFragmentData_user._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GReviewData_user', 'G__typename'),
+                  G__typename, r'GReviewFragmentData_user', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GReviewData_user', 'id'),
+                  id, r'GReviewFragmentData_user', 'id'),
               name: BuiltValueNullFieldError.checkNotNull(
-                  name, r'GReviewData_user', 'name'),
+                  name, r'GReviewFragmentData_user', 'name'),
               donatorTier: donatorTier,
               donatorBadge: donatorBadge,
               moderatorRoles: _moderatorRoles?.build(),
@@ -1028,7 +1063,7 @@ class GReviewData_userBuilder
         _avatar?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GReviewData_user', _$failedField, e.toString());
+            r'GReviewFragmentData_user', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1037,35 +1072,36 @@ class GReviewData_userBuilder
   }
 }
 
-class _$GReviewData_user_avatar extends GReviewData_user_avatar {
+class _$GReviewFragmentData_user_avatar
+    extends GReviewFragmentData_user_avatar {
   @override
   final String G__typename;
   @override
   final String? large;
 
-  factory _$GReviewData_user_avatar(
-          [void Function(GReviewData_user_avatarBuilder)? updates]) =>
-      (new GReviewData_user_avatarBuilder()..update(updates))._build();
+  factory _$GReviewFragmentData_user_avatar(
+          [void Function(GReviewFragmentData_user_avatarBuilder)? updates]) =>
+      (new GReviewFragmentData_user_avatarBuilder()..update(updates))._build();
 
-  _$GReviewData_user_avatar._({required this.G__typename, this.large})
+  _$GReviewFragmentData_user_avatar._({required this.G__typename, this.large})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GReviewData_user_avatar', 'G__typename');
+        G__typename, r'GReviewFragmentData_user_avatar', 'G__typename');
   }
 
   @override
-  GReviewData_user_avatar rebuild(
-          void Function(GReviewData_user_avatarBuilder) updates) =>
+  GReviewFragmentData_user_avatar rebuild(
+          void Function(GReviewFragmentData_user_avatarBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GReviewData_user_avatarBuilder toBuilder() =>
-      new GReviewData_user_avatarBuilder()..replace(this);
+  GReviewFragmentData_user_avatarBuilder toBuilder() =>
+      new GReviewFragmentData_user_avatarBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GReviewData_user_avatar &&
+    return other is GReviewFragmentData_user_avatar &&
         G__typename == other.G__typename &&
         large == other.large;
   }
@@ -1081,17 +1117,18 @@ class _$GReviewData_user_avatar extends GReviewData_user_avatar {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GReviewData_user_avatar')
+    return (newBuiltValueToStringHelper(r'GReviewFragmentData_user_avatar')
           ..add('G__typename', G__typename)
           ..add('large', large))
         .toString();
   }
 }
 
-class GReviewData_user_avatarBuilder
+class GReviewFragmentData_user_avatarBuilder
     implements
-        Builder<GReviewData_user_avatar, GReviewData_user_avatarBuilder> {
-  _$GReviewData_user_avatar? _$v;
+        Builder<GReviewFragmentData_user_avatar,
+            GReviewFragmentData_user_avatarBuilder> {
+  _$GReviewFragmentData_user_avatar? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -1101,11 +1138,11 @@ class GReviewData_user_avatarBuilder
   String? get large => _$this._large;
   set large(String? large) => _$this._large = large;
 
-  GReviewData_user_avatarBuilder() {
-    GReviewData_user_avatar._initializeBuilder(this);
+  GReviewFragmentData_user_avatarBuilder() {
+    GReviewFragmentData_user_avatar._initializeBuilder(this);
   }
 
-  GReviewData_user_avatarBuilder get _$this {
+  GReviewFragmentData_user_avatarBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -1116,24 +1153,24 @@ class GReviewData_user_avatarBuilder
   }
 
   @override
-  void replace(GReviewData_user_avatar other) {
+  void replace(GReviewFragmentData_user_avatar other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GReviewData_user_avatar;
+    _$v = other as _$GReviewFragmentData_user_avatar;
   }
 
   @override
-  void update(void Function(GReviewData_user_avatarBuilder)? updates) {
+  void update(void Function(GReviewFragmentData_user_avatarBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GReviewData_user_avatar build() => _build();
+  GReviewFragmentData_user_avatar build() => _build();
 
-  _$GReviewData_user_avatar _build() {
+  _$GReviewFragmentData_user_avatar _build() {
     final _$result = _$v ??
-        new _$GReviewData_user_avatar._(
+        new _$GReviewFragmentData_user_avatar._(
             G__typename: BuiltValueNullFieldError.checkNotNull(
-                G__typename, r'GReviewData_user_avatar', 'G__typename'),
+                G__typename, r'GReviewFragmentData_user_avatar', 'G__typename'),
             large: large);
     replace(_$result);
     return _$result;

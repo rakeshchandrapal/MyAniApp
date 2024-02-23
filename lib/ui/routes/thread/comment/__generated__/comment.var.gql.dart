@@ -8,25 +8,24 @@ import 'package:myaniapp/graphql/__generated__/serializers.gql.dart' as _i1;
 
 part 'comment.var.gql.g.dart';
 
-abstract class GThreadCommentVars
-    implements Built<GThreadCommentVars, GThreadCommentVarsBuilder> {
-  GThreadCommentVars._();
+abstract class GCommentVars
+    implements Built<GCommentVars, GCommentVarsBuilder> {
+  GCommentVars._();
 
-  factory GThreadCommentVars([Function(GThreadCommentVarsBuilder b) updates]) =
-      _$GThreadCommentVars;
+  factory GCommentVars([Function(GCommentVarsBuilder b) updates]) =
+      _$GCommentVars;
 
   int? get id;
-  static Serializer<GThreadCommentVars> get serializer =>
-      _$gThreadCommentVarsSerializer;
+  static Serializer<GCommentVars> get serializer => _$gCommentVarsSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GThreadCommentVars.serializer,
+        GCommentVars.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GThreadCommentVars? fromJson(Map<String, dynamic> json) =>
+  static GCommentVars? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GThreadCommentVars.serializer,
+        GCommentVars.serializer,
         json,
       );
 }

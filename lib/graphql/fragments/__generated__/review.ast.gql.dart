@@ -6,8 +6,8 @@ import 'package:gql/ast.dart' as _i1;
 import 'package:myaniapp/graphql/fragments/__generated__/user.ast.gql.dart'
     as _i2;
 
-const Review = _i1.FragmentDefinitionNode(
-  name: _i1.NameNode(value: 'Review'),
+const ReviewFragment = _i1.FragmentDefinitionNode(
+  name: _i1.NameNode(value: 'ReviewFragment'),
   typeCondition: _i1.TypeConditionNode(
       on: _i1.NamedTypeNode(
     name: _i1.NameNode(value: 'Review'),
@@ -102,6 +102,6 @@ const Review = _i1.FragmentDefinitionNode(
   ]),
 );
 const document = _i1.DocumentNode(definitions: [
-  Review,
+  ReviewFragment,
   _i2.UserFragment,
 ]);

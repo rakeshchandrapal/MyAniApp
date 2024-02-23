@@ -229,15 +229,15 @@ import 'package:myaniapp/graphql/fragments/__generated__/releasing_media.var.gql
     show GReleasingMediaVars;
 import 'package:myaniapp/graphql/fragments/__generated__/review.data.gql.dart'
     show
-        GReviewData,
-        GReviewData_media,
-        GReviewData_media_title,
-        GReviewData_user,
-        GReviewData_user_avatar;
+        GReviewFragmentData,
+        GReviewFragmentData_media,
+        GReviewFragmentData_media_title,
+        GReviewFragmentData_user,
+        GReviewFragmentData_user_avatar;
 import 'package:myaniapp/graphql/fragments/__generated__/review.req.gql.dart'
-    show GReviewReq;
+    show GReviewFragmentReq;
 import 'package:myaniapp/graphql/fragments/__generated__/review.var.gql.dart'
-    show GReviewVars;
+    show GReviewFragmentVars;
 import 'package:myaniapp/graphql/fragments/__generated__/text_activity.data.gql.dart'
     show
         GTextActivityData,
@@ -762,15 +762,16 @@ import 'package:myaniapp/ui/routes/review/__generated__/review.data.gql.dart'
     show
         GRateReviewData,
         GRateReviewData_RateReview,
+        GReviewData,
         GReviewData_Review,
         GReviewData_Review_media,
         GReviewData_Review_media_title,
         GReviewData_Review_user,
         GReviewData_Review_user_avatar;
 import 'package:myaniapp/ui/routes/review/__generated__/review.req.gql.dart'
-    show GRateReviewReq;
+    show GRateReviewReq, GReviewReq;
 import 'package:myaniapp/ui/routes/review/__generated__/review.var.gql.dart'
-    show GRateReviewVars;
+    show GRateReviewVars, GReviewVars;
 import 'package:myaniapp/ui/routes/search/__generated__/search.data.gql.dart'
     show
         GGenreCollectionData,
@@ -852,9 +853,14 @@ import 'package:myaniapp/ui/routes/thread/__generated__/thread.var.gql.dart'
         GToggleThreadSubscriptionVars;
 import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.data.gql.dart'
     show
-        GThreadCommentData_ThreadComment,
-        GThreadCommentData_ThreadComment_user,
-        GThreadCommentData_ThreadComment_user_avatar;
+        GCommentData,
+        GCommentData_ThreadComment,
+        GCommentData_ThreadComment_user,
+        GCommentData_ThreadComment_user_avatar;
+import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.req.gql.dart'
+    show GCommentReq;
+import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.var.gql.dart'
+    show GCommentVars;
 import 'package:myaniapp/ui/routes/user/__generated__/user.data.gql.dart'
     show
         GGenreStatData,
@@ -1042,6 +1048,12 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GCharactersData_Media_characters_pageInfo,
   GCharactersReq,
   GCharactersVars,
+  GCommentData,
+  GCommentData_ThreadComment,
+  GCommentData_ThreadComment_user,
+  GCommentData_ThreadComment_user_avatar,
+  GCommentReq,
+  GCommentVars,
   GCountryCode,
   GDeleteActivityData,
   GDeleteActivityData_DeleteActivity,
@@ -1434,10 +1446,13 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GReviewData_Review_media_title,
   GReviewData_Review_user,
   GReviewData_Review_user_avatar,
-  GReviewData_media,
-  GReviewData_media_title,
-  GReviewData_user,
-  GReviewData_user_avatar,
+  GReviewFragmentData,
+  GReviewFragmentData_media,
+  GReviewFragmentData_media_title,
+  GReviewFragmentData_user,
+  GReviewFragmentData_user_avatar,
+  GReviewFragmentReq,
+  GReviewFragmentVars,
   GReviewRating,
   GReviewReq,
   GReviewSort,
@@ -1563,9 +1578,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GThisUserReq,
   GThisUserVars,
   GThreadCommentData,
-  GThreadCommentData_ThreadComment,
-  GThreadCommentData_ThreadComment_user,
-  GThreadCommentData_ThreadComment_user_avatar,
   GThreadCommentData_user,
   GThreadCommentData_user_avatar,
   GThreadCommentReq,

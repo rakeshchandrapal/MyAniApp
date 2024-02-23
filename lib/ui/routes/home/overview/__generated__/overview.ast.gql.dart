@@ -192,7 +192,7 @@ const HomeOverview = _i1.OperationDefinitionNode(
           directives: [],
           selectionSet: _i1.SelectionSetNode(selections: [
             _i1.FragmentSpreadNode(
-              name: _i1.NameNode(value: 'Review'),
+              name: _i1.NameNode(value: 'ReviewFragment'),
               directives: [],
             )
           ]),
@@ -209,5 +209,5 @@ const document = _i1.DocumentNode(definitions: [
   _i5.ReleasingMedia,
   _i6.MediaListEntry,
   _i7.FuzzyDate,
-  _i8.Review,
+  _i8.ReviewFragment,
 ]);

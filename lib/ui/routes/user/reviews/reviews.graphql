@@ -7,7 +7,7 @@ query UserReviews($userId: Int, $page: Int) {
       ...PageInfo
     }
     reviews(userId: $userId, sort: ID_DESC) {
-      ...Review
+      ...ReviewFragment
     }
   }
 }

@@ -16,20 +16,21 @@ import 'package:myaniapp/graphql/fragments/__generated__/review.var.gql.dart'
 
 part 'review.req.gql.g.dart';
 
-abstract class GReviewReq
+abstract class GReviewFragmentReq
     implements
-        Built<GReviewReq, GReviewReqBuilder>,
-        _i1.FragmentRequest<_i2.GReviewData, _i3.GReviewVars> {
-  GReviewReq._();
+        Built<GReviewFragmentReq, GReviewFragmentReqBuilder>,
+        _i1.FragmentRequest<_i2.GReviewFragmentData, _i3.GReviewFragmentVars> {
+  GReviewFragmentReq._();
 
-  factory GReviewReq([Function(GReviewReqBuilder b) updates]) = _$GReviewReq;
+  factory GReviewFragmentReq([Function(GReviewFragmentReqBuilder b) updates]) =
+      _$GReviewFragmentReq;
 
-  static void _initializeBuilder(GReviewReqBuilder b) => b
+  static void _initializeBuilder(GReviewFragmentReqBuilder b) => b
     ..document = _i4.document
-    ..fragmentName = 'Review';
+    ..fragmentName = 'ReviewFragment';
 
   @override
-  _i3.GReviewVars get vars;
+  _i3.GReviewFragmentVars get vars;
   @override
   _i5.DocumentNode get document;
   @override
@@ -37,19 +38,20 @@ abstract class GReviewReq
   @override
   Map<String, dynamic> get idFields;
   @override
-  _i2.GReviewData? parseData(Map<String, dynamic> json) =>
-      _i2.GReviewData.fromJson(json);
+  _i2.GReviewFragmentData? parseData(Map<String, dynamic> json) =>
+      _i2.GReviewFragmentData.fromJson(json);
 
-  static Serializer<GReviewReq> get serializer => _$gReviewReqSerializer;
+  static Serializer<GReviewFragmentReq> get serializer =>
+      _$gReviewFragmentReqSerializer;
 
   Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
-        GReviewReq.serializer,
+        GReviewFragmentReq.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewReq? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentReq? fromJson(Map<String, dynamic> json) =>
       _i6.serializers.deserializeWith(
-        GReviewReq.serializer,
+        GReviewFragmentReq.serializer,
         json,
       );
 }

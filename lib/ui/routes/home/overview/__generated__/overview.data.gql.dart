@@ -1209,7 +1209,7 @@ abstract class GHomeOverviewData_reviews_reviews
     implements
         Built<GHomeOverviewData_reviews_reviews,
             GHomeOverviewData_reviews_reviewsBuilder>,
-        _i10.GReview {
+        _i10.GReviewFragment {
   GHomeOverviewData_reviews_reviews._();
 
   factory GHomeOverviewData_reviews_reviews(
@@ -1255,7 +1255,7 @@ abstract class GHomeOverviewData_reviews_reviews_media
     implements
         Built<GHomeOverviewData_reviews_reviews_media,
             GHomeOverviewData_reviews_reviews_mediaBuilder>,
-        _i10.GReview_media {
+        _i10.GReviewFragment_media {
   GHomeOverviewData_reviews_reviews_media._();
 
   factory GHomeOverviewData_reviews_reviews_media(
@@ -1298,7 +1298,7 @@ abstract class GHomeOverviewData_reviews_reviews_media_title
     implements
         Built<GHomeOverviewData_reviews_reviews_media_title,
             GHomeOverviewData_reviews_reviews_media_titleBuilder>,
-        _i10.GReview_media_title {
+        _i10.GReviewFragment_media_title {
   GHomeOverviewData_reviews_reviews_media_title._();
 
   factory GHomeOverviewData_reviews_reviews_media_title(
@@ -1335,7 +1335,7 @@ abstract class GHomeOverviewData_reviews_reviews_user
     implements
         Built<GHomeOverviewData_reviews_reviews_user,
             GHomeOverviewData_reviews_reviews_userBuilder>,
-        _i10.GReview_user,
+        _i10.GReviewFragment_user,
         _i9.GUserFragment {
   GHomeOverviewData_reviews_reviews_user._();
 
@@ -1383,7 +1383,7 @@ abstract class GHomeOverviewData_reviews_reviews_user_avatar
     implements
         Built<GHomeOverviewData_reviews_reviews_user_avatar,
             GHomeOverviewData_reviews_reviews_user_avatarBuilder>,
-        _i10.GReview_user_avatar,
+        _i10.GReviewFragment_user_avatar,
         _i9.GUserFragment_avatar {
   GHomeOverviewData_reviews_reviews_user_avatar._();
 

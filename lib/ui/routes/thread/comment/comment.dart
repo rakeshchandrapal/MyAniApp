@@ -28,7 +28,7 @@ class ThreadCommentPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: GQLRequest(
-        operationRequest: GThreadCommentReq(
+        operationRequest: GCommentReq(
           (b) => b..vars.id = id,
         ),
         builder: (context, response, error, refetch) => ListView(
@@ -67,7 +67,7 @@ class _ThreadComment extends ConsumerWidget {
     this.isReply,
   });
 
-  final GThreadCommentData_ThreadComment comment;
+  final GCommentData_ThreadComment comment;
   final void Function() refetch;
   final bool? isReply;
 
@@ -75,12 +75,12 @@ class _ThreadComment extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
 
-    List<GThreadCommentData_ThreadComment> replies = [];
+    List<GCommentData_ThreadComment> replies = [];
 
     try {
       if (comment.childComments != null) {
         for (var reply in comment.childComments!.asList) {
-          replies.add(GThreadCommentData_ThreadComment.fromJson(reply)!);
+          replies.add(GCommentData_ThreadComment.fromJson(reply)!);
         }
       }
     } catch (err) {}

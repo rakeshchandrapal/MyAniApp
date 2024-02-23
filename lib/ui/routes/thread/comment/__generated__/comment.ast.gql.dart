@@ -6,9 +6,9 @@ import 'package:gql/ast.dart' as _i1;
 import 'package:myaniapp/graphql/fragments/__generated__/user.ast.gql.dart'
     as _i2;
 
-const ThreadComment = _i1.OperationDefinitionNode(
+const Comment = _i1.OperationDefinitionNode(
   type: _i1.OperationType.query,
-  name: _i1.NameNode(value: 'ThreadComment'),
+  name: _i1.NameNode(value: 'Comment'),
   variableDefinitions: [
     _i1.VariableDefinitionNode(
       variable: _i1.VariableNode(name: _i1.NameNode(value: 'id')),
@@ -106,6 +106,6 @@ const ThreadComment = _i1.OperationDefinitionNode(
   ]),
 );
 const document = _i1.DocumentNode(definitions: [
-  ThreadComment,
+  Comment,
   _i2.UserFragment,
 ]);

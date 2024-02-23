@@ -74,7 +74,7 @@ const UserReviews = _i1.OperationDefinitionNode(
           directives: [],
           selectionSet: _i1.SelectionSetNode(selections: [
             _i1.FragmentSpreadNode(
-              name: _i1.NameNode(value: 'Review'),
+              name: _i1.NameNode(value: 'ReviewFragment'),
               directives: [],
             )
           ]),
@@ -86,6 +86,6 @@ const UserReviews = _i1.OperationDefinitionNode(
 const document = _i1.DocumentNode(definitions: [
   UserReviews,
   _i2.PageInfo,
-  _i3.Review,
+  _i3.ReviewFragment,
   _i4.UserFragment,
 ]);

@@ -13,45 +13,43 @@ import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
 
 part 'comment.data.gql.g.dart';
 
-abstract class GThreadCommentData
-    implements Built<GThreadCommentData, GThreadCommentDataBuilder> {
-  GThreadCommentData._();
+abstract class GCommentData
+    implements Built<GCommentData, GCommentDataBuilder> {
+  GCommentData._();
 
-  factory GThreadCommentData([Function(GThreadCommentDataBuilder b) updates]) =
-      _$GThreadCommentData;
+  factory GCommentData([Function(GCommentDataBuilder b) updates]) =
+      _$GCommentData;
 
-  static void _initializeBuilder(GThreadCommentDataBuilder b) =>
+  static void _initializeBuilder(GCommentDataBuilder b) =>
       b..G__typename = 'Query';
 
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
-  BuiltList<GThreadCommentData_ThreadComment?>? get ThreadComment;
-  static Serializer<GThreadCommentData> get serializer =>
-      _$gThreadCommentDataSerializer;
+  BuiltList<GCommentData_ThreadComment?>? get ThreadComment;
+  static Serializer<GCommentData> get serializer => _$gCommentDataSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GThreadCommentData.serializer,
+        GCommentData.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GThreadCommentData? fromJson(Map<String, dynamic> json) =>
+  static GCommentData? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GThreadCommentData.serializer,
+        GCommentData.serializer,
         json,
       );
 }
 
-abstract class GThreadCommentData_ThreadComment
+abstract class GCommentData_ThreadComment
     implements
-        Built<GThreadCommentData_ThreadComment,
-            GThreadCommentData_ThreadCommentBuilder> {
-  GThreadCommentData_ThreadComment._();
+        Built<GCommentData_ThreadComment, GCommentData_ThreadCommentBuilder> {
+  GCommentData_ThreadComment._();
 
-  factory GThreadCommentData_ThreadComment(
-          [Function(GThreadCommentData_ThreadCommentBuilder b) updates]) =
-      _$GThreadCommentData_ThreadComment;
+  factory GCommentData_ThreadComment(
+          [Function(GCommentData_ThreadCommentBuilder b) updates]) =
+      _$GCommentData_ThreadComment;
 
-  static void _initializeBuilder(GThreadCommentData_ThreadCommentBuilder b) =>
+  static void _initializeBuilder(GCommentData_ThreadCommentBuilder b) =>
       b..G__typename = 'ThreadComment';
 
   @BuiltValueField(wireName: '__typename')
@@ -62,38 +60,36 @@ abstract class GThreadCommentData_ThreadComment
   bool? get isLiked;
   int get likeCount;
   int get createdAt;
-  GThreadCommentData_ThreadComment_user? get user;
+  GCommentData_ThreadComment_user? get user;
   _i2.JsonObject? get childComments;
   bool? get isLocked;
-  static Serializer<GThreadCommentData_ThreadComment> get serializer =>
-      _$gThreadCommentDataThreadCommentSerializer;
+  static Serializer<GCommentData_ThreadComment> get serializer =>
+      _$gCommentDataThreadCommentSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GThreadCommentData_ThreadComment.serializer,
+        GCommentData_ThreadComment.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GThreadCommentData_ThreadComment? fromJson(
-          Map<String, dynamic> json) =>
+  static GCommentData_ThreadComment? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GThreadCommentData_ThreadComment.serializer,
+        GCommentData_ThreadComment.serializer,
         json,
       );
 }
 
-abstract class GThreadCommentData_ThreadComment_user
+abstract class GCommentData_ThreadComment_user
     implements
-        Built<GThreadCommentData_ThreadComment_user,
-            GThreadCommentData_ThreadComment_userBuilder>,
+        Built<GCommentData_ThreadComment_user,
+            GCommentData_ThreadComment_userBuilder>,
         _i3.GUserFragment {
-  GThreadCommentData_ThreadComment_user._();
+  GCommentData_ThreadComment_user._();
 
-  factory GThreadCommentData_ThreadComment_user(
-          [Function(GThreadCommentData_ThreadComment_userBuilder b) updates]) =
-      _$GThreadCommentData_ThreadComment_user;
+  factory GCommentData_ThreadComment_user(
+          [Function(GCommentData_ThreadComment_userBuilder b) updates]) =
+      _$GCommentData_ThreadComment_user;
 
-  static void _initializeBuilder(
-          GThreadCommentData_ThreadComment_userBuilder b) =>
+  static void _initializeBuilder(GCommentData_ThreadComment_userBuilder b) =>
       b..G__typename = 'User';
 
   @override
@@ -110,37 +106,36 @@ abstract class GThreadCommentData_ThreadComment_user
   @override
   BuiltList<_i4.GModRole?>? get moderatorRoles;
   @override
-  GThreadCommentData_ThreadComment_user_avatar? get avatar;
-  static Serializer<GThreadCommentData_ThreadComment_user> get serializer =>
-      _$gThreadCommentDataThreadCommentUserSerializer;
+  GCommentData_ThreadComment_user_avatar? get avatar;
+  static Serializer<GCommentData_ThreadComment_user> get serializer =>
+      _$gCommentDataThreadCommentUserSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GThreadCommentData_ThreadComment_user.serializer,
+        GCommentData_ThreadComment_user.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GThreadCommentData_ThreadComment_user? fromJson(
-          Map<String, dynamic> json) =>
+  static GCommentData_ThreadComment_user? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GThreadCommentData_ThreadComment_user.serializer,
+        GCommentData_ThreadComment_user.serializer,
         json,
       );
 }
 
-abstract class GThreadCommentData_ThreadComment_user_avatar
+abstract class GCommentData_ThreadComment_user_avatar
     implements
-        Built<GThreadCommentData_ThreadComment_user_avatar,
-            GThreadCommentData_ThreadComment_user_avatarBuilder>,
+        Built<GCommentData_ThreadComment_user_avatar,
+            GCommentData_ThreadComment_user_avatarBuilder>,
         _i3.GUserFragment_avatar {
-  GThreadCommentData_ThreadComment_user_avatar._();
+  GCommentData_ThreadComment_user_avatar._();
 
-  factory GThreadCommentData_ThreadComment_user_avatar(
-      [Function(GThreadCommentData_ThreadComment_user_avatarBuilder b)
-          updates]) = _$GThreadCommentData_ThreadComment_user_avatar;
+  factory GCommentData_ThreadComment_user_avatar(
+          [Function(GCommentData_ThreadComment_user_avatarBuilder b) updates]) =
+      _$GCommentData_ThreadComment_user_avatar;
 
   static void _initializeBuilder(
-          GThreadCommentData_ThreadComment_user_avatarBuilder b) =>
+          GCommentData_ThreadComment_user_avatarBuilder b) =>
       b..G__typename = 'UserAvatar';
 
   @override
@@ -148,19 +143,19 @@ abstract class GThreadCommentData_ThreadComment_user_avatar
   String get G__typename;
   @override
   String? get large;
-  static Serializer<GThreadCommentData_ThreadComment_user_avatar>
-      get serializer => _$gThreadCommentDataThreadCommentUserAvatarSerializer;
+  static Serializer<GCommentData_ThreadComment_user_avatar> get serializer =>
+      _$gCommentDataThreadCommentUserAvatarSerializer;
 
   @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GThreadCommentData_ThreadComment_user_avatar.serializer,
+        GCommentData_ThreadComment_user_avatar.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GThreadCommentData_ThreadComment_user_avatar? fromJson(
+  static GCommentData_ThreadComment_user_avatar? fromJson(
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GThreadCommentData_ThreadComment_user_avatar.serializer,
+        GCommentData_ThreadComment_user_avatar.serializer,
         json,
       );
 }

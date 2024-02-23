@@ -6,28 +6,25 @@ part of 'comment.data.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GThreadCommentData> _$gThreadCommentDataSerializer =
-    new _$GThreadCommentDataSerializer();
-Serializer<GThreadCommentData_ThreadComment>
-    _$gThreadCommentDataThreadCommentSerializer =
-    new _$GThreadCommentData_ThreadCommentSerializer();
-Serializer<GThreadCommentData_ThreadComment_user>
-    _$gThreadCommentDataThreadCommentUserSerializer =
-    new _$GThreadCommentData_ThreadComment_userSerializer();
-Serializer<GThreadCommentData_ThreadComment_user_avatar>
-    _$gThreadCommentDataThreadCommentUserAvatarSerializer =
-    new _$GThreadCommentData_ThreadComment_user_avatarSerializer();
+Serializer<GCommentData> _$gCommentDataSerializer =
+    new _$GCommentDataSerializer();
+Serializer<GCommentData_ThreadComment> _$gCommentDataThreadCommentSerializer =
+    new _$GCommentData_ThreadCommentSerializer();
+Serializer<GCommentData_ThreadComment_user>
+    _$gCommentDataThreadCommentUserSerializer =
+    new _$GCommentData_ThreadComment_userSerializer();
+Serializer<GCommentData_ThreadComment_user_avatar>
+    _$gCommentDataThreadCommentUserAvatarSerializer =
+    new _$GCommentData_ThreadComment_user_avatarSerializer();
 
-class _$GThreadCommentDataSerializer
-    implements StructuredSerializer<GThreadCommentData> {
+class _$GCommentDataSerializer implements StructuredSerializer<GCommentData> {
   @override
-  final Iterable<Type> types = const [GThreadCommentData, _$GThreadCommentData];
+  final Iterable<Type> types = const [GCommentData, _$GCommentData];
   @override
-  final String wireName = 'GThreadCommentData';
+  final String wireName = 'GCommentData';
 
   @override
-  Iterable<Object?> serialize(
-      Serializers serializers, GThreadCommentData object,
+  Iterable<Object?> serialize(Serializers serializers, GCommentData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -40,18 +37,17 @@ class _$GThreadCommentDataSerializer
       result
         ..add('ThreadComment')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType.nullable(GThreadCommentData_ThreadComment)
-            ])));
+            specifiedType: const FullType(BuiltList,
+                const [const FullType.nullable(GCommentData_ThreadComment)])));
     }
     return result;
   }
 
   @override
-  GThreadCommentData deserialize(
+  GCommentData deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GThreadCommentDataBuilder();
+    final result = new GCommentDataBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -66,7 +62,7 @@ class _$GThreadCommentDataSerializer
         case 'ThreadComment':
           result.ThreadComment.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType.nullable(GThreadCommentData_ThreadComment)
+                const FullType.nullable(GCommentData_ThreadComment)
               ]))! as BuiltList<Object?>);
           break;
       }
@@ -76,19 +72,19 @@ class _$GThreadCommentDataSerializer
   }
 }
 
-class _$GThreadCommentData_ThreadCommentSerializer
-    implements StructuredSerializer<GThreadCommentData_ThreadComment> {
+class _$GCommentData_ThreadCommentSerializer
+    implements StructuredSerializer<GCommentData_ThreadComment> {
   @override
   final Iterable<Type> types = const [
-    GThreadCommentData_ThreadComment,
-    _$GThreadCommentData_ThreadComment
+    GCommentData_ThreadComment,
+    _$GCommentData_ThreadComment
   ];
   @override
-  final String wireName = 'GThreadCommentData_ThreadComment';
+  final String wireName = 'GCommentData_ThreadComment';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GThreadCommentData_ThreadComment object,
+      Serializers serializers, GCommentData_ThreadComment object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -129,8 +125,7 @@ class _$GThreadCommentData_ThreadCommentSerializer
       result
         ..add('user')
         ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(GThreadCommentData_ThreadComment_user)));
+            specifiedType: const FullType(GCommentData_ThreadComment_user)));
     }
     value = object.childComments;
     if (value != null) {
@@ -150,10 +145,10 @@ class _$GThreadCommentData_ThreadCommentSerializer
   }
 
   @override
-  GThreadCommentData_ThreadComment deserialize(
+  GCommentData_ThreadComment deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GThreadCommentData_ThreadCommentBuilder();
+    final result = new GCommentData_ThreadCommentBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -192,8 +187,8 @@ class _$GThreadCommentData_ThreadCommentSerializer
         case 'user':
           result.user.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(GThreadCommentData_ThreadComment_user))!
-              as GThreadCommentData_ThreadComment_user);
+                      const FullType(GCommentData_ThreadComment_user))!
+              as GCommentData_ThreadComment_user);
           break;
         case 'childComments':
           result.childComments = serializers.deserialize(value,
@@ -210,19 +205,19 @@ class _$GThreadCommentData_ThreadCommentSerializer
   }
 }
 
-class _$GThreadCommentData_ThreadComment_userSerializer
-    implements StructuredSerializer<GThreadCommentData_ThreadComment_user> {
+class _$GCommentData_ThreadComment_userSerializer
+    implements StructuredSerializer<GCommentData_ThreadComment_user> {
   @override
   final Iterable<Type> types = const [
-    GThreadCommentData_ThreadComment_user,
-    _$GThreadCommentData_ThreadComment_user
+    GCommentData_ThreadComment_user,
+    _$GCommentData_ThreadComment_user
   ];
   @override
-  final String wireName = 'GThreadCommentData_ThreadComment_user';
+  final String wireName = 'GCommentData_ThreadComment_user';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GThreadCommentData_ThreadComment_user object,
+      Serializers serializers, GCommentData_ThreadComment_user object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -261,16 +256,16 @@ class _$GThreadCommentData_ThreadComment_userSerializer
         ..add('avatar')
         ..add(serializers.serialize(value,
             specifiedType:
-                const FullType(GThreadCommentData_ThreadComment_user_avatar)));
+                const FullType(GCommentData_ThreadComment_user_avatar)));
     }
     return result;
   }
 
   @override
-  GThreadCommentData_ThreadComment_user deserialize(
+  GCommentData_ThreadComment_user deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GThreadCommentData_ThreadComment_userBuilder();
+    final result = new GCommentData_ThreadComment_userBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -306,9 +301,9 @@ class _$GThreadCommentData_ThreadComment_userSerializer
           break;
         case 'avatar':
           result.avatar.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      GThreadCommentData_ThreadComment_user_avatar))!
-              as GThreadCommentData_ThreadComment_user_avatar);
+                  specifiedType:
+                      const FullType(GCommentData_ThreadComment_user_avatar))!
+              as GCommentData_ThreadComment_user_avatar);
           break;
       }
     }
@@ -317,20 +312,19 @@ class _$GThreadCommentData_ThreadComment_userSerializer
   }
 }
 
-class _$GThreadCommentData_ThreadComment_user_avatarSerializer
-    implements
-        StructuredSerializer<GThreadCommentData_ThreadComment_user_avatar> {
+class _$GCommentData_ThreadComment_user_avatarSerializer
+    implements StructuredSerializer<GCommentData_ThreadComment_user_avatar> {
   @override
   final Iterable<Type> types = const [
-    GThreadCommentData_ThreadComment_user_avatar,
-    _$GThreadCommentData_ThreadComment_user_avatar
+    GCommentData_ThreadComment_user_avatar,
+    _$GCommentData_ThreadComment_user_avatar
   ];
   @override
-  final String wireName = 'GThreadCommentData_ThreadComment_user_avatar';
+  final String wireName = 'GCommentData_ThreadComment_user_avatar';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers,
-      GThreadCommentData_ThreadComment_user_avatar object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GCommentData_ThreadComment_user_avatar object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -349,10 +343,10 @@ class _$GThreadCommentData_ThreadComment_user_avatarSerializer
   }
 
   @override
-  GThreadCommentData_ThreadComment_user_avatar deserialize(
+  GCommentData_ThreadComment_user_avatar deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GThreadCommentData_ThreadComment_user_avatarBuilder();
+    final result = new GCommentData_ThreadComment_user_avatarBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -375,35 +369,32 @@ class _$GThreadCommentData_ThreadComment_user_avatarSerializer
   }
 }
 
-class _$GThreadCommentData extends GThreadCommentData {
+class _$GCommentData extends GCommentData {
   @override
   final String G__typename;
   @override
-  final BuiltList<GThreadCommentData_ThreadComment?>? ThreadComment;
+  final BuiltList<GCommentData_ThreadComment?>? ThreadComment;
 
-  factory _$GThreadCommentData(
-          [void Function(GThreadCommentDataBuilder)? updates]) =>
-      (new GThreadCommentDataBuilder()..update(updates))._build();
+  factory _$GCommentData([void Function(GCommentDataBuilder)? updates]) =>
+      (new GCommentDataBuilder()..update(updates))._build();
 
-  _$GThreadCommentData._({required this.G__typename, this.ThreadComment})
+  _$GCommentData._({required this.G__typename, this.ThreadComment})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GThreadCommentData', 'G__typename');
+        G__typename, r'GCommentData', 'G__typename');
   }
 
   @override
-  GThreadCommentData rebuild(
-          void Function(GThreadCommentDataBuilder) updates) =>
+  GCommentData rebuild(void Function(GCommentDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GThreadCommentDataBuilder toBuilder() =>
-      new GThreadCommentDataBuilder()..replace(this);
+  GCommentDataBuilder toBuilder() => new GCommentDataBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GThreadCommentData &&
+    return other is GCommentData &&
         G__typename == other.G__typename &&
         ThreadComment == other.ThreadComment;
   }
@@ -419,34 +410,32 @@ class _$GThreadCommentData extends GThreadCommentData {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GThreadCommentData')
+    return (newBuiltValueToStringHelper(r'GCommentData')
           ..add('G__typename', G__typename)
           ..add('ThreadComment', ThreadComment))
         .toString();
   }
 }
 
-class GThreadCommentDataBuilder
-    implements Builder<GThreadCommentData, GThreadCommentDataBuilder> {
-  _$GThreadCommentData? _$v;
+class GCommentDataBuilder
+    implements Builder<GCommentData, GCommentDataBuilder> {
+  _$GCommentData? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GThreadCommentData_ThreadComment?>? _ThreadComment;
-  ListBuilder<GThreadCommentData_ThreadComment?> get ThreadComment =>
-      _$this._ThreadComment ??=
-          new ListBuilder<GThreadCommentData_ThreadComment?>();
-  set ThreadComment(
-          ListBuilder<GThreadCommentData_ThreadComment?>? ThreadComment) =>
+  ListBuilder<GCommentData_ThreadComment?>? _ThreadComment;
+  ListBuilder<GCommentData_ThreadComment?> get ThreadComment =>
+      _$this._ThreadComment ??= new ListBuilder<GCommentData_ThreadComment?>();
+  set ThreadComment(ListBuilder<GCommentData_ThreadComment?>? ThreadComment) =>
       _$this._ThreadComment = ThreadComment;
 
-  GThreadCommentDataBuilder() {
-    GThreadCommentData._initializeBuilder(this);
+  GCommentDataBuilder() {
+    GCommentData._initializeBuilder(this);
   }
 
-  GThreadCommentDataBuilder get _$this {
+  GCommentDataBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -457,26 +446,26 @@ class GThreadCommentDataBuilder
   }
 
   @override
-  void replace(GThreadCommentData other) {
+  void replace(GCommentData other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GThreadCommentData;
+    _$v = other as _$GCommentData;
   }
 
   @override
-  void update(void Function(GThreadCommentDataBuilder)? updates) {
+  void update(void Function(GCommentDataBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GThreadCommentData build() => _build();
+  GCommentData build() => _build();
 
-  _$GThreadCommentData _build() {
-    _$GThreadCommentData _$result;
+  _$GCommentData _build() {
+    _$GCommentData _$result;
     try {
       _$result = _$v ??
-          new _$GThreadCommentData._(
+          new _$GCommentData._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, r'GThreadCommentData', 'G__typename'),
+                  G__typename, r'GCommentData', 'G__typename'),
               ThreadComment: _ThreadComment?.build());
     } catch (_) {
       late String _$failedField;
@@ -485,7 +474,7 @@ class GThreadCommentDataBuilder
         _ThreadComment?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GThreadCommentData', _$failedField, e.toString());
+            r'GCommentData', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -494,8 +483,7 @@ class GThreadCommentDataBuilder
   }
 }
 
-class _$GThreadCommentData_ThreadComment
-    extends GThreadCommentData_ThreadComment {
+class _$GCommentData_ThreadComment extends GCommentData_ThreadComment {
   @override
   final String G__typename;
   @override
@@ -511,17 +499,17 @@ class _$GThreadCommentData_ThreadComment
   @override
   final int createdAt;
   @override
-  final GThreadCommentData_ThreadComment_user? user;
+  final GCommentData_ThreadComment_user? user;
   @override
   final _i2.JsonObject? childComments;
   @override
   final bool? isLocked;
 
-  factory _$GThreadCommentData_ThreadComment(
-          [void Function(GThreadCommentData_ThreadCommentBuilder)? updates]) =>
-      (new GThreadCommentData_ThreadCommentBuilder()..update(updates))._build();
+  factory _$GCommentData_ThreadComment(
+          [void Function(GCommentData_ThreadCommentBuilder)? updates]) =>
+      (new GCommentData_ThreadCommentBuilder()..update(updates))._build();
 
-  _$GThreadCommentData_ThreadComment._(
+  _$GCommentData_ThreadComment._(
       {required this.G__typename,
       required this.id,
       this.threadId,
@@ -534,28 +522,28 @@ class _$GThreadCommentData_ThreadComment
       this.isLocked})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GThreadCommentData_ThreadComment', 'G__typename');
+        G__typename, r'GCommentData_ThreadComment', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GThreadCommentData_ThreadComment', 'id');
+        id, r'GCommentData_ThreadComment', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        likeCount, r'GThreadCommentData_ThreadComment', 'likeCount');
+        likeCount, r'GCommentData_ThreadComment', 'likeCount');
     BuiltValueNullFieldError.checkNotNull(
-        createdAt, r'GThreadCommentData_ThreadComment', 'createdAt');
+        createdAt, r'GCommentData_ThreadComment', 'createdAt');
   }
 
   @override
-  GThreadCommentData_ThreadComment rebuild(
-          void Function(GThreadCommentData_ThreadCommentBuilder) updates) =>
+  GCommentData_ThreadComment rebuild(
+          void Function(GCommentData_ThreadCommentBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GThreadCommentData_ThreadCommentBuilder toBuilder() =>
-      new GThreadCommentData_ThreadCommentBuilder()..replace(this);
+  GCommentData_ThreadCommentBuilder toBuilder() =>
+      new GCommentData_ThreadCommentBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GThreadCommentData_ThreadComment &&
+    return other is GCommentData_ThreadComment &&
         G__typename == other.G__typename &&
         id == other.id &&
         threadId == other.threadId &&
@@ -587,7 +575,7 @@ class _$GThreadCommentData_ThreadComment
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GThreadCommentData_ThreadComment')
+    return (newBuiltValueToStringHelper(r'GCommentData_ThreadComment')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('threadId', threadId)
@@ -602,11 +590,10 @@ class _$GThreadCommentData_ThreadComment
   }
 }
 
-class GThreadCommentData_ThreadCommentBuilder
+class GCommentData_ThreadCommentBuilder
     implements
-        Builder<GThreadCommentData_ThreadComment,
-            GThreadCommentData_ThreadCommentBuilder> {
-  _$GThreadCommentData_ThreadComment? _$v;
+        Builder<GCommentData_ThreadComment, GCommentData_ThreadCommentBuilder> {
+  _$GCommentData_ThreadComment? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -636,11 +623,10 @@ class GThreadCommentData_ThreadCommentBuilder
   int? get createdAt => _$this._createdAt;
   set createdAt(int? createdAt) => _$this._createdAt = createdAt;
 
-  GThreadCommentData_ThreadComment_userBuilder? _user;
-  GThreadCommentData_ThreadComment_userBuilder get user =>
-      _$this._user ??= new GThreadCommentData_ThreadComment_userBuilder();
-  set user(GThreadCommentData_ThreadComment_userBuilder? user) =>
-      _$this._user = user;
+  GCommentData_ThreadComment_userBuilder? _user;
+  GCommentData_ThreadComment_userBuilder get user =>
+      _$this._user ??= new GCommentData_ThreadComment_userBuilder();
+  set user(GCommentData_ThreadComment_userBuilder? user) => _$this._user = user;
 
   _i2.JsonObject? _childComments;
   _i2.JsonObject? get childComments => _$this._childComments;
@@ -651,11 +637,11 @@ class GThreadCommentData_ThreadCommentBuilder
   bool? get isLocked => _$this._isLocked;
   set isLocked(bool? isLocked) => _$this._isLocked = isLocked;
 
-  GThreadCommentData_ThreadCommentBuilder() {
-    GThreadCommentData_ThreadComment._initializeBuilder(this);
+  GCommentData_ThreadCommentBuilder() {
+    GCommentData_ThreadComment._initializeBuilder(this);
   }
 
-  GThreadCommentData_ThreadCommentBuilder get _$this {
+  GCommentData_ThreadCommentBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -674,35 +660,35 @@ class GThreadCommentData_ThreadCommentBuilder
   }
 
   @override
-  void replace(GThreadCommentData_ThreadComment other) {
+  void replace(GCommentData_ThreadComment other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GThreadCommentData_ThreadComment;
+    _$v = other as _$GCommentData_ThreadComment;
   }
 
   @override
-  void update(void Function(GThreadCommentData_ThreadCommentBuilder)? updates) {
+  void update(void Function(GCommentData_ThreadCommentBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GThreadCommentData_ThreadComment build() => _build();
+  GCommentData_ThreadComment build() => _build();
 
-  _$GThreadCommentData_ThreadComment _build() {
-    _$GThreadCommentData_ThreadComment _$result;
+  _$GCommentData_ThreadComment _build() {
+    _$GCommentData_ThreadComment _$result;
     try {
       _$result = _$v ??
-          new _$GThreadCommentData_ThreadComment._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                  r'GThreadCommentData_ThreadComment', 'G__typename'),
+          new _$GCommentData_ThreadComment._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GCommentData_ThreadComment', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GThreadCommentData_ThreadComment', 'id'),
+                  id, r'GCommentData_ThreadComment', 'id'),
               threadId: threadId,
               comment: comment,
               isLiked: isLiked,
               likeCount: BuiltValueNullFieldError.checkNotNull(
-                  likeCount, r'GThreadCommentData_ThreadComment', 'likeCount'),
+                  likeCount, r'GCommentData_ThreadComment', 'likeCount'),
               createdAt: BuiltValueNullFieldError.checkNotNull(
-                  createdAt, r'GThreadCommentData_ThreadComment', 'createdAt'),
+                  createdAt, r'GCommentData_ThreadComment', 'createdAt'),
               user: _user?.build(),
               childComments: childComments,
               isLocked: isLocked);
@@ -713,7 +699,7 @@ class GThreadCommentData_ThreadCommentBuilder
         _user?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GThreadCommentData_ThreadComment', _$failedField, e.toString());
+            r'GCommentData_ThreadComment', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -722,8 +708,8 @@ class GThreadCommentData_ThreadCommentBuilder
   }
 }
 
-class _$GThreadCommentData_ThreadComment_user
-    extends GThreadCommentData_ThreadComment_user {
+class _$GCommentData_ThreadComment_user
+    extends GCommentData_ThreadComment_user {
   @override
   final String G__typename;
   @override
@@ -737,15 +723,13 @@ class _$GThreadCommentData_ThreadComment_user
   @override
   final BuiltList<_i4.GModRole?>? moderatorRoles;
   @override
-  final GThreadCommentData_ThreadComment_user_avatar? avatar;
+  final GCommentData_ThreadComment_user_avatar? avatar;
 
-  factory _$GThreadCommentData_ThreadComment_user(
-          [void Function(GThreadCommentData_ThreadComment_userBuilder)?
-              updates]) =>
-      (new GThreadCommentData_ThreadComment_userBuilder()..update(updates))
-          ._build();
+  factory _$GCommentData_ThreadComment_user(
+          [void Function(GCommentData_ThreadComment_userBuilder)? updates]) =>
+      (new GCommentData_ThreadComment_userBuilder()..update(updates))._build();
 
-  _$GThreadCommentData_ThreadComment_user._(
+  _$GCommentData_ThreadComment_user._(
       {required this.G__typename,
       required this.id,
       required this.name,
@@ -755,27 +739,26 @@ class _$GThreadCommentData_ThreadComment_user
       this.avatar})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, r'GThreadCommentData_ThreadComment_user', 'G__typename');
+        G__typename, r'GCommentData_ThreadComment_user', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        id, r'GThreadCommentData_ThreadComment_user', 'id');
+        id, r'GCommentData_ThreadComment_user', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        name, r'GThreadCommentData_ThreadComment_user', 'name');
+        name, r'GCommentData_ThreadComment_user', 'name');
   }
 
   @override
-  GThreadCommentData_ThreadComment_user rebuild(
-          void Function(GThreadCommentData_ThreadComment_userBuilder)
-              updates) =>
+  GCommentData_ThreadComment_user rebuild(
+          void Function(GCommentData_ThreadComment_userBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GThreadCommentData_ThreadComment_userBuilder toBuilder() =>
-      new GThreadCommentData_ThreadComment_userBuilder()..replace(this);
+  GCommentData_ThreadComment_userBuilder toBuilder() =>
+      new GCommentData_ThreadComment_userBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GThreadCommentData_ThreadComment_user &&
+    return other is GCommentData_ThreadComment_user &&
         G__typename == other.G__typename &&
         id == other.id &&
         name == other.name &&
@@ -801,8 +784,7 @@ class _$GThreadCommentData_ThreadComment_user
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(
-            r'GThreadCommentData_ThreadComment_user')
+    return (newBuiltValueToStringHelper(r'GCommentData_ThreadComment_user')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('name', name)
@@ -814,11 +796,11 @@ class _$GThreadCommentData_ThreadComment_user
   }
 }
 
-class GThreadCommentData_ThreadComment_userBuilder
+class GCommentData_ThreadComment_userBuilder
     implements
-        Builder<GThreadCommentData_ThreadComment_user,
-            GThreadCommentData_ThreadComment_userBuilder> {
-  _$GThreadCommentData_ThreadComment_user? _$v;
+        Builder<GCommentData_ThreadComment_user,
+            GCommentData_ThreadComment_userBuilder> {
+  _$GCommentData_ThreadComment_user? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -846,18 +828,17 @@ class GThreadCommentData_ThreadComment_userBuilder
   set moderatorRoles(ListBuilder<_i4.GModRole?>? moderatorRoles) =>
       _$this._moderatorRoles = moderatorRoles;
 
-  GThreadCommentData_ThreadComment_user_avatarBuilder? _avatar;
-  GThreadCommentData_ThreadComment_user_avatarBuilder get avatar =>
-      _$this._avatar ??=
-          new GThreadCommentData_ThreadComment_user_avatarBuilder();
-  set avatar(GThreadCommentData_ThreadComment_user_avatarBuilder? avatar) =>
+  GCommentData_ThreadComment_user_avatarBuilder? _avatar;
+  GCommentData_ThreadComment_user_avatarBuilder get avatar =>
+      _$this._avatar ??= new GCommentData_ThreadComment_user_avatarBuilder();
+  set avatar(GCommentData_ThreadComment_user_avatarBuilder? avatar) =>
       _$this._avatar = avatar;
 
-  GThreadCommentData_ThreadComment_userBuilder() {
-    GThreadCommentData_ThreadComment_user._initializeBuilder(this);
+  GCommentData_ThreadComment_userBuilder() {
+    GCommentData_ThreadComment_user._initializeBuilder(this);
   }
 
-  GThreadCommentData_ThreadComment_userBuilder get _$this {
+  GCommentData_ThreadComment_userBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -873,31 +854,30 @@ class GThreadCommentData_ThreadComment_userBuilder
   }
 
   @override
-  void replace(GThreadCommentData_ThreadComment_user other) {
+  void replace(GCommentData_ThreadComment_user other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GThreadCommentData_ThreadComment_user;
+    _$v = other as _$GCommentData_ThreadComment_user;
   }
 
   @override
-  void update(
-      void Function(GThreadCommentData_ThreadComment_userBuilder)? updates) {
+  void update(void Function(GCommentData_ThreadComment_userBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GThreadCommentData_ThreadComment_user build() => _build();
+  GCommentData_ThreadComment_user build() => _build();
 
-  _$GThreadCommentData_ThreadComment_user _build() {
-    _$GThreadCommentData_ThreadComment_user _$result;
+  _$GCommentData_ThreadComment_user _build() {
+    _$GCommentData_ThreadComment_user _$result;
     try {
       _$result = _$v ??
-          new _$GThreadCommentData_ThreadComment_user._(
+          new _$GCommentData_ThreadComment_user._(
               G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                  r'GThreadCommentData_ThreadComment_user', 'G__typename'),
+                  r'GCommentData_ThreadComment_user', 'G__typename'),
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'GThreadCommentData_ThreadComment_user', 'id'),
+                  id, r'GCommentData_ThreadComment_user', 'id'),
               name: BuiltValueNullFieldError.checkNotNull(
-                  name, r'GThreadCommentData_ThreadComment_user', 'name'),
+                  name, r'GCommentData_ThreadComment_user', 'name'),
               donatorTier: donatorTier,
               donatorBadge: donatorBadge,
               moderatorRoles: _moderatorRoles?.build(),
@@ -911,9 +891,7 @@ class GThreadCommentData_ThreadComment_userBuilder
         _avatar?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'GThreadCommentData_ThreadComment_user',
-            _$failedField,
-            e.toString());
+            r'GCommentData_ThreadComment_user', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -922,41 +900,40 @@ class GThreadCommentData_ThreadComment_userBuilder
   }
 }
 
-class _$GThreadCommentData_ThreadComment_user_avatar
-    extends GThreadCommentData_ThreadComment_user_avatar {
+class _$GCommentData_ThreadComment_user_avatar
+    extends GCommentData_ThreadComment_user_avatar {
   @override
   final String G__typename;
   @override
   final String? large;
 
-  factory _$GThreadCommentData_ThreadComment_user_avatar(
-          [void Function(GThreadCommentData_ThreadComment_user_avatarBuilder)?
+  factory _$GCommentData_ThreadComment_user_avatar(
+          [void Function(GCommentData_ThreadComment_user_avatarBuilder)?
               updates]) =>
-      (new GThreadCommentData_ThreadComment_user_avatarBuilder()
-            ..update(updates))
+      (new GCommentData_ThreadComment_user_avatarBuilder()..update(updates))
           ._build();
 
-  _$GThreadCommentData_ThreadComment_user_avatar._(
+  _$GCommentData_ThreadComment_user_avatar._(
       {required this.G__typename, this.large})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(G__typename,
-        r'GThreadCommentData_ThreadComment_user_avatar', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GCommentData_ThreadComment_user_avatar', 'G__typename');
   }
 
   @override
-  GThreadCommentData_ThreadComment_user_avatar rebuild(
-          void Function(GThreadCommentData_ThreadComment_user_avatarBuilder)
+  GCommentData_ThreadComment_user_avatar rebuild(
+          void Function(GCommentData_ThreadComment_user_avatarBuilder)
               updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GThreadCommentData_ThreadComment_user_avatarBuilder toBuilder() =>
-      new GThreadCommentData_ThreadComment_user_avatarBuilder()..replace(this);
+  GCommentData_ThreadComment_user_avatarBuilder toBuilder() =>
+      new GCommentData_ThreadComment_user_avatarBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GThreadCommentData_ThreadComment_user_avatar &&
+    return other is GCommentData_ThreadComment_user_avatar &&
         G__typename == other.G__typename &&
         large == other.large;
   }
@@ -973,18 +950,18 @@ class _$GThreadCommentData_ThreadComment_user_avatar
   @override
   String toString() {
     return (newBuiltValueToStringHelper(
-            r'GThreadCommentData_ThreadComment_user_avatar')
+            r'GCommentData_ThreadComment_user_avatar')
           ..add('G__typename', G__typename)
           ..add('large', large))
         .toString();
   }
 }
 
-class GThreadCommentData_ThreadComment_user_avatarBuilder
+class GCommentData_ThreadComment_user_avatarBuilder
     implements
-        Builder<GThreadCommentData_ThreadComment_user_avatar,
-            GThreadCommentData_ThreadComment_user_avatarBuilder> {
-  _$GThreadCommentData_ThreadComment_user_avatar? _$v;
+        Builder<GCommentData_ThreadComment_user_avatar,
+            GCommentData_ThreadComment_user_avatarBuilder> {
+  _$GCommentData_ThreadComment_user_avatar? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -994,11 +971,11 @@ class GThreadCommentData_ThreadComment_user_avatarBuilder
   String? get large => _$this._large;
   set large(String? large) => _$this._large = large;
 
-  GThreadCommentData_ThreadComment_user_avatarBuilder() {
-    GThreadCommentData_ThreadComment_user_avatar._initializeBuilder(this);
+  GCommentData_ThreadComment_user_avatarBuilder() {
+    GCommentData_ThreadComment_user_avatar._initializeBuilder(this);
   }
 
-  GThreadCommentData_ThreadComment_user_avatarBuilder get _$this {
+  GCommentData_ThreadComment_user_avatarBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -1009,26 +986,25 @@ class GThreadCommentData_ThreadComment_user_avatarBuilder
   }
 
   @override
-  void replace(GThreadCommentData_ThreadComment_user_avatar other) {
+  void replace(GCommentData_ThreadComment_user_avatar other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GThreadCommentData_ThreadComment_user_avatar;
+    _$v = other as _$GCommentData_ThreadComment_user_avatar;
   }
 
   @override
   void update(
-      void Function(GThreadCommentData_ThreadComment_user_avatarBuilder)?
-          updates) {
+      void Function(GCommentData_ThreadComment_user_avatarBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GThreadCommentData_ThreadComment_user_avatar build() => _build();
+  GCommentData_ThreadComment_user_avatar build() => _build();
 
-  _$GThreadCommentData_ThreadComment_user_avatar _build() {
+  _$GCommentData_ThreadComment_user_avatar _build() {
     final _$result = _$v ??
-        new _$GThreadCommentData_ThreadComment_user_avatar._(
+        new _$GCommentData_ThreadComment_user_avatar._(
             G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                r'GThreadCommentData_ThreadComment_user_avatar', 'G__typename'),
+                r'GCommentData_ThreadComment_user_avatar', 'G__typename'),
             large: large);
     replace(_$result);
     return _$result;

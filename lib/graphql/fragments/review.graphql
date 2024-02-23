@@ -1,6 +1,6 @@
 # import '/graphql/fragments/user.graphql'
 
-fragment Review on Review {
+fragment ReviewFragment on Review {
   id
   rating
   ratingAmount

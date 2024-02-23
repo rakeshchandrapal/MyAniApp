@@ -16,24 +16,23 @@ import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.var.gql.
 
 part 'comment.req.gql.g.dart';
 
-abstract class GThreadCommentReq
+abstract class GCommentReq
     implements
-        Built<GThreadCommentReq, GThreadCommentReqBuilder>,
-        _i1.OperationRequest<_i2.GThreadCommentData, _i3.GThreadCommentVars> {
-  GThreadCommentReq._();
+        Built<GCommentReq, GCommentReqBuilder>,
+        _i1.OperationRequest<_i2.GCommentData, _i3.GCommentVars> {
+  GCommentReq._();
 
-  factory GThreadCommentReq([Function(GThreadCommentReqBuilder b) updates]) =
-      _$GThreadCommentReq;
+  factory GCommentReq([Function(GCommentReqBuilder b) updates]) = _$GCommentReq;
 
-  static void _initializeBuilder(GThreadCommentReqBuilder b) => b
+  static void _initializeBuilder(GCommentReqBuilder b) => b
     ..operation = _i4.Operation(
       document: _i5.document,
-      operationName: 'ThreadComment',
+      operationName: 'Comment',
     )
     ..executeOnListen = true;
 
   @override
-  _i3.GThreadCommentVars get vars;
+  _i3.GCommentVars get vars;
   @override
   _i4.Operation get operation;
   @override
@@ -46,12 +45,12 @@ abstract class GThreadCommentReq
   String? get requestId;
   @override
   @BuiltValueField(serialize: false)
-  _i2.GThreadCommentData? Function(
-    _i2.GThreadCommentData?,
-    _i2.GThreadCommentData?,
+  _i2.GCommentData? Function(
+    _i2.GCommentData?,
+    _i2.GCommentData?,
   )? get updateResult;
   @override
-  _i2.GThreadCommentData? get optimisticResponse;
+  _i2.GCommentData? get optimisticResponse;
   @override
   String? get updateCacheHandlerKey;
   @override
@@ -61,20 +60,19 @@ abstract class GThreadCommentReq
   @override
   bool get executeOnListen;
   @override
-  _i2.GThreadCommentData? parseData(Map<String, dynamic> json) =>
-      _i2.GThreadCommentData.fromJson(json);
+  _i2.GCommentData? parseData(Map<String, dynamic> json) =>
+      _i2.GCommentData.fromJson(json);
 
-  static Serializer<GThreadCommentReq> get serializer =>
-      _$gThreadCommentReqSerializer;
+  static Serializer<GCommentReq> get serializer => _$gCommentReqSerializer;
 
   Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
-        GThreadCommentReq.serializer,
+        GCommentReq.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GThreadCommentReq? fromJson(Map<String, dynamic> json) =>
+  static GCommentReq? fromJson(Map<String, dynamic> json) =>
       _i6.serializers.deserializeWith(
-        GThreadCommentReq.serializer,
+        GCommentReq.serializer,
         json,
       );
 }

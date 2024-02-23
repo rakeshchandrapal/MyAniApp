@@ -7,7 +7,7 @@ import 'package:myaniapp/ui/common/image.dart';
 class ReviewCard extends StatelessWidget {
   const ReviewCard({super.key, required this.review});
 
-  final GReview review;
+  final GReviewFragment review;
 
   @override
   Widget build(BuildContext context) {

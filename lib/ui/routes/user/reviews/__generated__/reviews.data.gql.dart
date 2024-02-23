@@ -115,7 +115,7 @@ abstract class GUserReviewsData_Page_reviews
     implements
         Built<GUserReviewsData_Page_reviews,
             GUserReviewsData_Page_reviewsBuilder>,
-        _i3.GReview {
+        _i3.GReviewFragment {
   GUserReviewsData_Page_reviews._();
 
   factory GUserReviewsData_Page_reviews(
@@ -160,7 +160,7 @@ abstract class GUserReviewsData_Page_reviews_media
     implements
         Built<GUserReviewsData_Page_reviews_media,
             GUserReviewsData_Page_reviews_mediaBuilder>,
-        _i3.GReview_media {
+        _i3.GReviewFragment_media {
   GUserReviewsData_Page_reviews_media._();
 
   factory GUserReviewsData_Page_reviews_media(
@@ -203,7 +203,7 @@ abstract class GUserReviewsData_Page_reviews_media_title
     implements
         Built<GUserReviewsData_Page_reviews_media_title,
             GUserReviewsData_Page_reviews_media_titleBuilder>,
-        _i3.GReview_media_title {
+        _i3.GReviewFragment_media_title {
   GUserReviewsData_Page_reviews_media_title._();
 
   factory GUserReviewsData_Page_reviews_media_title(
@@ -240,7 +240,7 @@ abstract class GUserReviewsData_Page_reviews_user
     implements
         Built<GUserReviewsData_Page_reviews_user,
             GUserReviewsData_Page_reviews_userBuilder>,
-        _i3.GReview_user,
+        _i3.GReviewFragment_user,
         _i5.GUserFragment {
   GUserReviewsData_Page_reviews_user._();
 
@@ -287,7 +287,7 @@ abstract class GUserReviewsData_Page_reviews_user_avatar
     implements
         Built<GUserReviewsData_Page_reviews_user_avatar,
             GUserReviewsData_Page_reviews_user_avatarBuilder>,
-        _i3.GReview_user_avatar,
+        _i3.GReviewFragment_user_avatar,
         _i5.GUserFragment_avatar {
   GUserReviewsData_Page_reviews_user_avatar._();
 

@@ -99,7 +99,7 @@ class ReviewPage extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
                       child: Wrap(
-                        spacing: 10,
+                        spacing: 5,
                         runSpacing: 5,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
@@ -122,7 +122,7 @@ class ReviewPage extends ConsumerWidget {
                           Text.rich(
                             TextSpan(
                               children: [
-                                const TextSpan(text: "made "),
+                                const TextSpan(text: "- "),
                                 TextSpan(
                                   text: timeago.format(
                                     dateFromTimestamp(
@@ -131,7 +131,6 @@ class ReviewPage extends ConsumerWidget {
                                 ),
                               ],
                             ),
-                            style: theme.textTheme.labelSmall,
                           )
                         ],
                       ),

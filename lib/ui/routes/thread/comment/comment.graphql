@@ -1,6 +1,6 @@
 # import '/graphql/fragments/user.graphql'
 
-query ThreadComment($id: Int) {
+query Comment($id: Int) {
   ThreadComment(id: $id) {
     id
     threadId

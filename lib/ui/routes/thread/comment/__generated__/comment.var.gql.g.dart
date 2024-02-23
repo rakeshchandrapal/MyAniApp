@@ -6,19 +6,17 @@ part of 'comment.var.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GThreadCommentVars> _$gThreadCommentVarsSerializer =
-    new _$GThreadCommentVarsSerializer();
+Serializer<GCommentVars> _$gCommentVarsSerializer =
+    new _$GCommentVarsSerializer();
 
-class _$GThreadCommentVarsSerializer
-    implements StructuredSerializer<GThreadCommentVars> {
+class _$GCommentVarsSerializer implements StructuredSerializer<GCommentVars> {
   @override
-  final Iterable<Type> types = const [GThreadCommentVars, _$GThreadCommentVars];
+  final Iterable<Type> types = const [GCommentVars, _$GCommentVars];
   @override
-  final String wireName = 'GThreadCommentVars';
+  final String wireName = 'GCommentVars';
 
   @override
-  Iterable<Object?> serialize(
-      Serializers serializers, GThreadCommentVars object,
+  Iterable<Object?> serialize(Serializers serializers, GCommentVars object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
@@ -32,10 +30,10 @@ class _$GThreadCommentVarsSerializer
   }
 
   @override
-  GThreadCommentVars deserialize(
+  GCommentVars deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GThreadCommentVarsBuilder();
+    final result = new GCommentVarsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -54,29 +52,26 @@ class _$GThreadCommentVarsSerializer
   }
 }
 
-class _$GThreadCommentVars extends GThreadCommentVars {
+class _$GCommentVars extends GCommentVars {
   @override
   final int? id;
 
-  factory _$GThreadCommentVars(
-          [void Function(GThreadCommentVarsBuilder)? updates]) =>
-      (new GThreadCommentVarsBuilder()..update(updates))._build();
+  factory _$GCommentVars([void Function(GCommentVarsBuilder)? updates]) =>
+      (new GCommentVarsBuilder()..update(updates))._build();
 
-  _$GThreadCommentVars._({this.id}) : super._();
+  _$GCommentVars._({this.id}) : super._();
 
   @override
-  GThreadCommentVars rebuild(
-          void Function(GThreadCommentVarsBuilder) updates) =>
+  GCommentVars rebuild(void Function(GCommentVarsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GThreadCommentVarsBuilder toBuilder() =>
-      new GThreadCommentVarsBuilder()..replace(this);
+  GCommentVarsBuilder toBuilder() => new GCommentVarsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GThreadCommentVars && id == other.id;
+    return other is GCommentVars && id == other.id;
   }
 
   @override
@@ -89,22 +84,22 @@ class _$GThreadCommentVars extends GThreadCommentVars {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GThreadCommentVars')..add('id', id))
+    return (newBuiltValueToStringHelper(r'GCommentVars')..add('id', id))
         .toString();
   }
 }
 
-class GThreadCommentVarsBuilder
-    implements Builder<GThreadCommentVars, GThreadCommentVarsBuilder> {
-  _$GThreadCommentVars? _$v;
+class GCommentVarsBuilder
+    implements Builder<GCommentVars, GCommentVarsBuilder> {
+  _$GCommentVars? _$v;
 
   int? _id;
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  GThreadCommentVarsBuilder();
+  GCommentVarsBuilder();
 
-  GThreadCommentVarsBuilder get _$this {
+  GCommentVarsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
@@ -114,21 +109,21 @@ class GThreadCommentVarsBuilder
   }
 
   @override
-  void replace(GThreadCommentVars other) {
+  void replace(GCommentVars other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GThreadCommentVars;
+    _$v = other as _$GCommentVars;
   }
 
   @override
-  void update(void Function(GThreadCommentVarsBuilder)? updates) {
+  void update(void Function(GCommentVarsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GThreadCommentVars build() => _build();
+  GCommentVars build() => _build();
 
-  _$GThreadCommentVars _build() {
-    final _$result = _$v ?? new _$GThreadCommentVars._(id: id);
+  _$GCommentVars _build() {
+    final _$result = _$v ?? new _$GCommentVars._(id: id);
     replace(_$result);
     return _$result;
   }

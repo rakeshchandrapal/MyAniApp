@@ -8,21 +8,24 @@ import 'package:myaniapp/graphql/__generated__/serializers.gql.dart' as _i1;
 
 part 'review.var.gql.g.dart';
 
-abstract class GReviewVars implements Built<GReviewVars, GReviewVarsBuilder> {
-  GReviewVars._();
+abstract class GReviewFragmentVars
+    implements Built<GReviewFragmentVars, GReviewFragmentVarsBuilder> {
+  GReviewFragmentVars._();
 
-  factory GReviewVars([Function(GReviewVarsBuilder b) updates]) = _$GReviewVars;
+  factory GReviewFragmentVars(
+      [Function(GReviewFragmentVarsBuilder b) updates]) = _$GReviewFragmentVars;
 
-  static Serializer<GReviewVars> get serializer => _$gReviewVarsSerializer;
+  static Serializer<GReviewFragmentVars> get serializer =>
+      _$gReviewFragmentVarsSerializer;
 
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GReviewVars.serializer,
+        GReviewFragmentVars.serializer,
         this,
       ) as Map<String, dynamic>);
 
-  static GReviewVars? fromJson(Map<String, dynamic> json) =>
+  static GReviewFragmentVars? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
-        GReviewVars.serializer,
+        GReviewFragmentVars.serializer,
         json,
       );
 }
