@@ -16,11 +16,6 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Declare short sha
-        shell: bash
-        run: |
-          echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
-
       - name: Get Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -40,12 +35,11 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: MyAniApp-${{ env.sha_short }}-linux-x64.zip
+          filename: MyAniApp-linux-x64.zip
           directory: build/linux/x64/release/bundle
 
       - uses: ncipollo/release-action@v1
         with:
-          tag: ${{ env.sha_short }}
-          artifacts: 'build/linux/x64/release/bundle/MyAniApp-${{ env.sha_short }}-linux-x64.zip'
+          artifacts: 'build/linux/x64/release/bundle/MyAniApp-linux-x64.zip'
           allowUpdates: true
-          prerelease: true
+          makeLatest: true
