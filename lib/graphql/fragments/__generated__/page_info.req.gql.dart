@@ -22,7 +22,7 @@ abstract class GPageInfoReq
         _i1.FragmentRequest<_i2.GPageInfoData, _i3.GPageInfoVars> {
   GPageInfoReq._();
 
-  factory GPageInfoReq([Function(GPageInfoReqBuilder b) updates]) =
+  factory GPageInfoReq([void Function(GPageInfoReqBuilder b) updates]) =
       _$GPageInfoReq;
 
   static void _initializeBuilder(GPageInfoReqBuilder b) => b
@@ -40,6 +40,12 @@ abstract class GPageInfoReq
   @override
   _i2.GPageInfoData? parseData(Map<String, dynamic> json) =>
       _i2.GPageInfoData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GPageInfoData data) => data.toJson();
 
   static Serializer<GPageInfoReq> get serializer => _$gPageInfoReqSerializer;
 

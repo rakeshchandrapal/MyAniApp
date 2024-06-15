@@ -13,7 +13,8 @@ part 'viewer.var.gql.g.dart';
 abstract class GViewerVars implements Built<GViewerVars, GViewerVarsBuilder> {
   GViewerVars._();
 
-  factory GViewerVars([Function(GViewerVarsBuilder b) updates]) = _$GViewerVars;
+  factory GViewerVars([void Function(GViewerVarsBuilder b) updates]) =
+      _$GViewerVars;
 
   static Serializer<GViewerVars> get serializer => _$gViewerVarsSerializer;
 
@@ -34,7 +35,7 @@ abstract class GNotificationCountVars
   GNotificationCountVars._();
 
   factory GNotificationCountVars(
-          [Function(GNotificationCountVarsBuilder b) updates]) =
+          [void Function(GNotificationCountVarsBuilder b) updates]) =
       _$GNotificationCountVars;
 
   static Serializer<GNotificationCountVars> get serializer =>
@@ -56,7 +57,7 @@ abstract class GUpdateUserVars
     implements Built<GUpdateUserVars, GUpdateUserVarsBuilder> {
   GUpdateUserVars._();
 
-  factory GUpdateUserVars([Function(GUpdateUserVarsBuilder b) updates]) =
+  factory GUpdateUserVars([void Function(GUpdateUserVarsBuilder b) updates]) =
       _$GUpdateUserVars;
 
   String? get about;
@@ -94,7 +95,7 @@ abstract class GThisUserVars
     implements Built<GThisUserVars, GThisUserVarsBuilder> {
   GThisUserVars._();
 
-  factory GThisUserVars([Function(GThisUserVarsBuilder b) updates]) =
+  factory GThisUserVars([void Function(GThisUserVarsBuilder b) updates]) =
       _$GThisUserVars;
 
   static Serializer<GThisUserVars> get serializer => _$gThisUserVarsSerializer;

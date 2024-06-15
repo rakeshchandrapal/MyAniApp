@@ -22,7 +22,7 @@ abstract class GTextActivityReq
         _i1.FragmentRequest<_i2.GTextActivityData, _i3.GTextActivityVars> {
   GTextActivityReq._();
 
-  factory GTextActivityReq([Function(GTextActivityReqBuilder b) updates]) =
+  factory GTextActivityReq([void Function(GTextActivityReqBuilder b) updates]) =
       _$GTextActivityReq;
 
   static void _initializeBuilder(GTextActivityReqBuilder b) => b
@@ -40,6 +40,12 @@ abstract class GTextActivityReq
   @override
   _i2.GTextActivityData? parseData(Map<String, dynamic> json) =>
       _i2.GTextActivityData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GTextActivityData data) => data.toJson();
 
   static Serializer<GTextActivityReq> get serializer =>
       _$gTextActivityReqSerializer;

@@ -14,6 +14,12 @@ Serializer<GMessageActivityData_messenger>
 Serializer<GMessageActivityData_messenger_avatar>
     _$gMessageActivityDataMessengerAvatarSerializer =
     new _$GMessageActivityData_messenger_avatarSerializer();
+Serializer<GMessageActivityData_recipient>
+    _$gMessageActivityDataRecipientSerializer =
+    new _$GMessageActivityData_recipientSerializer();
+Serializer<GMessageActivityData_recipient_avatar>
+    _$gMessageActivityDataRecipientAvatarSerializer =
+    new _$GMessageActivityData_recipient_avatarSerializer();
 
 class _$GMessageActivityDataSerializer
     implements StructuredSerializer<GMessageActivityData> {
@@ -101,6 +107,13 @@ class _$GMessageActivityDataSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(GMessageActivityData_messenger)));
     }
+    value = object.recipient;
+    if (value != null) {
+      result
+        ..add('recipient')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(GMessageActivityData_recipient)));
+    }
     return result;
   }
 
@@ -170,6 +183,12 @@ class _$GMessageActivityDataSerializer
                   specifiedType:
                       const FullType(GMessageActivityData_messenger))!
               as GMessageActivityData_messenger);
+          break;
+        case 'recipient':
+          result.recipient.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(GMessageActivityData_recipient))!
+              as GMessageActivityData_recipient);
           break;
       }
     }
@@ -342,6 +361,170 @@ class _$GMessageActivityData_messenger_avatarSerializer
   }
 }
 
+class _$GMessageActivityData_recipientSerializer
+    implements StructuredSerializer<GMessageActivityData_recipient> {
+  @override
+  final Iterable<Type> types = const [
+    GMessageActivityData_recipient,
+    _$GMessageActivityData_recipient
+  ];
+  @override
+  final String wireName = 'GMessageActivityData_recipient';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GMessageActivityData_recipient object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.donatorTier;
+    if (value != null) {
+      result
+        ..add('donatorTier')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.donatorBadge;
+    if (value != null) {
+      result
+        ..add('donatorBadge')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.moderatorRoles;
+    if (value != null) {
+      result
+        ..add('moderatorRoles')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType.nullable(_i1.GModRole)])));
+    }
+    value = object.avatar;
+    if (value != null) {
+      result
+        ..add('avatar')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(GMessageActivityData_recipient_avatar)));
+    }
+    return result;
+  }
+
+  @override
+  GMessageActivityData_recipient deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GMessageActivityData_recipientBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'donatorTier':
+          result.donatorTier = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'donatorBadge':
+          result.donatorBadge = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'moderatorRoles':
+          result.moderatorRoles.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType.nullable(_i1.GModRole)
+              ]))! as BuiltList<Object?>);
+          break;
+        case 'avatar':
+          result.avatar.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(GMessageActivityData_recipient_avatar))!
+              as GMessageActivityData_recipient_avatar);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GMessageActivityData_recipient_avatarSerializer
+    implements StructuredSerializer<GMessageActivityData_recipient_avatar> {
+  @override
+  final Iterable<Type> types = const [
+    GMessageActivityData_recipient_avatar,
+    _$GMessageActivityData_recipient_avatar
+  ];
+  @override
+  final String wireName = 'GMessageActivityData_recipient_avatar';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GMessageActivityData_recipient_avatar object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.large;
+    if (value != null) {
+      result
+        ..add('large')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  GMessageActivityData_recipient_avatar deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GMessageActivityData_recipient_avatarBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'large':
+          result.large = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$GMessageActivityData extends GMessageActivityData {
   @override
   final String G__typename;
@@ -369,6 +552,8 @@ class _$GMessageActivityData extends GMessageActivityData {
   final int? userId;
   @override
   final GMessageActivityData_messenger? messenger;
+  @override
+  final GMessageActivityData_recipient? recipient;
 
   factory _$GMessageActivityData(
           [void Function(GMessageActivityDataBuilder)? updates]) =>
@@ -387,7 +572,8 @@ class _$GMessageActivityData extends GMessageActivityData {
       required this.likeCount,
       required this.createdAt,
       this.userId,
-      this.messenger})
+      this.messenger,
+      this.recipient})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GMessageActivityData', 'G__typename');
@@ -425,7 +611,8 @@ class _$GMessageActivityData extends GMessageActivityData {
         likeCount == other.likeCount &&
         createdAt == other.createdAt &&
         userId == other.userId &&
-        messenger == other.messenger;
+        messenger == other.messenger &&
+        recipient == other.recipient;
   }
 
   @override
@@ -444,6 +631,7 @@ class _$GMessageActivityData extends GMessageActivityData {
     _$hash = $jc(_$hash, createdAt.hashCode);
     _$hash = $jc(_$hash, userId.hashCode);
     _$hash = $jc(_$hash, messenger.hashCode);
+    _$hash = $jc(_$hash, recipient.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -463,7 +651,8 @@ class _$GMessageActivityData extends GMessageActivityData {
           ..add('likeCount', likeCount)
           ..add('createdAt', createdAt)
           ..add('userId', userId)
-          ..add('messenger', messenger))
+          ..add('messenger', messenger)
+          ..add('recipient', recipient))
         .toString();
   }
 }
@@ -526,6 +715,12 @@ class GMessageActivityDataBuilder
   set messenger(GMessageActivityData_messengerBuilder? messenger) =>
       _$this._messenger = messenger;
 
+  GMessageActivityData_recipientBuilder? _recipient;
+  GMessageActivityData_recipientBuilder get recipient =>
+      _$this._recipient ??= new GMessageActivityData_recipientBuilder();
+  set recipient(GMessageActivityData_recipientBuilder? recipient) =>
+      _$this._recipient = recipient;
+
   GMessageActivityDataBuilder() {
     GMessageActivityData._initializeBuilder(this);
   }
@@ -546,6 +741,7 @@ class GMessageActivityDataBuilder
       _createdAt = $v.createdAt;
       _userId = $v.userId;
       _messenger = $v.messenger?.toBuilder();
+      _recipient = $v.recipient?.toBuilder();
       _$v = null;
     }
     return this;
@@ -587,12 +783,15 @@ class GMessageActivityDataBuilder
               createdAt: BuiltValueNullFieldError.checkNotNull(
                   createdAt, r'GMessageActivityData', 'createdAt'),
               userId: userId,
-              messenger: _messenger?.build());
+              messenger: _messenger?.build(),
+              recipient: _recipient?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'messenger';
         _messenger?.build();
+        _$failedField = 'recipient';
+        _recipient?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GMessageActivityData', _$failedField, e.toString());
@@ -900,6 +1099,308 @@ class GMessageActivityData_messenger_avatarBuilder
         new _$GMessageActivityData_messenger_avatar._(
             G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
                 r'GMessageActivityData_messenger_avatar', 'G__typename'),
+            large: large);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GMessageActivityData_recipient extends GMessageActivityData_recipient {
+  @override
+  final String G__typename;
+  @override
+  final int id;
+  @override
+  final String name;
+  @override
+  final int? donatorTier;
+  @override
+  final String? donatorBadge;
+  @override
+  final BuiltList<_i1.GModRole?>? moderatorRoles;
+  @override
+  final GMessageActivityData_recipient_avatar? avatar;
+
+  factory _$GMessageActivityData_recipient(
+          [void Function(GMessageActivityData_recipientBuilder)? updates]) =>
+      (new GMessageActivityData_recipientBuilder()..update(updates))._build();
+
+  _$GMessageActivityData_recipient._(
+      {required this.G__typename,
+      required this.id,
+      required this.name,
+      this.donatorTier,
+      this.donatorBadge,
+      this.moderatorRoles,
+      this.avatar})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GMessageActivityData_recipient', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        id, r'GMessageActivityData_recipient', 'id');
+    BuiltValueNullFieldError.checkNotNull(
+        name, r'GMessageActivityData_recipient', 'name');
+  }
+
+  @override
+  GMessageActivityData_recipient rebuild(
+          void Function(GMessageActivityData_recipientBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GMessageActivityData_recipientBuilder toBuilder() =>
+      new GMessageActivityData_recipientBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GMessageActivityData_recipient &&
+        G__typename == other.G__typename &&
+        id == other.id &&
+        name == other.name &&
+        donatorTier == other.donatorTier &&
+        donatorBadge == other.donatorBadge &&
+        moderatorRoles == other.moderatorRoles &&
+        avatar == other.avatar;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, donatorTier.hashCode);
+    _$hash = $jc(_$hash, donatorBadge.hashCode);
+    _$hash = $jc(_$hash, moderatorRoles.hashCode);
+    _$hash = $jc(_$hash, avatar.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GMessageActivityData_recipient')
+          ..add('G__typename', G__typename)
+          ..add('id', id)
+          ..add('name', name)
+          ..add('donatorTier', donatorTier)
+          ..add('donatorBadge', donatorBadge)
+          ..add('moderatorRoles', moderatorRoles)
+          ..add('avatar', avatar))
+        .toString();
+  }
+}
+
+class GMessageActivityData_recipientBuilder
+    implements
+        Builder<GMessageActivityData_recipient,
+            GMessageActivityData_recipientBuilder> {
+  _$GMessageActivityData_recipient? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  int? _donatorTier;
+  int? get donatorTier => _$this._donatorTier;
+  set donatorTier(int? donatorTier) => _$this._donatorTier = donatorTier;
+
+  String? _donatorBadge;
+  String? get donatorBadge => _$this._donatorBadge;
+  set donatorBadge(String? donatorBadge) => _$this._donatorBadge = donatorBadge;
+
+  ListBuilder<_i1.GModRole?>? _moderatorRoles;
+  ListBuilder<_i1.GModRole?> get moderatorRoles =>
+      _$this._moderatorRoles ??= new ListBuilder<_i1.GModRole?>();
+  set moderatorRoles(ListBuilder<_i1.GModRole?>? moderatorRoles) =>
+      _$this._moderatorRoles = moderatorRoles;
+
+  GMessageActivityData_recipient_avatarBuilder? _avatar;
+  GMessageActivityData_recipient_avatarBuilder get avatar =>
+      _$this._avatar ??= new GMessageActivityData_recipient_avatarBuilder();
+  set avatar(GMessageActivityData_recipient_avatarBuilder? avatar) =>
+      _$this._avatar = avatar;
+
+  GMessageActivityData_recipientBuilder() {
+    GMessageActivityData_recipient._initializeBuilder(this);
+  }
+
+  GMessageActivityData_recipientBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _id = $v.id;
+      _name = $v.name;
+      _donatorTier = $v.donatorTier;
+      _donatorBadge = $v.donatorBadge;
+      _moderatorRoles = $v.moderatorRoles?.toBuilder();
+      _avatar = $v.avatar?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GMessageActivityData_recipient other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GMessageActivityData_recipient;
+  }
+
+  @override
+  void update(void Function(GMessageActivityData_recipientBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GMessageActivityData_recipient build() => _build();
+
+  _$GMessageActivityData_recipient _build() {
+    _$GMessageActivityData_recipient _$result;
+    try {
+      _$result = _$v ??
+          new _$GMessageActivityData_recipient._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                  r'GMessageActivityData_recipient', 'G__typename'),
+              id: BuiltValueNullFieldError.checkNotNull(
+                  id, r'GMessageActivityData_recipient', 'id'),
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, r'GMessageActivityData_recipient', 'name'),
+              donatorTier: donatorTier,
+              donatorBadge: donatorBadge,
+              moderatorRoles: _moderatorRoles?.build(),
+              avatar: _avatar?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'moderatorRoles';
+        _moderatorRoles?.build();
+        _$failedField = 'avatar';
+        _avatar?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GMessageActivityData_recipient', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GMessageActivityData_recipient_avatar
+    extends GMessageActivityData_recipient_avatar {
+  @override
+  final String G__typename;
+  @override
+  final String? large;
+
+  factory _$GMessageActivityData_recipient_avatar(
+          [void Function(GMessageActivityData_recipient_avatarBuilder)?
+              updates]) =>
+      (new GMessageActivityData_recipient_avatarBuilder()..update(updates))
+          ._build();
+
+  _$GMessageActivityData_recipient_avatar._(
+      {required this.G__typename, this.large})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GMessageActivityData_recipient_avatar', 'G__typename');
+  }
+
+  @override
+  GMessageActivityData_recipient_avatar rebuild(
+          void Function(GMessageActivityData_recipient_avatarBuilder)
+              updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GMessageActivityData_recipient_avatarBuilder toBuilder() =>
+      new GMessageActivityData_recipient_avatarBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GMessageActivityData_recipient_avatar &&
+        G__typename == other.G__typename &&
+        large == other.large;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, large.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(
+            r'GMessageActivityData_recipient_avatar')
+          ..add('G__typename', G__typename)
+          ..add('large', large))
+        .toString();
+  }
+}
+
+class GMessageActivityData_recipient_avatarBuilder
+    implements
+        Builder<GMessageActivityData_recipient_avatar,
+            GMessageActivityData_recipient_avatarBuilder> {
+  _$GMessageActivityData_recipient_avatar? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  String? _large;
+  String? get large => _$this._large;
+  set large(String? large) => _$this._large = large;
+
+  GMessageActivityData_recipient_avatarBuilder() {
+    GMessageActivityData_recipient_avatar._initializeBuilder(this);
+  }
+
+  GMessageActivityData_recipient_avatarBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _large = $v.large;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GMessageActivityData_recipient_avatar other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GMessageActivityData_recipient_avatar;
+  }
+
+  @override
+  void update(
+      void Function(GMessageActivityData_recipient_avatarBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GMessageActivityData_recipient_avatar build() => _build();
+
+  _$GMessageActivityData_recipient_avatar _build() {
+    final _$result = _$v ??
+        new _$GMessageActivityData_recipient_avatar._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                r'GMessageActivityData_recipient_avatar', 'G__typename'),
             large: large);
     replace(_$result);
     return _$result;

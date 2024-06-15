@@ -73,7 +73,8 @@ abstract class GReviewFragmentData
   GReviewFragmentData._();
 
   factory GReviewFragmentData(
-      [Function(GReviewFragmentDataBuilder b) updates]) = _$GReviewFragmentData;
+          [void Function(GReviewFragmentDataBuilder b) updates]) =
+      _$GReviewFragmentData;
 
   static void _initializeBuilder(GReviewFragmentDataBuilder b) =>
       b..G__typename = 'Review';
@@ -116,7 +117,7 @@ abstract class GReviewFragmentData_media
   GReviewFragmentData_media._();
 
   factory GReviewFragmentData_media(
-          [Function(GReviewFragmentData_mediaBuilder b) updates]) =
+          [void Function(GReviewFragmentData_mediaBuilder b) updates]) =
       _$GReviewFragmentData_media;
 
   static void _initializeBuilder(GReviewFragmentData_mediaBuilder b) =>
@@ -157,7 +158,7 @@ abstract class GReviewFragmentData_media_title
   GReviewFragmentData_media_title._();
 
   factory GReviewFragmentData_media_title(
-          [Function(GReviewFragmentData_media_titleBuilder b) updates]) =
+          [void Function(GReviewFragmentData_media_titleBuilder b) updates]) =
       _$GReviewFragmentData_media_title;
 
   static void _initializeBuilder(GReviewFragmentData_media_titleBuilder b) =>
@@ -192,7 +193,7 @@ abstract class GReviewFragmentData_user
   GReviewFragmentData_user._();
 
   factory GReviewFragmentData_user(
-          [Function(GReviewFragmentData_userBuilder b) updates]) =
+          [void Function(GReviewFragmentData_userBuilder b) updates]) =
       _$GReviewFragmentData_user;
 
   static void _initializeBuilder(GReviewFragmentData_userBuilder b) =>
@@ -238,7 +239,7 @@ abstract class GReviewFragmentData_user_avatar
   GReviewFragmentData_user_avatar._();
 
   factory GReviewFragmentData_user_avatar(
-          [Function(GReviewFragmentData_user_avatarBuilder b) updates]) =
+          [void Function(GReviewFragmentData_user_avatarBuilder b) updates]) =
       _$GReviewFragmentData_user_avatar;
 
   static void _initializeBuilder(GReviewFragmentData_user_avatarBuilder b) =>

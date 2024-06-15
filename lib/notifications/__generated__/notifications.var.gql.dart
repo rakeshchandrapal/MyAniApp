@@ -14,7 +14,8 @@ abstract class GNotificationsVars
     implements Built<GNotificationsVars, GNotificationsVarsBuilder> {
   GNotificationsVars._();
 
-  factory GNotificationsVars([Function(GNotificationsVarsBuilder b) updates]) =
+  factory GNotificationsVars(
+          [void Function(GNotificationsVarsBuilder b) updates]) =
       _$GNotificationsVars;
 
   int? get page;

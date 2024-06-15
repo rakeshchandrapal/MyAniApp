@@ -23,7 +23,7 @@ abstract class GMediaListOptionsData
   GMediaListOptionsData._();
 
   factory GMediaListOptionsData(
-          [Function(GMediaListOptionsDataBuilder b) updates]) =
+          [void Function(GMediaListOptionsDataBuilder b) updates]) =
       _$GMediaListOptionsData;
 
   static void _initializeBuilder(GMediaListOptionsDataBuilder b) =>

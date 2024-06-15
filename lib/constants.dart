@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-BorderRadius imageRadius = BorderRadius.circular(10);
-const Color linkColor = Color(0xff0969da);
+const BorderRadius imageRadius = BorderRadius.all(Radius.circular(14));
 
-enum ListStyle {
-  grid,
-  detailedList,
-  simpleList,
-}
+const String anilistDefaultImage =
+    "https://s4.anilist.co/file/anilistcdn/staff/large/default.jpg";

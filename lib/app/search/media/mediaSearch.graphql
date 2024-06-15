@@ -1,0 +1,57 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/media.graphql'
+
+query GenreCollection {
+  genres: GenreCollection
+  tags: MediaTagCollection {
+    name
+    description
+    category
+    isAdult
+  }
+}
+
+query Search(
+  $page: Int
+  $perPage: Int
+  $type: MediaType
+  $format: [MediaFormat]
+  $sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
+  $season: MediaSeason
+  $seasonYear: Int
+  $search: String
+  $year: String
+  $yearGreater: FuzzyDateInt
+  $yearLesser: FuzzyDateInt
+  $genres: [String]
+  $with_tags: [String]
+  $without_tags: [String]
+  $isAdult: Boolean = false
+  $onList: Boolean
+  $countryOfOrigin: CountryCode
+) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      ...PageInfo
+    }
+    media(
+      isAdult: $isAdult
+      type: $type
+      sort: $sort
+      format_in: $format
+      season: $season
+      seasonYear: $seasonYear
+      startDate_like: $year
+      startDate_greater: $yearGreater
+      startDate_lesser: $yearLesser
+      search: $search
+      genre_in: $genres
+      tag_in: $with_tags
+      tag_not_in: $without_tags
+      onList: $onList
+      countryOfOrigin: $countryOfOrigin
+    ) {
+      ...MediaFragment
+    }
+  }
+}

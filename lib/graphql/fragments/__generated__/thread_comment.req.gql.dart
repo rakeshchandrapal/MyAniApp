@@ -22,7 +22,8 @@ abstract class GThreadCommentReq
         _i1.FragmentRequest<_i2.GThreadCommentData, _i3.GThreadCommentVars> {
   GThreadCommentReq._();
 
-  factory GThreadCommentReq([Function(GThreadCommentReqBuilder b) updates]) =
+  factory GThreadCommentReq(
+          [void Function(GThreadCommentReqBuilder b) updates]) =
       _$GThreadCommentReq;
 
   static void _initializeBuilder(GThreadCommentReqBuilder b) => b
@@ -40,6 +41,12 @@ abstract class GThreadCommentReq
   @override
   _i2.GThreadCommentData? parseData(Map<String, dynamic> json) =>
       _i2.GThreadCommentData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GThreadCommentData data) => data.toJson();
 
   static Serializer<GThreadCommentReq> get serializer =>
       _$gThreadCommentReqSerializer;

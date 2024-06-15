@@ -545,6 +545,7 @@ final BuiltSet<GMediaRankType> _$gMediaRankTypeValues =
   _$gMediaRankTypePOPULAR,
 ]);
 
+const GMediaRelation _$gMediaRelationSOURCE = const GMediaRelation._('SOURCE');
 const GMediaRelation _$gMediaRelationADAPTATION =
     const GMediaRelation._('ADAPTATION');
 const GMediaRelation _$gMediaRelationPREQUEL =
@@ -562,7 +563,6 @@ const GMediaRelation _$gMediaRelationALTERNATIVE =
 const GMediaRelation _$gMediaRelationSPIN_OFF =
     const GMediaRelation._('SPIN_OFF');
 const GMediaRelation _$gMediaRelationOTHER = const GMediaRelation._('OTHER');
-const GMediaRelation _$gMediaRelationSOURCE = const GMediaRelation._('SOURCE');
 const GMediaRelation _$gMediaRelationCOMPILATION =
     const GMediaRelation._('COMPILATION');
 const GMediaRelation _$gMediaRelationCONTAINS =
@@ -570,6 +570,8 @@ const GMediaRelation _$gMediaRelationCONTAINS =
 
 GMediaRelation _$gMediaRelationValueOf(String name) {
   switch (name) {
+    case 'SOURCE':
+      return _$gMediaRelationSOURCE;
     case 'ADAPTATION':
       return _$gMediaRelationADAPTATION;
     case 'PREQUEL':
@@ -590,8 +592,6 @@ GMediaRelation _$gMediaRelationValueOf(String name) {
       return _$gMediaRelationSPIN_OFF;
     case 'OTHER':
       return _$gMediaRelationOTHER;
-    case 'SOURCE':
-      return _$gMediaRelationSOURCE;
     case 'COMPILATION':
       return _$gMediaRelationCOMPILATION;
     case 'CONTAINS':
@@ -603,6 +603,7 @@ GMediaRelation _$gMediaRelationValueOf(String name) {
 
 final BuiltSet<GMediaRelation> _$gMediaRelationValues =
     new BuiltSet<GMediaRelation>(const <GMediaRelation>[
+  _$gMediaRelationSOURCE,
   _$gMediaRelationADAPTATION,
   _$gMediaRelationPREQUEL,
   _$gMediaRelationSEQUEL,
@@ -613,7 +614,6 @@ final BuiltSet<GMediaRelation> _$gMediaRelationValues =
   _$gMediaRelationALTERNATIVE,
   _$gMediaRelationSPIN_OFF,
   _$gMediaRelationOTHER,
-  _$gMediaRelationSOURCE,
   _$gMediaRelationCOMPILATION,
   _$gMediaRelationCONTAINS,
 ]);

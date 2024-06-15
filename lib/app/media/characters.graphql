@@ -1,0 +1,34 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/character.graphql'
+# import '/graphql/fragments/staff.graphql'
+
+query MediaCharacters($mediaId: Int, $page: Int) {
+  Media(id: $mediaId) {
+    id
+    countryOfOrigin
+    characters(page: $page, sort: [ROLE, RELEVANCE, ID]) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        name
+        role
+        node {
+          ...CharacterFragment
+          name {
+            first
+            full
+          }
+        }
+        voiceActorRoles(sort: [RELEVANCE, ID]) {
+          roleNotes
+          dubGroup
+          voiceActor {
+            ...StaffFragment
+            languageV2
+          }
+        }
+      }
+    }
+  }
+}

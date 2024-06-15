@@ -33,20 +33,26 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
 
       - name: Get Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x'
+          flutter-version: '3.22.x'
           channel: 'stable'
           cache: true
 
       - run: flutter pub get
       - run: flutter build apk
+      - run: flutter build apk --split-per-abi
+
+      - run: mv build/app/outputs/apk/release/app-armeabi-v7a-release.apk build/app/outputs/apk/release/MyAniApp-armeabi-v7a-release.apk
+      - run: mv build/app/outputs/apk/release/app-arm64-v8a-release.apk build/app/outputs/apk/release/MyAniApp-arm64-v8a-release.apk
+      - run: mv build/app/outputs/apk/release/app-x86_64-release.apk build/app/outputs/apk/release/MyAniApp-x86_64-release.apk
+      - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/MyAniApp-release.apk
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: 'build/app/outputs/apk/release/MyAniApp*.apk'
+          artifacts: 'build/app/outputs/apk/release/MyAniApp*.apk,build/app/outputs/flutter-apk/MyAniApp-release.apk'
           allowUpdates: true
           makeLatest: true

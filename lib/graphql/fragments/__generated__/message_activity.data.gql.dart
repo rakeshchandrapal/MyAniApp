@@ -26,6 +26,7 @@ abstract class GMessageActivity {
   int get createdAt;
   int? get userId;
   GMessageActivity_messenger? get messenger;
+  GMessageActivity_recipient? get recipient;
   Map<String, dynamic> toJson();
 }
 
@@ -58,6 +59,35 @@ abstract class GMessageActivity_messenger_avatar
   Map<String, dynamic> toJson();
 }
 
+abstract class GMessageActivity_recipient implements _i2.GUserFragment {
+  @override
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i1.GModRole?>? get moderatorRoles;
+  @override
+  GMessageActivity_recipient_avatar? get avatar;
+  @override
+  Map<String, dynamic> toJson();
+}
+
+abstract class GMessageActivity_recipient_avatar
+    implements _i2.GUserFragment_avatar {
+  @override
+  String get G__typename;
+  @override
+  String? get large;
+  @override
+  Map<String, dynamic> toJson();
+}
+
 abstract class GMessageActivityData
     implements
         Built<GMessageActivityData, GMessageActivityDataBuilder>,
@@ -65,7 +95,7 @@ abstract class GMessageActivityData
   GMessageActivityData._();
 
   factory GMessageActivityData(
-          [Function(GMessageActivityDataBuilder b) updates]) =
+          [void Function(GMessageActivityDataBuilder b) updates]) =
       _$GMessageActivityData;
 
   static void _initializeBuilder(GMessageActivityDataBuilder b) =>
@@ -98,6 +128,8 @@ abstract class GMessageActivityData
   int? get userId;
   @override
   GMessageActivityData_messenger? get messenger;
+  @override
+  GMessageActivityData_recipient? get recipient;
   static Serializer<GMessageActivityData> get serializer =>
       _$gMessageActivityDataSerializer;
 
@@ -123,7 +155,7 @@ abstract class GMessageActivityData_messenger
   GMessageActivityData_messenger._();
 
   factory GMessageActivityData_messenger(
-          [Function(GMessageActivityData_messengerBuilder b) updates]) =
+          [void Function(GMessageActivityData_messengerBuilder b) updates]) =
       _$GMessageActivityData_messenger;
 
   static void _initializeBuilder(GMessageActivityData_messengerBuilder b) =>
@@ -169,8 +201,8 @@ abstract class GMessageActivityData_messenger_avatar
   GMessageActivityData_messenger_avatar._();
 
   factory GMessageActivityData_messenger_avatar(
-          [Function(GMessageActivityData_messenger_avatarBuilder b) updates]) =
-      _$GMessageActivityData_messenger_avatar;
+      [void Function(GMessageActivityData_messenger_avatarBuilder b)
+          updates]) = _$GMessageActivityData_messenger_avatar;
 
   static void _initializeBuilder(
           GMessageActivityData_messenger_avatarBuilder b) =>
@@ -194,6 +226,90 @@ abstract class GMessageActivityData_messenger_avatar
           Map<String, dynamic> json) =>
       _i3.serializers.deserializeWith(
         GMessageActivityData_messenger_avatar.serializer,
+        json,
+      );
+}
+
+abstract class GMessageActivityData_recipient
+    implements
+        Built<GMessageActivityData_recipient,
+            GMessageActivityData_recipientBuilder>,
+        GMessageActivity_recipient,
+        _i2.GUserFragment {
+  GMessageActivityData_recipient._();
+
+  factory GMessageActivityData_recipient(
+          [void Function(GMessageActivityData_recipientBuilder b) updates]) =
+      _$GMessageActivityData_recipient;
+
+  static void _initializeBuilder(GMessageActivityData_recipientBuilder b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i1.GModRole?>? get moderatorRoles;
+  @override
+  GMessageActivityData_recipient_avatar? get avatar;
+  static Serializer<GMessageActivityData_recipient> get serializer =>
+      _$gMessageActivityDataRecipientSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
+        GMessageActivityData_recipient.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GMessageActivityData_recipient? fromJson(Map<String, dynamic> json) =>
+      _i3.serializers.deserializeWith(
+        GMessageActivityData_recipient.serializer,
+        json,
+      );
+}
+
+abstract class GMessageActivityData_recipient_avatar
+    implements
+        Built<GMessageActivityData_recipient_avatar,
+            GMessageActivityData_recipient_avatarBuilder>,
+        GMessageActivity_recipient_avatar,
+        _i2.GUserFragment_avatar {
+  GMessageActivityData_recipient_avatar._();
+
+  factory GMessageActivityData_recipient_avatar(
+      [void Function(GMessageActivityData_recipient_avatarBuilder b)
+          updates]) = _$GMessageActivityData_recipient_avatar;
+
+  static void _initializeBuilder(
+          GMessageActivityData_recipient_avatarBuilder b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<GMessageActivityData_recipient_avatar> get serializer =>
+      _$gMessageActivityDataRecipientAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i3.serializers.serializeWith(
+        GMessageActivityData_recipient_avatar.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GMessageActivityData_recipient_avatar? fromJson(
+          Map<String, dynamic> json) =>
+      _i3.serializers.deserializeWith(
+        GMessageActivityData_recipient_avatar.serializer,
         json,
       );
 }

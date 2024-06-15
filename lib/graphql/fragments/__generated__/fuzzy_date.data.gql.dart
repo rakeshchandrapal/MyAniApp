@@ -20,7 +20,7 @@ abstract class GFuzzyDateData
     implements Built<GFuzzyDateData, GFuzzyDateDataBuilder>, GFuzzyDate {
   GFuzzyDateData._();
 
-  factory GFuzzyDateData([Function(GFuzzyDateDataBuilder b) updates]) =
+  factory GFuzzyDateData([void Function(GFuzzyDateDataBuilder b) updates]) =
       _$GFuzzyDateData;
 
   static void _initializeBuilder(GFuzzyDateDataBuilder b) =>

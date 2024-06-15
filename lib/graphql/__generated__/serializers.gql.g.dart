@@ -8,25 +8,6 @@ part of 'serializers.gql.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(FetchPolicy.serializer)
-      ..add(GActivitiesData.serializer)
-      ..add(GActivitiesData_Page.serializer)
-      ..add(GActivitiesData_Page_activities__asListActivity.serializer)
-      ..add(GActivitiesData_Page_activities__asListActivity_media.serializer)
-      ..add(GActivitiesData_Page_activities__asListActivity_media_coverImage
-          .serializer)
-      ..add(GActivitiesData_Page_activities__asListActivity_media_title
-          .serializer)
-      ..add(GActivitiesData_Page_activities__asListActivity_user.serializer)
-      ..add(GActivitiesData_Page_activities__asListActivity_user_avatar
-          .serializer)
-      ..add(GActivitiesData_Page_activities__asTextActivity.serializer)
-      ..add(GActivitiesData_Page_activities__asTextActivity_user.serializer)
-      ..add(GActivitiesData_Page_activities__asTextActivity_user_avatar
-          .serializer)
-      ..add(GActivitiesData_Page_activities__base.serializer)
-      ..add(GActivitiesData_Page_pageInfo.serializer)
-      ..add(GActivitiesReq.serializer)
-      ..add(GActivitiesVars.serializer)
       ..add(GActivityData.serializer)
       ..add(GActivityData_activity__asListActivity.serializer)
       ..add(GActivityData_activity__asListActivity_media.serializer)
@@ -38,6 +19,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GActivityData_activity__asMessageActivity_messenger.serializer)
       ..add(
           GActivityData_activity__asMessageActivity_messenger_avatar.serializer)
+      ..add(GActivityData_activity__asMessageActivity_recipient.serializer)
+      ..add(
+          GActivityData_activity__asMessageActivity_recipient_avatar.serializer)
       ..add(GActivityData_activity__asTextActivity.serializer)
       ..add(GActivityData_activity__asTextActivity_user.serializer)
       ..add(GActivityData_activity__asTextActivity_user_avatar.serializer)
@@ -73,32 +57,26 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GCharacterData_Character_media_edges_node.serializer)
       ..add(GCharacterData_Character_media_edges_node_coverImage.serializer)
       ..add(GCharacterData_Character_media_edges_node_title.serializer)
+      ..add(GCharacterData_Character_media_edges_voiceActorRoles.serializer)
+      ..add(GCharacterData_Character_media_edges_voiceActorRoles_voiceActor
+          .serializer)
+      ..add(
+          GCharacterData_Character_media_edges_voiceActorRoles_voiceActor_image
+              .serializer)
+      ..add(GCharacterData_Character_media_edges_voiceActorRoles_voiceActor_name
+          .serializer)
       ..add(GCharacterData_Character_media_pageInfo.serializer)
       ..add(GCharacterData_Character_name.serializer)
+      ..add(GCharacterFragmentData.serializer)
+      ..add(GCharacterFragmentData_image.serializer)
+      ..add(GCharacterFragmentData_name.serializer)
+      ..add(GCharacterFragmentReq.serializer)
+      ..add(GCharacterFragmentVars.serializer)
       ..add(GCharacterNameInput.serializer)
       ..add(GCharacterReq.serializer)
       ..add(GCharacterRole.serializer)
       ..add(GCharacterSort.serializer)
       ..add(GCharacterVars.serializer)
-      ..add(GCharactersData.serializer)
-      ..add(GCharactersData_Media.serializer)
-      ..add(GCharactersData_Media_characters.serializer)
-      ..add(GCharactersData_Media_characters_edges.serializer)
-      ..add(GCharactersData_Media_characters_edges_node.serializer)
-      ..add(GCharactersData_Media_characters_edges_node_image.serializer)
-      ..add(GCharactersData_Media_characters_edges_node_name.serializer)
-      ..add(GCharactersData_Media_characters_edges_voiceActorRoles.serializer)
-      ..add(GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor
-          .serializer)
-      ..add(
-          GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_image
-              .serializer)
-      ..add(
-          GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_name
-              .serializer)
-      ..add(GCharactersData_Media_characters_pageInfo.serializer)
-      ..add(GCharactersReq.serializer)
-      ..add(GCharactersVars.serializer)
       ..add(GCommentData.serializer)
       ..add(GCommentData_ThreadComment.serializer)
       ..add(GCommentData_ThreadComment_user.serializer)
@@ -122,6 +100,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GDeleteMediaListEntryData_DeleteMediaListEntry.serializer)
       ..add(GDeleteMediaListEntryReq.serializer)
       ..add(GDeleteMediaListEntryVars.serializer)
+      ..add(GEmbedMediaCardData.serializer)
+      ..add(GEmbedMediaCardData_Media.serializer)
+      ..add(GEmbedMediaCardData_Media_coverImage.serializer)
+      ..add(GEmbedMediaCardData_Media_title.serializer)
+      ..add(GEmbedMediaCardReq.serializer)
+      ..add(GEmbedMediaCardVars.serializer)
       ..add(GExploreData.serializer)
       ..add(GExploreData_nextSeason.serializer)
       ..add(GExploreData_nextSeason_media.serializer)
@@ -208,6 +192,26 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GGenreStatData.serializer)
       ..add(GGenreStatReq.serializer)
       ..add(GGenreStatVars.serializer)
+      ..add(GHomeActivitiesData.serializer)
+      ..add(GHomeActivitiesData_Page.serializer)
+      ..add(GHomeActivitiesData_Page_activities__asListActivity.serializer)
+      ..add(
+          GHomeActivitiesData_Page_activities__asListActivity_media.serializer)
+      ..add(GHomeActivitiesData_Page_activities__asListActivity_media_coverImage
+          .serializer)
+      ..add(GHomeActivitiesData_Page_activities__asListActivity_media_title
+          .serializer)
+      ..add(GHomeActivitiesData_Page_activities__asListActivity_user.serializer)
+      ..add(GHomeActivitiesData_Page_activities__asListActivity_user_avatar
+          .serializer)
+      ..add(GHomeActivitiesData_Page_activities__asTextActivity.serializer)
+      ..add(GHomeActivitiesData_Page_activities__asTextActivity_user.serializer)
+      ..add(GHomeActivitiesData_Page_activities__asTextActivity_user_avatar
+          .serializer)
+      ..add(GHomeActivitiesData_Page_activities__base.serializer)
+      ..add(GHomeActivitiesData_Page_pageInfo.serializer)
+      ..add(GHomeActivitiesReq.serializer)
+      ..add(GHomeActivitiesVars.serializer)
       ..add(GHomeOverviewData.serializer)
       ..add(GHomeOverviewData_forums.serializer)
       ..add(GHomeOverviewData_forums_threads.serializer)
@@ -246,13 +250,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GHomeOverviewReq.serializer)
       ..add(GHomeOverviewVars.serializer)
       ..add(GLikeableType.serializer)
-      ..add(GLikesData.serializer)
-      ..add(GLikesData_Page.serializer)
-      ..add(GLikesData_Page_likes.serializer)
-      ..add(GLikesData_Page_likes_avatar.serializer)
-      ..add(GLikesData_Page_pageInfo.serializer)
-      ..add(GLikesReq.serializer)
-      ..add(GLikesVars.serializer)
       ..add(GListActivityData.serializer)
       ..add(GListActivityData_media.serializer)
       ..add(GListActivityData_media_coverImage.serializer)
@@ -272,6 +269,27 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GListGroupData_entries_startedAt.serializer)
       ..add(GListGroupReq.serializer)
       ..add(GListGroupVars.serializer)
+      ..add(GMediaCharactersData.serializer)
+      ..add(GMediaCharactersData_Media.serializer)
+      ..add(GMediaCharactersData_Media_characters.serializer)
+      ..add(GMediaCharactersData_Media_characters_edges.serializer)
+      ..add(GMediaCharactersData_Media_characters_edges_node.serializer)
+      ..add(GMediaCharactersData_Media_characters_edges_node_image.serializer)
+      ..add(GMediaCharactersData_Media_characters_edges_node_name.serializer)
+      ..add(GMediaCharactersData_Media_characters_edges_voiceActorRoles
+          .serializer)
+      ..add(
+          GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor
+              .serializer)
+      ..add(
+          GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_image
+              .serializer)
+      ..add(
+          GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_name
+              .serializer)
+      ..add(GMediaCharactersData_Media_characters_pageInfo.serializer)
+      ..add(GMediaCharactersReq.serializer)
+      ..add(GMediaCharactersVars.serializer)
       ..add(GMediaData.serializer)
       ..add(GMediaData_Media.serializer)
       ..add(GMediaData_Media_characters.serializer)
@@ -305,6 +323,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GMediaEntryData_MediaList_media_startDate.serializer)
       ..add(GMediaEntryData_MediaList_media_title.serializer)
       ..add(GMediaEntryData_MediaList_startedAt.serializer)
+      ..add(GMediaEntryData_MediaList_user.serializer)
+      ..add(GMediaEntryData_MediaList_user_mediaListOptions.serializer)
       ..add(GMediaEntryReq.serializer)
       ..add(GMediaEntryVars.serializer)
       ..add(GMediaExternalLinkInput.serializer)
@@ -353,25 +373,35 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GMediaListStatus.serializer)
       ..add(GMediaListVars.serializer)
       ..add(GMediaRankType.serializer)
-      ..add(GMediaRecommendationsData.serializer)
-      ..add(GMediaRecommendationsData_Media.serializer)
-      ..add(GMediaRecommendationsData_Media_recommendations.serializer)
-      ..add(GMediaRecommendationsData_Media_recommendations_nodes.serializer)
-      ..add(
-          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation
-              .serializer)
-      ..add(
-          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage
-              .serializer)
-      ..add(
-          GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title
-              .serializer)
-      ..add(GMediaRecommendationsData_Media_recommendations_pageInfo.serializer)
-      ..add(GMediaRecommendationsReq.serializer)
-      ..add(GMediaRecommendationsVars.serializer)
       ..add(GMediaRelation.serializer)
       ..add(GMediaReq.serializer)
+      ..add(GMediaReviewsData.serializer)
+      ..add(GMediaReviewsData_Media.serializer)
+      ..add(GMediaReviewsData_Media_reviews.serializer)
+      ..add(GMediaReviewsData_Media_reviews_nodes.serializer)
+      ..add(GMediaReviewsData_Media_reviews_nodes_media.serializer)
+      ..add(GMediaReviewsData_Media_reviews_nodes_media_title.serializer)
+      ..add(GMediaReviewsData_Media_reviews_nodes_user.serializer)
+      ..add(GMediaReviewsData_Media_reviews_nodes_user_avatar.serializer)
+      ..add(GMediaReviewsData_Media_reviews_pageInfo.serializer)
+      ..add(GMediaReviewsReq.serializer)
+      ..add(GMediaReviewsVars.serializer)
       ..add(GMediaSeason.serializer)
+      ..add(GMediaSimilarData.serializer)
+      ..add(GMediaSimilarData_Media.serializer)
+      ..add(GMediaSimilarData_Media_recommendations.serializer)
+      ..add(GMediaSimilarData_Media_recommendations_nodes.serializer)
+      ..add(GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation
+          .serializer)
+      ..add(
+          GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation_coverImage
+              .serializer)
+      ..add(
+          GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation_title
+              .serializer)
+      ..add(GMediaSimilarData_Media_recommendations_pageInfo.serializer)
+      ..add(GMediaSimilarReq.serializer)
+      ..add(GMediaSimilarVars.serializer)
       ..add(GMediaSort.serializer)
       ..add(GMediaSource.serializer)
       ..add(GMediaStaffData.serializer)
@@ -385,6 +415,21 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GMediaStaffReq.serializer)
       ..add(GMediaStaffVars.serializer)
       ..add(GMediaStatus.serializer)
+      ..add(GMediaThreadsData.serializer)
+      ..add(GMediaThreadsData_Page.serializer)
+      ..add(GMediaThreadsData_Page_pageInfo.serializer)
+      ..add(GMediaThreadsData_Page_threads.serializer)
+      ..add(GMediaThreadsData_Page_threads_categories.serializer)
+      ..add(GMediaThreadsData_Page_threads_mediaCategories.serializer)
+      ..add(
+          GMediaThreadsData_Page_threads_mediaCategories_coverImage.serializer)
+      ..add(GMediaThreadsData_Page_threads_mediaCategories_title.serializer)
+      ..add(GMediaThreadsData_Page_threads_replyUser.serializer)
+      ..add(GMediaThreadsData_Page_threads_replyUser_avatar.serializer)
+      ..add(GMediaThreadsData_Page_threads_user.serializer)
+      ..add(GMediaThreadsData_Page_threads_user_avatar.serializer)
+      ..add(GMediaThreadsReq.serializer)
+      ..add(GMediaThreadsVars.serializer)
       ..add(GMediaTitleInput.serializer)
       ..add(GMediaTrendSort.serializer)
       ..add(GMediaType.serializer)
@@ -392,6 +437,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GMessageActivityData.serializer)
       ..add(GMessageActivityData_messenger.serializer)
       ..add(GMessageActivityData_messenger_avatar.serializer)
+      ..add(GMessageActivityData_recipient.serializer)
+      ..add(GMessageActivityData_recipient_avatar.serializer)
       ..add(GMessageActivityReq.serializer)
       ..add(GMessageActivityVars.serializer)
       ..add(GModActionType.serializer)
@@ -634,15 +681,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GReviewReq.serializer)
       ..add(GReviewSort.serializer)
       ..add(GReviewVars.serializer)
-      ..add(GReviewsData.serializer)
-      ..add(GReviewsData_Media.serializer)
-      ..add(GReviewsData_Media_reviews.serializer)
-      ..add(GReviewsData_Media_reviews_nodes.serializer)
-      ..add(GReviewsData_Media_reviews_nodes_user.serializer)
-      ..add(GReviewsData_Media_reviews_nodes_user_avatar.serializer)
-      ..add(GReviewsData_Media_reviews_pageInfo.serializer)
-      ..add(GReviewsReq.serializer)
-      ..add(GReviewsVars.serializer)
       ..add(GRevisionHistoryAction.serializer)
       ..add(GSaveActivityReplyData.serializer)
       ..add(GSaveActivityReplyData_SaveActivityReply.serializer)
@@ -672,6 +710,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GSaveMessageActivityData_SaveMessageActivity.serializer)
       ..add(GSaveMessageActivityData_SaveMessageActivity_messenger.serializer)
       ..add(GSaveMessageActivityData_SaveMessageActivity_messenger_avatar
+          .serializer)
+      ..add(GSaveMessageActivityData_SaveMessageActivity_recipient.serializer)
+      ..add(GSaveMessageActivityData_SaveMessageActivity_recipient_avatar
           .serializer)
       ..add(GSaveMessageActivityReq.serializer)
       ..add(GSaveMessageActivityVars.serializer)
@@ -706,17 +747,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GSearchReq.serializer)
       ..add(GSearchVars.serializer)
       ..add(GSiteTrendSort.serializer)
-      ..add(GSocialsData.serializer)
-      ..add(GSocialsData_followers.serializer)
-      ..add(GSocialsData_followers_followers.serializer)
-      ..add(GSocialsData_followers_followers_avatar.serializer)
-      ..add(GSocialsData_followers_pageInfo.serializer)
-      ..add(GSocialsData_following.serializer)
-      ..add(GSocialsData_following_following.serializer)
-      ..add(GSocialsData_following_following_avatar.serializer)
-      ..add(GSocialsData_following_pageInfo.serializer)
-      ..add(GSocialsReq.serializer)
-      ..add(GSocialsVars.serializer)
       ..add(GStaffData.serializer)
       ..add(GStaffData_Staff.serializer)
       ..add(GStaffData_Staff_characterMedia.serializer)
@@ -739,12 +769,29 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GStaffData_Staff_staffMedia_edges_node_coverImage.serializer)
       ..add(GStaffData_Staff_staffMedia_edges_node_title.serializer)
       ..add(GStaffData_Staff_staffMedia_pageInfo.serializer)
+      ..add(GStaffFragmentData.serializer)
+      ..add(GStaffFragmentData_image.serializer)
+      ..add(GStaffFragmentData_name.serializer)
+      ..add(GStaffFragmentReq.serializer)
+      ..add(GStaffFragmentVars.serializer)
       ..add(GStaffLanguage.serializer)
       ..add(GStaffNameInput.serializer)
       ..add(GStaffReq.serializer)
       ..add(GStaffSort.serializer)
       ..add(GStaffVars.serializer)
+      ..add(GStudioData.serializer)
+      ..add(GStudioData_Studio.serializer)
+      ..add(GStudioData_Studio_media.serializer)
+      ..add(GStudioData_Studio_media_nodes.serializer)
+      ..add(GStudioData_Studio_media_nodes_coverImage.serializer)
+      ..add(GStudioData_Studio_media_nodes_title.serializer)
+      ..add(GStudioData_Studio_media_pageInfo.serializer)
+      ..add(GStudioFragmentData.serializer)
+      ..add(GStudioFragmentReq.serializer)
+      ..add(GStudioFragmentVars.serializer)
+      ..add(GStudioReq.serializer)
       ..add(GStudioSort.serializer)
+      ..add(GStudioVars.serializer)
       ..add(GSubmissionSort.serializer)
       ..add(GSubmissionStatus.serializer)
       ..add(GTextActivityData.serializer)
@@ -756,6 +803,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GThisUserData_avatar.serializer)
       ..add(GThisUserData_mediaListOptions.serializer)
       ..add(GThisUserData_mediaListOptions_animeList.serializer)
+      ..add(GThisUserData_mediaListOptions_mangaList.serializer)
       ..add(GThisUserData_options.serializer)
       ..add(GThisUserData_statistics.serializer)
       ..add(GThisUserData_statistics_anime.serializer)
@@ -797,20 +845,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GThreadReq.serializer)
       ..add(GThreadSort.serializer)
       ..add(GThreadVars.serializer)
-      ..add(GThreadsData.serializer)
-      ..add(GThreadsData_Page.serializer)
-      ..add(GThreadsData_Page_pageInfo.serializer)
-      ..add(GThreadsData_Page_threads.serializer)
-      ..add(GThreadsData_Page_threads_categories.serializer)
-      ..add(GThreadsData_Page_threads_mediaCategories.serializer)
-      ..add(GThreadsData_Page_threads_mediaCategories_coverImage.serializer)
-      ..add(GThreadsData_Page_threads_mediaCategories_title.serializer)
-      ..add(GThreadsData_Page_threads_replyUser.serializer)
-      ..add(GThreadsData_Page_threads_replyUser_avatar.serializer)
-      ..add(GThreadsData_Page_threads_user.serializer)
-      ..add(GThreadsData_Page_threads_user_avatar.serializer)
-      ..add(GThreadsReq.serializer)
-      ..add(GThreadsVars.serializer)
       ..add(GToggleActivitySubscriptionData.serializer)
       ..add(
           GToggleActivitySubscriptionData_ToggleActivitySubscription__asListActivity
@@ -858,6 +892,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GUpdateUserData_UpdateUser_avatar.serializer)
       ..add(GUpdateUserData_UpdateUser_mediaListOptions.serializer)
       ..add(GUpdateUserData_UpdateUser_mediaListOptions_animeList.serializer)
+      ..add(GUpdateUserData_UpdateUser_mediaListOptions_mangaList.serializer)
       ..add(GUpdateUserData_UpdateUser_options.serializer)
       ..add(GUpdateUserData_UpdateUser_statistics.serializer)
       ..add(GUpdateUserData_UpdateUser_statistics_anime.serializer)
@@ -882,6 +917,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(
           GUserActivitiesData_Page_activities__asMessageActivity_messenger_avatar
               .serializer)
+      ..add(GUserActivitiesData_Page_activities__asMessageActivity_recipient
+          .serializer)
+      ..add(
+          GUserActivitiesData_Page_activities__asMessageActivity_recipient_avatar
+              .serializer)
       ..add(GUserActivitiesData_Page_activities__asTextActivity.serializer)
       ..add(GUserActivitiesData_Page_activities__asTextActivity_user.serializer)
       ..add(GUserActivitiesData_Page_activities__asTextActivity_user_avatar
@@ -898,16 +938,67 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GUserData_User_favourites_anime_nodes.serializer)
       ..add(GUserData_User_favourites_anime_nodes_coverImage.serializer)
       ..add(GUserData_User_favourites_anime_nodes_title.serializer)
+      ..add(GUserData_User_favourites_characters.serializer)
+      ..add(GUserData_User_favourites_characters_nodes.serializer)
+      ..add(GUserData_User_favourites_characters_nodes_image.serializer)
+      ..add(GUserData_User_favourites_characters_nodes_name.serializer)
       ..add(GUserData_User_favourites_manga.serializer)
       ..add(GUserData_User_favourites_manga_nodes.serializer)
       ..add(GUserData_User_favourites_manga_nodes_coverImage.serializer)
       ..add(GUserData_User_favourites_manga_nodes_title.serializer)
+      ..add(GUserData_User_favourites_staff.serializer)
+      ..add(GUserData_User_favourites_staff_nodes.serializer)
+      ..add(GUserData_User_favourites_staff_nodes_image.serializer)
+      ..add(GUserData_User_favourites_staff_nodes_name.serializer)
+      ..add(GUserData_User_favourites_studios.serializer)
+      ..add(GUserData_User_favourites_studios_nodes.serializer)
       ..add(GUserData_User_mediaListOptions.serializer)
       ..add(GUserData_User_statistics.serializer)
       ..add(GUserData_User_statistics_anime.serializer)
       ..add(GUserData_User_statistics_anime_genres.serializer)
       ..add(GUserData_User_statistics_manga.serializer)
       ..add(GUserData_User_statistics_manga_genres.serializer)
+      ..add(GUserFavoritesData.serializer)
+      ..add(GUserFavoritesData_User.serializer)
+      ..add(GUserFavoritesData_User_avatar.serializer)
+      ..add(GUserFavoritesData_User_favourites.serializer)
+      ..add(GUserFavoritesData_User_favourites_anime.serializer)
+      ..add(GUserFavoritesData_User_favourites_anime_edges.serializer)
+      ..add(GUserFavoritesData_User_favourites_anime_edges_node.serializer)
+      ..add(GUserFavoritesData_User_favourites_anime_edges_node_coverImage
+          .serializer)
+      ..add(
+          GUserFavoritesData_User_favourites_anime_edges_node_title.serializer)
+      ..add(GUserFavoritesData_User_favourites_anime_pageInfo.serializer)
+      ..add(GUserFavoritesData_User_favourites_characters.serializer)
+      ..add(GUserFavoritesData_User_favourites_characters_edges.serializer)
+      ..add(GUserFavoritesData_User_favourites_characters_edges_node.serializer)
+      ..add(GUserFavoritesData_User_favourites_characters_edges_node_image
+          .serializer)
+      ..add(GUserFavoritesData_User_favourites_characters_edges_node_name
+          .serializer)
+      ..add(GUserFavoritesData_User_favourites_characters_pageInfo.serializer)
+      ..add(GUserFavoritesData_User_favourites_manga.serializer)
+      ..add(GUserFavoritesData_User_favourites_manga_edges.serializer)
+      ..add(GUserFavoritesData_User_favourites_manga_edges_node.serializer)
+      ..add(GUserFavoritesData_User_favourites_manga_edges_node_coverImage
+          .serializer)
+      ..add(
+          GUserFavoritesData_User_favourites_manga_edges_node_title.serializer)
+      ..add(GUserFavoritesData_User_favourites_manga_pageInfo.serializer)
+      ..add(GUserFavoritesData_User_favourites_staff.serializer)
+      ..add(GUserFavoritesData_User_favourites_staff_edges.serializer)
+      ..add(GUserFavoritesData_User_favourites_staff_edges_node.serializer)
+      ..add(
+          GUserFavoritesData_User_favourites_staff_edges_node_image.serializer)
+      ..add(GUserFavoritesData_User_favourites_staff_edges_node_name.serializer)
+      ..add(GUserFavoritesData_User_favourites_staff_pageInfo.serializer)
+      ..add(GUserFavoritesData_User_favourites_studios.serializer)
+      ..add(GUserFavoritesData_User_favourites_studios_edges.serializer)
+      ..add(GUserFavoritesData_User_favourites_studios_edges_node.serializer)
+      ..add(GUserFavoritesData_User_favourites_studios_pageInfo.serializer)
+      ..add(GUserFavoritesReq.serializer)
+      ..add(GUserFavoritesVars.serializer)
       ..add(GUserFragmentData.serializer)
       ..add(GUserFragmentData_avatar.serializer)
       ..add(GUserFragmentReq.serializer)
@@ -923,22 +1014,41 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GUserReviewsData_Page_reviews_user_avatar.serializer)
       ..add(GUserReviewsReq.serializer)
       ..add(GUserReviewsVars.serializer)
+      ..add(GUserSocialsData.serializer)
+      ..add(GUserSocialsData_followers.serializer)
+      ..add(GUserSocialsData_followers_followers.serializer)
+      ..add(GUserSocialsData_followers_followers_avatar.serializer)
+      ..add(GUserSocialsData_followers_pageInfo.serializer)
+      ..add(GUserSocialsData_following.serializer)
+      ..add(GUserSocialsData_following_following.serializer)
+      ..add(GUserSocialsData_following_following_avatar.serializer)
+      ..add(GUserSocialsData_following_pageInfo.serializer)
+      ..add(GUserSocialsReq.serializer)
+      ..add(GUserSocialsVars.serializer)
       ..add(GUserSort.serializer)
       ..add(GUserStaffNameLanguage.serializer)
       ..add(GUserStatisticsSort.serializer)
-      ..add(GUserStatsData.serializer)
-      ..add(GUserStatsData_User.serializer)
-      ..add(GUserStatsData_User_statistics.serializer)
-      ..add(GUserStatsData_User_statistics_anime.serializer)
-      ..add(GUserStatsData_User_statistics_anime_countries.serializer)
-      ..add(GUserStatsData_User_statistics_anime_formats.serializer)
-      ..add(GUserStatsData_User_statistics_anime_lengths.serializer)
-      ..add(GUserStatsData_User_statistics_anime_releaseYears.serializer)
-      ..add(GUserStatsData_User_statistics_anime_scores.serializer)
-      ..add(GUserStatsData_User_statistics_anime_startYears.serializer)
-      ..add(GUserStatsData_User_statistics_anime_statuses.serializer)
-      ..add(GUserStatsReq.serializer)
-      ..add(GUserStatsVars.serializer)
+      ..add(GUserThreadsData.serializer)
+      ..add(GUserThreadsData_comments.serializer)
+      ..add(GUserThreadsData_comments_pageInfo.serializer)
+      ..add(GUserThreadsData_comments_threadComments.serializer)
+      ..add(GUserThreadsData_comments_threadComments_thread.serializer)
+      ..add(GUserThreadsData_comments_threadComments_user.serializer)
+      ..add(GUserThreadsData_comments_threadComments_user_avatar.serializer)
+      ..add(GUserThreadsData_thread.serializer)
+      ..add(GUserThreadsData_thread_pageInfo.serializer)
+      ..add(GUserThreadsData_thread_threads.serializer)
+      ..add(GUserThreadsData_thread_threads_categories.serializer)
+      ..add(GUserThreadsData_thread_threads_mediaCategories.serializer)
+      ..add(
+          GUserThreadsData_thread_threads_mediaCategories_coverImage.serializer)
+      ..add(GUserThreadsData_thread_threads_mediaCategories_title.serializer)
+      ..add(GUserThreadsData_thread_threads_replyUser.serializer)
+      ..add(GUserThreadsData_thread_threads_replyUser_avatar.serializer)
+      ..add(GUserThreadsData_thread_threads_user.serializer)
+      ..add(GUserThreadsData_thread_threads_user_avatar.serializer)
+      ..add(GUserThreadsReq.serializer)
+      ..add(GUserThreadsVars.serializer)
       ..add(GUserTitleLanguage.serializer)
       ..add(GUserVars.serializer)
       ..add(GViewerData.serializer)
@@ -946,16 +1056,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GViewerData_Viewer_avatar.serializer)
       ..add(GViewerData_Viewer_mediaListOptions.serializer)
       ..add(GViewerData_Viewer_mediaListOptions_animeList.serializer)
+      ..add(GViewerData_Viewer_mediaListOptions_mangaList.serializer)
       ..add(GViewerData_Viewer_options.serializer)
       ..add(GViewerData_Viewer_statistics.serializer)
       ..add(GViewerData_Viewer_statistics_anime.serializer)
       ..add(GViewerData_Viewer_statistics_manga.serializer)
       ..add(GViewerReq.serializer)
       ..add(GViewerVars.serializer)
-      ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType.nullable(GActivitiesData_Page_activities)]),
-          () => new ListBuilder<GActivitiesData_Page_activities?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GActivityData_replies_activityReplies)
@@ -973,16 +1080,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GCharacterData_Character_media_edges?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType.nullable(GCharactersData_Media_characters_edges)
-          ]),
-          () => new ListBuilder<GCharactersData_Media_characters_edges?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
             const FullType.nullable(
-                GCharactersData_Media_characters_edges_voiceActorRoles)
+                GCharacterData_Character_media_edges_voiceActorRoles)
           ]),
           () => new ListBuilder<
-              GCharactersData_Media_characters_edges_voiceActorRoles?>())
+              GCharacterData_Character_media_edges_voiceActorRoles?>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType.nullable(GCommentData_ThreadComment)]),
@@ -1077,6 +1179,11 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GForumsData_Page_threads_categories?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
+            const FullType.nullable(GHomeActivitiesData_Page_activities)
+          ]),
+          () => new ListBuilder<GHomeActivitiesData_Page_activities?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
             const FullType.nullable(GHomeOverviewData_forums_threads)
           ]),
           () => new ListBuilder<GHomeOverviewData_forums_threads?>())
@@ -1116,12 +1223,20 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GHomeOverviewData_reviews_reviews?>())
       ..addBuilderFactory(
           const FullType(BuiltList,
-              const [const FullType.nullable(GLikesData_Page_likes)]),
-          () => new ListBuilder<GLikesData_Page_likes?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList,
               const [const FullType.nullable(GListGroupData_entries)]),
           () => new ListBuilder<GListGroupData_entries?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GMediaCharactersData_Media_characters_edges)
+          ]),
+          () => new ListBuilder<GMediaCharactersData_Media_characters_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GMediaCharactersData_Media_characters_edges_voiceActorRoles)
+          ]),
+          () => new ListBuilder<
+              GMediaCharactersData_Media_characters_edges_voiceActorRoles?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GMediaData_Media_characters_nodes)
@@ -1184,16 +1299,74 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GMediaListSort?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType.nullable(
-                GMediaRecommendationsData_Media_recommendations_nodes)
+            const FullType.nullable(GMediaReviewsData_Media_reviews_nodes)
           ]),
-          () => new ListBuilder<
-              GMediaRecommendationsData_Media_recommendations_nodes?>())
+          () => new ListBuilder<GMediaReviewsData_Media_reviews_nodes?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GMediaSimilarData_Media_recommendations_nodes)
+          ]),
+          () =>
+              new ListBuilder<GMediaSimilarData_Media_recommendations_nodes?>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType.nullable(GMediaSort)]),
+          () => new ListBuilder<GMediaSort?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GMediaStaffData_Media_staff_edges)
           ]),
           () => new ListBuilder<GMediaStaffData_Media_staff_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType.nullable(GMediaThreadsData_Page_threads)]),
+          () => new ListBuilder<GMediaThreadsData_Page_threads?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GMediaThreadsData_Page_threads_mediaCategories)
+          ]),
+          () => new ListBuilder<
+              GMediaThreadsData_Page_threads_mediaCategories?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GMediaThreadsData_Page_threads_categories)
+          ]),
+          () => new ListBuilder<GMediaThreadsData_Page_threads_categories?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
           () => new ListBuilder<GModRole?>())
@@ -1399,24 +1572,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           ]),
           () => new ListBuilder<GReleasingMediaData_airingSchedule_edges?>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(GReviewsData_Media_reviews_nodes)
-          ]),
-          () => new ListBuilder<GReviewsData_Media_reviews_nodes?>())
-      ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType.nullable(GSearchData_Page_media)]),
           () => new ListBuilder<GSearchData_Page_media?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(GSocialsData_followers_followers)
-          ]),
-          () => new ListBuilder<GSocialsData_followers_followers?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(GSocialsData_following_following)
-          ]),
-          () => new ListBuilder<GSocialsData_following_following?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GStaffData_Staff_characterMedia_edges)
@@ -1434,6 +1592,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType.nullable(GStaffData_Staff_staffMedia_edges)
           ]),
           () => new ListBuilder<GStaffData_Staff_staffMedia_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType.nullable(GStudioData_Studio_media_nodes)]),
+          () => new ListBuilder<GStudioData_Studio_media_nodes?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GThreadData_comments_threadComments)
@@ -1462,20 +1624,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
               BuiltList, const [const FullType.nullable(GThreadSort)]),
           () => new ListBuilder<GThreadSort?>())
       ..addBuilderFactory(
-          const FullType(BuiltList,
-              const [const FullType.nullable(GThreadsData_Page_threads)]),
-          () => new ListBuilder<GThreadsData_Page_threads?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(GThreadsData_Page_threads_mediaCategories)
-          ]),
-          () => new ListBuilder<GThreadsData_Page_threads_mediaCategories?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(GThreadsData_Page_threads_categories)
-          ]),
-          () => new ListBuilder<GThreadsData_Page_threads_categories?>())
-      ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GUserActivitiesData_Page_activities)
           ]),
@@ -1487,9 +1635,24 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<GUserData_User_favourites_anime_nodes?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
+            const FullType.nullable(GUserData_User_favourites_characters_nodes)
+          ]),
+          () => new ListBuilder<GUserData_User_favourites_characters_nodes?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
             const FullType.nullable(GUserData_User_favourites_manga_nodes)
           ]),
           () => new ListBuilder<GUserData_User_favourites_manga_nodes?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GUserData_User_favourites_staff_nodes)
+          ]),
+          () => new ListBuilder<GUserData_User_favourites_staff_nodes?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GUserData_User_favourites_studios_nodes)
+          ]),
+          () => new ListBuilder<GUserData_User_favourites_studios_nodes?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(GUserData_User_statistics_anime_genres)
@@ -1501,56 +1664,81 @@ Serializers _$serializers = (new Serializers().toBuilder()
           ]),
           () => new ListBuilder<GUserData_User_statistics_manga_genres?>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GUserFavoritesData_User_favourites_anime_edges)
+          ]),
+          () => new ListBuilder<
+              GUserFavoritesData_User_favourites_anime_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GUserFavoritesData_User_favourites_characters_edges)
+          ]),
+          () => new ListBuilder<
+              GUserFavoritesData_User_favourites_characters_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GUserFavoritesData_User_favourites_manga_edges)
+          ]),
+          () => new ListBuilder<
+              GUserFavoritesData_User_favourites_manga_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GUserFavoritesData_User_favourites_staff_edges)
+          ]),
+          () => new ListBuilder<
+              GUserFavoritesData_User_favourites_staff_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(
+                GUserFavoritesData_User_favourites_studios_edges)
+          ]),
+          () => new ListBuilder<
+              GUserFavoritesData_User_favourites_studios_edges?>())
+      ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType.nullable(GUserReviewsData_Page_reviews)]),
           () => new ListBuilder<GUserReviewsData_Page_reviews?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType.nullable(
-                GUserStatsData_User_statistics_anime_formats)
+            const FullType.nullable(GUserSocialsData_followers_followers)
           ]),
-          () =>
-              new ListBuilder<GUserStatsData_User_statistics_anime_formats?>())
+          () => new ListBuilder<GUserSocialsData_followers_followers?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GUserSocialsData_following_following)
+          ]),
+          () => new ListBuilder<GUserSocialsData_following_following?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType.nullable(GUserThreadsData_comments_threadComments)
+          ]),
+          () => new ListBuilder<GUserThreadsData_comments_threadComments?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType.nullable(GUserThreadsData_thread_threads)]),
+          () => new ListBuilder<GUserThreadsData_thread_threads?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType.nullable(
-                GUserStatsData_User_statistics_anime_statuses)
-          ]),
-          () =>
-              new ListBuilder<GUserStatsData_User_statistics_anime_statuses?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(GUserStatsData_User_statistics_anime_scores)
-          ]),
-          () => new ListBuilder<GUserStatsData_User_statistics_anime_scores?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(
-                GUserStatsData_User_statistics_anime_lengths)
-          ]),
-          () =>
-              new ListBuilder<GUserStatsData_User_statistics_anime_lengths?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(
-                GUserStatsData_User_statistics_anime_releaseYears)
+                GUserThreadsData_thread_threads_mediaCategories)
           ]),
           () => new ListBuilder<
-              GUserStatsData_User_statistics_anime_releaseYears?>())
+              GUserThreadsData_thread_threads_mediaCategories?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
-            const FullType.nullable(
-                GUserStatsData_User_statistics_anime_startYears)
+            const FullType.nullable(GUserThreadsData_thread_threads_categories)
           ]),
-          () => new ListBuilder<
-              GUserStatsData_User_statistics_anime_startYears?>())
+          () => new ListBuilder<GUserThreadsData_thread_threads_categories?>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType.nullable(
-                GUserStatsData_User_statistics_anime_countries)
-          ]),
-          () => new ListBuilder<
-              GUserStatsData_User_statistics_anime_countries?>())
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(String)]),
           () => new ListBuilder<String?>())
@@ -1756,29 +1944,62 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType.nullable(String)]),
           () => new ListBuilder<String?>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(double)]),
           () => new ListBuilder<double?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType.nullable(int)]),
-          () => new ListBuilder<int?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(int)]),
           () => new ListBuilder<int?>()))

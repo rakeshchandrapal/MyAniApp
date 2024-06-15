@@ -20,7 +20,8 @@ abstract class GViewerReq
         _i1.OperationRequest<_i2.GViewerData, _i3.GViewerVars> {
   GViewerReq._();
 
-  factory GViewerReq([Function(GViewerReqBuilder b) updates]) = _$GViewerReq;
+  factory GViewerReq([void Function(GViewerReqBuilder b) updates]) =
+      _$GViewerReq;
 
   static void _initializeBuilder(GViewerReqBuilder b) => b
     ..operation = _i4.Operation(
@@ -37,6 +38,7 @@ abstract class GViewerReq
   _i4.Request get execRequest => _i4.Request(
         operation: operation,
         variables: vars.toJson(),
+        context: context ?? const _i4.Context(),
       );
 
   @override
@@ -58,8 +60,22 @@ abstract class GViewerReq
   @override
   bool get executeOnListen;
   @override
+  @BuiltValueField(serialize: false)
+  _i4.Context? get context;
+  @override
   _i2.GViewerData? parseData(Map<String, dynamic> json) =>
       _i2.GViewerData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GViewerData data) => data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GViewerData, _i3.GViewerVars> transformOperation(
+          _i4.Operation Function(_i4.Operation) transform) =>
+      this.rebuild((b) => b..operation = transform(operation));
 
   static Serializer<GViewerReq> get serializer => _$gViewerReqSerializer;
 
@@ -83,7 +99,7 @@ abstract class GNotificationCountReq
   GNotificationCountReq._();
 
   factory GNotificationCountReq(
-          [Function(GNotificationCountReqBuilder b) updates]) =
+          [void Function(GNotificationCountReqBuilder b) updates]) =
       _$GNotificationCountReq;
 
   static void _initializeBuilder(GNotificationCountReqBuilder b) => b
@@ -101,6 +117,7 @@ abstract class GNotificationCountReq
   _i4.Request get execRequest => _i4.Request(
         operation: operation,
         variables: vars.toJson(),
+        context: context ?? const _i4.Context(),
       );
 
   @override
@@ -122,8 +139,23 @@ abstract class GNotificationCountReq
   @override
   bool get executeOnListen;
   @override
+  @BuiltValueField(serialize: false)
+  _i4.Context? get context;
+  @override
   _i2.GNotificationCountData? parseData(Map<String, dynamic> json) =>
       _i2.GNotificationCountData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GNotificationCountData data) =>
+      data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GNotificationCountData, _i3.GNotificationCountVars>
+      transformOperation(_i4.Operation Function(_i4.Operation) transform) =>
+          this.rebuild((b) => b..operation = transform(operation));
 
   static Serializer<GNotificationCountReq> get serializer =>
       _$gNotificationCountReqSerializer;
@@ -146,7 +178,7 @@ abstract class GUpdateUserReq
         _i1.OperationRequest<_i2.GUpdateUserData, _i3.GUpdateUserVars> {
   GUpdateUserReq._();
 
-  factory GUpdateUserReq([Function(GUpdateUserReqBuilder b) updates]) =
+  factory GUpdateUserReq([void Function(GUpdateUserReqBuilder b) updates]) =
       _$GUpdateUserReq;
 
   static void _initializeBuilder(GUpdateUserReqBuilder b) => b
@@ -164,6 +196,7 @@ abstract class GUpdateUserReq
   _i4.Request get execRequest => _i4.Request(
         operation: operation,
         variables: vars.toJson(),
+        context: context ?? const _i4.Context(),
       );
 
   @override
@@ -185,8 +218,22 @@ abstract class GUpdateUserReq
   @override
   bool get executeOnListen;
   @override
+  @BuiltValueField(serialize: false)
+  _i4.Context? get context;
+  @override
   _i2.GUpdateUserData? parseData(Map<String, dynamic> json) =>
       _i2.GUpdateUserData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GUpdateUserData data) => data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GUpdateUserData, _i3.GUpdateUserVars>
+      transformOperation(_i4.Operation Function(_i4.Operation) transform) =>
+          this.rebuild((b) => b..operation = transform(operation));
 
   static Serializer<GUpdateUserReq> get serializer =>
       _$gUpdateUserReqSerializer;
@@ -209,7 +256,7 @@ abstract class GThisUserReq
         _i1.FragmentRequest<_i2.GThisUserData, _i3.GThisUserVars> {
   GThisUserReq._();
 
-  factory GThisUserReq([Function(GThisUserReqBuilder b) updates]) =
+  factory GThisUserReq([void Function(GThisUserReqBuilder b) updates]) =
       _$GThisUserReq;
 
   static void _initializeBuilder(GThisUserReqBuilder b) => b
@@ -227,6 +274,12 @@ abstract class GThisUserReq
   @override
   _i2.GThisUserData? parseData(Map<String, dynamic> json) =>
       _i2.GThisUserData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GThisUserData data) => data.toJson();
 
   static Serializer<GThisUserReq> get serializer => _$gThisUserReqSerializer;
 

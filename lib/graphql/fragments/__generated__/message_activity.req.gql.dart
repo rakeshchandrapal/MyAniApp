@@ -24,7 +24,8 @@ abstract class GMessageActivityReq
   GMessageActivityReq._();
 
   factory GMessageActivityReq(
-      [Function(GMessageActivityReqBuilder b) updates]) = _$GMessageActivityReq;
+          [void Function(GMessageActivityReqBuilder b) updates]) =
+      _$GMessageActivityReq;
 
   static void _initializeBuilder(GMessageActivityReqBuilder b) => b
     ..document = _i4.document
@@ -41,6 +42,13 @@ abstract class GMessageActivityReq
   @override
   _i2.GMessageActivityData? parseData(Map<String, dynamic> json) =>
       _i2.GMessageActivityData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GMessageActivityData data) =>
+      data.toJson();
 
   static Serializer<GMessageActivityReq> get serializer =>
       _$gMessageActivityReqSerializer;

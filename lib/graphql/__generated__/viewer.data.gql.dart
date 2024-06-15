@@ -7,13 +7,16 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart' as _i2;
 import 'package:myaniapp/graphql/__generated__/serializers.gql.dart' as _i1;
+import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
+    as _i3;
 
 part 'viewer.data.gql.g.dart';
 
 abstract class GViewerData implements Built<GViewerData, GViewerDataBuilder> {
   GViewerData._();
 
-  factory GViewerData([Function(GViewerDataBuilder b) updates]) = _$GViewerData;
+  factory GViewerData([void Function(GViewerDataBuilder b) updates]) =
+      _$GViewerData;
 
   static void _initializeBuilder(GViewerDataBuilder b) =>
       b..G__typename = 'Query';
@@ -39,7 +42,8 @@ abstract class GViewerData_Viewer
     implements Built<GViewerData_Viewer, GViewerData_ViewerBuilder>, GThisUser {
   GViewerData_Viewer._();
 
-  factory GViewerData_Viewer([Function(GViewerData_ViewerBuilder b) updates]) =
+  factory GViewerData_Viewer(
+          [void Function(GViewerData_ViewerBuilder b) updates]) =
       _$GViewerData_Viewer;
 
   static void _initializeBuilder(GViewerData_ViewerBuilder b) =>
@@ -66,6 +70,12 @@ abstract class GViewerData_Viewer
   GViewerData_Viewer_options? get options;
   @override
   GViewerData_Viewer_mediaListOptions? get mediaListOptions;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i2.GModRole?>? get moderatorRoles;
   static Serializer<GViewerData_Viewer> get serializer =>
       _$gViewerDataViewerSerializer;
 
@@ -89,7 +99,7 @@ abstract class GViewerData_Viewer_avatar
   GViewerData_Viewer_avatar._();
 
   factory GViewerData_Viewer_avatar(
-          [Function(GViewerData_Viewer_avatarBuilder b) updates]) =
+          [void Function(GViewerData_Viewer_avatarBuilder b) updates]) =
       _$GViewerData_Viewer_avatar;
 
   static void _initializeBuilder(GViewerData_Viewer_avatarBuilder b) =>
@@ -124,7 +134,7 @@ abstract class GViewerData_Viewer_statistics
   GViewerData_Viewer_statistics._();
 
   factory GViewerData_Viewer_statistics(
-          [Function(GViewerData_Viewer_statisticsBuilder b) updates]) =
+          [void Function(GViewerData_Viewer_statisticsBuilder b) updates]) =
       _$GViewerData_Viewer_statistics;
 
   static void _initializeBuilder(GViewerData_Viewer_statisticsBuilder b) =>
@@ -161,8 +171,8 @@ abstract class GViewerData_Viewer_statistics_anime
   GViewerData_Viewer_statistics_anime._();
 
   factory GViewerData_Viewer_statistics_anime(
-          [Function(GViewerData_Viewer_statistics_animeBuilder b) updates]) =
-      _$GViewerData_Viewer_statistics_anime;
+      [void Function(GViewerData_Viewer_statistics_animeBuilder b)
+          updates]) = _$GViewerData_Viewer_statistics_anime;
 
   static void _initializeBuilder(
           GViewerData_Viewer_statistics_animeBuilder b) =>
@@ -206,8 +216,8 @@ abstract class GViewerData_Viewer_statistics_manga
   GViewerData_Viewer_statistics_manga._();
 
   factory GViewerData_Viewer_statistics_manga(
-          [Function(GViewerData_Viewer_statistics_mangaBuilder b) updates]) =
-      _$GViewerData_Viewer_statistics_manga;
+      [void Function(GViewerData_Viewer_statistics_mangaBuilder b)
+          updates]) = _$GViewerData_Viewer_statistics_manga;
 
   static void _initializeBuilder(
           GViewerData_Viewer_statistics_mangaBuilder b) =>
@@ -250,7 +260,7 @@ abstract class GViewerData_Viewer_options
   GViewerData_Viewer_options._();
 
   factory GViewerData_Viewer_options(
-          [Function(GViewerData_Viewer_optionsBuilder b) updates]) =
+          [void Function(GViewerData_Viewer_optionsBuilder b) updates]) =
       _$GViewerData_Viewer_options;
 
   static void _initializeBuilder(GViewerData_Viewer_optionsBuilder b) =>
@@ -295,8 +305,8 @@ abstract class GViewerData_Viewer_mediaListOptions
   GViewerData_Viewer_mediaListOptions._();
 
   factory GViewerData_Viewer_mediaListOptions(
-          [Function(GViewerData_Viewer_mediaListOptionsBuilder b) updates]) =
-      _$GViewerData_Viewer_mediaListOptions;
+      [void Function(GViewerData_Viewer_mediaListOptionsBuilder b)
+          updates]) = _$GViewerData_Viewer_mediaListOptions;
 
   static void _initializeBuilder(
           GViewerData_Viewer_mediaListOptionsBuilder b) =>
@@ -311,6 +321,8 @@ abstract class GViewerData_Viewer_mediaListOptions
   String? get rowOrder;
   @override
   GViewerData_Viewer_mediaListOptions_animeList? get animeList;
+  @override
+  GViewerData_Viewer_mediaListOptions_mangaList? get mangaList;
   static Serializer<GViewerData_Viewer_mediaListOptions> get serializer =>
       _$gViewerDataViewerMediaListOptionsSerializer;
 
@@ -336,7 +348,7 @@ abstract class GViewerData_Viewer_mediaListOptions_animeList
   GViewerData_Viewer_mediaListOptions_animeList._();
 
   factory GViewerData_Viewer_mediaListOptions_animeList(
-      [Function(GViewerData_Viewer_mediaListOptions_animeListBuilder b)
+      [void Function(GViewerData_Viewer_mediaListOptions_animeListBuilder b)
           updates]) = _$GViewerData_Viewer_mediaListOptions_animeList;
 
   static void _initializeBuilder(
@@ -347,7 +359,15 @@ abstract class GViewerData_Viewer_mediaListOptions_animeList
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
+  BuiltList<String?>? get customLists;
+  @override
   BuiltList<String?>? get sectionOrder;
+  @override
+  bool? get splitCompletedSectionByFormat;
+  @override
+  BuiltList<String?>? get advancedScoring;
+  @override
+  bool? get advancedScoringEnabled;
   static Serializer<GViewerData_Viewer_mediaListOptions_animeList>
       get serializer => _$gViewerDataViewerMediaListOptionsAnimeListSerializer;
 
@@ -365,12 +385,57 @@ abstract class GViewerData_Viewer_mediaListOptions_animeList
       );
 }
 
+abstract class GViewerData_Viewer_mediaListOptions_mangaList
+    implements
+        Built<GViewerData_Viewer_mediaListOptions_mangaList,
+            GViewerData_Viewer_mediaListOptions_mangaListBuilder>,
+        GThisUser_mediaListOptions_mangaList {
+  GViewerData_Viewer_mediaListOptions_mangaList._();
+
+  factory GViewerData_Viewer_mediaListOptions_mangaList(
+      [void Function(GViewerData_Viewer_mediaListOptions_mangaListBuilder b)
+          updates]) = _$GViewerData_Viewer_mediaListOptions_mangaList;
+
+  static void _initializeBuilder(
+          GViewerData_Viewer_mediaListOptions_mangaListBuilder b) =>
+      b..G__typename = 'MediaListTypeOptions';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<String?>? get customLists;
+  @override
+  BuiltList<String?>? get sectionOrder;
+  @override
+  bool? get splitCompletedSectionByFormat;
+  @override
+  BuiltList<String?>? get advancedScoring;
+  @override
+  bool? get advancedScoringEnabled;
+  static Serializer<GViewerData_Viewer_mediaListOptions_mangaList>
+      get serializer => _$gViewerDataViewerMediaListOptionsMangaListSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GViewerData_Viewer_mediaListOptions_mangaList.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GViewerData_Viewer_mediaListOptions_mangaList? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GViewerData_Viewer_mediaListOptions_mangaList.serializer,
+        json,
+      );
+}
+
 abstract class GNotificationCountData
     implements Built<GNotificationCountData, GNotificationCountDataBuilder> {
   GNotificationCountData._();
 
   factory GNotificationCountData(
-          [Function(GNotificationCountDataBuilder b) updates]) =
+          [void Function(GNotificationCountDataBuilder b) updates]) =
       _$GNotificationCountData;
 
   static void _initializeBuilder(GNotificationCountDataBuilder b) =>
@@ -401,7 +466,7 @@ abstract class GNotificationCountData_Viewer
   GNotificationCountData_Viewer._();
 
   factory GNotificationCountData_Viewer(
-          [Function(GNotificationCountData_ViewerBuilder b) updates]) =
+          [void Function(GNotificationCountData_ViewerBuilder b) updates]) =
       _$GNotificationCountData_Viewer;
 
   static void _initializeBuilder(GNotificationCountData_ViewerBuilder b) =>
@@ -433,8 +498,8 @@ abstract class GNotificationCountData_Viewer_options
   GNotificationCountData_Viewer_options._();
 
   factory GNotificationCountData_Viewer_options(
-          [Function(GNotificationCountData_Viewer_optionsBuilder b) updates]) =
-      _$GNotificationCountData_Viewer_options;
+      [void Function(GNotificationCountData_Viewer_optionsBuilder b)
+          updates]) = _$GNotificationCountData_Viewer_options;
 
   static void _initializeBuilder(
           GNotificationCountData_Viewer_optionsBuilder b) =>
@@ -463,7 +528,7 @@ abstract class GUpdateUserData
     implements Built<GUpdateUserData, GUpdateUserDataBuilder> {
   GUpdateUserData._();
 
-  factory GUpdateUserData([Function(GUpdateUserDataBuilder b) updates]) =
+  factory GUpdateUserData([void Function(GUpdateUserDataBuilder b) updates]) =
       _$GUpdateUserData;
 
   static void _initializeBuilder(GUpdateUserDataBuilder b) =>
@@ -494,7 +559,7 @@ abstract class GUpdateUserData_UpdateUser
   GUpdateUserData_UpdateUser._();
 
   factory GUpdateUserData_UpdateUser(
-          [Function(GUpdateUserData_UpdateUserBuilder b) updates]) =
+          [void Function(GUpdateUserData_UpdateUserBuilder b) updates]) =
       _$GUpdateUserData_UpdateUser;
 
   static void _initializeBuilder(GUpdateUserData_UpdateUserBuilder b) =>
@@ -521,6 +586,12 @@ abstract class GUpdateUserData_UpdateUser
   GUpdateUserData_UpdateUser_options? get options;
   @override
   GUpdateUserData_UpdateUser_mediaListOptions? get mediaListOptions;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i2.GModRole?>? get moderatorRoles;
   static Serializer<GUpdateUserData_UpdateUser> get serializer =>
       _$gUpdateUserDataUpdateUserSerializer;
 
@@ -545,7 +616,7 @@ abstract class GUpdateUserData_UpdateUser_avatar
   GUpdateUserData_UpdateUser_avatar._();
 
   factory GUpdateUserData_UpdateUser_avatar(
-          [Function(GUpdateUserData_UpdateUser_avatarBuilder b) updates]) =
+          [void Function(GUpdateUserData_UpdateUser_avatarBuilder b) updates]) =
       _$GUpdateUserData_UpdateUser_avatar;
 
   static void _initializeBuilder(GUpdateUserData_UpdateUser_avatarBuilder b) =>
@@ -581,8 +652,8 @@ abstract class GUpdateUserData_UpdateUser_statistics
   GUpdateUserData_UpdateUser_statistics._();
 
   factory GUpdateUserData_UpdateUser_statistics(
-          [Function(GUpdateUserData_UpdateUser_statisticsBuilder b) updates]) =
-      _$GUpdateUserData_UpdateUser_statistics;
+      [void Function(GUpdateUserData_UpdateUser_statisticsBuilder b)
+          updates]) = _$GUpdateUserData_UpdateUser_statistics;
 
   static void _initializeBuilder(
           GUpdateUserData_UpdateUser_statisticsBuilder b) =>
@@ -620,7 +691,7 @@ abstract class GUpdateUserData_UpdateUser_statistics_anime
   GUpdateUserData_UpdateUser_statistics_anime._();
 
   factory GUpdateUserData_UpdateUser_statistics_anime(
-      [Function(GUpdateUserData_UpdateUser_statistics_animeBuilder b)
+      [void Function(GUpdateUserData_UpdateUser_statistics_animeBuilder b)
           updates]) = _$GUpdateUserData_UpdateUser_statistics_anime;
 
   static void _initializeBuilder(
@@ -665,7 +736,7 @@ abstract class GUpdateUserData_UpdateUser_statistics_manga
   GUpdateUserData_UpdateUser_statistics_manga._();
 
   factory GUpdateUserData_UpdateUser_statistics_manga(
-      [Function(GUpdateUserData_UpdateUser_statistics_mangaBuilder b)
+      [void Function(GUpdateUserData_UpdateUser_statistics_mangaBuilder b)
           updates]) = _$GUpdateUserData_UpdateUser_statistics_manga;
 
   static void _initializeBuilder(
@@ -710,8 +781,8 @@ abstract class GUpdateUserData_UpdateUser_options
   GUpdateUserData_UpdateUser_options._();
 
   factory GUpdateUserData_UpdateUser_options(
-          [Function(GUpdateUserData_UpdateUser_optionsBuilder b) updates]) =
-      _$GUpdateUserData_UpdateUser_options;
+      [void Function(GUpdateUserData_UpdateUser_optionsBuilder b)
+          updates]) = _$GUpdateUserData_UpdateUser_options;
 
   static void _initializeBuilder(GUpdateUserData_UpdateUser_optionsBuilder b) =>
       b..G__typename = 'UserOptions';
@@ -756,7 +827,7 @@ abstract class GUpdateUserData_UpdateUser_mediaListOptions
   GUpdateUserData_UpdateUser_mediaListOptions._();
 
   factory GUpdateUserData_UpdateUser_mediaListOptions(
-      [Function(GUpdateUserData_UpdateUser_mediaListOptionsBuilder b)
+      [void Function(GUpdateUserData_UpdateUser_mediaListOptionsBuilder b)
           updates]) = _$GUpdateUserData_UpdateUser_mediaListOptions;
 
   static void _initializeBuilder(
@@ -772,6 +843,8 @@ abstract class GUpdateUserData_UpdateUser_mediaListOptions
   String? get rowOrder;
   @override
   GUpdateUserData_UpdateUser_mediaListOptions_animeList? get animeList;
+  @override
+  GUpdateUserData_UpdateUser_mediaListOptions_mangaList? get mangaList;
   static Serializer<GUpdateUserData_UpdateUser_mediaListOptions>
       get serializer => _$gUpdateUserDataUpdateUserMediaListOptionsSerializer;
 
@@ -797,7 +870,8 @@ abstract class GUpdateUserData_UpdateUser_mediaListOptions_animeList
   GUpdateUserData_UpdateUser_mediaListOptions_animeList._();
 
   factory GUpdateUserData_UpdateUser_mediaListOptions_animeList(
-      [Function(GUpdateUserData_UpdateUser_mediaListOptions_animeListBuilder b)
+      [void Function(
+              GUpdateUserData_UpdateUser_mediaListOptions_animeListBuilder b)
           updates]) = _$GUpdateUserData_UpdateUser_mediaListOptions_animeList;
 
   static void _initializeBuilder(
@@ -808,7 +882,15 @@ abstract class GUpdateUserData_UpdateUser_mediaListOptions_animeList
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
+  BuiltList<String?>? get customLists;
+  @override
   BuiltList<String?>? get sectionOrder;
+  @override
+  bool? get splitCompletedSectionByFormat;
+  @override
+  BuiltList<String?>? get advancedScoring;
+  @override
+  bool? get advancedScoringEnabled;
   static Serializer<GUpdateUserData_UpdateUser_mediaListOptions_animeList>
       get serializer =>
           _$gUpdateUserDataUpdateUserMediaListOptionsAnimeListSerializer;
@@ -827,23 +909,84 @@ abstract class GUpdateUserData_UpdateUser_mediaListOptions_animeList
       );
 }
 
-abstract class GThisUser {
+abstract class GUpdateUserData_UpdateUser_mediaListOptions_mangaList
+    implements
+        Built<GUpdateUserData_UpdateUser_mediaListOptions_mangaList,
+            GUpdateUserData_UpdateUser_mediaListOptions_mangaListBuilder>,
+        GThisUser_mediaListOptions_mangaList {
+  GUpdateUserData_UpdateUser_mediaListOptions_mangaList._();
+
+  factory GUpdateUserData_UpdateUser_mediaListOptions_mangaList(
+      [void Function(
+              GUpdateUserData_UpdateUser_mediaListOptions_mangaListBuilder b)
+          updates]) = _$GUpdateUserData_UpdateUser_mediaListOptions_mangaList;
+
+  static void _initializeBuilder(
+          GUpdateUserData_UpdateUser_mediaListOptions_mangaListBuilder b) =>
+      b..G__typename = 'MediaListTypeOptions';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
+  BuiltList<String?>? get customLists;
+  @override
+  BuiltList<String?>? get sectionOrder;
+  @override
+  bool? get splitCompletedSectionByFormat;
+  @override
+  BuiltList<String?>? get advancedScoring;
+  @override
+  bool? get advancedScoringEnabled;
+  static Serializer<GUpdateUserData_UpdateUser_mediaListOptions_mangaList>
+      get serializer =>
+          _$gUpdateUserDataUpdateUserMediaListOptionsMangaListSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GUpdateUserData_UpdateUser_mediaListOptions_mangaList.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GUpdateUserData_UpdateUser_mediaListOptions_mangaList? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GUpdateUserData_UpdateUser_mediaListOptions_mangaList.serializer,
+        json,
+      );
+}
+
+abstract class GThisUser implements _i3.GUserFragment {
+  @override
+  String get G__typename;
+  @override
   int get id;
+  @override
   String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i2.GModRole?>? get moderatorRoles;
+  @override
+  GThisUser_avatar? get avatar;
   String? get about;
   String? get bannerImage;
   int? get unreadNotificationCount;
-  GThisUser_avatar? get avatar;
   GThisUser_statistics? get statistics;
   GThisUser_options? get options;
   GThisUser_mediaListOptions? get mediaListOptions;
+  @override
   Map<String, dynamic> toJson();
 }
 
-abstract class GThisUser_avatar {
+abstract class GThisUser_avatar implements _i3.GUserFragment_avatar {
+  @override
   String get G__typename;
+  @override
   String? get large;
+  @override
   Map<String, dynamic> toJson();
 }
 
@@ -890,20 +1033,38 @@ abstract class GThisUser_mediaListOptions {
   _i2.GScoreFormat? get scoreFormat;
   String? get rowOrder;
   GThisUser_mediaListOptions_animeList? get animeList;
+  GThisUser_mediaListOptions_mangaList? get mangaList;
   Map<String, dynamic> toJson();
 }
 
 abstract class GThisUser_mediaListOptions_animeList {
   String get G__typename;
+  BuiltList<String?>? get customLists;
   BuiltList<String?>? get sectionOrder;
+  bool? get splitCompletedSectionByFormat;
+  BuiltList<String?>? get advancedScoring;
+  bool? get advancedScoringEnabled;
+  Map<String, dynamic> toJson();
+}
+
+abstract class GThisUser_mediaListOptions_mangaList {
+  String get G__typename;
+  BuiltList<String?>? get customLists;
+  BuiltList<String?>? get sectionOrder;
+  bool? get splitCompletedSectionByFormat;
+  BuiltList<String?>? get advancedScoring;
+  bool? get advancedScoringEnabled;
   Map<String, dynamic> toJson();
 }
 
 abstract class GThisUserData
-    implements Built<GThisUserData, GThisUserDataBuilder>, GThisUser {
+    implements
+        Built<GThisUserData, GThisUserDataBuilder>,
+        GThisUser,
+        _i3.GUserFragment {
   GThisUserData._();
 
-  factory GThisUserData([Function(GThisUserDataBuilder b) updates]) =
+  factory GThisUserData([void Function(GThisUserDataBuilder b) updates]) =
       _$GThisUserData;
 
   static void _initializeBuilder(GThisUserDataBuilder b) =>
@@ -917,13 +1078,19 @@ abstract class GThisUserData
   @override
   String get name;
   @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i2.GModRole?>? get moderatorRoles;
+  @override
+  GThisUserData_avatar? get avatar;
+  @override
   String? get about;
   @override
   String? get bannerImage;
   @override
   int? get unreadNotificationCount;
-  @override
-  GThisUserData_avatar? get avatar;
   @override
   GThisUserData_statistics? get statistics;
   @override
@@ -948,11 +1115,12 @@ abstract class GThisUserData
 abstract class GThisUserData_avatar
     implements
         Built<GThisUserData_avatar, GThisUserData_avatarBuilder>,
-        GThisUser_avatar {
+        GThisUser_avatar,
+        _i3.GUserFragment_avatar {
   GThisUserData_avatar._();
 
   factory GThisUserData_avatar(
-          [Function(GThisUserData_avatarBuilder b) updates]) =
+          [void Function(GThisUserData_avatarBuilder b) updates]) =
       _$GThisUserData_avatar;
 
   static void _initializeBuilder(GThisUserData_avatarBuilder b) =>
@@ -986,7 +1154,7 @@ abstract class GThisUserData_statistics
   GThisUserData_statistics._();
 
   factory GThisUserData_statistics(
-          [Function(GThisUserData_statisticsBuilder b) updates]) =
+          [void Function(GThisUserData_statisticsBuilder b) updates]) =
       _$GThisUserData_statistics;
 
   static void _initializeBuilder(GThisUserData_statisticsBuilder b) =>
@@ -1023,7 +1191,7 @@ abstract class GThisUserData_statistics_anime
   GThisUserData_statistics_anime._();
 
   factory GThisUserData_statistics_anime(
-          [Function(GThisUserData_statistics_animeBuilder b) updates]) =
+          [void Function(GThisUserData_statistics_animeBuilder b) updates]) =
       _$GThisUserData_statistics_anime;
 
   static void _initializeBuilder(GThisUserData_statistics_animeBuilder b) =>
@@ -1066,7 +1234,7 @@ abstract class GThisUserData_statistics_manga
   GThisUserData_statistics_manga._();
 
   factory GThisUserData_statistics_manga(
-          [Function(GThisUserData_statistics_mangaBuilder b) updates]) =
+          [void Function(GThisUserData_statistics_mangaBuilder b) updates]) =
       _$GThisUserData_statistics_manga;
 
   static void _initializeBuilder(GThisUserData_statistics_mangaBuilder b) =>
@@ -1108,7 +1276,7 @@ abstract class GThisUserData_options
   GThisUserData_options._();
 
   factory GThisUserData_options(
-          [Function(GThisUserData_optionsBuilder b) updates]) =
+          [void Function(GThisUserData_optionsBuilder b) updates]) =
       _$GThisUserData_options;
 
   static void _initializeBuilder(GThisUserData_optionsBuilder b) =>
@@ -1153,7 +1321,7 @@ abstract class GThisUserData_mediaListOptions
   GThisUserData_mediaListOptions._();
 
   factory GThisUserData_mediaListOptions(
-          [Function(GThisUserData_mediaListOptionsBuilder b) updates]) =
+          [void Function(GThisUserData_mediaListOptionsBuilder b) updates]) =
       _$GThisUserData_mediaListOptions;
 
   static void _initializeBuilder(GThisUserData_mediaListOptionsBuilder b) =>
@@ -1168,6 +1336,8 @@ abstract class GThisUserData_mediaListOptions
   String? get rowOrder;
   @override
   GThisUserData_mediaListOptions_animeList? get animeList;
+  @override
+  GThisUserData_mediaListOptions_mangaList? get mangaList;
   static Serializer<GThisUserData_mediaListOptions> get serializer =>
       _$gThisUserDataMediaListOptionsSerializer;
 
@@ -1192,7 +1362,7 @@ abstract class GThisUserData_mediaListOptions_animeList
   GThisUserData_mediaListOptions_animeList._();
 
   factory GThisUserData_mediaListOptions_animeList(
-      [Function(GThisUserData_mediaListOptions_animeListBuilder b)
+      [void Function(GThisUserData_mediaListOptions_animeListBuilder b)
           updates]) = _$GThisUserData_mediaListOptions_animeList;
 
   static void _initializeBuilder(
@@ -1203,7 +1373,15 @@ abstract class GThisUserData_mediaListOptions_animeList
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   @override
+  BuiltList<String?>? get customLists;
+  @override
   BuiltList<String?>? get sectionOrder;
+  @override
+  bool? get splitCompletedSectionByFormat;
+  @override
+  BuiltList<String?>? get advancedScoring;
+  @override
+  bool? get advancedScoringEnabled;
   static Serializer<GThisUserData_mediaListOptions_animeList> get serializer =>
       _$gThisUserDataMediaListOptionsAnimeListSerializer;
 
@@ -1217,6 +1395,51 @@ abstract class GThisUserData_mediaListOptions_animeList
           Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GThisUserData_mediaListOptions_animeList.serializer,
+        json,
+      );
+}
+
+abstract class GThisUserData_mediaListOptions_mangaList
+    implements
+        Built<GThisUserData_mediaListOptions_mangaList,
+            GThisUserData_mediaListOptions_mangaListBuilder>,
+        GThisUser_mediaListOptions_mangaList {
+  GThisUserData_mediaListOptions_mangaList._();
+
+  factory GThisUserData_mediaListOptions_mangaList(
+      [void Function(GThisUserData_mediaListOptions_mangaListBuilder b)
+          updates]) = _$GThisUserData_mediaListOptions_mangaList;
+
+  static void _initializeBuilder(
+          GThisUserData_mediaListOptions_mangaListBuilder b) =>
+      b..G__typename = 'MediaListTypeOptions';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  BuiltList<String?>? get customLists;
+  @override
+  BuiltList<String?>? get sectionOrder;
+  @override
+  bool? get splitCompletedSectionByFormat;
+  @override
+  BuiltList<String?>? get advancedScoring;
+  @override
+  bool? get advancedScoringEnabled;
+  static Serializer<GThisUserData_mediaListOptions_mangaList> get serializer =>
+      _$gThisUserDataMediaListOptionsMangaListSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GThisUserData_mediaListOptions_mangaList.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GThisUserData_mediaListOptions_mangaList? fromJson(
+          Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GThisUserData_mediaListOptions_mangaList.serializer,
         json,
       );
 }

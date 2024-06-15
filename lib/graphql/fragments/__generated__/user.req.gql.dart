@@ -22,7 +22,7 @@ abstract class GUserFragmentReq
         _i1.FragmentRequest<_i2.GUserFragmentData, _i3.GUserFragmentVars> {
   GUserFragmentReq._();
 
-  factory GUserFragmentReq([Function(GUserFragmentReqBuilder b) updates]) =
+  factory GUserFragmentReq([void Function(GUserFragmentReqBuilder b) updates]) =
       _$GUserFragmentReq;
 
   static void _initializeBuilder(GUserFragmentReqBuilder b) => b
@@ -40,6 +40,12 @@ abstract class GUserFragmentReq
   @override
   _i2.GUserFragmentData? parseData(Map<String, dynamic> json) =>
       _i2.GUserFragmentData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GUserFragmentData data) => data.toJson();
 
   static Serializer<GUserFragmentReq> get serializer =>
       _$gUserFragmentReqSerializer;

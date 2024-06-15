@@ -12,7 +12,7 @@ abstract class GListGroupVars
     implements Built<GListGroupVars, GListGroupVarsBuilder> {
   GListGroupVars._();
 
-  factory GListGroupVars([Function(GListGroupVarsBuilder b) updates]) =
+  factory GListGroupVars([void Function(GListGroupVarsBuilder b) updates]) =
       _$GListGroupVars;
 
   static Serializer<GListGroupVars> get serializer =>

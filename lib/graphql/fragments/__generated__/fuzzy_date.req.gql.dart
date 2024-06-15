@@ -22,7 +22,7 @@ abstract class GFuzzyDateReq
         _i1.FragmentRequest<_i2.GFuzzyDateData, _i3.GFuzzyDateVars> {
   GFuzzyDateReq._();
 
-  factory GFuzzyDateReq([Function(GFuzzyDateReqBuilder b) updates]) =
+  factory GFuzzyDateReq([void Function(GFuzzyDateReqBuilder b) updates]) =
       _$GFuzzyDateReq;
 
   static void _initializeBuilder(GFuzzyDateReqBuilder b) => b
@@ -40,6 +40,12 @@ abstract class GFuzzyDateReq
   @override
   _i2.GFuzzyDateData? parseData(Map<String, dynamic> json) =>
       _i2.GFuzzyDateData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GFuzzyDateData data) => data.toJson();
 
   static Serializer<GFuzzyDateReq> get serializer => _$gFuzzyDateReqSerializer;
 

@@ -8,7 +8,7 @@ extension Capitalize on String {
     return replaceAll('_', " ")
         .split(' ')
         .map(
-          (element) => toBeginningOfSentenceCase(element.toLowerCase())!,
+          (element) => toBeginningOfSentenceCase(element.toLowerCase()),
         )
         .join(' ');
   }
@@ -101,5 +101,16 @@ extension InputFuzzyBuilderToDate on GFuzzyDateInputBuilder {
     }
 
     return str;
+  }
+}
+
+extension ThemeContext on BuildContext {
+  ThemeData get theme => Theme.of(this);
+}
+
+extension Abbreviate on num {
+  String abbreviate() {
+    var f = NumberFormat.compact(locale: "en_US");
+    return f.format(this);
   }
 }

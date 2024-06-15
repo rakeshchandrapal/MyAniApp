@@ -145,7 +145,8 @@ abstract class GThreadFragmentData
   GThreadFragmentData._();
 
   factory GThreadFragmentData(
-      [Function(GThreadFragmentDataBuilder b) updates]) = _$GThreadFragmentData;
+          [void Function(GThreadFragmentDataBuilder b) updates]) =
+      _$GThreadFragmentData;
 
   static void _initializeBuilder(GThreadFragmentDataBuilder b) =>
       b..G__typename = 'Thread';
@@ -202,8 +203,8 @@ abstract class GThreadFragmentData_mediaCategories
   GThreadFragmentData_mediaCategories._();
 
   factory GThreadFragmentData_mediaCategories(
-          [Function(GThreadFragmentData_mediaCategoriesBuilder b) updates]) =
-      _$GThreadFragmentData_mediaCategories;
+      [void Function(GThreadFragmentData_mediaCategoriesBuilder b)
+          updates]) = _$GThreadFragmentData_mediaCategories;
 
   static void _initializeBuilder(
           GThreadFragmentData_mediaCategoriesBuilder b) =>
@@ -254,7 +255,7 @@ abstract class GThreadFragmentData_mediaCategories_title
   GThreadFragmentData_mediaCategories_title._();
 
   factory GThreadFragmentData_mediaCategories_title(
-      [Function(GThreadFragmentData_mediaCategories_titleBuilder b)
+      [void Function(GThreadFragmentData_mediaCategories_titleBuilder b)
           updates]) = _$GThreadFragmentData_mediaCategories_title;
 
   static void _initializeBuilder(
@@ -292,7 +293,7 @@ abstract class GThreadFragmentData_mediaCategories_coverImage
   GThreadFragmentData_mediaCategories_coverImage._();
 
   factory GThreadFragmentData_mediaCategories_coverImage(
-      [Function(GThreadFragmentData_mediaCategories_coverImageBuilder b)
+      [void Function(GThreadFragmentData_mediaCategories_coverImageBuilder b)
           updates]) = _$GThreadFragmentData_mediaCategories_coverImage;
 
   static void _initializeBuilder(
@@ -330,7 +331,7 @@ abstract class GThreadFragmentData_categories
   GThreadFragmentData_categories._();
 
   factory GThreadFragmentData_categories(
-          [Function(GThreadFragmentData_categoriesBuilder b) updates]) =
+          [void Function(GThreadFragmentData_categoriesBuilder b) updates]) =
       _$GThreadFragmentData_categories;
 
   static void _initializeBuilder(GThreadFragmentData_categoriesBuilder b) =>
@@ -367,7 +368,7 @@ abstract class GThreadFragmentData_user
   GThreadFragmentData_user._();
 
   factory GThreadFragmentData_user(
-          [Function(GThreadFragmentData_userBuilder b) updates]) =
+          [void Function(GThreadFragmentData_userBuilder b) updates]) =
       _$GThreadFragmentData_user;
 
   static void _initializeBuilder(GThreadFragmentData_userBuilder b) =>
@@ -413,7 +414,7 @@ abstract class GThreadFragmentData_user_avatar
   GThreadFragmentData_user_avatar._();
 
   factory GThreadFragmentData_user_avatar(
-          [Function(GThreadFragmentData_user_avatarBuilder b) updates]) =
+          [void Function(GThreadFragmentData_user_avatarBuilder b) updates]) =
       _$GThreadFragmentData_user_avatar;
 
   static void _initializeBuilder(GThreadFragmentData_user_avatarBuilder b) =>
@@ -449,7 +450,7 @@ abstract class GThreadFragmentData_replyUser
   GThreadFragmentData_replyUser._();
 
   factory GThreadFragmentData_replyUser(
-          [Function(GThreadFragmentData_replyUserBuilder b) updates]) =
+          [void Function(GThreadFragmentData_replyUserBuilder b) updates]) =
       _$GThreadFragmentData_replyUser;
 
   static void _initializeBuilder(GThreadFragmentData_replyUserBuilder b) =>
@@ -495,8 +496,8 @@ abstract class GThreadFragmentData_replyUser_avatar
   GThreadFragmentData_replyUser_avatar._();
 
   factory GThreadFragmentData_replyUser_avatar(
-          [Function(GThreadFragmentData_replyUser_avatarBuilder b) updates]) =
-      _$GThreadFragmentData_replyUser_avatar;
+      [void Function(GThreadFragmentData_replyUser_avatarBuilder b)
+          updates]) = _$GThreadFragmentData_replyUser_avatar;
 
   static void _initializeBuilder(
           GThreadFragmentData_replyUser_avatarBuilder b) =>

@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
+import 'package:myaniapp/routes.dart';
 
 class PushNotifications {
   factory PushNotifications() => _instance;
@@ -17,6 +18,20 @@ class PushNotifications {
       onDidReceiveBackgroundNotificationResponse: notificationTap,
       onDidReceiveNotificationResponse: notificationTap,
     );
+  }
+
+  void init() async {
+    if (!kIsWeb && !Platform.isAndroid) return;
+
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+        await _flutterLocalNotificationsPlugin
+            .getNotificationAppLaunchDetails();
+    final didNotificationLaunchApp =
+        notificationAppLaunchDetails?.didNotificationLaunchApp ?? false;
+
+    if (didNotificationLaunchApp) {
+      notificationTap(notificationAppLaunchDetails!.notificationResponse!);
+    }
   }
 
   static final PushNotifications _instance = PushNotifications._private();
@@ -173,7 +188,9 @@ void notificationTap(NotificationResponse notificationResponse) {
   Map<String, dynamic>? decodePayload =
       jsonDecode(notificationResponse.payload!);
   if (decodePayload?['path'] != null) {
-    // appRouter.pushNamed(decodePayload!['path'] as String);
+    try {
+      router.push(decodePayload!['path'] as String);
+    } catch (e) {}
   }
 }
 

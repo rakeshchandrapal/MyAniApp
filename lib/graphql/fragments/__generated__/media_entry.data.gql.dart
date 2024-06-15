@@ -130,7 +130,8 @@ abstract class GMediaListEntryData
   GMediaListEntryData._();
 
   factory GMediaListEntryData(
-      [Function(GMediaListEntryDataBuilder b) updates]) = _$GMediaListEntryData;
+          [void Function(GMediaListEntryDataBuilder b) updates]) =
+      _$GMediaListEntryData;
 
   static void _initializeBuilder(GMediaListEntryDataBuilder b) =>
       b..G__typename = 'MediaList';
@@ -195,7 +196,7 @@ abstract class GMediaListEntryData_startedAt
   GMediaListEntryData_startedAt._();
 
   factory GMediaListEntryData_startedAt(
-          [Function(GMediaListEntryData_startedAtBuilder b) updates]) =
+          [void Function(GMediaListEntryData_startedAtBuilder b) updates]) =
       _$GMediaListEntryData_startedAt;
 
   static void _initializeBuilder(GMediaListEntryData_startedAtBuilder b) =>
@@ -235,7 +236,7 @@ abstract class GMediaListEntryData_completedAt
   GMediaListEntryData_completedAt._();
 
   factory GMediaListEntryData_completedAt(
-          [Function(GMediaListEntryData_completedAtBuilder b) updates]) =
+          [void Function(GMediaListEntryData_completedAtBuilder b) updates]) =
       _$GMediaListEntryData_completedAt;
 
   static void _initializeBuilder(GMediaListEntryData_completedAtBuilder b) =>
@@ -274,7 +275,7 @@ abstract class GMediaListEntryData_media
   GMediaListEntryData_media._();
 
   factory GMediaListEntryData_media(
-          [Function(GMediaListEntryData_mediaBuilder b) updates]) =
+          [void Function(GMediaListEntryData_mediaBuilder b) updates]) =
       _$GMediaListEntryData_media;
 
   static void _initializeBuilder(GMediaListEntryData_mediaBuilder b) =>
@@ -336,7 +337,7 @@ abstract class GMediaListEntryData_media_title
   GMediaListEntryData_media_title._();
 
   factory GMediaListEntryData_media_title(
-          [Function(GMediaListEntryData_media_titleBuilder b) updates]) =
+          [void Function(GMediaListEntryData_media_titleBuilder b) updates]) =
       _$GMediaListEntryData_media_title;
 
   static void _initializeBuilder(GMediaListEntryData_media_titleBuilder b) =>
@@ -372,8 +373,8 @@ abstract class GMediaListEntryData_media_coverImage
   GMediaListEntryData_media_coverImage._();
 
   factory GMediaListEntryData_media_coverImage(
-          [Function(GMediaListEntryData_media_coverImageBuilder b) updates]) =
-      _$GMediaListEntryData_media_coverImage;
+      [void Function(GMediaListEntryData_media_coverImageBuilder b)
+          updates]) = _$GMediaListEntryData_media_coverImage;
 
   static void _initializeBuilder(
           GMediaListEntryData_media_coverImageBuilder b) =>
@@ -410,8 +411,8 @@ abstract class GMediaListEntryData_media_startDate
   GMediaListEntryData_media_startDate._();
 
   factory GMediaListEntryData_media_startDate(
-          [Function(GMediaListEntryData_media_startDateBuilder b) updates]) =
-      _$GMediaListEntryData_media_startDate;
+      [void Function(GMediaListEntryData_media_startDateBuilder b)
+          updates]) = _$GMediaListEntryData_media_startDate;
 
   static void _initializeBuilder(
           GMediaListEntryData_media_startDateBuilder b) =>

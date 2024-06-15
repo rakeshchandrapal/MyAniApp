@@ -52,7 +52,7 @@ abstract class GAiringScheduleInput
   GAiringScheduleInput._();
 
   factory GAiringScheduleInput(
-          [Function(GAiringScheduleInputBuilder b) updates]) =
+          [void Function(GAiringScheduleInputBuilder b) updates]) =
       _$GAiringScheduleInput;
 
   int? get airingAt;
@@ -104,7 +104,7 @@ abstract class GAniChartHighlightInput
   GAniChartHighlightInput._();
 
   factory GAniChartHighlightInput(
-          [Function(GAniChartHighlightInputBuilder b) updates]) =
+          [void Function(GAniChartHighlightInputBuilder b) updates]) =
       _$GAniChartHighlightInput;
 
   int? get mediaId;
@@ -129,7 +129,8 @@ abstract class GCharacterNameInput
   GCharacterNameInput._();
 
   factory GCharacterNameInput(
-      [Function(GCharacterNameInputBuilder b) updates]) = _$GCharacterNameInput;
+          [void Function(GCharacterNameInputBuilder b) updates]) =
+      _$GCharacterNameInput;
 
   String? get first;
   String? get middle;
@@ -251,7 +252,7 @@ abstract class GFuzzyDateInput
     implements Built<GFuzzyDateInput, GFuzzyDateInputBuilder> {
   GFuzzyDateInput._();
 
-  factory GFuzzyDateInput([Function(GFuzzyDateInputBuilder b) updates]) =
+  factory GFuzzyDateInput([void Function(GFuzzyDateInputBuilder b) updates]) =
       _$GFuzzyDateInput;
 
   int? get year;
@@ -296,7 +297,7 @@ abstract class GListActivityOptionInput
   GListActivityOptionInput._();
 
   factory GListActivityOptionInput(
-          [Function(GListActivityOptionInputBuilder b) updates]) =
+          [void Function(GListActivityOptionInputBuilder b) updates]) =
       _$GListActivityOptionInput;
 
   bool? get disabled;
@@ -321,7 +322,7 @@ abstract class GMediaExternalLinkInput
   GMediaExternalLinkInput._();
 
   factory GMediaExternalLinkInput(
-          [Function(GMediaExternalLinkInputBuilder b) updates]) =
+          [void Function(GMediaExternalLinkInputBuilder b) updates]) =
       _$GMediaExternalLinkInput;
 
   int get id;
@@ -377,7 +378,7 @@ abstract class GMediaListOptionsInput
   GMediaListOptionsInput._();
 
   factory GMediaListOptionsInput(
-          [Function(GMediaListOptionsInputBuilder b) updates]) =
+          [void Function(GMediaListOptionsInputBuilder b) updates]) =
       _$GMediaListOptionsInput;
 
   BuiltList<String?>? get sectionOrder;
@@ -526,6 +527,8 @@ class GMediaRankType extends EnumClass {
 class GMediaRelation extends EnumClass {
   const GMediaRelation._(String name) : super(name);
 
+  static const GMediaRelation SOURCE = _$gMediaRelationSOURCE;
+
   static const GMediaRelation ADAPTATION = _$gMediaRelationADAPTATION;
 
   static const GMediaRelation PREQUEL = _$gMediaRelationPREQUEL;
@@ -545,8 +548,6 @@ class GMediaRelation extends EnumClass {
   static const GMediaRelation SPIN_OFF = _$gMediaRelationSPIN_OFF;
 
   static const GMediaRelation OTHER = _$gMediaRelationOTHER;
-
-  static const GMediaRelation SOURCE = _$gMediaRelationSOURCE;
 
   static const GMediaRelation COMPILATION = _$gMediaRelationCOMPILATION;
 
@@ -727,7 +728,7 @@ abstract class GMediaTitleInput
     implements Built<GMediaTitleInput, GMediaTitleInputBuilder> {
   GMediaTitleInput._();
 
-  factory GMediaTitleInput([Function(GMediaTitleInputBuilder b) updates]) =
+  factory GMediaTitleInput([void Function(GMediaTitleInputBuilder b) updates]) =
       _$GMediaTitleInput;
 
   String? get romaji;
@@ -875,7 +876,7 @@ abstract class GNotificationOptionInput
   GNotificationOptionInput._();
 
   factory GNotificationOptionInput(
-          [Function(GNotificationOptionInputBuilder b) updates]) =
+          [void Function(GNotificationOptionInputBuilder b) updates]) =
       _$GNotificationOptionInput;
 
   GNotificationType? get type;
@@ -1138,7 +1139,7 @@ abstract class GStaffNameInput
     implements Built<GStaffNameInput, GStaffNameInputBuilder> {
   GStaffNameInput._();
 
-  factory GStaffNameInput([Function(GStaffNameInputBuilder b) updates]) =
+  factory GStaffNameInput([void Function(GStaffNameInputBuilder b) updates]) =
       _$GStaffNameInput;
 
   String? get first;

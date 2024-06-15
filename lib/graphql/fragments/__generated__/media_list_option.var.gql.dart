@@ -13,7 +13,7 @@ abstract class GMediaListOptionsVars
   GMediaListOptionsVars._();
 
   factory GMediaListOptionsVars(
-          [Function(GMediaListOptionsVarsBuilder b) updates]) =
+          [void Function(GMediaListOptionsVarsBuilder b) updates]) =
       _$GMediaListOptionsVars;
 
   static Serializer<GMediaListOptionsVars> get serializer =>

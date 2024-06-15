@@ -15,4 +15,7 @@ fragment MessageActivity on MessageActivity {
   messenger {
     ...UserFragment
   }
+  recipient {
+    ...UserFragment
+  }
 }

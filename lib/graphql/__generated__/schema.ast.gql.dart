@@ -7742,6 +7742,10 @@ const MediaRelation = _i1.EnumTypeDefinitionNode(
   directives: [],
   values: [
     _i1.EnumValueDefinitionNode(
+      name: _i1.NameNode(value: 'SOURCE'),
+      directives: [],
+    ),
+    _i1.EnumValueDefinitionNode(
       name: _i1.NameNode(value: 'ADAPTATION'),
       directives: [],
     ),
@@ -7779,10 +7783,6 @@ const MediaRelation = _i1.EnumTypeDefinitionNode(
     ),
     _i1.EnumValueDefinitionNode(
       name: _i1.NameNode(value: 'OTHER'),
-      directives: [],
-    ),
-    _i1.EnumValueDefinitionNode(
-      name: _i1.NameNode(value: 'SOURCE'),
       directives: [],
     ),
     _i1.EnumValueDefinitionNode(

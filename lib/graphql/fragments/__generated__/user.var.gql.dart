@@ -12,7 +12,8 @@ abstract class GUserFragmentVars
     implements Built<GUserFragmentVars, GUserFragmentVarsBuilder> {
   GUserFragmentVars._();
 
-  factory GUserFragmentVars([Function(GUserFragmentVarsBuilder b) updates]) =
+  factory GUserFragmentVars(
+          [void Function(GUserFragmentVarsBuilder b) updates]) =
       _$GUserFragmentVars;
 
   static Serializer<GUserFragmentVars> get serializer =>

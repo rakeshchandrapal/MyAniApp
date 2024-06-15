@@ -22,7 +22,8 @@ abstract class GThreadFragmentReq
         _i1.FragmentRequest<_i2.GThreadFragmentData, _i3.GThreadFragmentVars> {
   GThreadFragmentReq._();
 
-  factory GThreadFragmentReq([Function(GThreadFragmentReqBuilder b) updates]) =
+  factory GThreadFragmentReq(
+          [void Function(GThreadFragmentReqBuilder b) updates]) =
       _$GThreadFragmentReq;
 
   static void _initializeBuilder(GThreadFragmentReqBuilder b) => b
@@ -40,6 +41,13 @@ abstract class GThreadFragmentReq
   @override
   _i2.GThreadFragmentData? parseData(Map<String, dynamic> json) =>
       _i2.GThreadFragmentData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GThreadFragmentData data) =>
+      data.toJson();
 
   static Serializer<GThreadFragmentReq> get serializer =>
       _$gThreadFragmentReqSerializer;

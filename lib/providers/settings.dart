@@ -1,107 +1,118 @@
 import 'package:flutter/material.dart';
-import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/providers/ferry.dart';
-import 'package:myaniapp/providers/shared_preferences.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/providers/shared_prefs.dart';
 
-part 'settings.g.dart';
+class _Settings {
+  final String? token;
+  final ThemeMode themeMode;
+  final Color? primaryColor;
+  final bool blurCovers;
+  final bool showEmbedMediaCard;
 
-@Riverpod(keepAlive: true)
-class Settings extends _$Settings {
+  _Settings({
+    required this.token,
+    required this.themeMode,
+    required this.primaryColor,
+    required this.blurCovers,
+    required this.showEmbedMediaCard,
+  });
+}
+
+class _SettingsNotifier extends Notifier<_Settings> {
   @override
-  set state(AppSettings value) {
-    super.state = value;
-    syncToStorage();
+  _Settings build() {
+    var sharedPrefs = ref.watch(sharedPrefsProvider);
+
+    return _Settings(
+      token: sharedPrefs.getString("token"),
+      themeMode: ThemeMode.values.firstWhere((element) =>
+          element.name ==
+          (sharedPrefs.getString("themeMode") ?? ThemeMode.system.name)),
+      primaryColor: sharedPrefs.containsKey("themeColor")
+          ? Color(sharedPrefs.getInt("themeColor")!)
+          : null,
+      blurCovers: sharedPrefs.getBool("blurCovers") ?? false,
+      showEmbedMediaCard: sharedPrefs.getBool("showEmbedMediaCard") ?? false,
+    );
   }
 
-  @override
-  bool updateShouldNotify(_, __) {
-    return true;
+  void updateThemeMode(ThemeMode themeMode) {
+    state = _Settings(
+      token: state.token,
+      themeMode: themeMode,
+      primaryColor: state.primaryColor,
+      blurCovers: state.blurCovers,
+      showEmbedMediaCard: state.showEmbedMediaCard,
+    );
+
+    ref.read(sharedPrefsProvider).setString("themeMode", themeMode.name);
+
+    ref.notifyListeners();
   }
 
-  Future<bool> login(String token) {
-    state = state..token = token;
-    return ref.read(sharedPrefProvider).setString(Setting.token.setting, token);
+  void updatePrimaryColor(Color color) {
+    state = _Settings(
+      token: state.token,
+      themeMode: state.themeMode,
+      primaryColor: color,
+      showEmbedMediaCard: state.showEmbedMediaCard,
+      blurCovers: state.blurCovers,
+    );
+
+    ref.read(sharedPrefsProvider).setInt("themeColor", color.value);
+
+    ref.notifyListeners();
   }
 
-  Future<bool> logout() async {
-    await ref.read(sharedPrefProvider).remove('token');
-    state = build();
-    ref.read(ferryClientProvider).cache.store.clear();
-    return true;
+  void updateBlurCovers(bool blur) {
+    state = _Settings(
+      token: state.token,
+      themeMode: state.themeMode,
+      blurCovers: blur,
+      showEmbedMediaCard: state.showEmbedMediaCard,
+      primaryColor: state.primaryColor,
+    );
+
+    ref.read(sharedPrefsProvider).setBool("blurCovers", blur);
+
+    ref.notifyListeners();
   }
 
-  void changeTheme(ThemeMode theme) {
-    state = state..theme = theme;
+  void updateEmbedMediaCard(bool setting) {
+    state = _Settings(
+      token: state.token,
+      themeMode: state.themeMode,
+      blurCovers: state.blurCovers,
+      showEmbedMediaCard: setting,
+      primaryColor: state.primaryColor,
+    );
+
+    ref.read(sharedPrefsProvider).setBool("showEmbedMediaCard", setting);
+
+    ref.notifyListeners();
   }
 
-  void changeListStyle(Setting setting, ListStyle style) {
-    switch (setting) {
-      case Setting.animeList:
-        state = state..animeList = style;
-        break;
-      case Setting.mangaList:
-        state = state..mangaList = style;
-        break;
-      case Setting.fallbackList:
-        state = state..fallbackList = style;
-        break;
-      default:
-        break;
+  Future<void> updateToken(String? token) async {
+    Future(() {
+      state = _Settings(
+        token: token,
+        themeMode: state.themeMode,
+        blurCovers: state.blurCovers,
+        primaryColor: state.primaryColor,
+        showEmbedMediaCard: state.showEmbedMediaCard,
+      );
+    });
+
+    if (token == null) {
+      await ref.read(sharedPrefsProvider).remove("token");
+    } else {
+      await ref.read(sharedPrefsProvider).setString("token", token);
     }
-  }
 
-  void syncToStorage() {
-    var settings = ref.read(sharedPrefProvider);
-    settings.setString(Setting.animeList.setting, state.animeList.name);
-    settings.setString(Setting.mangaList.setting, state.mangaList.name);
-    settings.setString(Setting.fallbackList.setting, state.fallbackList.name);
-    settings.setString(Setting.theme.setting, state.theme.name);
-    if (state.token?.isNotEmpty == true) {
-      settings.setString(Setting.token.setting, state.token!);
-    }
-  }
-
-  @override
-  AppSettings build() {
-    var prefs = ref.watch(sharedPrefProvider);
-    var animeList = ListStyle.values
-            .byName(prefs.getString(Setting.animeList.setting) ?? 'grid'),
-        mangaList = ListStyle.values
-            .byName(prefs.getString(Setting.mangaList.setting) ?? 'grid'),
-        fallbackList = ListStyle.values
-            .byName(prefs.getString(Setting.fallbackList.setting) ?? 'grid'),
-        theme = ThemeMode.values
-            .byName(prefs.getString(Setting.theme.setting) ?? 'system'),
-        token = prefs.getString(Setting.token.setting);
-
-    return AppSettings(animeList, mangaList, fallbackList, theme, token);
+    ref.notifyListeners();
   }
 }
 
-enum Setting {
-  animeList('list.anime'),
-  mangaList('list.manga'),
-  fallbackList('list.fallback'),
-  token('token'),
-  theme('theme');
-
-  const Setting(this.setting);
-  final String setting;
-}
-
-class AppSettings {
-  AppSettings(
-    this.animeList,
-    this.mangaList,
-    this.fallbackList,
-    this.theme,
-    this.token,
-  );
-
-  ListStyle animeList;
-  ListStyle fallbackList;
-  ListStyle mangaList;
-  ThemeMode theme;
-  String? token;
-}
+final settingsProvider = NotifierProvider<_SettingsNotifier, _Settings>(() {
+  return _SettingsNotifier();
+});

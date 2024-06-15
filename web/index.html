@@ -32,12 +32,6 @@
     <title>MyAniApp</title>
     <link rel="manifest" href="manifest.json" />
 
-    <script>
-      // The value below is injected by flutter build, do not touch.
-      var serviceWorkerVersion = null;
-    </script>
-    <!-- This script adds the flutter initialization JS code -->
-    <script src="flutter.js" defer></script>
     <style>
       .loading {
         width: 100vw;
@@ -48,23 +42,8 @@
       }
     </style>
   </head>
-  <body style="overflow: hidden">
+  <body>
     <p class="loading">Getting app ready...</p>
-    <script>
-      window.addEventListener('load', function (ev) {
-        // Download main.dart.js
-        _flutter.loader.loadEntrypoint({
-          serviceWorker: {
-            serviceWorkerVersion: serviceWorkerVersion,
-          },
-          onEntrypointLoaded: function (engineInitializer) {
-            engineInitializer.initializeEngine().then(function (appRunner) {
-              document.getElementsByClassName('loading')?.item(0)?.remove();
-              appRunner.runApp();
-            });
-          },
-        });
-      });
-    </script>
+    <script src="flutter_bootstrap.js" async></script>
   </body>
 </html>

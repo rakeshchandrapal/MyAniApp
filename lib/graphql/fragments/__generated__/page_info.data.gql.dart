@@ -19,7 +19,7 @@ abstract class GPageInfoData
     implements Built<GPageInfoData, GPageInfoDataBuilder>, GPageInfo {
   GPageInfoData._();
 
-  factory GPageInfoData([Function(GPageInfoDataBuilder b) updates]) =
+  factory GPageInfoData([void Function(GPageInfoDataBuilder b) updates]) =
       _$GPageInfoData;
 
   static void _initializeBuilder(GPageInfoDataBuilder b) =>

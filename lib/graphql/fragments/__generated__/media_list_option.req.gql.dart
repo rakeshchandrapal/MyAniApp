@@ -24,7 +24,7 @@ abstract class GMediaListOptionsReq
   GMediaListOptionsReq._();
 
   factory GMediaListOptionsReq(
-          [Function(GMediaListOptionsReqBuilder b) updates]) =
+          [void Function(GMediaListOptionsReqBuilder b) updates]) =
       _$GMediaListOptionsReq;
 
   static void _initializeBuilder(GMediaListOptionsReqBuilder b) => b
@@ -42,6 +42,13 @@ abstract class GMediaListOptionsReq
   @override
   _i2.GMediaListOptionsData? parseData(Map<String, dynamic> json) =>
       _i2.GMediaListOptionsData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GMediaListOptionsData data) =>
+      data.toJson();
 
   static Serializer<GMediaListOptionsReq> get serializer =>
       _$gMediaListOptionsReqSerializer;

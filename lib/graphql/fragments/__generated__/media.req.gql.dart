@@ -22,7 +22,8 @@ abstract class GMediaFragmentReq
         _i1.FragmentRequest<_i2.GMediaFragmentData, _i3.GMediaFragmentVars> {
   GMediaFragmentReq._();
 
-  factory GMediaFragmentReq([Function(GMediaFragmentReqBuilder b) updates]) =
+  factory GMediaFragmentReq(
+          [void Function(GMediaFragmentReqBuilder b) updates]) =
       _$GMediaFragmentReq;
 
   static void _initializeBuilder(GMediaFragmentReqBuilder b) => b
@@ -40,6 +41,12 @@ abstract class GMediaFragmentReq
   @override
   _i2.GMediaFragmentData? parseData(Map<String, dynamic> json) =>
       _i2.GMediaFragmentData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GMediaFragmentData data) => data.toJson();
 
   static Serializer<GMediaFragmentReq> get serializer =>
       _$gMediaFragmentReqSerializer;

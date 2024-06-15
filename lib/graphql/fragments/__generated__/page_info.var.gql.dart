@@ -12,7 +12,7 @@ abstract class GPageInfoVars
     implements Built<GPageInfoVars, GPageInfoVarsBuilder> {
   GPageInfoVars._();
 
-  factory GPageInfoVars([Function(GPageInfoVarsBuilder b) updates]) =
+  factory GPageInfoVars([void Function(GPageInfoVarsBuilder b) updates]) =
       _$GPageInfoVars;
 
   static Serializer<GPageInfoVars> get serializer => _$gPageInfoVarsSerializer;

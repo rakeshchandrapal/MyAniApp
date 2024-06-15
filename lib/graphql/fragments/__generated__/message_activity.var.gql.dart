@@ -13,7 +13,7 @@ abstract class GMessageActivityVars
   GMessageActivityVars._();
 
   factory GMessageActivityVars(
-          [Function(GMessageActivityVarsBuilder b) updates]) =
+          [void Function(GMessageActivityVarsBuilder b) updates]) =
       _$GMessageActivityVars;
 
   static Serializer<GMessageActivityVars> get serializer =>

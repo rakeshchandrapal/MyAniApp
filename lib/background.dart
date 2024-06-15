@@ -1,11 +1,11 @@
 import 'package:ferry_exec/src/fetch_policy.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/graphql.dart';
 import 'package:myaniapp/graphql/__generated__/viewer.req.gql.dart';
+import 'package:myaniapp/graphql/client.dart';
 import 'package:myaniapp/notifications/__generated__/notifications.data.gql.dart';
 import 'package:myaniapp/notifications/__generated__/notifications.req.gql.dart';
-import 'package:myaniapp/notifications/notification.dart';
+import 'package:myaniapp/notifications/notifications.dart';
 import 'package:myaniapp/notifications/push.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
@@ -59,7 +59,7 @@ void callbackDispatcher() {
         for (var notif in notifs!) {
           if (notif == null) continue;
 
-          var parsed = AnilistNotification(notif);
+          var parsed = AnilistNotification(notification: notif);
           var texts = parsed.extractText();
 
           if (notif
@@ -71,7 +71,7 @@ void callbackDispatcher() {
               ),
               texts.join(),
               payload: {
-                'path': '/media/${notif.media!.id}',
+                'path': '/media/${notif.media!.id}/info',
               },
             );
             continue;
@@ -83,7 +83,7 @@ void callbackDispatcher() {
               PushNotifications.mediaDetails(),
               texts.join(),
               payload: notif.G__typename != 'MediaDeletionNotification'
-                  ? {'path': '/media/${(notif as dynamic).animeId}'}
+                  ? {'path': '/media/${(notif as dynamic).animeId}/info'}
                   : null,
             );
           } else if (parsed.isActivity) {
@@ -113,7 +113,7 @@ void callbackDispatcher() {
                     ?.large,
               ),
               texts.join(),
-              payload: {'path': '/profile/${(notif).user!.id}'},
+              payload: {'path': '/user/${(notif).user!.name}/info'},
             );
           }
         }

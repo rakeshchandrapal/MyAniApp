@@ -59,7 +59,8 @@ abstract class GThreadCommentData
         GThreadComment {
   GThreadCommentData._();
 
-  factory GThreadCommentData([Function(GThreadCommentDataBuilder b) updates]) =
+  factory GThreadCommentData(
+          [void Function(GThreadCommentDataBuilder b) updates]) =
       _$GThreadCommentData;
 
   static void _initializeBuilder(GThreadCommentDataBuilder b) =>
@@ -108,7 +109,7 @@ abstract class GThreadCommentData_user
   GThreadCommentData_user._();
 
   factory GThreadCommentData_user(
-          [Function(GThreadCommentData_userBuilder b) updates]) =
+          [void Function(GThreadCommentData_userBuilder b) updates]) =
       _$GThreadCommentData_user;
 
   static void _initializeBuilder(GThreadCommentData_userBuilder b) =>
@@ -154,7 +155,7 @@ abstract class GThreadCommentData_user_avatar
   GThreadCommentData_user_avatar._();
 
   factory GThreadCommentData_user_avatar(
-          [Function(GThreadCommentData_user_avatarBuilder b) updates]) =
+          [void Function(GThreadCommentData_user_avatarBuilder b) updates]) =
       _$GThreadCommentData_user_avatar;
 
   static void _initializeBuilder(GThreadCommentData_user_avatarBuilder b) =>

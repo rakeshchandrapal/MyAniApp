@@ -170,7 +170,7 @@ abstract class GListGroupData
     implements Built<GListGroupData, GListGroupDataBuilder>, GListGroup {
   GListGroupData._();
 
-  factory GListGroupData([Function(GListGroupDataBuilder b) updates]) =
+  factory GListGroupData([void Function(GListGroupDataBuilder b) updates]) =
       _$GListGroupData;
 
   static void _initializeBuilder(GListGroupDataBuilder b) =>
@@ -213,7 +213,7 @@ abstract class GListGroupData_entries
   GListGroupData_entries._();
 
   factory GListGroupData_entries(
-          [Function(GListGroupData_entriesBuilder b) updates]) =
+          [void Function(GListGroupData_entriesBuilder b) updates]) =
       _$GListGroupData_entries;
 
   static void _initializeBuilder(GListGroupData_entriesBuilder b) =>
@@ -280,7 +280,7 @@ abstract class GListGroupData_entries_startedAt
   GListGroupData_entries_startedAt._();
 
   factory GListGroupData_entries_startedAt(
-          [Function(GListGroupData_entries_startedAtBuilder b) updates]) =
+          [void Function(GListGroupData_entries_startedAtBuilder b) updates]) =
       _$GListGroupData_entries_startedAt;
 
   static void _initializeBuilder(GListGroupData_entries_startedAtBuilder b) =>
@@ -322,8 +322,8 @@ abstract class GListGroupData_entries_completedAt
   GListGroupData_entries_completedAt._();
 
   factory GListGroupData_entries_completedAt(
-          [Function(GListGroupData_entries_completedAtBuilder b) updates]) =
-      _$GListGroupData_entries_completedAt;
+      [void Function(GListGroupData_entries_completedAtBuilder b)
+          updates]) = _$GListGroupData_entries_completedAt;
 
   static void _initializeBuilder(GListGroupData_entries_completedAtBuilder b) =>
       b..G__typename = 'FuzzyDate';
@@ -364,7 +364,7 @@ abstract class GListGroupData_entries_media
   GListGroupData_entries_media._();
 
   factory GListGroupData_entries_media(
-          [Function(GListGroupData_entries_mediaBuilder b) updates]) =
+          [void Function(GListGroupData_entries_mediaBuilder b) updates]) =
       _$GListGroupData_entries_media;
 
   static void _initializeBuilder(GListGroupData_entries_mediaBuilder b) =>
@@ -427,8 +427,8 @@ abstract class GListGroupData_entries_media_title
   GListGroupData_entries_media_title._();
 
   factory GListGroupData_entries_media_title(
-          [Function(GListGroupData_entries_media_titleBuilder b) updates]) =
-      _$GListGroupData_entries_media_title;
+      [void Function(GListGroupData_entries_media_titleBuilder b)
+          updates]) = _$GListGroupData_entries_media_title;
 
   static void _initializeBuilder(GListGroupData_entries_media_titleBuilder b) =>
       b..G__typename = 'MediaTitle';
@@ -465,7 +465,7 @@ abstract class GListGroupData_entries_media_coverImage
   GListGroupData_entries_media_coverImage._();
 
   factory GListGroupData_entries_media_coverImage(
-      [Function(GListGroupData_entries_media_coverImageBuilder b)
+      [void Function(GListGroupData_entries_media_coverImageBuilder b)
           updates]) = _$GListGroupData_entries_media_coverImage;
 
   static void _initializeBuilder(
@@ -504,8 +504,8 @@ abstract class GListGroupData_entries_media_startDate
   GListGroupData_entries_media_startDate._();
 
   factory GListGroupData_entries_media_startDate(
-          [Function(GListGroupData_entries_media_startDateBuilder b) updates]) =
-      _$GListGroupData_entries_media_startDate;
+      [void Function(GListGroupData_entries_media_startDateBuilder b)
+          updates]) = _$GListGroupData_entries_media_startDate;
 
   static void _initializeBuilder(
           GListGroupData_entries_media_startDateBuilder b) =>

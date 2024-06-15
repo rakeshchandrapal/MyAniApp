@@ -22,7 +22,8 @@ abstract class GNotificationsReq
         _i1.OperationRequest<_i2.GNotificationsData, _i3.GNotificationsVars> {
   GNotificationsReq._();
 
-  factory GNotificationsReq([Function(GNotificationsReqBuilder b) updates]) =
+  factory GNotificationsReq(
+          [void Function(GNotificationsReqBuilder b) updates]) =
       _$GNotificationsReq;
 
   static void _initializeBuilder(GNotificationsReqBuilder b) => b
@@ -40,6 +41,7 @@ abstract class GNotificationsReq
   _i4.Request get execRequest => _i4.Request(
         operation: operation,
         variables: vars.toJson(),
+        context: context ?? const _i4.Context(),
       );
 
   @override
@@ -61,8 +63,22 @@ abstract class GNotificationsReq
   @override
   bool get executeOnListen;
   @override
+  @BuiltValueField(serialize: false)
+  _i4.Context? get context;
+  @override
   _i2.GNotificationsData? parseData(Map<String, dynamic> json) =>
       _i2.GNotificationsData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GNotificationsData data) => data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GNotificationsData, _i3.GNotificationsVars>
+      transformOperation(_i4.Operation Function(_i4.Operation) transform) =>
+          this.rebuild((b) => b..operation = transform(operation));
 
   static Serializer<GNotificationsReq> get serializer =>
       _$gNotificationsReqSerializer;

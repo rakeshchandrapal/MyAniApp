@@ -1,4 +1,7 @@
+# import '/graphql/fragments/user.graphql'
+
 fragment ThisUser on User {
+  ...UserFragment
   id
   name
   about
@@ -35,7 +38,18 @@ fragment ThisUser on User {
     scoreFormat
     rowOrder
     animeList {
+      customLists
       sectionOrder
+      splitCompletedSectionByFormat
+      advancedScoring
+      advancedScoringEnabled
+    }
+    mangaList {
+      customLists
+      sectionOrder
+      splitCompletedSectionByFormat
+      advancedScoring
+      advancedScoringEnabled
     }
   }
 }

@@ -12,7 +12,8 @@ abstract class GTextActivityVars
     implements Built<GTextActivityVars, GTextActivityVarsBuilder> {
   GTextActivityVars._();
 
-  factory GTextActivityVars([Function(GTextActivityVarsBuilder b) updates]) =
+  factory GTextActivityVars(
+          [void Function(GTextActivityVarsBuilder b) updates]) =
       _$GTextActivityVars;
 
   static Serializer<GTextActivityVars> get serializer =>

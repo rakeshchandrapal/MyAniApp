@@ -12,7 +12,7 @@ abstract class GFuzzyDateVars
     implements Built<GFuzzyDateVars, GFuzzyDateVarsBuilder> {
   GFuzzyDateVars._();
 
-  factory GFuzzyDateVars([Function(GFuzzyDateVarsBuilder b) updates]) =
+  factory GFuzzyDateVars([void Function(GFuzzyDateVarsBuilder b) updates]) =
       _$GFuzzyDateVars;
 
   static Serializer<GFuzzyDateVars> get serializer =>

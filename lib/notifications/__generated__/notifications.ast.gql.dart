@@ -150,56 +150,6 @@ const Notifications = _i1.OperationDefinitionNode(
             _i1.InlineFragmentNode(
               typeCondition: _i1.TypeConditionNode(
                   on: _i1.NamedTypeNode(
-                name: _i1.NameNode(value: 'RelatedMediaAdditionNotification'),
-                isNonNull: false,
-              )),
-              directives: [],
-              selectionSet: _i1.SelectionSetNode(selections: [
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'type'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'context'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'media'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: _i1.SelectionSetNode(selections: [
-                    _i1.FragmentSpreadNode(
-                      name: _i1.NameNode(value: 'MediaFragment'),
-                      directives: [],
-                    )
-                  ]),
-                ),
-                _i1.FieldNode(
-                  name: _i1.NameNode(value: 'createdAt'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
-            ),
-            _i1.InlineFragmentNode(
-              typeCondition: _i1.TypeConditionNode(
-                  on: _i1.NamedTypeNode(
                 name: _i1.NameNode(value: 'FollowingNotification'),
                 isNonNull: false,
               )),
@@ -966,6 +916,56 @@ const Notifications = _i1.OperationDefinitionNode(
                   selectionSet: _i1.SelectionSetNode(selections: [
                     _i1.FragmentSpreadNode(
                       name: _i1.NameNode(value: 'UserFragment'),
+                      directives: [],
+                    )
+                  ]),
+                ),
+                _i1.FieldNode(
+                  name: _i1.NameNode(value: 'createdAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ]),
+            ),
+            _i1.InlineFragmentNode(
+              typeCondition: _i1.TypeConditionNode(
+                  on: _i1.NamedTypeNode(
+                name: _i1.NameNode(value: 'RelatedMediaAdditionNotification'),
+                isNonNull: false,
+              )),
+              directives: [],
+              selectionSet: _i1.SelectionSetNode(selections: [
+                _i1.FieldNode(
+                  name: _i1.NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                _i1.FieldNode(
+                  name: _i1.NameNode(value: 'type'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                _i1.FieldNode(
+                  name: _i1.NameNode(value: 'context'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                _i1.FieldNode(
+                  name: _i1.NameNode(value: 'media'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: _i1.SelectionSetNode(selections: [
+                    _i1.FragmentSpreadNode(
+                      name: _i1.NameNode(value: 'MediaFragment'),
                       directives: [],
                     )
                   ]),

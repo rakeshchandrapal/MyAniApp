@@ -1,0 +1,9 @@
+fragment CharacterFragment on Character {
+  id
+  name {
+    userPreferred
+  }
+  image {
+    large
+  }
+}

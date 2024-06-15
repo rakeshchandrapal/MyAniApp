@@ -22,7 +22,8 @@ abstract class GReleasingMediaReq
         _i1.FragmentRequest<_i2.GReleasingMediaData, _i3.GReleasingMediaVars> {
   GReleasingMediaReq._();
 
-  factory GReleasingMediaReq([Function(GReleasingMediaReqBuilder b) updates]) =
+  factory GReleasingMediaReq(
+          [void Function(GReleasingMediaReqBuilder b) updates]) =
       _$GReleasingMediaReq;
 
   static void _initializeBuilder(GReleasingMediaReqBuilder b) => b
@@ -40,6 +41,13 @@ abstract class GReleasingMediaReq
   @override
   _i2.GReleasingMediaData? parseData(Map<String, dynamic> json) =>
       _i2.GReleasingMediaData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GReleasingMediaData data) =>
+      data.toJson();
 
   static Serializer<GReleasingMediaReq> get serializer =>
       _$gReleasingMediaReqSerializer;

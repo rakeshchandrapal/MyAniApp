@@ -41,7 +41,8 @@ abstract class GMediaFragmentData
         GMediaFragment {
   GMediaFragmentData._();
 
-  factory GMediaFragmentData([Function(GMediaFragmentDataBuilder b) updates]) =
+  factory GMediaFragmentData(
+          [void Function(GMediaFragmentDataBuilder b) updates]) =
       _$GMediaFragmentData;
 
   static void _initializeBuilder(GMediaFragmentDataBuilder b) =>
@@ -89,7 +90,7 @@ abstract class GMediaFragmentData_title
   GMediaFragmentData_title._();
 
   factory GMediaFragmentData_title(
-          [Function(GMediaFragmentData_titleBuilder b) updates]) =
+          [void Function(GMediaFragmentData_titleBuilder b) updates]) =
       _$GMediaFragmentData_title;
 
   static void _initializeBuilder(GMediaFragmentData_titleBuilder b) =>
@@ -124,7 +125,7 @@ abstract class GMediaFragmentData_coverImage
   GMediaFragmentData_coverImage._();
 
   factory GMediaFragmentData_coverImage(
-          [Function(GMediaFragmentData_coverImageBuilder b) updates]) =
+          [void Function(GMediaFragmentData_coverImageBuilder b) updates]) =
       _$GMediaFragmentData_coverImage;
 
   static void _initializeBuilder(GMediaFragmentData_coverImageBuilder b) =>

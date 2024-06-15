@@ -22,7 +22,8 @@ abstract class GReviewFragmentReq
         _i1.FragmentRequest<_i2.GReviewFragmentData, _i3.GReviewFragmentVars> {
   GReviewFragmentReq._();
 
-  factory GReviewFragmentReq([Function(GReviewFragmentReqBuilder b) updates]) =
+  factory GReviewFragmentReq(
+          [void Function(GReviewFragmentReqBuilder b) updates]) =
       _$GReviewFragmentReq;
 
   static void _initializeBuilder(GReviewFragmentReqBuilder b) => b
@@ -40,6 +41,13 @@ abstract class GReviewFragmentReq
   @override
   _i2.GReviewFragmentData? parseData(Map<String, dynamic> json) =>
       _i2.GReviewFragmentData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GReviewFragmentData data) =>
+      data.toJson();
 
   static Serializer<GReviewFragmentReq> get serializer =>
       _$gReviewFragmentReqSerializer;

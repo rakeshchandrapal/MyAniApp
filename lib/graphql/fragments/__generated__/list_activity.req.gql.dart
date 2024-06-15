@@ -22,7 +22,7 @@ abstract class GListActivityReq
         _i1.FragmentRequest<_i2.GListActivityData, _i3.GListActivityVars> {
   GListActivityReq._();
 
-  factory GListActivityReq([Function(GListActivityReqBuilder b) updates]) =
+  factory GListActivityReq([void Function(GListActivityReqBuilder b) updates]) =
       _$GListActivityReq;
 
   static void _initializeBuilder(GListActivityReqBuilder b) => b
@@ -40,6 +40,12 @@ abstract class GListActivityReq
   @override
   _i2.GListActivityData? parseData(Map<String, dynamic> json) =>
       _i2.GListActivityData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GListActivityData data) => data.toJson();
 
   static Serializer<GListActivityReq> get serializer =>
       _$gListActivityReqSerializer;

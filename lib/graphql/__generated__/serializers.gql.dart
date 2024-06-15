@@ -8,7 +8,336 @@ import 'package:built_value/standard_json_plugin.dart' show StandardJsonPlugin;
 import 'package:ferry_exec/ferry_exec.dart';
 import 'package:gql_code_builder/src/serializers/operation_serializer.dart'
     show OperationSerializer;
-import 'package:myaniapp/graphql/__generated__/media.data.gql.dart'
+import 'package:myaniapp/app/activity/__generated__/activity.data.gql.dart'
+    show
+        GActivityData_activity,
+        GToggleActivitySubscriptionData_ToggleActivitySubscription,
+        GActivityData,
+        GActivityData_activity__asListActivity,
+        GActivityData_activity__asListActivity_media,
+        GActivityData_activity__asListActivity_media_coverImage,
+        GActivityData_activity__asListActivity_media_title,
+        GActivityData_activity__asListActivity_user,
+        GActivityData_activity__asListActivity_user_avatar,
+        GActivityData_activity__asMessageActivity,
+        GActivityData_activity__asMessageActivity_messenger,
+        GActivityData_activity__asMessageActivity_messenger_avatar,
+        GActivityData_activity__asMessageActivity_recipient,
+        GActivityData_activity__asMessageActivity_recipient_avatar,
+        GActivityData_activity__asTextActivity,
+        GActivityData_activity__asTextActivity_user,
+        GActivityData_activity__asTextActivity_user_avatar,
+        GActivityData_activity__base,
+        GActivityData_replies,
+        GActivityData_replies_activityReplies,
+        GActivityData_replies_activityReplies_user,
+        GActivityData_replies_activityReplies_user_avatar,
+        GActivityData_replies_pageInfo,
+        GDeleteActivityData,
+        GDeleteActivityData_DeleteActivity,
+        GDeleteActivityReplyData,
+        GDeleteActivityReplyData_DeleteActivityReply,
+        GSaveActivityReplyData,
+        GSaveActivityReplyData_SaveActivityReply,
+        GSaveActivityReplyData_SaveActivityReply_user,
+        GSaveActivityReplyData_SaveActivityReply_user_avatar,
+        GSaveMessageActivityData,
+        GSaveMessageActivityData_SaveMessageActivity,
+        GSaveMessageActivityData_SaveMessageActivity_messenger,
+        GSaveMessageActivityData_SaveMessageActivity_messenger_avatar,
+        GSaveMessageActivityData_SaveMessageActivity_recipient,
+        GSaveMessageActivityData_SaveMessageActivity_recipient_avatar,
+        GToggleActivitySubscriptionData,
+        GToggleActivitySubscriptionData_ToggleActivitySubscription__asListActivity,
+        GToggleActivitySubscriptionData_ToggleActivitySubscription__asMessageActivity,
+        GToggleActivitySubscriptionData_ToggleActivitySubscription__asTextActivity,
+        GToggleActivitySubscriptionData_ToggleActivitySubscription__base;
+import 'package:myaniapp/app/activity/__generated__/activity.req.gql.dart'
+    show
+        GActivityReq,
+        GDeleteActivityReplyReq,
+        GDeleteActivityReq,
+        GSaveActivityReplyReq,
+        GSaveMessageActivityReq,
+        GToggleActivitySubscriptionReq;
+import 'package:myaniapp/app/activity/__generated__/activity.var.gql.dart'
+    show
+        GActivityVars,
+        GDeleteActivityReplyVars,
+        GDeleteActivityVars,
+        GSaveActivityReplyVars,
+        GSaveMessageActivityVars,
+        GToggleActivitySubscriptionVars;
+import 'package:myaniapp/app/calendar/__generated__/calendar.data.gql.dart'
+    show
+        GCalendarScheduleData,
+        GCalendarScheduleData_Page,
+        GCalendarScheduleData_Page_airingSchedules,
+        GCalendarScheduleData_Page_airingSchedules_media,
+        GCalendarScheduleData_Page_airingSchedules_media_coverImage,
+        GCalendarScheduleData_Page_airingSchedules_media_title,
+        GCalendarScheduleData_Page_pageInfo;
+import 'package:myaniapp/app/calendar/__generated__/calendar.req.gql.dart'
+    show GCalendarScheduleReq;
+import 'package:myaniapp/app/calendar/__generated__/calendar.var.gql.dart'
+    show GCalendarScheduleVars;
+import 'package:myaniapp/app/calendar/__generated__/list.data.gql.dart'
+    show
+        GReleasesListData,
+        GReleasesListData_Page,
+        GReleasesListData_Page_media,
+        GReleasesListData_Page_media_airingSchedule,
+        GReleasesListData_Page_media_airingSchedule_edges,
+        GReleasesListData_Page_media_airingSchedule_edges_node,
+        GReleasesListData_Page_media_coverImage,
+        GReleasesListData_Page_media_nextAiringEpisode,
+        GReleasesListData_Page_media_title,
+        GReleasesListData_Page_pageInfo;
+import 'package:myaniapp/app/calendar/__generated__/list.req.gql.dart'
+    show GReleasesListReq;
+import 'package:myaniapp/app/calendar/__generated__/list.var.gql.dart'
+    show GReleasesListVars;
+import 'package:myaniapp/app/character/__generated__/character.data.gql.dart'
+    show
+        GCharacterData,
+        GCharacterData_Character,
+        GCharacterData_Character_dateOfBirth,
+        GCharacterData_Character_image,
+        GCharacterData_Character_media,
+        GCharacterData_Character_media_edges,
+        GCharacterData_Character_media_edges_node,
+        GCharacterData_Character_media_edges_node_coverImage,
+        GCharacterData_Character_media_edges_node_title,
+        GCharacterData_Character_media_edges_voiceActorRoles,
+        GCharacterData_Character_media_edges_voiceActorRoles_voiceActor,
+        GCharacterData_Character_media_edges_voiceActorRoles_voiceActor_image,
+        GCharacterData_Character_media_edges_voiceActorRoles_voiceActor_name,
+        GCharacterData_Character_media_pageInfo,
+        GCharacterData_Character_name;
+import 'package:myaniapp/app/character/__generated__/character.req.gql.dart'
+    show GCharacterReq;
+import 'package:myaniapp/app/character/__generated__/character.var.gql.dart'
+    show GCharacterVars;
+import 'package:myaniapp/app/explore/__generated__/explore.data.gql.dart'
+    show
+        GExploreData,
+        GExploreData_nextSeason,
+        GExploreData_nextSeason_media,
+        GExploreData_nextSeason_media_coverImage,
+        GExploreData_nextSeason_media_title,
+        GExploreData_popular,
+        GExploreData_popular_media,
+        GExploreData_popular_media_coverImage,
+        GExploreData_popular_media_title,
+        GExploreData_recent,
+        GExploreData_recent_media,
+        GExploreData_recent_media_coverImage,
+        GExploreData_recent_media_title,
+        GExploreData_season,
+        GExploreData_season_media,
+        GExploreData_season_media_coverImage,
+        GExploreData_season_media_title,
+        GExploreData_trending,
+        GExploreData_trending_media,
+        GExploreData_trending_media_coverImage,
+        GExploreData_trending_media_title;
+import 'package:myaniapp/app/explore/__generated__/explore.req.gql.dart'
+    show GExploreReq;
+import 'package:myaniapp/app/explore/__generated__/explore.var.gql.dart'
+    show GExploreVars;
+import 'package:myaniapp/app/forum/__generated__/forums.data.gql.dart'
+    show
+        GForumsData,
+        GForumsData_Page,
+        GForumsData_Page_pageInfo,
+        GForumsData_Page_threads,
+        GForumsData_Page_threads_categories,
+        GForumsData_Page_threads_mediaCategories,
+        GForumsData_Page_threads_mediaCategories_coverImage,
+        GForumsData_Page_threads_mediaCategories_title,
+        GForumsData_Page_threads_replyUser,
+        GForumsData_Page_threads_replyUser_avatar,
+        GForumsData_Page_threads_user,
+        GForumsData_Page_threads_user_avatar;
+import 'package:myaniapp/app/forum/__generated__/forums.req.gql.dart'
+    show GForumsReq;
+import 'package:myaniapp/app/forum/__generated__/forums.var.gql.dart'
+    show GForumsVars;
+import 'package:myaniapp/app/forum/__generated__/overview.data.gql.dart'
+    show
+        GForumOverviewData,
+        GForumOverviewData_new,
+        GForumOverviewData_new_threads,
+        GForumOverviewData_new_threads_categories,
+        GForumOverviewData_new_threads_mediaCategories,
+        GForumOverviewData_new_threads_mediaCategories_coverImage,
+        GForumOverviewData_new_threads_mediaCategories_title,
+        GForumOverviewData_new_threads_replyUser,
+        GForumOverviewData_new_threads_replyUser_avatar,
+        GForumOverviewData_new_threads_user,
+        GForumOverviewData_new_threads_user_avatar,
+        GForumOverviewData_recent,
+        GForumOverviewData_recent_threads,
+        GForumOverviewData_recent_threads_categories,
+        GForumOverviewData_recent_threads_mediaCategories,
+        GForumOverviewData_recent_threads_mediaCategories_coverImage,
+        GForumOverviewData_recent_threads_mediaCategories_title,
+        GForumOverviewData_recent_threads_replyUser,
+        GForumOverviewData_recent_threads_replyUser_avatar,
+        GForumOverviewData_recent_threads_user,
+        GForumOverviewData_recent_threads_user_avatar,
+        GForumOverviewData_release,
+        GForumOverviewData_release_threads,
+        GForumOverviewData_release_threads_categories,
+        GForumOverviewData_release_threads_mediaCategories,
+        GForumOverviewData_release_threads_mediaCategories_coverImage,
+        GForumOverviewData_release_threads_mediaCategories_title,
+        GForumOverviewData_release_threads_replyUser,
+        GForumOverviewData_release_threads_replyUser_avatar,
+        GForumOverviewData_release_threads_user,
+        GForumOverviewData_release_threads_user_avatar;
+import 'package:myaniapp/app/forum/__generated__/overview.req.gql.dart'
+    show GForumOverviewReq;
+import 'package:myaniapp/app/forum/__generated__/overview.var.gql.dart'
+    show GForumOverviewVars;
+import 'package:myaniapp/app/forum/thread/__generated__/comment.data.gql.dart'
+    show
+        GCommentData,
+        GCommentData_ThreadComment,
+        GCommentData_ThreadComment_user,
+        GCommentData_ThreadComment_user_avatar;
+import 'package:myaniapp/app/forum/thread/__generated__/comment.req.gql.dart'
+    show GCommentReq;
+import 'package:myaniapp/app/forum/thread/__generated__/comment.var.gql.dart'
+    show GCommentVars;
+import 'package:myaniapp/app/forum/thread/__generated__/thread.data.gql.dart'
+    show
+        GDeleteCommentData,
+        GDeleteCommentData_DeleteThreadComment,
+        GSaveCommentData,
+        GSaveCommentData_SaveThreadComment,
+        GSaveCommentData_SaveThreadComment_user,
+        GSaveCommentData_SaveThreadComment_user_avatar,
+        GThreadData,
+        GThreadData_comments,
+        GThreadData_comments_pageInfo,
+        GThreadData_comments_threadComments,
+        GThreadData_comments_threadComments_user,
+        GThreadData_comments_threadComments_user_avatar,
+        GThreadData_thread,
+        GThreadData_thread_categories,
+        GThreadData_thread_mediaCategories,
+        GThreadData_thread_mediaCategories_coverImage,
+        GThreadData_thread_mediaCategories_title,
+        GThreadData_thread_replyUser,
+        GThreadData_thread_replyUser_avatar,
+        GThreadData_thread_user,
+        GThreadData_thread_user_avatar,
+        GToggleThreadSubscriptionData,
+        GToggleThreadSubscriptionData_ToggleThreadSubscription;
+import 'package:myaniapp/app/forum/thread/__generated__/thread.req.gql.dart'
+    show
+        GDeleteCommentReq,
+        GSaveCommentReq,
+        GThreadReq,
+        GToggleThreadSubscriptionReq;
+import 'package:myaniapp/app/forum/thread/__generated__/thread.var.gql.dart'
+    show
+        GDeleteCommentVars,
+        GSaveCommentVars,
+        GThreadVars,
+        GToggleThreadSubscriptionVars;
+import 'package:myaniapp/app/home/__generated__/activities.data.gql.dart'
+    show
+        GHomeActivitiesData_Page_activities,
+        GToggleLikeData_ToggleLikeV2,
+        GHomeActivitiesData,
+        GHomeActivitiesData_Page,
+        GHomeActivitiesData_Page_activities__asListActivity,
+        GHomeActivitiesData_Page_activities__asListActivity_media,
+        GHomeActivitiesData_Page_activities__asListActivity_media_coverImage,
+        GHomeActivitiesData_Page_activities__asListActivity_media_title,
+        GHomeActivitiesData_Page_activities__asListActivity_user,
+        GHomeActivitiesData_Page_activities__asListActivity_user_avatar,
+        GHomeActivitiesData_Page_activities__asTextActivity,
+        GHomeActivitiesData_Page_activities__asTextActivity_user,
+        GHomeActivitiesData_Page_activities__asTextActivity_user_avatar,
+        GHomeActivitiesData_Page_activities__base,
+        GHomeActivitiesData_Page_pageInfo,
+        GSaveTextActivityData,
+        GSaveTextActivityData_SaveTextActivity,
+        GSaveTextActivityData_SaveTextActivity_user,
+        GSaveTextActivityData_SaveTextActivity_user_avatar,
+        GToggleLikeData,
+        GToggleLikeData_ToggleLikeV2__asActivityReply,
+        GToggleLikeData_ToggleLikeV2__asListActivity,
+        GToggleLikeData_ToggleLikeV2__asMessageActivity,
+        GToggleLikeData_ToggleLikeV2__asTextActivity,
+        GToggleLikeData_ToggleLikeV2__asThread,
+        GToggleLikeData_ToggleLikeV2__asThreadComment,
+        GToggleLikeData_ToggleLikeV2__base;
+import 'package:myaniapp/app/home/__generated__/activities.req.gql.dart'
+    show GHomeActivitiesReq, GSaveTextActivityReq, GToggleLikeReq;
+import 'package:myaniapp/app/home/__generated__/activities.var.gql.dart'
+    show GHomeActivitiesVars, GSaveTextActivityVars, GToggleLikeVars;
+import 'package:myaniapp/app/home/__generated__/overview.data.gql.dart'
+    show
+        GHomeOverviewData,
+        GHomeOverviewData_forums,
+        GHomeOverviewData_forums_threads,
+        GHomeOverviewData_forums_threads_categories,
+        GHomeOverviewData_forums_threads_mediaCategories,
+        GHomeOverviewData_forums_threads_mediaCategories_coverImage,
+        GHomeOverviewData_forums_threads_mediaCategories_title,
+        GHomeOverviewData_forums_threads_replyUser,
+        GHomeOverviewData_forums_threads_replyUser_avatar,
+        GHomeOverviewData_forums_threads_user,
+        GHomeOverviewData_forums_threads_user_avatar,
+        GHomeOverviewData_list,
+        GHomeOverviewData_list_mediaList,
+        GHomeOverviewData_list_mediaList_completedAt,
+        GHomeOverviewData_list_mediaList_media,
+        GHomeOverviewData_list_mediaList_media_coverImage,
+        GHomeOverviewData_list_mediaList_media_startDate,
+        GHomeOverviewData_list_mediaList_media_title,
+        GHomeOverviewData_list_mediaList_startedAt,
+        GHomeOverviewData_releasing,
+        GHomeOverviewData_releasing_media,
+        GHomeOverviewData_releasing_media_airingSchedule,
+        GHomeOverviewData_releasing_media_airingSchedule_edges,
+        GHomeOverviewData_releasing_media_airingSchedule_edges_node,
+        GHomeOverviewData_releasing_media_coverImage,
+        GHomeOverviewData_releasing_media_nextAiringEpisode,
+        GHomeOverviewData_releasing_media_title,
+        GHomeOverviewData_reviews,
+        GHomeOverviewData_reviews_reviews,
+        GHomeOverviewData_reviews_reviews_media,
+        GHomeOverviewData_reviews_reviews_media_title,
+        GHomeOverviewData_reviews_reviews_user,
+        GHomeOverviewData_reviews_reviews_user_avatar;
+import 'package:myaniapp/app/home/__generated__/overview.req.gql.dart'
+    show GHomeOverviewReq;
+import 'package:myaniapp/app/home/__generated__/overview.var.gql.dart'
+    show GHomeOverviewVars;
+import 'package:myaniapp/app/media/__generated__/characters.data.gql.dart'
+    show
+        GMediaCharactersData,
+        GMediaCharactersData_Media,
+        GMediaCharactersData_Media_characters,
+        GMediaCharactersData_Media_characters_edges,
+        GMediaCharactersData_Media_characters_edges_node,
+        GMediaCharactersData_Media_characters_edges_node_image,
+        GMediaCharactersData_Media_characters_edges_node_name,
+        GMediaCharactersData_Media_characters_edges_voiceActorRoles,
+        GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor,
+        GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_image,
+        GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_name,
+        GMediaCharactersData_Media_characters_pageInfo;
+import 'package:myaniapp/app/media/__generated__/characters.req.gql.dart'
+    show GMediaCharactersReq;
+import 'package:myaniapp/app/media/__generated__/characters.var.gql.dart'
+    show GMediaCharactersVars;
+import 'package:myaniapp/app/media/__generated__/media.data.gql.dart'
     show
         GMediaData,
         GMediaData_Media,
@@ -47,10 +376,371 @@ import 'package:myaniapp/graphql/__generated__/media.data.gql.dart'
         GToggleFavoriteData_ToggleFavourite_staff_pageInfo,
         GToggleFavoriteData_ToggleFavourite_studios,
         GToggleFavoriteData_ToggleFavourite_studios_pageInfo;
-import 'package:myaniapp/graphql/__generated__/media.req.gql.dart'
+import 'package:myaniapp/app/media/__generated__/media.req.gql.dart'
     show GMediaReq, GToggleFavoriteReq;
-import 'package:myaniapp/graphql/__generated__/media.var.gql.dart'
+import 'package:myaniapp/app/media/__generated__/media.var.gql.dart'
     show GMediaVars, GToggleFavoriteVars;
+import 'package:myaniapp/app/media/__generated__/reviews.data.gql.dart'
+    show
+        GMediaReviewsData,
+        GMediaReviewsData_Media,
+        GMediaReviewsData_Media_reviews,
+        GMediaReviewsData_Media_reviews_nodes,
+        GMediaReviewsData_Media_reviews_nodes_media,
+        GMediaReviewsData_Media_reviews_nodes_media_title,
+        GMediaReviewsData_Media_reviews_nodes_user,
+        GMediaReviewsData_Media_reviews_nodes_user_avatar,
+        GMediaReviewsData_Media_reviews_pageInfo;
+import 'package:myaniapp/app/media/__generated__/reviews.req.gql.dart'
+    show GMediaReviewsReq;
+import 'package:myaniapp/app/media/__generated__/reviews.var.gql.dart'
+    show GMediaReviewsVars;
+import 'package:myaniapp/app/media/__generated__/similar.data.gql.dart'
+    show
+        GMediaSimilarData,
+        GMediaSimilarData_Media,
+        GMediaSimilarData_Media_recommendations,
+        GMediaSimilarData_Media_recommendations_nodes,
+        GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation,
+        GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+        GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation_title,
+        GMediaSimilarData_Media_recommendations_pageInfo;
+import 'package:myaniapp/app/media/__generated__/similar.req.gql.dart'
+    show GMediaSimilarReq;
+import 'package:myaniapp/app/media/__generated__/similar.var.gql.dart'
+    show GMediaSimilarVars;
+import 'package:myaniapp/app/media/__generated__/staff.data.gql.dart'
+    show
+        GMediaStaffData,
+        GMediaStaffData_Media,
+        GMediaStaffData_Media_staff,
+        GMediaStaffData_Media_staff_edges,
+        GMediaStaffData_Media_staff_edges_node,
+        GMediaStaffData_Media_staff_edges_node_image,
+        GMediaStaffData_Media_staff_edges_node_name,
+        GMediaStaffData_Media_staff_pageInfo;
+import 'package:myaniapp/app/media/__generated__/staff.req.gql.dart'
+    show GMediaStaffReq;
+import 'package:myaniapp/app/media/__generated__/staff.var.gql.dart'
+    show GMediaStaffVars;
+import 'package:myaniapp/app/media/__generated__/threads.data.gql.dart'
+    show
+        GMediaThreadsData,
+        GMediaThreadsData_Page,
+        GMediaThreadsData_Page_pageInfo,
+        GMediaThreadsData_Page_threads,
+        GMediaThreadsData_Page_threads_categories,
+        GMediaThreadsData_Page_threads_mediaCategories,
+        GMediaThreadsData_Page_threads_mediaCategories_coverImage,
+        GMediaThreadsData_Page_threads_mediaCategories_title,
+        GMediaThreadsData_Page_threads_replyUser,
+        GMediaThreadsData_Page_threads_replyUser_avatar,
+        GMediaThreadsData_Page_threads_user,
+        GMediaThreadsData_Page_threads_user_avatar;
+import 'package:myaniapp/app/media/__generated__/threads.req.gql.dart'
+    show GMediaThreadsReq;
+import 'package:myaniapp/app/media/__generated__/threads.var.gql.dart'
+    show GMediaThreadsVars;
+import 'package:myaniapp/app/recommendations/__generated__/recommendations.data.gql.dart'
+    show
+        GRecommendationsData,
+        GRecommendationsData_Page,
+        GRecommendationsData_Page_pageInfo,
+        GRecommendationsData_Page_recommendations,
+        GRecommendationsData_Page_recommendations_media,
+        GRecommendationsData_Page_recommendations_mediaRecommendation,
+        GRecommendationsData_Page_recommendations_mediaRecommendation_coverImage,
+        GRecommendationsData_Page_recommendations_mediaRecommendation_title,
+        GRecommendationsData_Page_recommendations_media_coverImage,
+        GRecommendationsData_Page_recommendations_media_title,
+        GSaveRecommendationData,
+        GSaveRecommendationData_SaveRecommendation,
+        GSaveRecommendationData_SaveRecommendation_media,
+        GSaveRecommendationData_SaveRecommendation_mediaRecommendation,
+        GSaveRecommendationData_SaveRecommendation_mediaRecommendation_coverImage,
+        GSaveRecommendationData_SaveRecommendation_mediaRecommendation_title,
+        GSaveRecommendationData_SaveRecommendation_media_coverImage,
+        GSaveRecommendationData_SaveRecommendation_media_title;
+import 'package:myaniapp/app/recommendations/__generated__/recommendations.req.gql.dart'
+    show GRecommendationsReq, GSaveRecommendationReq;
+import 'package:myaniapp/app/recommendations/__generated__/recommendations.var.gql.dart'
+    show GRecommendationsVars, GSaveRecommendationVars;
+import 'package:myaniapp/app/review/__generated__/review.data.gql.dart'
+    show
+        GRateReviewData,
+        GRateReviewData_RateReview,
+        GReviewData,
+        GReviewData_Review,
+        GReviewData_Review_media,
+        GReviewData_Review_media_title,
+        GReviewData_Review_user,
+        GReviewData_Review_user_avatar;
+import 'package:myaniapp/app/review/__generated__/review.req.gql.dart'
+    show GRateReviewReq, GReviewReq;
+import 'package:myaniapp/app/review/__generated__/review.var.gql.dart'
+    show GRateReviewVars, GReviewVars;
+import 'package:myaniapp/app/search/media/__generated__/mediaSearch.data.gql.dart'
+    show
+        GGenreCollectionData,
+        GGenreCollectionData_tags,
+        GSearchData,
+        GSearchData_Page,
+        GSearchData_Page_media,
+        GSearchData_Page_media_coverImage,
+        GSearchData_Page_media_title,
+        GSearchData_Page_pageInfo;
+import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart'
+    show GGenreCollectionReq, GSearchReq;
+import 'package:myaniapp/app/search/media/__generated__/mediaSearch.var.gql.dart'
+    show GGenreCollectionVars, GSearchVars;
+import 'package:myaniapp/app/staff/__generated__/staff.data.gql.dart'
+    show
+        GStaffData,
+        GStaffData_Staff,
+        GStaffData_Staff_characterMedia,
+        GStaffData_Staff_characterMedia_edges,
+        GStaffData_Staff_characterMedia_edges_characters,
+        GStaffData_Staff_characterMedia_edges_characters_image,
+        GStaffData_Staff_characterMedia_edges_characters_name,
+        GStaffData_Staff_characterMedia_edges_node,
+        GStaffData_Staff_characterMedia_edges_node_coverImage,
+        GStaffData_Staff_characterMedia_edges_node_startDate,
+        GStaffData_Staff_characterMedia_edges_node_title,
+        GStaffData_Staff_characterMedia_pageInfo,
+        GStaffData_Staff_dateOfBirth,
+        GStaffData_Staff_dateOfDeath,
+        GStaffData_Staff_image,
+        GStaffData_Staff_name,
+        GStaffData_Staff_staffMedia,
+        GStaffData_Staff_staffMedia_edges,
+        GStaffData_Staff_staffMedia_edges_node,
+        GStaffData_Staff_staffMedia_edges_node_coverImage,
+        GStaffData_Staff_staffMedia_edges_node_title,
+        GStaffData_Staff_staffMedia_pageInfo;
+import 'package:myaniapp/app/staff/__generated__/staff.req.gql.dart'
+    show GStaffReq;
+import 'package:myaniapp/app/staff/__generated__/staff.var.gql.dart'
+    show GStaffVars;
+import 'package:myaniapp/app/studio/__generated__/studio.data.gql.dart'
+    show
+        GStudioData,
+        GStudioData_Studio,
+        GStudioData_Studio_media,
+        GStudioData_Studio_media_nodes,
+        GStudioData_Studio_media_nodes_coverImage,
+        GStudioData_Studio_media_nodes_title,
+        GStudioData_Studio_media_pageInfo;
+import 'package:myaniapp/app/studio/__generated__/studio.req.gql.dart'
+    show GStudioReq;
+import 'package:myaniapp/app/studio/__generated__/studio.var.gql.dart'
+    show GStudioVars;
+import 'package:myaniapp/app/user/__generated__/activities.data.gql.dart'
+    show
+        GUserActivitiesData_Page_activities,
+        GUserActivitiesData,
+        GUserActivitiesData_Page,
+        GUserActivitiesData_Page_activities__asListActivity,
+        GUserActivitiesData_Page_activities__asListActivity_media,
+        GUserActivitiesData_Page_activities__asListActivity_media_coverImage,
+        GUserActivitiesData_Page_activities__asListActivity_media_title,
+        GUserActivitiesData_Page_activities__asListActivity_user,
+        GUserActivitiesData_Page_activities__asListActivity_user_avatar,
+        GUserActivitiesData_Page_activities__asMessageActivity,
+        GUserActivitiesData_Page_activities__asMessageActivity_messenger,
+        GUserActivitiesData_Page_activities__asMessageActivity_messenger_avatar,
+        GUserActivitiesData_Page_activities__asMessageActivity_recipient,
+        GUserActivitiesData_Page_activities__asMessageActivity_recipient_avatar,
+        GUserActivitiesData_Page_activities__asTextActivity,
+        GUserActivitiesData_Page_activities__asTextActivity_user,
+        GUserActivitiesData_Page_activities__asTextActivity_user_avatar,
+        GUserActivitiesData_Page_activities__base,
+        GUserActivitiesData_Page_pageInfo;
+import 'package:myaniapp/app/user/__generated__/activities.req.gql.dart'
+    show GUserActivitiesReq;
+import 'package:myaniapp/app/user/__generated__/activities.var.gql.dart'
+    show GUserActivitiesVars;
+import 'package:myaniapp/app/user/__generated__/favorites.data.gql.dart'
+    show
+        GUserFavoritesData,
+        GUserFavoritesData_User,
+        GUserFavoritesData_User_avatar,
+        GUserFavoritesData_User_favourites,
+        GUserFavoritesData_User_favourites_anime,
+        GUserFavoritesData_User_favourites_anime_edges,
+        GUserFavoritesData_User_favourites_anime_edges_node,
+        GUserFavoritesData_User_favourites_anime_edges_node_coverImage,
+        GUserFavoritesData_User_favourites_anime_edges_node_title,
+        GUserFavoritesData_User_favourites_anime_pageInfo,
+        GUserFavoritesData_User_favourites_characters,
+        GUserFavoritesData_User_favourites_characters_edges,
+        GUserFavoritesData_User_favourites_characters_edges_node,
+        GUserFavoritesData_User_favourites_characters_edges_node_image,
+        GUserFavoritesData_User_favourites_characters_edges_node_name,
+        GUserFavoritesData_User_favourites_characters_pageInfo,
+        GUserFavoritesData_User_favourites_manga,
+        GUserFavoritesData_User_favourites_manga_edges,
+        GUserFavoritesData_User_favourites_manga_edges_node,
+        GUserFavoritesData_User_favourites_manga_edges_node_coverImage,
+        GUserFavoritesData_User_favourites_manga_edges_node_title,
+        GUserFavoritesData_User_favourites_manga_pageInfo,
+        GUserFavoritesData_User_favourites_staff,
+        GUserFavoritesData_User_favourites_staff_edges,
+        GUserFavoritesData_User_favourites_staff_edges_node,
+        GUserFavoritesData_User_favourites_staff_edges_node_image,
+        GUserFavoritesData_User_favourites_staff_edges_node_name,
+        GUserFavoritesData_User_favourites_staff_pageInfo,
+        GUserFavoritesData_User_favourites_studios,
+        GUserFavoritesData_User_favourites_studios_edges,
+        GUserFavoritesData_User_favourites_studios_edges_node,
+        GUserFavoritesData_User_favourites_studios_pageInfo;
+import 'package:myaniapp/app/user/__generated__/favorites.req.gql.dart'
+    show GUserFavoritesReq;
+import 'package:myaniapp/app/user/__generated__/favorites.var.gql.dart'
+    show GUserFavoritesVars;
+import 'package:myaniapp/app/user/__generated__/reviews.data.gql.dart'
+    show
+        GUserReviewsData,
+        GUserReviewsData_Page,
+        GUserReviewsData_Page_pageInfo,
+        GUserReviewsData_Page_reviews,
+        GUserReviewsData_Page_reviews_media,
+        GUserReviewsData_Page_reviews_media_title,
+        GUserReviewsData_Page_reviews_user,
+        GUserReviewsData_Page_reviews_user_avatar;
+import 'package:myaniapp/app/user/__generated__/reviews.req.gql.dart'
+    show GUserReviewsReq;
+import 'package:myaniapp/app/user/__generated__/reviews.var.gql.dart'
+    show GUserReviewsVars;
+import 'package:myaniapp/app/user/__generated__/social.data.gql.dart'
+    show
+        GUserSocialsData,
+        GUserSocialsData_followers,
+        GUserSocialsData_followers_followers,
+        GUserSocialsData_followers_followers_avatar,
+        GUserSocialsData_followers_pageInfo,
+        GUserSocialsData_following,
+        GUserSocialsData_following_following,
+        GUserSocialsData_following_following_avatar,
+        GUserSocialsData_following_pageInfo;
+import 'package:myaniapp/app/user/__generated__/social.req.gql.dart'
+    show GUserSocialsReq;
+import 'package:myaniapp/app/user/__generated__/social.var.gql.dart'
+    show GUserSocialsVars;
+import 'package:myaniapp/app/user/__generated__/thread.data.gql.dart'
+    show
+        GUserThreadsData,
+        GUserThreadsData_comments,
+        GUserThreadsData_comments_pageInfo,
+        GUserThreadsData_comments_threadComments,
+        GUserThreadsData_comments_threadComments_thread,
+        GUserThreadsData_comments_threadComments_user,
+        GUserThreadsData_comments_threadComments_user_avatar,
+        GUserThreadsData_thread,
+        GUserThreadsData_thread_pageInfo,
+        GUserThreadsData_thread_threads,
+        GUserThreadsData_thread_threads_categories,
+        GUserThreadsData_thread_threads_mediaCategories,
+        GUserThreadsData_thread_threads_mediaCategories_coverImage,
+        GUserThreadsData_thread_threads_mediaCategories_title,
+        GUserThreadsData_thread_threads_replyUser,
+        GUserThreadsData_thread_threads_replyUser_avatar,
+        GUserThreadsData_thread_threads_user,
+        GUserThreadsData_thread_threads_user_avatar;
+import 'package:myaniapp/app/user/__generated__/thread.req.gql.dart'
+    show GUserThreadsReq;
+import 'package:myaniapp/app/user/__generated__/thread.var.gql.dart'
+    show GUserThreadsVars;
+import 'package:myaniapp/app/user/__generated__/user.data.gql.dart'
+    show
+        GGenreStatData,
+        GUserData,
+        GUserData_User,
+        GUserData_User_avatar,
+        GUserData_User_favourites,
+        GUserData_User_favourites_anime,
+        GUserData_User_favourites_anime_nodes,
+        GUserData_User_favourites_anime_nodes_coverImage,
+        GUserData_User_favourites_anime_nodes_title,
+        GUserData_User_favourites_characters,
+        GUserData_User_favourites_characters_nodes,
+        GUserData_User_favourites_characters_nodes_image,
+        GUserData_User_favourites_characters_nodes_name,
+        GUserData_User_favourites_manga,
+        GUserData_User_favourites_manga_nodes,
+        GUserData_User_favourites_manga_nodes_coverImage,
+        GUserData_User_favourites_manga_nodes_title,
+        GUserData_User_favourites_staff,
+        GUserData_User_favourites_staff_nodes,
+        GUserData_User_favourites_staff_nodes_image,
+        GUserData_User_favourites_staff_nodes_name,
+        GUserData_User_favourites_studios,
+        GUserData_User_favourites_studios_nodes,
+        GUserData_User_mediaListOptions,
+        GUserData_User_statistics,
+        GUserData_User_statistics_anime,
+        GUserData_User_statistics_anime_genres,
+        GUserData_User_statistics_manga,
+        GUserData_User_statistics_manga_genres;
+import 'package:myaniapp/app/user/__generated__/user.req.gql.dart'
+    show GGenreStatReq, GUserReq;
+import 'package:myaniapp/app/user/__generated__/user.var.gql.dart'
+    show GGenreStatVars, GUserVars;
+import 'package:myaniapp/common/lists/__generated__/lists.data.gql.dart'
+    show
+        GMediaListData,
+        GMediaListData_MediaListCollection,
+        GMediaListData_MediaListCollection_lists,
+        GMediaListData_MediaListCollection_lists_entries,
+        GMediaListData_MediaListCollection_lists_entries_completedAt,
+        GMediaListData_MediaListCollection_lists_entries_media,
+        GMediaListData_MediaListCollection_lists_entries_media_coverImage,
+        GMediaListData_MediaListCollection_lists_entries_media_startDate,
+        GMediaListData_MediaListCollection_lists_entries_media_title,
+        GMediaListData_MediaListCollection_lists_entries_startedAt,
+        GMediaListData_MediaListCollection_user,
+        GMediaListData_MediaListCollection_user_mediaListOptions,
+        GMediaListData_MediaListCollection_user_mediaListOptions_animeList,
+        GMediaListData_MediaListCollection_user_mediaListOptions_mangaList;
+import 'package:myaniapp/common/lists/__generated__/lists.req.gql.dart'
+    show GMediaListReq;
+import 'package:myaniapp/common/lists/__generated__/lists.var.gql.dart'
+    show GMediaListVars;
+import 'package:myaniapp/common/markdown/generator/__generated__/media_card.data.gql.dart'
+    show
+        GEmbedMediaCardData,
+        GEmbedMediaCardData_Media,
+        GEmbedMediaCardData_Media_coverImage,
+        GEmbedMediaCardData_Media_title;
+import 'package:myaniapp/common/markdown/generator/__generated__/media_card.req.gql.dart'
+    show GEmbedMediaCardReq;
+import 'package:myaniapp/common/markdown/generator/__generated__/media_card.var.gql.dart'
+    show GEmbedMediaCardVars;
+import 'package:myaniapp/common/media_editor/__generated__/media_editor.data.gql.dart'
+    show
+        GDeleteMediaListEntryData,
+        GDeleteMediaListEntryData_DeleteMediaListEntry,
+        GMediaEntryData,
+        GMediaEntryData_MediaList,
+        GMediaEntryData_MediaList_completedAt,
+        GMediaEntryData_MediaList_media,
+        GMediaEntryData_MediaList_media_coverImage,
+        GMediaEntryData_MediaList_media_startDate,
+        GMediaEntryData_MediaList_media_title,
+        GMediaEntryData_MediaList_startedAt,
+        GMediaEntryData_MediaList_user,
+        GMediaEntryData_MediaList_user_mediaListOptions,
+        GSaveMediaListEntryData,
+        GSaveMediaListEntryData_SaveMediaListEntry,
+        GSaveMediaListEntryData_SaveMediaListEntry_completedAt,
+        GSaveMediaListEntryData_SaveMediaListEntry_media,
+        GSaveMediaListEntryData_SaveMediaListEntry_media_coverImage,
+        GSaveMediaListEntryData_SaveMediaListEntry_media_startDate,
+        GSaveMediaListEntryData_SaveMediaListEntry_media_title,
+        GSaveMediaListEntryData_SaveMediaListEntry_startedAt;
+import 'package:myaniapp/common/media_editor/__generated__/media_editor.req.gql.dart'
+    show GDeleteMediaListEntryReq, GMediaEntryReq, GSaveMediaListEntryReq;
+import 'package:myaniapp/common/media_editor/__generated__/media_editor.var.gql.dart'
+    show GDeleteMediaListEntryVars, GMediaEntryVars, GSaveMediaListEntryVars;
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart'
     show
         GActivitySort,
@@ -113,6 +803,7 @@ import 'package:myaniapp/graphql/__generated__/viewer.data.gql.dart'
         GThisUserData_avatar,
         GThisUserData_mediaListOptions,
         GThisUserData_mediaListOptions_animeList,
+        GThisUserData_mediaListOptions_mangaList,
         GThisUserData_options,
         GThisUserData_statistics,
         GThisUserData_statistics_anime,
@@ -122,6 +813,7 @@ import 'package:myaniapp/graphql/__generated__/viewer.data.gql.dart'
         GUpdateUserData_UpdateUser_avatar,
         GUpdateUserData_UpdateUser_mediaListOptions,
         GUpdateUserData_UpdateUser_mediaListOptions_animeList,
+        GUpdateUserData_UpdateUser_mediaListOptions_mangaList,
         GUpdateUserData_UpdateUser_options,
         GUpdateUserData_UpdateUser_statistics,
         GUpdateUserData_UpdateUser_statistics_anime,
@@ -131,6 +823,7 @@ import 'package:myaniapp/graphql/__generated__/viewer.data.gql.dart'
         GViewerData_Viewer_avatar,
         GViewerData_Viewer_mediaListOptions,
         GViewerData_Viewer_mediaListOptions_animeList,
+        GViewerData_Viewer_mediaListOptions_mangaList,
         GViewerData_Viewer_options,
         GViewerData_Viewer_statistics,
         GViewerData_Viewer_statistics_anime,
@@ -139,6 +832,15 @@ import 'package:myaniapp/graphql/__generated__/viewer.req.gql.dart'
     show GNotificationCountReq, GThisUserReq, GUpdateUserReq, GViewerReq;
 import 'package:myaniapp/graphql/__generated__/viewer.var.gql.dart'
     show GNotificationCountVars, GThisUserVars, GUpdateUserVars, GViewerVars;
+import 'package:myaniapp/graphql/fragments/__generated__/character.data.gql.dart'
+    show
+        GCharacterFragmentData,
+        GCharacterFragmentData_image,
+        GCharacterFragmentData_name;
+import 'package:myaniapp/graphql/fragments/__generated__/character.req.gql.dart'
+    show GCharacterFragmentReq;
+import 'package:myaniapp/graphql/fragments/__generated__/character.var.gql.dart'
+    show GCharacterFragmentVars;
 import 'package:myaniapp/graphql/fragments/__generated__/fuzzy_date.data.gql.dart'
     show GFuzzyDateData;
 import 'package:myaniapp/graphql/fragments/__generated__/fuzzy_date.req.gql.dart'
@@ -203,7 +905,9 @@ import 'package:myaniapp/graphql/fragments/__generated__/message_activity.data.g
     show
         GMessageActivityData,
         GMessageActivityData_messenger,
-        GMessageActivityData_messenger_avatar;
+        GMessageActivityData_messenger_avatar,
+        GMessageActivityData_recipient,
+        GMessageActivityData_recipient_avatar;
 import 'package:myaniapp/graphql/fragments/__generated__/message_activity.req.gql.dart'
     show GMessageActivityReq;
 import 'package:myaniapp/graphql/fragments/__generated__/message_activity.var.gql.dart'
@@ -238,6 +942,18 @@ import 'package:myaniapp/graphql/fragments/__generated__/review.req.gql.dart'
     show GReviewFragmentReq;
 import 'package:myaniapp/graphql/fragments/__generated__/review.var.gql.dart'
     show GReviewFragmentVars;
+import 'package:myaniapp/graphql/fragments/__generated__/staff.data.gql.dart'
+    show GStaffFragmentData, GStaffFragmentData_image, GStaffFragmentData_name;
+import 'package:myaniapp/graphql/fragments/__generated__/staff.req.gql.dart'
+    show GStaffFragmentReq;
+import 'package:myaniapp/graphql/fragments/__generated__/staff.var.gql.dart'
+    show GStaffFragmentVars;
+import 'package:myaniapp/graphql/fragments/__generated__/studio.data.gql.dart'
+    show GStudioFragmentData;
+import 'package:myaniapp/graphql/fragments/__generated__/studio.req.gql.dart'
+    show GStudioFragmentReq;
+import 'package:myaniapp/graphql/fragments/__generated__/studio.var.gql.dart'
+    show GStudioFragmentVars;
 import 'package:myaniapp/graphql/fragments/__generated__/text_activity.data.gql.dart'
     show
         GTextActivityData,
@@ -346,643 +1062,19 @@ import 'package:myaniapp/notifications/__generated__/notifications.req.gql.dart'
     show GNotificationsReq;
 import 'package:myaniapp/notifications/__generated__/notifications.var.gql.dart'
     show GNotificationsVars;
-import 'package:myaniapp/ui/common/comment/__generated__/like.data.gql.dart'
-    show
-        GLikesData,
-        GLikesData_Page,
-        GLikesData_Page_likes,
-        GLikesData_Page_likes_avatar,
-        GLikesData_Page_pageInfo;
-import 'package:myaniapp/ui/common/comment/__generated__/like.req.gql.dart'
-    show GLikesReq;
-import 'package:myaniapp/ui/common/comment/__generated__/like.var.gql.dart'
-    show GLikesVars;
-import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.data.gql.dart'
-    show
-        GDeleteMediaListEntryData,
-        GDeleteMediaListEntryData_DeleteMediaListEntry,
-        GMediaEntryData,
-        GMediaEntryData_MediaList,
-        GMediaEntryData_MediaList_completedAt,
-        GMediaEntryData_MediaList_media,
-        GMediaEntryData_MediaList_media_coverImage,
-        GMediaEntryData_MediaList_media_startDate,
-        GMediaEntryData_MediaList_media_title,
-        GMediaEntryData_MediaList_startedAt,
-        GSaveMediaListEntryData,
-        GSaveMediaListEntryData_SaveMediaListEntry,
-        GSaveMediaListEntryData_SaveMediaListEntry_completedAt,
-        GSaveMediaListEntryData_SaveMediaListEntry_media,
-        GSaveMediaListEntryData_SaveMediaListEntry_media_coverImage,
-        GSaveMediaListEntryData_SaveMediaListEntry_media_startDate,
-        GSaveMediaListEntryData_SaveMediaListEntry_media_title,
-        GSaveMediaListEntryData_SaveMediaListEntry_startedAt;
-import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.req.gql.dart'
-    show GDeleteMediaListEntryReq, GMediaEntryReq, GSaveMediaListEntryReq;
-import 'package:myaniapp/ui/common/media_editor/__generated__/media_editor.var.gql.dart'
-    show GDeleteMediaListEntryVars, GMediaEntryVars, GSaveMediaListEntryVars;
-import 'package:myaniapp/ui/routes/activity/__generated__/activity.data.gql.dart'
-    show
-        GActivityData_activity,
-        GToggleActivitySubscriptionData_ToggleActivitySubscription,
-        GActivityData,
-        GActivityData_activity__asListActivity,
-        GActivityData_activity__asListActivity_media,
-        GActivityData_activity__asListActivity_media_coverImage,
-        GActivityData_activity__asListActivity_media_title,
-        GActivityData_activity__asListActivity_user,
-        GActivityData_activity__asListActivity_user_avatar,
-        GActivityData_activity__asMessageActivity,
-        GActivityData_activity__asMessageActivity_messenger,
-        GActivityData_activity__asMessageActivity_messenger_avatar,
-        GActivityData_activity__asTextActivity,
-        GActivityData_activity__asTextActivity_user,
-        GActivityData_activity__asTextActivity_user_avatar,
-        GActivityData_activity__base,
-        GActivityData_replies,
-        GActivityData_replies_activityReplies,
-        GActivityData_replies_activityReplies_user,
-        GActivityData_replies_activityReplies_user_avatar,
-        GActivityData_replies_pageInfo,
-        GDeleteActivityData,
-        GDeleteActivityData_DeleteActivity,
-        GDeleteActivityReplyData,
-        GDeleteActivityReplyData_DeleteActivityReply,
-        GSaveActivityReplyData,
-        GSaveActivityReplyData_SaveActivityReply,
-        GSaveActivityReplyData_SaveActivityReply_user,
-        GSaveActivityReplyData_SaveActivityReply_user_avatar,
-        GSaveMessageActivityData,
-        GSaveMessageActivityData_SaveMessageActivity,
-        GSaveMessageActivityData_SaveMessageActivity_messenger,
-        GSaveMessageActivityData_SaveMessageActivity_messenger_avatar,
-        GToggleActivitySubscriptionData,
-        GToggleActivitySubscriptionData_ToggleActivitySubscription__asListActivity,
-        GToggleActivitySubscriptionData_ToggleActivitySubscription__asMessageActivity,
-        GToggleActivitySubscriptionData_ToggleActivitySubscription__asTextActivity,
-        GToggleActivitySubscriptionData_ToggleActivitySubscription__base;
-import 'package:myaniapp/ui/routes/activity/__generated__/activity.req.gql.dart'
-    show
-        GActivityReq,
-        GDeleteActivityReplyReq,
-        GDeleteActivityReq,
-        GSaveActivityReplyReq,
-        GSaveMessageActivityReq,
-        GToggleActivitySubscriptionReq;
-import 'package:myaniapp/ui/routes/activity/__generated__/activity.var.gql.dart'
-    show
-        GActivityVars,
-        GDeleteActivityReplyVars,
-        GDeleteActivityVars,
-        GSaveActivityReplyVars,
-        GSaveMessageActivityVars,
-        GToggleActivitySubscriptionVars;
-import 'package:myaniapp/ui/routes/calendar/__generated__/calendar.data.gql.dart'
-    show
-        GCalendarScheduleData,
-        GCalendarScheduleData_Page,
-        GCalendarScheduleData_Page_airingSchedules,
-        GCalendarScheduleData_Page_airingSchedules_media,
-        GCalendarScheduleData_Page_airingSchedules_media_coverImage,
-        GCalendarScheduleData_Page_airingSchedules_media_title,
-        GCalendarScheduleData_Page_pageInfo;
-import 'package:myaniapp/ui/routes/calendar/__generated__/calendar.req.gql.dart'
-    show GCalendarScheduleReq;
-import 'package:myaniapp/ui/routes/calendar/__generated__/calendar.var.gql.dart'
-    show GCalendarScheduleVars;
-import 'package:myaniapp/ui/routes/calendar/__generated__/listReleases.data.gql.dart'
-    show
-        GReleasesListData,
-        GReleasesListData_Page,
-        GReleasesListData_Page_media,
-        GReleasesListData_Page_media_airingSchedule,
-        GReleasesListData_Page_media_airingSchedule_edges,
-        GReleasesListData_Page_media_airingSchedule_edges_node,
-        GReleasesListData_Page_media_coverImage,
-        GReleasesListData_Page_media_nextAiringEpisode,
-        GReleasesListData_Page_media_title,
-        GReleasesListData_Page_pageInfo;
-import 'package:myaniapp/ui/routes/calendar/__generated__/listReleases.req.gql.dart'
-    show GReleasesListReq;
-import 'package:myaniapp/ui/routes/calendar/__generated__/listReleases.var.gql.dart'
-    show GReleasesListVars;
-import 'package:myaniapp/ui/routes/character/__generated__/character.data.gql.dart'
-    show
-        GCharacterData,
-        GCharacterData_Character,
-        GCharacterData_Character_dateOfBirth,
-        GCharacterData_Character_image,
-        GCharacterData_Character_media,
-        GCharacterData_Character_media_edges,
-        GCharacterData_Character_media_edges_node,
-        GCharacterData_Character_media_edges_node_coverImage,
-        GCharacterData_Character_media_edges_node_title,
-        GCharacterData_Character_media_pageInfo,
-        GCharacterData_Character_name;
-import 'package:myaniapp/ui/routes/character/__generated__/character.req.gql.dart'
-    show GCharacterReq;
-import 'package:myaniapp/ui/routes/character/__generated__/character.var.gql.dart'
-    show GCharacterVars;
-import 'package:myaniapp/ui/routes/explore/__generated__/explore.data.gql.dart'
-    show
-        GExploreData,
-        GExploreData_nextSeason,
-        GExploreData_nextSeason_media,
-        GExploreData_nextSeason_media_coverImage,
-        GExploreData_nextSeason_media_title,
-        GExploreData_popular,
-        GExploreData_popular_media,
-        GExploreData_popular_media_coverImage,
-        GExploreData_popular_media_title,
-        GExploreData_recent,
-        GExploreData_recent_media,
-        GExploreData_recent_media_coverImage,
-        GExploreData_recent_media_title,
-        GExploreData_season,
-        GExploreData_season_media,
-        GExploreData_season_media_coverImage,
-        GExploreData_season_media_title,
-        GExploreData_trending,
-        GExploreData_trending_media,
-        GExploreData_trending_media_coverImage,
-        GExploreData_trending_media_title;
-import 'package:myaniapp/ui/routes/explore/__generated__/explore.req.gql.dart'
-    show GExploreReq;
-import 'package:myaniapp/ui/routes/explore/__generated__/explore.var.gql.dart'
-    show GExploreVars;
-import 'package:myaniapp/ui/routes/forum/__generated__/forums.data.gql.dart'
-    show
-        GForumsData,
-        GForumsData_Page,
-        GForumsData_Page_pageInfo,
-        GForumsData_Page_threads,
-        GForumsData_Page_threads_categories,
-        GForumsData_Page_threads_mediaCategories,
-        GForumsData_Page_threads_mediaCategories_coverImage,
-        GForumsData_Page_threads_mediaCategories_title,
-        GForumsData_Page_threads_replyUser,
-        GForumsData_Page_threads_replyUser_avatar,
-        GForumsData_Page_threads_user,
-        GForumsData_Page_threads_user_avatar;
-import 'package:myaniapp/ui/routes/forum/__generated__/forums.req.gql.dart'
-    show GForumsReq;
-import 'package:myaniapp/ui/routes/forum/__generated__/forums.var.gql.dart'
-    show GForumsVars;
-import 'package:myaniapp/ui/routes/forum/overview/__generated__/overview.data.gql.dart'
-    show
-        GForumOverviewData,
-        GForumOverviewData_new,
-        GForumOverviewData_new_threads,
-        GForumOverviewData_new_threads_categories,
-        GForumOverviewData_new_threads_mediaCategories,
-        GForumOverviewData_new_threads_mediaCategories_coverImage,
-        GForumOverviewData_new_threads_mediaCategories_title,
-        GForumOverviewData_new_threads_replyUser,
-        GForumOverviewData_new_threads_replyUser_avatar,
-        GForumOverviewData_new_threads_user,
-        GForumOverviewData_new_threads_user_avatar,
-        GForumOverviewData_recent,
-        GForumOverviewData_recent_threads,
-        GForumOverviewData_recent_threads_categories,
-        GForumOverviewData_recent_threads_mediaCategories,
-        GForumOverviewData_recent_threads_mediaCategories_coverImage,
-        GForumOverviewData_recent_threads_mediaCategories_title,
-        GForumOverviewData_recent_threads_replyUser,
-        GForumOverviewData_recent_threads_replyUser_avatar,
-        GForumOverviewData_recent_threads_user,
-        GForumOverviewData_recent_threads_user_avatar,
-        GForumOverviewData_release,
-        GForumOverviewData_release_threads,
-        GForumOverviewData_release_threads_categories,
-        GForumOverviewData_release_threads_mediaCategories,
-        GForumOverviewData_release_threads_mediaCategories_coverImage,
-        GForumOverviewData_release_threads_mediaCategories_title,
-        GForumOverviewData_release_threads_replyUser,
-        GForumOverviewData_release_threads_replyUser_avatar,
-        GForumOverviewData_release_threads_user,
-        GForumOverviewData_release_threads_user_avatar;
-import 'package:myaniapp/ui/routes/forum/overview/__generated__/overview.req.gql.dart'
-    show GForumOverviewReq;
-import 'package:myaniapp/ui/routes/forum/overview/__generated__/overview.var.gql.dart'
-    show GForumOverviewVars;
-import 'package:myaniapp/ui/routes/home/activities/__generated__/activities.data.gql.dart'
-    show
-        GActivitiesData_Page_activities,
-        GToggleLikeData_ToggleLikeV2,
-        GActivitiesData,
-        GActivitiesData_Page,
-        GActivitiesData_Page_activities__asListActivity,
-        GActivitiesData_Page_activities__asListActivity_media,
-        GActivitiesData_Page_activities__asListActivity_media_coverImage,
-        GActivitiesData_Page_activities__asListActivity_media_title,
-        GActivitiesData_Page_activities__asListActivity_user,
-        GActivitiesData_Page_activities__asListActivity_user_avatar,
-        GActivitiesData_Page_activities__asTextActivity,
-        GActivitiesData_Page_activities__asTextActivity_user,
-        GActivitiesData_Page_activities__asTextActivity_user_avatar,
-        GActivitiesData_Page_activities__base,
-        GActivitiesData_Page_pageInfo,
-        GSaveTextActivityData,
-        GSaveTextActivityData_SaveTextActivity,
-        GSaveTextActivityData_SaveTextActivity_user,
-        GSaveTextActivityData_SaveTextActivity_user_avatar,
-        GToggleLikeData,
-        GToggleLikeData_ToggleLikeV2__asActivityReply,
-        GToggleLikeData_ToggleLikeV2__asListActivity,
-        GToggleLikeData_ToggleLikeV2__asMessageActivity,
-        GToggleLikeData_ToggleLikeV2__asTextActivity,
-        GToggleLikeData_ToggleLikeV2__asThread,
-        GToggleLikeData_ToggleLikeV2__asThreadComment,
-        GToggleLikeData_ToggleLikeV2__base;
-import 'package:myaniapp/ui/routes/home/activities/__generated__/activities.req.gql.dart'
-    show GActivitiesReq, GSaveTextActivityReq, GToggleLikeReq;
-import 'package:myaniapp/ui/routes/home/activities/__generated__/activities.var.gql.dart'
-    show GActivitiesVars, GSaveTextActivityVars, GToggleLikeVars;
-import 'package:myaniapp/ui/routes/home/list/__generated__/list.data.gql.dart'
-    show
-        GMediaListData,
-        GMediaListData_MediaListCollection,
-        GMediaListData_MediaListCollection_lists,
-        GMediaListData_MediaListCollection_lists_entries,
-        GMediaListData_MediaListCollection_lists_entries_completedAt,
-        GMediaListData_MediaListCollection_lists_entries_media,
-        GMediaListData_MediaListCollection_lists_entries_media_coverImage,
-        GMediaListData_MediaListCollection_lists_entries_media_startDate,
-        GMediaListData_MediaListCollection_lists_entries_media_title,
-        GMediaListData_MediaListCollection_lists_entries_startedAt,
-        GMediaListData_MediaListCollection_user,
-        GMediaListData_MediaListCollection_user_mediaListOptions,
-        GMediaListData_MediaListCollection_user_mediaListOptions_animeList,
-        GMediaListData_MediaListCollection_user_mediaListOptions_mangaList;
-import 'package:myaniapp/ui/routes/home/list/__generated__/list.req.gql.dart'
-    show GMediaListReq;
-import 'package:myaniapp/ui/routes/home/list/__generated__/list.var.gql.dart'
-    show GMediaListVars;
-import 'package:myaniapp/ui/routes/home/overview/__generated__/overview.data.gql.dart'
-    show
-        GHomeOverviewData,
-        GHomeOverviewData_forums,
-        GHomeOverviewData_forums_threads,
-        GHomeOverviewData_forums_threads_categories,
-        GHomeOverviewData_forums_threads_mediaCategories,
-        GHomeOverviewData_forums_threads_mediaCategories_coverImage,
-        GHomeOverviewData_forums_threads_mediaCategories_title,
-        GHomeOverviewData_forums_threads_replyUser,
-        GHomeOverviewData_forums_threads_replyUser_avatar,
-        GHomeOverviewData_forums_threads_user,
-        GHomeOverviewData_forums_threads_user_avatar,
-        GHomeOverviewData_list,
-        GHomeOverviewData_list_mediaList,
-        GHomeOverviewData_list_mediaList_completedAt,
-        GHomeOverviewData_list_mediaList_media,
-        GHomeOverviewData_list_mediaList_media_coverImage,
-        GHomeOverviewData_list_mediaList_media_startDate,
-        GHomeOverviewData_list_mediaList_media_title,
-        GHomeOverviewData_list_mediaList_startedAt,
-        GHomeOverviewData_releasing,
-        GHomeOverviewData_releasing_media,
-        GHomeOverviewData_releasing_media_airingSchedule,
-        GHomeOverviewData_releasing_media_airingSchedule_edges,
-        GHomeOverviewData_releasing_media_airingSchedule_edges_node,
-        GHomeOverviewData_releasing_media_coverImage,
-        GHomeOverviewData_releasing_media_nextAiringEpisode,
-        GHomeOverviewData_releasing_media_title,
-        GHomeOverviewData_reviews,
-        GHomeOverviewData_reviews_reviews,
-        GHomeOverviewData_reviews_reviews_media,
-        GHomeOverviewData_reviews_reviews_media_title,
-        GHomeOverviewData_reviews_reviews_user,
-        GHomeOverviewData_reviews_reviews_user_avatar;
-import 'package:myaniapp/ui/routes/home/overview/__generated__/overview.req.gql.dart'
-    show GHomeOverviewReq;
-import 'package:myaniapp/ui/routes/home/overview/__generated__/overview.var.gql.dart'
-    show GHomeOverviewVars;
-import 'package:myaniapp/ui/routes/media/characters/__generated__/characters.data.gql.dart'
-    show
-        GCharactersData,
-        GCharactersData_Media,
-        GCharactersData_Media_characters,
-        GCharactersData_Media_characters_edges,
-        GCharactersData_Media_characters_edges_node,
-        GCharactersData_Media_characters_edges_node_image,
-        GCharactersData_Media_characters_edges_node_name,
-        GCharactersData_Media_characters_edges_voiceActorRoles,
-        GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor,
-        GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_image,
-        GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_name,
-        GCharactersData_Media_characters_pageInfo;
-import 'package:myaniapp/ui/routes/media/characters/__generated__/characters.req.gql.dart'
-    show GCharactersReq;
-import 'package:myaniapp/ui/routes/media/characters/__generated__/characters.var.gql.dart'
-    show GCharactersVars;
-import 'package:myaniapp/ui/routes/media/reviews/__generated__/reviews.data.gql.dart'
-    show
-        GReviewsData,
-        GReviewsData_Media,
-        GReviewsData_Media_reviews,
-        GReviewsData_Media_reviews_nodes,
-        GReviewsData_Media_reviews_nodes_user,
-        GReviewsData_Media_reviews_nodes_user_avatar,
-        GReviewsData_Media_reviews_pageInfo;
-import 'package:myaniapp/ui/routes/media/reviews/__generated__/reviews.req.gql.dart'
-    show GReviewsReq;
-import 'package:myaniapp/ui/routes/media/reviews/__generated__/reviews.var.gql.dart'
-    show GReviewsVars;
-import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.data.gql.dart'
-    show
-        GMediaRecommendationsData,
-        GMediaRecommendationsData_Media,
-        GMediaRecommendationsData_Media_recommendations,
-        GMediaRecommendationsData_Media_recommendations_nodes,
-        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-        GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-        GMediaRecommendationsData_Media_recommendations_pageInfo;
-import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.req.gql.dart'
-    show GMediaRecommendationsReq;
-import 'package:myaniapp/ui/routes/media/similar/__generated__/similar.var.gql.dart'
-    show GMediaRecommendationsVars;
-import 'package:myaniapp/ui/routes/media/social/__generated__/social.data.gql.dart'
-    show
-        GThreadsData,
-        GThreadsData_Page,
-        GThreadsData_Page_pageInfo,
-        GThreadsData_Page_threads,
-        GThreadsData_Page_threads_categories,
-        GThreadsData_Page_threads_mediaCategories,
-        GThreadsData_Page_threads_mediaCategories_coverImage,
-        GThreadsData_Page_threads_mediaCategories_title,
-        GThreadsData_Page_threads_replyUser,
-        GThreadsData_Page_threads_replyUser_avatar,
-        GThreadsData_Page_threads_user,
-        GThreadsData_Page_threads_user_avatar;
-import 'package:myaniapp/ui/routes/media/social/__generated__/social.req.gql.dart'
-    show GThreadsReq;
-import 'package:myaniapp/ui/routes/media/social/__generated__/social.var.gql.dart'
-    show GThreadsVars;
-import 'package:myaniapp/ui/routes/media/staff/__generated__/staff.data.gql.dart'
-    show
-        GMediaStaffData,
-        GMediaStaffData_Media,
-        GMediaStaffData_Media_staff,
-        GMediaStaffData_Media_staff_edges,
-        GMediaStaffData_Media_staff_edges_node,
-        GMediaStaffData_Media_staff_edges_node_image,
-        GMediaStaffData_Media_staff_edges_node_name,
-        GMediaStaffData_Media_staff_pageInfo;
-import 'package:myaniapp/ui/routes/media/staff/__generated__/staff.req.gql.dart'
-    show GMediaStaffReq;
-import 'package:myaniapp/ui/routes/media/staff/__generated__/staff.var.gql.dart'
-    show GMediaStaffVars;
-import 'package:myaniapp/ui/routes/recommendations/__generated__/recommendations.data.gql.dart'
-    show
-        GRecommendationsData,
-        GRecommendationsData_Page,
-        GRecommendationsData_Page_pageInfo,
-        GRecommendationsData_Page_recommendations,
-        GRecommendationsData_Page_recommendations_media,
-        GRecommendationsData_Page_recommendations_mediaRecommendation,
-        GRecommendationsData_Page_recommendations_mediaRecommendation_coverImage,
-        GRecommendationsData_Page_recommendations_mediaRecommendation_title,
-        GRecommendationsData_Page_recommendations_media_coverImage,
-        GRecommendationsData_Page_recommendations_media_title,
-        GSaveRecommendationData,
-        GSaveRecommendationData_SaveRecommendation,
-        GSaveRecommendationData_SaveRecommendation_media,
-        GSaveRecommendationData_SaveRecommendation_mediaRecommendation,
-        GSaveRecommendationData_SaveRecommendation_mediaRecommendation_coverImage,
-        GSaveRecommendationData_SaveRecommendation_mediaRecommendation_title,
-        GSaveRecommendationData_SaveRecommendation_media_coverImage,
-        GSaveRecommendationData_SaveRecommendation_media_title;
-import 'package:myaniapp/ui/routes/recommendations/__generated__/recommendations.req.gql.dart'
-    show GRecommendationsReq, GSaveRecommendationReq;
-import 'package:myaniapp/ui/routes/recommendations/__generated__/recommendations.var.gql.dart'
-    show GRecommendationsVars, GSaveRecommendationVars;
-import 'package:myaniapp/ui/routes/review/__generated__/review.data.gql.dart'
-    show
-        GRateReviewData,
-        GRateReviewData_RateReview,
-        GReviewData,
-        GReviewData_Review,
-        GReviewData_Review_media,
-        GReviewData_Review_media_title,
-        GReviewData_Review_user,
-        GReviewData_Review_user_avatar;
-import 'package:myaniapp/ui/routes/review/__generated__/review.req.gql.dart'
-    show GRateReviewReq, GReviewReq;
-import 'package:myaniapp/ui/routes/review/__generated__/review.var.gql.dart'
-    show GRateReviewVars, GReviewVars;
-import 'package:myaniapp/ui/routes/search/__generated__/search.data.gql.dart'
-    show
-        GGenreCollectionData,
-        GGenreCollectionData_tags,
-        GSearchData,
-        GSearchData_Page,
-        GSearchData_Page_media,
-        GSearchData_Page_media_coverImage,
-        GSearchData_Page_media_title,
-        GSearchData_Page_pageInfo;
-import 'package:myaniapp/ui/routes/search/__generated__/search.req.gql.dart'
-    show GGenreCollectionReq, GSearchReq;
-import 'package:myaniapp/ui/routes/search/__generated__/search.var.gql.dart'
-    show GGenreCollectionVars, GSearchVars;
-import 'package:myaniapp/ui/routes/staff/__generated__/staff.data.gql.dart'
-    show
-        GStaffData,
-        GStaffData_Staff,
-        GStaffData_Staff_characterMedia,
-        GStaffData_Staff_characterMedia_edges,
-        GStaffData_Staff_characterMedia_edges_characters,
-        GStaffData_Staff_characterMedia_edges_characters_image,
-        GStaffData_Staff_characterMedia_edges_characters_name,
-        GStaffData_Staff_characterMedia_edges_node,
-        GStaffData_Staff_characterMedia_edges_node_coverImage,
-        GStaffData_Staff_characterMedia_edges_node_startDate,
-        GStaffData_Staff_characterMedia_edges_node_title,
-        GStaffData_Staff_characterMedia_pageInfo,
-        GStaffData_Staff_dateOfBirth,
-        GStaffData_Staff_dateOfDeath,
-        GStaffData_Staff_image,
-        GStaffData_Staff_name,
-        GStaffData_Staff_staffMedia,
-        GStaffData_Staff_staffMedia_edges,
-        GStaffData_Staff_staffMedia_edges_node,
-        GStaffData_Staff_staffMedia_edges_node_coverImage,
-        GStaffData_Staff_staffMedia_edges_node_title,
-        GStaffData_Staff_staffMedia_pageInfo;
-import 'package:myaniapp/ui/routes/staff/__generated__/staff.req.gql.dart'
-    show GStaffReq;
-import 'package:myaniapp/ui/routes/staff/__generated__/staff.var.gql.dart'
-    show GStaffVars;
-import 'package:myaniapp/ui/routes/thread/__generated__/thread.data.gql.dart'
-    show
-        GDeleteCommentData,
-        GDeleteCommentData_DeleteThreadComment,
-        GSaveCommentData,
-        GSaveCommentData_SaveThreadComment,
-        GSaveCommentData_SaveThreadComment_user,
-        GSaveCommentData_SaveThreadComment_user_avatar,
-        GThreadData,
-        GThreadData_comments,
-        GThreadData_comments_pageInfo,
-        GThreadData_comments_threadComments,
-        GThreadData_comments_threadComments_user,
-        GThreadData_comments_threadComments_user_avatar,
-        GThreadData_thread,
-        GThreadData_thread_categories,
-        GThreadData_thread_mediaCategories,
-        GThreadData_thread_mediaCategories_coverImage,
-        GThreadData_thread_mediaCategories_title,
-        GThreadData_thread_replyUser,
-        GThreadData_thread_replyUser_avatar,
-        GThreadData_thread_user,
-        GThreadData_thread_user_avatar,
-        GToggleThreadSubscriptionData,
-        GToggleThreadSubscriptionData_ToggleThreadSubscription;
-import 'package:myaniapp/ui/routes/thread/__generated__/thread.req.gql.dart'
-    show
-        GDeleteCommentReq,
-        GSaveCommentReq,
-        GThreadReq,
-        GToggleThreadSubscriptionReq;
-import 'package:myaniapp/ui/routes/thread/__generated__/thread.var.gql.dart'
-    show
-        GDeleteCommentVars,
-        GSaveCommentVars,
-        GThreadVars,
-        GToggleThreadSubscriptionVars;
-import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.data.gql.dart'
-    show
-        GCommentData,
-        GCommentData_ThreadComment,
-        GCommentData_ThreadComment_user,
-        GCommentData_ThreadComment_user_avatar;
-import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.req.gql.dart'
-    show GCommentReq;
-import 'package:myaniapp/ui/routes/thread/comment/__generated__/comment.var.gql.dart'
-    show GCommentVars;
-import 'package:myaniapp/ui/routes/user/__generated__/user.data.gql.dart'
-    show
-        GGenreStatData,
-        GUserData,
-        GUserData_User,
-        GUserData_User_avatar,
-        GUserData_User_favourites,
-        GUserData_User_favourites_anime,
-        GUserData_User_favourites_anime_nodes,
-        GUserData_User_favourites_anime_nodes_coverImage,
-        GUserData_User_favourites_anime_nodes_title,
-        GUserData_User_favourites_manga,
-        GUserData_User_favourites_manga_nodes,
-        GUserData_User_favourites_manga_nodes_coverImage,
-        GUserData_User_favourites_manga_nodes_title,
-        GUserData_User_mediaListOptions,
-        GUserData_User_statistics,
-        GUserData_User_statistics_anime,
-        GUserData_User_statistics_anime_genres,
-        GUserData_User_statistics_manga,
-        GUserData_User_statistics_manga_genres;
-import 'package:myaniapp/ui/routes/user/__generated__/user.req.gql.dart'
-    show GGenreStatReq, GUserReq;
-import 'package:myaniapp/ui/routes/user/__generated__/user.var.gql.dart'
-    show GGenreStatVars, GUserVars;
-import 'package:myaniapp/ui/routes/user/activity/__generated__/activity.data.gql.dart'
-    show
-        GUserActivitiesData_Page_activities,
-        GUserActivitiesData,
-        GUserActivitiesData_Page,
-        GUserActivitiesData_Page_activities__asListActivity,
-        GUserActivitiesData_Page_activities__asListActivity_media,
-        GUserActivitiesData_Page_activities__asListActivity_media_coverImage,
-        GUserActivitiesData_Page_activities__asListActivity_media_title,
-        GUserActivitiesData_Page_activities__asListActivity_user,
-        GUserActivitiesData_Page_activities__asListActivity_user_avatar,
-        GUserActivitiesData_Page_activities__asMessageActivity,
-        GUserActivitiesData_Page_activities__asMessageActivity_messenger,
-        GUserActivitiesData_Page_activities__asMessageActivity_messenger_avatar,
-        GUserActivitiesData_Page_activities__asTextActivity,
-        GUserActivitiesData_Page_activities__asTextActivity_user,
-        GUserActivitiesData_Page_activities__asTextActivity_user_avatar,
-        GUserActivitiesData_Page_activities__base,
-        GUserActivitiesData_Page_pageInfo;
-import 'package:myaniapp/ui/routes/user/activity/__generated__/activity.req.gql.dart'
-    show GUserActivitiesReq;
-import 'package:myaniapp/ui/routes/user/activity/__generated__/activity.var.gql.dart'
-    show GUserActivitiesVars;
-import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.data.gql.dart'
-    show
-        GUserReviewsData,
-        GUserReviewsData_Page,
-        GUserReviewsData_Page_pageInfo,
-        GUserReviewsData_Page_reviews,
-        GUserReviewsData_Page_reviews_media,
-        GUserReviewsData_Page_reviews_media_title,
-        GUserReviewsData_Page_reviews_user,
-        GUserReviewsData_Page_reviews_user_avatar;
-import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.req.gql.dart'
-    show GUserReviewsReq;
-import 'package:myaniapp/ui/routes/user/reviews/__generated__/reviews.var.gql.dart'
-    show GUserReviewsVars;
-import 'package:myaniapp/ui/routes/user/social/__generated__/social.data.gql.dart'
-    show
-        GSocialsData,
-        GSocialsData_followers,
-        GSocialsData_followers_followers,
-        GSocialsData_followers_followers_avatar,
-        GSocialsData_followers_pageInfo,
-        GSocialsData_following,
-        GSocialsData_following_following,
-        GSocialsData_following_following_avatar,
-        GSocialsData_following_pageInfo;
-import 'package:myaniapp/ui/routes/user/social/__generated__/social.req.gql.dart'
-    show GSocialsReq;
-import 'package:myaniapp/ui/routes/user/social/__generated__/social.var.gql.dart'
-    show GSocialsVars;
-import 'package:myaniapp/ui/routes/user/stats/__generated__/stats.data.gql.dart'
-    show
-        GUserStatsData,
-        GUserStatsData_User,
-        GUserStatsData_User_statistics,
-        GUserStatsData_User_statistics_anime,
-        GUserStatsData_User_statistics_anime_countries,
-        GUserStatsData_User_statistics_anime_formats,
-        GUserStatsData_User_statistics_anime_lengths,
-        GUserStatsData_User_statistics_anime_releaseYears,
-        GUserStatsData_User_statistics_anime_scores,
-        GUserStatsData_User_statistics_anime_startYears,
-        GUserStatsData_User_statistics_anime_statuses;
-import 'package:myaniapp/ui/routes/user/stats/__generated__/stats.req.gql.dart'
-    show GUserStatsReq;
-import 'package:myaniapp/ui/routes/user/stats/__generated__/stats.var.gql.dart'
-    show GUserStatsVars;
 
 part 'serializers.gql.g.dart';
 
 final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   ..add(OperationSerializer())
-  ..add(GActivitiesData_Page_activities.serializer)
   ..add(GActivityData_activity.serializer)
+  ..add(GHomeActivitiesData_Page_activities.serializer)
   ..add(GNotificationsData_Page_notifications.serializer)
   ..add(GToggleActivitySubscriptionData_ToggleActivitySubscription.serializer)
   ..add(GToggleLikeData_ToggleLikeV2.serializer)
   ..add(GUserActivitiesData_Page_activities.serializer)
   ..addPlugin(StandardJsonPlugin());
 @SerializersFor([
-  GActivitiesData,
-  GActivitiesData_Page,
-  GActivitiesData_Page_activities__asListActivity,
-  GActivitiesData_Page_activities__asListActivity_media,
-  GActivitiesData_Page_activities__asListActivity_media_coverImage,
-  GActivitiesData_Page_activities__asListActivity_media_title,
-  GActivitiesData_Page_activities__asListActivity_user,
-  GActivitiesData_Page_activities__asListActivity_user_avatar,
-  GActivitiesData_Page_activities__asTextActivity,
-  GActivitiesData_Page_activities__asTextActivity_user,
-  GActivitiesData_Page_activities__asTextActivity_user_avatar,
-  GActivitiesData_Page_activities__base,
-  GActivitiesData_Page_pageInfo,
-  GActivitiesReq,
-  GActivitiesVars,
   GActivityData,
   GActivityData_activity__asListActivity,
   GActivityData_activity__asListActivity_media,
@@ -993,6 +1085,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GActivityData_activity__asMessageActivity,
   GActivityData_activity__asMessageActivity_messenger,
   GActivityData_activity__asMessageActivity_messenger_avatar,
+  GActivityData_activity__asMessageActivity_recipient,
+  GActivityData_activity__asMessageActivity_recipient_avatar,
   GActivityData_activity__asTextActivity,
   GActivityData_activity__asTextActivity_user,
   GActivityData_activity__asTextActivity_user_avatar,
@@ -1027,27 +1121,22 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GCharacterData_Character_media_edges_node,
   GCharacterData_Character_media_edges_node_coverImage,
   GCharacterData_Character_media_edges_node_title,
+  GCharacterData_Character_media_edges_voiceActorRoles,
+  GCharacterData_Character_media_edges_voiceActorRoles_voiceActor,
+  GCharacterData_Character_media_edges_voiceActorRoles_voiceActor_image,
+  GCharacterData_Character_media_edges_voiceActorRoles_voiceActor_name,
   GCharacterData_Character_media_pageInfo,
   GCharacterData_Character_name,
+  GCharacterFragmentData,
+  GCharacterFragmentData_image,
+  GCharacterFragmentData_name,
+  GCharacterFragmentReq,
+  GCharacterFragmentVars,
   GCharacterNameInput,
   GCharacterReq,
   GCharacterRole,
   GCharacterSort,
   GCharacterVars,
-  GCharactersData,
-  GCharactersData_Media,
-  GCharactersData_Media_characters,
-  GCharactersData_Media_characters_edges,
-  GCharactersData_Media_characters_edges_node,
-  GCharactersData_Media_characters_edges_node_image,
-  GCharactersData_Media_characters_edges_node_name,
-  GCharactersData_Media_characters_edges_voiceActorRoles,
-  GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor,
-  GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_image,
-  GCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_name,
-  GCharactersData_Media_characters_pageInfo,
-  GCharactersReq,
-  GCharactersVars,
   GCommentData,
   GCommentData_ThreadComment,
   GCommentData_ThreadComment_user,
@@ -1071,6 +1160,12 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GDeleteMediaListEntryData_DeleteMediaListEntry,
   GDeleteMediaListEntryReq,
   GDeleteMediaListEntryVars,
+  GEmbedMediaCardData,
+  GEmbedMediaCardData_Media,
+  GEmbedMediaCardData_Media_coverImage,
+  GEmbedMediaCardData_Media_title,
+  GEmbedMediaCardReq,
+  GEmbedMediaCardVars,
   GExploreData,
   GExploreData_nextSeason,
   GExploreData_nextSeason_media,
@@ -1154,6 +1249,21 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GGenreStatData,
   GGenreStatReq,
   GGenreStatVars,
+  GHomeActivitiesData,
+  GHomeActivitiesData_Page,
+  GHomeActivitiesData_Page_activities__asListActivity,
+  GHomeActivitiesData_Page_activities__asListActivity_media,
+  GHomeActivitiesData_Page_activities__asListActivity_media_coverImage,
+  GHomeActivitiesData_Page_activities__asListActivity_media_title,
+  GHomeActivitiesData_Page_activities__asListActivity_user,
+  GHomeActivitiesData_Page_activities__asListActivity_user_avatar,
+  GHomeActivitiesData_Page_activities__asTextActivity,
+  GHomeActivitiesData_Page_activities__asTextActivity_user,
+  GHomeActivitiesData_Page_activities__asTextActivity_user_avatar,
+  GHomeActivitiesData_Page_activities__base,
+  GHomeActivitiesData_Page_pageInfo,
+  GHomeActivitiesReq,
+  GHomeActivitiesVars,
   GHomeOverviewData,
   GHomeOverviewData_forums,
   GHomeOverviewData_forums_threads,
@@ -1190,13 +1300,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GHomeOverviewReq,
   GHomeOverviewVars,
   GLikeableType,
-  GLikesData,
-  GLikesData_Page,
-  GLikesData_Page_likes,
-  GLikesData_Page_likes_avatar,
-  GLikesData_Page_pageInfo,
-  GLikesReq,
-  GLikesVars,
   GListActivityData,
   GListActivityData_media,
   GListActivityData_media_coverImage,
@@ -1216,6 +1319,20 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GListGroupData_entries_startedAt,
   GListGroupReq,
   GListGroupVars,
+  GMediaCharactersData,
+  GMediaCharactersData_Media,
+  GMediaCharactersData_Media_characters,
+  GMediaCharactersData_Media_characters_edges,
+  GMediaCharactersData_Media_characters_edges_node,
+  GMediaCharactersData_Media_characters_edges_node_image,
+  GMediaCharactersData_Media_characters_edges_node_name,
+  GMediaCharactersData_Media_characters_edges_voiceActorRoles,
+  GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor,
+  GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_image,
+  GMediaCharactersData_Media_characters_edges_voiceActorRoles_voiceActor_name,
+  GMediaCharactersData_Media_characters_pageInfo,
+  GMediaCharactersReq,
+  GMediaCharactersVars,
   GMediaData,
   GMediaData_Media,
   GMediaData_Media_characters,
@@ -1249,6 +1366,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GMediaEntryData_MediaList_media_startDate,
   GMediaEntryData_MediaList_media_title,
   GMediaEntryData_MediaList_startedAt,
+  GMediaEntryData_MediaList_user,
+  GMediaEntryData_MediaList_user_mediaListOptions,
   GMediaEntryReq,
   GMediaEntryVars,
   GMediaExternalLinkInput,
@@ -1290,19 +1409,30 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GMediaListStatus,
   GMediaListVars,
   GMediaRankType,
-  GMediaRecommendationsData,
-  GMediaRecommendationsData_Media,
-  GMediaRecommendationsData_Media_recommendations,
-  GMediaRecommendationsData_Media_recommendations_nodes,
-  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation,
-  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_coverImage,
-  GMediaRecommendationsData_Media_recommendations_nodes_mediaRecommendation_title,
-  GMediaRecommendationsData_Media_recommendations_pageInfo,
-  GMediaRecommendationsReq,
-  GMediaRecommendationsVars,
   GMediaRelation,
   GMediaReq,
+  GMediaReviewsData,
+  GMediaReviewsData_Media,
+  GMediaReviewsData_Media_reviews,
+  GMediaReviewsData_Media_reviews_nodes,
+  GMediaReviewsData_Media_reviews_nodes_media,
+  GMediaReviewsData_Media_reviews_nodes_media_title,
+  GMediaReviewsData_Media_reviews_nodes_user,
+  GMediaReviewsData_Media_reviews_nodes_user_avatar,
+  GMediaReviewsData_Media_reviews_pageInfo,
+  GMediaReviewsReq,
+  GMediaReviewsVars,
   GMediaSeason,
+  GMediaSimilarData,
+  GMediaSimilarData_Media,
+  GMediaSimilarData_Media_recommendations,
+  GMediaSimilarData_Media_recommendations_nodes,
+  GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation,
+  GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation_coverImage,
+  GMediaSimilarData_Media_recommendations_nodes_mediaRecommendation_title,
+  GMediaSimilarData_Media_recommendations_pageInfo,
+  GMediaSimilarReq,
+  GMediaSimilarVars,
   GMediaSort,
   GMediaSource,
   GMediaStaffData,
@@ -1316,6 +1446,20 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GMediaStaffReq,
   GMediaStaffVars,
   GMediaStatus,
+  GMediaThreadsData,
+  GMediaThreadsData_Page,
+  GMediaThreadsData_Page_pageInfo,
+  GMediaThreadsData_Page_threads,
+  GMediaThreadsData_Page_threads_categories,
+  GMediaThreadsData_Page_threads_mediaCategories,
+  GMediaThreadsData_Page_threads_mediaCategories_coverImage,
+  GMediaThreadsData_Page_threads_mediaCategories_title,
+  GMediaThreadsData_Page_threads_replyUser,
+  GMediaThreadsData_Page_threads_replyUser_avatar,
+  GMediaThreadsData_Page_threads_user,
+  GMediaThreadsData_Page_threads_user_avatar,
+  GMediaThreadsReq,
+  GMediaThreadsVars,
   GMediaTitleInput,
   GMediaTrendSort,
   GMediaType,
@@ -1323,6 +1467,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GMessageActivityData,
   GMessageActivityData_messenger,
   GMessageActivityData_messenger_avatar,
+  GMessageActivityData_recipient,
+  GMessageActivityData_recipient_avatar,
   GMessageActivityReq,
   GMessageActivityVars,
   GModActionType,
@@ -1457,15 +1603,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GReviewReq,
   GReviewSort,
   GReviewVars,
-  GReviewsData,
-  GReviewsData_Media,
-  GReviewsData_Media_reviews,
-  GReviewsData_Media_reviews_nodes,
-  GReviewsData_Media_reviews_nodes_user,
-  GReviewsData_Media_reviews_nodes_user_avatar,
-  GReviewsData_Media_reviews_pageInfo,
-  GReviewsReq,
-  GReviewsVars,
   GRevisionHistoryAction,
   GSaveActivityReplyData,
   GSaveActivityReplyData_SaveActivityReply,
@@ -1493,6 +1630,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GSaveMessageActivityData_SaveMessageActivity,
   GSaveMessageActivityData_SaveMessageActivity_messenger,
   GSaveMessageActivityData_SaveMessageActivity_messenger_avatar,
+  GSaveMessageActivityData_SaveMessageActivity_recipient,
+  GSaveMessageActivityData_SaveMessageActivity_recipient_avatar,
   GSaveMessageActivityReq,
   GSaveMessageActivityVars,
   GSaveRecommendationData,
@@ -1521,17 +1660,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GSearchReq,
   GSearchVars,
   GSiteTrendSort,
-  GSocialsData,
-  GSocialsData_followers,
-  GSocialsData_followers_followers,
-  GSocialsData_followers_followers_avatar,
-  GSocialsData_followers_pageInfo,
-  GSocialsData_following,
-  GSocialsData_following_following,
-  GSocialsData_following_following_avatar,
-  GSocialsData_following_pageInfo,
-  GSocialsReq,
-  GSocialsVars,
   GStaffData,
   GStaffData_Staff,
   GStaffData_Staff_characterMedia,
@@ -1554,12 +1682,29 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GStaffData_Staff_staffMedia_edges_node_coverImage,
   GStaffData_Staff_staffMedia_edges_node_title,
   GStaffData_Staff_staffMedia_pageInfo,
+  GStaffFragmentData,
+  GStaffFragmentData_image,
+  GStaffFragmentData_name,
+  GStaffFragmentReq,
+  GStaffFragmentVars,
   GStaffLanguage,
   GStaffNameInput,
   GStaffReq,
   GStaffSort,
   GStaffVars,
+  GStudioData,
+  GStudioData_Studio,
+  GStudioData_Studio_media,
+  GStudioData_Studio_media_nodes,
+  GStudioData_Studio_media_nodes_coverImage,
+  GStudioData_Studio_media_nodes_title,
+  GStudioData_Studio_media_pageInfo,
+  GStudioFragmentData,
+  GStudioFragmentReq,
+  GStudioFragmentVars,
+  GStudioReq,
   GStudioSort,
+  GStudioVars,
   GSubmissionSort,
   GSubmissionStatus,
   GTextActivityData,
@@ -1571,6 +1716,7 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GThisUserData_avatar,
   GThisUserData_mediaListOptions,
   GThisUserData_mediaListOptions_animeList,
+  GThisUserData_mediaListOptions_mangaList,
   GThisUserData_options,
   GThisUserData_statistics,
   GThisUserData_statistics_anime,
@@ -1612,20 +1758,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GThreadReq,
   GThreadSort,
   GThreadVars,
-  GThreadsData,
-  GThreadsData_Page,
-  GThreadsData_Page_pageInfo,
-  GThreadsData_Page_threads,
-  GThreadsData_Page_threads_categories,
-  GThreadsData_Page_threads_mediaCategories,
-  GThreadsData_Page_threads_mediaCategories_coverImage,
-  GThreadsData_Page_threads_mediaCategories_title,
-  GThreadsData_Page_threads_replyUser,
-  GThreadsData_Page_threads_replyUser_avatar,
-  GThreadsData_Page_threads_user,
-  GThreadsData_Page_threads_user_avatar,
-  GThreadsReq,
-  GThreadsVars,
   GToggleActivitySubscriptionData,
   GToggleActivitySubscriptionData_ToggleActivitySubscription__asListActivity,
   GToggleActivitySubscriptionData_ToggleActivitySubscription__asMessageActivity,
@@ -1666,6 +1798,7 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUpdateUserData_UpdateUser_avatar,
   GUpdateUserData_UpdateUser_mediaListOptions,
   GUpdateUserData_UpdateUser_mediaListOptions_animeList,
+  GUpdateUserData_UpdateUser_mediaListOptions_mangaList,
   GUpdateUserData_UpdateUser_options,
   GUpdateUserData_UpdateUser_statistics,
   GUpdateUserData_UpdateUser_statistics_anime,
@@ -1683,6 +1816,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUserActivitiesData_Page_activities__asMessageActivity,
   GUserActivitiesData_Page_activities__asMessageActivity_messenger,
   GUserActivitiesData_Page_activities__asMessageActivity_messenger_avatar,
+  GUserActivitiesData_Page_activities__asMessageActivity_recipient,
+  GUserActivitiesData_Page_activities__asMessageActivity_recipient_avatar,
   GUserActivitiesData_Page_activities__asTextActivity,
   GUserActivitiesData_Page_activities__asTextActivity_user,
   GUserActivitiesData_Page_activities__asTextActivity_user_avatar,
@@ -1698,16 +1833,60 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUserData_User_favourites_anime_nodes,
   GUserData_User_favourites_anime_nodes_coverImage,
   GUserData_User_favourites_anime_nodes_title,
+  GUserData_User_favourites_characters,
+  GUserData_User_favourites_characters_nodes,
+  GUserData_User_favourites_characters_nodes_image,
+  GUserData_User_favourites_characters_nodes_name,
   GUserData_User_favourites_manga,
   GUserData_User_favourites_manga_nodes,
   GUserData_User_favourites_manga_nodes_coverImage,
   GUserData_User_favourites_manga_nodes_title,
+  GUserData_User_favourites_staff,
+  GUserData_User_favourites_staff_nodes,
+  GUserData_User_favourites_staff_nodes_image,
+  GUserData_User_favourites_staff_nodes_name,
+  GUserData_User_favourites_studios,
+  GUserData_User_favourites_studios_nodes,
   GUserData_User_mediaListOptions,
   GUserData_User_statistics,
   GUserData_User_statistics_anime,
   GUserData_User_statistics_anime_genres,
   GUserData_User_statistics_manga,
   GUserData_User_statistics_manga_genres,
+  GUserFavoritesData,
+  GUserFavoritesData_User,
+  GUserFavoritesData_User_avatar,
+  GUserFavoritesData_User_favourites,
+  GUserFavoritesData_User_favourites_anime,
+  GUserFavoritesData_User_favourites_anime_edges,
+  GUserFavoritesData_User_favourites_anime_edges_node,
+  GUserFavoritesData_User_favourites_anime_edges_node_coverImage,
+  GUserFavoritesData_User_favourites_anime_edges_node_title,
+  GUserFavoritesData_User_favourites_anime_pageInfo,
+  GUserFavoritesData_User_favourites_characters,
+  GUserFavoritesData_User_favourites_characters_edges,
+  GUserFavoritesData_User_favourites_characters_edges_node,
+  GUserFavoritesData_User_favourites_characters_edges_node_image,
+  GUserFavoritesData_User_favourites_characters_edges_node_name,
+  GUserFavoritesData_User_favourites_characters_pageInfo,
+  GUserFavoritesData_User_favourites_manga,
+  GUserFavoritesData_User_favourites_manga_edges,
+  GUserFavoritesData_User_favourites_manga_edges_node,
+  GUserFavoritesData_User_favourites_manga_edges_node_coverImage,
+  GUserFavoritesData_User_favourites_manga_edges_node_title,
+  GUserFavoritesData_User_favourites_manga_pageInfo,
+  GUserFavoritesData_User_favourites_staff,
+  GUserFavoritesData_User_favourites_staff_edges,
+  GUserFavoritesData_User_favourites_staff_edges_node,
+  GUserFavoritesData_User_favourites_staff_edges_node_image,
+  GUserFavoritesData_User_favourites_staff_edges_node_name,
+  GUserFavoritesData_User_favourites_staff_pageInfo,
+  GUserFavoritesData_User_favourites_studios,
+  GUserFavoritesData_User_favourites_studios_edges,
+  GUserFavoritesData_User_favourites_studios_edges_node,
+  GUserFavoritesData_User_favourites_studios_pageInfo,
+  GUserFavoritesReq,
+  GUserFavoritesVars,
   GUserFragmentData,
   GUserFragmentData_avatar,
   GUserFragmentReq,
@@ -1723,22 +1902,40 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUserReviewsData_Page_reviews_user_avatar,
   GUserReviewsReq,
   GUserReviewsVars,
+  GUserSocialsData,
+  GUserSocialsData_followers,
+  GUserSocialsData_followers_followers,
+  GUserSocialsData_followers_followers_avatar,
+  GUserSocialsData_followers_pageInfo,
+  GUserSocialsData_following,
+  GUserSocialsData_following_following,
+  GUserSocialsData_following_following_avatar,
+  GUserSocialsData_following_pageInfo,
+  GUserSocialsReq,
+  GUserSocialsVars,
   GUserSort,
   GUserStaffNameLanguage,
   GUserStatisticsSort,
-  GUserStatsData,
-  GUserStatsData_User,
-  GUserStatsData_User_statistics,
-  GUserStatsData_User_statistics_anime,
-  GUserStatsData_User_statistics_anime_countries,
-  GUserStatsData_User_statistics_anime_formats,
-  GUserStatsData_User_statistics_anime_lengths,
-  GUserStatsData_User_statistics_anime_releaseYears,
-  GUserStatsData_User_statistics_anime_scores,
-  GUserStatsData_User_statistics_anime_startYears,
-  GUserStatsData_User_statistics_anime_statuses,
-  GUserStatsReq,
-  GUserStatsVars,
+  GUserThreadsData,
+  GUserThreadsData_comments,
+  GUserThreadsData_comments_pageInfo,
+  GUserThreadsData_comments_threadComments,
+  GUserThreadsData_comments_threadComments_thread,
+  GUserThreadsData_comments_threadComments_user,
+  GUserThreadsData_comments_threadComments_user_avatar,
+  GUserThreadsData_thread,
+  GUserThreadsData_thread_pageInfo,
+  GUserThreadsData_thread_threads,
+  GUserThreadsData_thread_threads_categories,
+  GUserThreadsData_thread_threads_mediaCategories,
+  GUserThreadsData_thread_threads_mediaCategories_coverImage,
+  GUserThreadsData_thread_threads_mediaCategories_title,
+  GUserThreadsData_thread_threads_replyUser,
+  GUserThreadsData_thread_threads_replyUser_avatar,
+  GUserThreadsData_thread_threads_user,
+  GUserThreadsData_thread_threads_user_avatar,
+  GUserThreadsReq,
+  GUserThreadsVars,
   GUserTitleLanguage,
   GUserVars,
   GViewerData,
@@ -1746,6 +1943,7 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GViewerData_Viewer_avatar,
   GViewerData_Viewer_mediaListOptions,
   GViewerData_Viewer_mediaListOptions_animeList,
+  GViewerData_Viewer_mediaListOptions_mangaList,
   GViewerData_Viewer_options,
   GViewerData_Viewer_statistics,
   GViewerData_Viewer_statistics_anime,

@@ -1,66 +1,121 @@
 import 'dart:io';
 
+import 'package:ferry/ferry.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:logger/logger.dart';
-import 'package:media_kit/media_kit.dart';
+import 'package:layout/layout.dart';
 import 'package:myaniapp/background.dart';
-import 'package:myaniapp/graphql.dart';
+import 'package:myaniapp/graphql/client.dart';
 import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/app_info.dart';
-import 'package:myaniapp/providers/ferry.dart';
-import 'package:myaniapp/providers/shared_preferences.dart';
-import 'package:myaniapp/ui/root.dart';
+import 'package:myaniapp/providers/settings.dart';
+import 'package:myaniapp/providers/shared_prefs.dart';
+import 'package:myaniapp/routes.dart';
+import 'package:myaniapp/url_protocol/web_url_protocol.dart'
+    if (dart.library.io) 'package:myaniapp/url_protocol/api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:relative_time/relative_time.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
 
-import 'web_url_protocol.dart'
-    if (dart.library.io) 'package:url_protocol/url_protocol.dart';
+late Client client;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MediaKit.ensureInitialized();
 
-  final prefs = await SharedPreferences.getInstance();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
 
-  if (!kIsWeb && Platform.isWindows) {
-    registerProtocolHandler('myaniapp');
+  client = await initClient();
+
+  var instance = await SharedPreferences.getInstance();
+  final appInfo = await PackageInfo.fromPlatform();
+
+  if (!kIsWeb) {
+    if (Platform.isWindows) {
+      registerProtocolHandler("myaniapp");
+    }
   }
 
   if (!kIsWeb && Platform.isAndroid) {
     Workmanager().initialize(callbackDispatcher);
     Workmanager().registerPeriodicTask(
       'background-notifs',
-      'simplePeriodicTask',
+      'simpleNotifsFetch',
       constraints: Constraints(
         networkType: NetworkType.connected,
       ),
-      existingWorkPolicy: ExistingWorkPolicy.replace,
+      existingWorkPolicy: ExistingWorkPolicy.append,
     );
 
     PushNotifications().requestPermission();
   }
 
-  GoRouter.optionURLReflectsImperativeAPIs = true;
-  await Hive.initFlutter();
-
-  final client = await initClient();
-  final info = await PackageInfo.fromPlatform();
-
   runApp(
     ProviderScope(
       overrides: [
-        sharedPrefProvider.overrideWithValue(prefs),
-        ferryClientProvider.overrideWithValue(client),
-        appInfoProvider.overrideWithValue(info)
+        sharedPrefsProvider.overrideWithValue(instance),
+        appInfoProvider.overrideWithValue(appInfo),
       ],
-      child: const App(),
+      child: const MainApp(),
     ),
   );
 }
 
-var logger = Logger();
+class MainApp extends ConsumerWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var themeMode =
+        ref.watch(settingsProvider.select((value) => value.themeMode));
+    var color =
+        ref.watch(settingsProvider.select((value) => value.primaryColor));
+
+    return Layout(
+      child: MaterialApp.router(
+        routerConfig: router,
+        localizationsDelegates: const [
+          RelativeTimeLocalizations.delegate,
+        ],
+        themeMode: themeMode,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light(color),
+        darkTheme: AppTheme.dark(color),
+        scrollBehavior: _ScrollBehavior(),
+      ),
+    );
+  }
+}
+
+class AppTheme {
+  static ThemeData dark(Color? seed) => ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seed ?? Colors.blue,
+          brightness: Brightness.dark,
+        ),
+        tabBarTheme: const TabBarTheme(tabAlignment: TabAlignment.start),
+      );
+
+  static ThemeData light(Color? seed) => ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seed ?? Colors.blue,
+          brightness: Brightness.light,
+        ),
+        tabBarTheme: const TabBarTheme(tabAlignment: TabAlignment.start),
+      );
+}
+
+class _ScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.invertedStylus,
+        PointerDeviceKind.trackpad,
+      };
+}

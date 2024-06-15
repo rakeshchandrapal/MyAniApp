@@ -12,7 +12,8 @@ abstract class GListActivityVars
     implements Built<GListActivityVars, GListActivityVarsBuilder> {
   GListActivityVars._();
 
-  factory GListActivityVars([Function(GListActivityVarsBuilder b) updates]) =
+  factory GListActivityVars(
+          [void Function(GListActivityVarsBuilder b) updates]) =
       _$GListActivityVars;
 
   static Serializer<GListActivityVars> get serializer =>

@@ -33,7 +33,8 @@ abstract class GUserFragmentData
         GUserFragment {
   GUserFragmentData._();
 
-  factory GUserFragmentData([Function(GUserFragmentDataBuilder b) updates]) =
+  factory GUserFragmentData(
+          [void Function(GUserFragmentDataBuilder b) updates]) =
       _$GUserFragmentData;
 
   static void _initializeBuilder(GUserFragmentDataBuilder b) =>
@@ -77,7 +78,7 @@ abstract class GUserFragmentData_avatar
   GUserFragmentData_avatar._();
 
   factory GUserFragmentData_avatar(
-          [Function(GUserFragmentData_avatarBuilder b) updates]) =
+          [void Function(GUserFragmentData_avatarBuilder b) updates]) =
       _$GUserFragmentData_avatar;
 
   static void _initializeBuilder(GUserFragmentData_avatarBuilder b) =>

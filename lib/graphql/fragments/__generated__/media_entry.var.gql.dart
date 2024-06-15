@@ -13,7 +13,8 @@ abstract class GMediaListEntryVars
   GMediaListEntryVars._();
 
   factory GMediaListEntryVars(
-      [Function(GMediaListEntryVarsBuilder b) updates]) = _$GMediaListEntryVars;
+          [void Function(GMediaListEntryVarsBuilder b) updates]) =
+      _$GMediaListEntryVars;
 
   static Serializer<GMediaListEntryVars> get serializer =>
       _$gMediaListEntryVarsSerializer;

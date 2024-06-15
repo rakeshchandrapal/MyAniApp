@@ -13,7 +13,8 @@ abstract class GReleasingMediaVars
   GReleasingMediaVars._();
 
   factory GReleasingMediaVars(
-      [Function(GReleasingMediaVarsBuilder b) updates]) = _$GReleasingMediaVars;
+          [void Function(GReleasingMediaVarsBuilder b) updates]) =
+      _$GReleasingMediaVars;
 
   static Serializer<GReleasingMediaVars> get serializer =>
       _$gReleasingMediaVarsSerializer;

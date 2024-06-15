@@ -22,7 +22,8 @@ abstract class GMediaListEntryReq
         _i1.FragmentRequest<_i2.GMediaListEntryData, _i3.GMediaListEntryVars> {
   GMediaListEntryReq._();
 
-  factory GMediaListEntryReq([Function(GMediaListEntryReqBuilder b) updates]) =
+  factory GMediaListEntryReq(
+          [void Function(GMediaListEntryReqBuilder b) updates]) =
       _$GMediaListEntryReq;
 
   static void _initializeBuilder(GMediaListEntryReqBuilder b) => b
@@ -40,6 +41,13 @@ abstract class GMediaListEntryReq
   @override
   _i2.GMediaListEntryData? parseData(Map<String, dynamic> json) =>
       _i2.GMediaListEntryData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GMediaListEntryData data) =>
+      data.toJson();
 
   static Serializer<GMediaListEntryReq> get serializer =>
       _$gMediaListEntryReqSerializer;

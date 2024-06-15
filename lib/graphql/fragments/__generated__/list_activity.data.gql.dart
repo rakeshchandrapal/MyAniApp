@@ -108,7 +108,8 @@ abstract class GListActivityData
         GListActivity {
   GListActivityData._();
 
-  factory GListActivityData([Function(GListActivityDataBuilder b) updates]) =
+  factory GListActivityData(
+          [void Function(GListActivityDataBuilder b) updates]) =
       _$GListActivityData;
 
   static void _initializeBuilder(GListActivityDataBuilder b) =>
@@ -167,7 +168,7 @@ abstract class GListActivityData_user
   GListActivityData_user._();
 
   factory GListActivityData_user(
-          [Function(GListActivityData_userBuilder b) updates]) =
+          [void Function(GListActivityData_userBuilder b) updates]) =
       _$GListActivityData_user;
 
   static void _initializeBuilder(GListActivityData_userBuilder b) =>
@@ -213,7 +214,7 @@ abstract class GListActivityData_user_avatar
   GListActivityData_user_avatar._();
 
   factory GListActivityData_user_avatar(
-          [Function(GListActivityData_user_avatarBuilder b) updates]) =
+          [void Function(GListActivityData_user_avatarBuilder b) updates]) =
       _$GListActivityData_user_avatar;
 
   static void _initializeBuilder(GListActivityData_user_avatarBuilder b) =>
@@ -248,7 +249,7 @@ abstract class GListActivityData_media
   GListActivityData_media._();
 
   factory GListActivityData_media(
-          [Function(GListActivityData_mediaBuilder b) updates]) =
+          [void Function(GListActivityData_mediaBuilder b) updates]) =
       _$GListActivityData_media;
 
   static void _initializeBuilder(GListActivityData_mediaBuilder b) =>
@@ -298,7 +299,7 @@ abstract class GListActivityData_media_title
   GListActivityData_media_title._();
 
   factory GListActivityData_media_title(
-          [Function(GListActivityData_media_titleBuilder b) updates]) =
+          [void Function(GListActivityData_media_titleBuilder b) updates]) =
       _$GListActivityData_media_title;
 
   static void _initializeBuilder(GListActivityData_media_titleBuilder b) =>
@@ -334,8 +335,8 @@ abstract class GListActivityData_media_coverImage
   GListActivityData_media_coverImage._();
 
   factory GListActivityData_media_coverImage(
-          [Function(GListActivityData_media_coverImageBuilder b) updates]) =
-      _$GListActivityData_media_coverImage;
+      [void Function(GListActivityData_media_coverImageBuilder b)
+          updates]) = _$GListActivityData_media_coverImage;
 
   static void _initializeBuilder(GListActivityData_media_coverImageBuilder b) =>
       b..G__typename = 'MediaCoverImage';

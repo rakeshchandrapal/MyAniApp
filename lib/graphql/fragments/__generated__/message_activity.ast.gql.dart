@@ -104,6 +104,18 @@ const MessageActivity = _i1.FragmentDefinitionNode(
         )
       ]),
     ),
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'recipient'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FragmentSpreadNode(
+          name: _i1.NameNode(value: 'UserFragment'),
+          directives: [],
+        )
+      ]),
+    ),
   ]),
 );
 const document = _i1.DocumentNode(definitions: [

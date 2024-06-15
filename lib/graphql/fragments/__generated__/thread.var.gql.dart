@@ -13,7 +13,8 @@ abstract class GThreadFragmentVars
   GThreadFragmentVars._();
 
   factory GThreadFragmentVars(
-      [Function(GThreadFragmentVarsBuilder b) updates]) = _$GThreadFragmentVars;
+          [void Function(GThreadFragmentVarsBuilder b) updates]) =
+      _$GThreadFragmentVars;
 
   static Serializer<GThreadFragmentVars> get serializer =>
       _$gThreadFragmentVarsSerializer;

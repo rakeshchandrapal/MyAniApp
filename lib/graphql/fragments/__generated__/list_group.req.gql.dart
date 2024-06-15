@@ -22,7 +22,7 @@ abstract class GListGroupReq
         _i1.FragmentRequest<_i2.GListGroupData, _i3.GListGroupVars> {
   GListGroupReq._();
 
-  factory GListGroupReq([Function(GListGroupReqBuilder b) updates]) =
+  factory GListGroupReq([void Function(GListGroupReqBuilder b) updates]) =
       _$GListGroupReq;
 
   static void _initializeBuilder(GListGroupReqBuilder b) => b
@@ -40,6 +40,12 @@ abstract class GListGroupReq
   @override
   _i2.GListGroupData? parseData(Map<String, dynamic> json) =>
       _i2.GListGroupData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GListGroupData data) => data.toJson();
 
   static Serializer<GListGroupReq> get serializer => _$gListGroupReqSerializer;
 

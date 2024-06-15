@@ -22,7 +22,8 @@ abstract class GNotificationsData
     implements Built<GNotificationsData, GNotificationsDataBuilder> {
   GNotificationsData._();
 
-  factory GNotificationsData([Function(GNotificationsDataBuilder b) updates]) =
+  factory GNotificationsData(
+          [void Function(GNotificationsDataBuilder b) updates]) =
       _$GNotificationsData;
 
   static void _initializeBuilder(GNotificationsDataBuilder b) =>
@@ -51,7 +52,7 @@ abstract class GNotificationsData_Page
   GNotificationsData_Page._();
 
   factory GNotificationsData_Page(
-          [Function(GNotificationsData_PageBuilder b) updates]) =
+          [void Function(GNotificationsData_PageBuilder b) updates]) =
       _$GNotificationsData_Page;
 
   static void _initializeBuilder(GNotificationsData_PageBuilder b) =>
@@ -84,7 +85,7 @@ abstract class GNotificationsData_Page_pageInfo
   GNotificationsData_Page_pageInfo._();
 
   factory GNotificationsData_Page_pageInfo(
-          [Function(GNotificationsData_Page_pageInfoBuilder b) updates]) =
+          [void Function(GNotificationsData_Page_pageInfoBuilder b) updates]) =
       _$GNotificationsData_Page_pageInfo;
 
   static void _initializeBuilder(GNotificationsData_Page_pageInfoBuilder b) =>
@@ -124,8 +125,6 @@ abstract class GNotificationsData_Page_notifications {
         {
           'AiringNotification':
               GNotificationsData_Page_notifications__asAiringNotification,
-          'RelatedMediaAdditionNotification':
-              GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification,
           'FollowingNotification':
               GNotificationsData_Page_notifications__asFollowingNotification,
           'ActivityMessageNotification':
@@ -150,6 +149,8 @@ abstract class GNotificationsData_Page_notifications {
               GNotificationsData_Page_notifications__asThreadCommentLikeNotification,
           'ThreadLikeNotification':
               GNotificationsData_Page_notifications__asThreadLikeNotification,
+          'RelatedMediaAdditionNotification':
+              GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification,
           'MediaDataChangeNotification':
               GNotificationsData_Page_notifications__asMediaDataChangeNotification,
           'MediaMergeNotification':
@@ -180,7 +181,7 @@ abstract class GNotificationsData_Page_notifications__base
   GNotificationsData_Page_notifications__base._();
 
   factory GNotificationsData_Page_notifications__base(
-      [Function(GNotificationsData_Page_notifications__baseBuilder b)
+      [void Function(GNotificationsData_Page_notifications__baseBuilder b)
           updates]) = _$GNotificationsData_Page_notifications__base;
 
   static void _initializeBuilder(
@@ -215,7 +216,7 @@ abstract class GNotificationsData_Page_notifications__asAiringNotification
   GNotificationsData_Page_notifications__asAiringNotification._();
 
   factory GNotificationsData_Page_notifications__asAiringNotification(
-      [Function(
+      [void Function(
               GNotificationsData_Page_notifications__asAiringNotificationBuilder
                   b)
           updates]) = _$GNotificationsData_Page_notifications__asAiringNotification;
@@ -260,7 +261,7 @@ abstract class GNotificationsData_Page_notifications__asAiringNotification_media
   GNotificationsData_Page_notifications__asAiringNotification_media._();
 
   factory GNotificationsData_Page_notifications__asAiringNotification_media(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asAiringNotification_mediaBuilder
                       b)
               updates]) =
@@ -321,7 +322,7 @@ abstract class GNotificationsData_Page_notifications__asAiringNotification_media
   GNotificationsData_Page_notifications__asAiringNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asAiringNotification_media_title(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asAiringNotification_media_titleBuilder
                       b)
               updates]) =
@@ -366,7 +367,7 @@ abstract class GNotificationsData_Page_notifications__asAiringNotification_media
   GNotificationsData_Page_notifications__asAiringNotification_media_coverImage._();
 
   factory GNotificationsData_Page_notifications__asAiringNotification_media_coverImage(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asAiringNotification_media_coverImageBuilder
                       b)
               updates]) =
@@ -402,6 +403,2032 @@ abstract class GNotificationsData_Page_notifications__asAiringNotification_media
           );
 }
 
+abstract class GNotificationsData_Page_notifications__asFollowingNotification
+    implements
+        Built<GNotificationsData_Page_notifications__asFollowingNotification,
+            GNotificationsData_Page_notifications__asFollowingNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asFollowingNotification._();
+
+  factory GNotificationsData_Page_notifications__asFollowingNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asFollowingNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asFollowingNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asFollowingNotificationBuilder
+              b) =>
+      b..G__typename = 'FollowingNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  GNotificationsData_Page_notifications__asFollowingNotification_user? get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asFollowingNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsFollowingNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asFollowingNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asFollowingNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asFollowingNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asFollowingNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asFollowingNotification_user,
+            GNotificationsData_Page_notifications__asFollowingNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asFollowingNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asFollowingNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asFollowingNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asFollowingNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asFollowingNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asFollowingNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asFollowingNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsFollowingNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asFollowingNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asFollowingNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asFollowingNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asFollowingNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asFollowingNotification_user_avatar,
+            GNotificationsData_Page_notifications__asFollowingNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asFollowingNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asFollowingNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asFollowingNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asFollowingNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asFollowingNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asFollowingNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsFollowingNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asFollowingNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asFollowingNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asFollowingNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityMessageNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityMessageNotification,
+            GNotificationsData_Page_notifications__asActivityMessageNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asActivityMessageNotification._();
+
+  factory GNotificationsData_Page_notifications__asActivityMessageNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityMessageNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityMessageNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityMessageNotificationBuilder
+              b) =>
+      b..G__typename = 'ActivityMessageNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get activityId;
+  GNotificationsData_Page_notifications__asActivityMessageNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityMessageNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityMessageNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityMessageNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityMessageNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityMessageNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityMessageNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityMessageNotification_user,
+            GNotificationsData_Page_notifications__asActivityMessageNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asActivityMessageNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asActivityMessageNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityMessageNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityMessageNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityMessageNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityMessageNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityMessageNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityMessageNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityMessageNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityMessageNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar,
+            GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityMessageNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityMentionNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityMentionNotification,
+            GNotificationsData_Page_notifications__asActivityMentionNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asActivityMentionNotification._();
+
+  factory GNotificationsData_Page_notifications__asActivityMentionNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityMentionNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityMentionNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityMentionNotificationBuilder
+              b) =>
+      b..G__typename = 'ActivityMentionNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get activityId;
+  GNotificationsData_Page_notifications__asActivityMentionNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityMentionNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityMentionNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityMentionNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityMentionNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityMentionNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityMentionNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityMentionNotification_user,
+            GNotificationsData_Page_notifications__asActivityMentionNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asActivityMentionNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asActivityMentionNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityMentionNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityMentionNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityMentionNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityMentionNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityMentionNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityMentionNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityMentionNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityMentionNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar,
+            GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityMentionNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplyNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplyNotification,
+            GNotificationsData_Page_notifications__asActivityReplyNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asActivityReplyNotification._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplyNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplyNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplyNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplyNotificationBuilder
+              b) =>
+      b..G__typename = 'ActivityReplyNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get activityId;
+  GNotificationsData_Page_notifications__asActivityReplyNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplyNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplyNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplyNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplyNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplyNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplyNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplyNotification_user,
+            GNotificationsData_Page_notifications__asActivityReplyNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asActivityReplyNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplyNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplyNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplyNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplyNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplyNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplyNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplyNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplyNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplyNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar,
+            GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplyNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplySubscribedNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification,
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplySubscribedNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplySubscribedNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplySubscribedNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplySubscribedNotificationBuilder
+              b) =>
+      b..G__typename = 'ActivityReplySubscribedNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get activityId;
+  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplySubscribedNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplySubscribedNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplySubscribedNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user,
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplySubscribedNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar,
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplySubscribedNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityLikeNotification
+    implements
+        Built<GNotificationsData_Page_notifications__asActivityLikeNotification,
+            GNotificationsData_Page_notifications__asActivityLikeNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asActivityLikeNotification._();
+
+  factory GNotificationsData_Page_notifications__asActivityLikeNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityLikeNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityLikeNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityLikeNotificationBuilder
+              b) =>
+      b..G__typename = 'ActivityLikeNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get activityId;
+  GNotificationsData_Page_notifications__asActivityLikeNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityLikeNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityLikeNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityLikeNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityLikeNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityLikeNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityLikeNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityLikeNotification_user,
+            GNotificationsData_Page_notifications__asActivityLikeNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asActivityLikeNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asActivityLikeNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityLikeNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityLikeNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityLikeNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityLikeNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityLikeNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityLikeNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityLikeNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityLikeNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar,
+            GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityLikeNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplyLikeNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification,
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asActivityReplyLikeNotification._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplyLikeNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplyLikeNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplyLikeNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplyLikeNotificationBuilder
+              b) =>
+      b..G__typename = 'ActivityReplyLikeNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get activityId;
+  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplyLikeNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplyLikeNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplyLikeNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplyLikeNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user,
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplyLikeNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar,
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsActivityReplyLikeNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification,
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentMentionNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotificationBuilder
+              b) =>
+      b..G__typename = 'ThreadCommentMentionNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get commentId;
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread?
+      get thread;
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentMentionNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread,
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_threadBuilder> {
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_threadBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_threadBuilder
+              b) =>
+      b..G__typename = 'Thread';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  String? get title;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationThreadSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user,
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar,
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification,
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentReplyNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotificationBuilder
+              b) =>
+      b..G__typename = 'ThreadCommentReplyNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get commentId;
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread?
+      get thread;
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentReplyNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread,
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_threadBuilder> {
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_threadBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_threadBuilder
+              b) =>
+      b..G__typename = 'Thread';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  String? get title;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationThreadSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user,
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar,
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification,
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotificationBuilder
+              b) =>
+      b..G__typename = 'ThreadCommentSubscribedNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get commentId;
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread?
+      get thread;
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread,
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_threadBuilder> {
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_threadBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_threadBuilder
+              b) =>
+      b..G__typename = 'Thread';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  String? get title;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationThreadSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user,
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar,
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification,
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentLikeNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotificationBuilder
+              b) =>
+      b..G__typename = 'ThreadCommentLikeNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  int get commentId;
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread?
+      get thread;
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentLikeNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread,
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_threadBuilder> {
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_threadBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_threadBuilder
+              b) =>
+      b..G__typename = 'Thread';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  String? get title;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationThreadSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user,
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar,
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadLikeNotification
+    implements
+        Built<GNotificationsData_Page_notifications__asThreadLikeNotification,
+            GNotificationsData_Page_notifications__asThreadLikeNotificationBuilder>,
+        GNotificationsData_Page_notifications {
+  GNotificationsData_Page_notifications__asThreadLikeNotification._();
+
+  factory GNotificationsData_Page_notifications__asThreadLikeNotification(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadLikeNotificationBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadLikeNotification;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadLikeNotificationBuilder
+              b) =>
+      b..G__typename = 'ThreadLikeNotification';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  _i4.GNotificationType? get type;
+  String? get context;
+  GNotificationsData_Page_notifications__asThreadLikeNotification_thread?
+      get thread;
+  GNotificationsData_Page_notifications__asThreadLikeNotification_user?
+      get user;
+  int? get createdAt;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadLikeNotification>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadLikeNotification
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadLikeNotification?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadLikeNotification
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadLikeNotification_thread
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadLikeNotification_thread,
+            GNotificationsData_Page_notifications__asThreadLikeNotification_threadBuilder> {
+  GNotificationsData_Page_notifications__asThreadLikeNotification_thread._();
+
+  factory GNotificationsData_Page_notifications__asThreadLikeNotification_thread(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadLikeNotification_threadBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadLikeNotification_thread;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadLikeNotification_threadBuilder
+              b) =>
+      b..G__typename = 'Thread';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  int get id;
+  String? get title;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadLikeNotification_thread>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationThreadSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadLikeNotification_thread
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadLikeNotification_thread?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadLikeNotification_thread
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadLikeNotification_user
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadLikeNotification_user,
+            GNotificationsData_Page_notifications__asThreadLikeNotification_userBuilder>,
+        _i6.GUserFragment {
+  GNotificationsData_Page_notifications__asThreadLikeNotification_user._();
+
+  factory GNotificationsData_Page_notifications__asThreadLikeNotification_user(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadLikeNotification_userBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadLikeNotification_user;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadLikeNotification_userBuilder
+              b) =>
+      b..G__typename = 'User';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  int get id;
+  @override
+  String get name;
+  @override
+  int? get donatorTier;
+  @override
+  String? get donatorBadge;
+  @override
+  BuiltList<_i4.GModRole?>? get moderatorRoles;
+  @override
+  GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar?
+      get avatar;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadLikeNotification_user>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationUserSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadLikeNotification_user
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadLikeNotification_user?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadLikeNotification_user
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar,
+            GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatarBuilder>,
+        _i6.GUserFragment_avatar {
+  GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar._();
+
+  factory GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar(
+          [void Function(
+                  GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatarBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatarBuilder
+              b) =>
+      b..G__typename = 'UserAvatar';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get large;
+  static Serializer<
+          GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationUserAvatarSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar
+                .serializer,
+            json,
+          );
+}
+
 abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification
     implements
         Built<
@@ -411,7 +2438,7 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification._();
 
   factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotificationBuilder
                       b)
               updates]) =
@@ -460,7 +2487,7 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media._();
 
   factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_mediaBuilder
                       b)
               updates]) =
@@ -521,7 +2548,7 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_titleBuilder
                       b)
               updates]) =
@@ -566,7 +2593,7 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage._();
 
   factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImageBuilder
                       b)
               updates]) =
@@ -602,2032 +2629,6 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
           );
 }
 
-abstract class GNotificationsData_Page_notifications__asFollowingNotification
-    implements
-        Built<GNotificationsData_Page_notifications__asFollowingNotification,
-            GNotificationsData_Page_notifications__asFollowingNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asFollowingNotification._();
-
-  factory GNotificationsData_Page_notifications__asFollowingNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asFollowingNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asFollowingNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asFollowingNotificationBuilder
-              b) =>
-      b..G__typename = 'FollowingNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  GNotificationsData_Page_notifications__asFollowingNotification_user? get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asFollowingNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsFollowingNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asFollowingNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asFollowingNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asFollowingNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asFollowingNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asFollowingNotification_user,
-            GNotificationsData_Page_notifications__asFollowingNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asFollowingNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asFollowingNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asFollowingNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asFollowingNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asFollowingNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asFollowingNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asFollowingNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsFollowingNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asFollowingNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asFollowingNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asFollowingNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asFollowingNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asFollowingNotification_user_avatar,
-            GNotificationsData_Page_notifications__asFollowingNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asFollowingNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asFollowingNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asFollowingNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asFollowingNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asFollowingNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asFollowingNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsFollowingNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asFollowingNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asFollowingNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asFollowingNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityMessageNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityMessageNotification,
-            GNotificationsData_Page_notifications__asActivityMessageNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asActivityMessageNotification._();
-
-  factory GNotificationsData_Page_notifications__asActivityMessageNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityMessageNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityMessageNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityMessageNotificationBuilder
-              b) =>
-      b..G__typename = 'ActivityMessageNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get activityId;
-  GNotificationsData_Page_notifications__asActivityMessageNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityMessageNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityMessageNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityMessageNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityMessageNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityMessageNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityMessageNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityMessageNotification_user,
-            GNotificationsData_Page_notifications__asActivityMessageNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asActivityMessageNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asActivityMessageNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityMessageNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityMessageNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityMessageNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityMessageNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityMessageNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityMessageNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityMessageNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityMessageNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar,
-            GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityMessageNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityMessageNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityMentionNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityMentionNotification,
-            GNotificationsData_Page_notifications__asActivityMentionNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asActivityMentionNotification._();
-
-  factory GNotificationsData_Page_notifications__asActivityMentionNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityMentionNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityMentionNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityMentionNotificationBuilder
-              b) =>
-      b..G__typename = 'ActivityMentionNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get activityId;
-  GNotificationsData_Page_notifications__asActivityMentionNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityMentionNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityMentionNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityMentionNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityMentionNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityMentionNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityMentionNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityMentionNotification_user,
-            GNotificationsData_Page_notifications__asActivityMentionNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asActivityMentionNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asActivityMentionNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityMentionNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityMentionNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityMentionNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityMentionNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityMentionNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityMentionNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityMentionNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityMentionNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar,
-            GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityMentionNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityMentionNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplyNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplyNotification,
-            GNotificationsData_Page_notifications__asActivityReplyNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asActivityReplyNotification._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplyNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplyNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplyNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplyNotificationBuilder
-              b) =>
-      b..G__typename = 'ActivityReplyNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get activityId;
-  GNotificationsData_Page_notifications__asActivityReplyNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplyNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplyNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplyNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplyNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplyNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplyNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplyNotification_user,
-            GNotificationsData_Page_notifications__asActivityReplyNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asActivityReplyNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplyNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplyNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplyNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplyNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplyNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplyNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplyNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplyNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplyNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar,
-            GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplyNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplyNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplySubscribedNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification,
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplySubscribedNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplySubscribedNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplySubscribedNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplySubscribedNotificationBuilder
-              b) =>
-      b..G__typename = 'ActivityReplySubscribedNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get activityId;
-  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplySubscribedNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplySubscribedNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplySubscribedNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user,
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplySubscribedNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar,
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplySubscribedNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplySubscribedNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityLikeNotification
-    implements
-        Built<GNotificationsData_Page_notifications__asActivityLikeNotification,
-            GNotificationsData_Page_notifications__asActivityLikeNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asActivityLikeNotification._();
-
-  factory GNotificationsData_Page_notifications__asActivityLikeNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityLikeNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityLikeNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityLikeNotificationBuilder
-              b) =>
-      b..G__typename = 'ActivityLikeNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get activityId;
-  GNotificationsData_Page_notifications__asActivityLikeNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityLikeNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityLikeNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityLikeNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityLikeNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityLikeNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityLikeNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityLikeNotification_user,
-            GNotificationsData_Page_notifications__asActivityLikeNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asActivityLikeNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asActivityLikeNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityLikeNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityLikeNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityLikeNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityLikeNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityLikeNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityLikeNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityLikeNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityLikeNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar,
-            GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityLikeNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityLikeNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplyLikeNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification,
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asActivityReplyLikeNotification._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplyLikeNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplyLikeNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplyLikeNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplyLikeNotificationBuilder
-              b) =>
-      b..G__typename = 'ActivityReplyLikeNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get activityId;
-  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplyLikeNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplyLikeNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplyLikeNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplyLikeNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user,
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplyLikeNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar,
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsActivityReplyLikeNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asActivityReplyLikeNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification,
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentMentionNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotificationBuilder
-              b) =>
-      b..G__typename = 'ThreadCommentMentionNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get commentId;
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread?
-      get thread;
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentMentionNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread,
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_threadBuilder> {
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_threadBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_threadBuilder
-              b) =>
-      b..G__typename = 'Thread';
-
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  String? get title;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationThreadSerializer;
-
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_thread
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user,
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar,
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentMentionNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentMentionNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification,
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentReplyNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotificationBuilder
-              b) =>
-      b..G__typename = 'ThreadCommentReplyNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get commentId;
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread?
-      get thread;
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentReplyNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread,
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_threadBuilder> {
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_threadBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_threadBuilder
-              b) =>
-      b..G__typename = 'Thread';
-
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  String? get title;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationThreadSerializer;
-
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_thread
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user,
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar,
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentReplyNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentReplyNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification,
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotificationBuilder
-              b) =>
-      b..G__typename = 'ThreadCommentSubscribedNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get commentId;
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread?
-      get thread;
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread,
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_threadBuilder> {
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_threadBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_threadBuilder
-              b) =>
-      b..G__typename = 'Thread';
-
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  String? get title;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationThreadSerializer;
-
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_thread
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user,
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar,
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentSubscribedNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentSubscribedNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification,
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentLikeNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotificationBuilder
-              b) =>
-      b..G__typename = 'ThreadCommentLikeNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  int get commentId;
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread?
-      get thread;
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentLikeNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread,
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_threadBuilder> {
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_threadBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_threadBuilder
-              b) =>
-      b..G__typename = 'Thread';
-
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  String? get title;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationThreadSerializer;
-
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user,
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar,
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadCommentLikeNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadCommentLikeNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadLikeNotification
-    implements
-        Built<GNotificationsData_Page_notifications__asThreadLikeNotification,
-            GNotificationsData_Page_notifications__asThreadLikeNotificationBuilder>,
-        GNotificationsData_Page_notifications {
-  GNotificationsData_Page_notifications__asThreadLikeNotification._();
-
-  factory GNotificationsData_Page_notifications__asThreadLikeNotification(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadLikeNotificationBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadLikeNotification;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadLikeNotificationBuilder
-              b) =>
-      b..G__typename = 'ThreadLikeNotification';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  _i4.GNotificationType? get type;
-  String? get context;
-  GNotificationsData_Page_notifications__asThreadLikeNotification_thread?
-      get thread;
-  GNotificationsData_Page_notifications__asThreadLikeNotification_user?
-      get user;
-  int? get createdAt;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadLikeNotification>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadLikeNotification
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadLikeNotification?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadLikeNotification
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadLikeNotification_thread
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadLikeNotification_thread,
-            GNotificationsData_Page_notifications__asThreadLikeNotification_threadBuilder> {
-  GNotificationsData_Page_notifications__asThreadLikeNotification_thread._();
-
-  factory GNotificationsData_Page_notifications__asThreadLikeNotification_thread(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadLikeNotification_threadBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadLikeNotification_thread;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadLikeNotification_threadBuilder
-              b) =>
-      b..G__typename = 'Thread';
-
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  int get id;
-  String? get title;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadLikeNotification_thread>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationThreadSerializer;
-
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadLikeNotification_thread
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadLikeNotification_thread?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadLikeNotification_thread
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadLikeNotification_user
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadLikeNotification_user,
-            GNotificationsData_Page_notifications__asThreadLikeNotification_userBuilder>,
-        _i6.GUserFragment {
-  GNotificationsData_Page_notifications__asThreadLikeNotification_user._();
-
-  factory GNotificationsData_Page_notifications__asThreadLikeNotification_user(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadLikeNotification_userBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadLikeNotification_user;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadLikeNotification_userBuilder
-              b) =>
-      b..G__typename = 'User';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  int get id;
-  @override
-  String get name;
-  @override
-  int? get donatorTier;
-  @override
-  String? get donatorBadge;
-  @override
-  BuiltList<_i4.GModRole?>? get moderatorRoles;
-  @override
-  GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar?
-      get avatar;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadLikeNotification_user>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationUserSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadLikeNotification_user
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadLikeNotification_user?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadLikeNotification_user
-                .serializer,
-            json,
-          );
-}
-
-abstract class GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar
-    implements
-        Built<
-            GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar,
-            GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatarBuilder>,
-        _i6.GUserFragment_avatar {
-  GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar._();
-
-  factory GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar(
-          [Function(
-                  GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatarBuilder
-                      b)
-              updates]) =
-      _$GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar;
-
-  static void _initializeBuilder(
-          GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatarBuilder
-              b) =>
-      b..G__typename = 'UserAvatar';
-
-  @override
-  @BuiltValueField(wireName: '__typename')
-  String get G__typename;
-  @override
-  String? get large;
-  static Serializer<
-          GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar>
-      get serializer =>
-          _$gNotificationsDataPageNotificationsAsThreadLikeNotificationUserAvatarSerializer;
-
-  @override
-  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
-        GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar
-            .serializer,
-        this,
-      ) as Map<String, dynamic>);
-
-  static GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar?
-      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
-            GNotificationsData_Page_notifications__asThreadLikeNotification_user_avatar
-                .serializer,
-            json,
-          );
-}
-
 abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotification
     implements
         Built<
@@ -2637,7 +2638,7 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
   GNotificationsData_Page_notifications__asMediaDataChangeNotification._();
 
   factory GNotificationsData_Page_notifications__asMediaDataChangeNotification(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaDataChangeNotificationBuilder
                       b)
               updates]) =
@@ -2687,7 +2688,7 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media._();
 
   factory GNotificationsData_Page_notifications__asMediaDataChangeNotification_media(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaDataChangeNotification_mediaBuilder
                       b)
               updates]) =
@@ -2748,7 +2749,7 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_titleBuilder
                       b)
               updates]) =
@@ -2793,7 +2794,7 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage._();
 
   factory GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImageBuilder
                       b)
               updates]) =
@@ -2837,7 +2838,7 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification
   GNotificationsData_Page_notifications__asMediaMergeNotification._();
 
   factory GNotificationsData_Page_notifications__asMediaMergeNotification(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaMergeNotificationBuilder
                       b)
               updates]) =
@@ -2888,7 +2889,7 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
   GNotificationsData_Page_notifications__asMediaMergeNotification_media._();
 
   factory GNotificationsData_Page_notifications__asMediaMergeNotification_media(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaMergeNotification_mediaBuilder
                       b)
               updates]) =
@@ -2949,7 +2950,7 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
   GNotificationsData_Page_notifications__asMediaMergeNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asMediaMergeNotification_media_title(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaMergeNotification_media_titleBuilder
                       b)
               updates]) =
@@ -2994,7 +2995,7 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
   GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage._();
 
   factory GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImageBuilder
                       b)
               updates]) =
@@ -3039,7 +3040,7 @@ abstract class GNotificationsData_Page_notifications__asMediaDeletionNotificatio
   GNotificationsData_Page_notifications__asMediaDeletionNotification._();
 
   factory GNotificationsData_Page_notifications__asMediaDeletionNotification(
-          [Function(
+          [void Function(
                   GNotificationsData_Page_notifications__asMediaDeletionNotificationBuilder
                       b)
               updates]) =

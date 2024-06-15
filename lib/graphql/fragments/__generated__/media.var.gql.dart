@@ -12,7 +12,8 @@ abstract class GMediaFragmentVars
     implements Built<GMediaFragmentVars, GMediaFragmentVarsBuilder> {
   GMediaFragmentVars._();
 
-  factory GMediaFragmentVars([Function(GMediaFragmentVarsBuilder b) updates]) =
+  factory GMediaFragmentVars(
+          [void Function(GMediaFragmentVarsBuilder b) updates]) =
       _$GMediaFragmentVars;
 
   static Serializer<GMediaFragmentVars> get serializer =>

@@ -62,7 +62,8 @@ abstract class GTextActivityData
         GTextActivity {
   GTextActivityData._();
 
-  factory GTextActivityData([Function(GTextActivityDataBuilder b) updates]) =
+  factory GTextActivityData(
+          [void Function(GTextActivityDataBuilder b) updates]) =
       _$GTextActivityData;
 
   static void _initializeBuilder(GTextActivityDataBuilder b) =>
@@ -117,7 +118,7 @@ abstract class GTextActivityData_user
   GTextActivityData_user._();
 
   factory GTextActivityData_user(
-          [Function(GTextActivityData_userBuilder b) updates]) =
+          [void Function(GTextActivityData_userBuilder b) updates]) =
       _$GTextActivityData_user;
 
   static void _initializeBuilder(GTextActivityData_userBuilder b) =>
@@ -163,7 +164,7 @@ abstract class GTextActivityData_user_avatar
   GTextActivityData_user_avatar._();
 
   factory GTextActivityData_user_avatar(
-          [Function(GTextActivityData_user_avatarBuilder b) updates]) =
+          [void Function(GTextActivityData_user_avatarBuilder b) updates]) =
       _$GTextActivityData_user_avatar;
 
   static void _initializeBuilder(GTextActivityData_user_avatarBuilder b) =>

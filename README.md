@@ -1,16 +1,36 @@
-# myaniapp
+# MyAniApp
 
-A new Flutter project.
+MyAniApp (I cant think of a name) is an Android, Windows, Linux, Web (expect more bugs) Anilist client.
 
-## Getting Started
+# Features
 
-This project is a starting point for a Flutter application.
-``````
-A few resources to get you started if this is your first Flutter project:
+- Home page similar the site
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  - Anime/Manga thats your currently watching/reading
+  - Recent forum activity
+  - Recent reviews
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Media List
+
+  - Browse your lists
+  - A media editor
+
+- Activities
+
+  - See Following and Global
+  - Write your own posts
+
+- Forums support similar to the site
+
+  - Reply to comments
+  - Go to pages quickly
+
+- Markdown support (sometimes it looks broken)
+
+# Dev
+
+Some commands to run.
+
+When added/editing `.graphql` files run `dart run build_runner watch --delete-conflicting-outputs`
+
+Kinda of file based routing but I don't feel like working too much on it. Run `dart run scripts/routes.dart home=/home/overview` to generate new routes

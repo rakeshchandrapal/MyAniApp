@@ -18,15 +18,6 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         }
         createdAt
       }
-      ... on RelatedMediaAdditionNotification {
-        id
-        type
-        context
-        media {
-          ...MediaFragment
-        }
-        createdAt
-      }
       ... on FollowingNotification {
         id
         type
@@ -162,6 +153,15 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         }
         user {
           ...UserFragment
+        }
+        createdAt
+      }
+      ... on RelatedMediaAdditionNotification {
+        id
+        type
+        context
+        media {
+          ...MediaFragment
         }
         createdAt
       }

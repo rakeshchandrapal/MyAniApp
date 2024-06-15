@@ -12,7 +12,8 @@ abstract class GThreadCommentVars
     implements Built<GThreadCommentVars, GThreadCommentVarsBuilder> {
   GThreadCommentVars._();
 
-  factory GThreadCommentVars([Function(GThreadCommentVarsBuilder b) updates]) =
+  factory GThreadCommentVars(
+          [void Function(GThreadCommentVarsBuilder b) updates]) =
       _$GThreadCommentVars;
 
   static Serializer<GThreadCommentVars> get serializer =>

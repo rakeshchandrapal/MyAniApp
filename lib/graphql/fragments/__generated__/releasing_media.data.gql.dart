@@ -92,7 +92,8 @@ abstract class GReleasingMediaData
   GReleasingMediaData._();
 
   factory GReleasingMediaData(
-      [Function(GReleasingMediaDataBuilder b) updates]) = _$GReleasingMediaData;
+          [void Function(GReleasingMediaDataBuilder b) updates]) =
+      _$GReleasingMediaData;
 
   static void _initializeBuilder(GReleasingMediaDataBuilder b) =>
       b..G__typename = 'Media';
@@ -144,7 +145,7 @@ abstract class GReleasingMediaData_title
   GReleasingMediaData_title._();
 
   factory GReleasingMediaData_title(
-          [Function(GReleasingMediaData_titleBuilder b) updates]) =
+          [void Function(GReleasingMediaData_titleBuilder b) updates]) =
       _$GReleasingMediaData_title;
 
   static void _initializeBuilder(GReleasingMediaData_titleBuilder b) =>
@@ -180,7 +181,7 @@ abstract class GReleasingMediaData_coverImage
   GReleasingMediaData_coverImage._();
 
   factory GReleasingMediaData_coverImage(
-          [Function(GReleasingMediaData_coverImageBuilder b) updates]) =
+          [void Function(GReleasingMediaData_coverImageBuilder b) updates]) =
       _$GReleasingMediaData_coverImage;
 
   static void _initializeBuilder(GReleasingMediaData_coverImageBuilder b) =>
@@ -215,8 +216,8 @@ abstract class GReleasingMediaData_nextAiringEpisode
   GReleasingMediaData_nextAiringEpisode._();
 
   factory GReleasingMediaData_nextAiringEpisode(
-          [Function(GReleasingMediaData_nextAiringEpisodeBuilder b) updates]) =
-      _$GReleasingMediaData_nextAiringEpisode;
+      [void Function(GReleasingMediaData_nextAiringEpisodeBuilder b)
+          updates]) = _$GReleasingMediaData_nextAiringEpisode;
 
   static void _initializeBuilder(
           GReleasingMediaData_nextAiringEpisodeBuilder b) =>
@@ -256,8 +257,8 @@ abstract class GReleasingMediaData_airingSchedule
   GReleasingMediaData_airingSchedule._();
 
   factory GReleasingMediaData_airingSchedule(
-          [Function(GReleasingMediaData_airingScheduleBuilder b) updates]) =
-      _$GReleasingMediaData_airingSchedule;
+      [void Function(GReleasingMediaData_airingScheduleBuilder b)
+          updates]) = _$GReleasingMediaData_airingSchedule;
 
   static void _initializeBuilder(GReleasingMediaData_airingScheduleBuilder b) =>
       b..G__typename = 'AiringScheduleConnection';
@@ -292,7 +293,7 @@ abstract class GReleasingMediaData_airingSchedule_edges
   GReleasingMediaData_airingSchedule_edges._();
 
   factory GReleasingMediaData_airingSchedule_edges(
-      [Function(GReleasingMediaData_airingSchedule_edgesBuilder b)
+      [void Function(GReleasingMediaData_airingSchedule_edgesBuilder b)
           updates]) = _$GReleasingMediaData_airingSchedule_edges;
 
   static void _initializeBuilder(
@@ -329,7 +330,7 @@ abstract class GReleasingMediaData_airingSchedule_edges_node
   GReleasingMediaData_airingSchedule_edges_node._();
 
   factory GReleasingMediaData_airingSchedule_edges_node(
-      [Function(GReleasingMediaData_airingSchedule_edges_nodeBuilder b)
+      [void Function(GReleasingMediaData_airingSchedule_edges_nodeBuilder b)
           updates]) = _$GReleasingMediaData_airingSchedule_edges_node;
 
   static void _initializeBuilder(
