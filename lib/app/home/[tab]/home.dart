@@ -11,6 +11,7 @@ import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/list_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/media_editor/media_editor.dart';
+import 'package:myaniapp/common/overlay/menu.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/common/thread_card.dart';
 import 'package:myaniapp/constants.dart';
@@ -136,6 +137,35 @@ class _HomeLoggedInOverviewPageState
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
+              Stack(
+                children: [
+                  GestureDetector(
+                    // onTap: () => overlayEntry?.remove(),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 90,
+                    child: Container(
+                      height: 20,
+                      // width: MediaQuery.of(context).size.width,
+                      // height: MediaQuery.of(context).size.height,
+                      // color: Colors.black,
+                      child: const Center(
+                        child: Text(
+                          'This is a pop-up dialog',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               GridView.builder(
                 primary: false,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -210,22 +240,49 @@ class InProgress extends ConsumerWidget {
                 separatorBuilder: (context, index) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
                   var entry = list[index]!;
-                  return GridCard(
-                    image: entry.media!.coverImage!.extraLarge!,
-                    title: entry.media!.title!.userPreferred,
-                    blur: entry.media!.isAdult ?? false,
-                    aspectRatio: GridCard.listRatio,
-                    onDoubleTap: () => MediaEditorDialog.show(
-                      context,
-                      entry.media!,
-                      user.value!.data!.Viewer!.id,
-                      onSave: refetch,
-                      onDelete: refetch,
+
+                  return OverlayMenu(
+                    items: [
+                      OverlayMenuItem(
+                        onTap: (closeOverlay) {
+                          closeOverlay();
+                          MediaSheet.show(context, entry.media!);
+                        },
+                        child: const Text("Preview"),
+                        icon: const Icon(Icons.remove_red_eye),
+                      ),
+                      OverlayMenuItem(
+                        onTap: (closeOverlay) {
+                          closeOverlay();
+                          MediaEditorDialog.show(
+                            context,
+                            entry.media!,
+                            user.value!.data!.Viewer!.id,
+                            onSave: refetch,
+                            onDelete: refetch,
+                          );
+                        },
+                        child: const Text("Editor"),
+                        icon: const Icon(Icons.edit),
+                      ),
+                    ],
+                    builder: (showOverlay) => GridCard(
+                      image: entry.media!.coverImage!.extraLarge!,
+                      title: entry.media!.title!.userPreferred,
+                      blur: entry.media!.isAdult ?? false,
+                      aspectRatio: GridCard.listRatio,
+                      onDoubleTap: () => MediaEditorDialog.show(
+                        context,
+                        entry.media!,
+                        user.value!.data!.Viewer!.id,
+                        onSave: refetch,
+                        onDelete: refetch,
+                      ),
+                      onTap: () => context.push(
+                          "/media/${entry.media!.id}/overview",
+                          extra: {"media": entry.media}),
+                      onLongPress: showOverlay,
                     ),
-                    onTap: () => context.push(
-                        "/media/${entry.media!.id}/overview",
-                        extra: {"media": entry.media}),
-                    onLongPress: () => MediaSheet.show(context, entry.media!),
                   );
                 },
                 itemCount: list.length,
@@ -248,42 +305,68 @@ class InProgress extends ConsumerWidget {
                   progress = (entry.progress ?? 0) / entry.media!.episodes!;
                 }
 
-                return ListCard(
-                  image: entry.media!.coverImage!.extraLarge!,
-                  title: entry.media!.title!.userPreferred,
-                  underTitle: Show(
-                    when: progress != null,
-                    fallback: Text(
-                      style: context.theme.textTheme.labelMedium,
-                      "${entry.progress} ${entry.media!.type == GMediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
+                return OverlayMenu(
+                  items: [
+                    OverlayMenuItem(
+                      onTap: (closeOverlay) {
+                        closeOverlay();
+                        MediaSheet.show(context, entry.media!);
+                      },
+                      child: const Text("Preview"),
+                      icon: const Icon(Icons.remove_red_eye),
                     ),
-                    child: () => Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        LinearProgressIndicator(
-                          value: progress,
-                          borderRadius: imageRadius,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "${entry.progress} / ${entry.media!.chapters ?? entry.media!.episodes}",
-                          style: context.theme.textTheme.labelMedium,
-                        )
-                      ],
+                    OverlayMenuItem(
+                      onTap: (closeOverlay) {
+                        closeOverlay();
+                        MediaEditorDialog.show(
+                          context,
+                          entry.media!,
+                          user.value!.data!.Viewer!.id,
+                          onSave: refetch,
+                          onDelete: refetch,
+                        );
+                      },
+                      child: const Text("Editor"),
+                      icon: const Icon(Icons.edit),
                     ),
+                  ],
+                  builder: (showOverlay) => ListCard(
+                    image: entry.media!.coverImage!.extraLarge!,
+                    title: entry.media!.title!.userPreferred,
+                    underTitle: Show(
+                      when: progress != null,
+                      fallback: Text(
+                        style: context.theme.textTheme.labelMedium,
+                        "${entry.progress} ${entry.media!.type == GMediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
+                      ),
+                      child: () => Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          LinearProgressIndicator(
+                            value: progress,
+                            borderRadius: imageRadius,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            "${entry.progress} / ${entry.media!.chapters ?? entry.media!.episodes}",
+                            style: context.theme.textTheme.labelMedium,
+                          )
+                        ],
+                      ),
+                    ),
+                    blur: entry.media!.isAdult ?? false,
+                    onDoubleTap: () => MediaEditorDialog.show(
+                      context,
+                      entry.media!,
+                      user.value!.data!.Viewer!.id,
+                      onSave: refetch,
+                      onDelete: refetch,
+                    ),
+                    onTap: () => context.push(
+                        "/media/${entry.media!.id}/overview",
+                        extra: {"media": entry.media}),
+                    onLongPress: showOverlay,
                   ),
-                  blur: entry.media!.isAdult ?? false,
-                  onDoubleTap: () => MediaEditorDialog.show(
-                    context,
-                    entry.media!,
-                    user.value!.data!.Viewer!.id,
-                    onSave: refetch,
-                    onDelete: refetch,
-                  ),
-                  onTap: () => context.push(
-                      "/media/${entry.media!.id}/overview",
-                      extra: {"media": entry.media}),
-                  onLongPress: () => MediaSheet.show(context, entry.media!),
                 );
               },
               itemCount: list.length,
@@ -295,20 +378,46 @@ class InProgress extends ConsumerWidget {
               itemBuilder: (context, index) {
                 var entry = list[index]!;
 
-                return InkWell(
-                  onDoubleTap: () => MediaEditorDialog.show(
-                    context,
-                    entry.media!,
-                    user.value!.data!.Viewer!.id,
-                    onSave: refetch,
-                    onDelete: refetch,
-                  ),
-                  onTap: () => context.push(
-                      "/media/${entry.media!.id}/overview",
-                      extra: {"media": entry.media}),
-                  onLongPress: () => MediaSheet.show(context, entry.media!),
-                  child: ListTile(
-                    title: Text(entry.media!.title!.userPreferred!),
+                return OverlayMenu(
+                  items: [
+                    OverlayMenuItem(
+                      onTap: (closeOverlay) {
+                        closeOverlay();
+                        MediaSheet.show(context, entry.media!);
+                      },
+                      child: const Text("Preview"),
+                      icon: const Icon(Icons.remove_red_eye),
+                    ),
+                    OverlayMenuItem(
+                      onTap: (closeOverlay) {
+                        closeOverlay();
+                        MediaEditorDialog.show(
+                          context,
+                          entry.media!,
+                          user.value!.data!.Viewer!.id,
+                          onSave: refetch,
+                          onDelete: refetch,
+                        );
+                      },
+                      child: const Text("Editor"),
+                      icon: const Icon(Icons.edit),
+                    ),
+                  ],
+                  builder: (showOverlay) => InkWell(
+                    onDoubleTap: () => MediaEditorDialog.show(
+                      context,
+                      entry.media!,
+                      user.value!.data!.Viewer!.id,
+                      onSave: refetch,
+                      onDelete: refetch,
+                    ),
+                    onTap: () => context.push(
+                        "/media/${entry.media!.id}/overview",
+                        extra: {"media": entry.media}),
+                    onLongPress: showOverlay,
+                    child: ListTile(
+                      title: Text(entry.media!.title!.userPreferred!),
+                    ),
                   ),
                 );
               },

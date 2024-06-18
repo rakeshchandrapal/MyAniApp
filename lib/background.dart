@@ -83,7 +83,7 @@ void callbackDispatcher() {
               PushNotifications.mediaDetails(),
               texts.join(),
               payload: notif.G__typename != 'MediaDeletionNotification'
-                  ? {'path': '/media/${(notif as dynamic).animeId}/info'}
+                  ? {'path': '/media/${(notif as dynamic).media.id}/info'}
                   : null,
             );
           } else if (parsed.isActivity) {

@@ -161,7 +161,10 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         media {
-          ...MediaFragment
+          id
+          title {
+            userPreferred
+          }
         }
         createdAt
       }
@@ -170,7 +173,10 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         media {
-          ...MediaFragment
+          id
+          title {
+            userPreferred
+          }
         }
         reason
         createdAt
@@ -180,7 +186,10 @@ query Notifications($page: Int, $types: [NotificationType], $reset: Boolean = tr
         type
         context
         media {
-          ...MediaFragment
+          id
+          title {
+            userPreferred
+          }
         }
         deletedMediaTitles
         reason

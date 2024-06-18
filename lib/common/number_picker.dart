@@ -52,8 +52,12 @@ class _NumberPickerState extends State<NumberPicker> {
   void didUpdateWidget(covariant NumberPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
     // if (oldWidget.value != widget.value) {
+    // Future(
+    //   () {
     _controller.text =
         widget.buildText?.call(widget.value) ?? widget.value.toString();
+    // },
+    // );
     // }
   }
 

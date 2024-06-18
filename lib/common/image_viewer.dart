@@ -37,6 +37,8 @@ class _ImageViewerState extends State<ImageViewer> {
   Duration _animationDuration = Duration.zero;
   double _opacity = 1;
   bool _block = false;
+  final TransformationController _transformationController =
+      TransformationController();
 
   setOpacity() {
     final double tmp = _positionYDelta < 0
@@ -53,63 +55,54 @@ class _ImageViewerState extends State<ImageViewer> {
   }
 
   @override
+  void dispose() {
+    _transformationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final horizontalPosition = 0 + max(_positionYDelta, -_positionYDelta) / 15;
+    // final horizontalPosition = 0 + max(_positionYDelta, -_positionYDelta) / 15;
 
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(_opacity),
       body: Stack(
         fit: StackFit.expand,
         children: [
-          AnimatedPositioned(
-            duration: _animationDuration,
-            curve: Curves.fastOutSlowIn,
-            top: 0 + _positionYDelta,
-            bottom: 0 - _positionYDelta,
-            left: horizontalPosition,
-            right: horizontalPosition,
-            child: GestureDetector(
-              onVerticalDragStart: (details) {
-                setState(() => _initialPositionY = details.globalPosition.dy);
+          Dismissible(
+            resizeDuration: null,
+            key: Key("was upp"),
+            direction:
+                _block ? DismissDirection.none : DismissDirection.vertical,
+            onDismissed: (direction) {
+              context.pop();
+            },
+            onUpdate: (details) {
+              print(1 - details.progress);
+              setState(() => _opacity = 1 - details.progress);
+            },
+            // onResize: () => context.pop(),
+            child: InteractiveViewer(
+              maxScale: 10,
+              minScale: 1,
+              transformationController: _transformationController,
+              boundaryMargin: const EdgeInsets.all(0),
+              onInteractionUpdate: (details) {
+                if (_transformationController.value.getMaxScaleOnAxis() >= 1)
+                  setState(() => _block = true);
+                else
+                  setState(() => _block = false);
               },
-              onVerticalDragUpdate: (details) {
-                if (!_block) {
-                  setState(() {
-                    _currentPositionY = details.globalPosition.dy;
-                    _positionYDelta = _currentPositionY - _initialPositionY;
-                    setOpacity();
-                  });
-                }
+              onInteractionEnd: (details) {
+                print(_transformationController.value.getMaxScaleOnAxis());
+                if (_transformationController.value.getMaxScaleOnAxis() > 1)
+                  setState(() => _block = true);
+                else
+                  setState(() => _block = false);
               },
-              onVerticalDragEnd: (details) {
-                if (_positionYDelta > _disposeLevel ||
-                    _positionYDelta < -_disposeLevel) {
-                  Navigator.of(context).pop();
-                } else {
-                  setState(() {
-                    _animationDuration = const Duration(milliseconds: 300);
-                    _opacity = 1;
-                    _positionYDelta = 0;
-                  });
-
-                  Future.delayed(_animationDuration).then((_) {
-                    setState(() {
-                      _animationDuration = Duration.zero;
-                    });
-                  });
-                }
-              },
-              child: InteractiveViewer(
-                maxScale: 10,
-                minScale: 1,
-                boundaryMargin: const EdgeInsets.all(0),
-                onInteractionUpdate: (details) {
-                  if (details.pointerCount >= 2) setState(() => _block = true);
-                },
-                child: Hero(
-                  tag: widget.tag ?? widget.hashCode,
-                  child: widget.child,
-                ),
+              child: Hero(
+                tag: widget.tag ?? widget.hashCode,
+                child: widget.child,
               ),
             ),
           ),
