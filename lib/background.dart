@@ -1,4 +1,4 @@
-import 'package:ferry_exec/src/fetch_policy.dart';
+import 'package:ferry_exec/ferry_exec.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql/__generated__/viewer.req.gql.dart';

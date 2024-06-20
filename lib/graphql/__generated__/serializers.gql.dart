@@ -2,7 +2,6 @@
 // ignore_for_file: type=lint
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart' show StandardJsonPlugin;
 import 'package:ferry_exec/ferry_exec.dart';
@@ -1025,13 +1024,16 @@ import 'package:myaniapp/notifications/__generated__/notifications.data.gql.dart
         GNotificationsData_Page_notifications__asFollowingNotification_user_avatar,
         GNotificationsData_Page_notifications__asMediaDataChangeNotification,
         GNotificationsData_Page_notifications__asMediaDataChangeNotification_media,
+        GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage,
         GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title,
         GNotificationsData_Page_notifications__asMediaDeletionNotification,
         GNotificationsData_Page_notifications__asMediaMergeNotification,
         GNotificationsData_Page_notifications__asMediaMergeNotification_media,
+        GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage,
         GNotificationsData_Page_notifications__asMediaMergeNotification_media_title,
         GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification,
         GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media,
+        GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage,
         GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title,
         GNotificationsData_Page_notifications__asThreadCommentLikeNotification,
         GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread,
@@ -1506,13 +1508,16 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GNotificationsData_Page_notifications__asFollowingNotification_user_avatar,
   GNotificationsData_Page_notifications__asMediaDataChangeNotification,
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media,
+  GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage,
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title,
   GNotificationsData_Page_notifications__asMediaDeletionNotification,
   GNotificationsData_Page_notifications__asMediaMergeNotification,
   GNotificationsData_Page_notifications__asMediaMergeNotification_media,
+  GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage,
   GNotificationsData_Page_notifications__asMediaMergeNotification_media_title,
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification,
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media,
+  GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage,
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title,
   GNotificationsData_Page_notifications__asThreadCommentLikeNotification,
   GNotificationsData_Page_notifications__asThreadCommentLikeNotification_thread,

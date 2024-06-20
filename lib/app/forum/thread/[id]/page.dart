@@ -281,7 +281,6 @@ class ThreadsPage extends HookWidget {
                             ..vars.page = values.first
                             ..updateResult = (p0, p1) => p1));
                   if (dataKey.currentContext?.mounted == true) {
-                    print(dataKey.currentContext?.size);
                     scrollController
                         .jumpTo(dataKey.currentContext!.size!.height);
                     // Scrollable.ensureVisible(dataKey.currentContext!.s);

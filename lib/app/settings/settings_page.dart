@@ -353,24 +353,29 @@ class SettingsPage extends ConsumerWidget {
 }
 
 class SettingsSection extends StatelessWidget {
-  const SettingsSection({super.key, required this.tiles, required this.title});
+  const SettingsSection({
+    super.key,
+    required this.title,
+    required this.tiles,
+  });
 
-  final List<SettingsTile> tiles;
-  final String title;
+  final List<Widget> tiles;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: Text(
-            title,
-            style: context.theme.textTheme.titleMedium
-                ?.copyWith(fontWeight: FontWeight.w500),
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            child: Text(
+              title!,
+              style: context.theme.textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w500),
+            ),
           ),
-        ),
         Material(
           color:
               context.theme.colorScheme.surfaceContainerHighest.withOpacity(.3),
@@ -406,11 +411,14 @@ class SettingsTile<T> extends StatelessWidget {
         onPopupChanged = null,
         onCheckedChanged = null,
         checkedValue = null,
-        initialValue = null;
+        initialValue = null,
+        customWidget = null,
+        enabled = null;
 
   const SettingsTile.switchTile({
     super.key,
     required this.title,
+    this.enabled,
     this.subtitle,
     required bool value,
     required Function(bool) onChanged,
@@ -421,12 +429,14 @@ class SettingsTile<T> extends StatelessWidget {
         popupItems = null,
         onPopupChanged = null,
         onCheckedChanged = null,
-        initialValue = null;
+        initialValue = null,
+        customWidget = null;
 
   const SettingsTile.checkbox({
     super.key,
     required this.title,
     this.subtitle,
+    this.enabled,
     required bool value,
     required Function(bool? value) onChanged,
     this.icon,
@@ -436,12 +446,14 @@ class SettingsTile<T> extends StatelessWidget {
         popupItems = null,
         onPopupChanged = null,
         onCheckedChanged = onChanged,
-        initialValue = null;
+        initialValue = null,
+        customWidget = null;
 
   const SettingsTile.popup({
     super.key,
     required this.title,
     this.subtitle,
+    this.enabled,
     required List<PopupMenuEntry<T>> items,
     required Function(T value) onChanged,
     T? value,
@@ -452,7 +464,24 @@ class SettingsTile<T> extends StatelessWidget {
         switchValue = null,
         onSwitchChanged = null,
         onCheckedChanged = null,
-        initialValue = value;
+        initialValue = value,
+        customWidget = null;
+
+  const SettingsTile.custom({
+    super.key,
+    required this.title,
+    required Widget child,
+    this.icon,
+    this.subtitle,
+  })  : popupItems = null,
+        onPopupChanged = null,
+        checkedValue = null,
+        switchValue = null,
+        onSwitchChanged = null,
+        onCheckedChanged = null,
+        initialValue = null,
+        customWidget = child,
+        enabled = null;
 
   final String title;
   final Widget? subtitle;
@@ -464,6 +493,8 @@ class SettingsTile<T> extends StatelessWidget {
   final List<PopupMenuEntry<T>>? popupItems;
   final T? initialValue;
   final Function(T value)? onPopupChanged;
+  final Widget? customWidget;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -521,28 +552,30 @@ class SettingsTile<T> extends StatelessWidget {
           if (switchValue != null)
             Switch.adaptive(
               value: switchValue!,
-              onChanged: onSwitchChanged,
+              onChanged: enabled == false ? null : onSwitchChanged,
             ),
           if (checkedValue != null)
             Checkbox.adaptive(
               value: checkedValue!,
-              onChanged: onCheckedChanged,
-            )
+              onChanged: enabled == false ? null : onCheckedChanged,
+            ),
+          if (customWidget != null) customWidget!,
         ],
       ),
     );
 
     if (switchValue != null) {
       return InkWell(
-        onTap: () => onSwitchChanged!(!switchValue!),
+        onTap: enabled == false ? null : () => onSwitchChanged!(!switchValue!),
         child: tile,
       );
     } else if (checkedValue != null) {
       return InkWell(
-        onTap: () => onCheckedChanged!(!checkedValue!),
+        onTap:
+            enabled == false ? null : () => onCheckedChanged!(!checkedValue!),
         child: tile,
       );
-    } else if (popupItems != null) {
+    } else if (popupItems != null && enabled != false) {
       return PopupMenuButton(
         initialValue: initialValue,
         position: PopupMenuPosition.under,
@@ -550,6 +583,7 @@ class SettingsTile<T> extends StatelessWidget {
         itemBuilder: (context) => popupItems!,
         onSelected: onPopupChanged,
         constraints: const BoxConstraints(maxHeight: 500, maxWidth: 200),
+        surfaceTintColor: context.theme.colorScheme.primary,
         child: tile,
       );
     }

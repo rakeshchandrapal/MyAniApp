@@ -263,7 +263,6 @@ class CharacterPage extends ConsumerWidget {
 
 class _MediaList extends ConsumerWidget {
   const _MediaList({
-    super.key,
     required this.data,
   });
 

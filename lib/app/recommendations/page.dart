@@ -207,30 +207,3 @@ class _RecommendationsStatePage extends State<RecommendationsPage> {
     );
   }
 }
-
-class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _StickyHeaderDelegate({required this.child});
-
-  @override
-  double get minExtent => 40;
-
-  @override
-  double get maxExtent => 40; // Adjust this value according to your needs
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SafeArea(
-        child: Container(
-            color: Theme.of(context).appBarTheme.backgroundColor,
-            constraints: const BoxConstraints.tightFor(height: 104),
-            child: child));
-  }
-
-  @override
-  bool shouldRebuild(covariant _StickyHeaderDelegate oldDelegate) {
-    return child != oldDelegate.child;
-  }
-}

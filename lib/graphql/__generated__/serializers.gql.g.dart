@@ -525,6 +525,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           GNotificationsData_Page_notifications__asMediaDataChangeNotification_media
               .serializer)
       ..add(
+          GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage
+              .serializer)
+      ..add(
           GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title
               .serializer)
       ..add(GNotificationsData_Page_notifications__asMediaDeletionNotification
@@ -535,6 +538,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           GNotificationsData_Page_notifications__asMediaMergeNotification_media
               .serializer)
       ..add(
+          GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage
+              .serializer)
+      ..add(
           GNotificationsData_Page_notifications__asMediaMergeNotification_media_title
               .serializer)
       ..add(
@@ -542,6 +548,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
               .serializer)
       ..add(
           GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media
+              .serializer)
+      ..add(
+          GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage
               .serializer)
       ..add(
           GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title
@@ -1724,6 +1733,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType.nullable(GUserThreadsData_thread_threads_categories)
           ]),
           () => new ListBuilder<GUserThreadsData_thread_threads_categories?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(String)]),
+          () => new ListBuilder<String?>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType.nullable(String)]),
           () => new ListBuilder<String?>())

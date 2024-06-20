@@ -219,7 +219,6 @@ class GenresButton extends ConsumerWidget {
       builder: (context, response, error, refetch) {
         var genresList = response!.data!.genres!.toList();
 
-        // TODO: when auth is implemented add below to remove the option of adding the genre if 18+ content is off
         if ((displayAdultContent ?? false) == false) {
           genresList.remove("Hentai");
         }

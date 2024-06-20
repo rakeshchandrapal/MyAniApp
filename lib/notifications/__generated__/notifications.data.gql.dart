@@ -2482,7 +2482,8 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
     implements
         Built<
             GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media,
-            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_mediaBuilder> {
+            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_mediaBuilder>,
+        _i5.GMediaFragment {
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media._();
 
   factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media(
@@ -2497,16 +2498,33 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
               b) =>
       b..G__typename = 'Media';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   int get id;
+  @override
+  _i4.GMediaType? get type;
+  @override
+  bool? get isAdult;
+  @override
+  BuiltList<String?>? get genres;
+  @override
+  _i4.GMediaFormat? get format;
+  @override
+  String? get description;
+  @override
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title?
       get title;
+  @override
+  GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage?
+      get coverImage;
   static Serializer<
           GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media>
       get serializer =>
           _$gNotificationsDataPageNotificationsAsRelatedMediaAdditionNotificationMediaSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media
             .serializer,
@@ -2525,7 +2543,8 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
     implements
         Built<
             GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title,
-            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_titleBuilder> {
+            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_titleBuilder>,
+        _i5.GMediaFragment_title {
   GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title(
@@ -2540,14 +2559,17 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
               b) =>
       b..G__typename = 'MediaTitle';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   String? get userPreferred;
   static Serializer<
           GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title>
       get serializer =>
           _$gNotificationsDataPageNotificationsAsRelatedMediaAdditionNotificationMediaTitleSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title
             .serializer,
@@ -2557,6 +2579,51 @@ abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNoti
   static GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title?
       fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
             GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_title
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage,
+            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImageBuilder>,
+        _i5.GMediaFragment_coverImage {
+  GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage._();
+
+  factory GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage(
+          [void Function(
+                  GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImageBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImageBuilder
+              b) =>
+      b..G__typename = 'MediaCoverImage';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get extraLarge;
+  static Serializer<
+          GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsRelatedMediaAdditionNotificationMediaCoverImageSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification_media_coverImage
                 .serializer,
             json,
           );
@@ -2616,7 +2683,8 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
     implements
         Built<
             GNotificationsData_Page_notifications__asMediaDataChangeNotification_media,
-            GNotificationsData_Page_notifications__asMediaDataChangeNotification_mediaBuilder> {
+            GNotificationsData_Page_notifications__asMediaDataChangeNotification_mediaBuilder>,
+        _i5.GMediaFragment {
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media._();
 
   factory GNotificationsData_Page_notifications__asMediaDataChangeNotification_media(
@@ -2631,16 +2699,33 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
               b) =>
       b..G__typename = 'Media';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   int get id;
+  @override
+  _i4.GMediaType? get type;
+  @override
+  bool? get isAdult;
+  @override
+  BuiltList<String?>? get genres;
+  @override
+  _i4.GMediaFormat? get format;
+  @override
+  String? get description;
+  @override
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title?
       get title;
+  @override
+  GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage?
+      get coverImage;
   static Serializer<
           GNotificationsData_Page_notifications__asMediaDataChangeNotification_media>
       get serializer =>
           _$gNotificationsDataPageNotificationsAsMediaDataChangeNotificationMediaSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationsData_Page_notifications__asMediaDataChangeNotification_media
             .serializer,
@@ -2659,7 +2744,8 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
     implements
         Built<
             GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title,
-            GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_titleBuilder> {
+            GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_titleBuilder>,
+        _i5.GMediaFragment_title {
   GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title(
@@ -2674,14 +2760,17 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
               b) =>
       b..G__typename = 'MediaTitle';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   String? get userPreferred;
   static Serializer<
           GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title>
       get serializer =>
           _$gNotificationsDataPageNotificationsAsMediaDataChangeNotificationMediaTitleSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title
             .serializer,
@@ -2691,6 +2780,51 @@ abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotificat
   static GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title?
       fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
             GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_title
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage,
+            GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImageBuilder>,
+        _i5.GMediaFragment_coverImage {
+  GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage._();
+
+  factory GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage(
+          [void Function(
+                  GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImageBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImageBuilder
+              b) =>
+      b..G__typename = 'MediaCoverImage';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get extraLarge;
+  static Serializer<
+          GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsMediaDataChangeNotificationMediaCoverImageSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asMediaDataChangeNotification_media_coverImage
                 .serializer,
             json,
           );
@@ -2750,7 +2884,8 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
     implements
         Built<
             GNotificationsData_Page_notifications__asMediaMergeNotification_media,
-            GNotificationsData_Page_notifications__asMediaMergeNotification_mediaBuilder> {
+            GNotificationsData_Page_notifications__asMediaMergeNotification_mediaBuilder>,
+        _i5.GMediaFragment {
   GNotificationsData_Page_notifications__asMediaMergeNotification_media._();
 
   factory GNotificationsData_Page_notifications__asMediaMergeNotification_media(
@@ -2765,16 +2900,33 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
               b) =>
       b..G__typename = 'Media';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   int get id;
+  @override
+  _i4.GMediaType? get type;
+  @override
+  bool? get isAdult;
+  @override
+  BuiltList<String?>? get genres;
+  @override
+  _i4.GMediaFormat? get format;
+  @override
+  String? get description;
+  @override
   GNotificationsData_Page_notifications__asMediaMergeNotification_media_title?
       get title;
+  @override
+  GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage?
+      get coverImage;
   static Serializer<
           GNotificationsData_Page_notifications__asMediaMergeNotification_media>
       get serializer =>
           _$gNotificationsDataPageNotificationsAsMediaMergeNotificationMediaSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationsData_Page_notifications__asMediaMergeNotification_media
             .serializer,
@@ -2793,7 +2945,8 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
     implements
         Built<
             GNotificationsData_Page_notifications__asMediaMergeNotification_media_title,
-            GNotificationsData_Page_notifications__asMediaMergeNotification_media_titleBuilder> {
+            GNotificationsData_Page_notifications__asMediaMergeNotification_media_titleBuilder>,
+        _i5.GMediaFragment_title {
   GNotificationsData_Page_notifications__asMediaMergeNotification_media_title._();
 
   factory GNotificationsData_Page_notifications__asMediaMergeNotification_media_title(
@@ -2808,14 +2961,17 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
               b) =>
       b..G__typename = 'MediaTitle';
 
+  @override
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
+  @override
   String? get userPreferred;
   static Serializer<
           GNotificationsData_Page_notifications__asMediaMergeNotification_media_title>
       get serializer =>
           _$gNotificationsDataPageNotificationsAsMediaMergeNotificationMediaTitleSerializer;
 
+  @override
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationsData_Page_notifications__asMediaMergeNotification_media_title
             .serializer,
@@ -2825,6 +2981,51 @@ abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_m
   static GNotificationsData_Page_notifications__asMediaMergeNotification_media_title?
       fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
             GNotificationsData_Page_notifications__asMediaMergeNotification_media_title
+                .serializer,
+            json,
+          );
+}
+
+abstract class GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage
+    implements
+        Built<
+            GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage,
+            GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImageBuilder>,
+        _i5.GMediaFragment_coverImage {
+  GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage._();
+
+  factory GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage(
+          [void Function(
+                  GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImageBuilder
+                      b)
+              updates]) =
+      _$GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage;
+
+  static void _initializeBuilder(
+          GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImageBuilder
+              b) =>
+      b..G__typename = 'MediaCoverImage';
+
+  @override
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  @override
+  String? get extraLarge;
+  static Serializer<
+          GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage>
+      get serializer =>
+          _$gNotificationsDataPageNotificationsAsMediaMergeNotificationMediaCoverImageSerializer;
+
+  @override
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage
+            .serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage?
+      fromJson(Map<String, dynamic> json) => _i1.serializers.deserializeWith(
+            GNotificationsData_Page_notifications__asMediaMergeNotification_media_coverImage
                 .serializer,
             json,
           );

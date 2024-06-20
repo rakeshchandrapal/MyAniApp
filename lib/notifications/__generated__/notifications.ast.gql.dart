@@ -964,28 +964,10 @@ const Notifications = _i1.OperationDefinitionNode(
                   arguments: [],
                   directives: [],
                   selectionSet: _i1.SelectionSetNode(selections: [
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'id'),
-                      alias: null,
-                      arguments: [],
+                    _i1.FragmentSpreadNode(
+                      name: _i1.NameNode(value: 'MediaFragment'),
                       directives: [],
-                      selectionSet: null,
-                    ),
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'title'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: _i1.SelectionSetNode(selections: [
-                        _i1.FieldNode(
-                          name: _i1.NameNode(value: 'userPreferred'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null,
-                        )
-                      ]),
-                    ),
+                    )
                   ]),
                 ),
                 _i1.FieldNode(
@@ -1032,28 +1014,10 @@ const Notifications = _i1.OperationDefinitionNode(
                   arguments: [],
                   directives: [],
                   selectionSet: _i1.SelectionSetNode(selections: [
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'id'),
-                      alias: null,
-                      arguments: [],
+                    _i1.FragmentSpreadNode(
+                      name: _i1.NameNode(value: 'MediaFragment'),
                       directives: [],
-                      selectionSet: null,
-                    ),
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'title'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: _i1.SelectionSetNode(selections: [
-                        _i1.FieldNode(
-                          name: _i1.NameNode(value: 'userPreferred'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null,
-                        )
-                      ]),
-                    ),
+                    )
                   ]),
                 ),
                 _i1.FieldNode(
@@ -1107,28 +1071,10 @@ const Notifications = _i1.OperationDefinitionNode(
                   arguments: [],
                   directives: [],
                   selectionSet: _i1.SelectionSetNode(selections: [
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'id'),
-                      alias: null,
-                      arguments: [],
+                    _i1.FragmentSpreadNode(
+                      name: _i1.NameNode(value: 'MediaFragment'),
                       directives: [],
-                      selectionSet: null,
-                    ),
-                    _i1.FieldNode(
-                      name: _i1.NameNode(value: 'title'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: _i1.SelectionSetNode(selections: [
-                        _i1.FieldNode(
-                          name: _i1.NameNode(value: 'userPreferred'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null,
-                        )
-                      ]),
-                    ),
+                    )
                   ]),
                 ),
                 _i1.FieldNode(

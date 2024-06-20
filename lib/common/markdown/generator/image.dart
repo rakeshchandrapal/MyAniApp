@@ -77,7 +77,9 @@ class ImageNode2 extends SpanNode {
               ? () async {
                   var uri = Uri.tryParse(
                       (parent as LinkNode).attributes["href"] ?? "");
-                  if (uri != null && await canLaunchUrl(uri)) {
+                  if (uri != null &&
+                      await canLaunchUrl(uri) &&
+                      context.mounted) {
                     ConfirmationDialog.show(
                       context,
                       "launch to ${(parent as LinkNode).attributes["href"]}",

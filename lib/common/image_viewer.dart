@@ -1,10 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/common/cached_image.dart';
-
-double _disposeLevel = 150;
 
 class ImageViewer extends StatefulWidget {
   const ImageViewer({super.key, required this.child, this.tag});
@@ -30,29 +26,10 @@ class ImageViewer extends StatefulWidget {
 }
 
 class _ImageViewerState extends State<ImageViewer> {
-  // logic to swipe down to close image is from https://github.com/AgoraDesk-LocalMonero/insta-image-viewer/blob/main/lib/src/insta_image_viewer.dart
-  double _initialPositionY = 0;
-  double _currentPositionY = 0;
-  double _positionYDelta = 0;
-  Duration _animationDuration = Duration.zero;
   double _opacity = 1;
   bool _block = false;
   final TransformationController _transformationController =
       TransformationController();
-
-  setOpacity() {
-    final double tmp = _positionYDelta < 0
-        ? 1 - ((_positionYDelta / 1000) * -1)
-        : 1 - (_positionYDelta / 1000);
-
-    if (tmp > 1) {
-      _opacity = 1;
-    } else if (tmp < 0) {
-      _opacity = 0;
-    } else {
-      _opacity = tmp;
-    }
-  }
 
   @override
   void dispose() {
@@ -71,14 +48,13 @@ class _ImageViewerState extends State<ImageViewer> {
         children: [
           Dismissible(
             resizeDuration: null,
-            key: Key("was upp"),
+            key: const Key("was upp"),
             direction:
                 _block ? DismissDirection.none : DismissDirection.vertical,
             onDismissed: (direction) {
               context.pop();
             },
             onUpdate: (details) {
-              print(1 - details.progress);
               setState(() => _opacity = 1 - details.progress);
             },
             // onResize: () => context.pop(),
@@ -88,17 +64,18 @@ class _ImageViewerState extends State<ImageViewer> {
               transformationController: _transformationController,
               boundaryMargin: const EdgeInsets.all(0),
               onInteractionUpdate: (details) {
-                if (_transformationController.value.getMaxScaleOnAxis() >= 1)
+                if (_transformationController.value.getMaxScaleOnAxis() >= 1) {
                   setState(() => _block = true);
-                else
+                } else {
                   setState(() => _block = false);
+                }
               },
               onInteractionEnd: (details) {
-                print(_transformationController.value.getMaxScaleOnAxis());
-                if (_transformationController.value.getMaxScaleOnAxis() > 1)
+                if (_transformationController.value.getMaxScaleOnAxis() > 1) {
                   setState(() => _block = true);
-                else
+                } else {
                   setState(() => _block = false);
+                }
               },
               child: Hero(
                 tag: widget.tag ?? widget.hashCode,

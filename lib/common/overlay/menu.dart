@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/constants.dart';
@@ -36,7 +35,7 @@ class _OverlayMenuState extends State<OverlayMenu> {
           double? left;
           double? top;
           if ((pos.dx - box.size.width - 20) < 0 &&
-              (pos.dx + box.size.width + 10) > constraints.maxWidth) {
+              (pos.dx + box.size.width + 10 + 200) > constraints.maxWidth) {
             left = pos.dx;
             top = pos.dy - 40 * widget.items.length;
           }
@@ -83,7 +82,7 @@ class _OverlayMenuState extends State<OverlayMenu> {
                                       children: [
                                         if (item.icon != null) ...[
                                           item.icon!,
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                         ],
                                         item.child,
                                       ],

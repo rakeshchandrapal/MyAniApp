@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/media/__generated__/media.data.gql.dart';
 import 'package:myaniapp/common/cached_image.dart';
-import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
@@ -48,11 +47,11 @@ class _MediaOverviewState extends State<MediaOverview>
             ),
           ),
         Container(
-          // height: 150,
           constraints: const BoxConstraints(maxHeight: 150),
           margin: const EdgeInsets.symmetric(horizontal: 4),
           decoration: BoxDecoration(
-            border: Border.all(color: context.theme.colorScheme.surfaceContainerHighest),
+            border: Border.all(
+                color: context.theme.colorScheme.surfaceContainerHighest),
             borderRadius: imageRadius,
           ),
           child: MarkdownWidget(
@@ -130,7 +129,7 @@ class _MediaOverviewState extends State<MediaOverview>
                 title: 'Source',
                 info: widget.media.source!.name.capitalize(),
               ),
-            if (widget.media.hashtag != null)
+            if (widget.media.hashtag?.isNotEmpty == true)
               DetailBox(
                 title: 'Hashtag',
                 info: widget.media.hashtag!,
@@ -233,29 +232,9 @@ class _TagsState extends State<_Tags> {
             children: [
               for (var tag in widget.tags.where(
                   (p0) => showSpoiler ? true : p0!.isMediaSpoiler == false))
-                InkWellImage(
-                  borderRadius: imageRadius,
-                  onTap: () {},
-                  onLongPress: () => showDialog(
-                    context: context,
-                    builder: (context) => Dialog(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 50),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              tag.name,
-                              style: context.theme.textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: 10),
-                            Text(tag.description ?? "No description"),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                Tooltip(
+                  message: tag!.description!,
+                  triggerMode: TooltipTriggerMode.longPress,
                   child: Container(
                     width: double.maxFinite,
                     height: double.maxFinite,
@@ -266,7 +245,7 @@ class _TagsState extends State<_Tags> {
                     padding: const EdgeInsets.all(8),
                     child: DefaultTextStyle(
                       style: context.theme.textTheme.labelMedium?.copyWith(
-                              color: tag!.isMediaSpoiler == true
+                              color: tag.isMediaSpoiler == true
                                   ? context.theme.colorScheme.error
                                   : null) ??
                           const TextStyle(),
@@ -275,7 +254,7 @@ class _TagsState extends State<_Tags> {
                         children: [
                           Expanded(
                             child: Text(
-                              tag!.name,
+                              tag.name,
                               maxLines: 2,
                             ),
                           ),
@@ -285,6 +264,57 @@ class _TagsState extends State<_Tags> {
                     ),
                   ),
                 ),
+              // InkWellImage(
+              //   borderRadius: imageRadius,
+              //   onLongPress: () => showDialog(
+              //     context: context,
+              //     builder: (context) => Dialog(
+              //       child: Padding(
+              //         padding: const EdgeInsets.symmetric(
+              //             vertical: 20, horizontal: 50),
+              //         child: Column(
+              //           mainAxisSize: MainAxisSize.min,
+              //           children: [
+              //             Text(
+              //               tag.name,
+              //               style: context.theme.textTheme.titleMedium,
+              //             ),
+              //             const SizedBox(height: 10),
+              //             Text(tag.description ?? "No description"),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              //   child: Container(
+              //     width: double.maxFinite,
+              //     height: double.maxFinite,
+              //     decoration: BoxDecoration(
+              //       color: context.theme.colorScheme.surfaceContainerHighest,
+              //       borderRadius: imageRadius,
+              //     ),
+              //     padding: const EdgeInsets.all(8),
+              //     child: DefaultTextStyle(
+              //       style: context.theme.textTheme.labelMedium?.copyWith(
+              //               color: tag!.isMediaSpoiler == true
+              //                   ? context.theme.colorScheme.error
+              //                   : null) ??
+              //           const TextStyle(),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           Expanded(
+              //             child: Text(
+              //               tag!.name,
+              //               maxLines: 2,
+              //             ),
+              //           ),
+              //           Text("${tag.rank}%"),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           )
         ],
@@ -442,7 +472,8 @@ class DetailBox extends StatelessWidget {
         width: 120,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.surfaceContainerHighest),
+          border: Border.all(
+              color: context.theme.colorScheme.surfaceContainerHighest),
           borderRadius: imageRadius,
         ),
         child: Column(

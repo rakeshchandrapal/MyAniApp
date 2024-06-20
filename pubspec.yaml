@@ -1,26 +1,33 @@
 name: myaniapp
 description: 'An unofficial Anilist app.'
 publish_to: 'none'
-version: 0.4.0+1
+version: 0.4.0+2
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
 
 dependencies:
-  app_links: ^4.0.1
+  app_links: ^6.1.1
+  built_collection: ^5.1.1
+  built_value: ^8.9.2
   cached_network_image: ^3.3.1
-  collection: ^1.18.0
+  collection: ^1.19.0
   ferry: ^0.16.0+1
-  ferry_flutter: ^0.9.0-dev.2
+  ferry_exec: ^0.6.1
+  ferry_flutter: ^0.9.0-dev.6
   ferry_hive_store: ^0.5.2
+  ffi: ^2.1.2
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_hooks: ^0.20.5
   flutter_local_notifications: ^17.1.2
-  flutter_markdown: ^0.6.20+1
+  flutter_markdown: ^0.7.2+1
   flutter_riverpod: ^2.5.1
-  go_router: ^13.2.0
+  go_router: ^14.2.0
+  gql: ^1.0.0+1
+  gql_code_builder: ^0.10.0
+  gql_exec: ^1.0.0+1
   gql_http_link: ^1.0.1+1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -35,17 +42,21 @@ dependencies:
   relative_time: ^5.0.0
   shared_preferences: ^2.2.2
   url_launcher: ^6.2.5
+  win32: ^5.5.1
   win32_registry: ^1.1.3
   workmanager: ^0.5.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
   ferry_generator: ^0.10.0
   build_runner: ^2.4.8
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
   flutter_launcher_icons: ^0.13.1
+
+dependency_overrides:
+  collection: 1.19.0
 
 flutter_launcher_icons:
   android: 'launcher_icon'

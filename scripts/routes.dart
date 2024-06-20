@@ -330,13 +330,6 @@ class RoutePath {
     }
   }
 
-  static RoutePath? findRoute(RoutePath route, String path) {
-    if (route.path == path) {
-      return route;
-    } else if (route.subroute != null) return findRoute(route.subroute!, path);
-    return null;
-  }
-
   static RoutePath? mapPaths(List<String> segments) {
     // print(segments)
     if (segments.isEmpty) return null;

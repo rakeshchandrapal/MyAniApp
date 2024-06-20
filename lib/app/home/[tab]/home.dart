@@ -137,35 +137,6 @@ class _HomeLoggedInOverviewPageState
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
-              Stack(
-                children: [
-                  GestureDetector(
-                    // onTap: () => overlayEntry?.remove(),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 90,
-                    child: Container(
-                      height: 20,
-                      // width: MediaQuery.of(context).size.width,
-                      // height: MediaQuery.of(context).size.height,
-                      // color: Colors.black,
-                      child: const Center(
-                        child: Text(
-                          'This is a pop-up dialog',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               GridView.builder(
                 primary: false,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

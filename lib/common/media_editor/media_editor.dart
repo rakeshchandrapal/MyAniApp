@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/common/custom_dropdown.dart';
+import 'package:myaniapp/app/settings/settings_page.dart';
 import 'package:myaniapp/common/dialogs/confirmation.dart';
 import 'package:myaniapp/common/media_editor/__generated__/media_editor.data.gql.dart';
 import 'package:myaniapp/common/media_editor/__generated__/media_editor.req.gql.dart';
 import 'package:myaniapp/common/media_editor/__generated__/media_editor.var.gql.dart';
-import 'package:myaniapp/common/number_picker.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
@@ -176,6 +177,8 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
   Widget build(BuildContext context) {
     var userId = ref
         .watch(userProvider.select((value) => value.value?.data?.Viewer?.id));
+    var enabled = userId == widget.entry.user?.id;
+    var builtCustomList = options.customLists.build();
 
     return Scaffold(
       appBar: AppBar(
@@ -226,158 +229,368 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
       ),
       body: ListView(
         children: [
-          GridView(
-            shrinkWrap: true,
-            primary: false,
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 300,
-              mainAxisExtent: 60,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 8,
-            ),
-            children: [
-              SheetDropdownMenu(
+          SettingsSection(
+            title: null,
+            tiles: [
+              SettingsTile<GMediaListStatus>.popup(
+                title: "Status",
+                enabled: enabled,
                 value: options.status,
-                hint: "Status",
-                enabled: userId == widget.entry.user?.id,
-                onChanged: (values) => options.status = values.first,
-                items: GMediaListStatus.values.map(
-                  (p0) => DropdownMenuEntry(
-                    value: p0,
-                    label: p0.name.capitalize(),
+                items: [
+                  for (var s in GMediaListStatus.values)
+                    PopupMenuItem(
+                      value: s,
+                      child: Text(s.name.capitalize()),
+                    )
+                ],
+                onChanged: (value) => setState(() => options.status = value),
+              ),
+              SettingTileNumber(
+                title: widget.entry.media?.type == GMediaType.ANIME
+                    ? "Episodes Watched"
+                    : "Chapters Read",
+                enabled: enabled,
+                value: options.progress ?? 0,
+                onChanged: (value) => setState(() => options.progress = value),
+                max: widget.entry.media?.episodes ??
+                    widget.entry.media?.chapters,
+              ),
+              SettingTileNumber(
+                title: "Rewatches",
+                enabled: enabled,
+                value: options.repeat ?? 0,
+                onChanged: (value) => setState(() => options.repeat = value),
+              ),
+              if (widget.entry.user!.mediaListOptions!.scoreFormat ==
+                  GScoreFormat.POINT_3)
+                SettingsTile.custom(
+                  title: "Score",
+                  child: Row(
+                    children: [
+                      FilterChip(
+                        label: const Text("☹️"),
+                        showCheckmark: false,
+                        selected: options.score == 1,
+                        onSelected: enabled
+                            ? (value) {
+                                if (value == true) {
+                                  setState(() => options.score = 1);
+                                }
+                                if (value == false) {
+                                  setState(() => options.score = 0);
+                                }
+                              }
+                            : null,
+                      ),
+                      const SizedBox(width: 5),
+                      FilterChip(
+                        label: const Text("😐"),
+                        selected: options.score == 2,
+                        showCheckmark: false,
+                        onSelected: enabled
+                            ? (value) {
+                                if (value == true) {
+                                  setState(() => options.score = 2);
+                                }
+                                if (value == false) {
+                                  setState(() => options.score = 0);
+                                }
+                              }
+                            : null,
+                      ),
+                      const SizedBox(width: 5),
+                      FilterChip(
+                        label: const Text("😃"),
+                        selected: options.score == 3,
+                        showCheckmark: false,
+                        onSelected: enabled
+                            ? (value) {
+                                if (value == true) {
+                                  setState(() => options.score = 3);
+                                }
+                                if (value == false) {
+                                  setState(() => options.score = 0);
+                                }
+                              }
+                            : null,
+                      ),
+                    ],
                   ),
+                )
+              else
+                SettingTileNumber(
+                  title: "Score",
+                  enabled: enabled,
+                  value: switch (
+                      widget.entry.user!.mediaListOptions!.scoreFormat!) {
+                    (GScoreFormat.POINT_3) => options.score ?? 0,
+                    (GScoreFormat.POINT_5) => (options.score ?? 0).toInt(),
+                    (GScoreFormat.POINT_10) => (options.score ?? 0).toInt(),
+                    (GScoreFormat.POINT_10_DECIMAL) => (options.score ?? 0),
+                    (GScoreFormat.POINT_100) => (options.score ?? 0).toInt(),
+                    _ => options.score ?? 0,
+                  },
+                  max: switch (
+                      widget.entry.user!.mediaListOptions!.scoreFormat!) {
+                    (GScoreFormat.POINT_3) => 3,
+                    (GScoreFormat.POINT_5) => 5,
+                    (GScoreFormat.POINT_10) => 10,
+                    (GScoreFormat.POINT_10_DECIMAL) => 10.0,
+                    (GScoreFormat.POINT_100) => 100,
+                    GScoreFormat() => throw UnimplementedError(),
+                  },
+                  onChanged: (value) {
+                    setState(() => options.score = value.toDouble());
+                  },
+                ),
+              InkWell(
+                onTap: enabled
+                    ? () async {
+                        var selectedDate = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1940),
+                          initialDate: options.startedAt.toDate(),
+                          lastDate: DateTime(3000),
+                        );
+
+                        if (selectedDate != null) {
+                          setState(
+                            () => options.startedAt.update(
+                              (p0) {
+                                p0.day = selectedDate.day;
+                                p0.month = selectedDate.month;
+                                p0.year = selectedDate.year;
+                              },
+                            ),
+                          );
+                        }
+                      }
+                    : null,
+                child: SettingsTile(
+                  title: "Start date",
+                  subtitle: options.startedAt.toDate() != null
+                      ? Text(DateFormat.yMMMMd()
+                          .format(options.startedAt.toDate()!))
+                      : null,
                 ),
               ),
-              NumberPicker(
-                label: "Score",
-                value: options.score ?? 0,
-                // readOnly: true,
-                enabled: userId == widget.entry.user?.id,
-                min: 0,
-                max: switch (
-                    widget.entry.user!.mediaListOptions!.scoreFormat!) {
-                  (GScoreFormat.POINT_3) => 3,
-                  (GScoreFormat.POINT_5) => 5,
-                  (GScoreFormat.POINT_10) => 10,
-                  (GScoreFormat.POINT_10_DECIMAL) => 10,
-                  (GScoreFormat.POINT_100) => 100,
-                  GScoreFormat() => throw UnimplementedError(),
-                },
-                buildText: (value) =>
-                    switch (widget.entry.user!.mediaListOptions!.scoreFormat!) {
-                  (GScoreFormat.POINT_3) => switch (value) {
-                      0 => "",
-                      1 => ":(",
-                      2 => ":|",
-                      3 => ":)",
-                      _ => value.toString()
-                    },
-                  _ => value.toString(),
-                },
-                onDecrement: (value) =>
-                    setState(() => options.score = value.toDouble()),
-                onIncrement: (value) =>
-                    setState(() => options.score = value.toDouble()),
-              ),
-              NumberPicker(
-                label: "Episodes Progress",
-                value: (options.progress ?? 0).toInt(),
-                // readOnly: true,
-                enabled: userId == widget.entry.user?.id,
-                min: 0,
-                max: widget.entry.media!.episodes,
-                onDecrement: (value) =>
-                    setState(() => options.progress = value.toInt()),
-                onIncrement: (value) =>
-                    setState(() => options.progress = value.toInt()),
-              ),
-              NumberPicker(
-                label: "Rewatches",
-                value: (options.repeat ?? 0).toInt(),
-                // readOnly: true,
-                enabled: userId == widget.entry.user?.id,
-                min: 0,
-                onDecrement: (value) =>
-                    setState(() => options.repeat = value.toInt()),
-                onIncrement: (value) =>
-                    setState(() => options.repeat = value.toInt()),
-              ),
-              DateTimeButton(
-                text: "Start Date",
-                date: options.startedAt.toDate(),
-                enabled: userId == widget.entry.user?.id,
-                onClear: () => setState(
-                  () => options.startedAt.update(
-                    (p0) {
-                      p0.day = null;
-                      p0.month = null;
-                      p0.year = null;
-                    },
-                  ),
-                ),
-                onChanged: (date) => setState(
-                  () => options.startedAt.update(
-                    (p0) {
-                      p0.day = date.day;
-                      p0.month = date.month;
-                      p0.year = date.year;
-                    },
-                  ),
+              InkWell(
+                onTap: enabled
+                    ? () async {
+                        var selectedDate = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1940),
+                          initialDate: options.completedAt.toDate(),
+                          lastDate: DateTime(3000),
+                        );
+
+                        if (selectedDate != null) {
+                          setState(
+                            () => options.completedAt.update(
+                              (p0) {
+                                p0.day = selectedDate.day;
+                                p0.month = selectedDate.month;
+                                p0.year = selectedDate.year;
+                              },
+                            ),
+                          );
+                        }
+                      }
+                    : null,
+                child: SettingsTile(
+                  title: "Finished date",
+                  subtitle: options.completedAt.toDate() != null
+                      ? Text(DateFormat.yMMMMd()
+                          .format(options.completedAt.toDate()!))
+                      : null,
                 ),
               ),
-              DateTimeButton(
-                text: "Finish Date",
-                date: options.completedAt.toDate(),
-                enabled: userId == widget.entry.user?.id,
-                onClear: () => setState(
-                  () => options.completedAt.update(
-                    (p0) {
-                      p0.day = null;
-                      p0.month = null;
-                      p0.year = null;
-                    },
-                  ),
+              if (enabled) ...[
+                SettingsTile.switchTile(
+                  title: "Private",
+                  enabled: enabled,
+                  value: options.private ?? false,
+                  onChanged: (value) => setState(() => options.private = value),
                 ),
-                onChanged: (date) => setState(
-                  () => options.completedAt.update(
-                    (p0) {
-                      p0.day = date.day;
-                      p0.month = date.month;
-                      p0.year = date.year;
-                    },
-                  ),
+                SettingsTile.switchTile(
+                  title: "Hide From Statis List",
+                  value: options.hiddenFromStatusLists ?? false,
+                  enabled: enabled,
+                  onChanged: (value) =>
+                      setState(() => options.hiddenFromStatusLists = value),
                 ),
-              ),
+                SettingsTile<String>.popup(
+                  title: "Custom List",
+                  items: [
+                    for (var list in (widget.entry.customLists?.asList ?? []))
+                      CheckedPopupMenuItem(
+                        checked: builtCustomList.contains(list['name']),
+                        value: list['name'],
+                        child: Text(
+                          list['name'],
+                        ),
+                      )
+                  ],
+                  onChanged: (value) {
+                    if (builtCustomList.contains(value)) {
+                      setState(() => options.customLists.update(
+                            (p0) => p0.remove(value),
+                          ));
+                    } else {
+                      setState(() => options.customLists.update(
+                            (p0) => p0.add(value),
+                          ));
+                    }
+                  },
+                )
+              ],
             ],
           ),
-          const SizedBox(height: 5),
-          SwitchListTile.adaptive(
-            value: options.private ?? false,
-            title: const Text("Private"),
-            onChanged: userId == widget.entry.user?.id
-                ? (value) => setState(
-                      () => options.private = value,
-                    )
-                : null,
-          ),
-          SwitchListTile.adaptive(
-            value: options.hiddenFromStatusLists ?? false,
-            title: const Text("Hide from status list"),
-            onChanged: userId == widget.entry.user?.id
-                ? (value) =>
-                    setState(() => options.hiddenFromStatusLists = value)
-                : null,
-          ),
-          const SizedBox(height: 5),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: _NoteBox(
-              note: options.notes,
-              onChanged: (note) => options.notes = note,
-              enabled: userId == widget.entry.user?.id,
+          const SizedBox(height: 10),
+          if (enabled || options.notes?.isNotEmpty == true)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: _NoteBox(
+                note: options.notes,
+                onChanged: (note) => options.notes = note,
+                enabled: userId == widget.entry.user?.id,
+              ),
+            )
+        ],
+      ),
+    );
+  }
+}
+
+class SettingTileNumber<T extends num> extends HookWidget {
+  const SettingTileNumber({
+    super.key,
+    // required super.title,
+    required this.title,
+    required this.value,
+    required this.onChanged,
+    this.max,
+    this.enabled,
+    // super.icon,
+    // super.subtitle,
+  });
+
+  final void Function(T value) onChanged;
+  final T value;
+  final T? max;
+  final String title;
+  final bool? enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    var textEditingController =
+        useTextEditingController(text: value.toString());
+    final textEditingUpdate = useValueListenable(textEditingController);
+
+    useEffect(
+      () {
+        Future(
+          () {
+            if (textEditingController.text.isEmpty) {
+              onChanged(0 as T);
+            } else {
+              var num = value is int
+                  ? int.tryParse(textEditingController.text)
+                  : double.tryParse(textEditingController.text);
+
+              // print(textEditingController.text);
+              if (num != null) {
+                if (max != null && num > max!) {
+                  onChanged(max!);
+                  textEditingController.text = max!.toString();
+                } else {
+                  onChanged(num as T);
+                }
+              }
+            }
+          },
+        );
+        return null;
+      },
+      [textEditingUpdate],
+    );
+
+    return SettingsTile.custom(
+      title: title,
+      child: Row(
+        children: [
+          if (enabled == false)
+            Text(value.toString())
+          else
+            SizedBox(
+              width: 50,
+              height: 30,
+              child: TextField(
+                controller: textEditingController,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  if (value is double)
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r"[0-9]*\.?[0-9]?"))
+                  else
+                    FilteringTextInputFormatter.digitsOnly,
+                ],
+                // expands: true,
+                textAlignVertical: TextAlignVertical.top,
+                textAlign: TextAlign.right,
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  contentPadding: EdgeInsets.only(bottom: 16),
+                ),
+              ),
             ),
-          )
+          if (max != null) Text(" / $max"),
+          const SizedBox(width: 5),
+          if (enabled != false) ...[
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              iconSize: 20,
+              onPressed: () {
+                var num = value is int
+                    ? int.tryParse(textEditingController.text)
+                    : double.tryParse(textEditingController.text);
+
+                // print(textEditingController.text);
+                if (num != null) {
+                  if (max != null && (num + 1) > max!) {
+                    onChanged(max!);
+                    textEditingController.text = max!.toString();
+                  } else {
+                    onChanged(num + 1 as T);
+                    textEditingController.text = (num + 1).toString();
+                  }
+                }
+              },
+              icon: const Icon(Icons.arrow_upward),
+            ),
+            IconButton(
+              visualDensity: VisualDensity.compact,
+              iconSize: 20,
+              onPressed: () {
+                var num = value is int
+                    ? int.tryParse(textEditingController.text)
+                    : double.tryParse(textEditingController.text);
+
+                // print(textEditingController.text);
+                if (num != null) {
+                  if ((num - 1) < 0) {
+                    onChanged(num is int ? 0 as T : 0.0 as T);
+                    textEditingController.text =
+                        (num is int ? 0 : 0.0).toString();
+                  } else {
+                    onChanged(num - 1 as T);
+                    textEditingController.text = (num - 1).toString();
+                  }
+                }
+              },
+              icon: const Icon(Icons.arrow_downward),
+            ),
+          ]
         ],
       ),
     );
@@ -427,7 +640,7 @@ class __NoteBoxState extends State<_NoteBox> {
       maxLines: null,
       decoration: const InputDecoration(
         border: OutlineInputBorder(borderRadius: imageRadius),
-        labelText: "Note",
+        labelText: "Notes",
       ),
     );
   }

@@ -30,7 +30,6 @@ String scoreToText(GScoreFormat format, double value) {
     GScoreFormat.POINT_10 => "${value.toInt()} / 10",
     GScoreFormat.POINT_10_DECIMAL => "$value / 10",
     GScoreFormat.POINT_100 => "${value.toInt()} / 100",
-    // TODO: Handle this case.
     GScoreFormat() => throw UnimplementedError(),
   };
 }
