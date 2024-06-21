@@ -228,11 +228,12 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
         ],
       ),
       body: ListView(
+        padding: const EdgeInsets.all(8),
         children: [
           SettingsSection(
             title: null,
             tiles: [
-              SettingsTile<GMediaListStatus>.popup(
+              PopupSettingsTile(
                 title: "Status",
                 enabled: enabled,
                 value: options.status,
@@ -243,7 +244,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                       child: Text(s.name.capitalize()),
                     )
                 ],
-                onChanged: (value) => setState(() => options.status = value),
+                onSelected: (value) => setState(() => options.status = value),
               ),
               SettingTileNumber(
                 title: widget.entry.media?.type == GMediaType.ANIME
@@ -263,7 +264,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
               ),
               if (widget.entry.user!.mediaListOptions!.scoreFormat ==
                   GScoreFormat.POINT_3)
-                SettingsTile.custom(
+                SettingsTile(
                   title: "Score",
                   child: Row(
                     children: [
@@ -343,83 +344,101 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                     setState(() => options.score = value.toDouble());
                   },
                 ),
-              InkWell(
-                onTap: enabled
-                    ? () async {
-                        var selectedDate = await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(1940),
-                          initialDate: options.startedAt.toDate(),
-                          lastDate: DateTime(3000),
-                        );
+              SettingsTile(
+                title: "Start date",
+                onTap: () async {
+                  var selectedDate = await showDatePicker(
+                    context: context,
+                    firstDate: DateTime(1940),
+                    initialDate: options.startedAt.toDate(),
+                    lastDate: DateTime(3000),
+                  );
 
-                        if (selectedDate != null) {
-                          setState(
-                            () => options.startedAt.update(
-                              (p0) {
-                                p0.day = selectedDate.day;
-                                p0.month = selectedDate.month;
-                                p0.year = selectedDate.year;
-                              },
-                            ),
-                          );
-                        }
-                      }
+                  if (selectedDate != null) {
+                    setState(
+                      () => options.startedAt.update(
+                        (p0) {
+                          p0.day = selectedDate.day;
+                          p0.month = selectedDate.month;
+                          p0.year = selectedDate.year;
+                        },
+                      ),
+                    );
+                  }
+                },
+                enabled: enabled,
+                subtitle: options.startedAt.toDate() != null
+                    ? Text(
+                        DateFormat.yMMMMd().format(options.startedAt.toDate()!))
                     : null,
-                child: SettingsTile(
-                  title: "Start date",
-                  subtitle: options.startedAt.toDate() != null
-                      ? Text(DateFormat.yMMMMd()
-                          .format(options.startedAt.toDate()!))
-                      : null,
-                ),
+                child: options.startedAt.toDate() != null
+                    ? IconButton(
+                        onPressed: () =>
+                            setState(() => options.startedAt.update(
+                                  (p0) => p0
+                                    ..day = null
+                                    ..month = null
+                                    ..year = null,
+                                )),
+                        icon: const Icon(Icons.clear),
+                      )
+                    : null,
               ),
-              InkWell(
-                onTap: enabled
-                    ? () async {
-                        var selectedDate = await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(1940),
-                          initialDate: options.completedAt.toDate(),
-                          lastDate: DateTime(3000),
-                        );
+              SettingsTile(
+                title: "Finished date",
+                onTap: () async {
+                  var selectedDate = await showDatePicker(
+                    context: context,
+                    firstDate: DateTime(1940),
+                    initialDate: options.completedAt.toDate(),
+                    lastDate: DateTime(3000),
+                  );
 
-                        if (selectedDate != null) {
-                          setState(
-                            () => options.completedAt.update(
-                              (p0) {
-                                p0.day = selectedDate.day;
-                                p0.month = selectedDate.month;
-                                p0.year = selectedDate.year;
-                              },
-                            ),
-                          );
-                        }
-                      }
+                  if (selectedDate != null) {
+                    setState(
+                      () => options.completedAt.update(
+                        (p0) {
+                          p0.day = selectedDate.day;
+                          p0.month = selectedDate.month;
+                          p0.year = selectedDate.year;
+                        },
+                      ),
+                    );
+                  }
+                },
+                enabled: enabled,
+                subtitle: options.completedAt.toDate() != null
+                    ? Text(DateFormat.yMMMMd()
+                        .format(options.completedAt.toDate()!))
                     : null,
-                child: SettingsTile(
-                  title: "Finished date",
-                  subtitle: options.completedAt.toDate() != null
-                      ? Text(DateFormat.yMMMMd()
-                          .format(options.completedAt.toDate()!))
-                      : null,
-                ),
+                child: options.completedAt.toDate() != null
+                    ? IconButton(
+                        onPressed: () =>
+                            setState(() => options.completedAt.update(
+                                  (p0) => p0
+                                    ..day = null
+                                    ..month = null
+                                    ..year = null,
+                                )),
+                        icon: const Icon(Icons.clear),
+                      )
+                    : null,
               ),
               if (enabled) ...[
-                SettingsTile.switchTile(
+                SwitchSettingsTile(
                   title: "Private",
                   enabled: enabled,
                   value: options.private ?? false,
                   onChanged: (value) => setState(() => options.private = value),
                 ),
-                SettingsTile.switchTile(
+                SwitchSettingsTile(
                   title: "Hide From Statis List",
                   value: options.hiddenFromStatusLists ?? false,
                   enabled: enabled,
                   onChanged: (value) =>
                       setState(() => options.hiddenFromStatusLists = value),
                 ),
-                SettingsTile<String>.popup(
+                PopupSettingsTile<String>(
                   title: "Custom List",
                   items: [
                     for (var list in (widget.entry.customLists?.asList ?? []))
@@ -431,7 +450,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                         ),
                       )
                   ],
-                  onChanged: (value) {
+                  onSelected: (value) {
                     if (builtCustomList.contains(value)) {
                       setState(() => options.customLists.update(
                             (p0) => p0.remove(value),
@@ -448,13 +467,10 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
           ),
           const SizedBox(height: 10),
           if (enabled || options.notes?.isNotEmpty == true)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: _NoteBox(
-                note: options.notes,
-                onChanged: (note) => options.notes = note,
-                enabled: userId == widget.entry.user?.id,
-              ),
+            _NoteBox(
+              note: options.notes,
+              onChanged: (note) => options.notes = note,
+              enabled: userId == widget.entry.user?.id,
             )
         ],
       ),
@@ -515,7 +531,7 @@ class SettingTileNumber<T extends num> extends HookWidget {
       [textEditingUpdate],
     );
 
-    return SettingsTile.custom(
+    return SettingsTile(
       title: title,
       child: Row(
         children: [

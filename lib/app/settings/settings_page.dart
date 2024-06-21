@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
+import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
@@ -45,7 +46,7 @@ class SettingsPage extends ConsumerWidget {
           SettingsSection(
             title: "Appearance",
             tiles: [
-              SettingsTile.popup(
+              PopupSettingsTile(
                 title: "Theme",
                 icon: const Icon(Icons.palette),
                 value: settings.themeMode,
@@ -63,10 +64,10 @@ class SettingsPage extends ConsumerWidget {
                     child: Text("System"),
                   ),
                 ],
-                onChanged: (value) =>
+                onSelected: (value) =>
                     ref.read(settingsProvider.notifier).updateThemeMode(value),
               ),
-              SettingsTile.popup(
+              PopupSettingsTile(
                 title: "Color",
                 value: settings.primaryColor ?? Colors.blue[500],
                 icon: const Icon(Icons.palette),
@@ -87,22 +88,22 @@ class SettingsPage extends ConsumerWidget {
                       ),
                     )
                     .toList(),
-                onChanged: (value) => ref
+                onSelected: (value) => ref
                     .read(settingsProvider.notifier)
                     .updatePrimaryColor(value),
               ),
-              SettingsTile.switchTile(
+              SwitchSettingsTile(
                 title: "Blur 18+ covers",
                 value: settings.blurCovers,
                 onChanged: (value) =>
                     ref.read(settingsProvider.notifier).updateBlurCovers(value),
-              )
+              ),
             ],
           ),
           SettingsSection(
             title: "Chat",
             tiles: [
-              SettingsTile.switchTile(
+              SwitchSettingsTile(
                 value: settings.showEmbedMediaCard,
                 onChanged: (p0) => ref
                     .read(settingsProvider.notifier)
@@ -122,7 +123,7 @@ class SettingsPage extends ConsumerWidget {
             SettingsSection(
               title: "Anime & Manga",
               tiles: [
-                SettingsTile<GUserTitleLanguage>.popup(
+                PopupSettingsTile(
                   title: "Title Language",
                   value: user.value?.data?.Viewer?.options?.titleLanguage,
                   items: [
@@ -139,13 +140,13 @@ class SettingsPage extends ConsumerWidget {
                       child: Text(GUserTitleLanguage.ENGLISH.name.capitalize()),
                     )
                   ],
-                  onChanged: (value) => client
+                  onSelected: (value) => client
                       .request(GUpdateUserReq(
                         (b) => b..vars.titleLanguage = value,
                       ))
                       .first,
                 ),
-                SettingsTile<GUserStaffNameLanguage>.popup(
+                PopupSettingsTile(
                   title: "Staff & Character Name Language",
                   value: user.value?.data?.Viewer?.options?.staffNameLanguage,
                   items: [
@@ -165,13 +166,13 @@ class SettingsPage extends ConsumerWidget {
                           .capitalize()),
                     ),
                   ],
-                  onChanged: (value) => client
+                  onSelected: (value) => client
                       .request(GUpdateUserReq(
                         (b) => b..vars.staffNameLanguage = value,
                       ))
                       .first,
                 ),
-                SettingsTile<int>.popup(
+                PopupSettingsTile(
                   title: "Activity Time",
                   value: user.value!.data!.Viewer!.options!.activityMergeTime!,
                   items: mergeTimes
@@ -199,13 +200,13 @@ class SettingsPage extends ConsumerWidget {
                         ),
                       )
                       .toList(),
-                  onChanged: (value) => client
+                  onSelected: (value) => client
                       .request(GUpdateUserReq(
                         (b) => b..vars.activityMergeTime = value,
                       ))
                       .first,
                 ),
-                SettingsTile.switchTile(
+                SwitchSettingsTile(
                   title: "Airing Anime Notifications",
                   value:
                       user.value!.data!.Viewer!.options!.airingNotifications!,
@@ -215,7 +216,7 @@ class SettingsPage extends ConsumerWidget {
                       ))
                       .first,
                 ),
-                SettingsTile.switchTile(
+                SwitchSettingsTile(
                   title: "Adult Content",
                   value:
                       user.value!.data!.Viewer!.options!.displayAdultContent!,
@@ -231,7 +232,7 @@ class SettingsPage extends ConsumerWidget {
             SettingsSection(
               title: "Lists",
               tiles: [
-                SettingsTile<GScoreFormat>.popup(
+                PopupSettingsTile(
                   title: "Scoring System",
                   value:
                       user.value!.data!.Viewer!.mediaListOptions!.scoreFormat!,
@@ -254,13 +255,13 @@ class SettingsPage extends ConsumerWidget {
                         }),
                       ),
                   ],
-                  onChanged: (value) => client
+                  onSelected: (value) => client
                       .request(GUpdateUserReq(
                         (b) => b..vars.scoreFormat = value,
                       ))
                       .first,
                 ),
-                SettingsTile<String>.popup(
+                PopupSettingsTile(
                   title: "Default List Order",
                   value: user.value!.data!.Viewer!.mediaListOptions!.rowOrder!,
                   items: const [
@@ -281,13 +282,13 @@ class SettingsPage extends ConsumerWidget {
                       child: Text("Last Added"),
                     ),
                   ],
-                  onChanged: (value) => client
+                  onSelected: (value) => client
                       .request(GUpdateUserReq(
                         (b) => b..vars.rowOrder = value,
                       ))
                       .first,
                 ),
-                SettingsTile<String>.popup(
+                PopupSettingsTile(
                   title: "Split Completed List Section By Format",
                   items: [
                     CheckedPopupMenuItem(
@@ -305,7 +306,7 @@ class SettingsPage extends ConsumerWidget {
                       child: const Text("Manga"),
                     )
                   ],
-                  onChanged: (value) => {
+                  onSelected: (value) => {
                     if (value == "anime")
                       client
                           .request(
@@ -383,6 +384,7 @@ class SettingsSection extends StatelessWidget {
           borderOnForeground: true,
           child: ListView.separated(
             shrinkWrap: true,
+            primary: false,
             itemCount: tiles.length,
             itemBuilder: (context, index) => tiles[index],
             separatorBuilder: (context, index) => const Padding(
@@ -399,111 +401,171 @@ class SettingsSection extends StatelessWidget {
   }
 }
 
-class SettingsTile<T> extends StatelessWidget {
+class SettingsTile extends StatelessWidget {
   const SettingsTile({
     super.key,
     required this.title,
     this.subtitle,
     this.icon,
-  })  : switchValue = null,
-        onSwitchChanged = null,
-        popupItems = null,
-        onPopupChanged = null,
-        onCheckedChanged = null,
-        checkedValue = null,
-        initialValue = null,
-        customWidget = null,
-        enabled = null;
-
-  const SettingsTile.switchTile({
-    super.key,
-    required this.title,
+    this.onTap,
     this.enabled,
-    this.subtitle,
-    required bool value,
-    required Function(bool) onChanged,
-    this.icon,
-  })  : switchValue = value,
-        onSwitchChanged = onChanged,
-        checkedValue = null,
-        popupItems = null,
-        onPopupChanged = null,
-        onCheckedChanged = null,
-        initialValue = null,
-        customWidget = null;
-
-  const SettingsTile.checkbox({
-    super.key,
-    required this.title,
-    this.subtitle,
-    this.enabled,
-    required bool value,
-    required Function(bool? value) onChanged,
-    this.icon,
-  })  : switchValue = null,
-        onSwitchChanged = null,
-        checkedValue = value,
-        popupItems = null,
-        onPopupChanged = null,
-        onCheckedChanged = onChanged,
-        initialValue = null,
-        customWidget = null;
-
-  const SettingsTile.popup({
-    super.key,
-    required this.title,
-    this.subtitle,
-    this.enabled,
-    required List<PopupMenuEntry<T>> items,
-    required Function(T value) onChanged,
-    T? value,
-    this.icon,
-  })  : popupItems = items,
-        onPopupChanged = onChanged,
-        checkedValue = null,
-        switchValue = null,
-        onSwitchChanged = null,
-        onCheckedChanged = null,
-        initialValue = value,
-        customWidget = null;
-
-  const SettingsTile.custom({
-    super.key,
-    required this.title,
-    required Widget child,
-    this.icon,
-    this.subtitle,
-  })  : popupItems = null,
-        onPopupChanged = null,
-        checkedValue = null,
-        switchValue = null,
-        onSwitchChanged = null,
-        onCheckedChanged = null,
-        initialValue = null,
-        customWidget = child,
-        enabled = null;
+    this.child,
+  });
 
   final String title;
   final Widget? subtitle;
   final Icon? icon;
-  final bool? switchValue;
-  final bool? checkedValue;
-  final Function(bool value)? onSwitchChanged;
-  final Function(bool? value)? onCheckedChanged;
-  final List<PopupMenuEntry<T>>? popupItems;
-  final T? initialValue;
-  final Function(T value)? onPopupChanged;
-  final Widget? customWidget;
+  final VoidCallback? onTap;
+  final Widget? child;
   final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
+    return InkWell(
+      onTap: enabled == false ? null : onTap,
+      child: Padding(
+        padding: const EdgeInsetsDirectional.only(
+            start: 24, end: 20, top: 10, bottom: 10),
+        child: Row(
+          children: [
+            if (icon != null)
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconTheme(
+                  data: IconThemeData(color: context.theme.hintColor),
+                  child: icon!,
+                ),
+              ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: context.theme.textTheme.bodyLarge,
+                  ),
+                  if (subtitle != null)
+                    DefaultTextStyle(
+                      style: (context.theme.primaryTextTheme.bodyMedium ??
+                              const TextStyle())
+                          .copyWith(
+                              color: context.theme.hintColor,
+                              overflow: TextOverflow.ellipsis),
+                      maxLines: 1,
+                      child: subtitle!,
+                    )
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            if (child != null) child!,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SwitchSettingsTile extends SettingsTile {
+  SwitchSettingsTile({
+    super.key,
+    required super.title,
+    required this.value,
+    required this.onChanged,
+    super.icon,
+    super.subtitle,
+    super.enabled,
+  }) : super(
+          child: Switch.adaptive(
+            value: value,
+            onChanged: enabled == false ? null : onChanged,
+          ),
+          onTap: () => onChanged(!value),
+        );
+
+  final void Function(bool value) onChanged;
+  final bool value;
+}
+
+class CheckboxSettingsTile extends SettingsTile {
+  CheckboxSettingsTile({
+    super.key,
+    required super.title,
+    required this.value,
+    required this.onChanged,
+    super.icon,
+    super.subtitle,
+    super.enabled,
+  }) : super(
+          child: Checkbox.adaptive(
+            value: value,
+            onChanged: enabled == false ? null : onChanged,
+          ),
+          onTap: () => onChanged(!value),
+        );
+
+  final void Function(bool? value) onChanged;
+  final bool value;
+}
+
+class RadioSettingsTile extends SettingsTile {
+  RadioSettingsTile({
+    super.key,
+    required super.title,
+    required this.value,
+    required this.groupValue,
+    required this.onChanged,
+    super.icon,
+    super.subtitle,
+    super.enabled,
+  }) : super(
+          child: Radio.adaptive(
+            value: value,
+            groupValue: groupValue,
+            onChanged: enabled == false ? null : onChanged,
+            toggleable: true,
+          ),
+          onTap: () => onChanged(value == groupValue ? null : value),
+        );
+
+  final void Function(bool? value) onChanged;
+  final bool value;
+  final bool? groupValue;
+}
+
+class PopupSettingsTile<T> extends StatelessWidget {
+  const PopupSettingsTile({
+    super.key,
+    required this.title,
+    required this.items,
+    this.value,
+    this.subtitle,
+    this.icon,
+    this.enabled,
+    this.onSelected,
+    this.onClear,
+  });
+
+  final String title;
+  final Widget? subtitle;
+  final Icon? icon;
+  final bool? enabled;
+  final List<PopupMenuEntry<T>> items;
+  final T? value;
+  final void Function(T value)? onSelected;
+  final VoidCallback? onClear;
+
+  @override
+  Widget build(BuildContext context) {
     Widget? s;
-    if (popupItems != null && subtitle == null && initialValue != null) {
-      var text = (popupItems!.firstWhereOrNull(
+    if (subtitle == null && value != null) {
+      var text = (items.firstWhereOrNull(
         (element) {
           if (element is PopupMenuItem) {
-            return (element as PopupMenuItem).value == initialValue;
+            return (element as PopupMenuItem).value == value;
           }
           return false;
         },
@@ -514,80 +576,27 @@ class SettingsTile<T> extends StatelessWidget {
 
     s ??= subtitle;
 
-    var tile = Padding(
-      padding: const EdgeInsetsDirectional.only(
-          start: 24, end: 20, top: 10, bottom: 10),
-      child: Row(
-        children: [
-          if (icon != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconTheme(
-                data: IconThemeData(color: context.theme.hintColor),
-                child: icon!,
-              ),
-            ),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: context.theme.textTheme.bodyLarge,
-                ),
-                if (s != null)
-                  DefaultTextStyle(
-                    style: (context.theme.primaryTextTheme.bodyMedium ??
-                            const TextStyle())
-                        .copyWith(color: context.theme.hintColor),
-                    child: s,
-                  )
-              ],
-            ),
+    return PopupMenuButton(
+      initialValue: value,
+      position: PopupMenuPosition.under,
+      tooltip: "",
+      itemBuilder: (context) => items,
+      onSelected: onSelected,
+      constraints: const BoxConstraints(maxHeight: 500, maxWidth: 200),
+      surfaceTintColor: context.theme.colorScheme.primary,
+      enabled: enabled ?? true,
+      child: SettingsTile(
+        title: title,
+        subtitle: s,
+        icon: icon,
+        child: Show(
+          when: value != null && onClear != null,
+          child: () => IconButton(
+            icon: const Icon(Icons.clear),
+            onPressed: onClear!,
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          if (switchValue != null)
-            Switch.adaptive(
-              value: switchValue!,
-              onChanged: enabled == false ? null : onSwitchChanged,
-            ),
-          if (checkedValue != null)
-            Checkbox.adaptive(
-              value: checkedValue!,
-              onChanged: enabled == false ? null : onCheckedChanged,
-            ),
-          if (customWidget != null) customWidget!,
-        ],
+        ),
       ),
     );
-
-    if (switchValue != null) {
-      return InkWell(
-        onTap: enabled == false ? null : () => onSwitchChanged!(!switchValue!),
-        child: tile,
-      );
-    } else if (checkedValue != null) {
-      return InkWell(
-        onTap:
-            enabled == false ? null : () => onCheckedChanged!(!checkedValue!),
-        child: tile,
-      );
-    } else if (popupItems != null && enabled != false) {
-      return PopupMenuButton(
-        initialValue: initialValue,
-        position: PopupMenuPosition.under,
-        tooltip: "",
-        itemBuilder: (context) => popupItems!,
-        onSelected: onPopupChanged,
-        constraints: const BoxConstraints(maxHeight: 500, maxWidth: 200),
-        surfaceTintColor: context.theme.colorScheme.primary,
-        child: tile,
-      );
-    }
-
-    return tile;
   }
 }

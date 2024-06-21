@@ -343,26 +343,23 @@ class ActivityCard extends ConsumerWidget {
           padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
           child: Row(
             children: [
-              SizedBox(
-                height: 120,
-                width: 85,
-                child: InkWellImage(
-                  borderRadius: imageRadius,
-                  onTap: () => context.push(
-                    "/media/${a.media!.id}/info",
-                    extra: {"media": a.media},
-                  ),
-                  onLongPress: () => MediaSheet.show(context, a.media!),
-                  child: AspectRatio(
-                    aspectRatio: 2 / 3,
-                    child: ClipRRect(
-                      borderRadius: imageRadius,
-                      child: BlurImage(
-                        enabled: a.media!.isAdult ?? false,
-                        child: CachedImage(
-                          a.media!.coverImage!.extraLarge!,
-                          fit: BoxFit.fill,
-                        ),
+              InkWellImage(
+                borderRadius: imageRadius,
+                onTap: () => context.push(
+                  "/media/${a.media!.id}/info",
+                  extra: {"media": a.media},
+                ),
+                onLongPress: () => MediaSheet.show(context, a.media!),
+                child: SizedBox(
+                  height: 100,
+                  width: 70,
+                  child: ClipRRect(
+                    borderRadius: imageRadius,
+                    child: BlurImage(
+                      enabled: a.media!.isAdult ?? false,
+                      child: CachedImage(
+                        a.media!.coverImage!.extraLarge!,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

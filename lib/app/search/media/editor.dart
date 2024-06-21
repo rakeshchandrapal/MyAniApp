@@ -1,10 +1,12 @@
+import 'package:ferry_exec/ferry_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
 import 'package:myaniapp/app/search/media/page.dart';
-import 'package:myaniapp/common/custom_dropdown.dart';
+import 'package:myaniapp/app/settings/settings_page.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
+import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/graphql/widget.dart';
@@ -82,10 +84,15 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
           Row(
             children: [
               Expanded(
-                child: TextButton(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(
+                          context.theme.colorScheme.surfaceContainer)),
                   onPressed: () {
                     if (query.genres?.contains("Hentai") == true) {
                       query.isAdult = true;
+                    } else {
+                      query.isAdult = null;
                     }
                     context.replace("/search/media${query.toString()}");
                     context.pop();
@@ -106,94 +113,140 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
           const SizedBox(
             height: 5,
           ),
-          GridView(
-            shrinkWrap: true,
-            primary: false,
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              mainAxisExtent: 60,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SettingsSection(
+              title: null,
+              tiles: [
+                PopupSettingsTile(
+                  title: "Type",
+                  value: query.type,
+                  items: [
+                    for (var type in GMediaType.values)
+                      PopupMenuItem(
+                        value: type,
+                        child: Text(type.name.capitalize()),
+                      ),
+                  ],
+                  onClear: () => setState(() => query.type = null),
+                  onSelected: (value) => setState(() => query.type = value),
+                ),
+                PopupSettingsTile(
+                  title: "Sort",
+                  value: query.sort?.firstOrNull,
+                  subtitle: Show(
+                    when: query.sort != null,
+                    child: () => Text(
+                      query.sort!.fold(
+                        "",
+                        (str, element) => str.isEmpty
+                            ? element.name.capitalize()
+                            : "$str, ${element.name.capitalize()}",
+                      ),
+                    ),
+                  ),
+                  items: [
+                    for (var sort in GMediaSort.values)
+                      CheckedPopupMenuItem(
+                        value: sort,
+                        checked: query.sort?.contains(sort) == true,
+                        child: Text(sort.name.capitalize()),
+                      ),
+                  ],
+                  onClear: () => setState(() => query.sort = null),
+                  onSelected: (value) {
+                    if (query.sort?.contains(value) == true) {
+                      setState(() => query.sort?.remove(value));
+                    } else if (query.sort == null) {
+                      setState(() => query.sort = [value]);
+                    } else {
+                      setState(() => query.sort?.add(value));
+                    }
+                  },
+                ),
+                PopupSettingsTile(
+                  title: "Format",
+                  value: query.format?.firstOrNull,
+                  subtitle: Show(
+                    when: query.format != null,
+                    child: () => Text(
+                      query.format!.fold(
+                        "",
+                        (str, element) => str.isEmpty
+                            ? element.name.capitalize()
+                            : "$str, ${element.name.capitalize()}",
+                      ),
+                    ),
+                  ),
+                  items: [
+                    for (var format in GMediaFormat.values)
+                      CheckedPopupMenuItem(
+                        value: format,
+                        checked: query.format?.contains(format) == true,
+                        child: Text(format.name.capitalize()),
+                      ),
+                  ],
+                  onClear: () => setState(() => query.format = null),
+                  onSelected: (value) {
+                    if (query.format?.contains(value) == true) {
+                      setState(() => query.format?.remove(value));
+                    } else if (query.format == null) {
+                      setState(() => query.format = [value]);
+                    } else {
+                      setState(() => query.format?.add(value));
+                    }
+                  },
+                ),
+                PopupSettingsTile(
+                  title: "Season",
+                  value: query.season,
+                  items: [
+                    for (var season in GMediaSeason.values)
+                      PopupMenuItem(
+                        value: season,
+                        child: Text(season.name.capitalize()),
+                      ),
+                  ],
+                  onClear: () => setState(() => query.season = null),
+                  onSelected: (value) => setState(() => query.season = value),
+                ),
+                YearButton(
+                  onChanged: (year) => setState(() => query.year = year),
+                  year: query.year,
+                ),
+                PopupSettingsTile(
+                  title: "Country",
+                  value: query.countryOfOrigin,
+                  items: [
+                    for (var season in countries.entries)
+                      PopupMenuItem(
+                        value: season.value,
+                        child: Text(season.key),
+                      ),
+                  ],
+                  onClear: () => setState(() => query.countryOfOrigin = null),
+                  onSelected: (value) =>
+                      setState(() => query.countryOfOrigin = value),
+                ),
+                GenresButton(
+                  onChanged: (genres) => setState(() => query.genres = genres),
+                  genres: query.genres,
+                ),
+                RadioSettingsTile(
+                  title: "Not From My List",
+                  value: false,
+                  groupValue: query.onList,
+                  onChanged: (value) => setState(
+                      () => query.onList = value == false ? false : null),
+                ),
+                RadioSettingsTile(
+                  title: "Only From My List",
+                  value: true,
+                  groupValue: query.onList,
+                  onChanged: (value) => setState(() => query.onList = value),
+                )
+              ],
             ),
-            children: [
-              SheetDropdownMenu(
-                value: query.type,
-                hint: "Type",
-                onChanged: (values) => query.type = values.first,
-                onClear: () => query.type = null,
-                items: GMediaType.values.map(
-                  (p0) => DropdownMenuEntry(
-                    value: p0,
-                    label: p0.name.capitalize(),
-                  ),
-                ),
-              ),
-              SheetDropdownMenu<GMediaSort>.multi(
-                values: query.sort ?? [],
-                onClear: () => query.sort = null,
-                onChanged: (values) => query.sort = values.toList(),
-                hint: "Sort",
-                items: GMediaSort.values.map(
-                  (p0) =>
-                      DropdownMenuEntry(value: p0, label: p0.name.capitalize()),
-                ),
-              ),
-              SheetDropdownMenu<GMediaFormat>.multi(
-                values: query.format ?? [],
-                hint: "Format",
-                onClear: () => query.format = null,
-                onChanged: (values) => query.format = values.toList(),
-                items: GMediaFormat.values.map(
-                  (p0) =>
-                      DropdownMenuEntry(value: p0, label: p0.name.capitalize()),
-                ),
-              ),
-              YearButton(
-                onChanged: (year) => query.year = year,
-                year: query.year,
-              ),
-              SheetDropdownMenu(
-                value: query.season,
-                hint: "Season",
-                onChanged: (values) => query.season = values.first,
-                onClear: () => query.season = null,
-                items: GMediaSeason.values.map(
-                  (p0) => DropdownMenuEntry(
-                    value: p0,
-                    label: p0.name.capitalize(),
-                  ),
-                ),
-              ),
-              SheetDropdownMenu(
-                value: query.countryOfOrigin,
-                hint: "Country",
-                onChanged: (values) => query.countryOfOrigin = values.first,
-                onClear: () => query.countryOfOrigin = null,
-                items: countries.entries.map(
-                  (e) => DropdownMenuEntry(value: e.value, label: e.key),
-                ),
-              ),
-              GenresButton(
-                onChanged: (genres) => query.genres = genres,
-                genres: query.genres,
-              ),
-            ],
-          ),
-          RadioListTile.adaptive(
-            value: false,
-            groupValue: query.onList,
-            toggleable: true,
-            title: const Text("Not from my list"),
-            onChanged: (value) =>
-                setState(() => query.onList = value == false ? false : null),
-          ),
-          RadioListTile.adaptive(
-            value: true,
-            toggleable: true,
-            groupValue: query.onList,
-            title: const Text("Only from my list"),
-            onChanged: (value) => setState(() => query.onList = value),
           ),
         ],
       ),
@@ -214,8 +267,9 @@ class GenresButton extends ConsumerWidget {
     ));
 
     return GQLRequest(
-      operationRequest:
-          GGenreCollectionReq((b) => b..requestId = "genreCollectionSearch"),
+      operationRequest: GGenreCollectionReq((b) => b
+        ..requestId = "genreCollectionSearch"
+        ..fetchPolicy = FetchPolicy.NetworkOnly),
       builder: (context, response, error, refetch) {
         var genresList = response!.data!.genres!.toList();
 
@@ -223,12 +277,31 @@ class GenresButton extends ConsumerWidget {
           genresList.remove("Hentai");
         }
 
-        return SheetDropdownMenu<String>.multi(
-          hint: 'Genres',
-          items: genresList.map((e) => DropdownMenuEntry(label: e!, value: e)),
-          values: genres ?? [],
-          onChanged: (values) => onChanged(values.toList()),
+        return PopupSettingsTile(
+          title: "Generes",
+          value: genres?.firstOrNull,
+          subtitle: Show(
+            when: genres != null,
+            child: () => Text(genres!.join(", ")),
+          ),
+          items: [
+            for (var genre in genresList)
+              CheckedPopupMenuItem(
+                value: genre,
+                checked: genres?.contains(genre) == true,
+                child: Text(genre!),
+              ),
+          ],
           onClear: () => onChanged(null),
+          onSelected: (value) {
+            if (genres?.contains(value) == true) {
+              onChanged(genres!..remove(value));
+            } else if (genres == null) {
+              onChanged([value]);
+            } else {
+              onChanged(genres!..add(value));
+            }
+          },
         );
       },
     );
@@ -248,15 +321,19 @@ class YearButton extends StatelessWidget {
       (index) => 1940 + index,
     );
 
-    return SheetDropdownMenu(
-      hint: 'Year',
+    return PopupSettingsTile(
+      title: "Year",
       value: year,
-      onClear: () => onChanged(null),
       items: [
         for (var year in years.reversed)
-          DropdownMenuEntry(value: year, label: year.toString()),
+          PopupMenuItem(
+            value: year,
+            child: Text(year.toString()),
+            // checked: query.format?.contains(format) == true,
+          ),
       ],
-      onChanged: (v) => onChanged(v.first),
+      onClear: () => onChanged(null),
+      onSelected: onChanged,
     );
   }
 }
