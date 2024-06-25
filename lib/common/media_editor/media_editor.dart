@@ -239,9 +239,9 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 value: options.status,
                 items: [
                   for (var s in GMediaListStatus.values)
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: s,
-                      child: Text(s.name.capitalize()),
+                      label: s.name.capitalize(),
                     )
                 ],
                 onSelected: (value) => setState(() => options.status = value),
@@ -265,7 +265,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
               if (widget.entry.user!.mediaListOptions!.scoreFormat ==
                   GScoreFormat.POINT_3)
                 SettingsTile(
-                  title: "Score",
+                  title: Text("Score"),
                   child: Row(
                     children: [
                       FilterChip(
@@ -345,7 +345,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   },
                 ),
               SettingsTile(
-                title: "Start date",
+                title: Text("Start date"),
                 onTap: () async {
                   var selectedDate = await showDatePicker(
                     context: context,
@@ -385,7 +385,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                     : null,
               ),
               SettingsTile(
-                title: "Finished date",
+                title: Text("Finished date"),
                 onTap: () async {
                   var selectedDate = await showDatePicker(
                     context: context,
@@ -438,28 +438,20 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   onChanged: (value) =>
                       setState(() => options.hiddenFromStatusLists = value),
                 ),
-                PopupSettingsTile<String>(
+                MultiPopupSettingsTile<String>(
                   title: "Custom List",
+                  initialValues: builtCustomList.cast<String>().toList(),
                   items: [
                     for (var list in (widget.entry.customLists?.asList ?? []))
-                      CheckedPopupMenuItem(
-                        checked: builtCustomList.contains(list['name']),
+                      PopupSettingCheckbox(
                         value: list['name'],
-                        child: Text(
-                          list['name'],
-                        ),
+                        label: list['name'],
                       )
                   ],
-                  onSelected: (value) {
-                    if (builtCustomList.contains(value)) {
-                      setState(() => options.customLists.update(
-                            (p0) => p0.remove(value),
-                          ));
-                    } else {
-                      setState(() => options.customLists.update(
-                            (p0) => p0.add(value),
-                          ));
-                    }
+                  onSaved: (value) {
+                    setState(() => options.customLists
+                      ..clear()
+                      ..addAll(value));
                   },
                 )
               ],
@@ -481,14 +473,11 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
 class SettingTileNumber<T extends num> extends HookWidget {
   const SettingTileNumber({
     super.key,
-    // required super.title,
     required this.title,
     required this.value,
     required this.onChanged,
     this.max,
     this.enabled,
-    // super.icon,
-    // super.subtitle,
   });
 
   final void Function(T value) onChanged;
@@ -532,7 +521,7 @@ class SettingTileNumber<T extends num> extends HookWidget {
     );
 
     return SettingsTile(
-      title: title,
+      title: Text(title),
       child: Row(
         children: [
           if (enabled == false)

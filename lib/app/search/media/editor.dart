@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
 import 'package:myaniapp/app/search/media/page.dart';
+import 'package:myaniapp/app/search/media/tags.dart';
 import 'package:myaniapp/app/settings/settings_page.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/show.dart';
@@ -94,6 +95,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                     } else {
                       query.isAdult = null;
                     }
+                    print(query.toReq());
                     context.replace("/search/media${query.toString()}");
                     context.pop();
                   },
@@ -123,88 +125,86 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   value: query.type,
                   items: [
                     for (var type in GMediaType.values)
-                      PopupMenuItem(
+                      PopupSettingItem(
                         value: type,
-                        child: Text(type.name.capitalize()),
+                        label: type.name.capitalize(),
                       ),
                   ],
                   onClear: () => setState(() => query.type = null),
                   onSelected: (value) => setState(() => query.type = value),
                 ),
-                PopupSettingsTile(
+                MultiPopupSettingsTile(
                   title: "Sort",
-                  value: query.sort?.firstOrNull,
-                  subtitle: Show(
-                    when: query.sort != null,
-                    child: () => Text(
-                      query.sort!.fold(
-                        "",
-                        (str, element) => str.isEmpty
-                            ? element.name.capitalize()
-                            : "$str, ${element.name.capitalize()}",
-                      ),
-                    ),
-                  ),
+                  initialValues: query.sort,
                   items: [
                     for (var sort in GMediaSort.values)
-                      CheckedPopupMenuItem(
+                      PopupSettingCheckbox(
                         value: sort,
-                        checked: query.sort?.contains(sort) == true,
-                        child: Text(sort.name.capitalize()),
+                        label: sort.name.capitalize(),
                       ),
                   ],
                   onClear: () => setState(() => query.sort = null),
-                  onSelected: (value) {
-                    if (query.sort?.contains(value) == true) {
-                      setState(() => query.sort?.remove(value));
-                    } else if (query.sort == null) {
-                      setState(() => query.sort = [value]);
-                    } else {
-                      setState(() => query.sort?.add(value));
-                    }
-                  },
+                  onSaved: (values) => setState(
+                      () => query.sort = values.isEmpty ? null : values),
                 ),
-                PopupSettingsTile(
+                GenresButton(
+                  onChanged: (genres) => setState(() => query.genres = genres),
+                  genres: query.genres,
+                ),
+                MultiPopupSettingsTile(
                   title: "Format",
-                  value: query.format?.firstOrNull,
-                  subtitle: Show(
-                    when: query.format != null,
-                    child: () => Text(
-                      query.format!.fold(
-                        "",
-                        (str, element) => str.isEmpty
-                            ? element.name.capitalize()
-                            : "$str, ${element.name.capitalize()}",
-                      ),
-                    ),
-                  ),
+                  initialValues: query.format,
+                  onSaved: (values) => setState(
+                      () => query.format = values.isEmpty ? null : values),
                   items: [
                     for (var format in GMediaFormat.values)
-                      CheckedPopupMenuItem(
+                      PopupSettingCheckbox(
                         value: format,
-                        checked: query.format?.contains(format) == true,
-                        child: Text(format.name.capitalize()),
+                        label: format.name.capitalize(),
                       ),
                   ],
                   onClear: () => setState(() => query.format = null),
-                  onSelected: (value) {
-                    if (query.format?.contains(value) == true) {
-                      setState(() => query.format?.remove(value));
-                    } else if (query.format == null) {
-                      setState(() => query.format = [value]);
-                    } else {
-                      setState(() => query.format?.add(value));
-                    }
-                  },
                 ),
+                // PopupSettingsTile(
+                //   title: "Format",
+                //   value: query.format?.firstOrNull,
+                //   subtitle: Show(
+                //     when: query.format != null,
+                //     child: () => Text(
+                //       query.format!.fold(
+                //         "",
+                //         (str, element) => str.isEmpty
+                //             ? element.name.capitalize()
+                //             : "$str, ${element.name.capitalize()}",
+                //       ),
+                //     ),
+                //   ),
+                //   items: [
+                //     for (var format in GMediaFormat.values)
+                //       CheckedPopupMenuItem(
+                //         value: format,
+                //         checked: query.format?.contains(format) == true,
+                //         child: Text(format.name.capitalize()),
+                //       ),
+                //   ],
+                //   onSelected: (value) {
+                //     if (query.format?.contains(value) == true) {
+                //       setState(() => query.format?.remove(value));
+                //     } else if (query.format == null) {
+                //       setState(() => query.format = [value]);
+                //     } else {
+                //       setState(() => query.format?.add(value));
+                //     }
+                //   },
+                // ),
                 PopupSettingsTile(
                   title: "Season",
                   value: query.season,
                   items: [
                     for (var season in GMediaSeason.values)
-                      PopupMenuItem(
+                      PopupSettingItem(
                         value: season,
-                        child: Text(season.name.capitalize()),
+                        label: season.name.capitalize(),
                       ),
                   ],
                   onClear: () => setState(() => query.season = null),
@@ -214,23 +214,33 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   onChanged: (year) => setState(() => query.year = year),
                   year: query.year,
                 ),
+                // PopupSettingsTile(
+                //   title: "Country",
+                //   value: query.countryOfOrigin,
+                //   items: [
+                //     for (var season in countries.entries)
+                //       PopupMenuItem(
+                //         value: season.value,
+                //         child: Text(season.key),
+                //       ),
+                //   ],
+                //   onClear: () => setState(() => query.countryOfOrigin = null),
+                //   onSelected: (value) =>
+                //       setState(() => query.countryOfOrigin = value),
+                // ),
                 PopupSettingsTile(
                   title: "Country",
                   value: query.countryOfOrigin,
                   items: [
                     for (var season in countries.entries)
-                      PopupMenuItem(
+                      PopupSettingItem(
                         value: season.value,
-                        child: Text(season.key),
+                        label: season.key,
                       ),
                   ],
                   onClear: () => setState(() => query.countryOfOrigin = null),
                   onSelected: (value) =>
                       setState(() => query.countryOfOrigin = value),
-                ),
-                GenresButton(
-                  onChanged: (genres) => setState(() => query.genres = genres),
-                  genres: query.genres,
                 ),
                 RadioSettingsTile(
                   title: "Not From My List",
@@ -244,7 +254,54 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   value: true,
                   groupValue: query.onList,
                   onChanged: (value) => setState(() => query.onList = value),
-                )
+                ),
+                SettingsTile(
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Tags"),
+                      SizedBox(height: 5),
+                      Wrap(
+                        spacing: 5,
+                        runSpacing: 5,
+                        children: [
+                          for (var tag in (query.withTags ?? []))
+                            Chip(
+                              label: Text(tag.name),
+                              side: BorderSide(color: Colors.green),
+                              onDeleted: () =>
+                                  setState(() => query.withTags!.remove(tag)),
+                            ),
+                          for (var tag in (query.withoutTags ?? []))
+                            Chip(
+                              label: Text(tag.name),
+                              side: BorderSide(color: Colors.red),
+                              onDeleted: () => setState(
+                                  () => query.withoutTags!.remove(tag)),
+                            )
+                        ],
+                      ),
+                    ],
+                  ),
+                  onTap: () => TagsEditorSheet.show(
+                    context,
+                    whitelistedTags: query.withTags ?? [],
+                    blacklistedTags: query.withoutTags ?? [],
+                    onChanged: (whitelistedTags, blacklistedTags) {
+                      setState(() {
+                        if (whitelistedTags.isNotEmpty)
+                          query.withTags = whitelistedTags;
+                        else
+                          query.withTags = null;
+
+                        if (blacklistedTags.isNotEmpty)
+                          query.withoutTags = blacklistedTags;
+                        else
+                          query.withoutTags = null;
+                      });
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -267,9 +324,8 @@ class GenresButton extends ConsumerWidget {
     ));
 
     return GQLRequest(
-      operationRequest: GGenreCollectionReq((b) => b
-        ..requestId = "genreCollectionSearch"
-        ..fetchPolicy = FetchPolicy.NetworkOnly),
+      operationRequest:
+          GGenreCollectionReq((b) => b..requestId = "genreCollectionSearch"),
       builder: (context, response, error, refetch) {
         var genresList = response!.data!.genres!.toList();
 
@@ -277,31 +333,23 @@ class GenresButton extends ConsumerWidget {
           genresList.remove("Hentai");
         }
 
-        return PopupSettingsTile(
-          title: "Generes",
-          value: genres?.firstOrNull,
+        return MultiPopupSettingsTile(
+          title: "Genres",
+          initialValues: genres,
           subtitle: Show(
             when: genres != null,
             child: () => Text(genres!.join(", ")),
           ),
           items: [
             for (var genre in genresList)
-              CheckedPopupMenuItem(
-                value: genre,
-                checked: genres?.contains(genre) == true,
-                child: Text(genre!),
+              PopupSettingCheckbox(
+                value: genre!,
+                // checked: genres?.contains(genre) == true,
+                label: genre!,
               ),
           ],
           onClear: () => onChanged(null),
-          onSelected: (value) {
-            if (genres?.contains(value) == true) {
-              onChanged(genres!..remove(value));
-            } else if (genres == null) {
-              onChanged([value]);
-            } else {
-              onChanged(genres!..add(value));
-            }
-          },
+          onSaved: (values) => onChanged(values.isEmpty ? null : values),
         );
       },
     );
@@ -326,10 +374,9 @@ class YearButton extends StatelessWidget {
       value: year,
       items: [
         for (var year in years.reversed)
-          PopupMenuItem(
+          PopupSettingItem(
             value: year,
-            child: Text(year.toString()),
-            // checked: query.format?.contains(format) == true,
+            label: year.toString(),
           ),
       ],
       onClear: () => onChanged(null),

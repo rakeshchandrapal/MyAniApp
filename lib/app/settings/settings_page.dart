@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
@@ -50,18 +51,18 @@ class SettingsPage extends ConsumerWidget {
                 title: "Theme",
                 icon: const Icon(Icons.palette),
                 value: settings.themeMode,
-                items: const [
-                  PopupMenuItem(
+                items: [
+                  PopupSettingItem(
                     value: ThemeMode.light,
-                    child: Text("Light"),
+                    label: "Light",
                   ),
-                  PopupMenuItem(
+                  PopupSettingItem(
                     value: ThemeMode.dark,
-                    child: Text("Dark"),
+                    label: "Dark",
                   ),
-                  PopupMenuItem(
+                  PopupSettingItem(
                     value: ThemeMode.system,
-                    child: Text("System"),
+                    label: "System",
                   ),
                 ],
                 onSelected: (value) =>
@@ -78,8 +79,9 @@ class SettingsPage extends ConsumerWidget {
                 ),
                 items: Colors.primaries
                     .map(
-                      (e) => PopupMenuItem(
+                      (e) => PopupSettingItem(
                         value: e.shade500,
+                        label: null,
                         child: Container(
                           width: double.maxFinite,
                           height: 40,
@@ -127,17 +129,17 @@ class SettingsPage extends ConsumerWidget {
                   title: "Title Language",
                   value: user.value?.data?.Viewer?.options?.titleLanguage,
                   items: [
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: GUserTitleLanguage.NATIVE,
-                      child: Text(GUserTitleLanguage.NATIVE.name.capitalize()),
+                      label: GUserTitleLanguage.NATIVE.name.capitalize(),
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: GUserTitleLanguage.ROMAJI,
-                      child: Text(GUserTitleLanguage.ROMAJI.name.capitalize()),
+                      label: GUserTitleLanguage.ROMAJI.name.capitalize(),
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: GUserTitleLanguage.ENGLISH,
-                      child: Text(GUserTitleLanguage.ENGLISH.name.capitalize()),
+                      label: GUserTitleLanguage.ENGLISH.name.capitalize(),
                     )
                   ],
                   onSelected: (value) => client
@@ -150,20 +152,18 @@ class SettingsPage extends ConsumerWidget {
                   title: "Staff & Character Name Language",
                   value: user.value?.data?.Viewer?.options?.staffNameLanguage,
                   items: [
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: GUserStaffNameLanguage.NATIVE,
-                      child:
-                          Text(GUserStaffNameLanguage.NATIVE.name.capitalize()),
+                      label: GUserStaffNameLanguage.NATIVE.name.capitalize(),
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: GUserStaffNameLanguage.ROMAJI,
-                      child:
-                          Text(GUserStaffNameLanguage.ROMAJI.name.capitalize()),
+                      label: GUserStaffNameLanguage.ROMAJI.name.capitalize(),
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: GUserStaffNameLanguage.ROMAJI_WESTERN,
-                      child: Text(GUserStaffNameLanguage.ROMAJI_WESTERN.name
-                          .capitalize()),
+                      label: GUserStaffNameLanguage.ROMAJI_WESTERN.name
+                          .capitalize(),
                     ),
                   ],
                   onSelected: (value) => client
@@ -177,26 +177,24 @@ class SettingsPage extends ConsumerWidget {
                   value: user.value!.data!.Viewer!.options!.activityMergeTime!,
                   items: mergeTimes
                       .map(
-                        (e) => PopupMenuItem(
+                        (e) => PopupSettingItem(
                           value: e,
-                          child: Text(
-                            switch (e) {
-                              0 => 'Never',
-                              30 => '30 Minutes',
-                              60 => '1 Hour',
-                              120 => '2 Hours',
-                              180 => '3 Hours',
-                              360 => '6 Hours',
-                              720 => '12 Hours',
-                              1440 => '1 Day',
-                              2880 => '2 Days',
-                              4320 => '3 Days',
-                              10080 => '1 Week',
-                              20160 => '2 Weeks',
-                              29160 => 'Always',
-                              _ => e.toString(),
-                            },
-                          ),
+                          label: switch (e) {
+                            0 => 'Never',
+                            30 => '30 Minutes',
+                            60 => '1 Hour',
+                            120 => '2 Hours',
+                            180 => '3 Hours',
+                            360 => '6 Hours',
+                            720 => '12 Hours',
+                            1440 => '1 Day',
+                            2880 => '2 Days',
+                            4320 => '3 Days',
+                            10080 => '1 Week',
+                            20160 => '2 Weeks',
+                            29160 => 'Always',
+                            _ => e.toString(),
+                          },
                         ),
                       )
                       .toList(),
@@ -238,9 +236,9 @@ class SettingsPage extends ConsumerWidget {
                       user.value!.data!.Viewer!.mediaListOptions!.scoreFormat!,
                   items: [
                     for (var score in GScoreFormat.values)
-                      PopupMenuItem(
+                      PopupSettingItem(
                         value: score,
-                        child: Text(switch (score) {
+                        label: switch (score) {
                           GScoreFormat.POINT_3 =>
                             "3 Point Simily ${scoreToText(score, 3)}",
                           GScoreFormat.POINT_5 =>
@@ -252,7 +250,7 @@ class SettingsPage extends ConsumerWidget {
                           GScoreFormat.POINT_100 =>
                             "100 Point ${scoreToText(score, 50)}",
                           _ => "",
-                        }),
+                        },
                       ),
                   ],
                   onSelected: (value) => client
@@ -264,22 +262,22 @@ class SettingsPage extends ConsumerWidget {
                 PopupSettingsTile(
                   title: "Default List Order",
                   value: user.value!.data!.Viewer!.mediaListOptions!.rowOrder!,
-                  items: const [
-                    PopupMenuItem(
+                  items: [
+                    PopupSettingItem(
                       value: "score",
-                      child: Text("Score"),
+                      label: "Score",
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: "title",
-                      child: Text("Title"),
+                      label: "Title",
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: "updatedAt",
-                      child: Text("Last Updated"),
+                      label: "Last Updated",
                     ),
-                    PopupMenuItem(
+                    PopupSettingItem(
                       value: "id",
-                      child: Text("Last Added"),
+                      label: "Last Added",
                     ),
                   ],
                   onSelected: (value) => client
@@ -288,62 +286,68 @@ class SettingsPage extends ConsumerWidget {
                       ))
                       .first,
                 ),
-                PopupSettingsTile(
+                MultiPopupSettingsTile(
                   title: "Split Completed List Section By Format",
+                  initialValues: [
+                    user.value!.data!.Viewer!.mediaListOptions!.animeList!
+                                .splitCompletedSectionByFormat ==
+                            true
+                        ? "anime"
+                        : null,
+                    user.value!.data!.Viewer!.mediaListOptions!.mangaList!
+                                .splitCompletedSectionByFormat ==
+                            true
+                        ? "manga"
+                        : null,
+                  ],
                   items: [
-                    CheckedPopupMenuItem(
-                      checked: user.value!.data!.Viewer!.mediaListOptions!
-                              .animeList!.splitCompletedSectionByFormat ??
-                          false,
+                    PopupSettingCheckbox(
                       value: "anime",
-                      child: const Text("Anime"),
+                      label: "Anime",
                     ),
-                    CheckedPopupMenuItem(
-                      checked: user.value!.data!.Viewer!.mediaListOptions!
-                              .mangaList!.splitCompletedSectionByFormat ??
-                          false,
+                    PopupSettingCheckbox(
                       value: "manga",
-                      child: const Text("Manga"),
+                      label: "Manga",
                     )
                   ],
-                  onSelected: (value) => {
-                    if (value == "anime")
-                      client
-                          .request(
-                            GUpdateUserReq(
-                              (b) => b
-                                ..vars
-                                    .animeListOptions
-                                    .splitCompletedSectionByFormat = !(user
-                                        .value!
-                                        .data!
-                                        .Viewer!
-                                        .mediaListOptions!
-                                        .animeList!
-                                        .splitCompletedSectionByFormat ??
-                                    false),
-                            ),
-                          )
-                          .first
-                    else if (value == "manga")
-                      client
-                          .request(
-                            GUpdateUserReq(
-                              (b) => b
-                                ..vars
-                                    .mangaListOptions
-                                    .splitCompletedSectionByFormat = !(user
-                                        .value!
-                                        .data!
-                                        .Viewer!
-                                        .mediaListOptions!
-                                        .mangaList!
-                                        .splitCompletedSectionByFormat ??
-                                    false),
-                            ),
-                          )
-                          .first
-                  },
+                  // onSelected: (value) => {
+                  //   if (value == "anime")
+                  //     client
+                  //         .request(
+                  //           GUpdateUserReq(
+                  //             (b) => b
+                  //               ..vars
+                  //                   .animeListOptions
+                  //                   .splitCompletedSectionByFormat = !(user
+                  //                       .value!
+                  //                       .data!
+                  //                       .Viewer!
+                  //                       .mediaListOptions!
+                  //                       .animeList!
+                  //                       .splitCompletedSectionByFormat ??
+                  //                   false),
+                  //           ),
+                  //         )
+                  //         .first
+                  //   else if (value == "manga")
+                  //     client
+                  //         .request(
+                  //           GUpdateUserReq(
+                  //             (b) => b
+                  //               ..vars
+                  //                   .mangaListOptions
+                  //                   .splitCompletedSectionByFormat = !(user
+                  //                       .value!
+                  //                       .data!
+                  //                       .Viewer!
+                  //                       .mediaListOptions!
+                  //                       .mangaList!
+                  //                       .splitCompletedSectionByFormat ??
+                  //                   false),
+                  //           ),
+                  //         )
+                  //         .first
+                  // },
                 )
               ],
             ),
@@ -412,7 +416,7 @@ class SettingsTile extends StatelessWidget {
     this.child,
   });
 
-  final String title;
+  final Widget title;
   final Widget? subtitle;
   final Icon? icon;
   final VoidCallback? onTap;
@@ -441,9 +445,9 @@ class SettingsTile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: context.theme.textTheme.bodyLarge,
+                  DefaultTextStyle(
+                    style: context.theme.textTheme.bodyLarge ?? TextStyle(),
+                    child: title,
                   ),
                   if (subtitle != null)
                     DefaultTextStyle(
@@ -472,7 +476,7 @@ class SettingsTile extends StatelessWidget {
 class SwitchSettingsTile extends SettingsTile {
   SwitchSettingsTile({
     super.key,
-    required super.title,
+    required String title,
     required this.value,
     required this.onChanged,
     super.icon,
@@ -484,6 +488,7 @@ class SwitchSettingsTile extends SettingsTile {
             onChanged: enabled == false ? null : onChanged,
           ),
           onTap: () => onChanged(!value),
+          title: Text(title),
         );
 
   final void Function(bool value) onChanged;
@@ -493,7 +498,7 @@ class SwitchSettingsTile extends SettingsTile {
 class CheckboxSettingsTile extends SettingsTile {
   CheckboxSettingsTile({
     super.key,
-    required super.title,
+    required String title,
     required this.value,
     required this.onChanged,
     super.icon,
@@ -505,6 +510,7 @@ class CheckboxSettingsTile extends SettingsTile {
             onChanged: enabled == false ? null : onChanged,
           ),
           onTap: () => onChanged(!value),
+          title: Text(title),
         );
 
   final void Function(bool? value) onChanged;
@@ -514,7 +520,7 @@ class CheckboxSettingsTile extends SettingsTile {
 class RadioSettingsTile extends SettingsTile {
   RadioSettingsTile({
     super.key,
-    required super.title,
+    required String title,
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -529,12 +535,78 @@ class RadioSettingsTile extends SettingsTile {
             toggleable: true,
           ),
           onTap: () => onChanged(value == groupValue ? null : value),
+          title: Text(title),
         );
 
   final void Function(bool? value) onChanged;
   final bool value;
   final bool? groupValue;
 }
+
+// class PopupSettingsTile<T> extends StatelessWidget {
+//   const PopupSettingsTile({
+//     super.key,
+//     required this.title,
+//     required this.items,
+//     this.value,
+//     this.subtitle,
+//     this.icon,
+//     this.enabled,
+//     this.onSelected,
+//     this.onClear,
+//   });
+
+//   final String title;
+//   final Widget? subtitle;
+//   final Icon? icon;
+//   final bool? enabled;
+//   final List<PopupMenuEntry<T>> items;
+//   final T? value;
+//   final void Function(T value)? onSelected;
+//   final VoidCallback? onClear;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     Widget? s;
+//     if (subtitle == null && value != null) {
+//       var text = (items.firstWhereOrNull(
+//         (element) {
+//           if (element is PopupMenuItem) {
+//             return (element as PopupMenuItem).value == value;
+//           }
+//           return false;
+//         },
+//       ) as PopupMenuItem?)
+//           ?.child;
+//       if (text != null) s = text;
+//     }
+
+//     s ??= subtitle;
+
+//     return PopupMenuButton(
+//       initialValue: value,
+//       position: PopupMenuPosition.under,
+//       tooltip: "",
+//       itemBuilder: (context) => items,
+//       onSelected: onSelected,
+//       constraints: const BoxConstraints(maxHeight: 500, maxWidth: 200),
+//       surfaceTintColor: context.theme.colorScheme.primary,
+//       enabled: enabled ?? true,
+//       child: SettingsTile(
+//         title: Text(title),
+//         subtitle: s,
+//         icon: icon,
+//         child: Show(
+//           when: value != null && onClear != null,
+//           child: () => IconButton(
+//             icon: const Icon(Icons.clear),
+//             onPressed: onClear!,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class PopupSettingsTile<T> extends StatelessWidget {
   const PopupSettingsTile({
@@ -553,7 +625,7 @@ class PopupSettingsTile<T> extends StatelessWidget {
   final Widget? subtitle;
   final Icon? icon;
   final bool? enabled;
-  final List<PopupMenuEntry<T>> items;
+  final List<PopupSettingItem<T>> items;
   final T? value;
   final void Function(T value)? onSelected;
   final VoidCallback? onClear;
@@ -563,40 +635,213 @@ class PopupSettingsTile<T> extends StatelessWidget {
     Widget? s;
     if (subtitle == null && value != null) {
       var text = (items.firstWhereOrNull(
-        (element) {
-          if (element is PopupMenuItem) {
-            return (element as PopupMenuItem).value == value;
-          }
-          return false;
-        },
-      ) as PopupMenuItem?)
-          ?.child;
-      if (text != null) s = text;
+        (element) => element.value == value,
+      ))?.label;
+      if (text != null) s = Text(text);
     }
 
     s ??= subtitle;
 
-    return PopupMenuButton(
-      initialValue: value,
-      position: PopupMenuPosition.under,
-      tooltip: "",
-      itemBuilder: (context) => items,
-      onSelected: onSelected,
-      constraints: const BoxConstraints(maxHeight: 500, maxWidth: 200),
-      surfaceTintColor: context.theme.colorScheme.primary,
-      enabled: enabled ?? true,
-      child: SettingsTile(
-        title: title,
-        subtitle: s,
-        icon: icon,
-        child: Show(
-          when: value != null && onClear != null,
-          child: () => IconButton(
-            icon: const Icon(Icons.clear),
-            onPressed: onClear!,
+    return SettingsTile(
+      title: Text(title),
+      subtitle: s,
+      icon: icon,
+      onTap: () => showDialog(
+        context: context,
+        builder: (context) => AlertDialog.adaptive(
+          title: Text(title),
+          contentPadding: EdgeInsets.only(top: 10, bottom: 20),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (var item in items)
+                  ListTile(
+                    title: item.label != null ? Text(item.label!) : item.child,
+                    onTap: () {
+                      onSelected?.call(item.value);
+                      context.pop();
+                    },
+                    trailing: Radio.adaptive(
+                      value: item.value,
+                      groupValue: value,
+                      onChanged: (value) => onSelected?.call(item.value),
+                    ),
+                  ),
+              ],
+            ),
           ),
+        ),
+      ),
+      child: Show(
+        when: value != null && onClear != null,
+        child: () => IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: onClear!,
         ),
       ),
     );
   }
+}
+
+class MultiPopupSettingsTile<T> extends StatelessWidget {
+  const MultiPopupSettingsTile({
+    super.key,
+    required this.title,
+    required this.items,
+    this.initialValues,
+    this.subtitle,
+    this.icon,
+    this.enabled,
+    this.onSaved,
+    this.onClear,
+  });
+
+  final String title;
+  final Widget? subtitle;
+  final Icon? icon;
+  final bool? enabled;
+  final List<PopupSettingCheckbox<T>> items;
+  final List<T>? initialValues;
+  final void Function(List<T> values)? onSaved;
+  final VoidCallback? onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget? s;
+    if (subtitle == null && initialValues?.isNotEmpty == true) {
+      var text = (items.where(
+        (element) => initialValues!.contains(element.value),
+      ))
+          .map(
+            (e) => e.label,
+          )
+          .join(", ");
+      if (text.isNotEmpty) s = Text(text);
+    }
+
+    s ??= subtitle;
+
+    return SettingsTile(
+      title: Text(title),
+      subtitle: s,
+      icon: icon,
+      onTap: () => showDialog(
+        context: context,
+        builder: (context) => _MultiPopupMenu<T>(
+          title: title,
+          items: items,
+          initialValues: initialValues,
+          onSaved: onSaved,
+        ),
+      ),
+      child: Show(
+        when: initialValues?.isNotEmpty == true && onClear != null,
+        child: () => IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: onClear!,
+        ),
+      ),
+    );
+  }
+}
+
+class _MultiPopupMenu<T> extends StatefulWidget {
+  const _MultiPopupMenu({
+    super.key,
+    required this.title,
+    required this.items,
+    this.initialValues,
+    this.onSaved,
+  });
+
+  final String title;
+  final List<PopupSettingCheckbox<T>> items;
+  final List<T>? initialValues;
+  final void Function(List<T> values)? onSaved;
+
+  @override
+  State<_MultiPopupMenu<T>> createState() => __MultiPopupMenuState<T>();
+}
+
+class __MultiPopupMenuState<T> extends State<_MultiPopupMenu<T>> {
+  late List<T> values = widget.initialValues?.toList() ?? [];
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog.adaptive(
+      title: Text(widget.title),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            widget.onSaved?.call(values);
+            context.pop();
+          },
+          child: Text(
+            "Save",
+            style:
+                TextStyle(color: context.theme.colorScheme.onPrimaryContainer),
+          ),
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(
+                context.theme.colorScheme.primaryContainer),
+          ),
+        )
+      ],
+      actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      contentPadding: EdgeInsets.only(top: 10),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (var item in widget.items)
+              ListTile(
+                title: item.label != null ? Text(item.label!) : item.child,
+                onTap: () => setState(() {
+                  // widget.onSelected?.call(item.value);
+                  if (values.contains(item.value))
+                    values.remove(item.value);
+                  else
+                    values.add(item.value);
+                  // context.pop();
+                }),
+                trailing: Checkbox.adaptive(
+                  value: values.contains(item.value),
+                  onChanged: (value) => setState(() {
+                    // widget.onSelected?.call(item.value);
+                    if (values.contains(item.value))
+                      values.remove(item.value);
+                    else
+                      values.add(item.value);
+                    // context.pop();
+                  }),
+                ),
+              ),
+            //   ],
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+abstract class PopupSettingEntry<T> {
+  final String? label;
+  final Widget? child;
+  final T value;
+
+  const PopupSettingEntry(
+      {required this.label, required this.value, this.child});
+}
+
+class PopupSettingItem<T> extends PopupSettingEntry<T> {
+  PopupSettingItem({required super.label, required super.value, super.child});
+}
+
+class PopupSettingCheckbox<T> extends PopupSettingEntry<T> {
+  PopupSettingCheckbox({
+    required super.label,
+    required super.value,
+  });
 }

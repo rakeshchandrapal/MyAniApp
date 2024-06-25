@@ -99,21 +99,21 @@ class MediaCards extends StatelessWidget {
           itemBuilder: itemBuilder,
           itemCount: itemCount,
           primary: primary,
-          padding: padding,
+          padding: padding ?? EdgeInsets.zero,
         ),
       ListType.list => ListView.builder(
           shrinkWrap: shrinkWrap ?? false,
           itemBuilder: itemBuilder,
           itemCount: itemCount,
           primary: primary,
-          padding: padding,
+          padding: padding ?? EdgeInsets.zero,
         ),
       ListType.simple => ListView.builder(
           shrinkWrap: shrinkWrap ?? false,
           itemBuilder: itemBuilder,
           itemCount: itemCount,
           primary: primary,
-          padding: padding,
+          padding: padding ?? EdgeInsets.zero,
         ),
     };
   }
