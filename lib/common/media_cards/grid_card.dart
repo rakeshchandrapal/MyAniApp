@@ -56,40 +56,71 @@ class GridCard extends StatelessWidget {
                     .withOpacity(.7),
                 borderRadius: imageRadius,
               ),
-              child: CachedImage(
-                image,
-                imageBuilder: (context, imageProvider) => Column(
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: imageRadius,
-                        child: BlurImage(
-                          enabled: blur,
-                          child: Image(
-                            image: imageProvider,
-                            fit: BoxFit.fill,
-                            width: double.maxFinite,
-                          ),
-                        ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: imageRadius.topLeft,
+                        topRight: imageRadius.topRight,
+                      ),
+                      child: CachedImage(
+                        image,
+                        fit: BoxFit.fill,
+                        width: double.maxFinite,
                       ),
                     ),
-                    if (title != null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Column(
-                          children: [
-                            Text(
-                              title!,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            if (underTitle != null) underTitle!,
-                          ],
-                        ),
+                  ),
+                  if (title != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Column(
+                        children: [
+                          Text(
+                            title!,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          if (underTitle != null) underTitle!,
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
+              // child: CachedImage(
+              //   image,
+              //   imageBuilder: (context, imageProvider) => Column(
+              //     children: [
+              //       Expanded(
+              //         child: ClipRRect(
+              //           borderRadius: imageRadius,
+              //           child: BlurImage(
+              //             enabled: blur,
+              //             child: Image(
+              //               image: imageProvider,
+              //               fit: BoxFit.fill,
+              //               width: double.maxFinite,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       if (title != null)
+              //         Padding(
+              //           padding: const EdgeInsets.symmetric(horizontal: 5),
+              //           child: Column(
+              //             children: [
+              //               Text(
+              //                 title!,
+              //                 overflow: TextOverflow.ellipsis,
+              //                 style: Theme.of(context).textTheme.labelMedium,
+              //               ),
+              //               if (underTitle != null) underTitle!,
+              //             ],
+              //           ),
+              //         ),
+              //     ],
+              //   ),
+              // ),
             ),
           ),
           ...?chips

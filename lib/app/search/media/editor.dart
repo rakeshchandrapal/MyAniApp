@@ -95,7 +95,6 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                     } else {
                       query.isAdult = null;
                     }
-                    print(query.toReq());
                     context.replace("/search/media${query.toString()}");
                     context.pop();
                   },
