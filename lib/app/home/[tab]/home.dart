@@ -131,10 +131,19 @@ class _HomeLoggedInOverviewPageState
               // Reviews
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Recent Reviews",
-                  style: context.theme.textTheme.titleLarge
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      "Recent Reviews",
+                      style: context.theme.textTheme.titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () => context.push('/reviews'),
+                      child: const Text("More"),
+                    ),
+                  ],
                 ),
               ),
               GridView.builder(

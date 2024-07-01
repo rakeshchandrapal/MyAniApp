@@ -681,6 +681,16 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GReviewReq.serializer)
       ..add(GReviewSort.serializer)
       ..add(GReviewVars.serializer)
+      ..add(GReviewsData.serializer)
+      ..add(GReviewsData_Page.serializer)
+      ..add(GReviewsData_Page_pageInfo.serializer)
+      ..add(GReviewsData_Page_reviews.serializer)
+      ..add(GReviewsData_Page_reviews_media.serializer)
+      ..add(GReviewsData_Page_reviews_media_title.serializer)
+      ..add(GReviewsData_Page_reviews_user.serializer)
+      ..add(GReviewsData_Page_reviews_user_avatar.serializer)
+      ..add(GReviewsReq.serializer)
+      ..add(GReviewsVars.serializer)
       ..add(GRevisionHistoryAction.serializer)
       ..add(GSaveActivityReplyData.serializer)
       ..add(GSaveActivityReplyData_SaveActivityReply.serializer)
@@ -1530,6 +1540,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
           () => new ListBuilder<GModRole?>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType.nullable(GModRole)]),
+          () => new ListBuilder<GModRole?>())
+      ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType.nullable(GNotificationOptionInput)]),
           () => new ListBuilder<GNotificationOptionInput?>())
@@ -1571,6 +1584,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
             const FullType.nullable(GReleasingMediaData_airingSchedule_edges)
           ]),
           () => new ListBuilder<GReleasingMediaData_airingSchedule_edges?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType.nullable(GReviewsData_Page_reviews)]),
+          () => new ListBuilder<GReviewsData_Page_reviews?>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType.nullable(GSearchData_Page_media)]),

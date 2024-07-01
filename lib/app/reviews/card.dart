@@ -33,19 +33,21 @@ class ReviewCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                        text:
-                            "Review of ${review.media!.title!.userPreferred!} by ${review.user!.name}\n"),
-                    TextSpan(text: review.summary!)
-                  ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text:
+                              "Review of ${review.media!.title!.userPreferred!} by ${review.user!.name}\n"),
+                      TextSpan(text: review.summary!)
+                    ],
+                  ),
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 5,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
             // Text("Review of ${review.media!.title!.userPreferred!}"),

@@ -2,6 +2,7 @@
 // ignore_for_file: type=lint
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart' show StandardJsonPlugin;
 import 'package:ferry_exec/ferry_exec.dart';
@@ -478,6 +479,20 @@ import 'package:myaniapp/app/review/__generated__/review.req.gql.dart'
     show GRateReviewReq, GReviewReq;
 import 'package:myaniapp/app/review/__generated__/review.var.gql.dart'
     show GRateReviewVars, GReviewVars;
+import 'package:myaniapp/app/reviews/__generated__/reviews.data.gql.dart'
+    show
+        GReviewsData,
+        GReviewsData_Page,
+        GReviewsData_Page_pageInfo,
+        GReviewsData_Page_reviews,
+        GReviewsData_Page_reviews_media,
+        GReviewsData_Page_reviews_media_title,
+        GReviewsData_Page_reviews_user,
+        GReviewsData_Page_reviews_user_avatar;
+import 'package:myaniapp/app/reviews/__generated__/reviews.req.gql.dart'
+    show GReviewsReq;
+import 'package:myaniapp/app/reviews/__generated__/reviews.var.gql.dart'
+    show GReviewsVars;
 import 'package:myaniapp/app/search/media/__generated__/mediaSearch.data.gql.dart'
     show
         GGenreCollectionData,
@@ -1602,6 +1617,16 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GReviewReq,
   GReviewSort,
   GReviewVars,
+  GReviewsData,
+  GReviewsData_Page,
+  GReviewsData_Page_pageInfo,
+  GReviewsData_Page_reviews,
+  GReviewsData_Page_reviews_media,
+  GReviewsData_Page_reviews_media_title,
+  GReviewsData_Page_reviews_user,
+  GReviewsData_Page_reviews_user_avatar,
+  GReviewsReq,
+  GReviewsVars,
   GRevisionHistoryAction,
   GSaveActivityReplyData,
   GSaveActivityReplyData_SaveActivityReply,
