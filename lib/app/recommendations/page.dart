@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/recommendations/__generated__/recommendations.req.gql.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
@@ -9,22 +9,23 @@ import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/router.gr.dart';
 
-class RecommendationsPage extends StatefulWidget {
-  const RecommendationsPage({super.key});
+@RoutePage()
+class RecommendationsScreen extends StatefulWidget {
+  const RecommendationsScreen({super.key});
 
   @override
-  State<RecommendationsPage> createState() => _RecommendationsStatePage();
+  State<RecommendationsScreen> createState() => _RecommendationsStatePage();
 }
 
-class _RecommendationsStatePage extends State<RecommendationsPage> {
+class _RecommendationsStatePage extends State<RecommendationsScreen> {
   bool onMyList = false;
   GRecommendationSort sort = GRecommendationSort.ID_DESC;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(),
       appBar: AppBar(
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40),
@@ -134,9 +135,10 @@ class _RecommendationsStatePage extends State<RecommendationsPage> {
                                 image: rec.media!.coverImage!.extraLarge!,
                                 title: rec.media!.title!.userPreferred,
                                 blur: rec.media!.isAdult ?? false,
-                                onTap: () => context.push(
-                                    "/media/${rec.media!.id}/overview",
-                                    extra: {"media": rec.media!}),
+                                onTap: () => context.pushRoute(MediaRoute(
+                                  id: rec.media!.id,
+                                  placeholder: rec.media!,
+                                )),
                                 onLongPress: () =>
                                     MediaSheet.show(context, rec.media!),
                               ),
@@ -150,9 +152,10 @@ class _RecommendationsStatePage extends State<RecommendationsPage> {
                                 title: rec
                                     .mediaRecommendation!.title!.userPreferred,
                                 blur: rec.mediaRecommendation!.isAdult ?? false,
-                                onTap: () => context.push(
-                                    "/media/${rec.mediaRecommendation!.id}/overview",
-                                    extra: {"media": rec.mediaRecommendation!}),
+                                onTap: () => context.pushRoute(MediaRoute(
+                                  id: rec.mediaRecommendation!.id,
+                                  placeholder: rec.mediaRecommendation,
+                                )),
                                 onLongPress: () => MediaSheet.show(
                                     context, rec.mediaRecommendation!),
                               ),

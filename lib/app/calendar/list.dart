@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/calendar/__generated__/list.req.gql.dart';
 import 'package:myaniapp/app/calendar/page.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
@@ -8,6 +8,7 @@ import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 
 class MyListReleases extends StatelessWidget {
@@ -55,8 +56,9 @@ class MyListReleases extends StatelessWidget {
 
               return Card.outlined(
                 child: InkWellImage(
-                  onTap: () => context
-                      .push("/media/${media.id}/info", extra: {"media": media}),
+                  onTap: () => context.pushRoute(
+                    MediaRoute(id: media.id, placeholder: media),
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -9,12 +9,20 @@ import 'package:myaniapp/providers/settings.dart';
 final userProvider =
     StreamProvider.autoDispose<OperationResponse<GViewerData, GViewerVars>>(
         (ref) async* {
-  ref.watch(settingsProvider.select((value) => value.token));
+  var token = ref.watch(settingsProvider.select((value) => value.token));
   var stream = client
       .request(GViewerReq(
         (b) => b..requestId = "currentUser",
       ))
       .distinct();
+
+  if (token == null) {
+    yield OperationResponse(
+      operationRequest: GViewerReq(
+        (b) => b..requestId = "currentUser",
+      ),
+    );
+  }
 
   await for (var s in stream) {
     yield s;

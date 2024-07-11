@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/extensions.dart';
 
 class ConfirmationDialog extends StatelessWidget {
@@ -51,7 +51,7 @@ class ConfirmationDialog extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       onConfirm();
-                      context.pop();
+                      context.maybePop();
                     },
                     child: delete == true
                         ? const Text("Delete")
@@ -61,7 +61,7 @@ class ConfirmationDialog extends StatelessWidget {
                     width: 5,
                   ),
                   TextButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () => context.maybePop(),
                     child: const Text("    Back    "),
                   ),
                 ],

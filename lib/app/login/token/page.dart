@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/providers/settings.dart';
+import 'package:myaniapp/router.gr.dart';
 
+@RoutePage()
 class TokenLoginPage extends ConsumerWidget {
   const TokenLoginPage({super.key});
 
@@ -20,7 +22,7 @@ class TokenLoginPage extends ConsumerWidget {
             ref
                 .read(settingsProvider.notifier)
                 .updateToken(value)
-                .then((value) => context.go("/"));
+                .then((value) => context.navigateTo(HomeRoute()));
           }
         },
       ),

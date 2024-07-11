@@ -1,21 +1,23 @@
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/providers/settings.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AnilistLoginPage extends ConsumerStatefulWidget {
-  const AnilistLoginPage({super.key});
+@RoutePage()
+class AnilistLoginScreen extends ConsumerStatefulWidget {
+  const AnilistLoginScreen({super.key});
 
   @override
-  ConsumerState<AnilistLoginPage> createState() => _AnilistLoginPageState();
+  ConsumerState<AnilistLoginScreen> createState() => _AnilistLoginPageState();
 }
 
-class _AnilistLoginPageState extends ConsumerState<AnilistLoginPage> {
+class _AnilistLoginPageState extends ConsumerState<AnilistLoginScreen> {
   final Uri authUri = Uri(
     scheme: 'https',
     host: 'anilist.co',
@@ -37,7 +39,7 @@ class _AnilistLoginPageState extends ConsumerState<AnilistLoginPage> {
 
     launchUrl(
       authUri,
-      mode: LaunchMode.externalApplication,
+      // mode: LaunchMode.externalApplication,
     );
 
     stream();
@@ -55,7 +57,7 @@ class _AnilistLoginPageState extends ConsumerState<AnilistLoginPage> {
         ref
             .read(settingsProvider.notifier)
             .updateToken(token)
-            .then((value) => context.go("/"));
+            .then((value) => context.navigateTo(HomeRoute()));
       }
     });
   }
@@ -76,10 +78,9 @@ class _AnilistLoginPageState extends ConsumerState<AnilistLoginPage> {
                 width: double.maxFinite,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStatePropertyAll(Colors.blue[100]!),
+                    backgroundColor: WidgetStatePropertyAll(Colors.blue[100]!),
                   ),
-                  onPressed: () => context.push("/login/anilist"),
+                  onPressed: () => context.pushRoute(AnilistLoginRoute()),
                   child: const Text(
                     "Login with Anilist",
                     style: TextStyle(color: Colors.black),

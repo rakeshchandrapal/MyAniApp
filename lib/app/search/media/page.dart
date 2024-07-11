@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/search/media/__generated__/mediaSearch.data.gql.dart';
 import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
 import 'package:myaniapp/app/search/media/editor.dart';
@@ -16,15 +16,20 @@ import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
+import 'package:myaniapp/router.gr.dart';
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+@RoutePage()
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key, this.autofocus});
+
+  final bool? autofocus;
 
   @override
   Widget build(BuildContext context) {
-    var query = GoRouterState.of(context).uri.queryParametersAll;
+    var query = context.routeData.queryParams;
+    print(query.rawMap);
     return FutureBuilder(
-      future: MediaSearchQuery.from(query, client: client),
+      future: MediaSearchQuery.from(query.rawMap, client: client),
       builder: (context, snapshot) => Show(
         when: snapshot.data != null,
         fallback: Scaffold(
@@ -33,16 +38,20 @@ class SearchPage extends StatelessWidget {
             child: CircularProgressIndicator.adaptive(),
           ),
         ),
-        child: () => SearchView(query: snapshot.data!),
+        child: () => SearchView(
+          query: snapshot.data!,
+          autofocus: autofocus,
+        ),
       ),
     );
   }
 }
 
 class SearchView extends ConsumerStatefulWidget {
-  const SearchView({super.key, required this.query});
+  const SearchView({super.key, required this.query, this.autofocus});
 
   final MediaSearchQuery query;
+  final bool? autofocus;
 
   @override
   ConsumerState<SearchView> createState() => _SearchViewState();
@@ -59,8 +68,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
 
   void maybeFocus() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (GoRouterState.of(context).extra is Map &&
-          (GoRouterState.of(context).extra! as Map)['autofocus'] == true) {
+      if (widget.autofocus == true) {
         _focusNode.requestFocus();
       }
     });
@@ -107,7 +115,8 @@ class _SearchViewState extends ConsumerState<SearchView> {
               ),
               onSubmitted: (value) {
                 widget.query.search = value.isEmpty ? null : value;
-                context.replace("/search/media${widget.query.toString()}");
+                context.router
+                    .replaceNamed("/search/media${widget.query.toString()}");
               },
             ),
           ),
@@ -156,7 +165,9 @@ class _SearchViewState extends ConsumerState<SearchView> {
                   blur: media.isAdult!,
                   onLongPress: () => MediaSheet.show(context, media),
                   onTap: () => context
-                      .push("/media/${media.id}/info", extra: {"media": media}),
+                      .pushRoute(MediaRoute(id: media.id, placeholder: media)),
+                  // onTap: () => context
+                  //     .push("/media/${media.id}/info", extra: {"media": media}),
                 );
               },
               itemCount: response.data!.Page!.media!.length,
@@ -205,17 +216,17 @@ class MediaSearchQuery {
   bool? onList;
   String? countryOfOrigin;
 
-  static Future<MediaSearchQuery> from(Map<String, List<String>> query,
+  static Future<MediaSearchQuery> from(Map<String, dynamic> query,
       {required Client client}) async {
     List<GMediaSort>? sort0;
     List<GMediaFormat>? format0;
     List<String>? genre0;
     List<GGenreCollectionData_tags>? withTag0;
     List<GGenreCollectionData_tags>? withoutTag0;
-    GMediaType? type0 = GMediaType.values.firstWhereOrNull(
-        (element) => element.name == query["type"]?.firstOrNull);
-    GMediaSeason? season0 = GMediaSeason.values.firstWhereOrNull(
-        (element) => element.name == query["season"]?.firstOrNull);
+    GMediaType? type0 = GMediaType.values
+        .firstWhereOrNull((element) => element.name == query["type"]);
+    GMediaSeason? season0 = GMediaSeason.values
+        .firstWhereOrNull((element) => element.name == query["season"]);
 
     GGenreCollectionData? collection;
 
@@ -229,50 +240,55 @@ class MediaSearchQuery {
               .first)
           .data!;
     }
-    // print(client.cache.);
 
     if (query["sort"] != null) {
-      var s = GMediaSort.values
-          .where((element) => query["sort"]!.contains(element.name));
+      var list = query["sort"] is List ? query["sort"] : [query["sort"]];
+      var s = GMediaSort.values.where((element) => list.contains(element.name));
       if (s.isNotEmpty) {
         sort0 = s.toList();
       }
     }
 
     if (query["genre"] != null) {
-      var g = collection!.genres!
-          .where((element) => query["genre"]!.contains(element));
+      var list = query["genre"] is List ? query["genre"] : [query["genre"]];
+      var g = collection!.genres!.where((element) => list.contains(element));
       if (g.isNotEmpty) {
         genre0 = g.cast<String>().toList();
       }
     }
 
     if (query["withTags"] != null) {
-      var t = collection!.tags!
-          .where((element) => query["withTags"]!.contains(element!.name));
+      var list =
+          query["withTags"] is List ? query["withTags"] : [query["withTags"]];
+      var t =
+          collection!.tags!.where((element) => list.contains(element!.name));
       if (t.isNotEmpty) {
         withTag0 = t.cast<GGenreCollectionData_tags>().toList();
       }
     }
 
     if (query["withoutTags"] != null) {
-      var t = collection!.tags!
-          .where((element) => query["withoutTags"]!.contains(element!.name));
+      var list = query["withoutTags"] is List
+          ? query["withoutTags"]
+          : [query["withoutTags"]];
+      var t =
+          collection!.tags!.where((element) => list.contains(element!.name));
       if (t.isNotEmpty == true) {
         withoutTag0 = t.cast<GGenreCollectionData_tags>().toList();
       }
     }
 
     if (query["format"] != null) {
-      var f = GMediaFormat.values
-          .where((element) => query["format"]!.contains(element.name));
+      var list = query["format"] is List ? query["format"] : [query["format"]];
+      var f =
+          GMediaFormat.values.where((element) => list.contains(element.name));
       if (f.isNotEmpty) {
         format0 = f.toList();
       }
     }
 
     return MediaSearchQuery(
-      search: query["search"]?.firstOrNull,
+      search: query["search"],
       sort: sort0,
       type: type0,
       format: format0,
@@ -280,23 +296,14 @@ class MediaSearchQuery {
       withTags: withTag0,
       withoutTags: withoutTag0,
       season: season0,
-      countryOfOrigin: query["countryOfOrigin"]?.firstOrNull,
-      endDate: query["endDate"] != null
-          ? int.tryParse(query["endDate"]!.first)
-          : null,
-      isAdult: query["isAdult"] != null
-          ? bool.tryParse(query["isAdult"]!.first)
-          : null,
-      onList: query["onList"] != null
-          ? bool.tryParse(query["onList"]!.first)
-          : null,
-      // seasonYear: query["seasonYear"] != null
-      //     ? int.tryParse(query["seasonYear"]!.first)
-      //     : null,
-      startDate: query["startDate"] != null
-          ? int.tryParse(query["startDate"]!.first)
-          : null,
-      year: query["year"] != null ? int.tryParse(query["year"]!.first) : null,
+      countryOfOrigin: query["countryOfOrigin"],
+      endDate: query["endDate"] != null ? int.tryParse(query["endDate"]) : null,
+      isAdult:
+          query["isAdult"] != null ? bool.tryParse(query["isAdult"]) : null,
+      onList: query["onList"] != null ? bool.tryParse(query["onList"]) : null,
+      startDate:
+          query["startDate"] != null ? int.tryParse(query["startDate"]) : null,
+      year: query["year"] != null ? int.tryParse(query["year"]) : null,
     );
   }
 

@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ferry/ferry.dart';
 import 'package:ferry_flutter/ferry_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gql_exec/gql_exec.dart' as g;
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
+import 'package:myaniapp/router.gr.dart';
 
 class GQLRequest<TData, TVars> extends StatelessWidget {
   const GQLRequest({
@@ -95,14 +96,14 @@ class GraphqlError extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () => context.pop(),
+                            onPressed: () => context.maybePop(),
                             child: const Text("Don't log in"),
                           ),
                           const SizedBox(
                             width: 5,
                           ),
                           ElevatedButton(
-                            onPressed: () => context.push("/login"),
+                            onPressed: () => context.pushRoute(LoginRoute()),
                             child: const Text("Log in"),
                           ),
                         ],

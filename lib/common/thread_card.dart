@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/fragments/__generated__/thread.data.gql.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:relative_time/relative_time.dart';
 
@@ -24,7 +25,7 @@ class ThreadCard extends StatelessWidget {
         child: InkWellImage(
           borderRadius: imageRadius,
           onTap: () => context
-              .push("/forum/thread/${thread.id}", extra: {"thread": thread}),
+              .pushRoute(ThreadRoute(id: thread.id, placeholder: thread)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -74,8 +75,8 @@ class ThreadCard extends StatelessWidget {
     return Card.outlined(
       child: InkWellImage(
         borderRadius: imageRadius,
-        onTap: () => context
-            .push("/forum/thread/${thread.id}", extra: {"thread": thread}),
+        onTap: () =>
+            context.pushRoute(ThreadRoute(id: thread.id, placeholder: thread)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -64,10 +64,13 @@ class GridCard extends StatelessWidget {
                         topLeft: imageRadius.topLeft,
                         topRight: imageRadius.topRight,
                       ),
-                      child: CachedImage(
-                        image,
-                        fit: BoxFit.fill,
-                        width: double.maxFinite,
+                      child: BlurImage(
+                        enabled: blur,
+                        child: CachedImage(
+                          image,
+                          fit: BoxFit.fill,
+                          width: double.maxFinite,
+                        ),
                       ),
                     ),
                   ),

@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/app/settings/settings_page.dart';
+import 'package:myaniapp/app/settings/settings_screen.dart';
 import 'package:myaniapp/common/dialogs/confirmation.dart';
 import 'package:myaniapp/common/media_editor/__generated__/media_editor.data.gql.dart';
 import 'package:myaniapp/common/media_editor/__generated__/media_editor.req.gql.dart';
@@ -200,7 +200,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                     widget.onDelete!();
                   }
 
-                  if (context.mounted) context.pop();
+                  if (context.mounted) context.maybePop();
                 },
                 delete: true,
               ),
@@ -220,7 +220,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   widget.onSave();
                 }
 
-                if (context.mounted) context.pop();
+                if (context.mounted) context.maybePop();
               },
               icon: const Icon(Icons.save),
             ),

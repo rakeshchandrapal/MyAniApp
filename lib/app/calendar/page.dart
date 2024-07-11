@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/app/calendar/__generated__/calendar.req.gql.dart';
 import 'package:myaniapp/app/calendar/list.dart';
@@ -9,19 +9,21 @@ import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 
 var dateFormat = DateFormat('EEEE MMMM dd, yyyy');
 var hourTime = DateFormat.jm();
 
-class CalendarPage extends StatefulWidget {
-  const CalendarPage({super.key});
+@RoutePage()
+class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
 
   @override
-  State<CalendarPage> createState() => _CalendarPageState();
+  State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
+class _CalendarScreenState extends State<CalendarScreen> {
   bool all = true;
 
   @override
@@ -156,9 +158,11 @@ class _CalendarState extends State<Calendar> {
                     children: [
                       Card.outlined(
                         child: InkWellImage(
-                          onTap: () => context.push(
-                              "/media/${schedule.media!.id}/info",
-                              extra: {"media": schedule.media}),
+                          onTap: () => context.pushRoute(
+                            MediaRoute(
+                                id: schedule.media!.id,
+                                placeholder: schedule.media),
+                          ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

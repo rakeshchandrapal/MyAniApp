@@ -118,33 +118,6 @@ import 'package:myaniapp/app/character/__generated__/character.req.gql.dart'
     show GCharacterReq;
 import 'package:myaniapp/app/character/__generated__/character.var.gql.dart'
     show GCharacterVars;
-import 'package:myaniapp/app/explore/__generated__/explore.data.gql.dart'
-    show
-        GExploreData,
-        GExploreData_nextSeason,
-        GExploreData_nextSeason_media,
-        GExploreData_nextSeason_media_coverImage,
-        GExploreData_nextSeason_media_title,
-        GExploreData_popular,
-        GExploreData_popular_media,
-        GExploreData_popular_media_coverImage,
-        GExploreData_popular_media_title,
-        GExploreData_recent,
-        GExploreData_recent_media,
-        GExploreData_recent_media_coverImage,
-        GExploreData_recent_media_title,
-        GExploreData_season,
-        GExploreData_season_media,
-        GExploreData_season_media_coverImage,
-        GExploreData_season_media_title,
-        GExploreData_trending,
-        GExploreData_trending_media,
-        GExploreData_trending_media_coverImage,
-        GExploreData_trending_media_title;
-import 'package:myaniapp/app/explore/__generated__/explore.req.gql.dart'
-    show GExploreReq;
-import 'package:myaniapp/app/explore/__generated__/explore.var.gql.dart'
-    show GExploreVars;
 import 'package:myaniapp/app/forum/__generated__/forums.data.gql.dart'
     show
         GForumsData,
@@ -200,16 +173,6 @@ import 'package:myaniapp/app/forum/__generated__/overview.req.gql.dart'
     show GForumOverviewReq;
 import 'package:myaniapp/app/forum/__generated__/overview.var.gql.dart'
     show GForumOverviewVars;
-import 'package:myaniapp/app/forum/thread/__generated__/comment.data.gql.dart'
-    show
-        GCommentData,
-        GCommentData_ThreadComment,
-        GCommentData_ThreadComment_user,
-        GCommentData_ThreadComment_user_avatar;
-import 'package:myaniapp/app/forum/thread/__generated__/comment.req.gql.dart'
-    show GCommentReq;
-import 'package:myaniapp/app/forum/thread/__generated__/comment.var.gql.dart'
-    show GCommentVars;
 import 'package:myaniapp/app/forum/thread/__generated__/thread.data.gql.dart'
     show
         GDeleteCommentData,
@@ -247,6 +210,16 @@ import 'package:myaniapp/app/forum/thread/__generated__/thread.var.gql.dart'
         GSaveCommentVars,
         GThreadVars,
         GToggleThreadSubscriptionVars;
+import 'package:myaniapp/app/forum/thread/comment/__generated__/comment.data.gql.dart'
+    show
+        GCommentData,
+        GCommentData_ThreadComment,
+        GCommentData_ThreadComment_user,
+        GCommentData_ThreadComment_user_avatar;
+import 'package:myaniapp/app/forum/thread/comment/__generated__/comment.req.gql.dart'
+    show GCommentReq;
+import 'package:myaniapp/app/forum/thread/comment/__generated__/comment.var.gql.dart'
+    show GCommentVars;
 import 'package:myaniapp/app/home/__generated__/activities.data.gql.dart'
     show
         GHomeActivitiesData_Page_activities,
@@ -319,6 +292,33 @@ import 'package:myaniapp/app/home/__generated__/overview.req.gql.dart'
     show GHomeOverviewReq;
 import 'package:myaniapp/app/home/__generated__/overview.var.gql.dart'
     show GHomeOverviewVars;
+import 'package:myaniapp/app/home/explore/__generated__/explore.data.gql.dart'
+    show
+        GExploreData,
+        GExploreData_nextSeason,
+        GExploreData_nextSeason_media,
+        GExploreData_nextSeason_media_coverImage,
+        GExploreData_nextSeason_media_title,
+        GExploreData_popular,
+        GExploreData_popular_media,
+        GExploreData_popular_media_coverImage,
+        GExploreData_popular_media_title,
+        GExploreData_recent,
+        GExploreData_recent_media,
+        GExploreData_recent_media_coverImage,
+        GExploreData_recent_media_title,
+        GExploreData_season,
+        GExploreData_season_media,
+        GExploreData_season_media_coverImage,
+        GExploreData_season_media_title,
+        GExploreData_trending,
+        GExploreData_trending_media,
+        GExploreData_trending_media_coverImage,
+        GExploreData_trending_media_title;
+import 'package:myaniapp/app/home/explore/__generated__/explore.req.gql.dart'
+    show GExploreReq;
+import 'package:myaniapp/app/home/explore/__generated__/explore.var.gql.dart'
+    show GExploreVars;
 import 'package:myaniapp/app/media/__generated__/characters.data.gql.dart'
     show
         GMediaCharactersData,

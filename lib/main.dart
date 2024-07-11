@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:layout/layout.dart';
 import 'package:myaniapp/background.dart';
 import 'package:myaniapp/graphql/client.dart';
@@ -13,7 +12,7 @@ import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/app_info.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/shared_prefs.dart';
-import 'package:myaniapp/routes.dart';
+import 'package:myaniapp/router.dart';
 import 'package:myaniapp/url_protocol/web_url_protocol.dart'
     if (dart.library.io) 'package:myaniapp/url_protocol/api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -26,7 +25,7 @@ late Client client;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  GoRouter.optionURLReflectsImperativeAPIs = true;
+  // GoRouter.optionURLReflectsImperativeAPIs = true;
 
   client = await initClient();
 
@@ -76,7 +75,7 @@ class MainApp extends ConsumerWidget {
 
     return Layout(
       child: MaterialApp.router(
-        routerConfig: router,
+        routerConfig: router.config(),
         localizationsDelegates: const [
           RelativeTimeLocalizations.delegate,
         ],

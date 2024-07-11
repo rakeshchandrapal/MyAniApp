@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:myaniapp/app/reviews/__generated__/reviews.req.gql.dart';
 import 'package:myaniapp/app/reviews/card.dart';
 import 'package:myaniapp/graphql/widget.dart';
 
-class ReviewsPage extends StatelessWidget {
-  const ReviewsPage({super.key});
+@RoutePage()
+class ReviewsScreen extends StatelessWidget {
+  const ReviewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

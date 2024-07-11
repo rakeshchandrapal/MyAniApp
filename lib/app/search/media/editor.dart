@@ -1,11 +1,10 @@
-import 'package:ferry_exec/ferry_exec.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
 import 'package:myaniapp/app/search/media/page.dart';
 import 'package:myaniapp/app/search/media/tags.dart';
-import 'package:myaniapp/app/settings/settings_page.dart';
+import 'package:myaniapp/app/settings/settings_screen.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
@@ -95,8 +94,9 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                     } else {
                       query.isAdult = null;
                     }
-                    context.replace("/search/media${query.toString()}");
-                    context.pop();
+                    context.router
+                        .replaceNamed("/search/media${query.toString()}");
+                    context.maybePop();
                   },
                   child: const Text("Save"),
                 ),

@@ -46,8 +46,18 @@ query Thread($id: Int, $page: Int) {
   }
 }
 
-mutation SaveComment($id: Int, $threadId: Int, $parentCommentId: Int, $comment: String) {
-  SaveThreadComment(id: $id, threadId: $threadId, parentCommentId: $parentCommentId, comment: $comment) {
+mutation SaveComment(
+  $id: Int
+  $threadId: Int
+  $parentCommentId: Int
+  $comment: String
+) {
+  SaveThreadComment(
+    id: $id
+    threadId: $threadId
+    parentCommentId: $parentCommentId
+    comment: $comment
+  ) {
     id
     threadId
     comment

@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:myaniapp/router.gr.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+@RoutePage()
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,9 @@ class LoginPage extends StatelessWidget {
                 width: double.maxFinite,
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStatePropertyAll(Colors.blue[100]!),
+                    backgroundColor: WidgetStatePropertyAll(Colors.blue[100]!),
                   ),
-                  onPressed: () => context.push("/login/anilist"),
+                  onPressed: () => context.pushRoute(AnilistLoginRoute()),
                   child: const Text(
                     "Login with Anilist",
                     style: TextStyle(color: Colors.black),
@@ -36,7 +37,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.maxFinite,
                 child: ElevatedButton(
-                  onPressed: () => context.push("/login/token"),
+                  onPressed: () => context.pushRoute(TokenLoginRoute()),
                   child: const Text("Login with Token"),
                 ),
               )

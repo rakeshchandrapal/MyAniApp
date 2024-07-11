@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
@@ -8,6 +8,7 @@ import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/router.gr.dart';
 
 md.SpanNodeGeneratorWithTag mediaCardGenerator = md.SpanNodeGeneratorWithTag(
   tag: "mediaCard",
@@ -37,8 +38,10 @@ class MediaCardNode extends md.ElementNode {
           ..vars.id = id),
         builder: (context, response, error, refetch) => Card.outlined(
           child: InkWellImage(
-            onTap: () => context.push("/media/$id/info",
-                extra: {"media": response.data!.Media!}),
+            onTap: () => context.pushRoute(MediaRoute(
+              id: id,
+              placeholder: response.data!.Media,
+            )),
             onLongPress: () => MediaSheet.show(context, response.data!.Media!),
             borderRadius: imageRadius,
             child: Row(
@@ -99,17 +102,5 @@ class MediaCardNode extends md.ElementNode {
         ),
       ),
     );
-
-    // }
-    // final url = attributes['href'] ?? '';
-    // return TextSpan(
-    //   children: [
-    //     for (final child in children)
-    //       _toLinkInlineSpan(
-    //         child.build(),
-    //         () => linkConfig.onTap?.call(url),
-    //       ),
-    //   ],
-    // );
   }
 }

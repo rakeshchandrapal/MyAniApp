@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/forum/%5Btab%5D/new.dart';
 import 'package:myaniapp/app/forum/%5Btab%5D/overview.dart';
 import 'package:myaniapp/app/forum/%5Btab%5D/recent.dart';
@@ -7,6 +7,7 @@ import 'package:myaniapp/app/forum/%5Btab%5D/search.dart';
 import 'package:myaniapp/app/forum/%5Btab%5D/subscribed.dart';
 import 'package:myaniapp/common/custom_dropdown.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/router.gr.dart';
 
 enum ForumTabs { overview, recent, $new, subscribed, search }
 
@@ -35,41 +36,54 @@ final allCategories = [
   ForumCategory(id: 17, name: "Misc"),
 ];
 
-class ForumPage extends StatefulWidget {
-  const ForumPage({super.key, required this.tab});
+@RoutePage()
+class ForumScreen extends StatefulWidget {
+  const ForumScreen({
+    super.key,
+    @queryParam this.search,
+    @queryParam this.category,
+    @pathParam required this.tab,
+  });
 
   final String tab;
+  final String? search;
+  final int? category;
 
   @override
-  State<ForumPage> createState() => _ForumPageState();
+  State<ForumScreen> createState() => _ForumScreenState();
 }
 
-class _ForumPageState extends State<ForumPage> {
+class _ForumScreenState extends State<ForumScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  int? category;
-  String? search;
+  // int? category;
 
-  @override
-  void initState() {
-    super.initState();
-    Future(
-      () => setState(
-        () {
-          String? cat =
-              GoRouterState.of(context).uri.queryParameters['category'];
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Future(
+  //     () => setState(
+  //       () {
+  //         String? cat =
+  //             GoRouterState.of(context).uri.queryParameters['category'];
 
-          if (cat != null) category = int.tryParse(cat);
-          search = GoRouterState.of(context).uri.queryParameters['search'];
-        },
-      ),
-    );
-  }
+  //         if (cat != null) category = int.tryParse(cat);
+  //         search = context.routeData.queryParams.getString("search");
+  //       },
+  //     ),
+  //   );
+  // }
 
   void goTo(ForumTabs tab, {int? category, String? search}) {
-    context.replace(
-        "/forum/${category != null && tab == ForumTabs.overview ? ForumTabs.recent.name : tab.name}?category=$category=search=$search");
-    this.category = category;
-    this.search = search;
+    context.replaceRoute(ForumRoute(
+        tab: category != null && tab == ForumTabs.overview
+            ? ForumTabs.recent.name
+            : tab.name,
+        category: category,
+        search: search));
+    // context.replace(
+    //     "/forum/${category != null && tab == ForumTabs.overview ? ForumTabs.recent.name : tab.name}?category=$category=search=$search");
+    // this.category = category;
+    // this.search = search;
   }
 
   @override
@@ -80,14 +94,16 @@ class _ForumPageState extends State<ForumPage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavigationDrawer(
-        selectedIndex: category == null
+        selectedIndex: widget.category == null
             ? 0
-            : allCategories.indexWhere((element) => element.id == category) + 1,
+            : allCategories
+                    .indexWhere((element) => element.id == widget.category) +
+                1,
         onDestinationSelected: (index) => index == 0
-            ? goTo(tabEnum, search: search)
+            ? goTo(tabEnum, search: widget.search)
             : goTo(tabEnum,
                 category: allCategories.elementAt(index - 1).id,
-                search: search),
+                search: widget.search),
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -133,8 +149,8 @@ class _ForumPageState extends State<ForumPage> {
                 key: Key(widget.tab),
                 value: ForumTabs.values
                     .firstWhere((element) => element.name == widget.tab),
-                onChanged: (values) =>
-                    goTo(values.first, category: category, search: search),
+                onChanged: (values) => goTo(values.first,
+                    category: widget.category, search: widget.search),
                 items: ForumTabs.values.map(
                   (e) => DropdownMenuEntry(
                     value: e,
@@ -149,18 +165,18 @@ class _ForumPageState extends State<ForumPage> {
       body: switch (tabEnum) {
         ForumTabs.overview => const ForumOverviewPage(),
         ForumTabs.recent => ForumRecentPage(
-            categoryId: category,
+            categoryId: widget.category,
           ),
         ForumTabs.$new => ForumNewPage(
-            categoryId: category,
+            categoryId: widget.category,
           ),
         ForumTabs.subscribed => ForumSubscribedPage(
-            categoryId: category,
+            categoryId: widget.category,
           ),
         ForumTabs.search => ForumSearchPage(
-            search: search,
+            search: widget.search,
             onChange: (search) =>
-                goTo(tabEnum, category: category, search: search),
+                goTo(tabEnum, category: widget.category, search: search),
           ),
       },
     );

@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:markdown_widget/widget/span_node.dart';
@@ -117,19 +117,19 @@ class MarkdownWidget extends ConsumerWidget {
             // print(uri?.host);
             if (uri?.host == 'anilist.co') {
               if (['anime', 'manga'].contains(uri!.pathSegments.first)) {
-                context.push('/media/${uri.pathSegments[1]}/info');
+                context.router.pushNamed('/media/${uri.pathSegments[1]}');
                 return;
               } else if (['character', 'staff']
                   .contains(uri.pathSegments.first)) {
-                context.push(
-                    '/${uri.pathSegments.take(2).join('/')}${uri.pathSegments.first == "staff" ? "/roles" : ""}');
+                context.router
+                    .pushNamed('/${uri.pathSegments.take(2).join('/')}');
                 return;
               } else if (uri.pathSegments.first == 'forum' &&
                   uri.pathSegments[1] == 'thread') {
-                context.push('/${uri.pathSegments.join("/")}');
+                context.router.pushNamed('/${uri.pathSegments.join("/")}');
                 return;
               } else if (uri.pathSegments.first == 'activity') {
-                context.push('/activity/${uri.pathSegments[1]}');
+                context.router.pushNamed('/activity/${uri.pathSegments[1]}');
                 return;
               }
             }

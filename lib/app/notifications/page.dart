@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/pagination.dart';
@@ -10,11 +10,13 @@ import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/notifications/__generated__/notifications.req.gql.dart';
 import 'package:myaniapp/notifications/notifications.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:relative_time/relative_time.dart';
 
-class NotificationPage extends StatelessWidget {
-  const NotificationPage({super.key});
+@RoutePage()
+class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +48,26 @@ class NotificationPage extends StatelessWidget {
 
               var n = notif.notification as dynamic;
 
-              var onTap =
-                  (notif.isMedia && n.type != GNotificationType.MEDIA_DELETION)
+              var onTap = (notif.isMedia &&
+                      n.type != GNotificationType.MEDIA_DELETION)
+                  ? () {
+                      context.pushRoute(
+                          MediaRoute(id: n.media.id, placeholder: n.media));
+                    }
+                  : notif.isActivity
                       ? () {
-                          context.push("/media/${n.media.id}/info",
-                              extra: {"media": n.media});
+                          context.pushRoute(ActivityRoute(id: n.activityId));
                         }
-                      : notif.isActivity
+                      : notif.isThread
                           ? () {
-                              context.push("/activity/${n.activityId}");
+                              context.pushRoute(ThreadRoute(id: n.thread.id));
                             }
-                          : notif.isThread
+                          : n.type == GNotificationType.FOLLOWING
                               ? () {
-                                  context.push("/forum/thread/${n.thread.id}");
+                                  context
+                                      .pushRoute(UserRoute(name: n.user.name));
                                 }
-                              : n.type == GNotificationType.FOLLOWING
-                                  ? () {
-                                      context.push("/user/${n.user.name}/info");
-                                    }
-                                  : null;
+                              : null;
 
               return Card.outlined(
                 child: InkWellImage(
