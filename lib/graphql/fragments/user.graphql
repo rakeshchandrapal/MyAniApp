@@ -1,0 +1,10 @@
+fragment UserFragment on User {
+  id
+  name
+  donatorTier
+  donatorBadge
+  moderatorRoles
+  avatar {
+    large
+  }
+}

@@ -1,0 +1,29 @@
+targets:
+  $default:
+    builders:
+      ferry_generator|graphql_builder:
+        enabled: true
+        options:
+          schema: myaniapp|lib/graphql/schema.graphql
+          type_overrides:
+            Json:
+              name: JsonObject
+              import: "package:built_value/json_object.dart"
+            FuzzyDateInt:
+              name: int
+      ferry_generator|serializer_builder:
+        enabled: true
+        options:
+          schema: myaniapp|lib/graphql/schema.graphql
+          type_overrides:
+            Json:
+              name: JsonObject
+              import: "package:built_value/json_object.dart"
+            FuzzyDateInt:
+              name: int
+      auto_route_generator:auto_route_generator:
+        generate_for:
+          - lib/app/**.dart
+      auto_route_generator:auto_router_generator:
+        generate_for:
+          - lib/router.dart

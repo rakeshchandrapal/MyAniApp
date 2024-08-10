@@ -1,0 +1,14 @@
+fragment MediaFragment on Media {
+  id
+  type
+  isAdult
+  genres
+  format
+  description(asHtml: false)
+  title {
+    userPreferred
+  }
+  coverImage {
+    extraLarge
+  }
+}

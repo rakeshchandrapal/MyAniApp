@@ -1,0 +1,40 @@
+name: Build and Release Windows
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build Windows App
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.x'
+          channel: 'stable'
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter build windows
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: MyAniApp-windows.zip
+          directory: build/windows/x64/runner/Release
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'build/windows/x64/runner/Release/MyAniApp-windows.zip'
+          allowUpdates: true
+          makeLatest: true

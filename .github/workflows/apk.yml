@@ -1,0 +1,58 @@
+name: Build and Release Apk
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.0.3
+        with:
+          fileName: upload-keystore.jks
+          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.x'
+          channel: 'stable'
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter build apk
+      - run: flutter build apk --split-per-abi
+
+      - run: mv build/app/outputs/apk/release/app-armeabi-v7a-release.apk build/app/outputs/apk/release/MyAniApp-armeabi-v7a-release.apk
+      - run: mv build/app/outputs/apk/release/app-arm64-v8a-release.apk build/app/outputs/apk/release/MyAniApp-arm64-v8a-release.apk
+      - run: mv build/app/outputs/apk/release/app-x86_64-release.apk build/app/outputs/apk/release/MyAniApp-x86_64-release.apk
+      - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/MyAniApp-release.apk
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'build/app/outputs/apk/release/MyAniApp*.apk,build/app/outputs/flutter-apk/MyAniApp-release.apk'
+          allowUpdates: true
+          makeLatest: true

@@ -1,0 +1,9 @@
+fragment StaffFragment on Staff {
+  id
+  name {
+    userPreferred
+  }
+  image {
+    large
+  }
+}

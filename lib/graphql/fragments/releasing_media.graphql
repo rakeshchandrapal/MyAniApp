@@ -1,0 +1,19 @@
+# import './media.graphql'
+
+fragment ReleasingMedia on Media {
+  ...MediaFragment
+  nextAiringEpisode {
+    airingAt
+    timeUntilAiring
+    episode
+  }
+  airingSchedule(notYetAired: false) {
+    edges {
+      node {
+        airingAt
+        timeUntilAiring
+        episode
+      }
+    }
+  }
+}

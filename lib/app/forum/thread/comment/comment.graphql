@@ -1,0 +1,17 @@
+# import '/graphql/fragments/user.graphql'
+
+query Comment($id: Int) {
+  ThreadComment(id: $id) {
+    id
+    threadId
+    comment
+    isLiked
+    likeCount
+    createdAt
+    user {
+      ...UserFragment
+    }
+    childComments
+    isLocked
+  }
+}

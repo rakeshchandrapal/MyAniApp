@@ -1,0 +1,19 @@
+# import '/graphql/fragments/user.graphql'
+
+fragment ReviewFragment on Review {
+  id
+  rating
+  ratingAmount
+  summary
+  media {
+    id
+    title {
+      userPreferred
+    }
+    type
+    bannerImage
+  }
+  user {
+    ...UserFragment
+  }
+}

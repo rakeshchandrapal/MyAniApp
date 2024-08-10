@@ -1,0 +1,11 @@
+# import './media_entry.graphql'
+
+fragment ListGroup on MediaListGroup {
+  name
+  isCustomList
+  isSplitCompletedList
+  status
+  entries {
+    ...MediaListEntry
+  }
+}

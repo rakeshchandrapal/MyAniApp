@@ -1,0 +1,19 @@
+# import '/graphql/fragments/thread.graphql'
+
+query ForumOverview {
+  recent: Page(perPage: 14) {
+    threads(sort: [IS_STICKY, REPLIED_AT_DESC]) {
+      ...ThreadFragment
+    }
+  }
+  new: Page(perPage: 5) {
+    threads(sort: [ID_DESC]) {
+      ...ThreadFragment
+    }
+  }
+  release: Page(perPage: 4) {
+    threads(categoryId: 5, sort: [REPLIED_AT_DESC]) {
+      ...ThreadFragment
+    }
+  }
+}

@@ -1,0 +1,23 @@
+# import '/graphql/fragments/list_group.graphql'
+# import '/graphql/fragments/media_list_option.graphql'
+
+query MediaList($userName: String, $type: MediaType, $sort: [MediaListSort]) {
+  MediaListCollection(userName: $userName, type: $type, sort: $sort) {
+    lists {
+      ...ListGroup
+    }
+    user {
+      id
+      mediaListOptions {
+        scoreFormat
+        rowOrder
+        animeList {
+          ...MediaListOptions
+        }
+        mangaList {
+          ...MediaListOptions
+        }
+      }
+    }
+  }
+}

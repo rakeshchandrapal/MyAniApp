@@ -1,0 +1,53 @@
+# import '/graphql/fragments/fuzzy_date.graphql'
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/media.graphql'
+# import '/graphql/fragments/character.graphql'
+# import '/graphql/fragments/staff.graphql'
+
+query Staff($id: Int, $onList: Boolean, $characterPage: Int, $staffPage: Int) {
+  Staff(id: $id) {
+    ...StaffFragment
+    description
+    gender
+    language: languageV2
+    dateOfBirth {
+      ...FuzzyDate
+    }
+    dateOfDeath {
+      ...FuzzyDate
+    }
+    age
+    yearsActive
+    homeTown
+    bloodType
+    isFavourite
+    isFavouriteBlocked
+    characterMedia(page: $characterPage, onList: $onList, sort: [START_DATE_DESC]) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        node {
+          ...MediaFragment
+          startDate {
+            year
+          }
+        }
+        characters {
+          ...CharacterFragment
+        }
+      }
+    }
+    staffMedia(page: $staffPage, onList: $onList, sort: [START_DATE_DESC]) {
+      pageInfo {
+        ...PageInfo
+      }
+      edges {
+        node {
+          ...MediaFragment
+        }
+        staffRole
+      }
+    }
+  }
+}

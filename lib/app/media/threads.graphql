@@ -1,0 +1,13 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/thread.graphql'
+
+query MediaThreads($mediaId: Int, $page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      ...PageInfo
+    }
+    threads(mediaCategoryId: $mediaId, sort: ID_DESC) {
+      ...ThreadFragment
+    }
+  }
+}

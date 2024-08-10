@@ -1,0 +1,13 @@
+# import '/graphql/fragments/page_info.graphql'
+# import '/graphql/fragments/review.graphql'
+
+query UserReviews($userId: Int, $page: Int) {
+  Page(page: $page) {
+    pageInfo {
+      ...PageInfo
+    }
+    reviews(userId: $userId, sort: ID_DESC) {
+      ...ReviewFragment
+    }
+  }
+}

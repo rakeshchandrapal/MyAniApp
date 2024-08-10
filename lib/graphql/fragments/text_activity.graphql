@@ -1,0 +1,17 @@
+# import './user.graphql'
+
+fragment TextActivity on TextActivity {
+  id
+  userId
+  type
+  replyCount
+  text
+  isLocked
+  isSubscribed
+  isLiked
+  likeCount
+  createdAt
+  user {
+    ...UserFragment
+  }
+}
