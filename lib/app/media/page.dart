@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/media/__generated__/media.data.gql.dart';
-import 'package:myaniapp/app/media/__generated__/media.req.gql.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/hiding_floating_button.dart';
 import 'package:myaniapp/common/image_viewer.dart';
@@ -11,25 +11,28 @@ import 'package:myaniapp/common/invisible_expanded_title.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_editor/media_editor.dart';
+// import 'package:myaniapp/common/media_editor/media_editor.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/common/sliver_tabbar_view.dart';
 import 'package:myaniapp/common/widget_gradient.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class MediaScreen extends StatefulWidget {
+class MediaScreen extends StatefulHookWidget {
   const MediaScreen({super.key, @pathParam required this.id, this.placeholder});
 
   final int id;
-  final GMediaFragment? placeholder;
+  final Fragment$MediaFragment? placeholder;
 
   @override
   State<MediaScreen> createState() => _MediaScreenState();
@@ -40,20 +43,25 @@ class _MediaScreenState extends State<MediaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GMediaReq((b) => b
-        ..requestId = "mediaPage${widget.id}"
-        ..vars.id = widget.id),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      mediaQuery,
+      variables: Variables$Query$Media(id: widget.id).toJson(),
+      parseData: Query$Media.fromJson,
+    ));
+
+    return GQLWidget(
       loading: null,
-      error: (response) => Scaffold(
+      refetch: refetch,
+      response: snapshot,
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response!.graphqlErrors, response.linkException),
-          req: response.operationRequest,
+          exception: (snapshot.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) {
-        if (response?.loading == true && widget.placeholder == null) {
+      builder: () {
+        if (snapshot?.loading == true && widget.placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -61,7 +69,7 @@ class _MediaScreenState extends State<MediaScreen> {
             ),
           );
         }
-        if (response?.data == null) {
+        if (snapshot?.data == null) {
           return Scaffold(
             body: CustomScrollView(
               slivers: [
@@ -76,7 +84,7 @@ class _MediaScreenState extends State<MediaScreen> {
           );
         }
 
-        _buildTabs(response!.data!.Media!);
+        _buildTabs(snapshot!.parsedData!.Media!);
 
         return AutoTabsRouter.tabBar(
           routes: [
@@ -86,9 +94,9 @@ class _MediaScreenState extends State<MediaScreen> {
             return HidingFloatingButton(
               notificationPredicate: (notification) => notification.depth == 2,
               button: Show(
-                when: response?.data?.Media != null,
+                when: snapshot?.parsedData?.Media != null,
                 child: () => FloatingButtons(
-                  media: response!.data!.Media!,
+                  media: snapshot!.parsedData!.Media!,
                   onUpdate: refetch,
                 ),
               ),
@@ -100,9 +108,9 @@ class _MediaScreenState extends State<MediaScreen> {
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
                     MediaBar(
                       tab: tabs[tabController.index].$2,
-                      data: response!.data!.Media!,
+                      data: snapshot!.parsedData!.Media!,
                     ),
-                    if (response?.data != null && tabs.isNotEmpty)
+                    if (snapshot?.parsedData != null && tabs.isNotEmpty)
                       SliverPersistentHeader(
                         delegate: SliverTabBarViewDelegate(
                           child: TabBar(
@@ -130,7 +138,7 @@ class _MediaScreenState extends State<MediaScreen> {
     );
   }
 
-  void _buildTabs(GMediaData_Media media) {
+  void _buildTabs(Query$Media$Media media) {
     tabs = [
       (MediaInfoRoute(media: media), "Info"),
       if (media.relations?.edges?.isNotEmpty == true)
@@ -154,7 +162,7 @@ class FloatingButtons extends ConsumerWidget {
     required this.onUpdate,
   });
 
-  final GMediaData_Media media;
+  final Query$Media$Media media;
   final VoidCallback onUpdate;
 
   @override
@@ -170,8 +178,9 @@ class FloatingButtons extends ConsumerWidget {
           Expanded(
             child: FloatingActionButton.extended(
               heroTag: null,
+              // onPressed: () {},
               onPressed: () => MediaEditorDialog.show(
-                context, media, user.value!.data!.Viewer!.id,
+                context, media, user.value!.parsedData!.Viewer!.id,
                 onSave: onUpdate,
                 onDelete: onUpdate,
                 // onDelete: () => client.request(GDeleteMediaListEntryReq((b) => b..vars.,)),
@@ -186,15 +195,18 @@ class FloatingButtons extends ConsumerWidget {
             heroTag: null,
             onPressed: media.isFavouriteBlocked
                 ? null
-                : () => client
-                    .request(media.type == GMediaType.ANIME
-                        ? GToggleFavoriteReq(
-                            (b) => b..vars.animeId = media.id,
-                          )
-                        : GToggleFavoriteReq(
-                            (b) => b..vars.mangaId = media.id,
-                          ))
-                    .first
+                : () => c
+                    .query(GQLRequest(
+                      toggleFavoriteQuery,
+                      variables: media.type == Enum$MediaType.ANIME
+                          ? Variables$Mutation$ToggleFavorite(
+                              animeId: media.id,
+                            ).toJson()
+                          : Variables$Mutation$ToggleFavorite(
+                              mangaId: media.id,
+                            ).toJson(),
+                    ))
+                    .last
                     .then((_) => onUpdate()),
             label: Icon(
               Icons.favorite,
@@ -215,7 +227,7 @@ class MediaBar extends ConsumerWidget {
     required this.tab,
   });
 
-  final GMediaData_Media data;
+  final Query$Media$Media data;
   final String tab;
 
   @override
@@ -410,7 +422,7 @@ class MediaBarPlaceholder extends StatelessWidget {
     required this.placeholder,
   });
 
-  final GMediaFragment? placeholder;
+  final Fragment$MediaFragment? placeholder;
 
   @override
   Widget build(BuildContext context) {

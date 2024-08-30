@@ -1,82 +1,76 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/studio/__generated__/studio.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gql_http_link/gql_http_link.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/pagination.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/studio/studio.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class StudioScreen extends StatelessWidget {
+class StudioScreen extends HookWidget {
   const StudioScreen({super.key, @pathParam required this.id});
 
   final int id;
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GStudioReq((b) => b
-        ..requestId = "studio${id}Page"
-        ..vars.id = id
-        ..vars.sort.add(
-              GMediaSort.START_DATE_DESC,
-            )),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      studioQuery,
+      variables:
+          Variables$Query$Studio(id: id, sort: [Enum$MediaSort.START_DATE_DESC])
+              .toJson(),
+      parseData: Query$Studio.fromJson,
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: Scaffold(
-        appBar: AppBar(),
-        body: const Center(
+        body: Center(
           child: CircularProgressIndicator.adaptive(),
         ),
       ),
-      error: (response) => Scaffold(
-        appBar: AppBar(),
+      error: Scaffold(
         body: GraphqlError(
-          exception: (response?.graphqlErrors, response?.linkException),
+          exception: (snapshot.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) => Scaffold(
+      builder: () => Scaffold(
         appBar: AppBar(
-          title: Text(response!.data!.Studio!.name),
+          title: Text(snapshot.parsedData!.Studio!.name),
         ),
-        body: GraphqlPagination(
-          pageInfo: response.data!.Studio!.media!.pageInfo!,
-          req: (nextPage) => (response.operationRequest as GStudioReq).rebuild(
-            (b) => b
-              ..vars.page = nextPage
-              ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-                ..Studio.media.nodes.insertAll(
-                    0,
-                    previous?.Studio?.media?.nodes?.whereNot((p0) =>
-                            result.Studio?.media?.nodes?.contains(p0) ??
-                            false) ??
-                        [])),
+        body: GridView.builder(
+          padding: const EdgeInsets.all(8),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 150,
+            childAspectRatio: GridCard.listRatio,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
           ),
-          child: GridView.builder(
-            padding: const EdgeInsets.all(8),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 150,
-              childAspectRatio: GridCard.listRatio,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-            ),
-            itemBuilder: (context, index) {
-              var anime = response.data!.Studio!.media!.nodes![index]!;
+          itemBuilder: (context, index) {
+            var anime = snapshot.parsedData!.Studio!.media!.nodes![index]!;
 
-              return GridCard(
-                image: anime.coverImage!.extraLarge!,
-                title: anime.title!.userPreferred,
-                blur: anime.isAdult ?? false,
-                onTap: () => context.pushRoute(MediaRoute(
-                  id: anime.id,
-                  placeholder: anime,
-                )),
-                onLongPress: () => MediaSheet.show(context, anime),
-              );
-            },
-            itemCount: response.data!.Studio!.media!.nodes!.length,
-          ),
+            return GridCard(
+              image: anime.coverImage!.extraLarge!,
+              title: anime.title!.userPreferred,
+              blur: anime.isAdult ?? false,
+              onTap: () => context.pushRoute(MediaRoute(
+                id: anime.id,
+                placeholder: anime,
+              )),
+              onLongPress: () => MediaSheet.show(context, anime),
+            );
+          },
+          itemCount: snapshot.parsedData!.Studio!.media!.nodes!.length,
         ),
       ),
     );

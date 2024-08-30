@@ -3,10 +3,10 @@ import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
 
 class MediaSheet extends StatelessWidget {
-  static void show(BuildContext context, GMediaFragment media,
+  static void show(BuildContext context, Fragment$MediaFragment media,
       {Widget? leading}) {
     showModalBottomSheet(
       context: context,
@@ -21,7 +21,7 @@ class MediaSheet extends StatelessWidget {
 
   const MediaSheet({super.key, required this.media, this.leading});
 
-  final GMediaFragment media;
+  final Fragment$MediaFragment media;
   final Widget? leading;
 
   @override

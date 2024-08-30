@@ -1,23 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/media/__generated__/media.data.gql.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
 
-var _mediaRelations = GMediaRelation.values.toList();
+var _mediaRelations = Enum$MediaRelation.values.toList();
 
 @RoutePage()
 class MediaRelationsScreen extends ConsumerWidget {
   const MediaRelationsScreen({super.key, required this.media});
 
-  final GMediaData_Media media;
+  final Query$Media$Media media;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/character/__generated__/character.data.gql.dart';
-import 'package:myaniapp/app/character/__generated__/character.req.gql.dart';
-import 'package:myaniapp/app/media/__generated__/media.req.gql.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/hiding_floating_button.dart';
 import 'package:myaniapp/common/image_viewer.dart';
@@ -20,44 +18,49 @@ import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/character.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/character/character.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/character.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final _extractInfo = RegExp(r"^((?:(?:\*\*)|(?:__))[^]*?\n\n)");
 
 @RoutePage()
-class CharacterPage extends ConsumerWidget {
+class CharacterPage extends HookConsumerWidget {
   const CharacterPage(
       {super.key, @pathParam required this.id, this.placeholder});
 
   final int id;
-  final GCharacterFragment? placeholder;
+  final Fragment$CharacterFragment? placeholder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var listSettings = ref.watch(listSettingsProvider);
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      characterQuery,
+      variables: Variables$Query$Character(id: id).toJson(),
+      parseData: Query$Character.fromJson,
+      mergeResults: defaultMergeResults("Character.media.edges"),
+    ));
 
-    return GQLRequest(
-      // key: const Key("SHD"),
-      operationRequest: GCharacterReq(
-        (b) => b
-          ..requestId = "characterPage$id"
-          ..vars.id = id,
-      ),
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: null,
-      error: (response) => Scaffold(
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response!.graphqlErrors, response.linkException),
-          req: response.operationRequest,
+          exception: (snapshot!.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) {
-        if (response?.loading == true && placeholder == null) {
+      builder: () {
+        if (snapshot?.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -65,24 +68,25 @@ class CharacterPage extends ConsumerWidget {
             ),
           );
         }
-        var data = response?.data?.Character;
+        var data = snapshot?.parsedData?.Character;
 
         return HidingFloatingButton(
           button: Show(
             when: data != null,
             child: () => FloatingActionButton.extended(
               heroTag: null,
-              onPressed: data!.isFavouriteBlocked
-                  ? null
-                  : () => client
-                      .request(GToggleFavoriteReq(
-                        (b) => b..vars.characterId = data.id,
-                      ))
-                      .first
-                      .then((_) => refetch()),
+              onPressed: () {},
+              // onPressed: data!.isFavouriteBlocked
+              //     ? null
+              //     : () => client
+              //         .request(GToggleFavoriteReq(
+              //           (b) => b..vars.characterId = data.id,
+              //         ))
+              //         .first
+              //         .then((_) => refetch()),
               label: Icon(
                 Icons.favorite,
-                color: data.isFavourite ? Colors.red[200] : null,
+                color: data!.isFavourite ? Colors.red[200] : null,
               ),
               backgroundColor: Colors.red[900],
             ),
@@ -183,20 +187,11 @@ class CharacterPage extends ConsumerWidget {
 
                   return GraphqlPagination(
                     pageInfo: data.media!.pageInfo!,
-                    req: (nextPage) =>
-                        (response!.operationRequest as GCharacterReq).rebuild(
-                      (p0) => p0
-                        ..vars.page = nextPage
-                        ..updateResult = (previous, result) => result?.rebuild(
-                            (p0) => p0
-                              ..Character.media.edges.insertAll(
-                                  0,
-                                  previous?.Character?.media?.edges?.whereNot(
-                                          (p0) =>
-                                              result.Character?.media?.edges
-                                                  ?.contains(p0) ??
-                                              false) ??
-                                      [])),
+                    req: (nextPage) => fetchMore(
+                      variables: Variables$Query$Character.fromJson(
+                              snapshot.request!.variables)
+                          .copyWith(page: nextPage)
+                          .toJson(),
                     ),
                     child: CustomScrollView(
                       slivers: [
@@ -261,7 +256,7 @@ class _MediaList extends ConsumerWidget {
     required this.data,
   });
 
-  final GCharacterData_Character data;
+  final Query$Character$Character data;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -316,8 +311,10 @@ class _MediaList extends ConsumerWidget {
                   leading: ListTileCircleAvatar(
                     url: staff.voiceActor!.image!.large!,
                   ),
-                  onTap: () =>
-                      context.pushRoute(StaffRoute(id: staff.voiceActor!.id)),
+                  onTap: () => context.pushRoute(StaffRoute(
+                    id: staff.voiceActor!.id,
+                    placeholder: staff.voiceActor,
+                  )),
                   contentPadding: const EdgeInsets.all(0),
                 )
             ],

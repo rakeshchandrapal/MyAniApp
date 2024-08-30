@@ -3,10 +3,10 @@ import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_codegen/builder.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/app/activity/__generated__/activity.data.gql.dart';
-import 'package:myaniapp/app/activity/__generated__/activity.req.gql.dart';
-import 'package:myaniapp/app/home/__generated__/activities.req.gql.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/comment.dart';
 import 'package:myaniapp/common/dialogs/confirmation.dart';
@@ -19,18 +19,22 @@ import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/list_activity.data.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/message_activity.data.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/text_activity.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/activity/activity.graphql.dart';
+import 'package:myaniapp/graphql/__gen/app/home/activities.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/list_activity.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/message_activity.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/text_activity.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class ActivityPage extends ConsumerWidget {
+class ActivityPage extends HookConsumerWidget {
   const ActivityPage({
     super.key,
     @pathParam required this.id,
@@ -42,28 +46,30 @@ class ActivityPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GQLRequest(
-      operationRequest: GActivityReq(
-        (b) => b
-          ..requestId = "activityPage"
-          ..vars.id = id,
-      ),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(activityQuery,
+        variables: Variables$Query$Activity(id: id).toJson(),
+        parseData: Query$Activity.fromJson,
+        mergeResults: defaultMergeResults("replies.activityReplies")));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: null,
-      error: (response) => Scaffold(
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response!.graphqlErrors, response.linkException),
-          req: response.operationRequest,
+          exception: (snapshot.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) {
+      builder: () {
         // dynamic placeholder =
         //     (GoRouterState.of(context).extra as Map?)?["activity"];
 
-        if (response?.loading == true &&
-            placeholder is! GListActivity &&
-            placeholder is! GTextActivity &&
-            placeholder is! GMessageActivity) {
+        if (snapshot?.loading == true &&
+            placeholder is! Fragment$ListActivity &&
+            placeholder is! Fragment$TextActivity &&
+            placeholder is! Fragment$MessageActivity) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -72,7 +78,7 @@ class ActivityPage extends ConsumerWidget {
           );
         }
 
-        GActivityData? data = response?.data;
+        var data = snapshot?.parsedData;
 
         var view = CustomScrollView(
           slivers: [
@@ -102,15 +108,18 @@ class ActivityPage extends ConsumerWidget {
                         hasTap: false,
                         withFooter: false,
                       ),
-                      onSave: (text) => client
-                          .request(GSaveActivityReplyReq(
-                            (b) => b
-                              ..vars.activityId =
-                                  (placeholder ?? data?.activity)!.id
-                              ..vars.text = text,
+                      onSave: (text) => c
+                          .query(GQLRequest(
+                            saveActivityReplyQuery,
+                            variables: Variables$Mutation$SaveActivityReply(
+                              text: text,
+                              activityId: (placeholder ?? data?.activity)!.id,
+                            ).toJson(),
                           ))
-                          .first
-                          .then((value) => refetch()),
+                          .last
+                          .then(
+                            (value) => refetch(),
+                          ),
                     ),
                   ),
                   child: Container(
@@ -164,13 +173,18 @@ class ActivityPage extends ConsumerWidget {
                     footer: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: IconButton(
-                        onPressed: () => client
-                            .request(GToggleLikeReq(
-                              (b) => b
-                                ..vars.id = comment.id
-                                ..vars.type = GLikeableType.ACTIVITY_REPLY,
+                        onPressed: () => c
+                            .query(GQLRequest(
+                              toggleLikeQuery,
+                              variables: Variables$Mutation$ToggleLike(
+                                id: comment.id,
+                                type: Enum$LikeableType.ACTIVITY_REPLY,
+                              ).toJson(),
                             ))
-                            .first,
+                            .last
+                            .then(
+                              (value) => refetch(FetchPolicy.cacheFirst),
+                            ),
                         icon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -196,22 +210,11 @@ class ActivityPage extends ConsumerWidget {
             fallback: view,
             child: () => GraphqlPagination(
               pageInfo: data!.replies!.pageInfo!,
-              req: (nextPage) =>
-                  (response!.operationRequest as GActivityReq).rebuild(
-                (p0) => p0
-                  ..vars.page = nextPage
-                  ..updateResult = (previous, result) => result?.rebuild(
-                        (p0) => p0
-                          ..replies.activityReplies.insertAll(
-                                0,
-                                previous?.replies?.activityReplies?.whereNot(
-                                        (p0) =>
-                                            result.replies?.activityReplies
-                                                ?.contains(p0) ??
-                                            false) ??
-                                    [],
-                              ),
-                      ),
+              req: (nextPage) => fetchMore(
+                variables: Variables$Query$Activity.fromJson(
+                        snapshot.request!.variables)
+                    .copyWith(page: nextPage)
+                    .toJson(),
               ),
               child: view,
             ),
@@ -227,21 +230,22 @@ class ActivityCard extends ConsumerWidget {
       {super.key,
       this.activity,
       this.hasTap = true,
-      this.onDeleted,
+      // this.onDeleted,
+      this.refetch,
       this.withFooter = true})
-      : assert(activity is GListActivity ||
-            activity is GTextActivity ||
-            activity is GMessageActivity);
+      : assert(activity is Fragment$ListActivity ||
+            activity is Fragment$TextActivity ||
+            activity is Fragment$MessageActivity);
 
   final dynamic activity;
   final bool hasTap;
-  final VoidCallback? onDeleted;
+  final QueryRefetch? refetch;
   final bool withFooter;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var userId = ref
-        .watch(userProvider.select((value) => value.value?.data?.Viewer?.id));
+    var userId = ref.watch(
+        userProvider.select((value) => value.value?.parsedData?.Viewer?.id));
 
     var footer = withFooter
         ? Padding(
@@ -250,19 +254,22 @@ class ActivityCard extends ConsumerWidget {
               children: [
                 IconButton(
                   color: (activity.isLiked ?? false) ? Colors.red : null,
+                  // onPressed: () {},
                   onPressed: requiredLogin(
-                    ref,
-                    "like an activity",
-                    () => client
-                        .request(
-                          GToggleLikeReq(
-                            (b) => b
-                              ..vars.id = activity.id
-                              ..vars.type = GLikeableType.ACTIVITY,
-                          ),
-                        )
-                        .first,
-                  ),
+                      ref,
+                      "like an activity",
+                      () => c
+                          .query(
+                            GQLRequest(
+                              toggleLikeQuery,
+                              variables: Variables$Mutation$ToggleLike(
+                                      id: activity.id,
+                                      type: Enum$LikeableType.ACTIVITY)
+                                  .toJson(),
+                            ),
+                          )
+                          .last
+                          .then((_) => refetch?.call(FetchPolicy.cacheOnly))),
                   icon: Row(
                     children: [
                       const Icon(
@@ -286,16 +293,19 @@ class ActivityCard extends ConsumerWidget {
                   onPressed: requiredLogin(
                     ref,
                     "subscribe to an activity",
-                    () => client
-                        .request(
-                          GToggleActivitySubscriptionReq(
-                            (b) => b
-                              ..vars.id = activity.id
-                              ..vars.subscribe =
-                                  !(activity.isSubscribed ?? false),
+                    () => c
+                        .query(
+                          GQLRequest(
+                            toggleActivitySubscriptionQuery,
+                            variables:
+                                Variables$Mutation$ToggleActivitySubscription(
+                              id: activity.id,
+                              subscribe: !(activity.isSubscribed ?? false),
+                            ).toJson(),
                           ),
                         )
-                        .first,
+                        .last
+                        .then((_) => refetch?.call(FetchPolicy.cacheOnly)),
                   ),
                   icon: Icon(
                     activity.isSubscribed == true
@@ -309,21 +319,40 @@ class ActivityCard extends ConsumerWidget {
                   IconButton(
                     onPressed: requiredLogin(
                       ref,
-                      "delete an activity.",
+                      "delete an activity",
                       () => ConfirmationDialog.show(
                         context,
                         "activity",
-                        () => client
-                            .request(
-                              GDeleteActivityReq(
-                                (b) => b..vars.id = activity.id,
+                        () => c
+                            .query(
+                              GQLRequest(
+                                deleteActivityQuery,
+                                variables: Variables$Mutation$DeleteActivity(
+                                        id: activity.id)
+                                    .toJson(),
                               ),
                             )
-                            .first
-                            .then((value) => onDeleted?.call()),
-                        delete: true,
+                            .last
+                            .then((_) => refetch?.call()),
                       ),
                     ),
+                    // onPressed: requiredLogin(
+                    //   ref,
+                    //   "delete an activity.",
+                    //   () => ConfirmationDialog.show(
+                    //     context,
+                    //     "activity",
+                    //     () => client
+                    //         .request(
+                    //           GDeleteActivityReq(
+                    //             (b) => b..vars.id = activity.id,
+                    //           ),
+                    //         )
+                    //         .first
+                    //         .then((value) => onDeleted?.call()),
+                    //     delete: true,
+                    //   ),
+                    // ),
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
@@ -334,8 +363,8 @@ class ActivityCard extends ConsumerWidget {
           )
         : null;
 
-    if (activity is GListActivity) {
-      var a = activity as GListActivity;
+    if (activity is Fragment$ListActivity) {
+      var a = activity as Fragment$ListActivity;
       return Comment(
         collapsible: false,
         onAvatarTap: () => context.pushRoute(
@@ -384,13 +413,14 @@ class ActivityCard extends ConsumerWidget {
                       if (a.progress != null)
                         TextSpan(text: " ${a.progress!} of"),
                       TextSpan(
-                          text: " ${a.media!.title!.userPreferred}",
-                          style: const TextStyle(color: Colors.blue),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => context.pushRoute(
-                                  MediaRoute(
-                                      id: a.media!.id, placeholder: a.media),
-                                ))
+                        text: " ${a.media!.title!.userPreferred}",
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => context.pushRoute(
+                                MediaRoute(
+                                    id: a.media!.id, placeholder: a.media),
+                              ),
+                      )
                     ],
                   ),
                 ),
@@ -399,9 +429,9 @@ class ActivityCard extends ConsumerWidget {
           ),
         ),
       );
-    } else if (activity is GTextActivity) {
+    } else if (activity is Fragment$TextActivity) {
       // print(activity.text);
-      var a = activity as GTextActivity;
+      var a = activity as Fragment$TextActivity;
       return Comment(
         collapsible: false,
         onTap: hasTap
@@ -419,8 +449,8 @@ class ActivityCard extends ConsumerWidget {
           selectable: true,
         ),
       );
-    } else if (activity is GMessageActivity) {
-      var a = activity as GMessageActivity;
+    } else if (activity is Fragment$MessageActivity) {
+      var a = activity as Fragment$MessageActivity;
 
       return Comment(
         avatar: a.messenger!.avatar!.large!,

@@ -64,7 +64,7 @@ class _MarkdownEditorState extends State<MarkdownEditor> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: _pageController.positions.isNotEmpty &&
-          (_pageController.page == _pageController.initialPage),
+          (_pageController.page != _pageController.initialPage),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

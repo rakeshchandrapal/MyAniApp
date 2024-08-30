@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/user/__generated__/user.data.gql.dart';
-import 'package:myaniapp/app/user/__generated__/user.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/image_viewer.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
@@ -10,17 +10,20 @@ import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/common/sliver_tabbar_view.dart';
 import 'package:myaniapp/common/widget_gradient.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/user/user.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/user.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class UserScreen extends StatefulWidget {
+class UserScreen extends StatefulHookWidget {
   const UserScreen(
       {super.key, @pathParam required this.name, this.placeholder});
 
   final String name;
-  final GUserFragment? placeholder;
+  final Fragment$UserFragment? placeholder;
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -32,14 +35,25 @@ class _UserScreenState extends State<UserScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GUserReq((b) => b
-        ..requestId = "userPage${widget.name}"
-        ..vars.name = widget.name),
-      errorWidget: false,
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      userQuery,
+      variables: Variables$Query$User(name: widget.name).toJson(),
+      parseData: Query$User.fromJson,
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      error: Scaffold(
+        appBar: AppBar(),
+        body: GraphqlError(
+          exception: (snapshot.errors, snapshot.linkError),
+          refetch: refetch,
+        ),
+      ),
       loading: null,
-      builder: (context, response, error, refetch) {
-        if (response?.loading == true && widget.placeholder == null) {
+      builder: () {
+        if (snapshot?.loading == true && widget.placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -48,17 +62,7 @@ class _UserScreenState extends State<UserScreen>
           );
         }
 
-        if (response?.hasErrors == true) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: GraphqlError(
-              exception: (response?.graphqlErrors, response?.linkException),
-              req: response?.operationRequest,
-            ),
-          );
-        }
-
-        var data = response?.data?.User;
+        var data = snapshot?.parsedData?.User;
 
         if (data != null) _buildTabs(data);
 
@@ -104,7 +108,7 @@ class _UserScreenState extends State<UserScreen>
     );
   }
 
-  void _buildTabs(GUserData_User user) {
+  void _buildTabs(Query$User$User user) {
     tabs = [
       (UserInfoRoute(user: user), "Info"),
       (UserSocialRoute(id: user.id), "Social"),
@@ -133,8 +137,8 @@ class UserAppBar extends StatelessWidget {
     this.data,
   });
 
-  final GUserFragment? placeholderData;
-  final GUserData_User? data;
+  final Fragment$UserFragment? placeholderData;
+  final Query$User$User? data;
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/media/__generated__/reviews.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/common/pagination.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/media/reviews.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class MediaReviewsScreen extends StatelessWidget {
+class MediaReviewsScreen extends HookWidget {
   const MediaReviewsScreen(
       {super.key, @PathParam.inherit("id") required this.mediaId});
 
@@ -17,26 +21,37 @@ class MediaReviewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GMediaReviewsReq((b) => b
-        ..requestId = "mediaReviews$mediaId"
-        ..vars.mediaId = mediaId),
-      builder: (context, response, error, refetch) => GraphqlPagination(
-        pageInfo: response!.data!.Media!.reviews!.pageInfo!,
-        req: (nextPage) => (response.operationRequest as GMediaReviewsReq)
-            .rebuild((p0) => p0
-              ..vars.page = nextPage
-              ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-                ..Media.reviews.nodes.insertAll(
-                    0,
-                    previous?.Media?.reviews?.nodes?.whereNot((p0) =>
-                            result.Media?.reviews?.nodes?.contains(p0) ??
-                            false) ??
-                        []))),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      mediaReviewsQuery,
+      variables: Variables$Query$MediaReviews(mediaId: mediaId).toJson(),
+      parseData: Query$MediaReviews.fromJson,
+      mergeResults: defaultMergeResults("Media.reviews"),
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      builder: () => GraphqlPagination(
+        pageInfo: snapshot!.parsedData!.Media!.reviews!.pageInfo!,
+        req: (nextPage) => fetchMore(
+          variables:
+              Variables$Query$MediaReviews(mediaId: mediaId, page: nextPage)
+                  .toJson(),
+        ),
+        // req: (nextPage) => (response.operationRequest as GMediaReviewsReq)
+        //     .rebuild((p0) => p0
+        //       ..vars.page = nextPage
+        //       ..updateResult = (previous, result) => result?.rebuild((p0) => p0
+        //         ..Media.reviews.nodes.insertAll(
+        //             0,
+        //             previous?.Media?.reviews?.nodes?.whereNot((p0) =>
+        //                     result.Media?.reviews?.nodes?.contains(p0) ??
+        //                     false) ??
+        //                 []))),
         child: ListView.builder(
           padding: const EdgeInsets.all(0),
           itemBuilder: (context, index) {
-            var review = response.data!.Media!.reviews!.nodes![index]!;
+            var review = snapshot.parsedData!.Media!.reviews!.nodes![index]!;
 
             return ListTile(
               onTap: () => context
@@ -62,7 +77,7 @@ class MediaReviewsScreen extends StatelessWidget {
                   Icon(
                     Icons.thumb_up,
                     size: 20,
-                    color: review.userRating == GReviewRating.UP_VOTE
+                    color: review.userRating == Enum$ReviewRating.UP_VOTE
                         ? Colors.green
                         : null,
                   )
@@ -76,7 +91,7 @@ class MediaReviewsScreen extends StatelessWidget {
                   )),
             );
           },
-          itemCount: response.data!.Media!.reviews!.nodes!.length,
+          itemCount: snapshot.parsedData!.Media!.reviews!.nodes!.length,
         ),
       ),
     );

@@ -5,7 +5,7 @@ import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/thread.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/thread.graphql.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:relative_time/relative_time.dart';
@@ -16,7 +16,7 @@ class ThreadCard extends StatelessWidget {
     required this.thread,
   });
 
-  final GThreadFragment thread;
+  final Fragment$ThreadFragment thread;
 
   @override
   Widget build(BuildContext context) {

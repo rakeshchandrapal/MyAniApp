@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
-import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/search/media/__generated__/mediaSearch.data.gql.dart';
-import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/search/media/editor.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/media_card.dart';
@@ -12,11 +11,14 @@ import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
 class SearchScreen extends StatelessWidget {
@@ -27,9 +29,8 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var query = context.routeData.queryParams;
-    print(query.rawMap);
     return FutureBuilder(
-      future: MediaSearchQuery.from(query.rawMap, client: client),
+      future: MediaSearchQuery.from(query.rawMap),
       builder: (context, snapshot) => Show(
         when: snapshot.data != null,
         fallback: Scaffold(
@@ -125,54 +126,58 @@ class _SearchViewState extends ConsumerState<SearchView> {
       body: Show(
         when: widget.query.toString() != '?',
         fallback: const SizedBox(),
-        child: () => GQLRequest(
-          key: Key(widget.query.toString()),
-          operationRequest: widget.query.toReq(),
-          builder: (context, response, error, refetch) => GraphqlPagination(
-            pageInfo: response!.data!.Page!.pageInfo!,
-            req: (nextPage) {
-              return (response.operationRequest as GSearchReq).rebuild(
-                (p0) => p0
-                  ..vars.page = nextPage
-                  ..updateResult = (previous, result) => result?.rebuild(
-                        (p0) => p0
-                          ..Page.media.insertAll(
-                                0,
-                                previous?.Page?.media?.whereNot((p0) =>
-                                        result.Page?.media?.contains(p0) ??
-                                        false) ??
-                                    [],
-                              ),
-                      ),
-              );
-            },
-            child: MediaCards(
-              listType: listSetting,
-              padding: EdgeInsets.all(listSetting == ListType.grid ? 8 : 0),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 150,
-                childAspectRatio: GridCard.listRatio,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                var media = response.data!.Page!.media![index]!;
+        child: () => HookBuilder(
+          builder: (context) {
+            var (:snapshot, :fetchMore, :refetch) =
+                c.useQuery(widget.query.toReq());
 
-                return MediaCard(
-                  listType: listSetting,
-                  image: media.coverImage!.extraLarge!,
-                  title: media.title!.userPreferred!,
-                  blur: media.isAdult!,
-                  onLongPress: () => MediaSheet.show(context, media),
-                  onTap: () => context
-                      .pushRoute(MediaRoute(id: media.id, placeholder: media)),
-                  // onTap: () => context
-                  //     .push("/media/${media.id}/info", extra: {"media": media}),
-                );
-              },
-              itemCount: response.data!.Page!.media!.length,
-            ),
-          ),
+            // print(snapshot.request?.variables?['genres'][0]);
+
+            return RefreshIndicator.adaptive(
+              onRefresh: refetch,
+              child: GQLWidget(
+                key: Key(widget.query.toString()),
+                refetch: refetch,
+                response: snapshot,
+                builder: () => GraphqlPagination(
+                  pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+                  req: (nextPage) => fetchMore(
+                      variables: Variables$Query$Search.fromJson(
+                              snapshot.request!.variables)
+                          .copyWith(page: nextPage)
+                          .toJson()),
+                  child: MediaCards(
+                    listType: listSetting,
+                    padding:
+                        EdgeInsets.all(listSetting == ListType.grid ? 8 : 0),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 150,
+                      childAspectRatio: GridCard.listRatio,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      var media = snapshot.parsedData!.Page!.media![index]!;
+
+                      return MediaCard(
+                        listType: listSetting,
+                        image: media.coverImage!.extraLarge!,
+                        title: media.title!.userPreferred!,
+                        blur: media.isAdult!,
+                        onLongPress: () => MediaSheet.show(context, media),
+                        onTap: () => context.pushRoute(
+                            MediaRoute(id: media.id, placeholder: media)),
+                        // onTap: () => context
+                        //     .push("/media/${media.id}/info", extra: {"media": media}),
+                      );
+                    },
+                    itemCount: snapshot.parsedData!.Page!.media!.length,
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -199,13 +204,13 @@ class MediaSearchQuery {
   });
 
   String? search;
-  List<GMediaSort>? sort;
-  GMediaType? type;
-  List<GMediaFormat>? format;
+  List<Enum$MediaSort>? sort;
+  Enum$MediaType? type;
+  List<Enum$MediaFormat>? format;
   List<String>? genres;
-  List<GGenreCollectionData_tags>? withTags;
-  List<GGenreCollectionData_tags>? withoutTags;
-  GMediaSeason? season;
+  List<Query$GenreCollection$tags>? withTags;
+  List<Query$GenreCollection$tags>? withoutTags;
+  Enum$MediaSeason? season;
   // int? seasonYear;
   int? year;
   // yearGreater
@@ -216,34 +221,40 @@ class MediaSearchQuery {
   bool? onList;
   String? countryOfOrigin;
 
-  static Future<MediaSearchQuery> from(Map<String, dynamic> query,
-      {required Client client}) async {
-    List<GMediaSort>? sort0;
-    List<GMediaFormat>? format0;
+  static Future<MediaSearchQuery> from(Map<String, dynamic> query) async {
+    List<Enum$MediaSort>? sort0;
+    List<Enum$MediaFormat>? format0;
     List<String>? genre0;
-    List<GGenreCollectionData_tags>? withTag0;
-    List<GGenreCollectionData_tags>? withoutTag0;
-    GMediaType? type0 = GMediaType.values
+    List<Query$GenreCollection$tags>? withTag0;
+    List<Query$GenreCollection$tags>? withoutTag0;
+    Enum$MediaType? type0 = Enum$MediaType.values
         .firstWhereOrNull((element) => element.name == query["type"]);
-    GMediaSeason? season0 = GMediaSeason.values
+    Enum$MediaSeason? season0 = Enum$MediaSeason.values
         .firstWhereOrNull((element) => element.name == query["season"]);
 
-    GGenreCollectionData? collection;
+    Query$GenreCollection? collection;
 
     if (query["withTags"] != null ||
         query["withoutTags"] != null ||
         query["genre"] != null) {
-      collection = (await client
-              .request(GGenreCollectionReq(
-                (b) => b..fetchPolicy = FetchPolicy.NoCache,
-              ))
-              .first)
-          .data!;
+      collection = (await c
+              .query(GQLRequest(genreCollectionQuery,
+                  fetchPolicy: FetchPolicy.noCache,
+                  parseData: Query$GenreCollection.fromJson))
+              .last)
+          .parsedData;
+      // collection = (await client
+      //         .request(GGenreCollectionReq(
+      //           (b) => b..fetchPolicy = FetchPolicy.NoCache,
+      //         ))
+      //         .first)
+      //     .data!;
     }
 
     if (query["sort"] != null) {
       var list = query["sort"] is List ? query["sort"] : [query["sort"]];
-      var s = GMediaSort.values.where((element) => list.contains(element.name));
+      var s =
+          Enum$MediaSort.values.where((element) => list.contains(element.name));
       if (s.isNotEmpty) {
         sort0 = s.toList();
       }
@@ -263,7 +274,7 @@ class MediaSearchQuery {
       var t =
           collection!.tags!.where((element) => list.contains(element!.name));
       if (t.isNotEmpty) {
-        withTag0 = t.cast<GGenreCollectionData_tags>().toList();
+        withTag0 = t.cast<Query$GenreCollection$tags>().toList();
       }
     }
 
@@ -274,14 +285,14 @@ class MediaSearchQuery {
       var t =
           collection!.tags!.where((element) => list.contains(element!.name));
       if (t.isNotEmpty == true) {
-        withoutTag0 = t.cast<GGenreCollectionData_tags>().toList();
+        withoutTag0 = t.cast<Query$GenreCollection$tags>().toList();
       }
     }
 
     if (query["format"] != null) {
       var list = query["format"] is List ? query["format"] : [query["format"]];
-      var f =
-          GMediaFormat.values.where((element) => list.contains(element.name));
+      var f = Enum$MediaFormat.values
+          .where((element) => list.contains(element.name));
       if (f.isNotEmpty) {
         format0 = f.toList();
       }
@@ -307,34 +318,42 @@ class MediaSearchQuery {
     );
   }
 
-  GSearchReq toReq() {
-    return GSearchReq(
-      (b) {
-        if (format?.isNotEmpty == true) b.vars.format.addAll(format!);
-        if (genres?.isNotEmpty == true) b.vars.genres.addAll(genres!);
-        if (withTags?.isNotEmpty == true) {
-          b.vars.with_tags.addAll(withTags!.map((e) => e.name));
-        }
-        if (withoutTags?.isNotEmpty == true) {
-          b.vars.without_tags.addAll(withoutTags!.map((e) => e.name));
-        }
-        if (sort?.isNotEmpty == true) b.vars.sort.addAll(sort!);
-        if (isAdult != null) b.vars.isAdult = isAdult;
-        if (onList != null) b.vars.onList = onList;
-        if (search != null) b.vars.search = search;
-        if (season != null) b.vars.season = season;
-        if (year != null && season != null) b.vars.seasonYear = year;
-        if (type != null) b.vars.type = type;
-        if (year != null && season == null) b.vars.year = '$year%';
-        if (endDate != null) b.vars.yearGreater = endDate;
-        if (startDate != null) b.vars.yearLesser = startDate;
-        if (countryOfOrigin != null) {
-          b.vars.countryOfOrigin.update((p0) => p0.value = countryOfOrigin);
-        }
-
-        b.requestId = "search";
-      },
+  GQLRequest<Query$Search> toReq() {
+    return GQLRequest(
+      searchQuery,
+      parseData: Query$Search.fromJson,
+      mergeResults: defaultMergeResults("Page.media"),
+      variables: _removeNulls(Variables$Query$Search(
+        format: format,
+        sort: sort,
+        countryOfOrigin: countryOfOrigin,
+        genres: genres,
+        isAdult: isAdult,
+        onList: onList,
+        search: search,
+        season: season,
+        seasonYear: (year != null && season != null) ? year : null,
+        type: type,
+        with_tags: withTags
+            ?.map(
+              (e) => e.name,
+            )
+            .toList(),
+        without_tags: withoutTags
+            ?.map(
+              (e) => e.name,
+            )
+            .toList(),
+        year: (year != null && season == null) ? "$year%" : null,
+        yearGreater: endDate.toString(),
+        yearLesser: startDate.toString(),
+      )).toJson(),
     );
+  }
+
+  Variables$Query$Search _removeNulls(Variables$Query$Search vars) {
+    return Variables$Query$Search.fromJson(
+        vars.toJson()..removeWhere((key, value) => value == 'null'));
   }
 
   @override

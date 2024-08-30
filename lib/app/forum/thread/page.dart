@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/app/forum/%5Btab%5D/page.dart';
-import 'package:myaniapp/app/forum/thread/__generated__/thread.data.gql.dart';
-import 'package:myaniapp/app/forum/thread/__generated__/thread.req.gql.dart';
-import 'package:myaniapp/app/home/__generated__/activities.req.gql.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/comment.dart';
 import 'package:myaniapp/common/custom_dropdown.dart';
 import 'package:myaniapp/common/hiding_floating_button.dart';
@@ -16,43 +13,49 @@ import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/thread.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/forum/thread/thread.graphql.dart';
+import 'package:myaniapp/graphql/__gen/app/home/activities.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/thread.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class ThreadScreen extends HookWidget {
-  ThreadScreen({super.key, required this.id, this.placeholder});
+  ThreadScreen({super.key, @pathParam required this.id, this.placeholder});
 
   final int id;
-  final GThreadFragment? placeholder;
+  final Fragment$ThreadFragment? placeholder;
 
   final dataKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     var scrollController = useScrollController();
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      threadQuery,
+      variables: Variables$Query$Thread(id: id).toJson(),
+      parseData: Query$Thread.fromJson,
+      mergeResults: defaultMergeResults("comments.threadComments"),
+    ));
 
-    return GQLRequest(
-      operationRequest: GThreadReq(
-        (b) => b
-          ..requestId = "threadPage$id"
-          ..vars.id = id,
-      ),
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: null,
-      error: (response) => Scaffold(
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response!.graphqlErrors, response.linkException),
-          req: response.operationRequest,
+          exception: (snapshot!.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) {
-        if (response?.loading == true && placeholder == null) {
+      builder: () {
+        if (snapshot?.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -60,7 +63,7 @@ class ThreadScreen extends HookWidget {
             ),
           );
         }
-        var threadData = response?.data?.thread;
+        var threadData = snapshot?.parsedData?.thread;
 
         var view = CustomScrollView(
           controller: scrollController,
@@ -169,14 +172,16 @@ class ThreadScreen extends HookWidget {
                     : () => MarkdownEditor.show(
                           context,
                           hint: "Write a reply",
-                          onSave: (text) => client
-                              .request(GSaveCommentReq(
-                                (b) => b
-                                  ..vars.threadId =
-                                      (placeholder ?? threadData)!.id
-                                  ..vars.comment = text,
+                          onSave: (text) => c
+                              .query(GQLRequest(
+                                saveCommentQuery,
+                                variables: Variables$Mutation$SaveComment(
+                                        threadId:
+                                            (placeholder ?? threadData)!.id,
+                                        comment: text)
+                                    .toJson(),
                               ))
-                              .first
+                              .last
                               .then((value) => refetch()),
                           leading: Comment(
                             collapsible: false,
@@ -227,7 +232,7 @@ class ThreadScreen extends HookWidget {
               ),
             ),
             Show(
-              when: response?.data?.comments != null,
+              when: snapshot?.parsedData?.comments != null,
               fallback: const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator.adaptive(),
@@ -236,9 +241,10 @@ class ThreadScreen extends HookWidget {
               child: () => SliverList.builder(
                 itemBuilder: (context, index) {
                   var comment =
-                      response.data!.comments!.threadComments![index]!;
+                      snapshot.parsedData!.comments!.threadComments![index]!;
 
                   if (comment.user == null) return const SizedBox();
+                  // print(comment.childComments);
 
                   return ThreadComment(
                     id: comment.id,
@@ -247,7 +253,7 @@ class ThreadScreen extends HookWidget {
                     username: comment.user!.name,
                     comment: comment.comment!,
                     createdAt: comment.createdAt,
-                    replies: comment.childComments?.asList,
+                    replies: comment.childComments as List?,
                     isLiked: comment.isLiked ?? false,
                     likeCount: comment.likeCount,
                     refetch: refetch,
@@ -256,7 +262,8 @@ class ThreadScreen extends HookWidget {
                     ),
                   );
                 },
-                itemCount: response!.data!.comments!.threadComments!.length,
+                itemCount:
+                    snapshot!.parsedData!.comments!.threadComments!.length,
               ),
             )
           ],
@@ -270,20 +277,24 @@ class ThreadScreen extends HookWidget {
             ),
             width: 130,
             child: Show(
-              when: response?.data != null,
+              when: snapshot?.parsedData != null,
               child: () => SheetDropdownMenu(
-                key: Key((response!.data!.comments!.pageInfo!.currentPage ?? 1)
-                    .toString()),
-                value: response.data!.comments!.pageInfo!.currentPage ?? 1,
+                key: Key(
+                    (snapshot!.parsedData!.comments!.pageInfo!.currentPage ?? 1)
+                        .toString()),
+                value:
+                    snapshot.parsedData!.comments!.pageInfo!.currentPage ?? 1,
                 hint: "Page",
                 onChanged: (values) {
-                  if (response.data!.comments!.pageInfo!.currentPage ==
+                  if (snapshot.parsedData!.comments!.pageInfo!.currentPage ==
                       values.first) return;
-                  client.requestController.add(
-                      (response.operationRequest as GThreadReq)
-                          .rebuild((p0) => p0
-                            ..vars.page = values.first
-                            ..updateResult = (p0, p1) => p1));
+                  fetchMore(
+                    variables: Variables$Query$Thread.fromJson(
+                            snapshot.request!.variables)
+                        .copyWith(page: values.first)
+                        .toJson(),
+                    mergeResults: (previousResult, result) => result,
+                  );
                   if (dataKey.currentContext?.mounted == true) {
                     scrollController
                         .jumpTo(dataKey.currentContext!.size!.height);
@@ -291,7 +302,9 @@ class ThreadScreen extends HookWidget {
                 },
                 items: [
                   for (int i = 1;
-                      i <= (response.data!.comments!.pageInfo!.lastPage ?? 1);
+                      i <=
+                          (snapshot.parsedData!.comments!.pageInfo!.lastPage ??
+                              1);
                       i++)
                     DropdownMenuEntry(value: i, label: i.toString())
                 ],
@@ -304,21 +317,12 @@ class ThreadScreen extends HookWidget {
               when: threadData != null,
               fallback: view,
               child: () => GraphqlPagination(
-                pageInfo: response!.data!.comments!.pageInfo!,
-                req: (nextPage) =>
-                    (response.operationRequest as GThreadReq).rebuild(
-                  (p0) => p0
-                    ..vars.page = nextPage
-                    ..updateResult = (previous, result) => result?.rebuild(
-                        (p0) => p0
-                          ..comments.threadComments.insertAll(
-                              0,
-                              previous?.comments?.threadComments?.whereNot(
-                                      (p0) =>
-                                          result.comments?.threadComments
-                                              ?.contains(p0) ??
-                                          false) ??
-                                  [])),
+                pageInfo: snapshot!.parsedData!.comments!.pageInfo!,
+                req: (nextPage) => fetchMore(
+                  variables: Variables$Query$Thread.fromJson(
+                          snapshot.request!.variables)
+                      .copyWith(page: nextPage)
+                      .toJson(),
                 ),
                 child: view,
               ),
@@ -358,16 +362,16 @@ class ThreadComment extends ConsumerWidget {
   final GestureTapCallback? onAvatarTap;
   final bool isLiked;
   final int likeCount;
-  final VoidCallback refetch;
+  final QueryRefetch refetch;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<GThreadData_comments_threadComments> parsedReplies = [];
+    List<Query$Thread$comments$threadComments> parsedReplies = [];
     try {
       if (replies != null) {
         for (var reply in replies!) {
           parsedReplies
-              .add(GThreadData_comments_threadComments.fromJson(reply)!);
+              .add(Query$Thread$comments$threadComments.fromJson(reply)!);
         }
       }
     } catch (err) {}
@@ -394,7 +398,7 @@ class ThreadComment extends ConsumerWidget {
                   username: reply.user!.name,
                   createdAt: reply.createdAt,
                   comment: reply.comment!,
-                  replies: reply.childComments?.asList,
+                  replies: reply.childComments as List?,
                   isLiked: reply.isLiked ?? false,
                   likeCount: reply.likeCount,
                   onAvatarTap: () => context.pushRoute(
@@ -413,16 +417,21 @@ class ThreadComment extends ConsumerWidget {
               onPressed: requiredLogin(
                 ref,
                 "like a comment",
-                () => client
-                    .request(
-                      GToggleLikeReq((b) => b
-                        ..vars.id = id
-                        ..vars.type = GLikeableType.THREAD_COMMENT),
-                    )
-                    .first
+                () => c
+                    .query(GQLRequest(
+                      toggleLikeQuery,
+                      variables: Variables$Mutation$ToggleLike(
+                        id: id,
+                        type: Enum$LikeableType.THREAD_COMMENT,
+                      ).toJson(),
+                    ))
+                    .last
                     .then(
                   (value) {
-                    if (isReply == true) refetch();
+                    if (isReply == true)
+                      refetch();
+                    else
+                      refetch(FetchPolicy.cacheFirst);
                   },
                 ),
               ),
@@ -442,13 +451,14 @@ class ThreadComment extends ConsumerWidget {
                 () => MarkdownEditor.show(
                   context,
                   hint: "Write a reply",
-                  onSave: (text) => client
-                      .request(GSaveCommentReq(
-                        (b) => b
-                          ..vars.parentCommentId = parentId
-                          ..vars.comment = text,
+                  onSave: (text) => c
+                      .query(GQLRequest(
+                        saveCommentQuery,
+                        variables: Variables$Mutation$SaveComment(
+                                comment: text, parentCommentId: parentId)
+                            .toJson(),
                       ))
-                      .first
+                      .last
                       .then((value) => refetch()),
                   leading: Comment(
                     collapsible: false,

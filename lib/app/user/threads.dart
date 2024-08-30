@@ -1,42 +1,55 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/user/__generated__/thread.data.gql.dart';
-import 'package:myaniapp/app/user/__generated__/thread.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/comment.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/common/thread_card.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/user/thread.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class UserThreadsScreen extends StatelessWidget {
+class UserThreadsScreen extends HookWidget {
   const UserThreadsScreen({super.key, required this.id});
 
   final int id;
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GUserThreadsReq(
-        (b) => b
-          ..requestId = "userThreads$id"
-          ..vars.userId = id,
-      ),
-      builder: (context, response, error, refetch) => ThreadsView(
-        data: response!.data!,
-        req: response.operationRequest as GUserThreadsReq,
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      userThreadsQuery,
+      variables: Variables$Query$UserThreads(userId: id).toJson(),
+      parseData: Query$UserThreads.fromJson,
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      builder: () => ThreadsView(
+        data: snapshot!.parsedData!,
+        fetchMore: fetchMore,
+        request: snapshot.request!,
       ),
     );
   }
 }
 
 class ThreadsView extends StatefulWidget {
-  const ThreadsView({super.key, required this.data, required this.req});
+  const ThreadsView({
+    super.key,
+    required this.data,
+    required this.request,
+    required this.fetchMore,
+  });
 
-  final GUserThreadsData data;
-  final GUserThreadsReq req;
+  final Query$UserThreads data;
+  final GQLRequest request;
+  final QueryHookFetchMore fetchMore;
 
   @override
   State<ThreadsView> createState() => _ThreadsViewState();
@@ -51,22 +64,34 @@ class _ThreadsViewState extends State<ThreadsView> {
       pageInfo: selected == 0
           ? widget.data.thread!.pageInfo!
           : widget.data.comments!.pageInfo!,
+      req: (nextPage) {
+        var vars =
+            Variables$Query$UserThreads.fromJson(widget.request.variables);
+
+        if (selected == 0)
+          return widget.fetchMore(
+              variables: vars.copyWith(threadPage: nextPage).toJson(),
+              mergeResults: defaultMergeResults("thread.threads"));
+        return widget.fetchMore(
+            variables: vars.copyWith(commentsPage: nextPage).toJson(),
+            mergeResults: defaultMergeResults("comment.threadComments"));
+      },
       // depth: ,
-      req: (nextPage) => widget.req.rebuild((b) {
-        if (selected == 0) {
-          b.vars.threadPage = nextPage;
-        } else {
-          b.vars.commentsPage = nextPage;
-        }
+      // req: (nextPage) => widget.req.rebuild((b) {
+      //   if (selected == 0) {
+      //     b.vars.threadPage = nextPage;
+      //   } else {
+      //     b.vars.commentsPage = nextPage;
+      //   }
 
-        b.updateResult = (prev, result) => result!.rebuild((p0) => p0
-          ..thread.threads.insertAll(0, prev?.thread?.threads ?? [])
-          ..comments
-              .threadComments
-              .insertAll(0, prev?.comments?.threadComments ?? []));
+      //   b.updateResult = (prev, result) => result!.rebuild((p0) => p0
+      //     ..thread.threads.insertAll(0, prev?.thread?.threads ?? [])
+      //     ..comments
+      //         .threadComments
+      //         .insertAll(0, prev?.comments?.threadComments ?? []));
 
-        return b;
-      }),
+      //   return b;
+      // }),
       child: CustomScrollView(
         slivers: [
           SliverPadding(

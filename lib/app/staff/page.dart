@@ -2,9 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/media/__generated__/media.req.gql.dart';
-import 'package:myaniapp/app/staff/__generated__/staff.data.gql.dart';
-import 'package:myaniapp/app/staff/__generated__/staff.req.gql.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/staff/production_screen.dart';
 import 'package:myaniapp/app/staff/voice_screen.dart';
 import 'package:myaniapp/common/cached_image.dart';
@@ -14,47 +13,49 @@ import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/invisible_expanded_title.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
-import 'package:myaniapp/common/media_cards/grid_card.dart';
-import 'package:myaniapp/common/media_cards/media_card.dart';
-import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/common/sliver_tabbar_view.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/staff.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/staff/staff.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/staff.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
-import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 final _extractInfo = RegExp(r"^((?:(?:\*\*)|(?:__))[^]*?\n\n)");
 
 @RoutePage()
-class StaffScreen extends ConsumerWidget {
+class StaffScreen extends HookConsumerWidget {
   const StaffScreen({super.key, @pathParam required this.id, this.placeholder});
 
   final int id;
-  final GStaffFragment? placeholder;
+  final Fragment$StaffFragment? placeholder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GQLRequest(
-      operationRequest: GStaffReq(
-        (b) => b
-          ..requestId = "staffPage$id"
-          ..vars.id = (id),
-      ),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      staffQuery,
+      variables: Variables$Query$Staff(id: id).toJson(),
+      parseData: Query$Staff.fromJson,
+    ));
+
+    return GQLWidget(
+      response: snapshot,
+      refetch: refetch,
       loading: null,
-      error: (response) => Scaffold(
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response!.graphqlErrors, response.linkException),
-          req: response.operationRequest,
+          exception: (snapshot!.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) {
-        if (response?.loading == true && placeholder == null) {
+      builder: () {
+        if (snapshot?.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -63,10 +64,11 @@ class StaffScreen extends ConsumerWidget {
           );
         }
 
-        var data = response?.data?.Staff;
+        var data = snapshot?.parsedData?.Staff;
 
         return StaffView(
-          operationRequest: response!.operationRequest as GStaffReq,
+          fetchMore: fetchMore,
+          request: snapshot.request!,
           refetch: refetch,
           placeholder: placeholder,
           staff: data,
@@ -75,7 +77,7 @@ class StaffScreen extends ConsumerWidget {
     );
   }
 
-  bool hasTabs(GStaffData_Staff staff) {
+  bool hasTabs(Query$Staff$Staff staff) {
     return staff.characterMedia!.edges!.isNotEmpty == true &&
         staff.staffMedia!.edges!.isNotEmpty == true;
   }
@@ -85,15 +87,17 @@ class StaffView extends ConsumerStatefulWidget {
   const StaffView({
     super.key,
     this.staff,
-    required this.operationRequest,
     this.placeholder,
     required this.refetch,
+    required this.fetchMore,
+    required this.request,
   });
 
-  final GStaffReq operationRequest;
+  final GQLRequest request;
   final VoidCallback refetch;
-  final GStaffData_Staff? staff;
-  final GStaffFragment? placeholder;
+  final QueryHookFetchMore fetchMore;
+  final Query$Staff$Staff? staff;
+  final Fragment$StaffFragment? placeholder;
 
   @override
   ConsumerState<StaffView> createState() => _StaffViewState();
@@ -155,14 +159,15 @@ class _StaffViewState extends ConsumerState<StaffView>
         when: widget.staff != null,
         child: () => FloatingActionButton.extended(
           heroTag: null,
-          onPressed: widget.staff!.isFavouriteBlocked
-              ? null
-              : () => client
-                  .request(GToggleFavoriteReq(
-                    (b) => b..vars.staffId = widget.staff!.id,
-                  ))
-                  .first
-                  .then((_) => widget.refetch()),
+          onPressed: () {},
+          // onPressed: widget.staff!.isFavouriteBlocked
+          //     ? null
+          //     : () => client
+          //         .request(GToggleFavoriteReq(
+          //           (b) => b..vars.staffId = widget.staff!.id,
+          //         ))
+          //         .first
+          //         .then((_) => widget.refetch()),
           label: Icon(
             Icons.favorite,
             color: widget.staff!.isFavourite ? Colors.red[200] : null,
@@ -368,36 +373,22 @@ class _StaffViewState extends ConsumerState<StaffView>
                   bool isCharacter = tabController!.index == 0 ? true : false;
 
                   if (isCharacter) {
-                    return widget.operationRequest.rebuild(
-                      (p0) => p0
-                        ..vars.characterPage = nextPage
-                        ..updateResult = (previous, result) => result?.rebuild(
-                            (p0) => p0
-                              ..Staff.characterMedia.edges.insertAll(
-                                  0,
-                                  previous?.Staff?.characterMedia?.edges
-                                          ?.whereNot((p0) =>
-                                              result
-                                                  .Staff?.characterMedia?.edges
-                                                  ?.contains(p0) ??
-                                              false) ??
-                                      [])),
+                    widget.fetchMore(
+                      variables: Variables$Query$Staff.fromJson(
+                              widget.request.variables)
+                          .copyWith(characterPage: nextPage)
+                          .toJson(),
+                      mergeResults:
+                          defaultMergeResults("Staff.characterMedia.edges"),
                     );
                   }
 
-                  return widget.operationRequest.rebuild(
-                    (p0) => p0
-                      ..vars.staffPage = nextPage
-                      ..updateResult = (previous, result) => result?.rebuild(
-                          (p0) => p0
-                            ..Staff.staffMedia.edges.insertAll(
-                                0,
-                                previous?.Staff?.staffMedia?.edges?.whereNot(
-                                        (p0) =>
-                                            result.Staff?.staffMedia?.edges
-                                                ?.contains(p0) ??
-                                            false) ??
-                                    [])),
+                  return widget.fetchMore(
+                    variables:
+                        Variables$Query$Staff.fromJson(widget.request.variables)
+                            .copyWith(staffPage: nextPage)
+                            .toJson(),
+                    mergeResults: defaultMergeResults("Staff.staffMedia.edges"),
                   );
                 },
                 child: TabBarView(
@@ -422,7 +413,7 @@ class _StaffViewState extends ConsumerState<StaffView>
     );
   }
 
-  bool hasTabs(GStaffData_Staff staff) {
+  bool hasTabs(Query$Staff$Staff staff) {
     return staff.characterMedia!.edges!.isNotEmpty == true &&
         staff.staffMedia!.edges!.isNotEmpty == true;
   }

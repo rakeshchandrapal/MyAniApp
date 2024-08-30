@@ -1,17 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/search/media/page.dart';
 import 'package:myaniapp/app/search/media/tags.dart';
 import 'package:myaniapp/app/settings/settings_screen.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
+import 'package:mygraphql/graphql.dart';
 
 var countries = {
   "Japan": "JP",
@@ -123,7 +127,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   title: "Type",
                   value: query.type,
                   items: [
-                    for (var type in GMediaType.values)
+                    for (var type in Enum$MediaType.values)
                       PopupSettingItem(
                         value: type,
                         label: type.name.capitalize(),
@@ -136,7 +140,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   title: "Sort",
                   initialValues: query.sort,
                   items: [
-                    for (var sort in GMediaSort.values)
+                    for (var sort in Enum$MediaSort.values)
                       PopupSettingCheckbox(
                         value: sort,
                         label: sort.name.capitalize(),
@@ -156,7 +160,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   onSaved: (values) => setState(
                       () => query.format = values.isEmpty ? null : values),
                   items: [
-                    for (var format in GMediaFormat.values)
+                    for (var format in Enum$MediaFormat.values)
                       PopupSettingCheckbox(
                         value: format,
                         label: format.name.capitalize(),
@@ -200,7 +204,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   title: "Season",
                   value: query.season,
                   items: [
-                    for (var season in GMediaSeason.values)
+                    for (var season in Enum$MediaSeason.values)
                       PopupSettingItem(
                         value: season,
                         label: season.name.capitalize(),
@@ -310,7 +314,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
   }
 }
 
-class GenresButton extends ConsumerWidget {
+class GenresButton extends HookConsumerWidget {
   const GenresButton({super.key, this.genres, required this.onChanged});
 
   final List<String>? genres;
@@ -319,16 +323,20 @@ class GenresButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var displayAdultContent = ref.watch(userProvider.select(
-      (value) => value.value?.data?.Viewer?.options?.displayAdultContent,
+      (value) => value.value?.parsedData?.Viewer?.options?.displayAdultContent,
+    ));
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      genreCollectionQuery,
+      parseData: Query$GenreCollection.fromJson,
     ));
 
-    return GQLRequest(
-      operationRequest:
-          GGenreCollectionReq((b) => b..requestId = "genreCollectionSearch"),
-      builder: (context, response, error, refetch) {
-        var genresList = response!.data!.genres!.toList();
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      builder: () {
+        var genresList = snapshot!.parsedData!.genres!.toList();
 
-        if ((displayAdultContent ?? false) == false) {
+        if ((displayAdultContent ?? true) == false) {
           genresList.remove("Hentai");
         }
 

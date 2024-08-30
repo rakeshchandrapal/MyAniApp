@@ -11,7 +11,7 @@
 // import "app/login/page.dart" as r9;
 // import "app/login/token/page.dart" as r10;
 // import "app/media/[id]/[tab]/page.dart" as r11;
-// import "app/notifications/page.dart" as r12;
+import "app/notifications/page.dart" as r12;
 // import "app/recommendations/page.dart" as r13;
 // import "app/review/[id]/page.dart" as r14;
 // import "app/reviews/page.dart" as r15;
@@ -90,10 +90,10 @@
 //       tab: state.pathParameters['tab']!,
 //     ),
 //   ),
-//   GoRoute(
-//     path: "/notifications",
-//     builder: (context, state) => r12.NotificationPage(),
-//   ),
+  // GoRoute(
+  //   path: "/notifications",
+  //   builder: (context, state) => r12.NotificationScreen(),
+  // ),
 //   GoRoute(
 //     path: "/recommendations",
 //     builder: (context, state) => r13.RecommendationsPage(),

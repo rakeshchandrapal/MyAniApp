@@ -1,12 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/media/__generated__/media.data.gql.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/media/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -17,7 +17,7 @@ class MediaInfoScreen extends StatelessWidget {
     required this.media,
   });
 
-  final GMediaData_Media media;
+  final Query$Media$Media media;
 
   @override
   Widget build(BuildContext context) {
@@ -89,15 +89,16 @@ class MediaInfoScreen extends StatelessWidget {
             if (media.startDate != null &&
                 media.startDate!.toDateString() != null)
               DetailBox(
-                title: media.status == GMediaStatus.NOT_YET_RELEASED
+                title: media.status == Enum$MediaStatus.NOT_YET_RELEASED
                     ? 'Starting'
                     : 'Started',
                 info: media.startDate!.toDateString()!,
               ),
             if (media.endDate != null && media.endDate!.toDateString() != null)
               DetailBox(
-                title:
-                    media.status == GMediaStatus.FINISHED ? "Ended" : "Ending",
+                title: media.status == Enum$MediaStatus.FINISHED
+                    ? "Ended"
+                    : "Ending",
                 info: media.endDate!.toDateString()!,
               ),
             if (media.episodes != null)
@@ -177,7 +178,7 @@ class _Tags extends StatefulWidget {
     required this.tags,
   });
 
-  final BuiltList<GMediaData_Media_tags?> tags;
+  final List<Query$Media$Media$tags?> tags;
 
   @override
   State<_Tags> createState() => _TagsState();
@@ -311,8 +312,8 @@ class _Links extends StatelessWidget {
     this.trailer,
   });
 
-  final Iterable<GMediaData_Media_externalLinks?>? links;
-  final GMediaData_Media_trailer? trailer;
+  final Iterable<Query$Media$Media$externalLinks?>? links;
+  final Query$Media$Media$trailer? trailer;
 
   @override
   Widget build(BuildContext context) {
@@ -334,11 +335,10 @@ class _Links extends StatelessWidget {
             children: [
               if (trailer != null)
                 _Link(
-                    link: GMediaData_Media_externalLinks(
-                  (b) => b
-                    ..site = "Trailer"
-                    ..url =
-                        "https://${trailer!.site}.com/${trailer!.site == "youtube" ? "/watch?v=${trailer!.id}" : "/video/${trailer!.id}"}",
+                    link: Query$Media$Media$externalLinks(
+                  site: "Trailer",
+                  url:
+                      "https://${trailer!.site}.com/${trailer!.site == "youtube" ? "/watch?v=${trailer!.id}" : "/video/${trailer!.id}"}",
                 )),
               if (links?.isNotEmpty == true)
                 for (var link in links!) _Link(link: link!),
@@ -355,7 +355,7 @@ class _Link extends StatelessWidget {
     required this.link,
   });
 
-  final GMediaData_Media_externalLinks link;
+  final Query$Media$Media$externalLinks link;
 
   @override
   Widget build(BuildContext context) {

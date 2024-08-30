@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/review/__generated__/review.req.gql.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/image_viewer.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
@@ -11,40 +12,45 @@ import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/common/widget_gradient.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/review.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/review/review.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/review.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 import 'package:relative_time/relative_time.dart';
 
 @RoutePage()
-class ReviewScreen extends ConsumerWidget {
+class ReviewScreen extends HookConsumerWidget {
   const ReviewScreen(
       {super.key, @pathParam required this.id, this.placeholder});
 
   final int id;
-  final GReviewFragment? placeholder;
+  final Fragment$ReviewFragment? placeholder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GQLRequest(
-      operationRequest: GReviewReq(
-        (b) => b
-          ..requestId = "reviewPage$id"
-          ..vars.id = id,
-      ),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      reviewQuery,
+      variables: Variables$Query$Review(id: id).toJson(),
+      parseData: Query$Review.fromJson,
+    ));
+
+    return GQLWidget(
       loading: null,
-      error: (response) => Scaffold(
+      refetch: refetch,
+      response: snapshot,
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response!.graphqlErrors, response.linkException),
-          req: response.operationRequest,
+          exception: (snapshot!.errors, snapshot.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) {
-        if (response?.loading == true && placeholder == null) {
+      builder: () {
+        if (snapshot?.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -53,7 +59,7 @@ class ReviewScreen extends ConsumerWidget {
           );
         }
 
-        var data = response?.data?.Review;
+        var data = snapshot?.parsedData?.Review;
 
         return Scaffold(
           body: CustomScrollView(
@@ -205,21 +211,24 @@ class ReviewScreen extends ConsumerWidget {
                             onPressed: requiredLogin(
                               ref,
                               "to rate a review",
-                              () => client
-                                  .request(
-                                    GRateReviewReq(
-                                      (b) => b
-                                        ..vars.id = data.id
-                                        ..vars.rating = data.userRating ==
-                                                GReviewRating.UP_VOTE
-                                            ? GReviewRating.NO_VOTE
-                                            : GReviewRating.UP_VOTE,
-                                    ),
-                                  )
-                                  .first,
+                              () => c
+                                  .query(GQLRequest(
+                                    rateReviewQuery,
+                                    variables: Variables$Mutation$RateReview(
+                                            id: data.id,
+                                            rating: data.userRating ==
+                                                    Enum$ReviewRating.UP_VOTE
+                                                ? Enum$ReviewRating.NO_VOTE
+                                                : Enum$ReviewRating.UP_VOTE)
+                                        .toJson(),
+                                  ))
+                                  .last
+                                  .then(
+                                    (value) => refetch(FetchPolicy.cacheFirst),
+                                  ),
                             ),
                             icon: const Icon(Icons.thumb_up),
-                            color: data.userRating == GReviewRating.UP_VOTE
+                            color: data.userRating == Enum$ReviewRating.UP_VOTE
                                 ? Colors.green
                                 : null,
                             iconSize: 30,
@@ -229,23 +238,27 @@ class ReviewScreen extends ConsumerWidget {
                             onPressed: requiredLogin(
                               ref,
                               "to rate a review",
-                              () => client
-                                  .request(
-                                    GRateReviewReq(
-                                      (b) => b
-                                        ..vars.id = data.id
-                                        ..vars.rating = data.userRating ==
-                                                GReviewRating.DOWN_VOTE
-                                            ? GReviewRating.NO_VOTE
-                                            : GReviewRating.DOWN_VOTE,
-                                    ),
-                                  )
-                                  .first,
+                              () => c
+                                  .query(GQLRequest(
+                                    rateReviewQuery,
+                                    variables: Variables$Mutation$RateReview(
+                                            id: data.id,
+                                            rating: data.userRating ==
+                                                    Enum$ReviewRating.DOWN_VOTE
+                                                ? Enum$ReviewRating.NO_VOTE
+                                                : Enum$ReviewRating.DOWN_VOTE)
+                                        .toJson(),
+                                  ))
+                                  .last
+                                  .then(
+                                    (value) => refetch(FetchPolicy.cacheFirst),
+                                  ),
                             ),
                             icon: const Icon(Icons.thumb_down),
-                            color: data.userRating == GReviewRating.DOWN_VOTE
-                                ? Colors.red
-                                : null,
+                            color:
+                                data.userRating == Enum$ReviewRating.DOWN_VOTE
+                                    ? Colors.red
+                                    : null,
                             iconSize: 30,
                           ),
                         ],

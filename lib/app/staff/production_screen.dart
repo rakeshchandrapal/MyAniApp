@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/staff/__generated__/staff.data.gql.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/staff/staff.graphql.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
 
@@ -14,7 +14,7 @@ import 'package:myaniapp/router.gr.dart';
 class StaffProductionRolesScreen extends ConsumerStatefulWidget {
   const StaffProductionRolesScreen({super.key, required this.staffRoles});
 
-  final GStaffData_Staff_staffMedia staffRoles;
+  final Query$Staff$Staff$staffMedia staffRoles;
 
   @override
   ConsumerState<StaffProductionRolesScreen> createState() =>

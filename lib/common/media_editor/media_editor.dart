@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/settings/settings_screen.dart';
 import 'package:myaniapp/common/dialogs/confirmation.dart';
-import 'package:myaniapp/common/media_editor/__generated__/media_editor.data.gql.dart';
-import 'package:myaniapp/common/media_editor/__generated__/media_editor.req.gql.dart';
-import 'package:myaniapp/common/media_editor/__generated__/media_editor.var.gql.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/media_editor.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
+import 'package:mygraphql/graphql.dart';
 
-class MediaEditorDialog extends ConsumerWidget {
+class MediaEditorDialog extends HookConsumerWidget {
   const MediaEditorDialog({
     super.key,
     required this.media,
@@ -27,14 +29,14 @@ class MediaEditorDialog extends ConsumerWidget {
     required this.onDelete,
   });
 
-  final GMediaFragment media;
+  final Fragment$MediaFragment media;
   final int userId;
   final VoidCallback onSave;
   final VoidCallback? onDelete;
 
   static void show(
     BuildContext context,
-    GMediaFragment media,
+    Fragment$MediaFragment media,
     int userId, {
     required VoidCallback onSave,
     VoidCallback? onDelete,
@@ -55,13 +57,23 @@ class MediaEditorDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GQLRequest(
-      operationRequest: GMediaEntryReq(
-        (b) => b
-          ..requestId = "mediaListEntry$media$userId"
-          ..vars.mediaId = media.id
-          ..vars.userId = userId,
-      ),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      mediaEntryQuery,
+      variables: Variables$Query$MediaEntry(mediaId: media.id, userId: userId)
+          .toJson(),
+      parseData: Query$MediaEntry.fromJson,
+      fetchPolicy: FetchPolicy.networkOnly,
+    ));
+
+    return GQLWidget(
+      // operationRequest: GMediaEntryReq(
+      //   (b) => b
+      //     ..requestId = "mediaListEntry$media$userId"
+      //     ..vars.mediaId = media.id
+      //     ..vars.userId = userId,
+      // ),
+      refetch: refetch,
+      response: snapshot,
       loading: Scaffold(
         appBar: AppBar(),
         body: const Center(
@@ -69,32 +81,24 @@ class MediaEditorDialog extends ConsumerWidget {
         ),
       ),
       errorWidget: false,
-      builder: (context, response, error, refetch) {
+      builder: () {
         // var mediaList = ;
-        var mediaList = (response!.data?.MediaList);
+        var mediaList = (snapshot!.parsedData?.MediaList);
 
         if (mediaList == null) {
           var user = ref.read(userProvider);
+          mediaList = Query$MediaEntry$MediaList(
+            id: -1,
+            mediaId: media.id,
+            media: Query$MediaEntry$MediaList$media.fromJson(media.toJson()),
+          );
 
-          mediaList = GMediaEntryData_MediaList((b) => b
-                ..id = -1
-                ..mediaId = media.id
-                ..media =
-                    GMediaEntryData_MediaList_media.fromJson(media.toJson())
-                        ?.toBuilder()
-              // ..user = user.value?.data != null &&
-              //         user.value!.data!.Viewer!.id == userId
-              //     ? GMediaEntryData_MediaList_user.fromJson(
-              //             user.value!.data!.toJson())
-              //         ?.toBuilder()
-              //     : null,
-              );
-
-          if (user.value?.data != null &&
-              user.value!.data!.Viewer!.id == userId) {
-            mediaList = mediaList.rebuild((p0) => p0.user.replace(
-                GMediaEntryData_MediaList_user.fromJson(
-                    user.value!.data!.Viewer!.toJson())!));
+          if (user.value?.parsedData != null &&
+              user.value!.parsedData!.Viewer!.id == userId) {
+            mediaList = mediaList.copyWith(
+              user: Query$MediaEntry$MediaList$user.fromJson(
+                  user.value!.parsedData!.Viewer!.toJson()),
+            );
           }
         }
 
@@ -104,7 +108,7 @@ class MediaEditorDialog extends ConsumerWidget {
           entry: mediaList,
           onDelete: onDelete,
           onSave: onSave,
-          key: Key(response.data?.toString() ?? "nada"),
+          key: Key(snapshot.data?.toString() ?? "nada"),
         );
       },
     );
@@ -119,7 +123,7 @@ class _MediaEditorView extends ConsumerStatefulWidget {
     this.onDelete,
   });
 
-  final GMediaEntryData_MediaList entry;
+  final Query$MediaEntry$MediaList entry;
   final VoidCallback onSave;
   final VoidCallback? onDelete;
 
@@ -128,57 +132,59 @@ class _MediaEditorView extends ConsumerStatefulWidget {
 }
 
 class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
-  late GSaveMediaListEntryVarsBuilder options;
-  late GSaveMediaListEntryVars og;
+  late Variables$Mutation$SaveMediaListEntry options;
+  late Variables$Mutation$SaveMediaListEntry og;
 
   @override
   void initState() {
     super.initState();
-    options = GSaveMediaListEntryVarsBuilder()
-      ..update((p0) => p0
-        ..id = widget.entry.id
-        ..mediaId = widget.entry.mediaId
-        ..completedAt = widget.entry.completedAt != null
-            ? GFuzzyDateInput(
-                (b) => b
-                  ..day = widget.entry.completedAt?.day
-                  ..month = widget.entry.completedAt?.month
-                  ..year = widget.entry.completedAt?.year,
-              ).toBuilder()
-            : null
-        ..startedAt = widget.entry.startedAt != null
-            ? GFuzzyDateInput(
-                (b) => b
-                  ..day = widget.entry.startedAt?.day
-                  ..month = widget.entry.startedAt?.month
-                  ..year = widget.entry.startedAt?.year,
-              ).toBuilder()
-            : null
-        ..hiddenFromStatusLists = widget.entry.hiddenFromStatusLists
-        ..notes = widget.entry.notes
-        ..priority = widget.entry.priority
-        ..private = widget.entry.private
-        ..progress = widget.entry.progress
-        ..progressVolumes = widget.entry.progressVolumes
-        ..repeat = widget.entry.repeat
-        ..score = widget.entry.score
-        ..status = widget.entry.status
-        ..customLists.addAll(widget.entry.customLists?.asList
-                .where((e) => e['enabled'] == true)
-                .map((e) => e['name']) ??
-            []));
-
-    og = GSaveMediaListEntryVars(
-      (b) => b..replace(options.build()),
+    print(widget.entry.customLists
+        ?.toList()
+        .where((e) => e['enabled'] == true)
+        .map((e) => e['name']));
+    options = Variables$Mutation$SaveMediaListEntry(
+      completedAt: widget.entry.completedAt != null
+          ? Input$FuzzyDateInput(
+              day: widget.entry.completedAt?.day,
+              month: widget.entry.completedAt?.month,
+              year: widget.entry?.completedAt?.year,
+            )
+          : null,
+      startedAt: widget.entry.startedAt != null
+          ? Input$FuzzyDateInput(
+              day: widget.entry.startedAt?.day,
+              month: widget.entry.startedAt?.month,
+              year: widget.entry?.startedAt?.year,
+            )
+          : null,
+      customLists: widget.entry.customLists
+          ?.where((e) => e['enabled'] == true)
+          .map((e) => e['name'])
+          .cast<String>()
+          .toList(),
+      hiddenFromStatusLists: widget.entry.hiddenFromStatusLists,
+      id: widget.entry.id,
+      mediaId: widget.entry.mediaId,
+      notes: widget.entry.notes,
+      priority: widget.entry.priority,
+      private: widget.entry.private,
+      progress: widget.entry.progress,
+      progressVolumes: widget.entry.progressVolumes,
+      repeat: widget.entry.repeat,
+      score: widget.entry.score,
+      status: widget.entry.status,
     );
+
+    og = options.copyWith();
   }
 
   @override
   Widget build(BuildContext context) {
-    var userId = ref
-        .watch(userProvider.select((value) => value.value?.data?.Viewer?.id));
+    var userId = ref.watch(
+        userProvider.select((value) => value.value?.parsedData?.Viewer?.id));
     var enabled = userId == widget.entry.user?.id;
-    var builtCustomList = options.customLists.build();
+    // print(widget.entry.customLists);
+    // var builtCustomList = options.customLists.build();
 
     return Scaffold(
       appBar: AppBar(
@@ -192,11 +198,10 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 "media from your list",
                 () async {
                   if (options.id != -1) {
-                    await client
-                        .request(GDeleteMediaListEntryReq(
-                          (b) => b..vars.id = options.id,
-                        ))
-                        .first;
+                    await c
+                        .query(GQLRequest(deleteMediaListEntryQuery,
+                            variables: {'id': options.id}))
+                        .last;
                     widget.onDelete!();
                   }
 
@@ -210,13 +215,12 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
           if (userId == widget.entry.user?.id)
             IconButton(
               onPressed: () async {
-                if (options.toString() != og.toString()) {
-                  if (options.id == -1) options.id = null;
-                  await client
-                      .request(GSaveMediaListEntryReq(
-                        (b) => b..vars.replace(options.build()),
-                      ))
-                      .first;
+                if (!jsonMapEquals(options.toJson(), og.toJson())) {
+                  if (options.id == -1) options = options.copyWith(id: null);
+                  var i = await c
+                      .query(GQLRequest(saveMediaListEntryQuery,
+                          variables: options.toJson()))
+                      .last;
                   widget.onSave();
                 }
 
@@ -238,21 +242,23 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 enabled: enabled,
                 value: options.status,
                 items: [
-                  for (var s in GMediaListStatus.values)
+                  for (var s in Enum$MediaListStatus.values)
                     PopupSettingItem(
                       value: s,
                       label: s.name.capitalize(),
                     )
                 ],
-                onSelected: (value) => setState(() => options.status = value),
+                onSelected: (value) =>
+                    setState(() => options = options.copyWith(status: value)),
               ),
               SettingTileNumber(
-                title: widget.entry.media?.type == GMediaType.ANIME
+                title: widget.entry.media?.type == Enum$MediaType.ANIME
                     ? "Episodes Watched"
                     : "Chapters Read",
                 enabled: enabled,
                 value: options.progress ?? 0,
-                onChanged: (value) => setState(() => options.progress = value),
+                onChanged: (value) =>
+                    setState(() => options = options.copyWith(progress: value)),
                 max: widget.entry.media?.episodes ??
                     widget.entry.media?.chapters,
               ),
@@ -260,10 +266,11 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 title: "Rewatches",
                 enabled: enabled,
                 value: options.repeat ?? 0,
-                onChanged: (value) => setState(() => options.repeat = value),
+                onChanged: (value) =>
+                    setState(() => options = options.copyWith(repeat: value)),
               ),
               if (widget.entry.user!.mediaListOptions!.scoreFormat ==
-                  GScoreFormat.POINT_3)
+                  Enum$ScoreFormat.POINT_3)
                 SettingsTile(
                   title: Text("Score"),
                   child: Row(
@@ -275,10 +282,12 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                         onSelected: enabled
                             ? (value) {
                                 if (value == true) {
-                                  setState(() => options.score = 1);
+                                  setState(() =>
+                                      options = options.copyWith(score: 1));
                                 }
                                 if (value == false) {
-                                  setState(() => options.score = 0);
+                                  setState(() =>
+                                      options = options.copyWith(score: 0));
                                 }
                               }
                             : null,
@@ -291,10 +300,12 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                         onSelected: enabled
                             ? (value) {
                                 if (value == true) {
-                                  setState(() => options.score = 2);
+                                  setState(() =>
+                                      options = options.copyWith(score: 2));
                                 }
                                 if (value == false) {
-                                  setState(() => options.score = 0);
+                                  setState(() =>
+                                      options = options.copyWith(score: 0));
                                 }
                               }
                             : null,
@@ -307,10 +318,12 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                         onSelected: enabled
                             ? (value) {
                                 if (value == true) {
-                                  setState(() => options.score = 3);
+                                  setState(() =>
+                                      options = options.copyWith(score: 3));
                                 }
                                 if (value == false) {
-                                  setState(() => options.score = 0);
+                                  setState(() =>
+                                      options = options.copyWith(score: 0));
                                 }
                               }
                             : null,
@@ -324,24 +337,26 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   enabled: enabled,
                   value: switch (
                       widget.entry.user!.mediaListOptions!.scoreFormat!) {
-                    (GScoreFormat.POINT_3) => options.score ?? 0,
-                    (GScoreFormat.POINT_5) => (options.score ?? 0).toInt(),
-                    (GScoreFormat.POINT_10) => (options.score ?? 0).toInt(),
-                    (GScoreFormat.POINT_10_DECIMAL) => (options.score ?? 0),
-                    (GScoreFormat.POINT_100) => (options.score ?? 0).toInt(),
+                    (Enum$ScoreFormat.POINT_3) => options.score ?? 0,
+                    (Enum$ScoreFormat.POINT_5) => (options.score ?? 0).toInt(),
+                    (Enum$ScoreFormat.POINT_10) => (options.score ?? 0).toInt(),
+                    (Enum$ScoreFormat.POINT_10_DECIMAL) => (options.score ?? 0),
+                    (Enum$ScoreFormat.POINT_100) =>
+                      (options.score ?? 0).toInt(),
                     _ => options.score ?? 0,
                   },
                   max: switch (
                       widget.entry.user!.mediaListOptions!.scoreFormat!) {
-                    (GScoreFormat.POINT_3) => 3,
-                    (GScoreFormat.POINT_5) => 5,
-                    (GScoreFormat.POINT_10) => 10,
-                    (GScoreFormat.POINT_10_DECIMAL) => 10.0,
-                    (GScoreFormat.POINT_100) => 100,
-                    GScoreFormat() => throw UnimplementedError(),
+                    (Enum$ScoreFormat.POINT_3) => 3,
+                    (Enum$ScoreFormat.POINT_5) => 5,
+                    (Enum$ScoreFormat.POINT_10) => 10,
+                    (Enum$ScoreFormat.POINT_10_DECIMAL) => 10.0,
+                    (Enum$ScoreFormat.POINT_100) => 100,
+                    Enum$ScoreFormat() => throw UnimplementedError(),
                   },
                   onChanged: (value) {
-                    setState(() => options.score = value.toDouble());
+                    setState(() =>
+                        options = options.copyWith(score: value.toDouble()));
                   },
                 ),
               SettingsTile(
@@ -350,36 +365,27 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   var selectedDate = await showDatePicker(
                     context: context,
                     firstDate: DateTime(1940),
-                    initialDate: options.startedAt.toDate(),
+                    initialDate: options.startedAt?.toDate(),
                     lastDate: DateTime(3000),
                   );
 
                   if (selectedDate != null) {
-                    setState(
-                      () => options.startedAt.update(
-                        (p0) {
-                          p0.day = selectedDate.day;
-                          p0.month = selectedDate.month;
-                          p0.year = selectedDate.year;
-                        },
-                      ),
-                    );
+                    setState(() => options = options.copyWith(
+                        startedAt: Input$FuzzyDateInput(
+                            day: selectedDate.day,
+                            month: selectedDate.month,
+                            year: selectedDate.year)));
                   }
                 },
                 enabled: enabled,
-                subtitle: options.startedAt.toDate() != null
-                    ? Text(
-                        DateFormat.yMMMMd().format(options.startedAt.toDate()!))
+                subtitle: options.startedAt?.toDate() != null
+                    ? Text(DateFormat.yMMMMd()
+                        .format(options.startedAt!.toDate()!))
                     : null,
-                child: options.startedAt.toDate() != null
+                child: options.startedAt?.toDate() != null && enabled
                     ? IconButton(
-                        onPressed: () =>
-                            setState(() => options.startedAt.update(
-                                  (p0) => p0
-                                    ..day = null
-                                    ..month = null
-                                    ..year = null,
-                                )),
+                        onPressed: () => setState(
+                            () => options = options.copyWith(startedAt: null)),
                         icon: const Icon(Icons.clear),
                       )
                     : null,
@@ -390,36 +396,27 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   var selectedDate = await showDatePicker(
                     context: context,
                     firstDate: DateTime(1940),
-                    initialDate: options.completedAt.toDate(),
+                    initialDate: options.completedAt?.toDate(),
                     lastDate: DateTime(3000),
                   );
 
                   if (selectedDate != null) {
-                    setState(
-                      () => options.completedAt.update(
-                        (p0) {
-                          p0.day = selectedDate.day;
-                          p0.month = selectedDate.month;
-                          p0.year = selectedDate.year;
-                        },
-                      ),
-                    );
+                    setState(() => options = options.copyWith(
+                        completedAt: Input$FuzzyDateInput(
+                            day: selectedDate.day,
+                            month: selectedDate.month,
+                            year: selectedDate.year)));
                   }
                 },
                 enabled: enabled,
-                subtitle: options.completedAt.toDate() != null
+                subtitle: options.completedAt?.toDate() != null
                     ? Text(DateFormat.yMMMMd()
-                        .format(options.completedAt.toDate()!))
+                        .format(options.completedAt!.toDate()!))
                     : null,
-                child: options.completedAt.toDate() != null
+                child: options.completedAt?.toDate() != null && enabled
                     ? IconButton(
-                        onPressed: () =>
-                            setState(() => options.completedAt.update(
-                                  (p0) => p0
-                                    ..day = null
-                                    ..month = null
-                                    ..year = null,
-                                )),
+                        onPressed: () => setState(
+                            () => options = options.copyWith(startedAt: null)),
                         icon: const Icon(Icons.clear),
                       )
                     : null,
@@ -429,29 +426,29 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   title: "Private",
                   enabled: enabled,
                   value: options.private ?? false,
-                  onChanged: (value) => setState(() => options.private = value),
+                  onChanged: (value) => setState(
+                      () => options = options.copyWith(private: value)),
                 ),
                 SwitchSettingsTile(
                   title: "Hide From Statis List",
                   value: options.hiddenFromStatusLists ?? false,
                   enabled: enabled,
-                  onChanged: (value) =>
-                      setState(() => options.hiddenFromStatusLists = value),
+                  onChanged: (value) => setState(() =>
+                      options = options.copyWith(hiddenFromStatusLists: value)),
                 ),
                 MultiPopupSettingsTile<String>(
                   title: "Custom List",
-                  initialValues: builtCustomList.cast<String>().toList(),
+                  initialValues: options.customLists?.cast(),
                   items: [
-                    for (var list in (widget.entry.customLists?.asList ?? []))
+                    for (var list in (widget.entry.customLists ?? []))
                       PopupSettingCheckbox(
                         value: list['name'],
                         label: list['name'],
                       )
                   ],
                   onSaved: (value) {
-                    setState(() => options.customLists
-                      ..clear()
-                      ..addAll(value));
+                    setState(
+                        () => options = options.copyWith(customLists: value));
                   },
                 )
               ],
@@ -461,7 +458,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
           if (enabled || options.notes?.isNotEmpty == true)
             _NoteBox(
               note: options.notes,
-              onChanged: (note) => options.notes = note,
+              onChanged: (note) => options = options.copyWith(notes: note),
               enabled: userId == widget.entry.user?.id,
             )
         ],

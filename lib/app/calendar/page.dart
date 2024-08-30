@@ -2,15 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/app/calendar/__generated__/calendar.req.gql.dart';
 import 'package:myaniapp/app/calendar/list.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/calendar/calendar.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 
 var dateFormat = DateFormat('EEEE MMMM dd, yyyy');
 var hourTime = DateFormat.jm();
@@ -66,19 +69,22 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     var scrollController = useScrollController();
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      calendarScheduleQuery,
+      variables: Variables$Query$CalendarSchedule(
+              start: day.millisecondsSinceEpoch ~/ 1000,
+              end: (day.millisecondsSinceEpoch ~/ 1000) + 86400)
+          .toJson(),
+      parseData: Query$CalendarSchedule.fromJson,
+      mergeResults: defaultMergeResults("Page.airingSchedules"),
+    ));
     var now = DateTime.now();
 
-    return GQLRequest(
-      operationRequest: GCalendarScheduleReq(
-        (b) => b
-          ..requestId = "calendarPage$day"
-          ..vars.start = day.millisecondsSinceEpoch ~/ 1000
-          ..vars.end = (day.millisecondsSinceEpoch ~/ 1000) + 86400,
-      ),
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: null,
-      errorWidget: false,
-      builder: (context, response, error, refetch) {
-        return CustomScrollView(
+      builder: ()  => CustomScrollView(
           controller: scrollController,
           slivers: [
             SliverAppBar(
@@ -128,27 +134,27 @@ class _CalendarState extends State<Calendar> {
                 ),
               ),
             ),
-            if (response?.loading == true)
+            if (snapshot?.loading == true)
               const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
               )
-            else if (response?.hasErrors == true)
-              SliverFillRemaining(
-                child: GraphqlError(
-                  exception: (response!.graphqlErrors, response.linkException),
-                ),
-              )
+            // else if (response?.hasErrors == true)
+            //   SliverFillRemaining(
+            //     child: GraphqlError(
+            //       exception: (response!.graphqlErrors, response.linkException),
+            //     ),
+            //   )
             else
               SliverList.builder(
                 itemBuilder: (context, index) {
-                  var schedule = response.data!.Page!.airingSchedules![index]!;
+                  var schedule = snapshot.parsedData!.Page!.airingSchedules![index]!;
                   var timestamp = dateFromTimestamp(schedule.airingAt);
 
                   bool isNext = timestamp.isAfter(now)
                       ? index != 0
-                          ? dateFromTimestamp(response.data!.Page!
+                          ? dateFromTimestamp(snapshot.parsedData!.Page!
                                   .airingSchedules![index - 1]!.airingAt)
                               .isBefore(now)
                           : false
@@ -215,98 +221,10 @@ class _CalendarState extends State<Calendar> {
                     ],
                   );
                 },
-                itemCount: response!.data!.Page!.airingSchedules!.length,
+                itemCount: snapshot.parsedData!.Page!.airingSchedules!.length,
               ),
-            // SliverFillRemaining(
-            //   child: GQLRequest(
-            //     // key: Key(day.to),
-            //     operationRequest: GCalendarScheduleReq(
-            //       (b) => b
-            //         ..requestId = "calendarPage$day"
-            //         ..vars.start = day.millisecondsSinceEpoch ~/ 1000
-            //         ..vars.end = (day.millisecondsSinceEpoch ~/ 1000) + 86400,
-            //     ),
-            //     builder: (context, response, error, refetch) =>
-            //         ListView.builder(
-            //       itemBuilder: (context, index) {
-            //         var schedule =
-            //             response.data!.Page!.airingSchedules![index]!;
-            //         var timestamp = dateFromTimestamp(schedule.airingAt);
-
-            //         bool isNext = timestamp.isAfter(now)
-            //             ? index != 0
-            //                 ? dateFromTimestamp(response.data!.Page!
-            //                         .airingSchedules![index - 1]!.airingAt)
-            //                     .isBefore(now)
-            //                 : false
-            //             : false;
-
-            //         return Stack(
-            //           children: [
-            //             Card.outlined(
-            //               child: InkWellImage(
-            //                 onTap: () => context.push(
-            //                     "/media/${schedule.media!.id}/info",
-            //                     extra: {"media": schedule.media}),
-            //                 child: Row(
-            //                   crossAxisAlignment: CrossAxisAlignment.start,
-            //                   children: [
-            //                     SizedBox(
-            //                       height: 120,
-            //                       width: 90,
-            //                       child: GridCard(
-            //                         image:
-            //                             schedule.media!.coverImage!.extraLarge!,
-            //                         blur: schedule.media!.isAdult ?? false,
-            //                       ),
-            //                     ),
-            //                     Expanded(
-            //                       child: Padding(
-            //                         padding: const EdgeInsets.all(8.0),
-            //                         child: Column(
-            //                           crossAxisAlignment:
-            //                               CrossAxisAlignment.start,
-            //                           children: [
-            //                             Text(
-            //                               schedule.media!.title!.userPreferred!,
-            //                               style: context
-            //                                   .theme.textTheme.labelLarge,
-            //                             ),
-            //                             Text(
-            //                               "Episode ${schedule.episode} ${timestamp.isAfter(now) ? "airing at" : "aired at"} ${hourTime.format(timestamp)}",
-            //                             ),
-            //                           ],
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ),
-            //             ),
-            //             if (isNext)
-            //               Positioned(
-            //                 top: 0,
-            //                 right: 5,
-            //                 child: Container(
-            //                   decoration: const BoxDecoration(
-            //                     color: Colors.blue,
-            //                     borderRadius: imageRadius,
-            //                   ),
-            //                   padding: const EdgeInsets.symmetric(
-            //                       horizontal: 20, vertical: 8),
-            //                   child: const Text("Next"),
-            //                 ),
-            //               )
-            //           ],
-            //         );
-            //       },
-            //       itemCount: response!.data!.Page!.airingSchedules!.length,
-            //     ),
-            //   ),
-            // ),
           ],
-        );
-      },
+        ),
     );
   }
 }

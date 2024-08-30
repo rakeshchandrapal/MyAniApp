@@ -2,16 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/__generated__/viewer.req.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/viewer.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 
 var mergeTimes = [
   0,
@@ -128,54 +131,74 @@ class SettingsScreen extends ConsumerWidget {
               tiles: [
                 PopupSettingsTile(
                   title: "Title Language",
-                  value: user.value?.data?.Viewer?.options?.titleLanguage,
+                  value: user.value?.parsedData?.Viewer?.options?.titleLanguage,
                   items: [
                     PopupSettingItem(
-                      value: GUserTitleLanguage.NATIVE,
-                      label: GUserTitleLanguage.NATIVE.name.capitalize(),
+                      value: Enum$UserTitleLanguage.NATIVE,
+                      label: Enum$UserTitleLanguage.NATIVE.name.capitalize(),
                     ),
                     PopupSettingItem(
-                      value: GUserTitleLanguage.ROMAJI,
-                      label: GUserTitleLanguage.ROMAJI.name.capitalize(),
+                      value: Enum$UserTitleLanguage.ROMAJI,
+                      label: Enum$UserTitleLanguage.ROMAJI.name.capitalize(),
                     ),
                     PopupSettingItem(
-                      value: GUserTitleLanguage.ENGLISH,
-                      label: GUserTitleLanguage.ENGLISH.name.capitalize(),
+                      value: Enum$UserTitleLanguage.ENGLISH,
+                      label: Enum$UserTitleLanguage.ENGLISH.name.capitalize(),
                     )
                   ],
-                  onSelected: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.titleLanguage = value,
-                      ))
-                      .first,
+                  onSelected: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables: Variables$Mutation$UpdateUser(
+                                  titleLanguage: value)
+                              .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 ),
                 PopupSettingsTile(
                   title: "Staff & Character Name Language",
-                  value: user.value?.data?.Viewer?.options?.staffNameLanguage,
+                  value: user
+                      .value?.parsedData?.Viewer?.options?.staffNameLanguage,
                   items: [
                     PopupSettingItem(
-                      value: GUserStaffNameLanguage.NATIVE,
-                      label: GUserStaffNameLanguage.NATIVE.name.capitalize(),
+                      value: Enum$UserStaffNameLanguage.NATIVE,
+                      label:
+                          Enum$UserStaffNameLanguage.NATIVE.name.capitalize(),
                     ),
                     PopupSettingItem(
-                      value: GUserStaffNameLanguage.ROMAJI,
-                      label: GUserStaffNameLanguage.ROMAJI.name.capitalize(),
+                      value: Enum$UserStaffNameLanguage.ROMAJI,
+                      label:
+                          Enum$UserStaffNameLanguage.ROMAJI.name.capitalize(),
                     ),
                     PopupSettingItem(
-                      value: GUserStaffNameLanguage.ROMAJI_WESTERN,
-                      label: GUserStaffNameLanguage.ROMAJI_WESTERN.name
+                      value: Enum$UserStaffNameLanguage.ROMAJI_WESTERN,
+                      label: Enum$UserStaffNameLanguage.ROMAJI_WESTERN.name
                           .capitalize(),
                     ),
                   ],
-                  onSelected: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.staffNameLanguage = value,
-                      ))
-                      .first,
+                  onSelected: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables: Variables$Mutation$UpdateUser(
+                                  staffNameLanguage: value)
+                              .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 ),
                 PopupSettingsTile(
                   title: "Activity Time",
-                  value: user.value!.data!.Viewer!.options!.activityMergeTime!,
+                  value: user
+                      .value!.parsedData!.Viewer!.options!.activityMergeTime!,
                   items: mergeTimes
                       .map(
                         (e) => PopupSettingItem(
@@ -199,70 +222,103 @@ class SettingsScreen extends ConsumerWidget {
                         ),
                       )
                       .toList(),
-                  onSelected: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.activityMergeTime = value,
-                      ))
-                      .first,
+                  onSelected: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables: Variables$Mutation$UpdateUser(
+                                  activityMergeTime: value)
+                              .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 ),
                 SwitchSettingsTile(
                   title: "Airing Anime Notifications",
-                  value:
-                      user.value!.data!.Viewer!.options!.airingNotifications!,
-                  onChanged: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.airingNotifications = value,
-                      ))
-                      .first,
+                  value: user
+                      .value!.parsedData!.Viewer!.options!.airingNotifications!,
+                  onChanged: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables: Variables$Mutation$UpdateUser(
+                                  airingNotifications: value)
+                              .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 ),
                 SwitchSettingsTile(
                   title: "Adult Content",
-                  value:
-                      user.value!.data!.Viewer!.options!.displayAdultContent!,
-                  onChanged: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.displayAdultContent = value,
-                      ))
-                      .first,
+                  value: user
+                      .value!.parsedData!.Viewer!.options!.displayAdultContent!,
+                  onChanged: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables: Variables$Mutation$UpdateUser(
+                                  displayAdultContent: value)
+                              .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 )
               ],
             ),
-          if (user.value?.data?.Viewer != null)
+          if (user.value?.parsedData?.Viewer != null)
             SettingsSection(
               title: "Lists",
               tiles: [
                 PopupSettingsTile(
                   title: "Scoring System",
-                  value:
-                      user.value!.data!.Viewer!.mediaListOptions!.scoreFormat!,
+                  value: user.value!.parsedData!.Viewer!.mediaListOptions!
+                      .scoreFormat!,
                   items: [
-                    for (var score in GScoreFormat.values)
+                    for (var score in Enum$ScoreFormat.values)
                       PopupSettingItem(
                         value: score,
                         label: switch (score) {
-                          GScoreFormat.POINT_3 =>
+                          Enum$ScoreFormat.POINT_3 =>
                             "3 Point Simily ${scoreToText(score, 3)}",
-                          GScoreFormat.POINT_5 =>
+                          Enum$ScoreFormat.POINT_5 =>
                             "5 Point ${scoreToText(score, 3)}",
-                          GScoreFormat.POINT_10 =>
+                          Enum$ScoreFormat.POINT_10 =>
                             "10 Point ${scoreToText(score, 5)}",
-                          GScoreFormat.POINT_10_DECIMAL =>
+                          Enum$ScoreFormat.POINT_10_DECIMAL =>
                             "10 Point Decimal ${scoreToText(score, 5.5)}",
-                          GScoreFormat.POINT_100 =>
+                          Enum$ScoreFormat.POINT_100 =>
                             "100 Point ${scoreToText(score, 50)}",
                           _ => "",
                         },
                       ),
                   ],
-                  onSelected: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.scoreFormat = value,
-                      ))
-                      .first,
+                  onSelected: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables:
+                              Variables$Mutation$UpdateUser(scoreFormat: value)
+                                  .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 ),
                 PopupSettingsTile(
                   title: "Default List Order",
-                  value: user.value!.data!.Viewer!.mediaListOptions!.rowOrder!,
+                  value: user
+                      .value!.parsedData!.Viewer!.mediaListOptions!.rowOrder!,
                   items: [
                     PopupSettingItem(
                       value: "score",
@@ -281,21 +337,29 @@ class SettingsScreen extends ConsumerWidget {
                       label: "Last Added",
                     ),
                   ],
-                  onSelected: (value) => client
-                      .request(GUpdateUserReq(
-                        (b) => b..vars.rowOrder = value,
-                      ))
-                      .first,
+                  onSelected: (value) => c
+                      .query(
+                        GQLRequest(
+                          updateUserQuery,
+                          variables:
+                              Variables$Mutation$UpdateUser(rowOrder: value)
+                                  .toJson(),
+                        ),
+                      )
+                      .last
+                      .then(
+                        (value) => ref.refresh(userProvider),
+                      ),
                 ),
                 MultiPopupSettingsTile(
                   title: "Split Completed List Section By Format",
                   initialValues: [
-                    user.value!.data!.Viewer!.mediaListOptions!.animeList!
+                    user.value!.parsedData!.Viewer!.mediaListOptions!.animeList!
                                 .splitCompletedSectionByFormat ==
                             true
                         ? "anime"
                         : null,
-                    user.value!.data!.Viewer!.mediaListOptions!.mangaList!
+                    user.value!.parsedData!.Viewer!.mediaListOptions!.mangaList!
                                 .splitCompletedSectionByFormat ==
                             true
                         ? "manga"
@@ -311,44 +375,71 @@ class SettingsScreen extends ConsumerWidget {
                       label: "Manga",
                     )
                   ],
-                  // onSelected: (value) => {
-                  //   if (value == "anime")
-                  //     client
-                  //         .request(
-                  //           GUpdateUserReq(
-                  //             (b) => b
-                  //               ..vars
-                  //                   .animeListOptions
-                  //                   .splitCompletedSectionByFormat = !(user
-                  //                       .value!
-                  //                       .data!
-                  //                       .Viewer!
-                  //                       .mediaListOptions!
-                  //                       .animeList!
-                  //                       .splitCompletedSectionByFormat ??
-                  //                   false),
-                  //           ),
-                  //         )
-                  //         .first
-                  //   else if (value == "manga")
-                  //     client
-                  //         .request(
-                  //           GUpdateUserReq(
-                  //             (b) => b
-                  //               ..vars
-                  //                   .mangaListOptions
-                  //                   .splitCompletedSectionByFormat = !(user
-                  //                       .value!
-                  //                       .data!
-                  //                       .Viewer!
-                  //                       .mediaListOptions!
-                  //                       .mangaList!
-                  //                       .splitCompletedSectionByFormat ??
-                  //                   false),
-                  //           ),
-                  //         )
-                  //         .first
-                  // },
+                  onSaved: (values) {
+                    if (values.contains("anime"))
+                      c
+                          .query(
+                            GQLRequest(
+                              updateUserQuery,
+                              variables: Variables$Mutation$UpdateUser(
+                                      animeListOptions: Input$MediaListOptionsInput(
+                                          splitCompletedSectionByFormat: !(user
+                                                  .value!
+                                                  .parsedData!
+                                                  .Viewer!
+                                                  .mediaListOptions!
+                                                  .animeList!
+                                                  .splitCompletedSectionByFormat ??
+                                              false)))
+                                  .toJson(),
+                            ),
+                          )
+                          .last
+                          .then(
+                            (value) => ref.refresh(userProvider),
+                          );
+                    if (values.contains("manga"))
+                      c
+                          .query(
+                            GQLRequest(
+                              updateUserQuery,
+                              variables: Variables$Mutation$UpdateUser(
+                                      mangaListOptions: Input$MediaListOptionsInput(
+                                          splitCompletedSectionByFormat: !(user
+                                                  .value!
+                                                  .parsedData!
+                                                  .Viewer!
+                                                  .mediaListOptions!
+                                                  .mangaList!
+                                                  .splitCompletedSectionByFormat ??
+                                              false)))
+                                  .toJson(),
+                            ),
+                          )
+                          .last
+                          .then(
+                            (value) => ref.refresh(userProvider),
+                          );
+
+                    if (values.length == 1 && values.first == null)
+                      c
+                          .query(
+                            GQLRequest(
+                              updateUserQuery,
+                              variables: Variables$Mutation$UpdateUser(
+                                  mangaListOptions: Input$MediaListOptionsInput(
+                                    splitCompletedSectionByFormat: false,
+                                  ),
+                                  animeListOptions: Input$MediaListOptionsInput(
+                                    splitCompletedSectionByFormat: false,
+                                  )).toJson(),
+                            ),
+                          )
+                          .last
+                          .then(
+                            (value) => ref.refresh(userProvider),
+                          );
+                  },
                 )
               ],
             ),

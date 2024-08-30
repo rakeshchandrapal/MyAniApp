@@ -25,7 +25,6 @@ import 'package:myaniapp/app/home/page.dart' as _i11;
 import 'package:myaniapp/app/login/anilist/page.dart' as _i2;
 import 'package:myaniapp/app/login/page.dart' as _i12;
 import 'package:myaniapp/app/login/token/page.dart' as _i33;
-import 'package:myaniapp/app/media/__generated__/media.data.gql.dart' as _i46;
 import 'package:myaniapp/app/media/characters.dart' as _i13;
 import 'package:myaniapp/app/media/info.dart' as _i14;
 import 'package:myaniapp/app/media/page.dart' as _i17;
@@ -40,12 +39,10 @@ import 'package:myaniapp/app/review/page.dart' as _i23;
 import 'package:myaniapp/app/reviews/page.dart' as _i24;
 import 'package:myaniapp/app/search/media/page.dart' as _i25;
 import 'package:myaniapp/app/settings/settings_screen.dart' as _i26;
-import 'package:myaniapp/app/staff/__generated__/staff.data.gql.dart' as _i49;
 import 'package:myaniapp/app/staff/page.dart' as _i28;
 import 'package:myaniapp/app/staff/production_screen.dart' as _i27;
 import 'package:myaniapp/app/staff/voice_screen.dart' as _i29;
 import 'package:myaniapp/app/studio/page.dart' as _i30;
-import 'package:myaniapp/app/user/__generated__/user.data.gql.dart' as _i52;
 import 'package:myaniapp/app/user/activities.dart' as _i34;
 import 'package:myaniapp/app/user/anime/page.dart' as _i35;
 import 'package:myaniapp/app/user/favorites/page.dart' as _i36;
@@ -55,17 +52,20 @@ import 'package:myaniapp/app/user/page.dart' as _i40;
 import 'package:myaniapp/app/user/reviews.dart' as _i39;
 import 'package:myaniapp/app/user/social.dart' as _i41;
 import 'package:myaniapp/app/user/threads.dart' as _i42;
-import 'package:myaniapp/graphql/fragments/__generated__/character.data.gql.dart'
+import 'package:myaniapp/graphql/__gen/app/media/media.graphql.dart' as _i46;
+import 'package:myaniapp/graphql/__gen/app/staff/staff.graphql.dart' as _i49;
+import 'package:myaniapp/graphql/__gen/app/user/user.graphql.dart' as _i52;
+import 'package:myaniapp/graphql/__gen/graphql/fragments/character.graphql.dart'
     as _i45;
-import 'package:myaniapp/graphql/fragments/__generated__/media.data.gql.dart'
+import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart'
     as _i47;
-import 'package:myaniapp/graphql/fragments/__generated__/review.data.gql.dart'
+import 'package:myaniapp/graphql/__gen/graphql/fragments/review.graphql.dart'
     as _i48;
-import 'package:myaniapp/graphql/fragments/__generated__/staff.data.gql.dart'
+import 'package:myaniapp/graphql/__gen/graphql/fragments/staff.graphql.dart'
     as _i50;
-import 'package:myaniapp/graphql/fragments/__generated__/thread.data.gql.dart'
+import 'package:myaniapp/graphql/__gen/graphql/fragments/thread.graphql.dart'
     as _i51;
-import 'package:myaniapp/graphql/fragments/__generated__/user.data.gql.dart'
+import 'package:myaniapp/graphql/__gen/graphql/fragments/user.graphql.dart'
     as _i53;
 
 abstract class $AppRouter extends _i43.RootStackRouter {
@@ -359,7 +359,12 @@ abstract class $AppRouter extends _i43.RootStackRouter {
       );
     },
     ThreadCommentRoute.name: (routeData) {
-      final args = routeData.argsAs<ThreadCommentRouteArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ThreadCommentRouteArgs>(
+          orElse: () => ThreadCommentRouteArgs(
+                commentId: pathParams.getInt('commentId'),
+                id: pathParams.getInt('id'),
+              ));
       return _i43.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i31.ThreadCommentScreen(
@@ -370,7 +375,9 @@ abstract class $AppRouter extends _i43.RootStackRouter {
       );
     },
     ThreadRoute.name: (routeData) {
-      final args = routeData.argsAs<ThreadRouteArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ThreadRouteArgs>(
+          orElse: () => ThreadRouteArgs(id: pathParams.getInt('id')));
       return _i43.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i32.ThreadScreen(
@@ -570,7 +577,7 @@ class CharacterRoute extends _i43.PageRouteInfo<CharacterRouteArgs> {
   CharacterRoute({
     _i44.Key? key,
     required int id,
-    _i45.GCharacterFragment? placeholder,
+    _i45.Fragment$CharacterFragment? placeholder,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           CharacterRoute.name,
@@ -600,7 +607,7 @@ class CharacterRouteArgs {
 
   final int id;
 
-  final _i45.GCharacterFragment? placeholder;
+  final _i45.Fragment$CharacterFragment? placeholder;
 
   @override
   String toString() {
@@ -794,7 +801,7 @@ class MediaCharactersRouteArgs {
 class MediaInfoRoute extends _i43.PageRouteInfo<MediaInfoRouteArgs> {
   MediaInfoRoute({
     _i44.Key? key,
-    required _i46.GMediaData_Media media,
+    required _i46.Query$Media$Media media,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           MediaInfoRoute.name,
@@ -819,7 +826,7 @@ class MediaInfoRouteArgs {
 
   final _i44.Key? key;
 
-  final _i46.GMediaData_Media media;
+  final _i46.Query$Media$Media media;
 
   @override
   String toString() {
@@ -832,7 +839,7 @@ class MediaInfoRouteArgs {
 class MediaRelationsRoute extends _i43.PageRouteInfo<MediaRelationsRouteArgs> {
   MediaRelationsRoute({
     _i44.Key? key,
-    required _i46.GMediaData_Media media,
+    required _i46.Query$Media$Media media,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           MediaRelationsRoute.name,
@@ -857,7 +864,7 @@ class MediaRelationsRouteArgs {
 
   final _i44.Key? key;
 
-  final _i46.GMediaData_Media media;
+  final _i46.Query$Media$Media media;
 
   @override
   String toString() {
@@ -900,7 +907,7 @@ class MediaRoute extends _i43.PageRouteInfo<MediaRouteArgs> {
   MediaRoute({
     _i44.Key? key,
     required int id,
-    _i47.GMediaFragment? placeholder,
+    _i47.Fragment$MediaFragment? placeholder,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           MediaRoute.name,
@@ -930,7 +937,7 @@ class MediaRouteArgs {
 
   final int id;
 
-  final _i47.GMediaFragment? placeholder;
+  final _i47.Fragment$MediaFragment? placeholder;
 
   @override
   String toString() {
@@ -1059,7 +1066,7 @@ class ReviewRoute extends _i43.PageRouteInfo<ReviewRouteArgs> {
   ReviewRoute({
     _i44.Key? key,
     required int id,
-    _i48.GReviewFragment? placeholder,
+    _i48.Fragment$ReviewFragment? placeholder,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           ReviewRoute.name,
@@ -1089,7 +1096,7 @@ class ReviewRouteArgs {
 
   final int id;
 
-  final _i48.GReviewFragment? placeholder;
+  final _i48.Fragment$ReviewFragment? placeholder;
 
   @override
   String toString() {
@@ -1169,7 +1176,7 @@ class StaffProductionRolesRoute
     extends _i43.PageRouteInfo<StaffProductionRolesRouteArgs> {
   StaffProductionRolesRoute({
     _i44.Key? key,
-    required _i49.GStaffData_Staff_staffMedia staffRoles,
+    required _i49.Query$Staff$Staff$staffMedia staffRoles,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           StaffProductionRolesRoute.name,
@@ -1194,7 +1201,7 @@ class StaffProductionRolesRouteArgs {
 
   final _i44.Key? key;
 
-  final _i49.GStaffData_Staff_staffMedia staffRoles;
+  final _i49.Query$Staff$Staff$staffMedia staffRoles;
 
   @override
   String toString() {
@@ -1208,7 +1215,7 @@ class StaffRoute extends _i43.PageRouteInfo<StaffRouteArgs> {
   StaffRoute({
     _i44.Key? key,
     required int id,
-    _i50.GStaffFragment? placeholder,
+    _i50.Fragment$StaffFragment? placeholder,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           StaffRoute.name,
@@ -1238,7 +1245,7 @@ class StaffRouteArgs {
 
   final int id;
 
-  final _i50.GStaffFragment? placeholder;
+  final _i50.Fragment$StaffFragment? placeholder;
 
   @override
   String toString() {
@@ -1251,7 +1258,7 @@ class StaffRouteArgs {
 class StaffVARolesRoute extends _i43.PageRouteInfo<StaffVARolesRouteArgs> {
   StaffVARolesRoute({
     _i44.Key? key,
-    required _i49.GStaffData_Staff_characterMedia medias,
+    required _i49.Query$Staff$Staff$characterMedia medias,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           StaffVARolesRoute.name,
@@ -1276,7 +1283,7 @@ class StaffVARolesRouteArgs {
 
   final _i44.Key? key;
 
-  final _i49.GStaffData_Staff_characterMedia medias;
+  final _i49.Query$Staff$Staff$characterMedia medias;
 
   @override
   String toString() {
@@ -1328,8 +1335,8 @@ class StudioRouteArgs {
 class ThreadCommentRoute extends _i43.PageRouteInfo<ThreadCommentRouteArgs> {
   ThreadCommentRoute({
     _i44.Key? key,
-    required String commentId,
-    required String id,
+    required int commentId,
+    required int id,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           ThreadCommentRoute.name,
@@ -1338,6 +1345,10 @@ class ThreadCommentRoute extends _i43.PageRouteInfo<ThreadCommentRouteArgs> {
             commentId: commentId,
             id: id,
           ),
+          rawPathParams: {
+            'commentId': commentId,
+            'id': id,
+          },
           initialChildren: children,
         );
 
@@ -1356,9 +1367,9 @@ class ThreadCommentRouteArgs {
 
   final _i44.Key? key;
 
-  final String commentId;
+  final int commentId;
 
-  final String id;
+  final int id;
 
   @override
   String toString() {
@@ -1372,7 +1383,7 @@ class ThreadRoute extends _i43.PageRouteInfo<ThreadRouteArgs> {
   ThreadRoute({
     _i44.Key? key,
     required int id,
-    _i51.GThreadFragment? placeholder,
+    _i51.Fragment$ThreadFragment? placeholder,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           ThreadRoute.name,
@@ -1381,6 +1392,7 @@ class ThreadRoute extends _i43.PageRouteInfo<ThreadRouteArgs> {
             id: id,
             placeholder: placeholder,
           ),
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 
@@ -1401,7 +1413,7 @@ class ThreadRouteArgs {
 
   final int id;
 
-  final _i51.GThreadFragment? placeholder;
+  final _i51.Fragment$ThreadFragment? placeholder;
 
   @override
   String toString() {
@@ -1552,7 +1564,7 @@ class UserFavoritesRouteArgs {
 class UserInfoRoute extends _i43.PageRouteInfo<UserInfoRouteArgs> {
   UserInfoRoute({
     _i44.Key? key,
-    required _i52.GUserData_User user,
+    required _i52.Query$User$User user,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           UserInfoRoute.name,
@@ -1577,7 +1589,7 @@ class UserInfoRouteArgs {
 
   final _i44.Key? key;
 
-  final _i52.GUserData_User user;
+  final _i52.Query$User$User user;
 
   @override
   String toString() {
@@ -1668,7 +1680,7 @@ class UserRoute extends _i43.PageRouteInfo<UserRouteArgs> {
   UserRoute({
     _i44.Key? key,
     required String name,
-    _i53.GUserFragment? placeholder,
+    _i53.Fragment$UserFragment? placeholder,
     List<_i43.PageRouteInfo>? children,
   }) : super(
           UserRoute.name,
@@ -1698,7 +1710,7 @@ class UserRouteArgs {
 
   final String name;
 
-  final _i53.GUserFragment? placeholder;
+  final _i53.Fragment$UserFragment? placeholder;
 
   @override
   String toString() {

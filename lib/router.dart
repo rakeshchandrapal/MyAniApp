@@ -28,11 +28,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: LoginRoute.page,
           path: "/login",
-          children: [
-            AutoRoute(page: TokenLoginRoute.page, path: "token"),
-            AutoRoute(page: AnilistLoginRoute.page, path: "anilist"),
-          ],
         ),
+        AutoRoute(page: TokenLoginRoute.page, path: "/login/token"),
+        AutoRoute(page: AnilistLoginRoute.page, path: "/login/anilist"),
         AutoRoute(
           page: MediaRoute.page,
           path: "/media/:id",

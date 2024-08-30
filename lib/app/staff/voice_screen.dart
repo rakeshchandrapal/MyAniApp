@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/staff/__generated__/staff.data.gql.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
@@ -9,6 +8,7 @@ import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/staff/staff.graphql.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
 
@@ -19,7 +19,7 @@ class StaffVARolesScreen extends ConsumerStatefulWidget {
     required this.medias,
   });
 
-  final GStaffData_Staff_characterMedia medias;
+  final Query$Staff$Staff$characterMedia medias;
 
   @override
   ConsumerState<StaffVARolesScreen> createState() => _StaffVARolesScreenState();
@@ -163,11 +163,11 @@ class _StaffVARolesScreenState extends ConsumerState<StaffVARolesScreen>
 class _Media {
   const _Media(this.medias, this.year);
 
-  final List<GStaffData_Staff_characterMedia_edges> medias;
+  final List<Query$Staff$Staff$characterMedia$edges> medias;
   final int year;
 
   static List<_Media> sort(
-      Iterable<GStaffData_Staff_characterMedia_edges?> edges) {
+      Iterable<Query$Staff$Staff$characterMedia$edges?> edges) {
     List<_Media> list = [];
 
     for (var edge in edges) {

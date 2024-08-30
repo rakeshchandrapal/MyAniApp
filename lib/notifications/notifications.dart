@@ -1,122 +1,76 @@
-import 'package:myaniapp/notifications/__generated__/notifications.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/notifications/notifications.graphql.dart';
 
 class AnilistNotification {
-  final GNotificationsData_Page_notifications notification;
+  final Query$Notifications$Page$notifications notification;
 
   AnilistNotification({required this.notification});
 
   bool get isMedia {
-    switch (notification.G__typename) {
-      case "RelatedMediaAdditionNotification":
-      case "MediaDataChangeNotification":
-      case "MediaMergeNotification":
-      case "MediaDeletionNotification":
-      case "AiringNotification":
-        return true;
-      default:
-        return false;
-    }
+    return notification.maybeWhen(
+      airingNotification: (p0) => true,
+      relatedMediaAdditionNotification: (p0) => true,
+      mediaDataChangeNotification: (p0) => true,
+      mediaMergeNotification: (p0) => true,
+      mediaDeletionNotification: (p0) => true,
+      orElse: () => false,
+    );
   }
 
   bool get isActivity {
-    switch (notification.G__typename) {
-      case "ActivityMessageNotification":
-      case "ActivityMentionNotification":
-      case "ActivityReplyNotification":
-      case "ActivityReplySubscribedNotification":
-      case "ActivityLikeNotification":
-      case "ActivityReplyLikeNotification":
-        return true;
-      default:
-        return false;
-    }
+    return notification.maybeWhen(
+      activityMessageNotification: (p0) => true,
+      activityMentionNotification: (p0) => true,
+      activityReplyNotification: (p0) => true,
+      activityReplySubscribedNotification: (p0) => true,
+      activityLikeNotification: (p0) => true,
+      orElse: () => false,
+    );
   }
 
   bool get isThread {
-    switch (notification.G__typename) {
-      case "ThreadCommentMentionNotification":
-      case "ThreadCommentReplyNotification":
-      case "ThreadCommentSubscribedNotification":
-      case "ThreadCommentLikeNotification":
-      case "ThreadLikeNotification":
-        return true;
-      default:
-        return false;
-    }
+    return notification.maybeWhen(
+      threadCommentMentionNotification: (p0) => true,
+      threadCommentReplyNotification: (p0) => true,
+      threadCommentLikeNotification: (p0) => true,
+      threadCommentSubscribedNotification: (p0) => true,
+      threadLikeNotification: (p0) => true,
+      orElse: () => false,
+    );
   }
 
   List<String> extractText() {
-    switch (notification.G__typename) {
-      case "AiringNotification":
-        {
-          var n = notification
-              as GNotificationsData_Page_notifications__asAiringNotification;
-          return [
-            n.contexts![0]!,
-            n.episode.toString(),
-            n.contexts![1]!,
-            n.media!.title!.userPreferred!,
-            n.contexts![2]!
-          ];
-        }
-      case "FollowingNotification":
-        {
-          var n = notification
-              as GNotificationsData_Page_notifications__asFollowingNotification;
-          return [n.user!.name, n.context!];
-        }
-      case "ActivityMessageNotification":
-      case "ActivityMentionNotification":
-      case "ActivityReplyNotification":
-      case "ActivityReplySubscribedNotification":
-      case "ActivityLikeNotification":
-      case "ActivityReplyLikeNotification":
-        {
-          var n = notification as dynamic;
-          return [n.user!.name, n.context!];
-        }
-      case "ThreadCommentMentionNotification":
-      case "ThreadCommentReplyNotification":
-      case "ThreadCommentSubscribedNotification":
-      case "ThreadCommentLikeNotification":
-      case "ThreadLikeNotification":
-        {
-          {
-            var n = notification as dynamic;
-            return [n.user!.name, n.context!];
-          }
-        }
-      case "RelatedMediaAdditionNotification":
-        {
-          var n = notification
-              as GNotificationsData_Page_notifications__asRelatedMediaAdditionNotification;
-          return [n.media!.title!.userPreferred!, n.context!];
-        }
-      case "MediaDataChangeNotification":
-        {
-          var n = notification
-              as GNotificationsData_Page_notifications__asMediaDataChangeNotification;
-          return [n.media!.title!.userPreferred!, n.context!];
-        }
-      case "MediaMergeNotification":
-        {
-          var n = notification
-              as GNotificationsData_Page_notifications__asMediaMergeNotification;
-          return [
-            n.deletedMediaTitles!.join(', '),
-            n.context!,
-            n.media!.title!.userPreferred!
-          ];
-        }
-      case "MediaDeletionNotification":
-        {
-          var n = notification
-              as GNotificationsData_Page_notifications__asMediaDeletionNotification;
-          return [n.deletedMediaTitle!, n.context!];
-        }
-    }
-
-    return [];
+    return notification.when(
+      airingNotification: (n) => [
+        n.contexts![0]!,
+        n.episode.toString(),
+        n.contexts![1]!,
+        n.media!.title!.userPreferred!,
+        n.contexts![2]!
+      ],
+      followingNotification: (n) => [n.user!.name, n.context!],
+      activityMessageNotification: (n) => [n.user!.name, n.context!],
+      activityMentionNotification: (n) => [n.user!.name, n.context!],
+      activityReplyNotification: (n) => [n.user!.name, n.context!],
+      activityReplySubscribedNotification: (n) => [n.user!.name, n.context!],
+      activityLikeNotification: (n) => [n.user!.name, n.context!],
+      activityReplyLikeNotification: (n) => [n.user!.name, n.context!],
+      threadCommentMentionNotification: (n) => [n.user!.name, n.context!],
+      threadCommentReplyNotification: (n) => [n.user!.name, n.context!],
+      threadCommentSubscribedNotification: (n) => [n.user!.name, n.context!],
+      threadCommentLikeNotification: (n) => [n.user!.name, n.context!],
+      threadLikeNotification: (n) => [n.user!.name, n.context!],
+      relatedMediaAdditionNotification: (n) =>
+          [n.media!.title!.userPreferred!, n.context!],
+      mediaDataChangeNotification: (n) =>
+          [n.media!.title!.userPreferred!, n.context!],
+      mediaMergeNotification: (n) => [
+        n.deletedMediaTitles!.join(', '),
+        n.context!,
+        n.media!.title!.userPreferred!
+      ],
+      mediaDeletionNotification: (n) => [n.deletedMediaTitle!, n.context!],
+      orElse: () => [],
+    );
   }
 
   @override

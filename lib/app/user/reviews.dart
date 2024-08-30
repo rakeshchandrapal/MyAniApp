@@ -1,39 +1,39 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/reviews/card.dart';
-import 'package:myaniapp/app/user/__generated__/reviews.req.gql.dart';
 import 'package:myaniapp/common/pagination.dart';
+import 'package:myaniapp/graphql/__gen/app/user/reviews.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class UserReviewsScreen extends StatelessWidget {
+class UserReviewsScreen extends HookWidget {
   const UserReviewsScreen({super.key, required this.id});
 
   final int id;
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GUserReviewsReq((b) => b
-        ..requestId = "userReviews$id"
-        ..vars.userId = id),
-      builder: (context, response, error, refetch) => GraphqlPagination(
-        pageInfo: response!.data!.Page!.pageInfo!,
-        req: (nextPage) =>
-            (response.operationRequest as GUserReviewsReq).rebuild(
-          (p0) => p0
-            ..vars.page = nextPage
-            ..updateResult = (previous, result) => result?.rebuild(
-                  (p0) => p0
-                    ..Page.reviews.insertAll(
-                          0,
-                          previous?.Page?.reviews?.whereNot((p0) =>
-                                  result.Page?.reviews?.contains(p0) ??
-                                  false) ??
-                              [],
-                        ),
-                ),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      userReviewsQuery,
+      variables: Variables$Query$UserReviews(userId: id).toJson(),
+      parseData: Query$UserReviews.fromJson,
+      mergeResults: defaultMergeResults("Page.reviews"),
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      builder: () => GraphqlPagination(
+        pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+        req: (nextPage) => fetchMore(
+          variables:
+              Variables$Query$UserReviews.fromJson(snapshot.request!.variables)
+                  .copyWith(page: nextPage)
+                  .toJson(),
         ),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -41,11 +41,11 @@ class UserReviewsScreen extends StatelessWidget {
             mainAxisExtent: 200,
           ),
           itemBuilder: (context, index) {
-            var review = response.data!.Page!.reviews![index]!;
+            var review = snapshot.parsedData!.Page!.reviews![index]!;
 
             return ReviewCard(review: review);
           },
-          itemCount: response.data!.Page!.reviews!.length,
+          itemCount: snapshot.parsedData!.Page!.reviews!.length,
         ),
       ),
     );

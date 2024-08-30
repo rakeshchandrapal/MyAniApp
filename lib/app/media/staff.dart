@@ -1,17 +1,20 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/media/__generated__/staff.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/media/staff.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class MediaStaffScreen extends StatelessWidget {
+class MediaStaffScreen extends HookWidget {
   const MediaStaffScreen(
       {super.key, @PathParam.inherit("id") required this.mediaId});
 
@@ -19,29 +22,27 @@ class MediaStaffScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GMediaStaffReq(
-        (b) => b
-          ..requestId = "mediaStaff$mediaId"
-          ..vars.mediaId = mediaId,
-      ),
-      builder: (context, response, error, refetch) => GraphqlPagination(
-        pageInfo: response!.data!.Media!.staff!.pageInfo!,
-        req: (nextPage) =>
-            (response.operationRequest as GMediaStaffReq).rebuild(
-          (p0) => p0
-            ..vars.page = nextPage
-            ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-              ..Media.staff.edges.insertAll(
-                  0,
-                  previous?.Media?.staff?.edges?.whereNot((p0) =>
-                          result.Media?.staff?.edges?.contains(p0) ?? false) ??
-                      [])),
-        ),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      mediaStaffQuery,
+      variables: Variables$Query$MediaStaff(mediaId: mediaId).toJson(),
+      parseData: Query$MediaStaff.fromJson,
+      mergeResults: defaultMergeResults("Media.staff.edges"),
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      builder: () => GraphqlPagination(
+        pageInfo: snapshot!.parsedData!.Media!.staff!.pageInfo!,
+        req: (nextPage) => fetchMore(
+            variables:
+                Variables$Query$MediaStaff.fromJson(snapshot.request!.variables)
+                    .copyWith(page: nextPage)
+                    .toJson()),
         child: ListView.separated(
           padding: const EdgeInsets.all(0),
           itemBuilder: (context, index) {
-            var staff = response.data!.Media!.staff!.edges![index]!;
+            var staff = snapshot.parsedData!.Media!.staff!.edges![index]!;
 
             return Card.outlined(
               child: InkWellImage(
@@ -86,7 +87,7 @@ class MediaStaffScreen extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(
             height: 5,
           ),
-          itemCount: response.data!.Media!.staff!.edges!.length,
+          itemCount: snapshot.parsedData!.Media!.staff!.edges!.length,
         ),
       ),
     );

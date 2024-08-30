@@ -1,20 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/app/user/favorites/page.dart';
-import 'package:myaniapp/app/user/__generated__/user.data.gql.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/user/user.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/router.gr.dart';
 
 @RoutePage()
 class UserInfoScreen extends StatelessWidget {
   const UserInfoScreen({super.key, required this.user});
 
-  final GUserData_User user;
+  final Query$User$User user;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class UserInfoScreen extends StatelessWidget {
             middle: (user.statistics!.anime!.minutesWatched / 1440)
                 .toStringAsFixed(1),
             right: user.statistics!.anime!.meanScore.toStringAsFixed(1),
-            type: GMediaType.ANIME,
+            type: Enum$MediaType.ANIME,
             onTap: () => context.pushRoute(UserAnimeRoute(name: user.name)),
             // onTap: () => context.push('/user/${user.name}/anime'),
           ),
@@ -52,7 +52,7 @@ class UserInfoScreen extends StatelessWidget {
             left: user.statistics!.manga!.count.toString(),
             middle: user.statistics!.manga!.chaptersRead.toString(),
             right: user.statistics!.manga!.meanScore.toStringAsFixed(1),
-            type: GMediaType.MANGA,
+            type: Enum$MediaType.MANGA,
             onTap: () => context.pushRoute(UserMangaRoute(name: user.name)),
           ),
         _GenreOverview(
@@ -307,7 +307,7 @@ class _StatsBox extends StatelessWidget {
   final String left;
   final String middle;
   final String right;
-  final GMediaType type;
+  final Enum$MediaType type;
   final GestureTapCallback? onTap;
 
   @override
@@ -329,7 +329,7 @@ class _StatsBox extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                '${type == GMediaType.ANIME ? "Anime Stats" : "Manga Stats"} (click to view list)',
+                '${type == Enum$MediaType.ANIME ? "Anime Stats" : "Manga Stats"} (click to view list)',
                 style: context.theme.textTheme.labelSmall,
               ),
               const SizedBox(
@@ -341,11 +341,15 @@ class _StatsBox extends StatelessWidget {
                 children: [
                   _stat(
                     left,
-                    type == GMediaType.ANIME ? "Total Anime" : "Total Manga",
+                    type == Enum$MediaType.ANIME
+                        ? "Total Anime"
+                        : "Total Manga",
                   ),
                   _stat(
                     middle,
-                    type == GMediaType.ANIME ? "Days watched" : "Chapters read",
+                    type == Enum$MediaType.ANIME
+                        ? "Days watched"
+                        : "Chapters read",
                   ),
                   _stat(
                     right,
@@ -373,14 +377,14 @@ class _StatsBox extends StatelessWidget {
 class _GenreOverview extends StatelessWidget {
   const _GenreOverview({this.animeStats, this.mangaStats});
 
-  final GUserData_User_statistics_anime? animeStats;
-  final GUserData_User_statistics_manga? mangaStats;
+  final Query$User$User$statistics$anime? animeStats;
+  final Query$User$User$statistics$manga? mangaStats;
 
-  List<GGenreStat> getTopGenres() {
-    List<GGenreStat> genres = [];
+  List<Fragment$GenreStat> getTopGenres() {
+    List<Fragment$GenreStat> genres = [];
 
     if (animeStats?.genres?.isNotEmpty == true) {
-      genres.addAll(animeStats!.genres!.whereType<GGenreStat>());
+      genres.addAll(animeStats!.genres!.whereType<Fragment$GenreStat>());
     }
     if (mangaStats?.genres?.isNotEmpty == true) {
       if (genres.isNotEmpty) {
@@ -389,17 +393,14 @@ class _GenreOverview extends StatelessWidget {
             var idx =
                 genres.indexWhere((element) => element.genre == genre!.genre);
 
-            genres[idx] = GGenreStatData(
-              (b) => b
-                ..count = genres[idx].count + genre!.count
-                ..genre = genres[idx].genre,
-            );
+            genres[idx] =
+                genres[idx].copyWith(count: genres[idx].count + genre!.count);
           } else {
             genres.add(genre!);
           }
         }
       } else {
-        genres.addAll(mangaStats!.genres!.whereType<GGenreStat>());
+        genres.addAll(mangaStats!.genres!.whereType<Fragment$GenreStat>());
       }
     }
 

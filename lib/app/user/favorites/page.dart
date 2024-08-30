@@ -1,20 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/user/__generated__/favorites.data.gql.dart';
-import 'package:myaniapp/app/user/__generated__/favorites.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/user/favorites.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 enum FavoriteTabs { anime, manga, characters, staff, studios }
 
 // ik this could use "AutoTabsRouter" but i dont fell like it maybe later :)
 @RoutePage()
-class UserFavoritesScreen extends StatefulWidget {
+class UserFavoritesScreen extends StatefulHookWidget {
   const UserFavoritesScreen(
       {super.key, @pathParam required this.name, @pathParam required this.tab});
 
@@ -52,23 +55,28 @@ class _UserFavoritesScreenState extends State<UserFavoritesScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
-      operationRequest: GUserFavoritesReq((b) => b
-        ..vars.name = widget.name
-        ..requestId = "user${widget.name}Favorites"),
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      userFavoritesQuery,
+      parseData: Query$UserFavorites.fromJson,
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: Scaffold(
         appBar: AppBar(),
         body: const Center(
           child: CircularProgressIndicator.adaptive(),
         ),
       ),
-      error: (response) => Scaffold(
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response?.graphqlErrors, response?.linkException),
+          exception: (snapshot?.errors, snapshot?.linkError),
+          refetch: refetch,
         ),
       ),
-      builder: (context, response, error, refetch) => Scaffold(
+      builder: () => Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             controller: _tabController,
@@ -86,24 +94,29 @@ class _UserFavoritesScreenState extends State<UserFavoritesScreen>
           controller: _tabController,
           children: [
             _FavoriteAnime(
-              operationRequest: response!.operationRequest as GUserFavoritesReq,
-              animes: response.data!.User!.favourites!.anime!,
+              request: snapshot.request!,
+              animes: snapshot.parsedData!.User!.favourites!.anime!,
+              fetchMore: fetchMore,
             ),
             _FavoriteManga(
-              operationRequest: response.operationRequest as GUserFavoritesReq,
-              mangas: response.data!.User!.favourites!.manga!,
+              request: snapshot.request!,
+              mangas: snapshot.parsedData!.User!.favourites!.manga!,
+              fetchMore: fetchMore,
             ),
             _FavoriteCharacters(
-              operationRequest: response.operationRequest as GUserFavoritesReq,
-              characters: response.data!.User!.favourites!.characters!,
+              request: snapshot.request!,
+              characters: snapshot.parsedData!.User!.favourites!.characters!,
+              fetchMore: fetchMore,
             ),
             _FavoriteStaff(
-              operationRequest: response.operationRequest as GUserFavoritesReq,
-              staffs: response.data!.User!.favourites!.staff!,
+              request: snapshot.request!,
+              staffs: snapshot.parsedData!.User!.favourites!.staff!,
+              fetchMore: fetchMore,
             ),
             _FavoriteStudios(
-              operationRequest: response.operationRequest as GUserFavoritesReq,
-              studios: response.data!.User!.favourites!.studios!,
+              request: snapshot.request!,
+              studios: snapshot.parsedData!.User!.favourites!.studios!,
+              fetchMore: fetchMore,
             ),
           ],
         ),
@@ -113,25 +126,22 @@ class _UserFavoritesScreenState extends State<UserFavoritesScreen>
 }
 
 class _FavoriteAnime extends StatelessWidget {
-  const _FavoriteAnime({required this.operationRequest, required this.animes});
+  const _FavoriteAnime(
+      {required this.request, required this.animes, required this.fetchMore});
 
-  final GUserFavoritesReq operationRequest;
-  final GUserFavoritesData_User_favourites_anime animes;
+  final GQLRequest request;
+  final Query$UserFavorites$User$favourites$anime animes;
+  final QueryHookFetchMore fetchMore;
 
   @override
   Widget build(BuildContext context) {
     return GraphqlPagination(
       pageInfo: animes.pageInfo!,
-      req: (nextPage) => operationRequest.rebuild(
-        (b) => b
-          ..vars.animePage = nextPage
-          ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-            ..User.favourites.anime.edges.insertAll(
-                0,
-                previous?.User?.favourites?.anime?.edges?.whereNot((p0) =>
-                        result.User?.favourites?.anime?.edges?.contains(p0) ??
-                        false) ??
-                    [])),
+      req: (nextPage) => fetchMore(
+        variables: Variables$Query$UserFavorites.fromJson(request.variables)
+            .copyWith(animePage: nextPage)
+            .toJson(),
+        mergeResults: defaultMergeResults("User.favourites.anime.edges"),
       ),
       child: GridView.builder(
         padding: const EdgeInsets.all(8),
@@ -162,25 +172,22 @@ class _FavoriteAnime extends StatelessWidget {
 }
 
 class _FavoriteManga extends StatelessWidget {
-  const _FavoriteManga({required this.operationRequest, required this.mangas});
+  const _FavoriteManga(
+      {required this.request, required this.mangas, required this.fetchMore});
 
-  final GUserFavoritesReq operationRequest;
-  final GUserFavoritesData_User_favourites_manga mangas;
+  final GQLRequest request;
+  final Query$UserFavorites$User$favourites$manga mangas;
+  final QueryHookFetchMore fetchMore;
 
   @override
   Widget build(BuildContext context) {
     return GraphqlPagination(
       pageInfo: mangas.pageInfo!,
-      req: (nextPage) => operationRequest.rebuild(
-        (b) => b
-          ..vars.mangaPage = nextPage
-          ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-            ..User.favourites.manga.edges.insertAll(
-                0,
-                previous?.User?.favourites?.manga?.edges?.whereNot((p0) =>
-                        result.User?.favourites?.manga?.edges?.contains(p0) ??
-                        false) ??
-                    [])),
+      req: (nextPage) => fetchMore(
+        variables: Variables$Query$UserFavorites.fromJson(request.variables)
+            .copyWith(mangaPage: nextPage)
+            .toJson(),
+        mergeResults: defaultMergeResults("User.favourites.manga.edges"),
       ),
       child: GridView.builder(
         padding: const EdgeInsets.all(8),
@@ -212,26 +219,23 @@ class _FavoriteManga extends StatelessWidget {
 
 class _FavoriteCharacters extends StatelessWidget {
   const _FavoriteCharacters(
-      {required this.operationRequest, required this.characters});
+      {required this.request,
+      required this.characters,
+      required this.fetchMore});
 
-  final GUserFavoritesReq operationRequest;
-  final GUserFavoritesData_User_favourites_characters characters;
+  final GQLRequest request;
+  final Query$UserFavorites$User$favourites$characters characters;
+  final QueryHookFetchMore fetchMore;
 
   @override
   Widget build(BuildContext context) {
     return GraphqlPagination(
       pageInfo: characters.pageInfo!,
-      req: (nextPage) => operationRequest.rebuild(
-        (b) => b
-          ..vars.characterPage = nextPage
-          ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-            ..User.favourites.characters.edges.insertAll(
-                0,
-                previous?.User?.favourites?.characters?.edges?.whereNot((p0) =>
-                        result.User?.favourites?.characters?.edges
-                            ?.contains(p0) ??
-                        false) ??
-                    [])),
+      req: (nextPage) => fetchMore(
+        variables: Variables$Query$UserFavorites.fromJson(request.variables)
+            .copyWith(characterPage: nextPage)
+            .toJson(),
+        mergeResults: defaultMergeResults("User.favourites.characters.edges"),
       ),
       child: GridView.builder(
         padding: const EdgeInsets.all(8),
@@ -260,25 +264,22 @@ class _FavoriteCharacters extends StatelessWidget {
 }
 
 class _FavoriteStaff extends StatelessWidget {
-  const _FavoriteStaff({required this.operationRequest, required this.staffs});
+  const _FavoriteStaff(
+      {required this.request, required this.staffs, required this.fetchMore});
 
-  final GUserFavoritesReq operationRequest;
-  final GUserFavoritesData_User_favourites_staff staffs;
+  final GQLRequest request;
+  final Query$UserFavorites$User$favourites$staff staffs;
+  final QueryHookFetchMore fetchMore;
 
   @override
   Widget build(BuildContext context) {
     return GraphqlPagination(
       pageInfo: staffs.pageInfo!,
-      req: (nextPage) => operationRequest.rebuild(
-        (b) => b
-          ..vars.characterPage = nextPage
-          ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-            ..User.favourites.staff.edges.insertAll(
-                0,
-                previous?.User?.favourites?.staff?.edges?.whereNot((p0) =>
-                        result.User?.favourites?.staff?.edges?.contains(p0) ??
-                        false) ??
-                    [])),
+      req: (nextPage) => fetchMore(
+        variables: Variables$Query$UserFavorites.fromJson(request.variables)
+            .copyWith(staffPage: nextPage)
+            .toJson(),
+        mergeResults: defaultMergeResults("User.favourites.staff.edges"),
       ),
       child: GridView.builder(
         padding: const EdgeInsets.all(8),
@@ -308,25 +309,21 @@ class _FavoriteStaff extends StatelessWidget {
 
 class _FavoriteStudios extends StatelessWidget {
   const _FavoriteStudios(
-      {required this.operationRequest, required this.studios});
+      {required this.request, required this.studios, required this.fetchMore});
 
-  final GUserFavoritesReq operationRequest;
-  final GUserFavoritesData_User_favourites_studios studios;
+  final GQLRequest request;
+  final Query$UserFavorites$User$favourites$studios studios;
+  final QueryHookFetchMore fetchMore;
 
   @override
   Widget build(BuildContext context) {
     return GraphqlPagination(
       pageInfo: studios.pageInfo!,
-      req: (nextPage) => operationRequest.rebuild(
-        (b) => b
-          ..vars.characterPage = nextPage
-          ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-            ..User.favourites.studios.edges.insertAll(
-                0,
-                previous?.User?.favourites?.studios?.edges?.whereNot((p0) =>
-                        result.User?.favourites?.studios?.edges?.contains(p0) ??
-                        false) ??
-                    [])),
+      req: (nextPage) => fetchMore(
+        variables: Variables$Query$UserFavorites.fromJson(request.variables)
+            .copyWith(studioPage: nextPage)
+            .toJson(),
+        mergeResults: defaultMergeResults("User.favourites.studios.edges"),
       ),
       child: ListView.builder(
         itemBuilder: (context, index) {

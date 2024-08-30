@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/common/dialogs/login.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 
 DateTime dateFromTimestamp(int timestamp) {
@@ -17,19 +18,19 @@ VoidCallback requiredLogin(
   return () => LoginDialog.show(ref.context, action);
 }
 
-String scoreToText(GScoreFormat format, double value) {
+String scoreToText(Enum$ScoreFormat format, double value) {
   if (value == 0) return "";
 
   return switch (format) {
-    GScoreFormat.POINT_3 => value == 1
+    Enum$ScoreFormat.POINT_3 => value == 1
         ? ":("
         : value == 2
             ? ":|"
             : ":)",
-    GScoreFormat.POINT_5 => "${value.toInt()} / 5",
-    GScoreFormat.POINT_10 => "${value.toInt()} / 10",
-    GScoreFormat.POINT_10_DECIMAL => "$value / 10",
-    GScoreFormat.POINT_100 => "${value.toInt()} / 100",
-    GScoreFormat() => throw UnimplementedError(),
+    Enum$ScoreFormat.POINT_5 => "${value.toInt()} / 5",
+    Enum$ScoreFormat.POINT_10 => "${value.toInt()} / 10",
+    Enum$ScoreFormat.POINT_10_DECIMAL => "$value / 10",
+    Enum$ScoreFormat.POINT_100 => "${value.toInt()} / 100",
+    Enum$ScoreFormat() => throw UnimplementedError(),
   };
 }

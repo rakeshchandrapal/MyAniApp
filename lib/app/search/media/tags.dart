@@ -1,30 +1,31 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:ferry_exec/ferry_exec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:myaniapp/app/search/media/__generated__/mediaSearch.data.gql.dart';
-import 'package:myaniapp/app/search/media/__generated__/mediaSearch.req.gql.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/constants.dart';
+import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:mygraphql/graphql.dart';
 
-class TagsEditorSheet extends StatefulWidget {
+class TagsEditorSheet extends StatefulHookWidget {
   const TagsEditorSheet(
       {super.key,
       required this.whitelistedTags,
       required this.blacklistedTags,
       required this.onChanged});
 
-  final List<GGenreCollectionData_tags?> whitelistedTags;
-  final List<GGenreCollectionData_tags?> blacklistedTags;
-  final void Function(List<GGenreCollectionData_tags> whitelistedTags,
-      List<GGenreCollectionData_tags> blacklistedTags) onChanged;
+  final List<Query$GenreCollection$tags?> whitelistedTags;
+  final List<Query$GenreCollection$tags?> blacklistedTags;
+  final void Function(List<Query$GenreCollection$tags> whitelistedTags,
+      List<Query$GenreCollection$tags> blacklistedTags) onChanged;
 
   static void show(
     BuildContext context, {
-    required List<GGenreCollectionData_tags?> whitelistedTags,
-    required List<GGenreCollectionData_tags?> blacklistedTags,
-    required void Function(List<GGenreCollectionData_tags> whitelistedTags,
-            List<GGenreCollectionData_tags> blacklistedTags)
+    required List<Query$GenreCollection$tags?> whitelistedTags,
+    required List<Query$GenreCollection$tags?> blacklistedTags,
+    required void Function(List<Query$GenreCollection$tags> whitelistedTags,
+            List<Query$GenreCollection$tags> blacklistedTags)
         onChanged,
   }) {
     showModalBottomSheet(
@@ -44,24 +45,30 @@ class TagsEditorSheet extends StatefulWidget {
 }
 
 class _TagsEditorSheetState extends State<TagsEditorSheet> {
-  late List<GGenreCollectionData_tags> whitelistedTags =
-      widget.whitelistedTags.cast<GGenreCollectionData_tags>();
-  late List<GGenreCollectionData_tags> blacklistedTags =
-      widget.blacklistedTags.cast<GGenreCollectionData_tags>();
+  late List<Query$GenreCollection$tags> whitelistedTags =
+      widget.whitelistedTags.cast<Query$GenreCollection$tags>();
+  late List<Query$GenreCollection$tags> blacklistedTags =
+      widget.blacklistedTags.cast<Query$GenreCollection$tags>();
 
   @override
   Widget build(BuildContext context) {
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      genreCollectionQuery,
+      parseData: Query$GenreCollection.fromJson,
+      fetchPolicy: FetchPolicy.cacheOnly,
+    ));
+
     return DraggableScrollableSheet(
       expand: false,
-      builder: (context, scrollController) => GQLRequest(
-        operationRequest: GGenreCollectionReq((b) => b
-          ..requestId = "genreCollectionSearch"
-          ..fetchPolicy = FetchPolicy.CacheOnly),
-        builder: (context, response, error, refetch) {
+      builder: (context, scrollController) => GQLWidget(
+        refetch: refetch,
+        response: snapshot,
+        builder: () {
           return HookBuilder(
             builder: (context) {
-              var tags = useMemoized(() => Tag.sort(response!.data!.tags!),
-                  [response!.data!.tags!]);
+              var tags = useMemoized(
+                  () => Tag.sort(snapshot!.parsedData!.tags!),
+                  [snapshot!.parsedData!.tags!]);
               var textEditingController = useTextEditingController();
               var notifier = useValueListenable(textEditingController);
 
@@ -153,9 +160,9 @@ class Tag {
   Tag({required this.category});
 
   String category;
-  List<GGenreCollectionData_tags> tags = [];
+  List<Query$GenreCollection$tags> tags = [];
 
-  static List<Tag> sort(BuiltList<GGenreCollectionData_tags?> tags) {
+  static List<Tag> sort(List<Query$GenreCollection$tags?> tags) {
     List<Tag> lists = [];
 
     for (var tag in tags) {

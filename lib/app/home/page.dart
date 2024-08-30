@@ -28,33 +28,43 @@ class HomeScreen extends ConsumerWidget {
     }
 
     return AutoTabsScaffold(
+      routes: [
+        if (user.value?.data != null) ...[
+          const HomeLoggedInOverviewRoute(),
+          const HomeAnimeListRoute(),
+          const ExploreRoute(),
+          const HomeMangaListRoute()
+        ] else
+          const ExploreRoute(),
+        const HomeActivitiesRoute(),
+      ],
       drawer: NavigationDrawer(
         children: [
           InkWell(
             onTap: user.value?.data == null
                 ? () => context.pushRoute(LoginRoute())
-                : () => context
-                    .pushRoute(UserRoute(name: user.value!.data!.Viewer!.name)),
+                : () => context.pushRoute(
+                    UserRoute(name: user.value!.parsedData!.Viewer!.name)),
             child: UserAccountsDrawerHeader(
               accountName: Show(
-                when: user.value?.data != null,
+                when: user.value?.parsedData != null,
                 fallback: Text(
                   "Guest",
                   style: TextStyle(color: context.theme.colorScheme.onSurface),
                 ),
                 child: () => Text(
-                  user.requireValue.data!.Viewer!.name,
+                  user.requireValue.parsedData!.Viewer!.name,
                   style: TextStyle(color: context.theme.colorScheme.onSurface),
                 ),
               ),
               currentAccountPicture: Show(
-                when: user.value?.data != null,
+                when: user.value?.parsedData != null,
                 child: () =>
-                    CachedImage(user.value!.data!.Viewer!.avatar!.large!),
+                    CachedImage(user.value!.parsedData!.Viewer!.avatar!.large!),
               ),
               currentAccountPictureSize: const Size.square(90),
               decoration: const BoxDecoration(),
-              accountEmail: user.value?.data != null
+              accountEmail: user.value?.parsedData != null
                   ? null
                   : Text(
                       "Sign in!",
@@ -93,22 +103,13 @@ class HomeScreen extends ConsumerWidget {
             )
         ],
       ),
-      routes: [
-        if (user.value?.data != null) ...[
-          const HomeLoggedInOverviewRoute(),
-          const HomeAnimeListRoute(),
-          const ExploreRoute(),
-          const HomeMangaListRoute()
-        ] else
-          const ExploreRoute(),
-        const HomeActivitiesRoute(),
-      ],
       bottomNavigationBuilder: (context, tabsRouter) => NavigationBar(
         selectedIndex: tabsRouter.activeIndex,
         onDestinationSelected: tabsRouter.setActiveIndex,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         height: 70,
         destinations: [
+          // TODO: change icon to explore icon if not logged in
           const NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           if (user.value?.data != null) ...[
             const NavigationDestination(
@@ -131,8 +132,8 @@ class HomeLeadingIcon extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var userAvatar = ref.watch(
-        userProvider.select((value) => value.value?.data?.Viewer?.avatar));
+    var userAvatar = ref.watch(userProvider
+        .select((value) => value.value?.parsedData?.Viewer?.avatar));
 
     return Show(
       when: userAvatar != null,

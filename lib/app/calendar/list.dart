@@ -1,29 +1,37 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/calendar/__generated__/list.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:myaniapp/app/calendar/page.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/extensions.dart';
+import 'package:myaniapp/graphql/__gen/app/calendar/list.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 
-class MyListReleases extends StatelessWidget {
+class MyListReleases extends HookWidget {
   const MyListReleases({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      releasesListQuery,
+      parseData: Query$ReleasesList.fromJson,
+      mergeResults: defaultMergeResults("Page.media"),
+    ));
     var now = DateTime.now();
 
-    return GQLRequest(
-      operationRequest: GReleasesListReq(
-        (b) => b..requestId = "myListReleases",
-      ),
-      builder: (context, response, error, refetch) {
-        var sorted = response!.data!.Page!.media!
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
+      builder: () {
+        var sorted = snapshot!.parsedData!.Page!.media!
             .where(
               (p0) => p0?.nextAiringEpisode != null,
             )
@@ -33,17 +41,9 @@ class MyListReleases extends StatelessWidget {
             );
 
         return GraphqlPagination(
-          pageInfo: response.data!.Page!.pageInfo!,
-          req: (nextPage) => (response.operationRequest as GReleasesListReq)
-              .rebuild((p0) => p0
-                ..vars.page = nextPage
-                ..updateResult = (previous, result) => result?.rebuild((p0) =>
-                    p0
-                      ..Page.media.insertAll(
-                          0,
-                          previous?.Page?.media?.whereNot((p0) =>
-                                  result.Page?.media?.contains(p0) ?? false) ??
-                              []))),
+          pageInfo: snapshot.parsedData!.Page!.pageInfo!,
+          req: (nextPage) => fetchMore(
+              variables: Variables$Query$ReleasesList(page: nextPage).toJson()),
           child: ListView.builder(
             itemBuilder: (context, index) {
               var media = sorted[index]!;

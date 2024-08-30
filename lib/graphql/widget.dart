@@ -1,78 +1,130 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ferry/ferry.dart';
-import 'package:ferry_flutter/ferry_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gql_exec/gql_exec.dart' as g;
-import 'package:myaniapp/main.dart';
+import 'package:gql_exec/gql_exec.dart' show GraphQLError;
+import 'package:gql_link/gql_link.dart';
+import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
-class GQLRequest<TData, TVars> extends StatelessWidget {
-  const GQLRequest({
+class GQLWidget<T> extends StatelessWidget {
+  const GQLWidget({
     super.key,
-    required this.operationRequest,
-    required this.builder,
+    required this.response,
+    required this.refetch,
     this.loading = const Center(
       child: CircularProgressIndicator.adaptive(),
     ),
     this.error,
+    required this.builder,
     this.errorWidget = true,
   });
 
-  final OperationRequest<TData, TVars> operationRequest;
-  final OperationResponseBuilder<TData, TVars> builder;
+  final GQLResponse<T> response;
   final Widget? loading;
-  final Widget Function(OperationResponse<TData, TVars>? response)? error;
+  final Widget? error;
   final bool errorWidget;
+  final Widget Function() builder;
+  final VoidCallback refetch;
 
   @override
   Widget build(BuildContext context) {
-    return Operation(
-      operationRequest: operationRequest,
-      builder: (context, response, _) {
-        if (response?.loading == true && loading != null) {
-          return loading!;
-        }
+    if (loading == null) {
+      return Show(
+        when: response.errors == null && response.linkError == null,
+        fallback: error ??
+            GraphqlError<T>(
+              exception: (response.errors, response.linkError),
+              refetch: refetch,
+            ),
+        child: builder,
+      );
+    }
 
-        if (response?.hasErrors == true && errorWidget == true) {
-          // logger.e(response?.linkException);
-          return error?.call(response) ??
-              GraphqlError(
-                exception: (response!.graphqlErrors, response.linkException),
-                req: response.operationRequest,
-              );
-        }
-
-        return builder(
-          context,
-          response,
-          error,
-          () async => client.requestController.add(operationRequest),
-        );
-      },
-      client: client,
+    return Show(
+      when: !response.loading,
+      fallback: loading,
+      child: () => Show(
+        when: (response.errors == null && response.linkError == null) ||
+            !errorWidget,
+        fallback: error ??
+            GraphqlError<T>(
+              exception: (response.errors, response.linkError),
+              refetch: refetch,
+            ),
+        child: builder,
+      ),
     );
   }
 }
 
-typedef OperationResponseBuilder<TData, TVars> = Widget Function(
-    BuildContext context,
-    OperationResponse<TData, TVars>? response,
-    Object? error,
-    Future<void> Function() refetch);
+// class GQLRequest<TData, TVars> extends StatelessWidget {
+//   const GQLRequest({
+//     super.key,
+//     required this.operationRequest,
+//     required this.builder,
+//     this.loading = const Center(
+//       child: CircularProgressIndicator.adaptive(),
+//     ),
+//     this.error,
+//     this.errorWidget = true,
+//   });
 
-class GraphqlError extends ConsumerWidget {
-  final (List<g.GraphQLError>?, LinkException?) exception;
-  final OperationRequest? req;
+//   final OperationRequest<TData, TVars> operationRequest;
+//   final OperationResponseBuilder<TData, TVars> builder;
+//   final Widget? loading;
+//   final Widget Function(OperationResponse<TData, TVars>? response)? error;
+//   final bool errorWidget;
 
-  const GraphqlError({super.key, required this.exception, this.req});
+//   @override
+//   Widget build(BuildContext context) {
+//     return Operation(
+//       operationRequest: operationRequest,
+//       builder: (context, response, _) {
+//         if (response?.loading == true && loading != null) {
+//           return loading!;
+//         }
+
+//         if (response?.hasErrors == true && errorWidget == true) {
+//           // logger.e(response?.linkException);
+//           return error?.call(response) ??
+//               GraphqlError(
+//                 exception: (response!.graphqlErrors, response.linkException),
+//                 req: response.operationRequest,
+//               );
+//         }
+
+//         return builder(
+//           context,
+//           response,
+//           error,
+//           () async => client.requestController.add(operationRequest),
+//         );
+//       },
+//       client: client,
+//     );
+//   }
+// }
+
+// typedef OperationResponseBuilder<TData, TVars> = Widget Function(
+//     BuildContext context,
+//     OperationResponse<TData, TVars>? response,
+//     Object? error,
+//     Future<void> Function() refetch);
+
+class GraphqlError<T> extends ConsumerWidget {
+  final (List<GraphQLError>?, LinkException?) exception;
+  final VoidCallback? refetch;
+
+  const GraphqlError({
+    super.key,
+    required this.exception,
+    required this.refetch,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // if (exception.$2 is ServerException) {
-    // print(exception.$2);
-    print(exception.$1);
     if (exception.$2 is ServerException) {
       var e = exception.$2 as ServerException;
       if (e.parsedResponse?.errors?.first.message == "Invalid token") {
@@ -117,7 +169,8 @@ class GraphqlError extends ConsumerWidget {
         );
       }
     }
-    print(exception.$2);
+
+    print(exception.$1);
 
     // logger.e(exception);
     // }
@@ -125,9 +178,9 @@ class GraphqlError extends ConsumerWidget {
       child: Column(
         children: [
           SelectableText(exception.toString()),
-          if (req != null)
+          if (refetch != null)
             TextButton(
-              onPressed: () => client.requestController.add(req!),
+              onPressed: refetch,
               child: const Text("Retry"),
             ),
         ],

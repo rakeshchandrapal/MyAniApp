@@ -1,71 +1,77 @@
 import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:collection/collection.dart';
-import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
-import 'package:myaniapp/common/lists/__generated__/lists.data.gql.dart';
-import 'package:myaniapp/common/lists/__generated__/lists.req.gql.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/media_editor/media_editor.dart';
+// import 'package:myaniapp/common/media_editor/media_editor.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/list_group.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/lists.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/list_group.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+// import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
+// import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class UserAnimeScreen extends StatelessWidget {
+class UserAnimeScreen extends HookWidget {
   const UserAnimeScreen({super.key, @pathParam required this.name});
 
   final String name;
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      mediaListQuery,
+      variables:
+          Variables$Query$MediaList(userName: name, type: Enum$MediaType.ANIME)
+              .toJson(),
+      fetchPolicy: FetchPolicy.noCache,
+      parseData: Query$MediaList.fromJson,
+    ));
+
+    return GQLWidget(
+      refetch: refetch,
+      response: snapshot,
       loading: Scaffold(
         appBar: AppBar(),
         body: const Center(
           child: CircularProgressIndicator.adaptive(),
         ),
       ),
-      error: (response) => Scaffold(
+      error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (response?.graphqlErrors, response?.linkException),
-          req: response?.operationRequest,
+          exception: (snapshot?.errors, snapshot?.linkError),
+          refetch: refetch,
         ),
       ),
-      operationRequest: GMediaListReq(
-        (b) => b
-          ..requestId = "mediaList$name"
-          ..vars.userName = name
-          ..vars.type = GMediaType.ANIME
-          ..fetchPolicy = FetchPolicy.NoCache,
+      builder: () => RefreshIndicator.adaptive(
+        onRefresh: refetch,
+        notificationPredicate: (notification) => notification.depth == 1,
+        child: MediaListView(
+          groups: snapshot!.parsedData!.MediaListCollection!.lists!
+              .whereType<Fragment$ListGroup>()
+              .toList(),
+          user: snapshot.parsedData!.MediaListCollection!.user!,
+          type: Enum$MediaType.ANIME,
+          refetch: refetch,
+        ),
       ),
-      builder: (context, response, error, refetch) {
-        return RefreshIndicator.adaptive(
-          onRefresh: refetch,
-          notificationPredicate: (notification) => notification.depth == 1,
-          child: MediaListView(
-            onDelete: refetch,
-            groups: response!.data!.MediaListCollection!.lists!
-                .whereType<GListGroup>()
-                .toBuiltList(),
-            user: response.data!.MediaListCollection!.user!,
-            type: GMediaType.ANIME,
-          ),
-        );
-      },
     );
   }
 }
@@ -77,14 +83,14 @@ class MediaListView extends ConsumerStatefulWidget {
     required this.user,
     required this.type,
     this.appBarLeading,
-    this.onDelete,
+    required this.refetch,
   });
 
-  final BuiltList<GListGroup> groups;
-  final GMediaListData_MediaListCollection_user user;
-  final GMediaType type;
+  final List<Fragment$ListGroup> groups;
+  final Query$MediaList$MediaListCollection$user user;
+  final Enum$MediaType type;
   final Widget? appBarLeading;
-  final VoidCallback? onDelete;
+  final QueryRefetch refetch;
 
   @override
   ConsumerState<MediaListView> createState() => _MediaListViewState();
@@ -93,14 +99,14 @@ class MediaListView extends ConsumerStatefulWidget {
 class _MediaListViewState extends ConsumerState<MediaListView>
     with TickerProviderStateMixin {
   TabController? _tabController;
-  List<GListGroup> groups = [];
-  late GMediaListSort sort;
+  List<Fragment$ListGroup> groups = [];
+  late Enum$MediaListSort sort;
 
   @override
   void didUpdateWidget(covariant MediaListView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.groups.toString() != widget.groups.toString() ||
-        oldWidget.user.toString() != widget.user.toString()) {
+    if (!jsonMapEquals(oldWidget.groups, widget.groups) ||
+        !jsonMapEquals(oldWidget.user.toJson(), widget.user.toJson())) {
       setGroups(widget.groups);
     }
   }
@@ -111,7 +117,7 @@ class _MediaListViewState extends ConsumerState<MediaListView>
     setGroups(widget.groups);
   }
 
-  void setGroups(BuiltList<GListGroup> listGroups) {
+  void setGroups(List<Fragment$ListGroup> listGroups) {
     if (groups.isNotEmpty) groups.clear();
     for (var section
         in widget.user.mediaListOptions!.animeList!.sectionOrder!) {
@@ -130,11 +136,11 @@ class _MediaListViewState extends ConsumerState<MediaListView>
       _tabController = TabController(length: groups.length, vsync: this);
     }
     sort = switch (widget.user.mediaListOptions!.rowOrder!) {
-      'score' => GMediaListSort.SCORE_DESC,
-      'title' => GMediaListSort.MEDIA_TITLE_NATIVE_DESC,
-      'updatedAt' => GMediaListSort.UPDATED_TIME_DESC,
-      'id' => GMediaListSort.ADDED_TIME_DESC,
-      _ => GMediaListSort.UPDATED_TIME_DESC,
+      'score' => Enum$MediaListSort.SCORE_DESC,
+      'title' => Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC,
+      'updatedAt' => Enum$MediaListSort.UPDATED_TIME_DESC,
+      'id' => Enum$MediaListSort.ADDED_TIME_DESC,
+      _ => Enum$MediaListSort.UPDATED_TIME_DESC,
     };
     sortEntries();
   }
@@ -147,10 +153,9 @@ class _MediaListViewState extends ConsumerState<MediaListView>
 
   void sortEntries() {
     for (var (index, group) in groups.indexed) {
-      var list = group.entries!.toList();
       switch (sort) {
-        case GMediaListSort.SCORE_DESC:
-          list.sort(
+        case Enum$MediaListSort.SCORE_DESC:
+          group.entries!.sort(
             (a, b) {
               if (a!.score == b!.score) {
                 return a.media!.title!.userPreferred!
@@ -162,19 +167,19 @@ class _MediaListViewState extends ConsumerState<MediaListView>
             },
           );
           break;
-        case GMediaListSort.MEDIA_TITLE_NATIVE_DESC:
-          list.sort(
+        case Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC:
+          group.entries!.sort(
             (a, b) => a!.media!.title!.userPreferred!
                 .compareTo(b!.media!.title!.userPreferred!),
           );
           break;
-        case GMediaListSort.ADDED_TIME_DESC:
-          list.sort(
+        case Enum$MediaListSort.ADDED_TIME_DESC:
+          group.entries!.sort(
             (a, b) => a!.id.compareTo(b!.id),
           );
           break;
         default:
-          list.sort(
+          group.entries!.sort(
             (a, b) {
               if (a!.updatedAt == b!.updatedAt) {
                 return a.media!.title!.userPreferred!
@@ -188,11 +193,13 @@ class _MediaListViewState extends ConsumerState<MediaListView>
           break;
       }
 
-      group = (group as GMediaListData_MediaListCollection_lists).rebuild(
-          (p0) => p0.entries
-            ..clear()
-            ..addAll(list as Iterable<
-                GMediaListData_MediaListCollection_lists_entries?>));
+      // group.entries!.clear();
+      // group.entries!.addAll(list);
+      //  = (group as GMediaListData_MediaListCollection_lists).rebuild(
+      //     (p0) => p0.entries
+      //       ..clear()
+      //       ..addAll(list as Iterable<
+      //           GMediaListData_MediaListCollection_lists_entries?>));
 
       groups.setAll(index, [group]);
     }
@@ -203,7 +210,7 @@ class _MediaListViewState extends ConsumerState<MediaListView>
   @override
   Widget build(BuildContext context) {
     var listSettings = ref.watch(listSettingsProvider);
-    var setting = widget.type == GMediaType.ANIME
+    var setting = widget.type == Enum$MediaType.ANIME
         ? listSettings.animeList
         : listSettings.mangaList;
 
@@ -236,18 +243,19 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                 builder: (context, scrollController) => ListView(
                   controller: scrollController,
                   children: [
-                    GMediaListSort.MEDIA_TITLE_NATIVE_DESC,
-                    GMediaListSort.ADDED_TIME_DESC,
-                    GMediaListSort.SCORE_DESC,
-                    GMediaListSort.UPDATED_TIME_DESC,
+                    Enum$MediaListSort.MEDIA_TITLE_NATIVE_DESC,
+                    Enum$MediaListSort.ADDED_TIME_DESC,
+                    Enum$MediaListSort.SCORE_DESC,
+                    Enum$MediaListSort.UPDATED_TIME_DESC,
                   ]
                       .map(
-                        (e) => RadioListTile<GMediaListSort>.adaptive(
+                        (e) => RadioListTile<Enum$MediaListSort>.adaptive(
                           value: e,
                           groupValue: sort,
                           title: Text(e.name.capitalize()),
                           onChanged: (value) {
-                            sort = value ?? GMediaListSort.UPDATED_TIME_DESC;
+                            sort =
+                                value ?? Enum$MediaListSort.UPDATED_TIME_DESC;
                             sortEntries();
                             context.maybePop();
                           },
@@ -265,7 +273,7 @@ class _MediaListViewState extends ConsumerState<MediaListView>
           ListSettingButton(
             type: setting,
             onUpdate: (type) => ref.read(listSettingsProvider.notifier).update(
-                  widget.type == GMediaType.ANIME
+                  widget.type == Enum$MediaType.ANIME
                       ? listSettings.copyWith(animeList: type)
                       : listSettings.copyWith(mangaList: type),
                 ),
@@ -304,7 +312,7 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                         when: totalEpiChap != null,
                         fallback: Text(
                           style: context.theme.textTheme.labelMedium,
-                          "${entry.progress} ${entry.media!.type == GMediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
+                          "${entry.progress} ${entry.media!.type == Enum$MediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
                         ),
                         child: () => Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -334,8 +342,8 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                     context,
                     entry.media!,
                     widget.user.id,
-                    onSave: () {},
-                    onDelete: () => widget.onDelete?.call(),
+                    onSave: () => widget.refetch(FetchPolicy.cacheOnly),
+                    onDelete: () => widget.refetch(),
                   ),
                   blur: entry.media!.isAdult!,
                   chips: [
@@ -355,7 +363,7 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                             Text(
                               scoreToText(
                                   widget.user.mediaListOptions?.scoreFormat ??
-                                      GScoreFormat.POINT_10,
+                                      Enum$ScoreFormat.POINT_10,
                                   entry.score ?? 0),
                             ),
                           ],

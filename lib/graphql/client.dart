@@ -5,7 +5,6 @@ import 'package:gql_http_link/gql_http_link.dart';
 // import 'package:hive/hive.dart';
 // *** If using flutter ***
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<Client> initClient() async {
@@ -17,7 +16,7 @@ Future<Client> initClient() async {
 
   final store = HiveStore(box);
 
-  final cache = Cache(store: store, possibleTypes: possibleTypesMap);
+  final cache = Cache(store: store);
 
   final HttpLink httpLink = HttpLink(
     'https://graphql.anilist.co',

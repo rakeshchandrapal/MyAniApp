@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/fragments/__generated__/page_info.data.gql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/fragments/page_info.graphql.dart';
 import 'package:myaniapp/main.dart';
 
-class GraphqlPagination extends StatelessWidget {
+class GraphqlPagination extends StatefulWidget {
   const GraphqlPagination({
     super.key,
     required this.pageInfo,
@@ -13,33 +15,43 @@ class GraphqlPagination extends StatelessWidget {
     this.isLoading,
   });
 
-  final GPageInfo pageInfo;
+  final Fragment$PageInfo pageInfo;
   final int? depth;
-  final OperationRequest Function(int nextPage) req;
+  final FutureOr Function(int nextPage) req;
   final Widget child;
   final bool? isLoading;
 
   @override
+  State<GraphqlPagination> createState() => _GraphqlPaginationState();
+}
+
+class _GraphqlPaginationState extends State<GraphqlPagination> {
+  late bool loading = widget.isLoading ?? false;
+
+  @override
   Widget build(BuildContext context) {
-    bool loading = isLoading ?? false;
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
-        if ((depth != null && notification.depth != depth) ||
+        if ((widget.depth != null && notification.depth != widget.depth) ||
             notification.metrics.axisDirection != AxisDirection.down) {
           return false;
         }
 
         if (notification.metrics.pixels >
                 notification.metrics.maxScrollExtent * .95 &&
-            pageInfo.hasNextPage == true &&
+            widget.pageInfo.hasNextPage == true &&
             loading == false) {
-          loading = true;
-          client.requestController.add(req((pageInfo.currentPage ?? 1) + 1));
+          Future(() async {
+            setState(() => loading = true);
+            await widget.req((widget.pageInfo.currentPage ?? 1) + 1);
+            setState(() => loading = false);
+          });
+          // client.requestController.add(req((pageInfo.currentPage ?? 1) + 1));
           // print(req((pageInfo.currentPage ?? 1) + 1));
         }
         return false;
       },
-      child: child,
+      child: widget.child,
     );
   }
 }

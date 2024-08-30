@@ -27,7 +27,7 @@ void main() async {
 
   // GoRouter.optionURLReflectsImperativeAPIs = true;
 
-  client = await initClient();
+  // client = await initClient();
 
   var instance = await SharedPreferences.getInstance();
   final appInfo = await PackageInfo.fromPlatform();
@@ -38,19 +38,19 @@ void main() async {
     }
   }
 
-  if (!kIsWeb && Platform.isAndroid) {
-    Workmanager().initialize(callbackDispatcher);
-    Workmanager().registerPeriodicTask(
-      'background-notifs',
-      'simpleNotifsFetch',
-      constraints: Constraints(
-        networkType: NetworkType.connected,
-      ),
-      existingWorkPolicy: ExistingWorkPolicy.append,
-    );
+  // if (!kIsWeb && Platform.isAndroid) {
+  //   Workmanager().initialize(callbackDispatcher);
+  //   Workmanager().registerPeriodicTask(
+  //     'background-notifs',
+  //     'simpleNotifsFetch',
+  //     constraints: Constraints(
+  //       networkType: NetworkType.connected,
+  //     ),
+  //     existingWorkPolicy: ExistingWorkPolicy.append,
+  //   );
 
-    PushNotifications().requestPermission();
-  }
+  //   PushNotifications().requestPermission();
+  // }
 
   runApp(
     ProviderScope(

@@ -31,6 +31,6 @@ MyAniApp (I cant think of a name) is an Android, Windows, Linux, Web (expect mor
 
 Some commands to run.
 
-When added/editing `.graphql` files run `dart run build_runner watch --delete-conflicting-outputs`
+When added/editing `.graphql` files && to add new routes run `dart run build_runner watch --delete-conflicting-outputs`
 
-Kinda of file based routing but I don't feel like working too much on it. Run `dart run scripts/routes.dart home=/home/overview` to generate new routes
+Also run dart run ./scripts/graphql.dart for `.graphql` files

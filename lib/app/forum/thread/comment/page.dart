@@ -1,49 +1,63 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/forum/thread/comment/__generated__/comment.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:myaniapp/app/forum/thread/page.dart';
+import 'package:myaniapp/app/home/home.dart';
+import 'package:myaniapp/graphql/__gen/app/forum/thread/comment/comment.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class ThreadCommentScreen extends StatelessWidget {
+class ThreadCommentScreen extends HookWidget {
   const ThreadCommentScreen(
-      {super.key, required this.commentId, required this.id});
+      {super.key,
+      @pathParam required this.commentId,
+      @pathParam required this.id});
 
-  final String id;
-  final String commentId;
+  final int id;
+  final int commentId;
 
   @override
   Widget build(BuildContext context) {
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      commentQuery,
+      variables: Variables$Query$Comment(id: commentId).toJson(),
+      parseData: Query$Comment.fromJson,
+    ));
+
     return Scaffold(
       appBar: AppBar(),
-      body: GQLRequest(
-        operationRequest: GCommentReq((b) => b
-          ..requestId = "threadComment$commentId"
-          ..vars.id = int.parse(commentId)),
-        builder: (context, response, error, refetch) => ListView(
+      body: GQLWidget(
+        refetch: refetch,
+        response: snapshot,
+        builder: () => ListView(
           children: [
             ListTile(
               title:
                   const Text("Viewing a single comment, click to view thread"),
               onTap: () => context.pushRoute(ThreadRoute(
-                  id: response!.data!.ThreadComment!.first!.threadId!)),
+                  id: snapshot!.parsedData!.ThreadComment!.first!.threadId!)),
             ),
             ThreadComment(
-              comment: response!.data!.ThreadComment!.first!.comment!,
-              avatar: response.data!.ThreadComment!.first!.user!.avatar!.large!,
-              username: response.data!.ThreadComment!.first!.user!.name,
-              createdAt: response.data!.ThreadComment!.first!.createdAt,
-              isLiked: response.data!.ThreadComment!.first!.isLiked ?? false,
-              id: response.data!.ThreadComment!.first!.id,
-              likeCount: response.data!.ThreadComment!.first!.likeCount,
+              comment: snapshot!.parsedData!.ThreadComment!.first!.comment!,
+              avatar: snapshot
+                  .parsedData!.ThreadComment!.first!.user!.avatar!.large!,
+              username: snapshot.parsedData!.ThreadComment!.first!.user!.name,
+              createdAt: snapshot.parsedData!.ThreadComment!.first!.createdAt,
+              isLiked:
+                  snapshot.parsedData!.ThreadComment!.first!.isLiked ?? false,
+              id: snapshot.parsedData!.ThreadComment!.first!.id,
+              likeCount: snapshot.parsedData!.ThreadComment!.first!.likeCount,
               refetch: refetch,
-              parentId: response.data!.ThreadComment!.first!.id,
-              replies:
-                  response.data!.ThreadComment!.first!.childComments?.asList,
+              parentId: snapshot.parsedData!.ThreadComment!.first!.id,
+              replies: snapshot
+                  .parsedData!.ThreadComment!.first!.childComments?.asList,
               onAvatarTap: () => context.pushRoute(
                 UserRoute(
-                    name: response.data!.ThreadComment!.first!.user!.name),
+                    name:
+                        snapshot.parsedData!.ThreadComment!.first!.user!.name),
               ),
             )
           ],

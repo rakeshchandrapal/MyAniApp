@@ -1,32 +1,39 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/user/__generated__/social.data.gql.dart';
-import 'package:myaniapp/app/user/__generated__/social.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/common/pagination.dart';
+import 'package:myaniapp/graphql/__gen/app/user/social.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class UserSocialScreen extends StatelessWidget {
+class UserSocialScreen extends HookWidget {
   const UserSocialScreen({super.key, required this.id});
 
   final int id;
 
   @override
   Widget build(BuildContext context) {
-    return GQLRequest(
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      userSocialsQuery,
+      variables: Variables$Query$UserSocials(id: id).toJson(),
+      parseData: Query$UserSocials.fromJson,
+    ));
+
+    return GQLWidget(
       key: Key(id.toString()),
-      operationRequest: GUserSocialsReq(
-        (b) => b
-          ..requestId = "userSocials$id"
-          ..vars.id = id,
-      ),
-      builder: (context, response, error, refetch) {
+      refetch: refetch,
+      response: snapshot,
+      builder: () {
         // this is so state isn't managed by UserSocialsPage which would make a new request switching between following and follower
         return SocialsView(
-          data: response!.data!,
-          req: response.operationRequest as GUserSocialsReq,
+          data: snapshot!.parsedData!,
+          request: snapshot.request!,
+          fetchMore: fetchMore,
         );
       },
     );
@@ -34,10 +41,15 @@ class UserSocialScreen extends StatelessWidget {
 }
 
 class SocialsView extends StatefulWidget {
-  const SocialsView({super.key, required this.data, required this.req});
+  const SocialsView(
+      {super.key,
+      required this.data,
+      required this.request,
+      required this.fetchMore});
 
-  final GUserSocialsData data;
-  final GUserSocialsReq req;
+  final Query$UserSocials data;
+  final GQLRequest request;
+  final QueryHookFetchMore fetchMore;
 
   @override
   State<SocialsView> createState() => _SocialsViewState();
@@ -53,22 +65,34 @@ class _SocialsViewState extends State<SocialsView> {
           ? widget.data.following!.pageInfo!
           : widget.data.followers!.pageInfo!,
       req: (nextPage) {
-        return widget.req.rebuild((b) {
-          if (pageIdx == 0) {
-            b.vars.followingPage = nextPage;
-          } else {
-            b.vars.followersPage = nextPage;
-          }
+        var vars =
+            Variables$Query$UserSocials.fromJson(widget.request.variables);
 
-          b.updateResult = (prev, result) => result!.rebuild((p0) => p0
-            ..following.following.insertAll(0, prev?.following?.following ?? [])
-            ..followers
-                .followers
-                .insertAll(0, prev?.followers?.followers ?? []));
-
-          return b;
-        });
+        if (pageIdx == 0)
+          return widget.fetchMore(
+              variables: vars.copyWith(followingPage: nextPage).toJson(),
+              mergeResults: defaultMergeResults("following.following"));
+        return widget.fetchMore(
+            variables: vars.copyWith(followersPage: nextPage).toJson(),
+            mergeResults: defaultMergeResults("followers.followers"));
       },
+      // req: (nextPage) {
+      //   return widget.request.rebuild((b) {
+      //     if (pageIdx == 0) {
+      //       b.vars.followingPage = nextPage;
+      //     } else {
+      //       b.vars.followersPage = nextPage;
+      //     }
+
+      //     b.updateResult = (prev, result) => result!.rebuild((p0) => p0
+      //       ..following.following.insertAll(0, prev?.following?.following ?? [])
+      //       ..followers
+      //           .followers
+      //           .insertAll(0, prev?.followers?.followers ?? []));
+
+      //     return b;
+      //   });
+      // },
       child: CustomScrollView(
         slivers: [
           SliverPadding(

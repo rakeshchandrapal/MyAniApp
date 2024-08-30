@@ -1,18 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:myaniapp/app/recommendations/__generated__/recommendations.req.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__generated__/schema.schema.gql.dart';
+import 'package:myaniapp/graphql/__gen/app/recommendations/recommendations.graphql.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:mygraphql/graphql.dart';
 
 @RoutePage()
-class RecommendationsScreen extends StatefulWidget {
+class RecommendationsScreen extends StatefulHookWidget {
   const RecommendationsScreen({super.key});
 
   @override
@@ -21,10 +25,18 @@ class RecommendationsScreen extends StatefulWidget {
 
 class _RecommendationsStatePage extends State<RecommendationsScreen> {
   bool onMyList = false;
-  GRecommendationSort sort = GRecommendationSort.ID_DESC;
+  Enum$RecommendationSort sort = Enum$RecommendationSort.ID_DESC;
 
   @override
   Widget build(BuildContext context) {
+    var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
+      recommendationsQuery,
+      variables: Variables$Query$Recommendations(onList: onMyList, sort: [sort])
+          .toJson(),
+      parseData: Query$Recommendations.fromJson,
+      mergeResults: defaultMergeResults("Page.recommendations"),
+    ));
+
     return Scaffold(
       appBar: AppBar(
         bottom: PreferredSize(
@@ -55,18 +67,18 @@ class _RecommendationsStatePage extends State<RecommendationsScreen> {
                   const SizedBox(
                     width: 10,
                   ),
-                  SegmentedButton<GRecommendationSort>(
+                  SegmentedButton<Enum$RecommendationSort>(
                     segments: const [
                       ButtonSegment(
-                        value: GRecommendationSort.ID_DESC,
+                        value: Enum$RecommendationSort.ID_DESC,
                         label: Text('Recent'),
                       ),
                       ButtonSegment(
-                        value: GRecommendationSort.RATING_DESC,
+                        value: Enum$RecommendationSort.RATING_DESC,
                         label: Text('Highest Rated'),
                       ),
                       ButtonSegment(
-                        value: GRecommendationSort.RATING,
+                        value: Enum$RecommendationSort.RATING,
                         label: Text('Lowest Rated'),
                       )
                     ],
@@ -79,33 +91,17 @@ class _RecommendationsStatePage extends State<RecommendationsScreen> {
           ),
         ),
       ),
-      body: GQLRequest(
-        key: Key("$sort$onMyList"),
-        operationRequest: GRecommendationsReq(
-          (b) => b
-            ..requestId = "recommendationPage"
-            ..vars.onList = onMyList
-            ..vars.sort.add(sort),
-        ),
-        builder: (context, response, error, refetch) => GraphqlPagination(
-          pageInfo: response!.data!.Page!.pageInfo!,
-          req: (nextPage) {
-            return (response.operationRequest as GRecommendationsReq).rebuild(
-              (p0) => p0
-                ..vars.page = nextPage
-                ..updateResult = (previous, result) => result?.rebuild(
-                      (p0) => p0
-                        ..Page.recommendations.insertAll(
-                              0,
-                              previous?.Page?.recommendations?.whereNot((p0) =>
-                                      result.Page?.recommendations
-                                          ?.contains(p0) ??
-                                      false) ??
-                                  [],
-                            ),
-                    ),
-            );
-          },
+      body: GQLWidget(
+        refetch: refetch,
+        response: snapshot,
+        builder: () => GraphqlPagination(
+          pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+          req: (nextPage) => fetchMore(
+            variables: Variables$Query$Recommendations.fromJson(
+                    snapshot.request!.variables)
+                .copyWith(page: nextPage)
+                .toJson(),
+          ),
           child: RefreshIndicator.adaptive(
             onRefresh: refetch,
             child: GridView.builder(
@@ -114,7 +110,7 @@ class _RecommendationsStatePage extends State<RecommendationsScreen> {
                 mainAxisExtent: 170,
               ),
               itemBuilder: (context, index) {
-                var rec = response.data!.Page!.recommendations![index]!;
+                var rec = snapshot.parsedData!.Page!.recommendations![index]!;
                 if (rec.media == null || rec.mediaRecommendation == null) {
                   return const SizedBox();
                 }
@@ -202,7 +198,7 @@ class _RecommendationsStatePage extends State<RecommendationsScreen> {
                   ),
                 );
               },
-              itemCount: response.data!.Page!.recommendations!.length,
+              itemCount: snapshot.parsedData!.Page!.recommendations!.length,
             ),
           ),
         ),
