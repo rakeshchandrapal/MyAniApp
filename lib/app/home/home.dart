@@ -32,7 +32,6 @@ var c = GraphqlClient(
   link: AuthLink(
     getToken: () async {
       var prefs = await SharedPreferences.getInstance();
-      print(prefs.getString("token"));
       return prefs.getString("token");
     },
     authHeader: "Authorization",

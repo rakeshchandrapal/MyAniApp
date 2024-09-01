@@ -306,34 +306,85 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                   title: entry.media!.title!.userPreferred,
                   underTitle: Show(
                     when: setting == ListType.list,
+                    fallback: Show(
+                      when: setting == ListType.simple,
+                      child: () => Row(
+                        children: [
+                          if ((entry.score ?? 0) != 0)
+                            Tooltip(
+                              message: scoreToText(
+                                widget.user.mediaListOptions?.scoreFormat ??
+                                    Enum$ScoreFormat.POINT_10,
+                                entry.score ?? 0,
+                              ),
+                              child: Icon(Icons.star, size: 20),
+                            ),
+                          if (entry.private == true)
+                            Tooltip(
+                              message: "Private",
+                              child: Icon(Icons.lock, size: 20),
+                            ),
+                          if (entry.notes != null)
+                            Tooltip(
+                              message: entry.notes,
+                              child: Icon(Icons.note_alt, size: 20),
+                            ),
+                        ],
+                      ),
+                    ),
                     child: () => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Show(
-                        when: totalEpiChap != null,
-                        fallback: Text(
-                          style: context.theme.textTheme.labelMedium,
-                          "${entry.progress} ${entry.media!.type == Enum$MediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
-                        ),
-                        child: () => Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            LinearProgressIndicator(
-                              value: (entry.progress ?? 0) / totalEpiChap!,
-                              borderRadius: imageRadius,
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              "${entry.progress} / ${entry.media!.chapters ?? entry.media!.episodes}",
+                      child: Column(
+                        children: [
+                          Show(
+                            when: totalEpiChap != null,
+                            fallback: Text(
                               style: context.theme.textTheme.labelMedium,
-                            )
-                          ],
-                        ),
+                              "${entry.progress} ${entry.media!.type == Enum$MediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
+                            ),
+                            child: () => Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                LinearProgressIndicator(
+                                  value: (entry.progress ?? 0) / totalEpiChap!,
+                                  borderRadius: imageRadius,
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  "${entry.progress} / ${entry.media!.chapters ?? entry.media!.episodes}",
+                                  style: context.theme.textTheme.labelMedium,
+                                )
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              if ((entry.score ?? 0) != 0)
+                                Tooltip(
+                                  message: scoreToText(
+                                    widget.user.mediaListOptions?.scoreFormat ??
+                                        Enum$ScoreFormat.POINT_10,
+                                    entry.score ?? 0,
+                                  ),
+                                  child: Icon(Icons.star, size: 20),
+                                ),
+                              if (entry.private == true)
+                                Tooltip(
+                                  message: "Private",
+                                  child: Icon(Icons.lock, size: 20),
+                                ),
+                              if (entry.notes != null)
+                                Tooltip(
+                                  message: entry.notes,
+                                  child: Icon(Icons.note_alt, size: 20),
+                                ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   onLongPress: () => MediaSheet.show(context, entry.media!),
-                  // onTap: () => context.push("/media/${entry.media!.id}/info",
-                  //     extra: {"media": entry.media}),
                   onTap: () => context.pushRoute(MediaRoute(
                     id: entry.mediaId,
                     placeholder: entry.media,
@@ -362,11 +413,37 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                             ),
                             Text(
                               scoreToText(
-                                  widget.user.mediaListOptions?.scoreFormat ??
-                                      Enum$ScoreFormat.POINT_10,
-                                  entry.score ?? 0),
+                                widget.user.mediaListOptions?.scoreFormat ??
+                                    Enum$ScoreFormat.POINT_10,
+                                entry.score ?? 0,
+                              ),
+                              style: context.theme.textTheme.labelMedium,
                             ),
                           ],
+                        ),
+                      ),
+                    if (entry.notes != null)
+                      GridChip(
+                        top: entry.score != 0 ? 30 : 5,
+                        left: entry.private == true ? 40 : 5,
+                        child: Tooltip(
+                          message: entry.notes,
+                          child: Icon(
+                            Icons.note_alt,
+                            size: 15,
+                          ),
+                        ),
+                      ),
+                    if (entry.private == true)
+                      GridChip(
+                        top: entry.score != 0 ? 30 : 5,
+                        left: 5,
+                        child: const Tooltip(
+                          message: "Private",
+                          child: Icon(
+                            Icons.lock,
+                            size: 15,
+                          ),
                         ),
                       ),
                   ],

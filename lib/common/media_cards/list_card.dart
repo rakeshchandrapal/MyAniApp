@@ -28,11 +28,12 @@ class ListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card.outlined(
-      child: InkWellImage(
-        borderRadius: imageRadius,
+      child: GestureDetector(
+        // borderRadius: imageRadius,
+        behavior: HitTestBehavior.translucent,
         onDoubleTap: onDoubleTap,
-        onTap: onTap,
         onLongPress: onLongPress,
+        onTap: onTap,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

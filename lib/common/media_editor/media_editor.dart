@@ -138,10 +138,6 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
   @override
   void initState() {
     super.initState();
-    print(widget.entry.customLists
-        ?.toList()
-        .where((e) => e['enabled'] == true)
-        .map((e) => e['name']));
     options = Variables$Mutation$SaveMediaListEntry(
       completedAt: widget.entry.completedAt != null
           ? Input$FuzzyDateInput(
@@ -163,8 +159,8 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
           .cast<String>()
           .toList(),
       hiddenFromStatusLists: widget.entry.hiddenFromStatusLists,
-      id: widget.entry.id,
-      mediaId: widget.entry.mediaId,
+      // id: widget.entry.id,
+      // mediaId: widget.entry.mediaId,
       notes: widget.entry.notes,
       priority: widget.entry.priority,
       private: widget.entry.private,
@@ -197,10 +193,10 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 context,
                 "media from your list",
                 () async {
-                  if (options.id != -1) {
+                  if (widget.entry.id != -1) {
                     await c
                         .query(GQLRequest(deleteMediaListEntryQuery,
-                            variables: {'id': options.id}))
+                            variables: {'id': widget.entry.id}))
                         .last;
                     widget.onDelete!();
                   }
@@ -216,7 +212,11 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
             IconButton(
               onPressed: () async {
                 if (!jsonMapEquals(options.toJson(), og.toJson())) {
-                  if (options.id == -1) options = options.copyWith(id: null);
+                  if (widget.entry.id == -1)
+                    options = options.copyWith(mediaId: widget.entry.mediaId);
+                  else
+                    options = options.copyWith(id: widget.entry.id);
+                  print(options.toJson());
                   var i = await c
                       .query(GQLRequest(saveMediaListEntryQuery,
                           variables: options.toJson()))

@@ -39,6 +39,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
   Widget build(BuildContext context) {
     var (snapshot: data, fetchMore: _, :refetch) = c.useQuery(GQLRequest(
       exploreQuery,
+      variables: Variables$Query$Explore(
+        season: season.$1,
+        seasonYear: season.$2,
+        nextSeason: nextSeason.$1,
+        nextYear: nextSeason.$2,
+      ).toJson(),
       parseData: Query$Explore.fromJson,
     ));
 

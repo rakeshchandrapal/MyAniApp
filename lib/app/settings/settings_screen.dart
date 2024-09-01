@@ -738,6 +738,7 @@ class PopupSettingsTile<T> extends StatelessWidget {
       title: Text(title),
       subtitle: s,
       icon: icon,
+      enabled: enabled,
       onTap: () => showDialog(
         context: context,
         builder: (context) => AlertDialog.adaptive(

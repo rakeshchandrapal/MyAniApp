@@ -1,7 +1,7 @@
 name: myaniapp
 description: "An unofficial Anilist app."
 publish_to: "none"
-version: 0.5.0
+version: 0.5.1
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
