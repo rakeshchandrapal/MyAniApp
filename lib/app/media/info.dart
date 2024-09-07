@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
@@ -7,6 +8,7 @@ import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/media/media.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -25,8 +27,8 @@ class MediaInfoScreen extends StatelessWidget {
       padding: const EdgeInsets.all(0),
       children: [
         if (media.genres?.isNotEmpty == true)
-          SizedBox(
-            height: 50,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -135,33 +137,8 @@ class MediaInfoScreen extends StatelessWidget {
               ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Titles",
-                style: context.theme.textTheme.titleMedium,
-              ),
-              if (media.title!.native != null)
-                _MediaTitle(
-                  lang: "Native",
-                  title: media.title!.native!,
-                ),
-              if (media.title!.romaji != null)
-                _MediaTitle(
-                  lang: "Romaji",
-                  title: media.title!.romaji!,
-                ),
-              if (media.title!.english != null)
-                _MediaTitle(
-                  lang: "English",
-                  title: media.title!.english!,
-                )
-            ],
-          ),
-        ),
+        if (media.studios?.edges?.isNotEmpty == true)
+          _Studios(studios: media.studios!),
         if (media.tags?.isNotEmpty == true) _Tags(tags: media.tags!),
         if (media.externalLinks?.isNotEmpty == true || media.trailer != null)
           _Links(
@@ -169,6 +146,88 @@ class MediaInfoScreen extends StatelessWidget {
             trailer: media.trailer,
           )
       ],
+    );
+  }
+}
+
+class _Studios extends StatelessWidget {
+  const _Studios({super.key, required this.studios});
+
+  final Query$Media$Media$studios studios;
+
+  @override
+  Widget build(BuildContext context) {
+    var mains = studios.edges!.where(
+      (element) => element?.isMain == true,
+    );
+    var producers = studios.edges!
+        .whereNot(
+          (element) => element?.isMain == true,
+        )
+        .whereNot(
+          (e) => mains.any(
+            (element) => element!.node!.id == e!.node!.id,
+          ),
+        );
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (mains.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+              child: Text(
+                "Studios",
+                style: context.theme.textTheme.titleMedium,
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (var studio in mains)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: ActionChip(
+                        label: Text(studio!.node!.name),
+                        onPressed: () =>
+                            context.pushRoute(StudioRoute(id: studio.node!.id)),
+                      ),
+                    ),
+                ],
+              ),
+            )
+          ],
+          if (producers.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Producers",
+                style: context.theme.textTheme.titleMedium,
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (var studio in producers)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: ActionChip(
+                        label: Text(studio!.node!.name),
+                        onPressed: () =>
+                            context.pushRoute(StudioRoute(id: studio.node!.id)),
+                      ),
+                    ),
+                ],
+              ),
+            )
+          ]
+        ],
+      ),
     );
   }
 }
@@ -279,29 +338,6 @@ class _TagsState extends State<_Tags> {
           )
         ],
       ),
-    );
-  }
-}
-
-class _MediaTitle extends StatelessWidget {
-  const _MediaTitle({
-    required this.lang,
-    required this.title,
-  });
-
-  final String lang;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          "$lang: ",
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Expanded(child: SelectableText(title)),
-      ],
     );
   }
 }

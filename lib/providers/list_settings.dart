@@ -14,6 +14,7 @@ class _ListSettings {
   final ListType staffVA;
   final ListType staffProduction;
   final ListType search;
+  final ListType studio;
 
   _ListSettings({
     required this.inProgress,
@@ -25,6 +26,7 @@ class _ListSettings {
     required this.staffVA,
     required this.staffProduction,
     required this.search,
+    required this.studio,
   });
 
   Map<String, String> toJson() {
@@ -38,6 +40,7 @@ class _ListSettings {
       "staffVA": staffVA.name,
       "staffProduction": staffProduction.name,
       "search": search.name,
+      "studio": studio.name,
     };
   }
 
@@ -51,6 +54,7 @@ class _ListSettings {
     ListType? staffVA,
     ListType? staffProduction,
     ListType? search,
+    ListType? studio,
   }) {
     return _ListSettings(
       inProgress: inProgress ?? this.inProgress,
@@ -62,6 +66,7 @@ class _ListSettings {
       staffVA: staffVA ?? this.staffVA,
       staffProduction: staffProduction ?? this.staffProduction,
       search: search ?? this.search,
+      studio: studio ?? this.studio,
     );
   }
 }
@@ -79,6 +84,7 @@ class _SettingsNotifier extends Notifier<_ListSettings> {
       staffVA: _getEnum("list.staffVA"),
       staffProduction: _getEnum("list.staffProduction"),
       search: _getEnum("list.search"),
+      studio: _getEnum("list.studio"),
     );
   }
 

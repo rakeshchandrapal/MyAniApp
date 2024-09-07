@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__gen/graphql/fragments/review.graphql.dart';
+import 'package:myaniapp/router.gr.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({super.key, required this.review});
@@ -14,10 +16,10 @@ class ReviewCard extends StatelessWidget {
     return Card.outlined(
       child: InkWellImage(
         borderRadius: imageRadius,
-        // onTap: () => context.pushRoute(ReviewRoute(
-        //   id: review.id,
-        //   placeholder: review,
-        // )),
+        onTap: () => context.pushRoute(ReviewRoute(
+          id: review.id,
+          placeholder: review,
+        )),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

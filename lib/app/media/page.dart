@@ -91,44 +91,58 @@ class _MediaScreenState extends State<MediaScreen> {
             for (var tab in tabs) tab.$1,
           ],
           builder: (context, child, tabController) {
-            return HidingFloatingButton(
-              notificationPredicate: (notification) => notification.depth == 2,
-              button: Show(
-                when: snapshot?.parsedData?.Media != null,
-                child: () => FloatingButtons(
-                  media: snapshot!.parsedData!.Media!,
-                  onUpdate: refetch,
+            return RefreshIndicator.adaptive(
+              onRefresh: refetch,
+              notificationPredicate: (notification) {
+                if (notification.metrics.axisDirection == AxisDirection.down &&
+                    notification.metrics.extentBefore == 0.0 &&
+                    notification.depth == 2 &&
+                    notification.metrics.pixels == 0) {
+                  return true;
+                }
+                return false;
+              },
+              child: HidingFloatingButton(
+                notificationPredicate: (notification) =>
+                    notification.depth == 2,
+                button: Show(
+                  when: snapshot?.parsedData?.Media != null,
+                  child: () => FloatingButtons(
+                    media: snapshot!.parsedData!.Media!,
+                    onUpdate: refetch,
+                  ),
                 ),
-              ),
-              builder: (button) => Scaffold(
-                floatingActionButton: button,
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerFloat,
-                body: NestedScrollView(
-                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                    MediaBar(
-                      tab: tabs[tabController.index].$2,
-                      data: snapshot!.parsedData!.Media!,
-                    ),
-                    if (snapshot?.parsedData != null && tabs.isNotEmpty)
-                      SliverPersistentHeader(
-                        delegate: SliverTabBarViewDelegate(
-                          child: TabBar(
-                            isScrollable: true,
-                            controller: tabController,
-                            tabs: tabs
-                                .map((e) => Tab(
-                                      text: e.$2,
-                                    ))
-                                .toList(),
+                builder: (button) => Scaffold(
+                  floatingActionButton: button,
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerFloat,
+                  body: NestedScrollView(
+                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                      MediaBar(
+                        tab: tabs[tabController.index].$2,
+                        data: snapshot!.parsedData!.Media!,
+                      ),
+                      if (snapshot?.parsedData != null && tabs.isNotEmpty)
+                        SliverPersistentHeader(
+                          delegate: SliverTabBarViewDelegate(
+                            child: TabBar(
+                              isScrollable: true,
+                              controller: tabController,
+                              tabs: tabs
+                                  .map((e) => Tab(
+                                        text: e.$2,
+                                      ))
+                                  .toList(),
+                            ),
                           ),
                         ),
-                      ),
-                  ],
-                  body: ScrollConfiguration(
+                    ],
+                    body: ScrollConfiguration(
                       behavior: ScrollConfiguration.of(context)
                           .copyWith(scrollbars: false),
-                      child: child),
+                      child: child,
+                    ),
+                  ),
                 ),
               ),
             );
@@ -178,7 +192,6 @@ class FloatingButtons extends ConsumerWidget {
           Expanded(
             child: FloatingActionButton.extended(
               heroTag: null,
-              // onPressed: () {},
               onPressed: () => MediaEditorDialog.show(
                 context, media, user.value!.parsedData!.Viewer!.id,
                 onSave: onUpdate,
@@ -363,11 +376,61 @@ class MediaBar extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          data!.title!.userPreferred!,
-                          style: context.theme.textTheme.titleMedium,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                        if (data.isAdult == true)
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.red[700],
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Text(
+                              "18+",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        GestureDetector(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 8),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Titles",
+                                      style:
+                                          context.theme.textTheme.titleMedium,
+                                    ),
+                                    if (data.title!.native != null)
+                                      _MediaTitle(
+                                        lang: "Native",
+                                        title: data.title!.native!,
+                                      ),
+                                    if (data.title!.romaji != null)
+                                      _MediaTitle(
+                                        lang: "Romaji",
+                                        title: data.title!.romaji!,
+                                      ),
+                                    if (data.title!.english != null)
+                                      _MediaTitle(
+                                        lang: "English",
+                                        title: data.title!.english!,
+                                      )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            data!.title!.userPreferred!,
+                            style: context.theme.textTheme.titleMedium
+                                ?.copyWith(color: Colors.blue[400]),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                          ),
                         ),
                         Text(
                           data!.format?.name.capitalize() ??
@@ -511,6 +574,29 @@ class MediaBarPlaceholder extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MediaTitle extends StatelessWidget {
+  const _MediaTitle({
+    required this.lang,
+    required this.title,
+  });
+
+  final String lang;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          "$lang: ",
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Expanded(child: SelectableText(title)),
+      ],
     );
   }
 }

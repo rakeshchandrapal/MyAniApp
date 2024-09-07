@@ -19,15 +19,17 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(userProvider);
 
-    if (user.isLoading) {
+    if (user.isLoading || user.value?.loading == true) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator.adaptive(),
         ),
       );
     }
+    // print(user.value?.data != null);
 
     return AutoTabsScaffold(
+      // key: Key(user.value?.parsedData?.Viewer?.toString() ?? "nada"),
       routes: [
         if (user.value?.data != null) ...[
           const HomeLoggedInOverviewRoute(),

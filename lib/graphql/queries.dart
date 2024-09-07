@@ -595,10 +595,13 @@ var mediaQuery = removeFragmentDups(r"""query Media($id: Int) {
     coverImage {
       extraLarge
     }
-    studios(isMain: true) {
-      nodes {
-        id
-        name
+    studios {
+      edges {
+        isMain
+        node {
+          id
+          name
+        }
       }
     }
     startDate {
@@ -671,8 +674,20 @@ var mediaQuery = removeFragmentDups(r"""query Media($id: Int) {
 
 
 """"$mediaFragment""""""");
-var toggleFavoriteQuery = removeFragmentDups(r"""mutation ToggleFavorite($animeId: Int, $mangaId: Int, $characterId: Int, $staffId: Int, $studioId: Int) {
-  ToggleFavourite(animeId: $animeId, mangaId: $mangaId, characterId: $characterId, staffId: $staffId, studioId: $studioId) {
+var toggleFavoriteQuery = removeFragmentDups(r"""mutation ToggleFavorite(
+  $animeId: Int
+  $mangaId: Int
+  $characterId: Int
+  $staffId: Int
+  $studioId: Int
+) {
+  ToggleFavourite(
+    animeId: $animeId
+    mangaId: $mangaId
+    characterId: $characterId
+    staffId: $staffId
+    studioId: $studioId
+  ) {
     anime {
       pageInfo {
         total

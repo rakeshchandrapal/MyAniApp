@@ -440,33 +440,50 @@ const documentNodeQueryMedia = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'studios'),
             alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'isMain'),
-                value: BooleanValueNode(value: true),
-              )
-            ],
+            arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'nodes'),
+                name: NameNode(value: 'edges'),
                 alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
                   FieldNode(
-                    name: NameNode(value: 'id'),
+                    name: NameNode(value: 'isMain'),
                     alias: null,
                     arguments: [],
                     directives: [],
                     selectionSet: null,
                   ),
                   FieldNode(
-                    name: NameNode(value: 'name'),
+                    name: NameNode(value: 'node'),
                     alias: null,
                     arguments: [],
                     directives: [],
-                    selectionSet: null,
+                    selectionSet: SelectionSetNode(selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
                   ),
                   FieldNode(
                     name: NameNode(value: '__typename'),
@@ -2265,32 +2282,32 @@ class _CopyWithStubImpl$Query$Media$Media$coverImage<TRes>
 
 class Query$Media$Media$studios {
   Query$Media$Media$studios({
-    this.nodes,
+    this.edges,
     this.$__typename = 'StudioConnection',
   });
 
   factory Query$Media$Media$studios.fromJson(Map<String, dynamic> json) {
-    final l$nodes = json['nodes'];
+    final l$edges = json['edges'];
     final l$$__typename = json['__typename'];
     return Query$Media$Media$studios(
-      nodes: (l$nodes as List<dynamic>?)
+      edges: (l$edges as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Media$Media$studios$nodes.fromJson(
+              : Query$Media$Media$studios$edges.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$Media$Media$studios$nodes?>? nodes;
+  final List<Query$Media$Media$studios$edges?>? edges;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$nodes = nodes;
-    _resultData['nodes'] = l$nodes?.map((e) => e?.toJson()).toList();
+    final l$edges = edges;
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2298,10 +2315,10 @@ class Query$Media$Media$studios {
 
   @override
   int get hashCode {
-    final l$nodes = nodes;
+    final l$edges = edges;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$nodes == null ? null : Object.hashAll(l$nodes.map((v) => v)),
+      l$edges == null ? null : Object.hashAll(l$edges.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -2315,20 +2332,20 @@ class Query$Media$Media$studios {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$nodes = nodes;
-    final lOther$nodes = other.nodes;
-    if (l$nodes != null && lOther$nodes != null) {
-      if (l$nodes.length != lOther$nodes.length) {
+    final l$edges = edges;
+    final lOther$edges = other.edges;
+    if (l$edges != null && lOther$edges != null) {
+      if (l$edges.length != lOther$edges.length) {
         return false;
       }
-      for (int i = 0; i < l$nodes.length; i++) {
-        final l$nodes$entry = l$nodes[i];
-        final lOther$nodes$entry = lOther$nodes[i];
-        if (l$nodes$entry != lOther$nodes$entry) {
+      for (int i = 0; i < l$edges.length; i++) {
+        final l$edges$entry = l$edges[i];
+        final lOther$edges$entry = lOther$edges[i];
+        if (l$edges$entry != lOther$edges$entry) {
           return false;
         }
       }
-    } else if (l$nodes != lOther$nodes) {
+    } else if (l$edges != lOther$edges) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2359,14 +2376,14 @@ abstract class CopyWith$Query$Media$Media$studios<TRes> {
       _CopyWithStubImpl$Query$Media$Media$studios;
 
   TRes call({
-    List<Query$Media$Media$studios$nodes?>? nodes,
+    List<Query$Media$Media$studios$edges?>? edges,
     String? $__typename,
   });
-  TRes nodes(
-      Iterable<Query$Media$Media$studios$nodes?>? Function(
+  TRes edges(
+      Iterable<Query$Media$Media$studios$edges?>? Function(
               Iterable<
-                  CopyWith$Query$Media$Media$studios$nodes<
-                      Query$Media$Media$studios$nodes>?>?)
+                  CopyWith$Query$Media$Media$studios$edges<
+                      Query$Media$Media$studios$edges>?>?)
           _fn);
 }
 
@@ -2384,28 +2401,28 @@ class _CopyWithImpl$Query$Media$Media$studios<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? nodes = _undefined,
+    Object? edges = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Media$Media$studios(
-        nodes: nodes == _undefined
-            ? _instance.nodes
-            : (nodes as List<Query$Media$Media$studios$nodes?>?),
+        edges: edges == _undefined
+            ? _instance.edges
+            : (edges as List<Query$Media$Media$studios$edges?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  TRes nodes(
-          Iterable<Query$Media$Media$studios$nodes?>? Function(
+  TRes edges(
+          Iterable<Query$Media$Media$studios$edges?>? Function(
                   Iterable<
-                      CopyWith$Query$Media$Media$studios$nodes<
-                          Query$Media$Media$studios$nodes>?>?)
+                      CopyWith$Query$Media$Media$studios$edges<
+                          Query$Media$Media$studios$edges>?>?)
               _fn) =>
       call(
-          nodes: _fn(_instance.nodes?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
-              : CopyWith$Query$Media$Media$studios$nodes(
+              : CopyWith$Query$Media$Media$studios$edges(
                   e,
                   (i) => i,
                 )))?.toList());
@@ -2418,26 +2435,187 @@ class _CopyWithStubImpl$Query$Media$Media$studios<TRes>
   TRes _res;
 
   call({
-    List<Query$Media$Media$studios$nodes?>? nodes,
+    List<Query$Media$Media$studios$edges?>? edges,
     String? $__typename,
   }) =>
       _res;
 
-  nodes(_fn) => _res;
+  edges(_fn) => _res;
 }
 
-class Query$Media$Media$studios$nodes {
-  Query$Media$Media$studios$nodes({
+class Query$Media$Media$studios$edges {
+  Query$Media$Media$studios$edges({
+    required this.isMain,
+    this.node,
+    this.$__typename = 'StudioEdge',
+  });
+
+  factory Query$Media$Media$studios$edges.fromJson(Map<String, dynamic> json) {
+    final l$isMain = json['isMain'];
+    final l$node = json['node'];
+    final l$$__typename = json['__typename'];
+    return Query$Media$Media$studios$edges(
+      isMain: (l$isMain as bool),
+      node: l$node == null
+          ? null
+          : Query$Media$Media$studios$edges$node.fromJson(
+              (l$node as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final bool isMain;
+
+  final Query$Media$Media$studios$edges$node? node;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$isMain = isMain;
+    _resultData['isMain'] = l$isMain;
+    final l$node = node;
+    _resultData['node'] = l$node?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$isMain = isMain;
+    final l$node = node;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$isMain,
+      l$node,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Media$Media$studios$edges) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isMain = isMain;
+    final lOther$isMain = other.isMain;
+    if (l$isMain != lOther$isMain) {
+      return false;
+    }
+    final l$node = node;
+    final lOther$node = other.node;
+    if (l$node != lOther$node) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Media$Media$studios$edges
+    on Query$Media$Media$studios$edges {
+  CopyWith$Query$Media$Media$studios$edges<Query$Media$Media$studios$edges>
+      get copyWith => CopyWith$Query$Media$Media$studios$edges(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Media$Media$studios$edges<TRes> {
+  factory CopyWith$Query$Media$Media$studios$edges(
+    Query$Media$Media$studios$edges instance,
+    TRes Function(Query$Media$Media$studios$edges) then,
+  ) = _CopyWithImpl$Query$Media$Media$studios$edges;
+
+  factory CopyWith$Query$Media$Media$studios$edges.stub(TRes res) =
+      _CopyWithStubImpl$Query$Media$Media$studios$edges;
+
+  TRes call({
+    bool? isMain,
+    Query$Media$Media$studios$edges$node? node,
+    String? $__typename,
+  });
+  CopyWith$Query$Media$Media$studios$edges$node<TRes> get node;
+}
+
+class _CopyWithImpl$Query$Media$Media$studios$edges<TRes>
+    implements CopyWith$Query$Media$Media$studios$edges<TRes> {
+  _CopyWithImpl$Query$Media$Media$studios$edges(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Media$Media$studios$edges _instance;
+
+  final TRes Function(Query$Media$Media$studios$edges) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isMain = _undefined,
+    Object? node = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Media$Media$studios$edges(
+        isMain: isMain == _undefined || isMain == null
+            ? _instance.isMain
+            : (isMain as bool),
+        node: node == _undefined
+            ? _instance.node
+            : (node as Query$Media$Media$studios$edges$node?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$Media$Media$studios$edges$node<TRes> get node {
+    final local$node = _instance.node;
+    return local$node == null
+        ? CopyWith$Query$Media$Media$studios$edges$node.stub(_then(_instance))
+        : CopyWith$Query$Media$Media$studios$edges$node(
+            local$node, (e) => call(node: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$Media$Media$studios$edges<TRes>
+    implements CopyWith$Query$Media$Media$studios$edges<TRes> {
+  _CopyWithStubImpl$Query$Media$Media$studios$edges(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isMain,
+    Query$Media$Media$studios$edges$node? node,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$Media$Media$studios$edges$node<TRes> get node =>
+      CopyWith$Query$Media$Media$studios$edges$node.stub(_res);
+}
+
+class Query$Media$Media$studios$edges$node {
+  Query$Media$Media$studios$edges$node({
     required this.id,
     required this.name,
     this.$__typename = 'Studio',
   });
 
-  factory Query$Media$Media$studios$nodes.fromJson(Map<String, dynamic> json) {
+  factory Query$Media$Media$studios$edges$node.fromJson(
+      Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
-    return Query$Media$Media$studios$nodes(
+    return Query$Media$Media$studios$edges$node(
       id: (l$id as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
@@ -2478,7 +2656,7 @@ class Query$Media$Media$studios$nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Media$Media$studios$nodes) ||
+    if (!(other is Query$Media$Media$studios$edges$node) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2501,23 +2679,24 @@ class Query$Media$Media$studios$nodes {
   }
 }
 
-extension UtilityExtension$Query$Media$Media$studios$nodes
-    on Query$Media$Media$studios$nodes {
-  CopyWith$Query$Media$Media$studios$nodes<Query$Media$Media$studios$nodes>
-      get copyWith => CopyWith$Query$Media$Media$studios$nodes(
+extension UtilityExtension$Query$Media$Media$studios$edges$node
+    on Query$Media$Media$studios$edges$node {
+  CopyWith$Query$Media$Media$studios$edges$node<
+          Query$Media$Media$studios$edges$node>
+      get copyWith => CopyWith$Query$Media$Media$studios$edges$node(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$Media$Media$studios$nodes<TRes> {
-  factory CopyWith$Query$Media$Media$studios$nodes(
-    Query$Media$Media$studios$nodes instance,
-    TRes Function(Query$Media$Media$studios$nodes) then,
-  ) = _CopyWithImpl$Query$Media$Media$studios$nodes;
+abstract class CopyWith$Query$Media$Media$studios$edges$node<TRes> {
+  factory CopyWith$Query$Media$Media$studios$edges$node(
+    Query$Media$Media$studios$edges$node instance,
+    TRes Function(Query$Media$Media$studios$edges$node) then,
+  ) = _CopyWithImpl$Query$Media$Media$studios$edges$node;
 
-  factory CopyWith$Query$Media$Media$studios$nodes.stub(TRes res) =
-      _CopyWithStubImpl$Query$Media$Media$studios$nodes;
+  factory CopyWith$Query$Media$Media$studios$edges$node.stub(TRes res) =
+      _CopyWithStubImpl$Query$Media$Media$studios$edges$node;
 
   TRes call({
     int? id,
@@ -2526,16 +2705,16 @@ abstract class CopyWith$Query$Media$Media$studios$nodes<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$Media$Media$studios$nodes<TRes>
-    implements CopyWith$Query$Media$Media$studios$nodes<TRes> {
-  _CopyWithImpl$Query$Media$Media$studios$nodes(
+class _CopyWithImpl$Query$Media$Media$studios$edges$node<TRes>
+    implements CopyWith$Query$Media$Media$studios$edges$node<TRes> {
+  _CopyWithImpl$Query$Media$Media$studios$edges$node(
     this._instance,
     this._then,
   );
 
-  final Query$Media$Media$studios$nodes _instance;
+  final Query$Media$Media$studios$edges$node _instance;
 
-  final TRes Function(Query$Media$Media$studios$nodes) _then;
+  final TRes Function(Query$Media$Media$studios$edges$node) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2544,7 +2723,7 @@ class _CopyWithImpl$Query$Media$Media$studios$nodes<TRes>
     Object? name = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$Media$Media$studios$nodes(
+      _then(Query$Media$Media$studios$edges$node(
         id: id == _undefined || id == null ? _instance.id : (id as int),
         name: name == _undefined || name == null
             ? _instance.name
@@ -2555,9 +2734,9 @@ class _CopyWithImpl$Query$Media$Media$studios$nodes<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$Media$Media$studios$nodes<TRes>
-    implements CopyWith$Query$Media$Media$studios$nodes<TRes> {
-  _CopyWithStubImpl$Query$Media$Media$studios$nodes(this._res);
+class _CopyWithStubImpl$Query$Media$Media$studios$edges$node<TRes>
+    implements CopyWith$Query$Media$Media$studios$edges$node<TRes> {
+  _CopyWithStubImpl$Query$Media$Media$studios$edges$node(this._res);
 
   TRes _res;
 
