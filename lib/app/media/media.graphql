@@ -92,6 +92,11 @@ query Media($id: Int) {
     mediaListEntry {
       status
     }
+    nextAiringEpisode {
+      airingAt
+      timeUntilAiring
+      episode
+    }
   }
 }
 

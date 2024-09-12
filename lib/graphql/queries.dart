@@ -660,6 +660,11 @@ var mediaQuery = removeFragmentDups(r"""query Media($id: Int) {
     mediaListEntry {
       status
     }
+    nextAiringEpisode {
+      airingAt
+      timeUntilAiring
+      episode
+    }
   }
 }
 

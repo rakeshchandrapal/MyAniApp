@@ -394,8 +394,8 @@ class ThreadComment extends ConsumerWidget {
                 ThreadComment(
                   id: reply.id,
                   parentId: id,
-                  avatar: reply.user!.avatar!.large!,
-                  username: reply.user!.name,
+                  avatar: reply.user?.avatar?.large ?? anilistDefaultImage,
+                  username: reply.user?.name ?? "unknown",
                   createdAt: reply.createdAt,
                   comment: reply.comment!,
                   replies: reply.childComments as List?,

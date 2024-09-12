@@ -49,7 +49,7 @@ class ImageNode2 extends SpanNode {
 
   ImageNode2(this.attributes, this.config, this.visitor);
 
-  static double maxHeight = 300;
+  static double maxHeight = 400;
 
   @override
   InlineSpan build() {
@@ -94,10 +94,7 @@ class ImageNode2 extends SpanNode {
               constraints: BoxConstraints(
                 minHeight: 10,
                 minWidth: 10,
-                maxHeight: height ??
-                    (heightPercent != null
-                        ? (heightPercent / 100) * maxHeight
-                        : maxHeight),
+                maxHeight: maxHeight,
                 maxWidth: width ?? double.maxFinite,
               ),
               child: CachedImage(

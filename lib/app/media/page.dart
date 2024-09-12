@@ -25,7 +25,9 @@ import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
+import 'package:relative_time/relative_time.dart';
 
 @RoutePage()
 class MediaScreen extends StatefulHookWidget {
@@ -118,6 +120,24 @@ class _MediaScreenState extends State<MediaScreen> {
                       FloatingActionButtonLocation.centerFloat,
                   body: NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                      if (snapshot?.parsedData?.Media?.nextAiringEpisode !=
+                          null)
+                        SliverToBoxAdapter(
+                          child: Container(
+                            height: 50,
+                            color: Colors.blue[900],
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Next Episode Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       MediaBar(
                         tab: tabs[tabController.index].$2,
                         data: snapshot!.parsedData!.Media!,

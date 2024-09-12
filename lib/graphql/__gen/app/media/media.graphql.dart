@@ -909,6 +909,42 @@ const documentNodeQueryMedia = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'nextAiringEpisode'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'airingAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'timeUntilAiring'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'episode'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -967,6 +1003,7 @@ class Query$Media$Media implements Fragment$MediaFragment {
     this.recommendations,
     this.reviews,
     this.mediaListEntry,
+    this.nextAiringEpisode,
   });
 
   factory Query$Media$Media.fromJson(Map<String, dynamic> json) {
@@ -1005,6 +1042,7 @@ class Query$Media$Media implements Fragment$MediaFragment {
     final l$recommendations = json['recommendations'];
     final l$reviews = json['reviews'];
     final l$mediaListEntry = json['mediaListEntry'];
+    final l$nextAiringEpisode = json['nextAiringEpisode'];
     return Query$Media$Media(
       id: (l$id as int),
       type: l$type == null ? null : fromJson$Enum$MediaType((l$type as String)),
@@ -1090,6 +1128,10 @@ class Query$Media$Media implements Fragment$MediaFragment {
           ? null
           : Query$Media$Media$mediaListEntry.fromJson(
               (l$mediaListEntry as Map<String, dynamic>)),
+      nextAiringEpisode: l$nextAiringEpisode == null
+          ? null
+          : Query$Media$Media$nextAiringEpisode.fromJson(
+              (l$nextAiringEpisode as Map<String, dynamic>)),
     );
   }
 
@@ -1162,6 +1204,8 @@ class Query$Media$Media implements Fragment$MediaFragment {
   final Query$Media$Media$reviews? reviews;
 
   final Query$Media$Media$mediaListEntry? mediaListEntry;
+
+  final Query$Media$Media$nextAiringEpisode? nextAiringEpisode;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1240,6 +1284,8 @@ class Query$Media$Media implements Fragment$MediaFragment {
     _resultData['reviews'] = l$reviews?.toJson();
     final l$mediaListEntry = mediaListEntry;
     _resultData['mediaListEntry'] = l$mediaListEntry?.toJson();
+    final l$nextAiringEpisode = nextAiringEpisode;
+    _resultData['nextAiringEpisode'] = l$nextAiringEpisode?.toJson();
     return _resultData;
   }
 
@@ -1280,6 +1326,7 @@ class Query$Media$Media implements Fragment$MediaFragment {
     final l$recommendations = recommendations;
     final l$reviews = reviews;
     final l$mediaListEntry = mediaListEntry;
+    final l$nextAiringEpisode = nextAiringEpisode;
     return Object.hashAll([
       l$id,
       l$type,
@@ -1318,6 +1365,7 @@ class Query$Media$Media implements Fragment$MediaFragment {
       l$recommendations,
       l$reviews,
       l$mediaListEntry,
+      l$nextAiringEpisode,
     ]);
   }
 
@@ -1537,6 +1585,11 @@ class Query$Media$Media implements Fragment$MediaFragment {
     if (l$mediaListEntry != lOther$mediaListEntry) {
       return false;
     }
+    final l$nextAiringEpisode = nextAiringEpisode;
+    final lOther$nextAiringEpisode = other.nextAiringEpisode;
+    if (l$nextAiringEpisode != lOther$nextAiringEpisode) {
+      return false;
+    }
     return true;
   }
 }
@@ -1594,6 +1647,7 @@ abstract class CopyWith$Query$Media$Media<TRes> {
     Query$Media$Media$recommendations? recommendations,
     Query$Media$Media$reviews? reviews,
     Query$Media$Media$mediaListEntry? mediaListEntry,
+    Query$Media$Media$nextAiringEpisode? nextAiringEpisode,
   });
   CopyWith$Query$Media$Media$title<TRes> get title;
   CopyWith$Query$Media$Media$coverImage<TRes> get coverImage;
@@ -1618,6 +1672,7 @@ abstract class CopyWith$Query$Media$Media<TRes> {
   CopyWith$Query$Media$Media$recommendations<TRes> get recommendations;
   CopyWith$Query$Media$Media$reviews<TRes> get reviews;
   CopyWith$Query$Media$Media$mediaListEntry<TRes> get mediaListEntry;
+  CopyWith$Query$Media$Media$nextAiringEpisode<TRes> get nextAiringEpisode;
 }
 
 class _CopyWithImpl$Query$Media$Media<TRes>
@@ -1669,6 +1724,7 @@ class _CopyWithImpl$Query$Media$Media<TRes>
     Object? recommendations = _undefined,
     Object? reviews = _undefined,
     Object? mediaListEntry = _undefined,
+    Object? nextAiringEpisode = _undefined,
   }) =>
       _then(Query$Media$Media(
         id: id == _undefined || id == null ? _instance.id : (id as int),
@@ -1765,6 +1821,9 @@ class _CopyWithImpl$Query$Media$Media<TRes>
         mediaListEntry: mediaListEntry == _undefined
             ? _instance.mediaListEntry
             : (mediaListEntry as Query$Media$Media$mediaListEntry?),
+        nextAiringEpisode: nextAiringEpisode == _undefined
+            ? _instance.nextAiringEpisode
+            : (nextAiringEpisode as Query$Media$Media$nextAiringEpisode?),
       ));
 
   CopyWith$Query$Media$Media$title<TRes> get title {
@@ -1887,6 +1946,14 @@ class _CopyWithImpl$Query$Media$Media<TRes>
         : CopyWith$Query$Media$Media$mediaListEntry(
             local$mediaListEntry, (e) => call(mediaListEntry: e));
   }
+
+  CopyWith$Query$Media$Media$nextAiringEpisode<TRes> get nextAiringEpisode {
+    final local$nextAiringEpisode = _instance.nextAiringEpisode;
+    return local$nextAiringEpisode == null
+        ? CopyWith$Query$Media$Media$nextAiringEpisode.stub(_then(_instance))
+        : CopyWith$Query$Media$Media$nextAiringEpisode(
+            local$nextAiringEpisode, (e) => call(nextAiringEpisode: e));
+  }
 }
 
 class _CopyWithStubImpl$Query$Media$Media<TRes>
@@ -1931,6 +1998,7 @@ class _CopyWithStubImpl$Query$Media$Media<TRes>
     Query$Media$Media$recommendations? recommendations,
     Query$Media$Media$reviews? reviews,
     Query$Media$Media$mediaListEntry? mediaListEntry,
+    Query$Media$Media$nextAiringEpisode? nextAiringEpisode,
   }) =>
       _res;
 
@@ -1973,6 +2041,9 @@ class _CopyWithStubImpl$Query$Media$Media<TRes>
 
   CopyWith$Query$Media$Media$mediaListEntry<TRes> get mediaListEntry =>
       CopyWith$Query$Media$Media$mediaListEntry.stub(_res);
+
+  CopyWith$Query$Media$Media$nextAiringEpisode<TRes> get nextAiringEpisode =>
+      CopyWith$Query$Media$Media$nextAiringEpisode.stub(_res);
 }
 
 class Query$Media$Media$title implements Fragment$MediaFragment$title {
@@ -4906,6 +4977,174 @@ class _CopyWithStubImpl$Query$Media$Media$mediaListEntry<TRes>
 
   call({
     Enum$MediaListStatus? status,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Media$Media$nextAiringEpisode {
+  Query$Media$Media$nextAiringEpisode({
+    required this.airingAt,
+    required this.timeUntilAiring,
+    required this.episode,
+    this.$__typename = 'AiringSchedule',
+  });
+
+  factory Query$Media$Media$nextAiringEpisode.fromJson(
+      Map<String, dynamic> json) {
+    final l$airingAt = json['airingAt'];
+    final l$timeUntilAiring = json['timeUntilAiring'];
+    final l$episode = json['episode'];
+    final l$$__typename = json['__typename'];
+    return Query$Media$Media$nextAiringEpisode(
+      airingAt: (l$airingAt as int),
+      timeUntilAiring: (l$timeUntilAiring as int),
+      episode: (l$episode as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int airingAt;
+
+  final int timeUntilAiring;
+
+  final int episode;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$airingAt = airingAt;
+    _resultData['airingAt'] = l$airingAt;
+    final l$timeUntilAiring = timeUntilAiring;
+    _resultData['timeUntilAiring'] = l$timeUntilAiring;
+    final l$episode = episode;
+    _resultData['episode'] = l$episode;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$airingAt = airingAt;
+    final l$timeUntilAiring = timeUntilAiring;
+    final l$episode = episode;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$airingAt,
+      l$timeUntilAiring,
+      l$episode,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Media$Media$nextAiringEpisode) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$airingAt = airingAt;
+    final lOther$airingAt = other.airingAt;
+    if (l$airingAt != lOther$airingAt) {
+      return false;
+    }
+    final l$timeUntilAiring = timeUntilAiring;
+    final lOther$timeUntilAiring = other.timeUntilAiring;
+    if (l$timeUntilAiring != lOther$timeUntilAiring) {
+      return false;
+    }
+    final l$episode = episode;
+    final lOther$episode = other.episode;
+    if (l$episode != lOther$episode) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Media$Media$nextAiringEpisode
+    on Query$Media$Media$nextAiringEpisode {
+  CopyWith$Query$Media$Media$nextAiringEpisode<
+          Query$Media$Media$nextAiringEpisode>
+      get copyWith => CopyWith$Query$Media$Media$nextAiringEpisode(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Media$Media$nextAiringEpisode<TRes> {
+  factory CopyWith$Query$Media$Media$nextAiringEpisode(
+    Query$Media$Media$nextAiringEpisode instance,
+    TRes Function(Query$Media$Media$nextAiringEpisode) then,
+  ) = _CopyWithImpl$Query$Media$Media$nextAiringEpisode;
+
+  factory CopyWith$Query$Media$Media$nextAiringEpisode.stub(TRes res) =
+      _CopyWithStubImpl$Query$Media$Media$nextAiringEpisode;
+
+  TRes call({
+    int? airingAt,
+    int? timeUntilAiring,
+    int? episode,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Media$Media$nextAiringEpisode<TRes>
+    implements CopyWith$Query$Media$Media$nextAiringEpisode<TRes> {
+  _CopyWithImpl$Query$Media$Media$nextAiringEpisode(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Media$Media$nextAiringEpisode _instance;
+
+  final TRes Function(Query$Media$Media$nextAiringEpisode) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? airingAt = _undefined,
+    Object? timeUntilAiring = _undefined,
+    Object? episode = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Media$Media$nextAiringEpisode(
+        airingAt: airingAt == _undefined || airingAt == null
+            ? _instance.airingAt
+            : (airingAt as int),
+        timeUntilAiring:
+            timeUntilAiring == _undefined || timeUntilAiring == null
+                ? _instance.timeUntilAiring
+                : (timeUntilAiring as int),
+        episode: episode == _undefined || episode == null
+            ? _instance.episode
+            : (episode as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Media$Media$nextAiringEpisode<TRes>
+    implements CopyWith$Query$Media$Media$nextAiringEpisode<TRes> {
+  _CopyWithStubImpl$Query$Media$Media$nextAiringEpisode(this._res);
+
+  TRes _res;
+
+  call({
+    int? airingAt,
+    int? timeUntilAiring,
+    int? episode,
     String? $__typename,
   }) =>
       _res;

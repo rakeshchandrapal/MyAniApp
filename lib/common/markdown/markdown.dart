@@ -23,6 +23,10 @@ String stripHTML(String data) {
       .replaceAll(removeFromMarkdown, "")
       .replaceAll(RegExp(r"</?(B|b)>"), "**")
       .replaceAll(RegExp("</?(i|I)>"), "*")
+      .replaceAllMapped(
+        RegExp(r"youtube\((.*?)\)", dotAll: true),
+        (match) => match.group(1) ?? '',
+      )
       .replaceAll(removeFromMarkdown, "");
 }
 
@@ -51,8 +55,11 @@ var markdownGenerator = md.MarkdownGenerator(
     centerSpanWithTag,
     mediaCardGenerator,
     imageGeneratorWithTag,
+    spoilerTag,
+    hrGeneratorWithTag,
   ],
   inlineSyntaxList: [
+    CenterSyntax(),
     AnilistImageSyntax(),
     SpoilerSyntax(),
   ],
@@ -99,8 +106,6 @@ class MarkdownWidget extends ConsumerWidget {
       textGenerator: markdownGenerator.textGenerator,
       generators: [
         ...markdownGenerator.generators,
-        spoilerTag,
-        hrGeneratorWithTag,
       ],
       inlineSyntaxList: [
         ...markdownGenerator.inlineSyntaxList,
