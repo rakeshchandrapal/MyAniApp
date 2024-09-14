@@ -123,16 +123,17 @@ class _MediaScreenState extends State<MediaScreen> {
                       if (snapshot?.parsedData?.Media?.nextAiringEpisode !=
                           null)
                         SliverToBoxAdapter(
-                          child: Container(
-                            height: 50,
-                            color: Colors.blue[900],
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Next Episode Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
-                                  style: TextStyle(color: Colors.white),
+                          child: SafeArea(
+                            child: Container(
+                              color: Colors.blue[900],
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Next Episode Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),

@@ -8,6 +8,7 @@ import 'package:myaniapp/app/reviews/card.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/list_card.dart';
+import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/media_editor/media_editor.dart';
 import 'package:myaniapp/common/overlay/menu.dart';
@@ -293,54 +294,28 @@ class InProgress extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   var entry = list[index]!;
 
-                  return OverlayMenu(
-                    items: [
-                      OverlayMenuItem(
-                        onTap: (closeOverlay) {
-                          closeOverlay();
-                          MediaSheet.show(context, entry.media!);
-                        },
-                        child: const Text("Preview"),
-                        icon: const Icon(Icons.remove_red_eye),
-                      ),
-                      OverlayMenuItem(
-                        onTap: (closeOverlay) {
-                          closeOverlay();
-                          MediaEditorDialog.show(
-                            context,
-                            entry.media!,
-                            user.value!.parsedData!.Viewer!.id,
-                            onSave: refetch,
-                            onDelete: refetch,
-                          );
-                        },
-                        child: const Text("Editor"),
-                        icon: const Icon(Icons.edit),
-                      ),
-                    ],
-                    builder: (showOverlay) => GridCard(
-                      image: entry.media!.coverImage!.extraLarge!,
-                      title: entry.media!.title!.userPreferred,
-                      blur: entry.media!.isAdult ?? false,
-                      aspectRatio: GridCard.listRatio,
-                      onDoubleTap: () => MediaEditorDialog.show(
-                        context,
-                        entry.media!,
-                        user.value!.parsedData!.Viewer!.id,
-                        onSave: refetch,
-                        onDelete: refetch,
-                      ),
-                      onTap: () => context.pushRoute(MediaRoute(
-                          id: entry.media!.id, placeholder: entry.media)),
-                      onLongPress: showOverlay,
+                  return MediaCard(
+                    listType: settings.inProgress,
+                    image: entry.media!.coverImage!.extraLarge!,
+                    title: entry.media!.title!.userPreferred,
+                    blur: entry.media!.isAdult ?? false,
+                    aspectRatio: GridCard.listRatio,
+                    onDoubleTap: () => MediaEditorDialog.show(
+                      context,
+                      entry.media!,
+                      user.value!.parsedData!.Viewer!.id,
+                      onSave: refetch,
+                      onDelete: refetch,
                     ),
+                    onTap: () => context.pushRoute(MediaRoute(
+                        id: entry.media!.id, placeholder: entry.media)),
+                    onLongPress: () => MediaSheet.show(context, entry.media!),
                   );
                 },
                 itemCount: list.length,
               ),
             ),
           ListType.list => ListView.separated(
-              // padding: const EdgeInsets.symmetric(horizontal: 8),
               shrinkWrap: true,
               primary: false,
               separatorBuilder: (context, index) => const SizedBox(width: 8),
@@ -356,68 +331,43 @@ class InProgress extends ConsumerWidget {
                   progress = (entry.progress ?? 0) / entry.media!.episodes!;
                 }
 
-                return OverlayMenu(
-                  items: [
-                    OverlayMenuItem(
-                      onTap: (closeOverlay) {
-                        closeOverlay();
-                        MediaSheet.show(context, entry.media!);
-                      },
-                      child: const Text("Preview"),
-                      icon: const Icon(Icons.remove_red_eye),
+                return MediaCard(
+                  listType: settings.inProgress,
+                  image: entry.media!.coverImage!.extraLarge!,
+                  title: entry.media!.title!.userPreferred,
+                  underTitle: Show(
+                    when: progress != null,
+                    fallback: Text(
+                      style: context.theme.textTheme.labelMedium,
+                      "${entry.progress} ${entry.media!.type == Enum$MediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
                     ),
-                    OverlayMenuItem(
-                      onTap: (closeOverlay) {
-                        closeOverlay();
-                        MediaEditorDialog.show(
-                          context,
-                          entry.media!,
-                          user.value!.parsedData!.Viewer!.id,
-                          onSave: refetch,
-                          onDelete: refetch,
-                        );
-                      },
-                      child: const Text("Editor"),
-                      icon: const Icon(Icons.edit),
+                    child: () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        LinearProgressIndicator(
+                          value: progress,
+                          borderRadius: imageRadius,
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "${entry.progress} / ${entry.media!.chapters ?? entry.media!.episodes}",
+                          style: context.theme.textTheme.labelMedium,
+                        )
+                      ],
                     ),
-                  ],
-                  builder: (showOverlay) => ListCard(
-                    image: entry.media!.coverImage!.extraLarge!,
-                    title: entry.media!.title!.userPreferred,
-                    underTitle: Show(
-                      when: progress != null,
-                      fallback: Text(
-                        style: context.theme.textTheme.labelMedium,
-                        "${entry.progress} ${entry.media!.type == Enum$MediaType.ANIME ? "Episodes Watched" : "Chapters Read"}",
-                      ),
-                      child: () => Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          LinearProgressIndicator(
-                            value: progress,
-                            borderRadius: imageRadius,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "${entry.progress} / ${entry.media!.chapters ?? entry.media!.episodes}",
-                            style: context.theme.textTheme.labelMedium,
-                          )
-                        ],
-                      ),
-                    ),
-                    blur: entry.media!.isAdult ?? false,
-                    onDoubleTap: () => MediaEditorDialog.show(
-                      context,
-                      entry.media!,
-                      user.value!.parsedData!.Viewer!.id,
-                      onSave: refetch,
-                      onDelete: refetch,
-                    ),
-                    onTap: () => context.pushRoute(
-                      MediaRoute(id: entry.mediaId, placeholder: entry.media),
-                    ),
-                    onLongPress: showOverlay,
                   ),
+                  blur: entry.media!.isAdult ?? false,
+                  onDoubleTap: () => MediaEditorDialog.show(
+                    context,
+                    entry.media!,
+                    user.value!.parsedData!.Viewer!.id,
+                    onSave: refetch,
+                    onDelete: refetch,
+                  ),
+                  onTap: () => context.pushRoute(
+                    MediaRoute(id: entry.mediaId, placeholder: entry.media),
+                  ),
+                  onLongPress: () => MediaSheet.show(context, entry.media!),
                 );
               },
               itemCount: list.length,
@@ -429,47 +379,21 @@ class InProgress extends ConsumerWidget {
               itemBuilder: (context, index) {
                 var entry = list[index]!;
 
-                return OverlayMenu(
-                  items: [
-                    OverlayMenuItem(
-                      onTap: (closeOverlay) {
-                        closeOverlay();
-                        MediaSheet.show(context, entry.media!);
-                      },
-                      child: const Text("Preview"),
-                      icon: const Icon(Icons.remove_red_eye),
-                    ),
-                    OverlayMenuItem(
-                      onTap: (closeOverlay) {
-                        closeOverlay();
-                        MediaEditorDialog.show(
-                          context,
-                          entry.media!,
-                          user.value!.parsedData!.Viewer!.id,
-                          onSave: refetch,
-                          onDelete: refetch,
-                        );
-                      },
-                      child: const Text("Editor"),
-                      icon: const Icon(Icons.edit),
-                    ),
-                  ],
-                  builder: (showOverlay) => InkWell(
-                    onDoubleTap: () => MediaEditorDialog.show(
-                      context,
-                      entry.media!,
-                      user.value!.parsedData!.Viewer!.id,
-                      onSave: refetch,
-                      onDelete: refetch,
-                    ),
-                    onTap: () => context.pushRoute(
-                      MediaRoute(id: entry.mediaId, placeholder: entry.media),
-                    ),
-                    onLongPress: showOverlay,
-                    child: ListTile(
-                      title: Text(entry.media!.title!.userPreferred!),
-                    ),
+                return MediaCard(
+                  listType: settings.inProgress,
+                  onDoubleTap: () => MediaEditorDialog.show(
+                    context,
+                    entry.media!,
+                    user.value!.parsedData!.Viewer!.id,
+                    onSave: refetch,
+                    onDelete: refetch,
                   ),
+                  onLongPress: () => MediaSheet.show(context, entry.media!),
+                  onTap: () => context.pushRoute(
+                    MediaRoute(id: entry.mediaId, placeholder: entry.media),
+                  ),
+                  // child: ListTile(
+                  title: entry.media!.title!.userPreferred!,
                 );
               },
               itemCount: list.length,

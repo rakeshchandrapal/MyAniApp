@@ -57,6 +57,7 @@ class _UserFavoritesScreenState extends State<UserFavoritesScreen>
   Widget build(BuildContext context) {
     var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
       userFavoritesQuery,
+      variables: Variables$Query$UserFavorites(name: widget.name).toJson(),
       parseData: Query$UserFavorites.fromJson,
     ));
 
