@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/app/home/home.dart';
@@ -16,7 +15,6 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:mygraphql/graphql.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -84,7 +82,7 @@ class MediaEditorDialog extends HookConsumerWidget {
       errorWidget: false,
       builder: () {
         // var mediaList = ;
-        var mediaList = (snapshot!.parsedData?.MediaList);
+        var mediaList = (snapshot.parsedData?.MediaList);
 
         if (mediaList == null) {
           var user = ref.read(userProvider);
@@ -144,14 +142,14 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
           ? Input$FuzzyDateInput(
               day: widget.entry.completedAt?.day,
               month: widget.entry.completedAt?.month,
-              year: widget.entry?.completedAt?.year,
+              year: widget.entry.completedAt?.year,
             )
           : null,
       startedAt: widget.entry.startedAt != null
           ? Input$FuzzyDateInput(
               day: widget.entry.startedAt?.day,
               month: widget.entry.startedAt?.month,
-              year: widget.entry?.startedAt?.year,
+              year: widget.entry.startedAt?.year,
             )
           : null,
       customLists: widget.entry.customLists
@@ -213,10 +211,11 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
             IconButton(
               onPressed: () async {
                 if (!jsonMapEquals(options.toJson(), og.toJson())) {
-                  if (widget.entry.id == -1)
+                  if (widget.entry.id == -1) {
                     options = options.copyWith(mediaId: widget.entry.mediaId);
-                  else
+                  } else {
                     options = options.copyWith(id: widget.entry.id);
+                  }
                   print(options.toJson());
                   var i = await c
                       .query(GQLRequest(saveMediaListEntryQuery,
@@ -289,7 +288,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
               if (widget.entry.user!.mediaListOptions!.scoreFormat ==
                   Enum$ScoreFormat.POINT_3)
                 SettingsTile(
-                  title: Text("Score"),
+                  title: const Text("Score"),
                   child: Row(
                     children: [
                       FilterChip(
@@ -377,7 +376,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   },
                 ),
               SettingsTile(
-                title: Text("Start date"),
+                title: const Text("Start date"),
                 onTap: () async {
                   var selectedDate = await showDatePicker(
                     context: context,
@@ -408,7 +407,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                     : null,
               ),
               SettingsTile(
-                title: Text("Finished date"),
+                title: const Text("Finished date"),
                 onTap: () async {
                   var selectedDate = await showDatePicker(
                     context: context,

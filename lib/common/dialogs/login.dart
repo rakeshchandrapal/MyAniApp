@@ -39,7 +39,7 @@ class LoginDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () => context.pushRoute(LoginRoute()),
+                    onPressed: () => context.pushRoute(const LoginRoute()),
                     child: const Text("Login"),
                   ),
                   const SizedBox(

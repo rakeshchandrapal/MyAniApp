@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:myaniapp/app/home/home.dart';
@@ -29,16 +28,16 @@ class ReviewsScreen extends HookWidget {
           pageInfo: snapshot.parsedData!.Page!.pageInfo!,
           req: (nextPage) => fetchMore(
               variables: Variables$Query$Reviews(page: nextPage).toJson()),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 250,
             mainAxisExtent: 200,
           ),
           builder: (context, index) {
-            var review = snapshot!.parsedData!.Page!.reviews![index]!;
+            var review = snapshot.parsedData!.Page!.reviews![index]!;
 
             return ReviewCard(review: review);
           },
-          itemCount: snapshot!.parsedData!.Page!.reviews!.length,
+          itemCount: snapshot.parsedData!.Page!.reviews!.length,
         ),
       ),
     );

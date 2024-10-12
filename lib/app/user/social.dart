@@ -31,7 +31,7 @@ class UserSocialScreen extends HookWidget {
       builder: () {
         // this is so state isn't managed by UserSocialsPage which would make a new request switching between following and follower
         return SocialsView(
-          data: snapshot!.parsedData!,
+          data: snapshot.parsedData!,
           request: snapshot.request!,
           fetchMore: fetchMore,
         );
@@ -68,10 +68,11 @@ class _SocialsViewState extends State<SocialsView> {
         var vars =
             Variables$Query$UserSocials.fromJson(widget.request.variables);
 
-        if (pageIdx == 0)
+        if (pageIdx == 0) {
           return widget.fetchMore(
               variables: vars.copyWith(followingPage: nextPage).toJson(),
               mergeResults: defaultMergeResults("following.following"));
+        }
         return widget.fetchMore(
             variables: vars.copyWith(followersPage: nextPage).toJson(),
             mergeResults: defaultMergeResults("followers.followers"));

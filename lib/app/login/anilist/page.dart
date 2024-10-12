@@ -57,7 +57,7 @@ class _AnilistLoginPageState extends ConsumerState<AnilistLoginScreen> {
         ref
             .read(settingsProvider.notifier)
             .updateToken(token)
-            .then((value) => context.navigateTo(HomeRoute()));
+            .then((value) => context.navigateTo(const HomeRoute()));
       }
     });
   }
@@ -80,7 +80,7 @@ class _AnilistLoginPageState extends ConsumerState<AnilistLoginScreen> {
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(Colors.blue[100]!),
                   ),
-                  onPressed: () => context.pushRoute(AnilistLoginRoute()),
+                  onPressed: () => context.pushRoute(const AnilistLoginRoute()),
                   child: const Text(
                     "Login with Anilist",
                     style: TextStyle(color: Colors.black),

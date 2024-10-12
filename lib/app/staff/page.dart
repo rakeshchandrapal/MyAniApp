@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/staff/production_screen.dart';
@@ -22,7 +21,6 @@ import 'package:myaniapp/graphql/__gen/app/staff/staff.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/fragments/staff.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:mygraphql/graphql.dart';
 
@@ -50,12 +48,12 @@ class StaffScreen extends HookConsumerWidget {
       error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (snapshot!.errors, snapshot.linkError),
+          exception: (snapshot.errors, snapshot.linkError),
           refetch: refetch,
         ),
       ),
       builder: () {
-        if (snapshot?.loading == true && placeholder == null) {
+        if (snapshot.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -64,7 +62,7 @@ class StaffScreen extends HookConsumerWidget {
           );
         }
 
-        var data = snapshot?.parsedData?.Staff;
+        var data = snapshot.parsedData?.Staff;
 
         return StaffView(
           fetchMore: fetchMore,
@@ -139,8 +137,8 @@ class _StaffViewState extends ConsumerState<StaffView>
   }
 
   void listener() {
-    if (currentIndex != tabController!.index) {
-      setState(() => currentIndex = tabController!.index);
+    if (currentIndex != tabController.index) {
+      setState(() => currentIndex = tabController.index);
     }
   }
 
@@ -193,7 +191,7 @@ class _StaffViewState extends ConsumerState<StaffView>
               actions: [
                 if (widget.staff != null &&
                     widget.staff!.characterMedia!.edges!.isNotEmpty &&
-                    (!hasTabs(widget.staff!) || tabController?.index == 0))
+                    (!hasTabs(widget.staff!) || tabController.index == 0))
                   ListSettingButton(
                     type: listSettings.staffVA,
                     onUpdate: (type) =>
@@ -203,7 +201,7 @@ class _StaffViewState extends ConsumerState<StaffView>
                   ),
                 if (widget.staff != null &&
                     widget.staff!.staffMedia!.edges!.isNotEmpty &&
-                    (!hasTabs(widget.staff!) || tabController?.index == 1))
+                    (!hasTabs(widget.staff!) || tabController.index == 1))
                   ListSettingButton(
                     type: listSettings.staffProduction,
                     onUpdate: (type) =>
@@ -358,7 +356,7 @@ class _StaffViewState extends ConsumerState<StaffView>
             )
           ],
           body: Show(
-            when: widget.staff != null && tabController != null,
+            when: widget.staff != null,
             fallback: const Center(
               child: CircularProgressIndicator.adaptive(),
             ),
@@ -366,11 +364,11 @@ class _StaffViewState extends ConsumerState<StaffView>
               behavior:
                   ScrollConfiguration.of(context).copyWith(scrollbars: false),
               child: GraphqlPagination(
-                pageInfo: tabController!.index == 0
+                pageInfo: tabController.index == 0
                     ? widget.staff!.characterMedia!.pageInfo!
                     : widget.staff!.staffMedia!.pageInfo!,
                 req: (nextPage) {
-                  bool isCharacter = tabController!.index == 0 ? true : false;
+                  bool isCharacter = tabController.index == 0 ? true : false;
 
                   if (isCharacter) {
                     widget.fetchMore(

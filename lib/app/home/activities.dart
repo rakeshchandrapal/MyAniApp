@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/activity/page.dart';
 import 'package:myaniapp/app/forum/%5Btab%5D/page.dart';
@@ -59,7 +58,6 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
 
     return HidingFloatingButton(
       button: FloatingActionButton(
-        child: const Icon(Icons.post_add),
         onPressed: requiredLogin(
           ref,
           "send a post",
@@ -71,14 +69,16 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
                         .toJson()))
                 .last
                 .then((value) => setState(() {
-                      if (!isFollowing)
+                      if (!isFollowing) {
                         isFollowing = true;
-                      else
+                      } else {
                         refetch();
+                      }
                     })),
             hint: "Write a post",
           ),
         ),
+        child: const Icon(Icons.post_add),
       ),
       builder: (button) => Scaffold(
         appBar: AppBar(
@@ -97,7 +97,7 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
                 thumbIcon: WidgetStateProperty.resolveWith(getThumbIcon),
                 onChanged: (value) {
                   setState(() => isFollowing = !isFollowing);
-                  Future.delayed(Duration(milliseconds: 100), () => refetch());
+                  Future.delayed(const Duration(milliseconds: 100), () => refetch());
                 },
               ),
           ],
@@ -115,7 +115,7 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
                     .copyWith(page: nextPage)
                     .toJson(),
               ),
-              pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+              pageInfo: snapshot.parsedData!.Page!.pageInfo!,
               builder: (context, index) {
                 var activity = snapshot.parsedData!.Page!.activities![index]!;
 
@@ -124,7 +124,7 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
                   refetch: refetch,
                 );
               },
-              itemCount: snapshot!.parsedData!.Page!.activities!.length,
+              itemCount: snapshot.parsedData!.Page!.activities!.length,
             ),
             // child: GraphqlPagination(
             //   pageInfo: snapshot!.parsedData!.Page!.pageInfo!,

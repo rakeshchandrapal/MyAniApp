@@ -3,7 +3,7 @@ name: Build and Release Linux
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   build:
@@ -19,8 +19,8 @@ jobs:
       - name: Get Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.x'
-          channel: 'stable'
+          flutter-version: "3.24.x"
+          channel: "stable"
           cache: true
 
       - name: Download deps
@@ -34,12 +34,12 @@ jobs:
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
-          type: 'zip'
+          type: "zip"
           filename: MyAniApp-linux-x64.zip
           directory: build/linux/x64/release/bundle
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: 'build/linux/x64/release/bundle/MyAniApp-linux-x64.zip'
+          artifacts: "build/linux/x64/release/bundle/MyAniApp-linux-x64.zip"
           allowUpdates: true
           makeLatest: true

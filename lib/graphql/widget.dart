@@ -155,7 +155,7 @@ class GraphqlError<T> extends ConsumerWidget {
                             width: 5,
                           ),
                           ElevatedButton(
-                            onPressed: () => context.pushRoute(LoginRoute()),
+                            onPressed: () => context.pushRoute(const LoginRoute()),
                             child: const Text("Log in"),
                           ),
                         ],

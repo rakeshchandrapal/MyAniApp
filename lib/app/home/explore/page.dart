@@ -102,10 +102,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           selected: const {9},
                           onSelectionChanged: (v) {
                             if (v.firstOrNull == 0) {
-                              context.pushRoute(RecommendationsRoute());
+                              context.pushRoute(const RecommendationsRoute());
                             }
                             if (v.firstOrNull == 1) {
-                              context.pushRoute(CalendarRoute());
+                              context.pushRoute(const CalendarRoute());
                             }
                           },
                         ),
@@ -115,31 +115,31 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
               ),
               _List(
-                medias: data!.parsedData!.trending!.media!,
+                medias: data.parsedData!.trending!.media!,
                 title: "Trending",
                 onTap: () => context.router.pushNamed(
                     "/search/media?sort=${Enum$MediaSort.TRENDING_DESC.name}"),
               ),
               _List(
-                medias: data!.parsedData!.season!.media!,
+                medias: data.parsedData!.season!.media!,
                 title: "Releasing This Season",
                 onTap: () => context.router.pushNamed(
                     "/search/media?season=${season.$1.name}&year=${season.$2}"),
               ),
               _List(
-                medias: data!.parsedData!.nextSeason!.media!,
+                medias: data.parsedData!.nextSeason!.media!,
                 title: "Releasing Next Season",
                 onTap: () => context.router.pushNamed(
                     "/search/media?season=${nextSeason.$1.name}&year=${nextSeason.$2}"),
               ),
               _List(
-                medias: data!.parsedData!.popular!.media!,
+                medias: data.parsedData!.popular!.media!,
                 title: "All Time Popular",
                 onTap: () => context.router.pushNamed(
                     "/search/media?sort=${Enum$MediaSort.POPULARITY_DESC}"),
               ),
               _List(
-                medias: data!.parsedData!.recent!.media!,
+                medias: data.parsedData!.recent!.media!,
                 title: "Recent",
                 onTap: () => context.router
                     .pushNamed("/search/media?sort=${Enum$MediaSort.ID_DESC}"),

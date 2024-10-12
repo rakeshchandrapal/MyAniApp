@@ -21,7 +21,7 @@ class ForumOverviewPage extends HookWidget {
       refetch: refetch,
       response: snapshot,
       builder: () {
-        var pinned = snapshot!.parsedData!.recent!.threads!
+        var pinned = snapshot.parsedData!.recent!.threads!
             .where((e) => e!.isSticky == true);
         var recent = snapshot.parsedData!.recent!.threads!
             .where((e) => e!.isSticky != true)

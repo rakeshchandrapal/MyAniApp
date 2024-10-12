@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(Colors.blue[100]!),
                   ),
-                  onPressed: () => context.pushRoute(AnilistLoginRoute()),
+                  onPressed: () => context.pushRoute(const AnilistLoginRoute()),
                   child: const Text(
                     "Login with Anilist",
                     style: TextStyle(color: Colors.black),
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: double.maxFinite,
                 child: ElevatedButton(
-                  onPressed: () => context.pushRoute(TokenLoginRoute()),
+                  onPressed: () => context.pushRoute(const TokenLoginRoute()),
                   child: const Text("Login with Token"),
                 ),
               )

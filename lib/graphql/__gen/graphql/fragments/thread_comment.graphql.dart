@@ -58,26 +58,26 @@ class Fragment$ThreadComment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$threadId = threadId;
-    _resultData['threadId'] = l$threadId;
+    resultData['threadId'] = l$threadId;
     final l$comment = comment;
-    _resultData['comment'] = l$comment;
+    resultData['comment'] = l$comment;
     final l$isLiked = isLiked;
-    _resultData['isLiked'] = l$isLiked;
+    resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    _resultData['likeCount'] = l$likeCount;
+    resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt;
+    resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    _resultData['user'] = l$user?.toJson();
+    resultData['user'] = l$user?.toJson();
     final l$isLocked = isLocked;
-    _resultData['isLocked'] = l$isLocked;
+    resultData['isLocked'] = l$isLocked;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -109,7 +109,7 @@ class Fragment$ThreadComment {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadComment) ||
+    if (other is! Fragment$ThreadComment ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -206,6 +206,7 @@ class _CopyWithImpl$Fragment$ThreadComment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? threadId = _undefined,
@@ -240,6 +241,7 @@ class _CopyWithImpl$Fragment$ThreadComment<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -252,8 +254,9 @@ class _CopyWithStubImpl$Fragment$ThreadComment<TRes>
     implements CopyWith$Fragment$ThreadComment<TRes> {
   _CopyWithStubImpl$Fragment$ThreadComment(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? threadId,
@@ -267,6 +270,7 @@ class _CopyWithStubImpl$Fragment$ThreadComment<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }

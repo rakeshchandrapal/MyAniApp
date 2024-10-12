@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:myaniapp/common/cached_image.dart';
@@ -151,7 +150,7 @@ class MediaInfoScreen extends StatelessWidget {
 }
 
 class _Studios extends StatelessWidget {
-  const _Studios({super.key, required this.studios});
+  const _Studios({required this.studios});
 
   final Query$Media$Media$studios studios;
 

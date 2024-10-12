@@ -50,12 +50,12 @@ class ThreadScreen extends HookWidget {
       error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (snapshot!.errors, snapshot.linkError),
+          exception: (snapshot.errors, snapshot.linkError),
           refetch: refetch,
         ),
       ),
       builder: () {
-        if (snapshot?.loading == true && placeholder == null) {
+        if (snapshot.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -63,7 +63,7 @@ class ThreadScreen extends HookWidget {
             ),
           );
         }
-        var threadData = snapshot?.parsedData?.thread;
+        var threadData = snapshot.parsedData?.thread;
 
         var view = CustomScrollView(
           controller: scrollController,
@@ -232,7 +232,7 @@ class ThreadScreen extends HookWidget {
               ),
             ),
             Show(
-              when: snapshot?.parsedData?.comments != null,
+              when: snapshot.parsedData?.comments != null,
               fallback: const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator.adaptive(),
@@ -263,7 +263,7 @@ class ThreadScreen extends HookWidget {
                   );
                 },
                 itemCount:
-                    snapshot!.parsedData!.comments!.threadComments!.length,
+                    snapshot.parsedData!.comments!.threadComments!.length,
               ),
             )
           ],
@@ -277,10 +277,10 @@ class ThreadScreen extends HookWidget {
             ),
             width: 130,
             child: Show(
-              when: snapshot?.parsedData != null,
+              when: snapshot.parsedData != null,
               child: () => SheetDropdownMenu(
                 key: Key(
-                    (snapshot!.parsedData!.comments!.pageInfo!.currentPage ?? 1)
+                    (snapshot.parsedData!.comments!.pageInfo!.currentPage ?? 1)
                         .toString()),
                 value:
                     snapshot.parsedData!.comments!.pageInfo!.currentPage ?? 1,
@@ -317,7 +317,7 @@ class ThreadScreen extends HookWidget {
               when: threadData != null,
               fallback: view,
               child: () => GraphqlPagination(
-                pageInfo: snapshot!.parsedData!.comments!.pageInfo!,
+                pageInfo: snapshot.parsedData!.comments!.pageInfo!,
                 req: (nextPage) => fetchMore(
                   variables: Variables$Query$Thread.fromJson(
                           snapshot.request!.variables)
@@ -371,7 +371,7 @@ class ThreadComment extends ConsumerWidget {
       if (replies != null) {
         for (var reply in replies!) {
           parsedReplies
-              .add(Query$Thread$comments$threadComments.fromJson(reply)!);
+              .add(Query$Thread$comments$threadComments.fromJson(reply));
         }
       }
     } catch (err) {}
@@ -428,10 +428,11 @@ class ThreadComment extends ConsumerWidget {
                     .last
                     .then(
                   (value) {
-                    if (isReply == true)
+                    if (isReply == true) {
                       refetch();
-                    else
+                    } else {
                       refetch(FetchPolicy.cacheFirst);
+                    }
                   },
                 ),
               ),

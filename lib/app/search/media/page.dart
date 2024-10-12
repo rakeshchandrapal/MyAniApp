@@ -15,7 +15,6 @@ import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:mygraphql/graphql.dart';
@@ -140,7 +139,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
                 refetch: refetch,
                 response: snapshot,
                 builder: () => GraphqlPagination(
-                  pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+                  pageInfo: snapshot.parsedData!.Page!.pageInfo!,
                   req: (nextPage) => fetchMore(
                       variables: Variables$Query$Search.fromJson(
                               snapshot.request!.variables)

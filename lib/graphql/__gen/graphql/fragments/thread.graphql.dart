@@ -91,35 +91,35 @@ class Fragment$ThreadFragment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$title = title;
-    _resultData['title'] = l$title;
+    resultData['title'] = l$title;
     final l$replyCount = replyCount;
-    _resultData['replyCount'] = l$replyCount;
+    resultData['replyCount'] = l$replyCount;
     final l$viewCount = viewCount;
-    _resultData['viewCount'] = l$viewCount;
+    resultData['viewCount'] = l$viewCount;
     final l$replyCommentId = replyCommentId;
-    _resultData['replyCommentId'] = l$replyCommentId;
+    resultData['replyCommentId'] = l$replyCommentId;
     final l$repliedAt = repliedAt;
-    _resultData['repliedAt'] = l$repliedAt;
+    resultData['repliedAt'] = l$repliedAt;
     final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt;
+    resultData['createdAt'] = l$createdAt;
     final l$isSticky = isSticky;
-    _resultData['isSticky'] = l$isSticky;
+    resultData['isSticky'] = l$isSticky;
     final l$mediaCategories = mediaCategories;
-    _resultData['mediaCategories'] =
+    resultData['mediaCategories'] =
         l$mediaCategories?.map((e) => e?.toJson()).toList();
     final l$categories = categories;
-    _resultData['categories'] = l$categories?.map((e) => e?.toJson()).toList();
+    resultData['categories'] = l$categories?.map((e) => e?.toJson()).toList();
     final l$user = user;
-    _resultData['user'] = l$user?.toJson();
+    resultData['user'] = l$user?.toJson();
     final l$replyUser = replyUser;
-    _resultData['replyUser'] = l$replyUser?.toJson();
+    resultData['replyUser'] = l$replyUser?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -161,7 +161,7 @@ class Fragment$ThreadFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadFragment) ||
+    if (other is! Fragment$ThreadFragment ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -292,13 +292,13 @@ abstract class CopyWith$Fragment$ThreadFragment<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          _fn);
+          fn);
   TRes categories(
       Iterable<Fragment$ThreadFragment$categories?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment$categories<
                       Fragment$ThreadFragment$categories>?>?)
-          _fn);
+          fn);
   CopyWith$Fragment$UserFragment<TRes> get user;
   CopyWith$Fragment$UserFragment<TRes> get replyUser;
 }
@@ -316,6 +316,7 @@ class _CopyWithImpl$Fragment$ThreadFragment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -366,34 +367,37 @@ class _CopyWithImpl$Fragment$ThreadFragment<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes mediaCategories(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          mediaCategories: _fn(_instance.mediaCategories?.map((e) => e == null
+          mediaCategories: fn(_instance.mediaCategories?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
                   (i) => i,
                 )))?.toList());
 
+  @override
   TRes categories(
           Iterable<Fragment$ThreadFragment$categories?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment$categories<
                           Fragment$ThreadFragment$categories>?>?)
-              _fn) =>
+              fn) =>
       call(
-          categories: _fn(_instance.categories?.map((e) => e == null
+          categories: fn(_instance.categories?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment$categories(
                   e,
                   (i) => i,
                 )))?.toList());
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -401,6 +405,7 @@ class _CopyWithImpl$Fragment$ThreadFragment<TRes>
         : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get replyUser {
     final local$replyUser = _instance.replyUser;
     return local$replyUser == null
@@ -414,8 +419,9 @@ class _CopyWithStubImpl$Fragment$ThreadFragment<TRes>
     implements CopyWith$Fragment$ThreadFragment<TRes> {
   _CopyWithStubImpl$Fragment$ThreadFragment(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     String? title,
@@ -433,13 +439,17 @@ class _CopyWithStubImpl$Fragment$ThreadFragment<TRes>
   }) =>
       _res;
 
-  mediaCategories(_fn) => _res;
+  @override
+  mediaCategories(fn) => _res;
 
-  categories(_fn) => _res;
+  @override
+  categories(fn) => _res;
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get replyUser =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -636,14 +646,14 @@ class Fragment$ThreadFragment$categories {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$name = name;
-    _resultData['name'] = l$name;
+    resultData['name'] = l$name;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -663,7 +673,7 @@ class Fragment$ThreadFragment$categories {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ThreadFragment$categories) ||
+    if (other is! Fragment$ThreadFragment$categories ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -725,6 +735,7 @@ class _CopyWithImpl$Fragment$ThreadFragment$categories<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -745,8 +756,9 @@ class _CopyWithStubImpl$Fragment$ThreadFragment$categories<TRes>
     implements CopyWith$Fragment$ThreadFragment$categories<TRes> {
   _CopyWithStubImpl$Fragment$ThreadFragment$categories(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     String? name,

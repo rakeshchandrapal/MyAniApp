@@ -89,37 +89,37 @@ class Fragment$ListActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$userId = userId;
-    _resultData['userId'] = l$userId;
+    resultData['userId'] = l$userId;
     final l$type = type;
-    _resultData['type'] =
+    resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$status = status;
-    _resultData['status'] = l$status;
+    resultData['status'] = l$status;
     final l$progress = progress;
-    _resultData['progress'] = l$progress;
+    resultData['progress'] = l$progress;
     final l$replyCount = replyCount;
-    _resultData['replyCount'] = l$replyCount;
+    resultData['replyCount'] = l$replyCount;
     final l$isLocked = isLocked;
-    _resultData['isLocked'] = l$isLocked;
+    resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    _resultData['isSubscribed'] = l$isSubscribed;
+    resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    _resultData['isLiked'] = l$isLiked;
+    resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    _resultData['likeCount'] = l$likeCount;
+    resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt;
+    resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    _resultData['user'] = l$user?.toJson();
+    resultData['user'] = l$user?.toJson();
     final l$media = media;
-    _resultData['media'] = l$media?.toJson();
+    resultData['media'] = l$media?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -161,7 +161,7 @@ class Fragment$ListActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ListActivity) || runtimeType != other.runtimeType) {
+    if (other is! Fragment$ListActivity || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -288,6 +288,7 @@ class _CopyWithImpl$Fragment$ListActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -338,6 +339,7 @@ class _CopyWithImpl$Fragment$ListActivity<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -345,6 +347,7 @@ class _CopyWithImpl$Fragment$ListActivity<TRes>
         : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -357,8 +360,9 @@ class _CopyWithStubImpl$Fragment$ListActivity<TRes>
     implements CopyWith$Fragment$ListActivity<TRes> {
   _CopyWithStubImpl$Fragment$ListActivity(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? userId,
@@ -377,9 +381,11 @@ class _CopyWithStubImpl$Fragment$ListActivity<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

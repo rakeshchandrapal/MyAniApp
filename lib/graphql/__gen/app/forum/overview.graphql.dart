@@ -41,16 +41,16 @@ class Query$ForumOverview {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$recent = recent;
-    _resultData['recent'] = l$recent?.toJson();
+    resultData['recent'] = l$recent?.toJson();
     final l$$new = $new;
-    _resultData['new'] = l$$new?.toJson();
+    resultData['new'] = l$$new?.toJson();
     final l$release = release;
-    _resultData['release'] = l$release?.toJson();
+    resultData['release'] = l$release?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -72,7 +72,7 @@ class Query$ForumOverview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ForumOverview) || runtimeType != other.runtimeType) {
+    if (other is! Query$ForumOverview || runtimeType != other.runtimeType) {
       return false;
     }
     final l$recent = recent;
@@ -140,6 +140,7 @@ class _CopyWithImpl$Query$ForumOverview<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? recent = _undefined,
     Object? $new = _undefined,
@@ -161,6 +162,7 @@ class _CopyWithImpl$Query$ForumOverview<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$ForumOverview$recent<TRes> get recent {
     final local$recent = _instance.recent;
     return local$recent == null
@@ -169,6 +171,7 @@ class _CopyWithImpl$Query$ForumOverview<TRes>
             local$recent, (e) => call(recent: e));
   }
 
+  @override
   CopyWith$Query$ForumOverview$new<TRes> get $new {
     final local$$new = _instance.$new;
     return local$$new == null
@@ -176,6 +179,7 @@ class _CopyWithImpl$Query$ForumOverview<TRes>
         : CopyWith$Query$ForumOverview$new(local$$new, (e) => call($new: e));
   }
 
+  @override
   CopyWith$Query$ForumOverview$release<TRes> get release {
     final local$release = _instance.release;
     return local$release == null
@@ -189,8 +193,9 @@ class _CopyWithStubImpl$Query$ForumOverview<TRes>
     implements CopyWith$Query$ForumOverview<TRes> {
   _CopyWithStubImpl$Query$ForumOverview(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$ForumOverview$recent? recent,
     Query$ForumOverview$new? $new,
@@ -199,12 +204,15 @@ class _CopyWithStubImpl$Query$ForumOverview<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$ForumOverview$recent<TRes> get recent =>
       CopyWith$Query$ForumOverview$recent.stub(_res);
 
+  @override
   CopyWith$Query$ForumOverview$new<TRes> get $new =>
       CopyWith$Query$ForumOverview$new.stub(_res);
 
+  @override
   CopyWith$Query$ForumOverview$release<TRes> get release =>
       CopyWith$Query$ForumOverview$release.stub(_res);
 }
@@ -396,12 +404,12 @@ class Query$ForumOverview$recent {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$threads = threads;
-    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -419,7 +427,7 @@ class Query$ForumOverview$recent {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ForumOverview$recent) ||
+    if (other is! Query$ForumOverview$recent ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -474,7 +482,7 @@ abstract class CopyWith$Query$ForumOverview$recent<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$ForumOverview$recent<TRes>
@@ -490,6 +498,7 @@ class _CopyWithImpl$Query$ForumOverview$recent<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? threads = _undefined,
     Object? $__typename = _undefined,
@@ -503,14 +512,15 @@ class _CopyWithImpl$Query$ForumOverview$recent<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          threads: _fn(_instance.threads?.map((e) => e == null
+          threads: fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -522,15 +532,17 @@ class _CopyWithStubImpl$Query$ForumOverview$recent<TRes>
     implements CopyWith$Query$ForumOverview$recent<TRes> {
   _CopyWithStubImpl$Query$ForumOverview$recent(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$ThreadFragment?>? threads,
     String? $__typename,
   }) =>
       _res;
 
-  threads(_fn) => _res;
+  @override
+  threads(fn) => _res;
 }
 
 class Query$ForumOverview$new {
@@ -557,12 +569,12 @@ class Query$ForumOverview$new {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$threads = threads;
-    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -580,7 +592,7 @@ class Query$ForumOverview$new {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ForumOverview$new) ||
+    if (other is! Query$ForumOverview$new ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -634,7 +646,7 @@ abstract class CopyWith$Query$ForumOverview$new<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$ForumOverview$new<TRes>
@@ -650,6 +662,7 @@ class _CopyWithImpl$Query$ForumOverview$new<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? threads = _undefined,
     Object? $__typename = _undefined,
@@ -663,14 +676,15 @@ class _CopyWithImpl$Query$ForumOverview$new<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          threads: _fn(_instance.threads?.map((e) => e == null
+          threads: fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -682,15 +696,17 @@ class _CopyWithStubImpl$Query$ForumOverview$new<TRes>
     implements CopyWith$Query$ForumOverview$new<TRes> {
   _CopyWithStubImpl$Query$ForumOverview$new(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$ThreadFragment?>? threads,
     String? $__typename,
   }) =>
       _res;
 
-  threads(_fn) => _res;
+  @override
+  threads(fn) => _res;
 }
 
 class Query$ForumOverview$release {
@@ -717,12 +733,12 @@ class Query$ForumOverview$release {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$threads = threads;
-    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -740,7 +756,7 @@ class Query$ForumOverview$release {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ForumOverview$release) ||
+    if (other is! Query$ForumOverview$release ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -795,7 +811,7 @@ abstract class CopyWith$Query$ForumOverview$release<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$ForumOverview$release<TRes>
@@ -811,6 +827,7 @@ class _CopyWithImpl$Query$ForumOverview$release<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? threads = _undefined,
     Object? $__typename = _undefined,
@@ -824,14 +841,15 @@ class _CopyWithImpl$Query$ForumOverview$release<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          threads: _fn(_instance.threads?.map((e) => e == null
+          threads: fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -843,13 +861,15 @@ class _CopyWithStubImpl$Query$ForumOverview$release<TRes>
     implements CopyWith$Query$ForumOverview$release<TRes> {
   _CopyWithStubImpl$Query$ForumOverview$release(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$ThreadFragment?>? threads,
     String? $__typename,
   }) =>
       _res;
 
-  threads(_fn) => _res;
+  @override
+  threads(fn) => _res;
 }

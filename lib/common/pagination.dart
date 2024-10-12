@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:myaniapp/graphql/__gen/graphql/fragments/page_info.graphql.dart';
-import 'package:myaniapp/main.dart';
 
 class GraphqlPagination extends StatefulWidget {
   const GraphqlPagination({
@@ -153,8 +150,8 @@ class _PaginationViewState extends State<PaginationView> {
               ),
             ),
           if (isLoading)
-            SliverPadding(
-              padding: const EdgeInsets.all(8.0),
+            const SliverPadding(
+              padding: EdgeInsets.all(8.0),
               sliver: SliverToBoxAdapter(
                 child: Center(
                   child: CircularProgressIndicator.adaptive(),

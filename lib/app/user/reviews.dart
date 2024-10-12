@@ -28,7 +28,7 @@ class UserReviewsScreen extends HookWidget {
       refetch: refetch,
       response: snapshot,
       builder: () => PaginationView.grid(
-        pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+        pageInfo: snapshot.parsedData!.Page!.pageInfo!,
         req: (nextPage) => fetchMore(
           variables:
               Variables$Query$UserReviews.fromJson(snapshot.request!.variables)

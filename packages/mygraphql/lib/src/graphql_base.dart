@@ -2,16 +2,13 @@
 
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gql_dedupe_link/gql_dedupe_link.dart';
 import 'package:gql_exec/gql_exec.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:mygraphql/graphql.dart';
-import 'package:mygraphql/src/fetch_policy.dart';
 import 'package:mygraphql/src/gql.dart';
 import 'package:mygraphql/src/links/fetch_policy_link.dart';
-import 'package:mygraphql/src/request.dart';
 
 class GraphqlClient {
   final Link _link;
@@ -67,7 +64,6 @@ class GraphqlClient {
         client: this,
       ),
     );
-    ;
   }
 
   Map<String, dynamic>? readQuery(

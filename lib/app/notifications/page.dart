@@ -5,7 +5,6 @@ import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/pagination.dart';
-import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/notifications/notifications.graphql.dart';
@@ -91,7 +90,7 @@ class NotificationScreen extends HookWidget {
                       selected: {s.value},
                       onSelectionChanged: (p0) => s.value = p0.first,
                       segments: [
-                        ButtonSegment(
+                        const ButtonSegment(
                           value: null,
                           label: Text("All"),
                         ),
@@ -108,7 +107,7 @@ class NotificationScreen extends HookWidget {
               builder: (context, index) {
                 var notif = AnilistNotification(
                     notification:
-                        snapshot!.parsedData!.Page!.notifications![index]!);
+                        snapshot.parsedData!.Page!.notifications![index]!);
 
                 var n = notif.notification as dynamic;
 
@@ -228,7 +227,7 @@ class NotificationScreen extends HookWidget {
                   ),
                 );
               },
-              itemCount: snapshot!.parsedData!.Page!.notifications!.length),
+              itemCount: snapshot.parsedData!.Page!.notifications!.length),
           // child: GraphqlPagination(
           //   pageInfo: snapshot.parsedData!.Page!.pageInfo!,
           //   req: (nextPage) => fetchMore(

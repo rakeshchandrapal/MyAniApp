@@ -31,7 +31,7 @@ class MyListReleases extends HookWidget {
       refetch: refetch,
       response: snapshot,
       builder: () {
-        var sorted = snapshot!.parsedData!.Page!.media!
+        var sorted = snapshot.parsedData!.Page!.media!
             .where(
               (p0) => p0?.nextAiringEpisode != null,
             )

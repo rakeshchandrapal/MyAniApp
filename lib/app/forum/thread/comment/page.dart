@@ -38,10 +38,10 @@ class ThreadCommentScreen extends HookWidget {
               title:
                   const Text("Viewing a single comment, click to view thread"),
               onTap: () => context.pushRoute(ThreadRoute(
-                  id: snapshot!.parsedData!.ThreadComment!.first!.threadId!)),
+                  id: snapshot.parsedData!.ThreadComment!.first!.threadId!)),
             ),
             ThreadComment(
-              comment: snapshot!.parsedData!.ThreadComment!.first!.comment!,
+              comment: snapshot.parsedData!.ThreadComment!.first!.comment!,
               avatar: snapshot
                   .parsedData!.ThreadComment!.first!.user!.avatar!.large!,
               username: snapshot.parsedData!.ThreadComment!.first!.user!.name,

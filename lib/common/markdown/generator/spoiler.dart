@@ -4,7 +4,6 @@ import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/router.dart';
-import 'package:myaniapp/routes.dart';
 
 md.SpanNodeGeneratorWithTag spoilerTag = md.SpanNodeGeneratorWithTag(
   tag: "spoiler",

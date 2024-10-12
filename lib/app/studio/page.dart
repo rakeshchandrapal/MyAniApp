@@ -1,8 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gql_http_link/gql_http_link.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
@@ -39,7 +36,7 @@ class StudioScreen extends HookConsumerWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      loading: Scaffold(
+      loading: const Scaffold(
         body: Center(
           child: CircularProgressIndicator.adaptive(),
         ),
@@ -60,7 +57,7 @@ class StudioScreen extends HookConsumerWidget {
                   .read(listSettingsProvider.notifier)
                   .update(listSetting.copyWith(studio: type)),
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
           ],
         ),
         body: PaginationView(

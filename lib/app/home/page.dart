@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
@@ -44,7 +43,7 @@ class HomeScreen extends ConsumerWidget {
         children: [
           InkWell(
             onTap: user.value?.data == null
-                ? () => context.pushRoute(LoginRoute())
+                ? () => context.pushRoute(const LoginRoute())
                 : () => context.pushRoute(
                     UserRoute(name: user.value!.parsedData!.Viewer!.name)),
             child: UserAccountsDrawerHeader(
@@ -78,7 +77,7 @@ class HomeScreen extends ConsumerWidget {
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text("Settings"),
-            onTap: () => context.pushRoute(SettingsRoute()),
+            onTap: () => context.pushRoute(const SettingsRoute()),
           ),
           ListTile(
             onTap: () => showAboutDialog(

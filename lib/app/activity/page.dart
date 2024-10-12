@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:graphql_codegen/builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/app/home/home.dart';
@@ -27,7 +24,6 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/text_activity.graphql.d
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
@@ -66,7 +62,7 @@ class ActivityPage extends HookConsumerWidget {
         // dynamic placeholder =
         //     (GoRouterState.of(context).extra as Map?)?["activity"];
 
-        if (snapshot?.loading == true &&
+        if (snapshot.loading == true &&
             placeholder is! Fragment$ListActivity &&
             placeholder is! Fragment$TextActivity &&
             placeholder is! Fragment$MessageActivity) {
@@ -78,7 +74,7 @@ class ActivityPage extends HookConsumerWidget {
           );
         }
 
-        var data = snapshot?.parsedData;
+        var data = snapshot.parsedData;
 
         var view = CustomScrollView(
           slivers: [

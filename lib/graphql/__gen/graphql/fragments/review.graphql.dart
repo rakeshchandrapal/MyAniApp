@@ -52,22 +52,22 @@ class Fragment$ReviewFragment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$rating = rating;
-    _resultData['rating'] = l$rating;
+    resultData['rating'] = l$rating;
     final l$ratingAmount = ratingAmount;
-    _resultData['ratingAmount'] = l$ratingAmount;
+    resultData['ratingAmount'] = l$ratingAmount;
     final l$summary = summary;
-    _resultData['summary'] = l$summary;
+    resultData['summary'] = l$summary;
     final l$media = media;
-    _resultData['media'] = l$media?.toJson();
+    resultData['media'] = l$media?.toJson();
     final l$user = user;
-    _resultData['user'] = l$user?.toJson();
+    resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -95,7 +95,7 @@ class Fragment$ReviewFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewFragment) ||
+    if (other is! Fragment$ReviewFragment ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -181,6 +181,7 @@ class _CopyWithImpl$Fragment$ReviewFragment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? rating = _undefined,
@@ -209,6 +210,7 @@ class _CopyWithImpl$Fragment$ReviewFragment<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$ReviewFragment$media<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -217,6 +219,7 @@ class _CopyWithImpl$Fragment$ReviewFragment<TRes>
             local$media, (e) => call(media: e));
   }
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -229,8 +232,9 @@ class _CopyWithStubImpl$Fragment$ReviewFragment<TRes>
     implements CopyWith$Fragment$ReviewFragment<TRes> {
   _CopyWithStubImpl$Fragment$ReviewFragment(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? rating,
@@ -242,9 +246,11 @@ class _CopyWithStubImpl$Fragment$ReviewFragment<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$ReviewFragment$media<TRes> get media =>
       CopyWith$Fragment$ReviewFragment$media.stub(_res);
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -415,18 +421,18 @@ class Fragment$ReviewFragment$media {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$title = title;
-    _resultData['title'] = l$title?.toJson();
+    resultData['title'] = l$title?.toJson();
     final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$bannerImage = bannerImage;
-    _resultData['bannerImage'] = l$bannerImage;
+    resultData['bannerImage'] = l$bannerImage;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -450,7 +456,7 @@ class Fragment$ReviewFragment$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewFragment$media) ||
+    if (other is! Fragment$ReviewFragment$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -524,6 +530,7 @@ class _CopyWithImpl$Fragment$ReviewFragment$media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -545,6 +552,7 @@ class _CopyWithImpl$Fragment$ReviewFragment$media<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$ReviewFragment$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -558,8 +566,9 @@ class _CopyWithStubImpl$Fragment$ReviewFragment$media<TRes>
     implements CopyWith$Fragment$ReviewFragment$media<TRes> {
   _CopyWithStubImpl$Fragment$ReviewFragment$media(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Fragment$ReviewFragment$media$title? title,
@@ -569,6 +578,7 @@ class _CopyWithStubImpl$Fragment$ReviewFragment$media<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$ReviewFragment$media$title<TRes> get title =>
       CopyWith$Fragment$ReviewFragment$media$title.stub(_res);
 }
@@ -594,12 +604,12 @@ class Fragment$ReviewFragment$media$title {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
+    resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -617,7 +627,7 @@ class Fragment$ReviewFragment$media$title {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment$ReviewFragment$media$title) ||
+    if (other is! Fragment$ReviewFragment$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -673,6 +683,7 @@ class _CopyWithImpl$Fragment$ReviewFragment$media$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -691,8 +702,9 @@ class _CopyWithStubImpl$Fragment$ReviewFragment$media$title<TRes>
     implements CopyWith$Fragment$ReviewFragment$media$title<TRes> {
   _CopyWithStubImpl$Fragment$ReviewFragment$media$title(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userPreferred,
     String? $__typename,

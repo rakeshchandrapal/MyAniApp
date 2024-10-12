@@ -5,8 +5,6 @@ import 'package:gql_exec/src/request.dart';
 import 'package:gql_exec/src/response.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:mygraphql/graphql.dart';
-import 'package:mygraphql/src/fetch_policy.dart';
-import 'package:mygraphql/src/response.dart';
 import 'package:normalize/utils.dart';
 
 var _defaultFetchPolicy = {

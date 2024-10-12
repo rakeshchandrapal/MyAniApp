@@ -22,7 +22,7 @@ class TokenLoginPage extends ConsumerWidget {
             ref
                 .read(settingsProvider.notifier)
                 .updateToken(value)
-                .then((value) => context.navigateTo(HomeRoute()));
+                .then((value) => context.navigateTo(const HomeRoute()));
           }
         },
       ),

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/search/media/page.dart';
@@ -262,8 +261,8 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Tags"),
-                      SizedBox(height: 5),
+                      const Text("Tags"),
+                      const SizedBox(height: 5),
                       Wrap(
                         spacing: 5,
                         runSpacing: 5,
@@ -271,14 +270,14 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                           for (var tag in (query.withTags ?? []))
                             Chip(
                               label: Text(tag.name),
-                              side: BorderSide(color: Colors.green),
+                              side: const BorderSide(color: Colors.green),
                               onDeleted: () =>
                                   setState(() => query.withTags!.remove(tag)),
                             ),
                           for (var tag in (query.withoutTags ?? []))
                             Chip(
                               label: Text(tag.name),
-                              side: BorderSide(color: Colors.red),
+                              side: const BorderSide(color: Colors.red),
                               onDeleted: () => setState(
                                   () => query.withoutTags!.remove(tag)),
                             )
@@ -292,15 +291,17 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                     blacklistedTags: query.withoutTags ?? [],
                     onChanged: (whitelistedTags, blacklistedTags) {
                       setState(() {
-                        if (whitelistedTags.isNotEmpty)
+                        if (whitelistedTags.isNotEmpty) {
                           query.withTags = whitelistedTags;
-                        else
+                        } else {
                           query.withTags = null;
+                        }
 
-                        if (blacklistedTags.isNotEmpty)
+                        if (blacklistedTags.isNotEmpty) {
                           query.withoutTags = blacklistedTags;
-                        else
+                        } else {
                           query.withoutTags = null;
+                        }
                       });
                     },
                   ),
@@ -334,7 +335,7 @@ class GenresButton extends HookConsumerWidget {
       refetch: refetch,
       response: snapshot,
       builder: () {
-        var genresList = snapshot!.parsedData!.genres!.toList();
+        var genresList = snapshot.parsedData!.genres!.toList();
 
         if ((displayAdultContent ?? true) == false) {
           genresList.remove("Hentai");
@@ -352,7 +353,7 @@ class GenresButton extends HookConsumerWidget {
               PopupSettingCheckbox(
                 value: genre!,
                 // checked: genres?.contains(genre) == true,
-                label: genre!,
+                label: genre,
               ),
           ],
           onClear: () => onChanged(null),

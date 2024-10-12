@@ -63,7 +63,7 @@ class _MediaScreenState extends State<MediaScreen> {
         ),
       ),
       builder: () {
-        if (snapshot?.loading == true && widget.placeholder == null) {
+        if (snapshot.loading == true && widget.placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -71,7 +71,7 @@ class _MediaScreenState extends State<MediaScreen> {
             ),
           );
         }
-        if (snapshot?.data == null) {
+        if (snapshot.data == null) {
           return Scaffold(
             body: CustomScrollView(
               slivers: [
@@ -86,7 +86,7 @@ class _MediaScreenState extends State<MediaScreen> {
           );
         }
 
-        _buildTabs(snapshot!.parsedData!.Media!);
+        _buildTabs(snapshot.parsedData!.Media!);
 
         return AutoTabsRouter.tabBar(
           routes: [
@@ -108,9 +108,9 @@ class _MediaScreenState extends State<MediaScreen> {
                 notificationPredicate: (notification) =>
                     notification.depth == 2,
                 button: Show(
-                  when: snapshot?.parsedData?.Media != null,
+                  when: snapshot.parsedData?.Media != null,
                   child: () => FloatingButtons(
-                    media: snapshot!.parsedData!.Media!,
+                    media: snapshot.parsedData!.Media!,
                     onUpdate: refetch,
                   ),
                 ),
@@ -120,7 +120,7 @@ class _MediaScreenState extends State<MediaScreen> {
                       FloatingActionButtonLocation.centerFloat,
                   body: NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      if (snapshot?.parsedData?.Media?.nextAiringEpisode !=
+                      if (snapshot.parsedData?.Media?.nextAiringEpisode !=
                           null)
                         SliverToBoxAdapter(
                           child: SafeArea(
@@ -132,7 +132,7 @@ class _MediaScreenState extends State<MediaScreen> {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Episode ${snapshot.parsedData!.Media!.nextAiringEpisode!.episode} Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
@@ -141,9 +141,9 @@ class _MediaScreenState extends State<MediaScreen> {
                         ),
                       MediaBar(
                         tab: tabs[tabController.index].$2,
-                        data: snapshot!.parsedData!.Media!,
+                        data: snapshot.parsedData!.Media!,
                       ),
-                      if (snapshot?.parsedData != null && tabs.isNotEmpty)
+                      if (snapshot.parsedData != null && tabs.isNotEmpty)
                         SliverPersistentHeader(
                           delegate: SliverTabBarViewDelegate(
                             child: TabBar(
@@ -273,7 +273,7 @@ class MediaBar extends ConsumerWidget {
       pinned: true,
       title: InvisibleExpandedTitle(
         child: Text(
-          data!.title!.userPreferred!,
+          data.title!.userPreferred!,
           maxLines: 2,
         ),
       ),
@@ -329,9 +329,9 @@ class MediaBar extends ConsumerWidget {
             SizedBox(
               height: 210,
               child: BlurImage(
-                enabled: data!.isAdult ?? false,
+                enabled: data.isAdult ?? false,
                 child: WidgetGradient(
-                  child: data?.bannerImage == null
+                  child: data.bannerImage == null
                       ? Container(
                           height: 210,
                           color: data != null ? Colors.grey : null,
@@ -344,13 +344,13 @@ class MediaBar extends ConsumerWidget {
                       : InkWellImage(
                           onTap: () => ImageViewer.showImage(
                             context,
-                            data!.bannerImage!,
-                            tag: data!.bannerImage,
+                            data.bannerImage!,
+                            tag: data.bannerImage,
                           ),
                           child: Hero(
-                            tag: data!.bannerImage!,
+                            tag: data.bannerImage!,
                             child: CachedImage(
-                              data!.bannerImage!,
+                              data.bannerImage!,
                               fit: BoxFit.cover,
                               height: 210,
                               width: double.maxFinite,
@@ -369,18 +369,18 @@ class MediaBar extends ConsumerWidget {
                   InkWellImage(
                     onTap: () => ImageViewer.showImage(
                       context,
-                      data!.coverImage!.extraLarge!,
-                      tag: data!.id,
+                      data.coverImage!.extraLarge!,
+                      tag: data.id,
                     ),
                     borderRadius: imageRadius,
                     child: Hero(
-                      tag: data!.id,
+                      tag: data.id,
                       child: ClipRRect(
                         borderRadius: imageRadius,
                         child: BlurImage(
-                          enabled: data!.isAdult ?? false,
+                          enabled: data.isAdult ?? false,
                           child: CachedImage(
-                            data!.coverImage!.extraLarge!,
+                            data.coverImage!.extraLarge!,
                             height: 150,
                             width: 106,
                             fit: BoxFit.fill,
@@ -399,13 +399,13 @@ class MediaBar extends ConsumerWidget {
                       children: [
                         if (data.isAdult == true)
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             decoration: BoxDecoration(
                               color: Colors.red[700],
                               borderRadius: BorderRadius.circular(7),
                             ),
-                            child: Text(
+                            child: const Text(
                               "18+",
                               style: TextStyle(color: Colors.white),
                             ),
@@ -446,7 +446,7 @@ class MediaBar extends ConsumerWidget {
                             ),
                           ),
                           child: Text(
-                            data!.title!.userPreferred!,
+                            data.title!.userPreferred!,
                             style: context.theme.textTheme.titleMedium
                                 ?.copyWith(color: Colors.blue[400]),
                             overflow: TextOverflow.ellipsis,
@@ -454,12 +454,12 @@ class MediaBar extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          data!.format?.name.capitalize() ??
-                              data!.type!.name.capitalize(),
+                          data.format?.name.capitalize() ??
+                              data.type!.name.capitalize(),
                           maxLines: 2,
                           style: context.theme.textTheme.titleSmall,
                         ),
-                        if (data?.favourites != null)
+                        if (data.favourites != null)
                           Row(
                             children: [
                               const Icon(
@@ -470,10 +470,10 @@ class MediaBar extends ConsumerWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text(data!.favourites!.abbreviate()),
+                              Text(data.favourites!.abbreviate()),
                             ],
                           ),
-                        if (data?.averageScore != null)
+                        if (data.averageScore != null)
                           Row(
                             children: [
                               const Icon(
@@ -484,7 +484,7 @@ class MediaBar extends ConsumerWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text("${data!.averageScore!.abbreviate()}/100"),
+                              Text("${data.averageScore!.abbreviate()}/100"),
                             ],
                           ),
                       ],

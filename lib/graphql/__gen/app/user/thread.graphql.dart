@@ -71,7 +71,7 @@ class Variables$Query$UserThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$UserThreads) ||
+    if (other is! Variables$Query$UserThreads ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -146,6 +146,7 @@ class _CopyWithImpl$Variables$Query$UserThreads<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userId = _undefined,
     Object? threadPage = _undefined,
@@ -163,8 +164,9 @@ class _CopyWithStubImpl$Variables$Query$UserThreads<TRes>
     implements CopyWith$Variables$Query$UserThreads<TRes> {
   _CopyWithStubImpl$Variables$Query$UserThreads(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? userId,
     int? threadPage,
@@ -204,14 +206,14 @@ class Query$UserThreads {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$thread = thread;
-    _resultData['thread'] = l$thread?.toJson();
+    resultData['thread'] = l$thread?.toJson();
     final l$comments = comments;
-    _resultData['comments'] = l$comments?.toJson();
+    resultData['comments'] = l$comments?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -231,7 +233,7 @@ class Query$UserThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserThreads) || runtimeType != other.runtimeType) {
+    if (other is! Query$UserThreads || runtimeType != other.runtimeType) {
       return false;
     }
     final l$thread = thread;
@@ -292,6 +294,7 @@ class _CopyWithImpl$Query$UserThreads<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? thread = _undefined,
     Object? comments = _undefined,
@@ -309,6 +312,7 @@ class _CopyWithImpl$Query$UserThreads<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$UserThreads$thread<TRes> get thread {
     final local$thread = _instance.thread;
     return local$thread == null
@@ -317,6 +321,7 @@ class _CopyWithImpl$Query$UserThreads<TRes>
             local$thread, (e) => call(thread: e));
   }
 
+  @override
   CopyWith$Query$UserThreads$comments<TRes> get comments {
     final local$comments = _instance.comments;
     return local$comments == null
@@ -330,8 +335,9 @@ class _CopyWithStubImpl$Query$UserThreads<TRes>
     implements CopyWith$Query$UserThreads<TRes> {
   _CopyWithStubImpl$Query$UserThreads(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$UserThreads$thread? thread,
     Query$UserThreads$comments? comments,
@@ -339,9 +345,11 @@ class _CopyWithStubImpl$Query$UserThreads<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$UserThreads$thread<TRes> get thread =>
       CopyWith$Query$UserThreads$thread.stub(_res);
 
+  @override
   CopyWith$Query$UserThreads$comments<TRes> get comments =>
       CopyWith$Query$UserThreads$comments.stub(_res);
 }
@@ -651,14 +659,14 @@ class Query$UserThreads$thread {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$threads = threads;
-    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -678,7 +686,7 @@ class Query$UserThreads$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserThreads$thread) ||
+    if (other is! Query$UserThreads$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -740,7 +748,7 @@ abstract class CopyWith$Query$UserThreads$thread<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$UserThreads$thread<TRes>
@@ -756,6 +764,7 @@ class _CopyWithImpl$Query$UserThreads$thread<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? threads = _undefined,
@@ -773,6 +782,7 @@ class _CopyWithImpl$Query$UserThreads$thread<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -780,14 +790,15 @@ class _CopyWithImpl$Query$UserThreads$thread<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
+  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          threads: _fn(_instance.threads?.map((e) => e == null
+          threads: fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -799,8 +810,9 @@ class _CopyWithStubImpl$Query$UserThreads$thread<TRes>
     implements CopyWith$Query$UserThreads$thread<TRes> {
   _CopyWithStubImpl$Query$UserThreads$thread(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$ThreadFragment?>? threads,
@@ -808,10 +820,12 @@ class _CopyWithStubImpl$Query$UserThreads$thread<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  threads(_fn) => _res;
+  @override
+  threads(fn) => _res;
 }
 
 class Query$UserThreads$comments {
@@ -846,15 +860,15 @@ class Query$UserThreads$comments {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$threadComments = threadComments;
-    _resultData['threadComments'] =
+    resultData['threadComments'] =
         l$threadComments?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -876,7 +890,7 @@ class Query$UserThreads$comments {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserThreads$comments) ||
+    if (other is! Query$UserThreads$comments ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -939,7 +953,7 @@ abstract class CopyWith$Query$UserThreads$comments<TRes> {
               Iterable<
                   CopyWith$Query$UserThreads$comments$threadComments<
                       Query$UserThreads$comments$threadComments>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$UserThreads$comments<TRes>
@@ -955,6 +969,7 @@ class _CopyWithImpl$Query$UserThreads$comments<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? threadComments = _undefined,
@@ -973,6 +988,7 @@ class _CopyWithImpl$Query$UserThreads$comments<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -980,14 +996,15 @@ class _CopyWithImpl$Query$UserThreads$comments<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
+  @override
   TRes threadComments(
           Iterable<Query$UserThreads$comments$threadComments?>? Function(
                   Iterable<
                       CopyWith$Query$UserThreads$comments$threadComments<
                           Query$UserThreads$comments$threadComments>?>?)
-              _fn) =>
+              fn) =>
       call(
-          threadComments: _fn(_instance.threadComments?.map((e) => e == null
+          threadComments: fn(_instance.threadComments?.map((e) => e == null
               ? null
               : CopyWith$Query$UserThreads$comments$threadComments(
                   e,
@@ -999,8 +1016,9 @@ class _CopyWithStubImpl$Query$UserThreads$comments<TRes>
     implements CopyWith$Query$UserThreads$comments<TRes> {
   _CopyWithStubImpl$Query$UserThreads$comments(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$UserThreads$comments$threadComments?>? threadComments,
@@ -1008,10 +1026,12 @@ class _CopyWithStubImpl$Query$UserThreads$comments<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  threadComments(_fn) => _res;
+  @override
+  threadComments(fn) => _res;
 }
 
 class Query$UserThreads$comments$threadComments {
@@ -1075,26 +1095,26 @@ class Query$UserThreads$comments$threadComments {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$threadId = threadId;
-    _resultData['threadId'] = l$threadId;
+    resultData['threadId'] = l$threadId;
     final l$comment = comment;
-    _resultData['comment'] = l$comment;
+    resultData['comment'] = l$comment;
     final l$isLiked = isLiked;
-    _resultData['isLiked'] = l$isLiked;
+    resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    _resultData['likeCount'] = l$likeCount;
+    resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt;
+    resultData['createdAt'] = l$createdAt;
     final l$thread = thread;
-    _resultData['thread'] = l$thread?.toJson();
+    resultData['thread'] = l$thread?.toJson();
     final l$user = user;
-    _resultData['user'] = l$user?.toJson();
+    resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1126,7 +1146,7 @@ class Query$UserThreads$comments$threadComments {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserThreads$comments$threadComments) ||
+    if (other is! Query$UserThreads$comments$threadComments ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1226,6 +1246,7 @@ class _CopyWithImpl$Query$UserThreads$comments$threadComments<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? threadId = _undefined,
@@ -1261,6 +1282,7 @@ class _CopyWithImpl$Query$UserThreads$comments$threadComments<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$UserThreads$comments$threadComments$thread<TRes> get thread {
     final local$thread = _instance.thread;
     return local$thread == null
@@ -1270,6 +1292,7 @@ class _CopyWithImpl$Query$UserThreads$comments$threadComments<TRes>
             local$thread, (e) => call(thread: e));
   }
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1282,8 +1305,9 @@ class _CopyWithStubImpl$Query$UserThreads$comments$threadComments<TRes>
     implements CopyWith$Query$UserThreads$comments$threadComments<TRes> {
   _CopyWithStubImpl$Query$UserThreads$comments$threadComments(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? threadId,
@@ -1297,9 +1321,11 @@ class _CopyWithStubImpl$Query$UserThreads$comments$threadComments<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$UserThreads$comments$threadComments$thread<TRes> get thread =>
       CopyWith$Query$UserThreads$comments$threadComments$thread.stub(_res);
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1330,14 +1356,14 @@ class Query$UserThreads$comments$threadComments$thread {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$title = title;
-    _resultData['title'] = l$title;
+    resultData['title'] = l$title;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1357,7 +1383,7 @@ class Query$UserThreads$comments$threadComments$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$UserThreads$comments$threadComments$thread) ||
+    if (other is! Query$UserThreads$comments$threadComments$thread ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1420,6 +1446,7 @@ class _CopyWithImpl$Query$UserThreads$comments$threadComments$thread<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -1438,8 +1465,9 @@ class _CopyWithStubImpl$Query$UserThreads$comments$threadComments$thread<TRes>
     implements CopyWith$Query$UserThreads$comments$threadComments$thread<TRes> {
   _CopyWithStubImpl$Query$UserThreads$comments$threadComments$thread(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     String? title,

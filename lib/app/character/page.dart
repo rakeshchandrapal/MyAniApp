@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/cached_image.dart';
@@ -22,7 +21,6 @@ import 'package:myaniapp/graphql/__gen/app/character/character.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/fragments/character.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:mygraphql/graphql.dart';
@@ -55,12 +53,12 @@ class CharacterPage extends HookConsumerWidget {
       error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (snapshot!.errors, snapshot.linkError),
+          exception: (snapshot.errors, snapshot.linkError),
           refetch: refetch,
         ),
       ),
       builder: () {
-        if (snapshot?.loading == true && placeholder == null) {
+        if (snapshot.loading == true && placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -68,7 +66,7 @@ class CharacterPage extends HookConsumerWidget {
             ),
           );
         }
-        var data = snapshot?.parsedData?.Character;
+        var data = snapshot.parsedData?.Character;
 
         return HidingFloatingButton(
           button: Show(
@@ -194,7 +192,7 @@ class CharacterPage extends HookConsumerWidget {
                           .toJson(),
                     ),
                     isGrid: listSettings.character == ListType.grid,
-                    itemCount: data!.media!.edges!.length,
+                    itemCount: data.media!.edges!.length,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
@@ -203,10 +201,10 @@ class CharacterPage extends HookConsumerWidget {
                       crossAxisSpacing: 10,
                     ),
                     padding: listSettings.character == ListType.grid
-                        ? EdgeInsets.all(8)
+                        ? const EdgeInsets.all(8)
                         : null,
                     trailing: SliverPadding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       sliver: SliverToBoxAdapter(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

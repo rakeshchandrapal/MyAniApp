@@ -88,7 +88,7 @@ class Variables$Query$Explore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Explore) ||
+    if (other is! Variables$Query$Explore ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -175,6 +175,7 @@ class _CopyWithImpl$Variables$Query$Explore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? season = _undefined,
     Object? seasonYear = _undefined,
@@ -195,8 +196,9 @@ class _CopyWithStubImpl$Variables$Query$Explore<TRes>
     implements CopyWith$Variables$Query$Explore<TRes> {
   _CopyWithStubImpl$Variables$Query$Explore(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Enum$MediaSeason? season,
     int? seasonYear,
@@ -258,20 +260,20 @@ class Query$Explore {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$trending = trending;
-    _resultData['trending'] = l$trending?.toJson();
+    resultData['trending'] = l$trending?.toJson();
     final l$season = season;
-    _resultData['season'] = l$season?.toJson();
+    resultData['season'] = l$season?.toJson();
     final l$nextSeason = nextSeason;
-    _resultData['nextSeason'] = l$nextSeason?.toJson();
+    resultData['nextSeason'] = l$nextSeason?.toJson();
     final l$popular = popular;
-    _resultData['popular'] = l$popular?.toJson();
+    resultData['popular'] = l$popular?.toJson();
     final l$recent = recent;
-    _resultData['recent'] = l$recent?.toJson();
+    resultData['recent'] = l$recent?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -297,7 +299,7 @@ class Query$Explore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Explore) || runtimeType != other.runtimeType) {
+    if (other is! Query$Explore || runtimeType != other.runtimeType) {
       return false;
     }
     final l$trending = trending;
@@ -378,6 +380,7 @@ class _CopyWithImpl$Query$Explore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? trending = _undefined,
     Object? season = _undefined,
@@ -407,6 +410,7 @@ class _CopyWithImpl$Query$Explore<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Explore$trending<TRes> get trending {
     final local$trending = _instance.trending;
     return local$trending == null
@@ -415,6 +419,7 @@ class _CopyWithImpl$Query$Explore<TRes>
             local$trending, (e) => call(trending: e));
   }
 
+  @override
   CopyWith$Query$Explore$season<TRes> get season {
     final local$season = _instance.season;
     return local$season == null
@@ -422,6 +427,7 @@ class _CopyWithImpl$Query$Explore<TRes>
         : CopyWith$Query$Explore$season(local$season, (e) => call(season: e));
   }
 
+  @override
   CopyWith$Query$Explore$nextSeason<TRes> get nextSeason {
     final local$nextSeason = _instance.nextSeason;
     return local$nextSeason == null
@@ -430,6 +436,7 @@ class _CopyWithImpl$Query$Explore<TRes>
             local$nextSeason, (e) => call(nextSeason: e));
   }
 
+  @override
   CopyWith$Query$Explore$popular<TRes> get popular {
     final local$popular = _instance.popular;
     return local$popular == null
@@ -438,6 +445,7 @@ class _CopyWithImpl$Query$Explore<TRes>
             local$popular, (e) => call(popular: e));
   }
 
+  @override
   CopyWith$Query$Explore$recent<TRes> get recent {
     final local$recent = _instance.recent;
     return local$recent == null
@@ -450,8 +458,9 @@ class _CopyWithStubImpl$Query$Explore<TRes>
     implements CopyWith$Query$Explore<TRes> {
   _CopyWithStubImpl$Query$Explore(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Explore$trending? trending,
     Query$Explore$season? season,
@@ -462,18 +471,23 @@ class _CopyWithStubImpl$Query$Explore<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Explore$trending<TRes> get trending =>
       CopyWith$Query$Explore$trending.stub(_res);
 
+  @override
   CopyWith$Query$Explore$season<TRes> get season =>
       CopyWith$Query$Explore$season.stub(_res);
 
+  @override
   CopyWith$Query$Explore$nextSeason<TRes> get nextSeason =>
       CopyWith$Query$Explore$nextSeason.stub(_res);
 
+  @override
   CopyWith$Query$Explore$popular<TRes> get popular =>
       CopyWith$Query$Explore$popular.stub(_res);
 
+  @override
   CopyWith$Query$Explore$recent<TRes> get recent =>
       CopyWith$Query$Explore$recent.stub(_res);
 }
@@ -850,12 +864,12 @@ class Query$Explore$trending {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -873,7 +887,7 @@ class Query$Explore$trending {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Explore$trending) ||
+    if (other is! Query$Explore$trending ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -927,7 +941,7 @@ abstract class CopyWith$Query$Explore$trending<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Explore$trending<TRes>
@@ -943,6 +957,7 @@ class _CopyWithImpl$Query$Explore$trending<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? media = _undefined,
     Object? $__typename = _undefined,
@@ -956,14 +971,15 @@ class _CopyWithImpl$Query$Explore$trending<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -975,15 +991,17 @@ class _CopyWithStubImpl$Query$Explore$trending<TRes>
     implements CopyWith$Query$Explore$trending<TRes> {
   _CopyWithStubImpl$Query$Explore$trending(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$MediaFragment?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }
 
 class Query$Explore$season {
@@ -1010,12 +1028,12 @@ class Query$Explore$season {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1033,7 +1051,7 @@ class Query$Explore$season {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Explore$season) || runtimeType != other.runtimeType) {
+    if (other is! Query$Explore$season || runtimeType != other.runtimeType) {
       return false;
     }
     final l$media = media;
@@ -1086,7 +1104,7 @@ abstract class CopyWith$Query$Explore$season<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Explore$season<TRes>
@@ -1102,6 +1120,7 @@ class _CopyWithImpl$Query$Explore$season<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? media = _undefined,
     Object? $__typename = _undefined,
@@ -1115,14 +1134,15 @@ class _CopyWithImpl$Query$Explore$season<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -1134,15 +1154,17 @@ class _CopyWithStubImpl$Query$Explore$season<TRes>
     implements CopyWith$Query$Explore$season<TRes> {
   _CopyWithStubImpl$Query$Explore$season(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$MediaFragment?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }
 
 class Query$Explore$nextSeason {
@@ -1169,12 +1191,12 @@ class Query$Explore$nextSeason {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1192,7 +1214,7 @@ class Query$Explore$nextSeason {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Explore$nextSeason) ||
+    if (other is! Query$Explore$nextSeason ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1247,7 +1269,7 @@ abstract class CopyWith$Query$Explore$nextSeason<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Explore$nextSeason<TRes>
@@ -1263,6 +1285,7 @@ class _CopyWithImpl$Query$Explore$nextSeason<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? media = _undefined,
     Object? $__typename = _undefined,
@@ -1276,14 +1299,15 @@ class _CopyWithImpl$Query$Explore$nextSeason<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -1295,15 +1319,17 @@ class _CopyWithStubImpl$Query$Explore$nextSeason<TRes>
     implements CopyWith$Query$Explore$nextSeason<TRes> {
   _CopyWithStubImpl$Query$Explore$nextSeason(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$MediaFragment?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }
 
 class Query$Explore$popular {
@@ -1330,12 +1356,12 @@ class Query$Explore$popular {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1353,7 +1379,7 @@ class Query$Explore$popular {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Explore$popular) || runtimeType != other.runtimeType) {
+    if (other is! Query$Explore$popular || runtimeType != other.runtimeType) {
       return false;
     }
     final l$media = media;
@@ -1406,7 +1432,7 @@ abstract class CopyWith$Query$Explore$popular<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Explore$popular<TRes>
@@ -1422,6 +1448,7 @@ class _CopyWithImpl$Query$Explore$popular<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? media = _undefined,
     Object? $__typename = _undefined,
@@ -1435,14 +1462,15 @@ class _CopyWithImpl$Query$Explore$popular<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -1454,15 +1482,17 @@ class _CopyWithStubImpl$Query$Explore$popular<TRes>
     implements CopyWith$Query$Explore$popular<TRes> {
   _CopyWithStubImpl$Query$Explore$popular(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$MediaFragment?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }
 
 class Query$Explore$recent {
@@ -1489,12 +1519,12 @@ class Query$Explore$recent {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1512,7 +1542,7 @@ class Query$Explore$recent {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Explore$recent) || runtimeType != other.runtimeType) {
+    if (other is! Query$Explore$recent || runtimeType != other.runtimeType) {
       return false;
     }
     final l$media = media;
@@ -1565,7 +1595,7 @@ abstract class CopyWith$Query$Explore$recent<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Explore$recent<TRes>
@@ -1581,6 +1611,7 @@ class _CopyWithImpl$Query$Explore$recent<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? media = _undefined,
     Object? $__typename = _undefined,
@@ -1594,14 +1625,15 @@ class _CopyWithImpl$Query$Explore$recent<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -1613,13 +1645,15 @@ class _CopyWithStubImpl$Query$Explore$recent<TRes>
     implements CopyWith$Query$Explore$recent<TRes> {
   _CopyWithStubImpl$Query$Explore$recent(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$MediaFragment?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }

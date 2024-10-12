@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myaniapp/providers/shared_prefs.dart';
-import 'package:myaniapp/providers/user.dart';
 
 class _Settings {
   final String? token;

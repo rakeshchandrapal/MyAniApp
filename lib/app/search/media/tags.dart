@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:myaniapp/app/home/home.dart';
@@ -67,8 +66,8 @@ class _TagsEditorSheetState extends State<TagsEditorSheet> {
           return HookBuilder(
             builder: (context) {
               var tags = useMemoized(
-                  () => Tag.sort(snapshot!.parsedData!.tags!),
-                  [snapshot!.parsedData!.tags!]);
+                  () => Tag.sort(snapshot.parsedData!.tags!),
+                  [snapshot.parsedData!.tags!]);
               var textEditingController = useTextEditingController();
               var notifier = useValueListenable(textEditingController);
 
@@ -94,7 +93,7 @@ class _TagsEditorSheetState extends State<TagsEditorSheet> {
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
                     title: TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(borderRadius: imageRadius),
                         hintText: "Search",
                       ),
@@ -120,9 +119,9 @@ class _TagsEditorSheetState extends State<TagsEditorSheet> {
                               subtitle: tag.description?.isNotEmpty == true
                                   ? Text(tag.description!)
                                   : null,
-                              value: whitelistedTags?.contains(tag) == true
+                              value: whitelistedTags.contains(tag) == true
                                   ? true
-                                  : blacklistedTags?.contains(tag) == true
+                                  : blacklistedTags.contains(tag) == true
                                       ? null
                                       : false,
                               tristate: true,

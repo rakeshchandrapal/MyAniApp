@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
@@ -46,7 +44,7 @@ class MediaSimilarScreen extends HookConsumerWidget {
                       snapshot.request!.variables)
                   .copyWith(page: nextPage)
                   .toJson()),
-          pageInfo: snapshot!.parsedData!.Media!.recommendations!.pageInfo!,
+          pageInfo: snapshot.parsedData!.Media!.recommendations!.pageInfo!,
           builder: (context, index) {
             var media = snapshot.parsedData!.Media!.recommendations!
                 .nodes![index]!.mediaRecommendation;
@@ -66,7 +64,7 @@ class MediaSimilarScreen extends HookConsumerWidget {
             );
           },
           itemCount:
-              snapshot!.parsedData!.Media!.recommendations!.nodes!.length,
+              snapshot.parsedData!.Media!.recommendations!.nodes!.length,
         ),
         child: () => PaginationView.grid(
           padding: const EdgeInsets.all(8),
@@ -75,7 +73,7 @@ class MediaSimilarScreen extends HookConsumerWidget {
                       snapshot.request!.variables)
                   .copyWith(page: nextPage)
                   .toJson()),
-          pageInfo: snapshot!.parsedData!.Media!.recommendations!.pageInfo!,
+          pageInfo: snapshot.parsedData!.Media!.recommendations!.pageInfo!,
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 150,
             childAspectRatio: GridCard.listRatio,
@@ -101,7 +99,7 @@ class MediaSimilarScreen extends HookConsumerWidget {
             );
           },
           itemCount:
-              snapshot!.parsedData!.Media!.recommendations!.nodes!.length,
+              snapshot.parsedData!.Media!.recommendations!.nodes!.length,
         ),
       ),
       // builder: () => GraphqlPagination(

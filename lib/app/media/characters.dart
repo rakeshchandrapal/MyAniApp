@@ -7,7 +7,6 @@ import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/custom_dropdown.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/pagination.dart';
-import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/media/characters.graphql.dart';
@@ -53,7 +52,7 @@ class MediaCharactersScreen extends HookWidget {
       response: snapshot,
       builder: () {
         return PaginationView.list(
-          pageInfo: snapshot!.parsedData!.Media!.characters!.pageInfo!,
+          pageInfo: snapshot.parsedData!.Media!.characters!.pageInfo!,
           req: (nextPage) => fetchMore(
               variables: Variables$Query$MediaCharacters.fromJson(
                       snapshot.request!.variables)

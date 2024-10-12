@@ -43,7 +43,7 @@ class Variables$Query$Review {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Review) ||
+    if (other is! Variables$Query$Review ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -90,6 +90,7 @@ class _CopyWithImpl$Variables$Query$Review<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? id = _undefined}) => _then(Variables$Query$Review._({
         ..._instance._$data,
         if (id != _undefined) 'id': (id as int?),
@@ -100,8 +101,9 @@ class _CopyWithStubImpl$Variables$Query$Review<TRes>
     implements CopyWith$Variables$Query$Review<TRes> {
   _CopyWithStubImpl$Variables$Query$Review(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({int? id}) => _res;
 }
 
@@ -127,12 +129,12 @@ class Query$Review {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$Review = Review;
-    _resultData['Review'] = l$Review?.toJson();
+    resultData['Review'] = l$Review?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -150,7 +152,7 @@ class Query$Review {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Review) || runtimeType != other.runtimeType) {
+    if (other is! Query$Review || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Review = Review;
@@ -201,6 +203,7 @@ class _CopyWithImpl$Query$Review<TRes> implements CopyWith$Query$Review<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? Review = _undefined,
     Object? $__typename = _undefined,
@@ -214,6 +217,7 @@ class _CopyWithImpl$Query$Review<TRes> implements CopyWith$Query$Review<TRes> {
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Review$Review<TRes> get Review {
     final local$Review = _instance.Review;
     return local$Review == null
@@ -226,14 +230,16 @@ class _CopyWithStubImpl$Query$Review<TRes>
     implements CopyWith$Query$Review<TRes> {
   _CopyWithStubImpl$Query$Review(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Review$Review? Review,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Review$Review<TRes> get Review =>
       CopyWith$Query$Review$Review.stub(_res);
 }
@@ -369,18 +375,25 @@ class Query$Review$Review implements Fragment$ReviewFragment {
     );
   }
 
+  @override
   final int id;
 
+  @override
   final int? rating;
 
+  @override
   final int? ratingAmount;
 
+  @override
   final String? summary;
 
+  @override
   final Query$Review$Review$media? media;
 
+  @override
   final Fragment$UserFragment? user;
 
+  @override
   final String $__typename;
 
   final String? body;
@@ -391,32 +404,33 @@ class Query$Review$Review implements Fragment$ReviewFragment {
 
   final int createdAt;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$rating = rating;
-    _resultData['rating'] = l$rating;
+    resultData['rating'] = l$rating;
     final l$ratingAmount = ratingAmount;
-    _resultData['ratingAmount'] = l$ratingAmount;
+    resultData['ratingAmount'] = l$ratingAmount;
     final l$summary = summary;
-    _resultData['summary'] = l$summary;
+    resultData['summary'] = l$summary;
     final l$media = media;
-    _resultData['media'] = l$media?.toJson();
+    resultData['media'] = l$media?.toJson();
     final l$user = user;
-    _resultData['user'] = l$user?.toJson();
+    resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
+    resultData['__typename'] = l$$__typename;
     final l$body = body;
-    _resultData['body'] = l$body;
+    resultData['body'] = l$body;
     final l$userRating = userRating;
-    _resultData['userRating'] =
+    resultData['userRating'] =
         l$userRating == null ? null : toJson$Enum$ReviewRating(l$userRating);
     final l$score = score;
-    _resultData['score'] = l$score;
+    resultData['score'] = l$score;
     final l$createdAt = createdAt;
-    _resultData['createdAt'] = l$createdAt;
-    return _resultData;
+    resultData['createdAt'] = l$createdAt;
+    return resultData;
   }
 
   @override
@@ -452,7 +466,7 @@ class Query$Review$Review implements Fragment$ReviewFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Review$Review) || runtimeType != other.runtimeType) {
+    if (other is! Query$Review$Review || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -561,6 +575,7 @@ class _CopyWithImpl$Query$Review$Review<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? rating = _undefined,
@@ -601,6 +616,7 @@ class _CopyWithImpl$Query$Review$Review<TRes>
             : (createdAt as int),
       ));
 
+  @override
   CopyWith$Query$Review$Review$media<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -609,6 +625,7 @@ class _CopyWithImpl$Query$Review$Review<TRes>
             local$media, (e) => call(media: e));
   }
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -621,8 +638,9 @@ class _CopyWithStubImpl$Query$Review$Review<TRes>
     implements CopyWith$Query$Review$Review<TRes> {
   _CopyWithStubImpl$Query$Review$Review(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? rating,
@@ -638,9 +656,11 @@ class _CopyWithStubImpl$Query$Review$Review<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Review$Review$media<TRes> get media =>
       CopyWith$Query$Review$Review$media.stub(_res);
 
+  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -672,29 +692,35 @@ class Query$Review$Review$media implements Fragment$ReviewFragment$media {
     );
   }
 
+  @override
   final int id;
 
+  @override
   final Query$Review$Review$media$title? title;
 
+  @override
   final Enum$MediaType? type;
 
+  @override
   final String? bannerImage;
 
+  @override
   final String $__typename;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$title = title;
-    _resultData['title'] = l$title?.toJson();
+    resultData['title'] = l$title?.toJson();
     final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$bannerImage = bannerImage;
-    _resultData['bannerImage'] = l$bannerImage;
+    resultData['bannerImage'] = l$bannerImage;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -718,7 +744,7 @@ class Query$Review$Review$media implements Fragment$ReviewFragment$media {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Review$Review$media) ||
+    if (other is! Query$Review$Review$media ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -792,6 +818,7 @@ class _CopyWithImpl$Query$Review$Review$media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -813,6 +840,7 @@ class _CopyWithImpl$Query$Review$Review$media<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Review$Review$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -826,8 +854,9 @@ class _CopyWithStubImpl$Query$Review$Review$media<TRes>
     implements CopyWith$Query$Review$Review$media<TRes> {
   _CopyWithStubImpl$Query$Review$Review$media(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Query$Review$Review$media$title? title,
@@ -837,6 +866,7 @@ class _CopyWithStubImpl$Query$Review$Review$media<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Review$Review$media$title<TRes> get title =>
       CopyWith$Query$Review$Review$media$title.stub(_res);
 }
@@ -857,17 +887,20 @@ class Query$Review$Review$media$title
     );
   }
 
+  @override
   final String? userPreferred;
 
+  @override
   final String $__typename;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
+    resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -885,7 +918,7 @@ class Query$Review$Review$media$title
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Review$Review$media$title) ||
+    if (other is! Query$Review$Review$media$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -940,6 +973,7 @@ class _CopyWithImpl$Query$Review$Review$media$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -958,8 +992,9 @@ class _CopyWithStubImpl$Query$Review$Review$media$title<TRes>
     implements CopyWith$Query$Review$Review$media$title<TRes> {
   _CopyWithStubImpl$Query$Review$Review$media$title(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -1025,7 +1060,7 @@ class Variables$Mutation$RateReview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$RateReview) ||
+    if (other is! Variables$Mutation$RateReview ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1087,6 +1122,7 @@ class _CopyWithImpl$Variables$Mutation$RateReview<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? rating = _undefined,
@@ -1102,8 +1138,9 @@ class _CopyWithStubImpl$Variables$Mutation$RateReview<TRes>
     implements CopyWith$Variables$Mutation$RateReview<TRes> {
   _CopyWithStubImpl$Variables$Mutation$RateReview(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Enum$ReviewRating? rating,
@@ -1134,12 +1171,12 @@ class Mutation$RateReview {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$RateReview = RateReview;
-    _resultData['RateReview'] = l$RateReview?.toJson();
+    resultData['RateReview'] = l$RateReview?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1157,7 +1194,7 @@ class Mutation$RateReview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$RateReview) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$RateReview || runtimeType != other.runtimeType) {
       return false;
     }
     final l$RateReview = RateReview;
@@ -1211,6 +1248,7 @@ class _CopyWithImpl$Mutation$RateReview<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? RateReview = _undefined,
     Object? $__typename = _undefined,
@@ -1224,6 +1262,7 @@ class _CopyWithImpl$Mutation$RateReview<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$RateReview$RateReview<TRes> get RateReview {
     final local$RateReview = _instance.RateReview;
     return local$RateReview == null
@@ -1237,14 +1276,16 @@ class _CopyWithStubImpl$Mutation$RateReview<TRes>
     implements CopyWith$Mutation$RateReview<TRes> {
   _CopyWithStubImpl$Mutation$RateReview(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$RateReview$RateReview? RateReview,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$RateReview$RateReview<TRes> get RateReview =>
       CopyWith$Mutation$RateReview$RateReview.stub(_res);
 }
@@ -1375,19 +1416,19 @@ class Mutation$RateReview$RateReview {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$rating = rating;
-    _resultData['rating'] = l$rating;
+    resultData['rating'] = l$rating;
     final l$ratingAmount = ratingAmount;
-    _resultData['ratingAmount'] = l$ratingAmount;
+    resultData['ratingAmount'] = l$ratingAmount;
     final l$userRating = userRating;
-    _resultData['userRating'] =
+    resultData['userRating'] =
         l$userRating == null ? null : toJson$Enum$ReviewRating(l$userRating);
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1411,7 +1452,7 @@ class Mutation$RateReview$RateReview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$RateReview$RateReview) ||
+    if (other is! Mutation$RateReview$RateReview ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1484,6 +1525,7 @@ class _CopyWithImpl$Mutation$RateReview$RateReview<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? rating = _undefined,
@@ -1510,8 +1552,9 @@ class _CopyWithStubImpl$Mutation$RateReview$RateReview<TRes>
     implements CopyWith$Mutation$RateReview$RateReview<TRes> {
   _CopyWithStubImpl$Mutation$RateReview$RateReview(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? rating,

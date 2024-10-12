@@ -134,7 +134,7 @@ class _CalendarState extends State<Calendar> {
                 ),
               ),
             ),
-            if (snapshot?.loading == true)
+            if (snapshot.loading == true)
               const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator.adaptive(),

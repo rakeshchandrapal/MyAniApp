@@ -38,10 +38,10 @@ class HomeMangaListPage extends HookConsumerWidget {
         onRefresh: refetch,
         child: MediaListView(
           appBarLeading: const HomeLeadingIcon(),
-          groups: snapshot!.parsedData!.MediaListCollection!.lists!
+          groups: snapshot.parsedData!.MediaListCollection!.lists!
               .whereType<Fragment$ListGroup>()
               .toList(),
-          user: snapshot!.parsedData!.MediaListCollection!.user!,
+          user: snapshot.parsedData!.MediaListCollection!.user!,
           type: Enum$MediaType.ANIME,
           refetch: refetch,
         ),

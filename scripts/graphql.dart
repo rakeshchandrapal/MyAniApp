@@ -37,8 +37,7 @@ void main(List<String> args) {
       var e = query;
 
       for (var inlineFragmentMatch in inlineFragment.allMatches(query)) {
-        e += "\n\n\n" +
-            '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
+        e += "\n\n\n" '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
         // }
       }
 
@@ -58,8 +57,7 @@ void main(List<String> args) {
       var e = fragment;
 
       for (var inlineFragmentMatch in inlineFragment.allMatches(fragment)) {
-        e += "\n\n\n" +
-            '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
+        e += "\n\n\n" '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
         // }
       }
 
@@ -77,8 +75,7 @@ void main(List<String> args) {
       var e = fragment;
 
       for (var inlineFragmentMatch in inlineFragment.allMatches(fragment)) {
-        e += "\n\n\n" +
-            '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
+        e += "\n\n\n" '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
         // e +=
         //     "\"\"\"\n\"\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}\"\nr\"\"\"";
         // }

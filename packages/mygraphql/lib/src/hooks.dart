@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:mygraphql/graphql.dart';
-import 'package:mygraphql/src/fetch_policy.dart';
-import 'package:mygraphql/src/json_equal.dart';
-import 'package:mygraphql/src/request.dart';
 
 // AsyncSnapshot<GQLResponse<T>> useCustomStream<T>(
 //   Stream<T>? stream, {
@@ -73,7 +69,7 @@ class _StreamHookState<T> extends HookState<QueryHookResult<T>, StreamHook<T>> {
   }
 
   void _subscribe() {
-    _subscription = stream!.listen(
+    _subscription = stream.listen(
       (data) {
         setState(() {
           _summary = data;

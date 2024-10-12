@@ -31,7 +31,7 @@ class UserThreadsScreen extends HookWidget {
       refetch: refetch,
       response: snapshot,
       builder: () => ThreadsView(
-        data: snapshot!.parsedData!,
+        data: snapshot.parsedData!,
         fetchMore: fetchMore,
         request: snapshot.request!,
       ),
@@ -68,10 +68,11 @@ class _ThreadsViewState extends State<ThreadsView> {
         var vars =
             Variables$Query$UserThreads.fromJson(widget.request.variables);
 
-        if (selected == 0)
+        if (selected == 0) {
           return widget.fetchMore(
               variables: vars.copyWith(threadPage: nextPage).toJson(),
               mergeResults: defaultMergeResults("thread.threads"));
+        }
         return widget.fetchMore(
             variables: vars.copyWith(commentsPage: nextPage).toJson(),
             mergeResults: defaultMergeResults("comment.threadComments"));

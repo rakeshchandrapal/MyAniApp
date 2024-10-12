@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:layout/layout.dart';
 import 'package:myaniapp/background.dart';
-import 'package:myaniapp/graphql/client.dart';
 import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/app_info.dart';
 import 'package:myaniapp/providers/settings.dart';
@@ -38,19 +37,19 @@ void main() async {
     }
   }
 
-  // if (!kIsWeb && Platform.isAndroid) {
-  //   Workmanager().initialize(callbackDispatcher);
-  //   Workmanager().registerPeriodicTask(
-  //     'background-notifs',
-  //     'simpleNotifsFetch',
-  //     constraints: Constraints(
-  //       networkType: NetworkType.connected,
-  //     ),
-  //     existingWorkPolicy: ExistingWorkPolicy.append,
-  //   );
+  if (!kIsWeb && Platform.isAndroid) {
+    Workmanager().initialize(callbackDispatcher);
+    Workmanager().registerPeriodicTask(
+      'background-notifs',
+      'simpleNotifsFetch',
+      constraints: Constraints(
+        networkType: NetworkType.connected,
+      ),
+      existingWorkPolicy: ExistingWorkPolicy.append,
+    );
 
-  //   PushNotifications().requestPermission();
-  // }
+    PushNotifications().requestPermission();
+  }
 
   runApp(
     ProviderScope(

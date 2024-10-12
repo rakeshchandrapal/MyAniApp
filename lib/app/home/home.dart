@@ -7,11 +7,9 @@ import 'package:myaniapp/app/home/page.dart';
 import 'package:myaniapp/app/reviews/card.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
-import 'package:myaniapp/common/media_cards/list_card.dart';
 import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/media_editor/media_editor.dart';
-import 'package:myaniapp/common/overlay/menu.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/common/thread_card.dart';
 import 'package:myaniapp/constants.dart';
@@ -64,7 +62,7 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
         leading: const HomeLeadingIcon(),
         actions: [
           IconButton(
-            onPressed: () => context.pushRoute(NotificationRoute()),
+            onPressed: () => context.pushRoute(const NotificationRoute()),
             // onPressed: () {},
             icon: const Icon(Icons.notifications),
           ),
@@ -86,7 +84,7 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
                 ),
               ),
               InProgress(
-                list: snapshot!.parsedData!.list!.mediaList!,
+                list: snapshot.parsedData!.list!.mediaList!,
                 refetch: refetch,
               ),
               // Threads
@@ -112,11 +110,11 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (context, index) {
-                  var thread = snapshot!.parsedData!.forums!.threads![index]!;
+                  var thread = snapshot.parsedData!.forums!.threads![index]!;
 
                   return ThreadCard(thread: thread);
                 },
-                itemCount: snapshot!.parsedData!.forums!.threads!.length,
+                itemCount: snapshot.parsedData!.forums!.threads!.length,
               ),
               // Reviews
               Padding(
@@ -130,7 +128,7 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     TextButton(
-                      onPressed: () => context.pushRoute(ReviewsRoute()),
+                      onPressed: () => context.pushRoute(const ReviewsRoute()),
                       child: const Text("More"),
                     ),
                   ],
@@ -144,11 +142,11 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
                 ),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  var review = snapshot!.parsedData!.reviews!.reviews![index]!;
+                  var review = snapshot.parsedData!.reviews!.reviews![index]!;
 
                   return ReviewCard(review: review);
                 },
-                itemCount: snapshot!.parsedData!.reviews!.reviews!.length,
+                itemCount: snapshot.parsedData!.reviews!.reviews!.length,
               ),
             ],
           ),

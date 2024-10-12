@@ -33,7 +33,7 @@ class MediaStaffScreen extends HookWidget {
       refetch: refetch,
       response: snapshot,
       builder: () => PaginationView.list(
-        pageInfo: snapshot!.parsedData!.Media!.staff!.pageInfo!,
+        pageInfo: snapshot.parsedData!.Media!.staff!.pageInfo!,
         req: (nextPage) => fetchMore(
             variables:
                 Variables$Query$MediaStaff.fromJson(snapshot.request!.variables)

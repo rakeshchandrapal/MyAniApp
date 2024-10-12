@@ -56,7 +56,7 @@ class UserAnimeScreen extends HookWidget {
       error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (snapshot?.errors, snapshot?.linkError),
+          exception: (snapshot.errors, snapshot.linkError),
           refetch: refetch,
         ),
       ),
@@ -64,7 +64,7 @@ class UserAnimeScreen extends HookWidget {
         onRefresh: refetch,
         notificationPredicate: (notification) => notification.depth == 1,
         child: MediaListView(
-          groups: snapshot!.parsedData!.MediaListCollection!.lists!
+          groups: snapshot.parsedData!.MediaListCollection!.lists!
               .whereType<Fragment$ListGroup>()
               .toList(),
           user: snapshot.parsedData!.MediaListCollection!.user!,
@@ -317,17 +317,17 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                                     Enum$ScoreFormat.POINT_10,
                                 entry.score ?? 0,
                               ),
-                              child: Icon(Icons.star, size: 20),
+                              child: const Icon(Icons.star, size: 20),
                             ),
                           if (entry.private == true)
-                            Tooltip(
+                            const Tooltip(
                               message: "Private",
                               child: Icon(Icons.lock, size: 20),
                             ),
                           if (entry.notes != null)
                             Tooltip(
                               message: entry.notes,
-                              child: Icon(Icons.note_alt, size: 20),
+                              child: const Icon(Icons.note_alt, size: 20),
                             ),
                         ],
                       ),
@@ -366,17 +366,17 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                                         Enum$ScoreFormat.POINT_10,
                                     entry.score ?? 0,
                                   ),
-                                  child: Icon(Icons.star, size: 20),
+                                  child: const Icon(Icons.star, size: 20),
                                 ),
                               if (entry.private == true)
-                                Tooltip(
+                                const Tooltip(
                                   message: "Private",
                                   child: Icon(Icons.lock, size: 20),
                                 ),
                               if (entry.notes != null)
                                 Tooltip(
                                   message: entry.notes,
-                                  child: Icon(Icons.note_alt, size: 20),
+                                  child: const Icon(Icons.note_alt, size: 20),
                                 ),
                             ],
                           ),
@@ -428,7 +428,7 @@ class _MediaListViewState extends ConsumerState<MediaListView>
                         left: entry.private == true ? 40 : 5,
                         child: Tooltip(
                           message: entry.notes,
-                          child: Icon(
+                          child: const Icon(
                             Icons.note_alt,
                             size: 15,
                           ),

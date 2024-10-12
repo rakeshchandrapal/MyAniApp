@@ -67,13 +67,13 @@ Map<String, dynamic> mapSetter<T>(
 }
 
 dynamic getValueFromKey(Map<String, dynamic> map, List<String> path) {
-  Map<String, dynamic> _map = map;
+  Map<String, dynamic> map0 = map;
 
   for (String element in path) {
-    if (_map[element] is Map<String, dynamic>) {
-      _map = _map[element];
+    if (map0[element] is Map<String, dynamic>) {
+      map0 = map0[element];
     } else {
-      return _map[element];
+      return map0[element];
     }
   }
 }

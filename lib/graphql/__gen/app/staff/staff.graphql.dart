@@ -85,7 +85,7 @@ class Variables$Query$Staff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Staff) || runtimeType != other.runtimeType) {
+    if (other is! Variables$Query$Staff || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -170,6 +170,7 @@ class _CopyWithImpl$Variables$Query$Staff<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? onList = _undefined,
@@ -190,8 +191,9 @@ class _CopyWithStubImpl$Variables$Query$Staff<TRes>
     implements CopyWith$Variables$Query$Staff<TRes> {
   _CopyWithStubImpl$Variables$Query$Staff(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     bool? onList,
@@ -223,12 +225,12 @@ class Query$Staff {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$Staff = Staff;
-    _resultData['Staff'] = l$Staff?.toJson();
+    resultData['Staff'] = l$Staff?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -246,7 +248,7 @@ class Query$Staff {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff) || runtimeType != other.runtimeType) {
+    if (other is! Query$Staff || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Staff = Staff;
@@ -297,6 +299,7 @@ class _CopyWithImpl$Query$Staff<TRes> implements CopyWith$Query$Staff<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? Staff = _undefined,
     Object? $__typename = _undefined,
@@ -310,6 +313,7 @@ class _CopyWithImpl$Query$Staff<TRes> implements CopyWith$Query$Staff<TRes> {
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Staff$Staff<TRes> get Staff {
     final local$Staff = _instance.Staff;
     return local$Staff == null
@@ -322,14 +326,16 @@ class _CopyWithStubImpl$Query$Staff<TRes>
     implements CopyWith$Query$Staff<TRes> {
   _CopyWithStubImpl$Query$Staff(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Staff$Staff? Staff,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Staff$Staff<TRes> get Staff =>
       CopyWith$Query$Staff$Staff.stub(_res);
 }
@@ -810,12 +816,16 @@ class Query$Staff$Staff implements Fragment$StaffFragment {
     );
   }
 
+  @override
   final int id;
 
+  @override
   final Query$Staff$Staff$name? name;
 
+  @override
   final Query$Staff$Staff$image? image;
 
+  @override
   final String $__typename;
 
   final String? description;
@@ -844,43 +854,44 @@ class Query$Staff$Staff implements Fragment$StaffFragment {
 
   final Query$Staff$Staff$staffMedia? staffMedia;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$name = name;
-    _resultData['name'] = l$name?.toJson();
+    resultData['name'] = l$name?.toJson();
     final l$image = image;
-    _resultData['image'] = l$image?.toJson();
+    resultData['image'] = l$image?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
+    resultData['__typename'] = l$$__typename;
     final l$description = description;
-    _resultData['description'] = l$description;
+    resultData['description'] = l$description;
     final l$gender = gender;
-    _resultData['gender'] = l$gender;
+    resultData['gender'] = l$gender;
     final l$language = language;
-    _resultData['language'] = l$language;
+    resultData['language'] = l$language;
     final l$dateOfBirth = dateOfBirth;
-    _resultData['dateOfBirth'] = l$dateOfBirth?.toJson();
+    resultData['dateOfBirth'] = l$dateOfBirth?.toJson();
     final l$dateOfDeath = dateOfDeath;
-    _resultData['dateOfDeath'] = l$dateOfDeath?.toJson();
+    resultData['dateOfDeath'] = l$dateOfDeath?.toJson();
     final l$age = age;
-    _resultData['age'] = l$age;
+    resultData['age'] = l$age;
     final l$yearsActive = yearsActive;
-    _resultData['yearsActive'] = l$yearsActive?.map((e) => e).toList();
+    resultData['yearsActive'] = l$yearsActive?.map((e) => e).toList();
     final l$homeTown = homeTown;
-    _resultData['homeTown'] = l$homeTown;
+    resultData['homeTown'] = l$homeTown;
     final l$bloodType = bloodType;
-    _resultData['bloodType'] = l$bloodType;
+    resultData['bloodType'] = l$bloodType;
     final l$isFavourite = isFavourite;
-    _resultData['isFavourite'] = l$isFavourite;
+    resultData['isFavourite'] = l$isFavourite;
     final l$isFavouriteBlocked = isFavouriteBlocked;
-    _resultData['isFavouriteBlocked'] = l$isFavouriteBlocked;
+    resultData['isFavouriteBlocked'] = l$isFavouriteBlocked;
     final l$characterMedia = characterMedia;
-    _resultData['characterMedia'] = l$characterMedia?.toJson();
+    resultData['characterMedia'] = l$characterMedia?.toJson();
     final l$staffMedia = staffMedia;
-    _resultData['staffMedia'] = l$staffMedia?.toJson();
-    return _resultData;
+    resultData['staffMedia'] = l$staffMedia?.toJson();
+    return resultData;
   }
 
   @override
@@ -930,7 +941,7 @@ class Query$Staff$Staff implements Fragment$StaffFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff) || runtimeType != other.runtimeType) {
+    if (other is! Query$Staff$Staff || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -1090,6 +1101,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -1156,6 +1168,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
             : (staffMedia as Query$Staff$Staff$staffMedia?),
       ));
 
+  @override
   CopyWith$Query$Staff$Staff$name<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -1163,6 +1176,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
         : CopyWith$Query$Staff$Staff$name(local$name, (e) => call(name: e));
   }
 
+  @override
   CopyWith$Query$Staff$Staff$image<TRes> get image {
     final local$image = _instance.image;
     return local$image == null
@@ -1170,6 +1184,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
         : CopyWith$Query$Staff$Staff$image(local$image, (e) => call(image: e));
   }
 
+  @override
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfBirth {
     final local$dateOfBirth = _instance.dateOfBirth;
     return local$dateOfBirth == null
@@ -1178,6 +1193,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
             local$dateOfBirth, (e) => call(dateOfBirth: e));
   }
 
+  @override
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfDeath {
     final local$dateOfDeath = _instance.dateOfDeath;
     return local$dateOfDeath == null
@@ -1186,6 +1202,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
             local$dateOfDeath, (e) => call(dateOfDeath: e));
   }
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia<TRes> get characterMedia {
     final local$characterMedia = _instance.characterMedia;
     return local$characterMedia == null
@@ -1194,6 +1211,7 @@ class _CopyWithImpl$Query$Staff$Staff<TRes>
             local$characterMedia, (e) => call(characterMedia: e));
   }
 
+  @override
   CopyWith$Query$Staff$Staff$staffMedia<TRes> get staffMedia {
     final local$staffMedia = _instance.staffMedia;
     return local$staffMedia == null
@@ -1207,8 +1225,9 @@ class _CopyWithStubImpl$Query$Staff$Staff<TRes>
     implements CopyWith$Query$Staff$Staff<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Query$Staff$Staff$name? name,
@@ -1230,21 +1249,27 @@ class _CopyWithStubImpl$Query$Staff$Staff<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Staff$Staff$name<TRes> get name =>
       CopyWith$Query$Staff$Staff$name.stub(_res);
 
+  @override
   CopyWith$Query$Staff$Staff$image<TRes> get image =>
       CopyWith$Query$Staff$Staff$image.stub(_res);
 
+  @override
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfBirth =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
 
+  @override
   CopyWith$Fragment$FuzzyDate<TRes> get dateOfDeath =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia<TRes> get characterMedia =>
       CopyWith$Query$Staff$Staff$characterMedia.stub(_res);
 
+  @override
   CopyWith$Query$Staff$Staff$staffMedia<TRes> get staffMedia =>
       CopyWith$Query$Staff$Staff$staffMedia.stub(_res);
 }
@@ -1264,17 +1289,20 @@ class Query$Staff$Staff$name implements Fragment$StaffFragment$name {
     );
   }
 
+  @override
   final String? userPreferred;
 
+  @override
   final String $__typename;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
+    resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1292,7 +1320,7 @@ class Query$Staff$Staff$name implements Fragment$StaffFragment$name {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$name) ||
+    if (other is! Query$Staff$Staff$name ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1346,6 +1374,7 @@ class _CopyWithImpl$Query$Staff$Staff$name<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -1364,8 +1393,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$name<TRes>
     implements CopyWith$Query$Staff$Staff$name<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$name(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -1388,17 +1418,20 @@ class Query$Staff$Staff$image implements Fragment$StaffFragment$image {
     );
   }
 
+  @override
   final String? large;
 
+  @override
   final String $__typename;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$large = large;
-    _resultData['large'] = l$large;
+    resultData['large'] = l$large;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1416,7 +1449,7 @@ class Query$Staff$Staff$image implements Fragment$StaffFragment$image {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$image) ||
+    if (other is! Query$Staff$Staff$image ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1470,6 +1503,7 @@ class _CopyWithImpl$Query$Staff$Staff$image<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? large = _undefined,
     Object? $__typename = _undefined,
@@ -1486,8 +1520,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$image<TRes>
     implements CopyWith$Query$Staff$Staff$image<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$image(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? large,
     String? $__typename,
@@ -1527,14 +1562,14 @@ class Query$Staff$Staff$characterMedia {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1554,7 +1589,7 @@ class Query$Staff$Staff$characterMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$characterMedia) ||
+    if (other is! Query$Staff$Staff$characterMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1617,7 +1652,7 @@ abstract class CopyWith$Query$Staff$Staff$characterMedia<TRes> {
               Iterable<
                   CopyWith$Query$Staff$Staff$characterMedia$edges<
                       Query$Staff$Staff$characterMedia$edges>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Staff$Staff$characterMedia<TRes>
@@ -1633,6 +1668,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -1650,6 +1686,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1657,14 +1694,15 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
+  @override
   TRes edges(
           Iterable<Query$Staff$Staff$characterMedia$edges?>? Function(
                   Iterable<
                       CopyWith$Query$Staff$Staff$characterMedia$edges<
                           Query$Staff$Staff$characterMedia$edges>?>?)
-              _fn) =>
+              fn) =>
       call(
-          edges: _fn(_instance.edges?.map((e) => e == null
+          edges: fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$Staff$Staff$characterMedia$edges(
                   e,
@@ -1676,8 +1714,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia<TRes>
     implements CopyWith$Query$Staff$Staff$characterMedia<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$characterMedia(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$Staff$Staff$characterMedia$edges?>? edges,
@@ -1685,10 +1724,12 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  edges(_fn) => _res;
+  @override
+  edges(fn) => _res;
 }
 
 class Query$Staff$Staff$characterMedia$edges {
@@ -1725,14 +1766,14 @@ class Query$Staff$Staff$characterMedia$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$node = node;
-    _resultData['node'] = l$node?.toJson();
+    resultData['node'] = l$node?.toJson();
     final l$characters = characters;
-    _resultData['characters'] = l$characters?.map((e) => e?.toJson()).toList();
+    resultData['characters'] = l$characters?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1752,7 +1793,7 @@ class Query$Staff$Staff$characterMedia$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$characterMedia$edges) ||
+    if (other is! Query$Staff$Staff$characterMedia$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1816,7 +1857,7 @@ abstract class CopyWith$Query$Staff$Staff$characterMedia$edges<TRes> {
               Iterable<
                   CopyWith$Fragment$CharacterFragment<
                       Fragment$CharacterFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges<TRes>
@@ -1832,6 +1873,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? node = _undefined,
     Object? characters = _undefined,
@@ -1849,6 +1891,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -1858,14 +1901,15 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges<TRes>
             local$node, (e) => call(node: e));
   }
 
+  @override
   TRes characters(
           Iterable<Fragment$CharacterFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$CharacterFragment<
                           Fragment$CharacterFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          characters: _fn(_instance.characters?.map((e) => e == null
+          characters: fn(_instance.characters?.map((e) => e == null
               ? null
               : CopyWith$Fragment$CharacterFragment(
                   e,
@@ -1877,8 +1921,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges<TRes>
     implements CopyWith$Query$Staff$Staff$characterMedia$edges<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Staff$Staff$characterMedia$edges$node? node,
     List<Fragment$CharacterFragment?>? characters,
@@ -1886,10 +1931,12 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> get node =>
       CopyWith$Query$Staff$Staff$characterMedia$edges$node.stub(_res);
 
-  characters(_fn) => _res;
+  @override
+  characters(fn) => _res;
 }
 
 class Query$Staff$Staff$characterMedia$edges$node
@@ -1944,50 +1991,60 @@ class Query$Staff$Staff$characterMedia$edges$node
     );
   }
 
+  @override
   final int id;
 
+  @override
   final Enum$MediaType? type;
 
+  @override
   final bool? isAdult;
 
+  @override
   final List<String?>? genres;
 
+  @override
   final Enum$MediaFormat? format;
 
+  @override
   final String? description;
 
+  @override
   final Query$Staff$Staff$characterMedia$edges$node$title? title;
 
+  @override
   final Query$Staff$Staff$characterMedia$edges$node$coverImage? coverImage;
 
+  @override
   final String $__typename;
 
   final Query$Staff$Staff$characterMedia$edges$node$startDate? startDate;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$type = type;
-    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$isAdult = isAdult;
-    _resultData['isAdult'] = l$isAdult;
+    resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
-    _resultData['genres'] = l$genres?.map((e) => e).toList();
+    resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
-    _resultData['format'] =
+    resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
-    _resultData['description'] = l$description;
+    resultData['description'] = l$description;
     final l$title = title;
-    _resultData['title'] = l$title?.toJson();
+    resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
-    _resultData['coverImage'] = l$coverImage?.toJson();
+    resultData['coverImage'] = l$coverImage?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
+    resultData['__typename'] = l$$__typename;
     final l$startDate = startDate;
-    _resultData['startDate'] = l$startDate?.toJson();
-    return _resultData;
+    resultData['startDate'] = l$startDate?.toJson();
+    return resultData;
   }
 
   @override
@@ -2021,7 +2078,7 @@ class Query$Staff$Staff$characterMedia$edges$node
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$characterMedia$edges$node) ||
+    if (other is! Query$Staff$Staff$characterMedia$edges$node ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2141,6 +2198,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -2182,6 +2240,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
                 as Query$Staff$Staff$characterMedia$edges$node$startDate?),
       ));
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -2191,6 +2250,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
             local$title, (e) => call(title: e));
   }
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
       get coverImage {
     final local$coverImage = _instance.coverImage;
@@ -2201,6 +2261,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
             local$coverImage, (e) => call(coverImage: e));
   }
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
       get startDate {
     final local$startDate = _instance.startDate;
@@ -2216,8 +2277,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
     implements CopyWith$Query$Staff$Staff$characterMedia$edges$node<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     Enum$MediaType? type,
@@ -2232,14 +2294,17 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$title<TRes> get title =>
       CopyWith$Query$Staff$Staff$characterMedia$edges$node$title.stub(_res);
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
       get coverImage =>
           CopyWith$Query$Staff$Staff$characterMedia$edges$node$coverImage.stub(
               _res);
 
+  @override
   CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
       get startDate =>
           CopyWith$Query$Staff$Staff$characterMedia$edges$node$startDate.stub(
@@ -2263,17 +2328,20 @@ class Query$Staff$Staff$characterMedia$edges$node$title
     );
   }
 
+  @override
   final String? userPreferred;
 
+  @override
   final String $__typename;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    _resultData['userPreferred'] = l$userPreferred;
+    resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2291,7 +2359,7 @@ class Query$Staff$Staff$characterMedia$edges$node$title
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$characterMedia$edges$node$title) ||
+    if (other is! Query$Staff$Staff$characterMedia$edges$node$title ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2351,6 +2419,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -2371,8 +2440,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$title<TRes>
   _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$title(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -2397,17 +2467,20 @@ class Query$Staff$Staff$characterMedia$edges$node$coverImage
     );
   }
 
+  @override
   final String? extraLarge;
 
+  @override
   final String $__typename;
 
+  @override
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$extraLarge = extraLarge;
-    _resultData['extraLarge'] = l$extraLarge;
+    resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2425,7 +2498,7 @@ class Query$Staff$Staff$characterMedia$edges$node$coverImage
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$characterMedia$edges$node$coverImage) ||
+    if (other is! Query$Staff$Staff$characterMedia$edges$node$coverImage ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2486,6 +2559,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
@@ -2507,8 +2581,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage<
   _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$coverImage(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? extraLarge,
     String? $__typename,
@@ -2537,12 +2612,12 @@ class Query$Staff$Staff$characterMedia$edges$node$startDate {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$year = year;
-    _resultData['year'] = l$year;
+    resultData['year'] = l$year;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2560,7 +2635,7 @@ class Query$Staff$Staff$characterMedia$edges$node$startDate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$characterMedia$edges$node$startDate) ||
+    if (other is! Query$Staff$Staff$characterMedia$edges$node$startDate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2621,6 +2696,7 @@ class _CopyWithImpl$Query$Staff$Staff$characterMedia$edges$node$startDate<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? year = _undefined,
     Object? $__typename = _undefined,
@@ -2640,8 +2716,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$startDate<
   _CopyWithStubImpl$Query$Staff$Staff$characterMedia$edges$node$startDate(
       this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? year,
     String? $__typename,
@@ -2681,14 +2758,14 @@ class Query$Staff$Staff$staffMedia {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2708,7 +2785,7 @@ class Query$Staff$Staff$staffMedia {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$staffMedia) ||
+    if (other is! Query$Staff$Staff$staffMedia ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2771,7 +2848,7 @@ abstract class CopyWith$Query$Staff$Staff$staffMedia<TRes> {
               Iterable<
                   CopyWith$Query$Staff$Staff$staffMedia$edges<
                       Query$Staff$Staff$staffMedia$edges>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Staff$Staff$staffMedia<TRes>
@@ -2787,6 +2864,7 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -2804,6 +2882,7 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -2811,14 +2890,15 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
+  @override
   TRes edges(
           Iterable<Query$Staff$Staff$staffMedia$edges?>? Function(
                   Iterable<
                       CopyWith$Query$Staff$Staff$staffMedia$edges<
                           Query$Staff$Staff$staffMedia$edges>?>?)
-              _fn) =>
+              fn) =>
       call(
-          edges: _fn(_instance.edges?.map((e) => e == null
+          edges: fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$Staff$Staff$staffMedia$edges(
                   e,
@@ -2830,8 +2910,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$staffMedia<TRes>
     implements CopyWith$Query$Staff$Staff$staffMedia<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$staffMedia(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$Staff$Staff$staffMedia$edges?>? edges,
@@ -2839,10 +2920,12 @@ class _CopyWithStubImpl$Query$Staff$Staff$staffMedia<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  edges(_fn) => _res;
+  @override
+  edges(fn) => _res;
 }
 
 class Query$Staff$Staff$staffMedia$edges {
@@ -2873,14 +2956,14 @@ class Query$Staff$Staff$staffMedia$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$node = node;
-    _resultData['node'] = l$node?.toJson();
+    resultData['node'] = l$node?.toJson();
     final l$staffRole = staffRole;
-    _resultData['staffRole'] = l$staffRole;
+    resultData['staffRole'] = l$staffRole;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -2900,7 +2983,7 @@ class Query$Staff$Staff$staffMedia$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Staff$Staff$staffMedia$edges) ||
+    if (other is! Query$Staff$Staff$staffMedia$edges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2963,6 +3046,7 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? node = _undefined,
     Object? staffRole = _undefined,
@@ -2980,6 +3064,7 @@ class _CopyWithImpl$Query$Staff$Staff$staffMedia$edges<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -2992,8 +3077,9 @@ class _CopyWithStubImpl$Query$Staff$Staff$staffMedia$edges<TRes>
     implements CopyWith$Query$Staff$Staff$staffMedia$edges<TRes> {
   _CopyWithStubImpl$Query$Staff$Staff$staffMedia$edges(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$MediaFragment? node,
     String? staffRole,
@@ -3001,6 +3087,7 @@ class _CopyWithStubImpl$Query$Staff$Staff$staffMedia$edges<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get node =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

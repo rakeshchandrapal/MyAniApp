@@ -73,7 +73,7 @@ class Variables$Query$HomeOverview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$HomeOverview) ||
+    if (other is! Variables$Query$HomeOverview ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143,6 +143,7 @@ class _CopyWithImpl$Variables$Query$HomeOverview<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? page = _undefined,
     Object? userId = _undefined,
@@ -160,8 +161,9 @@ class _CopyWithStubImpl$Variables$Query$HomeOverview<TRes>
     implements CopyWith$Variables$Query$HomeOverview<TRes> {
   _CopyWithStubImpl$Variables$Query$HomeOverview(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? page,
     int? userId,
@@ -216,18 +218,18 @@ class Query$HomeOverview {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$releasing = releasing;
-    _resultData['releasing'] = l$releasing?.toJson();
+    resultData['releasing'] = l$releasing?.toJson();
     final l$list = list;
-    _resultData['list'] = l$list?.toJson();
+    resultData['list'] = l$list?.toJson();
     final l$forums = forums;
-    _resultData['forums'] = l$forums?.toJson();
+    resultData['forums'] = l$forums?.toJson();
     final l$reviews = reviews;
-    _resultData['reviews'] = l$reviews?.toJson();
+    resultData['reviews'] = l$reviews?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -251,7 +253,7 @@ class Query$HomeOverview {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$HomeOverview) || runtimeType != other.runtimeType) {
+    if (other is! Query$HomeOverview || runtimeType != other.runtimeType) {
       return false;
     }
     final l$releasing = releasing;
@@ -326,6 +328,7 @@ class _CopyWithImpl$Query$HomeOverview<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? releasing = _undefined,
     Object? list = _undefined,
@@ -351,6 +354,7 @@ class _CopyWithImpl$Query$HomeOverview<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$HomeOverview$releasing<TRes> get releasing {
     final local$releasing = _instance.releasing;
     return local$releasing == null
@@ -359,6 +363,7 @@ class _CopyWithImpl$Query$HomeOverview<TRes>
             local$releasing, (e) => call(releasing: e));
   }
 
+  @override
   CopyWith$Query$HomeOverview$list<TRes> get list {
     final local$list = _instance.list;
     return local$list == null
@@ -366,6 +371,7 @@ class _CopyWithImpl$Query$HomeOverview<TRes>
         : CopyWith$Query$HomeOverview$list(local$list, (e) => call(list: e));
   }
 
+  @override
   CopyWith$Query$HomeOverview$forums<TRes> get forums {
     final local$forums = _instance.forums;
     return local$forums == null
@@ -374,6 +380,7 @@ class _CopyWithImpl$Query$HomeOverview<TRes>
             local$forums, (e) => call(forums: e));
   }
 
+  @override
   CopyWith$Query$HomeOverview$reviews<TRes> get reviews {
     final local$reviews = _instance.reviews;
     return local$reviews == null
@@ -387,8 +394,9 @@ class _CopyWithStubImpl$Query$HomeOverview<TRes>
     implements CopyWith$Query$HomeOverview<TRes> {
   _CopyWithStubImpl$Query$HomeOverview(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$HomeOverview$releasing? releasing,
     Query$HomeOverview$list? list,
@@ -398,15 +406,19 @@ class _CopyWithStubImpl$Query$HomeOverview<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Query$HomeOverview$releasing<TRes> get releasing =>
       CopyWith$Query$HomeOverview$releasing.stub(_res);
 
+  @override
   CopyWith$Query$HomeOverview$list<TRes> get list =>
       CopyWith$Query$HomeOverview$list.stub(_res);
 
+  @override
   CopyWith$Query$HomeOverview$forums<TRes> get forums =>
       CopyWith$Query$HomeOverview$forums.stub(_res);
 
+  @override
   CopyWith$Query$HomeOverview$reviews<TRes> get reviews =>
       CopyWith$Query$HomeOverview$reviews.stub(_res);
 }
@@ -689,12 +701,12 @@ class Query$HomeOverview$releasing {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$media = media;
-    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -712,7 +724,7 @@ class Query$HomeOverview$releasing {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$HomeOverview$releasing) ||
+    if (other is! Query$HomeOverview$releasing ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -767,7 +779,7 @@ abstract class CopyWith$Query$HomeOverview$releasing<TRes> {
       Iterable<Fragment$ReleasingMedia?>? Function(
               Iterable<
                   CopyWith$Fragment$ReleasingMedia<Fragment$ReleasingMedia>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$HomeOverview$releasing<TRes>
@@ -783,6 +795,7 @@ class _CopyWithImpl$Query$HomeOverview$releasing<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? media = _undefined,
     Object? $__typename = _undefined,
@@ -796,14 +809,15 @@ class _CopyWithImpl$Query$HomeOverview$releasing<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes media(
           Iterable<Fragment$ReleasingMedia?>? Function(
                   Iterable<
                       CopyWith$Fragment$ReleasingMedia<
                           Fragment$ReleasingMedia>?>?)
-              _fn) =>
+              fn) =>
       call(
-          media: _fn(_instance.media?.map((e) => e == null
+          media: fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ReleasingMedia(
                   e,
@@ -815,15 +829,17 @@ class _CopyWithStubImpl$Query$HomeOverview$releasing<TRes>
     implements CopyWith$Query$HomeOverview$releasing<TRes> {
   _CopyWithStubImpl$Query$HomeOverview$releasing(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$ReleasingMedia?>? media,
     String? $__typename,
   }) =>
       _res;
 
-  media(_fn) => _res;
+  @override
+  media(fn) => _res;
 }
 
 class Query$HomeOverview$list {
@@ -850,12 +866,12 @@ class Query$HomeOverview$list {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$mediaList = mediaList;
-    _resultData['mediaList'] = l$mediaList?.map((e) => e?.toJson()).toList();
+    resultData['mediaList'] = l$mediaList?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -873,7 +889,7 @@ class Query$HomeOverview$list {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$HomeOverview$list) ||
+    if (other is! Query$HomeOverview$list ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -927,7 +943,7 @@ abstract class CopyWith$Query$HomeOverview$list<TRes> {
       Iterable<Fragment$MediaListEntry?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$HomeOverview$list<TRes>
@@ -943,6 +959,7 @@ class _CopyWithImpl$Query$HomeOverview$list<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? mediaList = _undefined,
     Object? $__typename = _undefined,
@@ -956,14 +973,15 @@ class _CopyWithImpl$Query$HomeOverview$list<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes mediaList(
           Iterable<Fragment$MediaListEntry?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaListEntry<
                           Fragment$MediaListEntry>?>?)
-              _fn) =>
+              fn) =>
       call(
-          mediaList: _fn(_instance.mediaList?.map((e) => e == null
+          mediaList: fn(_instance.mediaList?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaListEntry(
                   e,
@@ -975,15 +993,17 @@ class _CopyWithStubImpl$Query$HomeOverview$list<TRes>
     implements CopyWith$Query$HomeOverview$list<TRes> {
   _CopyWithStubImpl$Query$HomeOverview$list(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$MediaListEntry?>? mediaList,
     String? $__typename,
   }) =>
       _res;
 
-  mediaList(_fn) => _res;
+  @override
+  mediaList(fn) => _res;
 }
 
 class Query$HomeOverview$forums {
@@ -1010,12 +1030,12 @@ class Query$HomeOverview$forums {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$threads = threads;
-    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1033,7 +1053,7 @@ class Query$HomeOverview$forums {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$HomeOverview$forums) ||
+    if (other is! Query$HomeOverview$forums ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1088,7 +1108,7 @@ abstract class CopyWith$Query$HomeOverview$forums<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$HomeOverview$forums<TRes>
@@ -1104,6 +1124,7 @@ class _CopyWithImpl$Query$HomeOverview$forums<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? threads = _undefined,
     Object? $__typename = _undefined,
@@ -1117,14 +1138,15 @@ class _CopyWithImpl$Query$HomeOverview$forums<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          threads: _fn(_instance.threads?.map((e) => e == null
+          threads: fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -1136,15 +1158,17 @@ class _CopyWithStubImpl$Query$HomeOverview$forums<TRes>
     implements CopyWith$Query$HomeOverview$forums<TRes> {
   _CopyWithStubImpl$Query$HomeOverview$forums(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$ThreadFragment?>? threads,
     String? $__typename,
   }) =>
       _res;
 
-  threads(_fn) => _res;
+  @override
+  threads(fn) => _res;
 }
 
 class Query$HomeOverview$reviews {
@@ -1171,12 +1195,12 @@ class Query$HomeOverview$reviews {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$reviews = reviews;
-    _resultData['reviews'] = l$reviews?.map((e) => e?.toJson()).toList();
+    resultData['reviews'] = l$reviews?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1194,7 +1218,7 @@ class Query$HomeOverview$reviews {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$HomeOverview$reviews) ||
+    if (other is! Query$HomeOverview$reviews ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1249,7 +1273,7 @@ abstract class CopyWith$Query$HomeOverview$reviews<TRes> {
       Iterable<Fragment$ReviewFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ReviewFragment<Fragment$ReviewFragment>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$HomeOverview$reviews<TRes>
@@ -1265,6 +1289,7 @@ class _CopyWithImpl$Query$HomeOverview$reviews<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? reviews = _undefined,
     Object? $__typename = _undefined,
@@ -1278,14 +1303,15 @@ class _CopyWithImpl$Query$HomeOverview$reviews<TRes>
             : ($__typename as String),
       ));
 
+  @override
   TRes reviews(
           Iterable<Fragment$ReviewFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ReviewFragment<
                           Fragment$ReviewFragment>?>?)
-              _fn) =>
+              fn) =>
       call(
-          reviews: _fn(_instance.reviews?.map((e) => e == null
+          reviews: fn(_instance.reviews?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ReviewFragment(
                   e,
@@ -1297,13 +1323,15 @@ class _CopyWithStubImpl$Query$HomeOverview$reviews<TRes>
     implements CopyWith$Query$HomeOverview$reviews<TRes> {
   _CopyWithStubImpl$Query$HomeOverview$reviews(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     List<Fragment$ReviewFragment?>? reviews,
     String? $__typename,
   }) =>
       _res;
 
-  reviews(_fn) => _res;
+  @override
+  reviews(fn) => _res;
 }

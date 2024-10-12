@@ -89,7 +89,7 @@ class Variables$Query$Recommendations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Recommendations) ||
+    if (other is! Variables$Query$Recommendations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -188,6 +188,7 @@ class _CopyWithImpl$Variables$Query$Recommendations<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? page = _undefined,
     Object? perPage = _undefined,
@@ -208,8 +209,9 @@ class _CopyWithStubImpl$Variables$Query$Recommendations<TRes>
     implements CopyWith$Variables$Query$Recommendations<TRes> {
   _CopyWithStubImpl$Variables$Query$Recommendations(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? page,
     int? perPage,
@@ -242,12 +244,12 @@ class Query$Recommendations {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$Page = Page;
-    _resultData['Page'] = l$Page?.toJson();
+    resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -265,7 +267,7 @@ class Query$Recommendations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Recommendations) || runtimeType != other.runtimeType) {
+    if (other is! Query$Recommendations || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -319,6 +321,7 @@ class _CopyWithImpl$Query$Recommendations<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -332,6 +335,7 @@ class _CopyWithImpl$Query$Recommendations<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Recommendations$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -344,14 +348,16 @@ class _CopyWithStubImpl$Query$Recommendations<TRes>
     implements CopyWith$Query$Recommendations<TRes> {
   _CopyWithStubImpl$Query$Recommendations(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Recommendations$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Recommendations$Page<TRes> get Page =>
       CopyWith$Query$Recommendations$Page.stub(_res);
 }
@@ -574,15 +580,15 @@ class Query$Recommendations$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    _resultData['pageInfo'] = l$pageInfo?.toJson();
+    resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$recommendations = recommendations;
-    _resultData['recommendations'] =
+    resultData['recommendations'] =
         l$recommendations?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -604,7 +610,7 @@ class Query$Recommendations$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Recommendations$Page) ||
+    if (other is! Query$Recommendations$Page ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -667,7 +673,7 @@ abstract class CopyWith$Query$Recommendations$Page<TRes> {
               Iterable<
                   CopyWith$Query$Recommendations$Page$recommendations<
                       Query$Recommendations$Page$recommendations>?>?)
-          _fn);
+          fn);
 }
 
 class _CopyWithImpl$Query$Recommendations$Page<TRes>
@@ -683,6 +689,7 @@ class _CopyWithImpl$Query$Recommendations$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? recommendations = _undefined,
@@ -701,6 +708,7 @@ class _CopyWithImpl$Query$Recommendations$Page<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -708,14 +716,15 @@ class _CopyWithImpl$Query$Recommendations$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
+  @override
   TRes recommendations(
           Iterable<Query$Recommendations$Page$recommendations?>? Function(
                   Iterable<
                       CopyWith$Query$Recommendations$Page$recommendations<
                           Query$Recommendations$Page$recommendations>?>?)
-              _fn) =>
+              fn) =>
       call(
-          recommendations: _fn(_instance.recommendations?.map((e) => e == null
+          recommendations: fn(_instance.recommendations?.map((e) => e == null
               ? null
               : CopyWith$Query$Recommendations$Page$recommendations(
                   e,
@@ -727,8 +736,9 @@ class _CopyWithStubImpl$Query$Recommendations$Page<TRes>
     implements CopyWith$Query$Recommendations$Page<TRes> {
   _CopyWithStubImpl$Query$Recommendations$Page(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$Recommendations$Page$recommendations?>? recommendations,
@@ -736,10 +746,12 @@ class _CopyWithStubImpl$Query$Recommendations$Page<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  recommendations(_fn) => _res;
+  @override
+  recommendations(fn) => _res;
 }
 
 class Query$Recommendations$Page$recommendations {
@@ -790,22 +802,22 @@ class Query$Recommendations$Page$recommendations {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$rating = rating;
-    _resultData['rating'] = l$rating;
+    resultData['rating'] = l$rating;
     final l$userRating = userRating;
-    _resultData['userRating'] = l$userRating == null
+    resultData['userRating'] = l$userRating == null
         ? null
         : toJson$Enum$RecommendationRating(l$userRating);
     final l$media = media;
-    _resultData['media'] = l$media?.toJson();
+    resultData['media'] = l$media?.toJson();
     final l$mediaRecommendation = mediaRecommendation;
-    _resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
+    resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -831,7 +843,7 @@ class Query$Recommendations$Page$recommendations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Recommendations$Page$recommendations) ||
+    if (other is! Query$Recommendations$Page$recommendations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -913,6 +925,7 @@ class _CopyWithImpl$Query$Recommendations$Page$recommendations<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? rating = _undefined,
@@ -938,6 +951,7 @@ class _CopyWithImpl$Query$Recommendations$Page$recommendations<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -945,6 +959,7 @@ class _CopyWithImpl$Query$Recommendations$Page$recommendations<TRes>
         : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
   }
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation {
     final local$mediaRecommendation = _instance.mediaRecommendation;
     return local$mediaRecommendation == null
@@ -958,8 +973,9 @@ class _CopyWithStubImpl$Query$Recommendations$Page$recommendations<TRes>
     implements CopyWith$Query$Recommendations$Page$recommendations<TRes> {
   _CopyWithStubImpl$Query$Recommendations$Page$recommendations(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? rating,
@@ -970,9 +986,11 @@ class _CopyWithStubImpl$Query$Recommendations$Page$recommendations<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -1051,7 +1069,7 @@ class Variables$Mutation$SaveRecommendation {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$SaveRecommendation) ||
+    if (other is! Variables$Mutation$SaveRecommendation ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1127,6 +1145,7 @@ class _CopyWithImpl$Variables$Mutation$SaveRecommendation<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? mediaId = _undefined,
     Object? mediaRecommendationId = _undefined,
@@ -1146,8 +1165,9 @@ class _CopyWithStubImpl$Variables$Mutation$SaveRecommendation<TRes>
     implements CopyWith$Variables$Mutation$SaveRecommendation<TRes> {
   _CopyWithStubImpl$Variables$Mutation$SaveRecommendation(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? mediaId,
     int? mediaRecommendationId,
@@ -1179,12 +1199,12 @@ class Mutation$SaveRecommendation {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$SaveRecommendation = SaveRecommendation;
-    _resultData['SaveRecommendation'] = l$SaveRecommendation?.toJson();
+    resultData['SaveRecommendation'] = l$SaveRecommendation?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1202,7 +1222,7 @@ class Mutation$SaveRecommendation {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$SaveRecommendation) ||
+    if (other is! Mutation$SaveRecommendation ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1259,6 +1279,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? SaveRecommendation = _undefined,
     Object? $__typename = _undefined,
@@ -1273,6 +1294,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$SaveRecommendation$SaveRecommendation<TRes>
       get SaveRecommendation {
     final local$SaveRecommendation = _instance.SaveRecommendation;
@@ -1288,14 +1310,16 @@ class _CopyWithStubImpl$Mutation$SaveRecommendation<TRes>
     implements CopyWith$Mutation$SaveRecommendation<TRes> {
   _CopyWithStubImpl$Mutation$SaveRecommendation(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$SaveRecommendation$SaveRecommendation? SaveRecommendation,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$SaveRecommendation$SaveRecommendation<TRes>
       get SaveRecommendation =>
           CopyWith$Mutation$SaveRecommendation$SaveRecommendation.stub(_res);
@@ -1483,22 +1507,22 @@ class Mutation$SaveRecommendation$SaveRecommendation {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$rating = rating;
-    _resultData['rating'] = l$rating;
+    resultData['rating'] = l$rating;
     final l$userRating = userRating;
-    _resultData['userRating'] = l$userRating == null
+    resultData['userRating'] = l$userRating == null
         ? null
         : toJson$Enum$RecommendationRating(l$userRating);
     final l$media = media;
-    _resultData['media'] = l$media?.toJson();
+    resultData['media'] = l$media?.toJson();
     final l$mediaRecommendation = mediaRecommendation;
-    _resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
+    resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -1524,7 +1548,7 @@ class Mutation$SaveRecommendation$SaveRecommendation {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$SaveRecommendation$SaveRecommendation) ||
+    if (other is! Mutation$SaveRecommendation$SaveRecommendation ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1607,6 +1631,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? rating = _undefined,
@@ -1632,6 +1657,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -1639,6 +1665,7 @@ class _CopyWithImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
         : CopyWith$Fragment$MediaFragment(local$media, (e) => call(media: e));
   }
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation {
     final local$mediaRecommendation = _instance.mediaRecommendation;
     return local$mediaRecommendation == null
@@ -1652,8 +1679,9 @@ class _CopyWithStubImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
     implements CopyWith$Mutation$SaveRecommendation$SaveRecommendation<TRes> {
   _CopyWithStubImpl$Mutation$SaveRecommendation$SaveRecommendation(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     int? id,
     int? rating,
@@ -1664,9 +1692,11 @@ class _CopyWithStubImpl$Mutation$SaveRecommendation$SaveRecommendation<TRes>
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

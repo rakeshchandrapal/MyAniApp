@@ -10,7 +10,6 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/viewer.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
-import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/utils.dart';
@@ -376,7 +375,7 @@ class SettingsScreen extends ConsumerWidget {
                     )
                   ],
                   onSaved: (values) {
-                    if (values.contains("anime"))
+                    if (values.contains("anime")) {
                       c
                           .query(
                             GQLRequest(
@@ -398,7 +397,8 @@ class SettingsScreen extends ConsumerWidget {
                           .then(
                             (value) => ref.refresh(userProvider),
                           );
-                    if (values.contains("manga"))
+                    }
+                    if (values.contains("manga")) {
                       c
                           .query(
                             GQLRequest(
@@ -420,8 +420,9 @@ class SettingsScreen extends ConsumerWidget {
                           .then(
                             (value) => ref.refresh(userProvider),
                           );
+                    }
 
-                    if (values.length == 1 && values.first == null)
+                    if (values.length == 1 && values.first == null) {
                       c
                           .query(
                             GQLRequest(
@@ -439,6 +440,7 @@ class SettingsScreen extends ConsumerWidget {
                           .then(
                             (value) => ref.refresh(userProvider),
                           );
+                    }
                   },
                 )
               ],
@@ -538,7 +540,7 @@ class SettingsTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   DefaultTextStyle(
-                    style: context.theme.textTheme.bodyLarge ?? TextStyle(),
+                    style: context.theme.textTheme.bodyLarge ?? const TextStyle(),
                     child: title,
                   ),
                   if (subtitle != null)
@@ -743,7 +745,7 @@ class PopupSettingsTile<T> extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog.adaptive(
           title: Text(title),
-          contentPadding: EdgeInsets.only(top: 10, bottom: 20),
+          contentPadding: const EdgeInsets.only(top: 10, bottom: 20),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -870,19 +872,19 @@ class __MultiPopupMenuState<T> extends State<_MultiPopupMenu<T>> {
             widget.onSaved?.call(values);
             context.maybePop();
           },
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(
+                context.theme.colorScheme.primaryContainer),
+          ),
           child: Text(
             "Save",
             style:
                 TextStyle(color: context.theme.colorScheme.onPrimaryContainer),
           ),
-          style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(
-                context.theme.colorScheme.primaryContainer),
-          ),
         )
       ],
       actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      contentPadding: EdgeInsets.only(top: 10),
+      contentPadding: const EdgeInsets.only(top: 10),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -892,20 +894,22 @@ class __MultiPopupMenuState<T> extends State<_MultiPopupMenu<T>> {
                 title: item.label != null ? Text(item.label!) : item.child,
                 onTap: () => setState(() {
                   // widget.onSelected?.call(item.value);
-                  if (values.contains(item.value))
+                  if (values.contains(item.value)) {
                     values.remove(item.value);
-                  else
+                  } else {
                     values.add(item.value);
+                  }
                   // context.pop();
                 }),
                 trailing: Checkbox.adaptive(
                   value: values.contains(item.value),
                   onChanged: (value) => setState(() {
                     // widget.onSelected?.call(item.value);
-                    if (values.contains(item.value))
+                    if (values.contains(item.value)) {
                       values.remove(item.value);
-                    else
+                    } else {
                       values.add(item.value);
+                    }
                     // context.pop();
                   }),
                 ),

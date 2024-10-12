@@ -53,7 +53,7 @@ class _UserScreenState extends State<UserScreen>
       ),
       loading: null,
       builder: () {
-        if (snapshot?.loading == true && widget.placeholder == null) {
+        if (snapshot.loading == true && widget.placeholder == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(
@@ -62,7 +62,7 @@ class _UserScreenState extends State<UserScreen>
           );
         }
 
-        var data = snapshot?.parsedData?.User;
+        var data = snapshot.parsedData?.User;
 
         if (data != null) _buildTabs(data);
 

@@ -42,7 +42,7 @@ class Variables$Query$EmbedMediaCard {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$EmbedMediaCard) ||
+    if (other is! Variables$Query$EmbedMediaCard ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -89,6 +89,7 @@ class _CopyWithImpl$Variables$Query$EmbedMediaCard<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Query$EmbedMediaCard._({
         ..._instance._$data,
@@ -100,8 +101,9 @@ class _CopyWithStubImpl$Variables$Query$EmbedMediaCard<TRes>
     implements CopyWith$Variables$Query$EmbedMediaCard<TRes> {
   _CopyWithStubImpl$Variables$Query$EmbedMediaCard(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({int? id}) => _res;
 }
 
@@ -127,12 +129,12 @@ class Query$EmbedMediaCard {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$Media = Media;
-    _resultData['Media'] = l$Media?.toJson();
+    resultData['Media'] = l$Media?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -150,7 +152,7 @@ class Query$EmbedMediaCard {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$EmbedMediaCard) || runtimeType != other.runtimeType) {
+    if (other is! Query$EmbedMediaCard || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;
@@ -204,6 +206,7 @@ class _CopyWithImpl$Query$EmbedMediaCard<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? Media = _undefined,
     Object? $__typename = _undefined,
@@ -217,6 +220,7 @@ class _CopyWithImpl$Query$EmbedMediaCard<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get Media {
     final local$Media = _instance.Media;
     return local$Media == null
@@ -229,14 +233,16 @@ class _CopyWithStubImpl$Query$EmbedMediaCard<TRes>
     implements CopyWith$Query$EmbedMediaCard<TRes> {
   _CopyWithStubImpl$Query$EmbedMediaCard(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Fragment$MediaFragment? Media,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Fragment$MediaFragment<TRes> get Media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

@@ -22,7 +22,7 @@ class MediaCardNode extends md.ElementNode {
   InlineSpan build() {
     var id = int.parse(attributes['id']!);
 
-    return WidgetSpan(child: SizedBox());
+    return const WidgetSpan(child: SizedBox());
 
     // return WidgetSpan(
     //   child: GQLRequest(

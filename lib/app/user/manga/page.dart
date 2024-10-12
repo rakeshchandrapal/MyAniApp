@@ -39,7 +39,7 @@ class UserMangaScreen extends HookWidget {
       error: Scaffold(
         appBar: AppBar(),
         body: GraphqlError(
-          exception: (snapshot?.errors, snapshot?.linkError),
+          exception: (snapshot.errors, snapshot.linkError),
           refetch: refetch,
         ),
       ),
@@ -48,7 +48,7 @@ class UserMangaScreen extends HookWidget {
         notificationPredicate: (notification) => notification.depth == 1,
         child: MediaListView(
           refetch: refetch,
-          groups: snapshot!.parsedData!.MediaListCollection!.lists!
+          groups: snapshot.parsedData!.MediaListCollection!.lists!
               .whereType<Fragment$ListGroup>()
               .toList(),
           user: snapshot.parsedData!.MediaListCollection!.user!,
