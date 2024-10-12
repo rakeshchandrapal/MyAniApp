@@ -94,112 +94,109 @@ class _RecommendationsStatePage extends State<RecommendationsScreen> {
       body: GQLWidget(
         refetch: refetch,
         response: snapshot,
-        builder: () => GraphqlPagination(
-          pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
-          req: (nextPage) => fetchMore(
-            variables: Variables$Query$Recommendations.fromJson(
-                    snapshot.request!.variables)
-                .copyWith(page: nextPage)
-                .toJson(),
-          ),
-          child: RefreshIndicator.adaptive(
-            onRefresh: refetch,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 400,
-                mainAxisExtent: 170,
-              ),
-              itemBuilder: (context, index) {
-                var rec = snapshot.parsedData!.Page!.recommendations![index]!;
-                if (rec.media == null || rec.mediaRecommendation == null) {
-                  return const SizedBox();
-                }
+        builder: () => RefreshIndicator.adaptive(
+          onRefresh: refetch,
+          child: PaginationView.grid(
+            pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+            req: (nextPage) => fetchMore(
+              variables: Variables$Query$Recommendations.fromJson(
+                      snapshot.request!.variables)
+                  .copyWith(page: nextPage)
+                  .toJson(),
+            ),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 400,
+              mainAxisExtent: 170,
+            ),
+            builder: (context, index) {
+              var rec = snapshot.parsedData!.Page!.recommendations![index]!;
+              if (rec.media == null || rec.mediaRecommendation == null) {
+                return const SizedBox();
+              }
 
-                return Card.outlined(
-                  child: Stack(
-                    // alignment: Alignment.bottomCenter,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              return Card.outlined(
+                child: Stack(
+                  // alignment: Alignment.bottomCenter,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 130,
+                            width: 85,
+                            child: GridCard(
+                              image: rec.media!.coverImage!.extraLarge!,
+                              title: rec.media!.title!.userPreferred,
+                              blur: rec.media!.isAdult ?? false,
+                              onTap: () => context.pushRoute(MediaRoute(
+                                id: rec.media!.id,
+                                placeholder: rec.media!,
+                              )),
+                              onLongPress: () =>
+                                  MediaSheet.show(context, rec.media!),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 130,
+                            width: 85,
+                            child: GridCard(
+                              image: rec
+                                  .mediaRecommendation!.coverImage!.extraLarge!,
+                              title:
+                                  rec.mediaRecommendation!.title!.userPreferred,
+                              blur: rec.mediaRecommendation!.isAdult ?? false,
+                              onTap: () => context.pushRoute(MediaRoute(
+                                id: rec.mediaRecommendation!.id,
+                                placeholder: rec.mediaRecommendation,
+                              )),
+                              onLongPress: () => MediaSheet.show(
+                                  context, rec.mediaRecommendation!),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: context.theme.colorScheme.surfaceContainerHigh
+                              .withOpacity(.5),
+                          borderRadius: imageRadius,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            SizedBox(
-                              height: 130,
-                              width: 85,
-                              child: GridCard(
-                                image: rec.media!.coverImage!.extraLarge!,
-                                title: rec.media!.title!.userPreferred,
-                                blur: rec.media!.isAdult ?? false,
-                                onTap: () => context.pushRoute(MediaRoute(
-                                  id: rec.media!.id,
-                                  placeholder: rec.media!,
-                                )),
-                                onLongPress: () =>
-                                    MediaSheet.show(context, rec.media!),
-                              ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.thumb_up),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.thumb_down),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 130,
-                              width: 85,
-                              child: GridCard(
-                                image: rec.mediaRecommendation!.coverImage!
-                                    .extraLarge!,
-                                title: rec
-                                    .mediaRecommendation!.title!.userPreferred,
-                                blur: rec.mediaRecommendation!.isAdult ?? false,
-                                onTap: () => context.pushRoute(MediaRoute(
-                                  id: rec.mediaRecommendation!.id,
-                                  placeholder: rec.mediaRecommendation,
-                                )),
-                                onLongPress: () => MediaSheet.show(
-                                    context, rec.mediaRecommendation!),
-                              ),
-                            ),
+                            Text(
+                                "${(rec.rating ?? 0) > 0 ? "+ " : ""}${(rec.rating ?? 0)}")
                           ],
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: context
-                                .theme.colorScheme.surfaceContainerHigh
-                                .withOpacity(.5),
-                            borderRadius: imageRadius,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.thumb_up),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.thumb_down),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                  "${(rec.rating ?? 0) > 0 ? "+ " : ""}${(rec.rating ?? 0)}")
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-              itemCount: snapshot.parsedData!.Page!.recommendations!.length,
-            ),
+                    )
+                  ],
+                ),
+              );
+            },
+            itemCount: snapshot.parsedData!.Page!.recommendations!.length,
           ),
         ),
       ),

@@ -27,7 +27,7 @@ class UserReviewsScreen extends HookWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      builder: () => GraphqlPagination(
+      builder: () => PaginationView.grid(
         pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
         req: (nextPage) => fetchMore(
           variables:
@@ -35,18 +35,16 @@ class UserReviewsScreen extends HookWidget {
                   .copyWith(page: nextPage)
                   .toJson(),
         ),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 300,
-            mainAxisExtent: 200,
-          ),
-          itemBuilder: (context, index) {
-            var review = snapshot.parsedData!.Page!.reviews![index]!;
-
-            return ReviewCard(review: review);
-          },
-          itemCount: snapshot.parsedData!.Page!.reviews!.length,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 300,
+          mainAxisExtent: 200,
         ),
+        builder: (context, index) {
+          var review = snapshot.parsedData!.Page!.reviews![index]!;
+
+          return ReviewCard(review: review);
+        },
+        itemCount: snapshot.parsedData!.Page!.reviews!.length,
       ),
     );
   }

@@ -75,169 +75,323 @@ class NotificationScreen extends HookWidget {
         refetch: refetch,
         builder: () => RefreshIndicator.adaptive(
           onRefresh: refetch,
-          child: GraphqlPagination(
-            pageInfo: snapshot.parsedData!.Page!.pageInfo!,
-            req: (nextPage) => fetchMore(
-                variables: Variables$Query$Notifications.fromJson(
-                        snapshot.request!.variables)
-                    .copyWith(page: nextPage)
-                    .toJson()),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: SegmentedButton(
-                        selected: {s.value},
-                        onSelectionChanged: (p0) => s.value = p0.first,
-                        segments: [
+          child: PaginationView.list(
+              pageInfo: snapshot.parsedData!.Page!.pageInfo!,
+              req: (nextPage) => fetchMore(
+                  variables: Variables$Query$Notifications.fromJson(
+                          snapshot.request!.variables)
+                      .copyWith(page: nextPage)
+                      .toJson()),
+              trailing: SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: SegmentedButton(
+                      selected: {s.value},
+                      onSelectionChanged: (p0) => s.value = p0.first,
+                      segments: [
+                        ButtonSegment(
+                          value: null,
+                          label: Text("All"),
+                        ),
+                        for (var y in notificationSelection.entries)
                           ButtonSegment(
-                            value: null,
-                            label: Text("All"),
-                          ),
-                          for (var y in notificationSelection.entries)
-                            ButtonSegment(
-                              value: y.key,
-                              label: Text(y.key),
-                            )
-                        ],
-                      ),
+                            value: y.key,
+                            label: Text(y.key),
+                          )
+                      ],
                     ),
                   ),
                 ),
-                SliverList.builder(
-                  itemBuilder: (context, index) {
-                    var notif = AnilistNotification(
-                        notification:
-                            snapshot!.parsedData!.Page!.notifications![index]!);
+              ),
+              builder: (context, index) {
+                var notif = AnilistNotification(
+                    notification:
+                        snapshot!.parsedData!.Page!.notifications![index]!);
 
-                    var n = notif.notification as dynamic;
+                var n = notif.notification as dynamic;
 
-                    // var onTap = null;
-                    var onTap = (notif.isMedia &&
-                            n.type != Enum$NotificationType.MEDIA_DELETION)
+                // var onTap = null;
+                var onTap = (notif.isMedia &&
+                        n.type != Enum$NotificationType.MEDIA_DELETION)
+                    ? () {
+                        context.pushRoute(
+                            MediaRoute(id: n.media.id, placeholder: n.media));
+                      }
+                    : notif.isActivity
                         ? () {
-                            context.pushRoute(MediaRoute(
-                                id: n.media.id, placeholder: n.media));
+                            context.pushRoute(ActivityRoute(id: n.activityId));
                           }
-                        : notif.isActivity
+                        : notif.isThread
                             ? () {
-                                context
-                                    .pushRoute(ActivityRoute(id: n.activityId));
+                                context.pushRoute(ThreadRoute(id: n.thread.id));
                               }
-                            : notif.isThread
+                            : n.type == Enum$NotificationType.FOLLOWING
                                 ? () {
                                     context.pushRoute(
-                                        ThreadRoute(id: n.thread.id));
+                                        UserRoute(name: n.user.name));
                                   }
-                                : n.type == Enum$NotificationType.FOLLOWING
-                                    ? () {
-                                        context.pushRoute(
-                                            UserRoute(name: n.user.name));
-                                      }
-                                    : null;
+                                : null;
 
-                    return Card.outlined(
-                      child: InkWellImage(
-                        onTap: onTap,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (notif.isMedia &&
-                                n.type != Enum$NotificationType.MEDIA_DELETION)
-                              SizedBox(
-                                height: 120,
-                                width: 85,
-                                child: ClipRRect(
-                                  borderRadius: imageRadius,
-                                  child: CachedImage(
-                                    n.media.coverImage.extraLarge,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              )
-                            else if (notif.isMedia)
-                              const SizedBox(
-                                height: 120,
-                                width: 85,
-                                child: ClipRRect(
-                                  borderRadius: imageRadius,
-                                  child: CachedImage(
-                                    anilistDefaultImage,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              )
-                            else if (notif.isActivity)
-                              SizedBox(
-                                height: 120,
-                                width: 85,
-                                child: ClipRRect(
-                                  borderRadius: imageRadius,
-                                  child: CachedImage(
-                                    n.user.avatar.large,
-                                    // fit: BoxFit.fill,
-                                  ),
-                                ),
-                              )
-                            else if (notif.isThread)
-                              SizedBox(
-                                height: 120,
-                                width: 85,
-                                child: ClipRRect(
-                                  borderRadius: imageRadius,
-                                  child: CachedImage(
-                                    n.media.coverImage.extraLarge,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              )
-                            else if (n.type == Enum$NotificationType.FOLLOWING)
-                              SizedBox(
-                                height: 120,
-                                width: 85,
-                                child: ClipRRect(
-                                  borderRadius: imageRadius,
-                                  child: CachedImage(
-                                    n.user.avatar.large,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      notif.toString(),
-                                      maxLines: 3,
-                                    ),
-                                    Text(
-                                      dateFromTimestamp(n.createdAt)
-                                          .relativeTime(context),
-                                      style: context.theme.textTheme.labelLarge
-                                          ?.copyWith(
-                                              color: context.theme.hintColor),
-                                      maxLines: 2,
-                                    ),
-                                  ],
-                                ),
+                return Card.outlined(
+                  child: InkWellImage(
+                    onTap: onTap,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (notif.isMedia &&
+                            n.type != Enum$NotificationType.MEDIA_DELETION)
+                          SizedBox(
+                            height: 120,
+                            width: 85,
+                            child: ClipRRect(
+                              borderRadius: imageRadius,
+                              child: CachedImage(
+                                n.media.coverImage.extraLarge,
+                                fit: BoxFit.fill,
                               ),
                             ),
-                          ],
+                          )
+                        else if (notif.isMedia)
+                          const SizedBox(
+                            height: 120,
+                            width: 85,
+                            child: ClipRRect(
+                              borderRadius: imageRadius,
+                              child: CachedImage(
+                                anilistDefaultImage,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          )
+                        else if (notif.isActivity)
+                          SizedBox(
+                            height: 120,
+                            width: 85,
+                            child: ClipRRect(
+                              borderRadius: imageRadius,
+                              child: CachedImage(
+                                n.user.avatar.large,
+                                // fit: BoxFit.fill,
+                              ),
+                            ),
+                          )
+                        else if (notif.isThread)
+                          SizedBox(
+                            height: 120,
+                            width: 85,
+                            child: ClipRRect(
+                              borderRadius: imageRadius,
+                              child: CachedImage(
+                                n.media.coverImage.extraLarge,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          )
+                        else if (n.type == Enum$NotificationType.FOLLOWING)
+                          SizedBox(
+                            height: 120,
+                            width: 85,
+                            child: ClipRRect(
+                              borderRadius: imageRadius,
+                              child: CachedImage(
+                                n.user.avatar.large,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  notif.toString(),
+                                  maxLines: 3,
+                                ),
+                                Text(
+                                  dateFromTimestamp(n.createdAt)
+                                      .relativeTime(context),
+                                  style: context.theme.textTheme.labelLarge
+                                      ?.copyWith(
+                                          color: context.theme.hintColor),
+                                  maxLines: 2,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: snapshot!.parsedData!.Page!.notifications!.length,
-                ),
-              ],
-            ),
-          ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              itemCount: snapshot!.parsedData!.Page!.notifications!.length),
+          // child: GraphqlPagination(
+          //   pageInfo: snapshot.parsedData!.Page!.pageInfo!,
+          //   req: (nextPage) => fetchMore(
+          //       variables: Variables$Query$Notifications.fromJson(
+          //               snapshot.request!.variables)
+          //           .copyWith(page: nextPage)
+          //           .toJson()),
+          //   child: CustomScrollView(
+          //     slivers: [
+          //       SliverToBoxAdapter(
+          //         child: Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 4),
+          //           child: SingleChildScrollView(
+          //             scrollDirection: Axis.horizontal,
+          //             child: SegmentedButton(
+          //               selected: {s.value},
+          //               onSelectionChanged: (p0) => s.value = p0.first,
+          //               segments: [
+          //                 ButtonSegment(
+          //                   value: null,
+          //                   label: Text("All"),
+          //                 ),
+          //                 for (var y in notificationSelection.entries)
+          //                   ButtonSegment(
+          //                     value: y.key,
+          //                     label: Text(y.key),
+          //                   )
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //       SliverList.builder(
+          //         itemBuilder: (context, index) {
+          //           var notif = AnilistNotification(
+          //               notification:
+          //                   snapshot!.parsedData!.Page!.notifications![index]!);
+
+          //           var n = notif.notification as dynamic;
+
+          //           // var onTap = null;
+          //           var onTap = (notif.isMedia &&
+          //                   n.type != Enum$NotificationType.MEDIA_DELETION)
+          //               ? () {
+          //                   context.pushRoute(MediaRoute(
+          //                       id: n.media.id, placeholder: n.media));
+          //                 }
+          //               : notif.isActivity
+          //                   ? () {
+          //                       context
+          //                           .pushRoute(ActivityRoute(id: n.activityId));
+          //                     }
+          //                   : notif.isThread
+          //                       ? () {
+          //                           context.pushRoute(
+          //                               ThreadRoute(id: n.thread.id));
+          //                         }
+          //                       : n.type == Enum$NotificationType.FOLLOWING
+          //                           ? () {
+          //                               context.pushRoute(
+          //                                   UserRoute(name: n.user.name));
+          //                             }
+          //                           : null;
+
+          //           return Card.outlined(
+          //             child: InkWellImage(
+          //               onTap: onTap,
+          //               child: Row(
+          //                 crossAxisAlignment: CrossAxisAlignment.start,
+          //                 children: [
+          //                   if (notif.isMedia &&
+          //                       n.type != Enum$NotificationType.MEDIA_DELETION)
+          //                     SizedBox(
+          //                       height: 120,
+          //                       width: 85,
+          //                       child: ClipRRect(
+          //                         borderRadius: imageRadius,
+          //                         child: CachedImage(
+          //                           n.media.coverImage.extraLarge,
+          //                           fit: BoxFit.fill,
+          //                         ),
+          //                       ),
+          //                     )
+          //                   else if (notif.isMedia)
+          //                     const SizedBox(
+          //                       height: 120,
+          //                       width: 85,
+          //                       child: ClipRRect(
+          //                         borderRadius: imageRadius,
+          //                         child: CachedImage(
+          //                           anilistDefaultImage,
+          //                           fit: BoxFit.fill,
+          //                         ),
+          //                       ),
+          //                     )
+          //                   else if (notif.isActivity)
+          //                     SizedBox(
+          //                       height: 120,
+          //                       width: 85,
+          //                       child: ClipRRect(
+          //                         borderRadius: imageRadius,
+          //                         child: CachedImage(
+          //                           n.user.avatar.large,
+          //                           // fit: BoxFit.fill,
+          //                         ),
+          //                       ),
+          //                     )
+          //                   else if (notif.isThread)
+          //                     SizedBox(
+          //                       height: 120,
+          //                       width: 85,
+          //                       child: ClipRRect(
+          //                         borderRadius: imageRadius,
+          //                         child: CachedImage(
+          //                           n.media.coverImage.extraLarge,
+          //                           fit: BoxFit.fill,
+          //                         ),
+          //                       ),
+          //                     )
+          //                   else if (n.type == Enum$NotificationType.FOLLOWING)
+          //                     SizedBox(
+          //                       height: 120,
+          //                       width: 85,
+          //                       child: ClipRRect(
+          //                         borderRadius: imageRadius,
+          //                         child: CachedImage(
+          //                           n.user.avatar.large,
+          //                           fit: BoxFit.fill,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   Expanded(
+          //                     child: Padding(
+          //                       padding: const EdgeInsets.all(8.0),
+          //                       child: Column(
+          //                         crossAxisAlignment: CrossAxisAlignment.start,
+          //                         children: [
+          //                           Text(
+          //                             notif.toString(),
+          //                             maxLines: 3,
+          //                           ),
+          //                           Text(
+          //                             dateFromTimestamp(n.createdAt)
+          //                                 .relativeTime(context),
+          //                             style: context.theme.textTheme.labelLarge
+          //                                 ?.copyWith(
+          //                                     color: context.theme.hintColor),
+          //                             maxLines: 2,
+          //                           ),
+          //                         ],
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           );
+          //         },
+          //         itemCount: snapshot!.parsedData!.Page!.notifications!.length,
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ),
       ),
     );

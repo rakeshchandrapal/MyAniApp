@@ -63,7 +63,8 @@ class StudioScreen extends HookConsumerWidget {
             SizedBox(width: 5),
           ],
         ),
-        body: GraphqlPagination(
+        body: PaginationView(
+          isGrid: listSetting.studio == ListType.grid,
           pageInfo: snapshot.parsedData!.Studio!.media!.pageInfo!,
           req: (nextPage) => fetchMore(
             variables:
@@ -71,35 +72,66 @@ class StudioScreen extends HookConsumerWidget {
                     .copyWith(page: nextPage)
                     .toJson(),
           ),
-          child: MediaCards(
-            listType: listSetting.studio,
-            padding: listSetting.studio == ListType.grid
-                ? const EdgeInsets.all(8)
-                : null,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 150,
-              childAspectRatio: GridCard.listRatio,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-            ),
-            itemCount: snapshot.parsedData!.Studio!.media!.nodes!.length,
-            itemBuilder: (context, index) {
-              var anime = snapshot.parsedData!.Studio!.media!.nodes![index]!;
-
-              return MediaCard(
-                listType: listSetting.studio,
-                image: anime.coverImage!.extraLarge!,
-                title: anime.title!.userPreferred,
-                blur: anime.isAdult ?? false,
-                onTap: () => context.pushRoute(MediaRoute(
-                  id: anime.id,
-                  placeholder: anime,
-                )),
-                onLongPress: () => MediaSheet.show(context, anime),
-              );
-            },
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 150,
+            childAspectRatio: GridCard.listRatio,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
           ),
+          builder: (context, index) {
+            var anime = snapshot.parsedData!.Studio!.media!.nodes![index]!;
+
+            return MediaCard(
+              listType: listSetting.studio,
+              image: anime.coverImage!.extraLarge!,
+              title: anime.title!.userPreferred,
+              blur: anime.isAdult ?? false,
+              onTap: () => context.pushRoute(MediaRoute(
+                id: anime.id,
+                placeholder: anime,
+              )),
+              onLongPress: () => MediaSheet.show(context, anime),
+            );
+          },
+          itemCount: snapshot.parsedData!.Studio!.media!.nodes!.length,
         ),
+        // body: GraphqlPagination(
+        //   pageInfo: snapshot.parsedData!.Studio!.media!.pageInfo!,
+        //   req: (nextPage) => fetchMore(
+        //     variables:
+        //         Variables$Query$Studio.fromJson(snapshot.request!.variables)
+        //             .copyWith(page: nextPage)
+        //             .toJson(),
+        //   ),
+        //   child: MediaCards(
+        //     listType: listSetting.studio,
+        //     padding: listSetting.studio == ListType.grid
+        //         ? const EdgeInsets.all(8)
+        //         : null,
+        //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        //       maxCrossAxisExtent: 150,
+        //       childAspectRatio: GridCard.listRatio,
+        //       mainAxisSpacing: 10,
+        //       crossAxisSpacing: 10,
+        //     ),
+        //     itemCount: snapshot.parsedData!.Studio!.media!.nodes!.length,
+        //     itemBuilder: (context, index) {
+        //       var anime = snapshot.parsedData!.Studio!.media!.nodes![index]!;
+
+        //       return MediaCard(
+        //         listType: listSetting.studio,
+        //         image: anime.coverImage!.extraLarge!,
+        //         title: anime.title!.userPreferred,
+        //         blur: anime.isAdult ?? false,
+        //         onTap: () => context.pushRoute(MediaRoute(
+        //           id: anime.id,
+        //           placeholder: anime,
+        //         )),
+        //         onLongPress: () => MediaSheet.show(context, anime),
+        //       );
+        //     },
+        //   ),
+        // ),
         //   child: GridView.builder(
         //     padding: const EdgeInsets.all(8),
         //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

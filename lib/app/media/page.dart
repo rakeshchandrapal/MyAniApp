@@ -131,7 +131,7 @@ class _MediaScreenState extends State<MediaScreen> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Next Episode Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
+                                    "Episode ${snapshot.parsedData!.Media!.nextAiringEpisode!.episode} Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),

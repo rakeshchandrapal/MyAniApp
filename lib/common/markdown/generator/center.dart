@@ -38,7 +38,6 @@ class CodeBlockNode extends ElementNode {
 
   @override
   InlineSpan build() {
-    print("IHI");
     return WidgetSpan(
       child: Center(
         child: Text.rich(

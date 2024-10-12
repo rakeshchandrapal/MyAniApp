@@ -67,7 +67,7 @@ class _ForumSearchPageState extends State<ForumSearchPage> {
         response: snapshot,
         builder: () => RefreshIndicator.adaptive(
           onRefresh: refetch,
-          child: GraphqlPagination(
+          child: PaginationView.list(
             pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
             req: (nextPage) => fetchMore(
               variables:
@@ -75,37 +75,27 @@ class _ForumSearchPageState extends State<ForumSearchPage> {
                       .copyWith(page: nextPage)
                       .toJson(),
             ),
-            child: CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                  sliver: SliverToBoxAdapter(
-                    child: TextField(
-                      controller: _controller,
-                      onSubmitted: widget.onChange,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        hintText: 'Search...',
-                      ),
+            trailing: SliverPadding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              sliver: SliverToBoxAdapter(
+                child: TextField(
+                  controller: _controller,
+                  onSubmitted: widget.onChange,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
+                    hintText: 'Search...',
                   ),
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(0),
-                  sliver: SliverList.builder(
-                    itemBuilder: (context, index) {
-                      var thread = snapshot.parsedData!.Page!.threads![index]!;
-
-                      return ThreadCard(thread: thread);
-                    },
-                    itemCount: snapshot.parsedData!.Page!.threads!.length,
-                  ),
-                ),
-              ],
+              ),
             ),
+            builder: (context, index) {
+              var thread = snapshot.parsedData!.Page!.threads![index]!;
+
+              return ThreadCard(thread: thread);
+            },
+            itemCount: snapshot.parsedData!.Page!.threads!.length,
           ),
         ),
       );

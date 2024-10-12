@@ -30,7 +30,7 @@ class UserActivityScreen extends HookWidget {
       response: snapshot,
       builder: () => RefreshIndicator.adaptive(
         onRefresh: refetch,
-        child: GraphqlPagination(
+        child: PaginationView.list(
           pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
           req: (nextPage) => fetchMore(
             variables: Variables$Query$UserActivities.fromJson(
@@ -38,17 +38,14 @@ class UserActivityScreen extends HookWidget {
                 .copyWith(page: nextPage)
                 .toJson(),
           ),
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              var activity = snapshot.parsedData!.Page!.activities![index]!;
+          builder: (context, index) {
+            var activity = snapshot.parsedData!.Page!.activities![index]!;
 
-              return ActivityCard(
-                activity: activity,
-              );
-            },
-            itemCount: snapshot.parsedData!.Page!.activities!.length,
-          ),
+            return ActivityCard(
+              activity: activity,
+            );
+          },
+          itemCount: snapshot.parsedData!.Page!.activities!.length,
         ),
       ),
     );

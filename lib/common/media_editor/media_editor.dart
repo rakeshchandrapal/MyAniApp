@@ -19,6 +19,7 @@ import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:mygraphql/graphql.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class MediaEditorDialog extends HookConsumerWidget {
   const MediaEditorDialog({
@@ -251,7 +252,23 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 onSelected: (value) =>
                     setState(() => options = options.copyWith(status: value)),
               ),
-              SettingTileNumber(
+              // SettingsTile(
+              //   title: Text(widget.entry.media?.type == Enum$MediaType.ANIME
+              //       ? "Episodes Watched"
+              //       : "Chapters Read"),
+              //   child: NumberPicker(
+              //     minValue: 0,
+              //     maxValue: widget.entry.media?.episodes ??
+              //         widget.entry.media?.chapters ??
+              //         (options.progress ?? 0) + 100,
+              //     onChanged: (value) => setState(
+              //         () => options = options.copyWith(progress: value)),
+              //     value: options.progress ?? 0,
+              //     axis: Axis.horizontal,
+              //     itemWidth: 50,
+              //   ),
+              // ),
+              SettingIntNumber(
                 title: widget.entry.media?.type == Enum$MediaType.ANIME
                     ? "Episodes Watched"
                     : "Chapters Read",
@@ -262,7 +279,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                 max: widget.entry.media?.episodes ??
                     widget.entry.media?.chapters,
               ),
-              SettingTileNumber(
+              SettingIntNumber(
                 title: "Rewatches",
                 enabled: enabled,
                 value: options.repeat ?? 0,
@@ -462,6 +479,43 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
               enabled: userId == widget.entry.user?.id,
             )
         ],
+      ),
+    );
+  }
+}
+
+class SettingIntNumber extends StatelessWidget {
+  const SettingIntNumber(
+      {super.key,
+      required this.onChanged,
+      required this.value,
+      this.max,
+      required this.title,
+      this.enabled});
+
+  final void Function(int value) onChanged;
+  final int value;
+  final int? max;
+  final String title;
+  final bool? enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingsTile(
+      title: Text(title),
+      subtitle: Center(
+        child: NumberPicker(
+          minValue: 0,
+          maxValue: max ?? (value ?? 0) + 100,
+          onChanged: onChanged,
+          value: value,
+          axis: Axis.horizontal,
+          itemWidth: 50,
+          decoration: BoxDecoration(
+            border: Border.all(color: context.theme.colorScheme.primary),
+            borderRadius: imageRadius,
+          ),
+        ),
       ),
     );
   }

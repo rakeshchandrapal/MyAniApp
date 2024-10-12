@@ -25,22 +25,20 @@ class ReviewsScreen extends HookWidget {
       body: GQLWidget(
         refetch: refetch,
         response: snapshot,
-        builder: () => GraphqlPagination(
+        builder: () => PaginationView.grid(
           pageInfo: snapshot.parsedData!.Page!.pageInfo!,
           req: (nextPage) => fetchMore(
               variables: Variables$Query$Reviews(page: nextPage).toJson()),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 250,
-              mainAxisExtent: 200,
-            ),
-            itemBuilder: (context, index) {
-              var review = snapshot!.parsedData!.Page!.reviews![index]!;
-
-              return ReviewCard(review: review);
-            },
-            itemCount: snapshot!.parsedData!.Page!.reviews!.length,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 250,
+            mainAxisExtent: 200,
           ),
+          builder: (context, index) {
+            var review = snapshot!.parsedData!.Page!.reviews![index]!;
+
+            return ReviewCard(review: review);
+          },
+          itemCount: snapshot!.parsedData!.Page!.reviews!.length,
         ),
       ),
     );

@@ -185,7 +185,7 @@ class CharacterPage extends HookConsumerWidget {
                       ? data.description?.replaceAll(metadata, "")
                       : data.description;
 
-                  return GraphqlPagination(
+                  return PaginationView(
                     pageInfo: data.media!.pageInfo!,
                     req: (nextPage) => fetchMore(
                       variables: Variables$Query$Character.fromJson(
@@ -193,53 +193,119 @@ class CharacterPage extends HookConsumerWidget {
                           .copyWith(page: nextPage)
                           .toJson(),
                     ),
-                    child: CustomScrollView(
-                      slivers: [
-                        SliverPadding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          sliver: SliverToBoxAdapter(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // if (data.age != null) Text("Age: ${data.age}"),
-                                if (data.age != null)
-                                  _InfoText(title: "Age:", text: data.age!),
-                                if (data.bloodType != null)
-                                  _InfoText(
-                                    title: "Blood Type:",
-                                    text: data.bloodType!,
-                                  ),
-                                if (data.dateOfBirth != null &&
-                                    data.dateOfBirth!.toDateString() != null)
-                                  _InfoText(
-                                    title: "Birth:",
-                                    text: data.dateOfBirth!.toDateString()!,
-                                  ),
-                                if (data.gender != null)
-                                  _InfoText(
-                                    title: "Gender:",
-                                    text: data.gender!,
-                                  ),
-                                if (metadata != null)
-                                  MarkdownWidget.body(
-                                    data: metadata,
-                                    padding: const EdgeInsets.all(0),
-                                  )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SliverToBoxAdapter(
-                          child: MarkdownWidget.body(
-                            data: description ?? "*No Description*",
-                            selectable: true,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                          ),
-                        ),
-                        _MediaList(data: data),
-                      ],
+                    isGrid: listSettings.character == ListType.grid,
+                    itemCount: data!.media!.edges!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 150,
+                      childAspectRatio: GridCard.listRatio,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
                     ),
+                    padding: listSettings.character == ListType.grid
+                        ? EdgeInsets.all(8)
+                        : null,
+                    trailing: SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      sliver: SliverToBoxAdapter(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (data.age != null)
+                              _InfoText(title: "Age:", text: data.age!),
+                            if (data.bloodType != null)
+                              _InfoText(
+                                title: "Blood Type:",
+                                text: data.bloodType!,
+                              ),
+                            if (data.dateOfBirth != null &&
+                                data.dateOfBirth!.toDateString() != null)
+                              _InfoText(
+                                title: "Birth:",
+                                text: data.dateOfBirth!.toDateString()!,
+                              ),
+                            if (data.gender != null)
+                              _InfoText(
+                                title: "Gender:",
+                                text: data.gender!,
+                              ),
+                            if (metadata != null)
+                              MarkdownWidget.body(
+                                data: metadata,
+                                padding: const EdgeInsets.all(0),
+                              ),
+                            MarkdownWidget.body(
+                              data: description ?? "*No Description*",
+                              selectable: true,
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    builder: (BuildContext context, int index) {
+                      var media = data.media!.edges![index]!;
+
+                      return MediaCard(
+                        listType: listSettings.character,
+                        blur: media.node!.isAdult ?? false,
+                        image: media.node!.coverImage!.extraLarge!,
+                        title: media.node!.title!.userPreferred,
+                        onTap: () => context.pushRoute(
+                          MediaRoute(
+                              id: media.node!.id, placeholder: media.node),
+                        ),
+                        onLongPress: () => MediaSheet.show(
+                          context,
+                          media.node!,
+                          leading: Column(
+                            children: [
+                              if (media.voiceActorRoles!.isNotEmpty ==
+                                  true) ...[
+                                Text(
+                                  "Voices Actors for",
+                                  style: context.theme.textTheme.titleMedium,
+                                ),
+                                ListTile(
+                                  title: Text(data.name!.userPreferred!),
+                                  leading: ListTileCircleAvatar(
+                                    url: data.image!.large!,
+                                  ),
+                                ),
+                              ],
+                              for (var staff in media.voiceActorRoles!)
+                                ListTile(
+                                  title: Text(
+                                      staff!.voiceActor!.name!.userPreferred!),
+                                  subtitle: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: staff.voiceActor!.languageV2!,
+                                        ),
+                                        if (staff.roleNotes != null)
+                                          TextSpan(
+                                              text: " / ${staff.roleNotes!}"),
+                                        if (staff.dubGroup != null)
+                                          TextSpan(
+                                              text: " / ${staff.dubGroup!}")
+                                      ],
+                                    ),
+                                  ),
+                                  leading: ListTileCircleAvatar(
+                                    url: staff.voiceActor!.image!.large!,
+                                  ),
+                                  onTap: () => context.pushRoute(StaffRoute(
+                                    id: staff.voiceActor!.id,
+                                    placeholder: staff.voiceActor,
+                                  )),
+                                  contentPadding: const EdgeInsets.all(0),
+                                )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),

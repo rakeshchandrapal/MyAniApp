@@ -31,68 +31,54 @@ class MediaReviewsScreen extends HookWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      builder: () => GraphqlPagination(
+      builder: () => PaginationView.list(
         pageInfo: snapshot!.parsedData!.Media!.reviews!.pageInfo!,
         req: (nextPage) => fetchMore(
           variables:
               Variables$Query$MediaReviews(mediaId: mediaId, page: nextPage)
                   .toJson(),
         ),
-        // req: (nextPage) => (response.operationRequest as GMediaReviewsReq)
-        //     .rebuild((p0) => p0
-        //       ..vars.page = nextPage
-        //       ..updateResult = (previous, result) => result?.rebuild((p0) => p0
-        //         ..Media.reviews.nodes.insertAll(
-        //             0,
-        //             previous?.Media?.reviews?.nodes?.whereNot((p0) =>
-        //                     result.Media?.reviews?.nodes?.contains(p0) ??
-        //                     false) ??
-        //                 []))),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(0),
-          itemBuilder: (context, index) {
-            var review = snapshot.parsedData!.Media!.reviews!.nodes![index]!;
+        builder: (context, index) {
+          var review = snapshot.parsedData!.Media!.reviews!.nodes![index]!;
 
-            return ListTile(
-              onTap: () => context
-                  .pushRoute(ReviewRoute(id: review.id, placeholder: review)),
-              // onTap: () => context
-              //     .push("/review/${review.id}", extra: {"review": review}),
-              title: Text(review.summary!),
-              subtitle: Row(
-                // mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(text: (review.rating ?? 0).toString()),
-                        const TextSpan(text: " / "),
-                        TextSpan(text: (review.ratingAmount ?? 0).toString())
-                      ],
-                    ),
+          return ListTile(
+            onTap: () => context
+                .pushRoute(ReviewRoute(id: review.id, placeholder: review)),
+            // onTap: () => context
+            //     .push("/review/${review.id}", extra: {"review": review}),
+            title: Text(review.summary!),
+            subtitle: Row(
+              // mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(text: (review.rating ?? 0).toString()),
+                      const TextSpan(text: " / "),
+                      TextSpan(text: (review.ratingAmount ?? 0).toString())
+                    ],
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Icon(
-                    Icons.thumb_up,
-                    size: 20,
-                    color: review.userRating == Enum$ReviewRating.UP_VOTE
-                        ? Colors.green
-                        : null,
-                  )
-                ],
-              ),
-              leading: ConstrainedBox(
-                  constraints:
-                      const BoxConstraints(maxHeight: 50, maxWidth: 50),
-                  child: ListTileCircleAvatar(
-                    url: review.user!.avatar!.large!,
-                  )),
-            );
-          },
-          itemCount: snapshot.parsedData!.Media!.reviews!.nodes!.length,
-        ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Icon(
+                  Icons.thumb_up,
+                  size: 20,
+                  color: review.userRating == Enum$ReviewRating.UP_VOTE
+                      ? Colors.green
+                      : null,
+                )
+              ],
+            ),
+            leading: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 50, maxWidth: 50),
+                child: ListTileCircleAvatar(
+                  url: review.user!.avatar!.large!,
+                )),
+          );
+        },
+        itemCount: snapshot.parsedData!.Media!.reviews!.nodes!.length,
       ),
     );
   }

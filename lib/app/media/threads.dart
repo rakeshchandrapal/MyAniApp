@@ -28,22 +28,19 @@ class MediaThreadsScreen extends HookWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      builder: () => GraphqlPagination(
+      builder: () => PaginationView.list(
         pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
         req: (nextPage) => fetchMore(
             variables: Variables$Query$MediaThreads.fromJson(
                     snapshot.request!.variables)
                 .copyWith(page: nextPage)
                 .toJson()),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(0),
-          itemBuilder: (context, index) {
-            var thread = snapshot.parsedData!.Page!.threads![index]!;
+        builder: (context, index) {
+          var thread = snapshot.parsedData!.Page!.threads![index]!;
 
-            return ThreadCard(thread: thread);
-          },
-          itemCount: snapshot.parsedData!.Page!.threads!.length,
-        ),
+          return ThreadCard(thread: thread);
+        },
+        itemCount: snapshot.parsedData!.Page!.threads!.length,
       ),
     );
   }

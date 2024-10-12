@@ -40,60 +40,59 @@ class MyListReleases extends HookWidget {
                   .compareTo(b!.nextAiringEpisode!.airingAt),
             );
 
-        return GraphqlPagination(
+        return PaginationView.list(
           pageInfo: snapshot.parsedData!.Page!.pageInfo!,
           req: (nextPage) => fetchMore(
               variables: Variables$Query$ReleasesList(page: nextPage).toJson()),
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              var media = sorted[index]!;
+          // child: ListView.builder(
+          builder: (context, index) {
+            var media = sorted[index]!;
 
-              var next = media.nextAiringEpisode;
+            var next = media.nextAiringEpisode;
 
-              if (next == null) return const SizedBox();
+            if (next == null) return const SizedBox();
 
-              var timestamp = dateFromTimestamp(next.airingAt);
+            var timestamp = dateFromTimestamp(next.airingAt);
 
-              return Card.outlined(
-                child: InkWellImage(
-                  onTap: () => context.pushRoute(
-                    MediaRoute(id: media.id, placeholder: media),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 120,
-                        width: 90,
-                        child: GridCard(
-                          image: media.coverImage!.extraLarge!,
-                          blur: media.isAdult ?? false,
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                media.title!.userPreferred!,
-                                style: context.theme.textTheme.labelLarge,
-                              ),
-                              Text(
-                                "Episode ${next.episode} ${timestamp.isAfter(now) ? "airing at" : "aired at"} ${dateFormat.format(timestamp)}, ${hourTime.format(timestamp)}",
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+            return Card.outlined(
+              child: InkWellImage(
+                onTap: () => context.pushRoute(
+                  MediaRoute(id: media.id, placeholder: media),
                 ),
-              );
-            },
-            itemCount: sorted.length,
-          ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 120,
+                      width: 90,
+                      child: GridCard(
+                        image: media.coverImage!.extraLarge!,
+                        blur: media.isAdult ?? false,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              media.title!.userPreferred!,
+                              style: context.theme.textTheme.labelLarge,
+                            ),
+                            Text(
+                              "Episode ${next.episode} ${timestamp.isAfter(now) ? "airing at" : "aired at"} ${dateFormat.format(timestamp)}, ${hourTime.format(timestamp)}",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+          itemCount: sorted.length,
         );
       },
     );

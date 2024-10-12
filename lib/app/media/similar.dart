@@ -8,6 +8,7 @@ import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/media_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
 import 'package:myaniapp/common/pagination.dart';
+import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/graphql/__gen/app/media/similar.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
@@ -37,24 +38,16 @@ class MediaSimilarScreen extends HookConsumerWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      builder: () => GraphqlPagination(
-        pageInfo: snapshot!.parsedData!.Media!.recommendations!.pageInfo!,
-        req: (nextPage) => fetchMore(
-            variables: Variables$Query$MediaSimilar.fromJson(
-                    snapshot.request!.variables)
-                .copyWith(page: nextPage)
-                .toJson()),
-        child: MediaCards(
-          listType: listSetting,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 150,
-            childAspectRatio: GridCard.listRatio,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-          ),
-          padding:
-              listSetting == ListType.grid ? const EdgeInsets.all(8) : null,
-          itemBuilder: (context, index) {
+      builder: () => Show(
+        when: listSetting == ListType.grid,
+        fallback: PaginationView.list(
+          req: (nextPage) => fetchMore(
+              variables: Variables$Query$MediaSimilar.fromJson(
+                      snapshot.request!.variables)
+                  .copyWith(page: nextPage)
+                  .toJson()),
+          pageInfo: snapshot!.parsedData!.Media!.recommendations!.pageInfo!,
+          builder: (context, index) {
             var media = snapshot.parsedData!.Media!.recommendations!
                 .nodes![index]!.mediaRecommendation;
 
@@ -72,9 +65,83 @@ class MediaSimilarScreen extends HookConsumerWidget {
               onLongPress: () => MediaSheet.show(context, media),
             );
           },
-          itemCount: snapshot.parsedData!.Media!.recommendations!.nodes!.length,
+          itemCount:
+              snapshot!.parsedData!.Media!.recommendations!.nodes!.length,
+        ),
+        child: () => PaginationView.grid(
+          padding: const EdgeInsets.all(8),
+          req: (nextPage) => fetchMore(
+              variables: Variables$Query$MediaSimilar.fromJson(
+                      snapshot.request!.variables)
+                  .copyWith(page: nextPage)
+                  .toJson()),
+          pageInfo: snapshot!.parsedData!.Media!.recommendations!.pageInfo!,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 150,
+            childAspectRatio: GridCard.listRatio,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          builder: (context, index) {
+            var media = snapshot.parsedData!.Media!.recommendations!
+                .nodes![index]!.mediaRecommendation;
+
+            if (media == null) return const SizedBox();
+
+            return MediaCard(
+              listType: listSetting,
+              image: media.coverImage!.extraLarge!,
+              title: media.title!.userPreferred,
+              blur: media.isAdult ?? false,
+              onTap: () => context.pushRoute(MediaRoute(
+                id: media.id,
+                placeholder: media,
+              )),
+              onLongPress: () => MediaSheet.show(context, media),
+            );
+          },
+          itemCount:
+              snapshot!.parsedData!.Media!.recommendations!.nodes!.length,
         ),
       ),
+      // builder: () => GraphqlPagination(
+      //   pageInfo: snapshot!.parsedData!.Media!.recommendations!.pageInfo!,
+      //   req: (nextPage) => fetchMore(
+      //       variables: Variables$Query$MediaSimilar.fromJson(
+      //               snapshot.request!.variables)
+      //           .copyWith(page: nextPage)
+      //           .toJson()),
+      //   child: MediaCards(
+      //     listType: listSetting,
+      //     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      //       maxCrossAxisExtent: 150,
+      //       childAspectRatio: GridCard.listRatio,
+      //       mainAxisSpacing: 10,
+      //       crossAxisSpacing: 10,
+      //     ),
+      //     padding:
+      //         listSetting == ListType.grid ? const EdgeInsets.all(8) : null,
+      //     itemBuilder: (context, index) {
+      //       var media = snapshot.parsedData!.Media!.recommendations!
+      //           .nodes![index]!.mediaRecommendation;
+
+      //       if (media == null) return const SizedBox();
+
+      //       return MediaCard(
+      //         listType: listSetting,
+      //         image: media.coverImage!.extraLarge!,
+      //         title: media.title!.userPreferred,
+      //         blur: media.isAdult ?? false,
+      //         onTap: () => context.pushRoute(MediaRoute(
+      //           id: media.id,
+      //           placeholder: media,
+      //         )),
+      //         onLongPress: () => MediaSheet.show(context, media),
+      //       );
+      //     },
+      //     itemCount: snapshot.parsedData!.Media!.recommendations!.nodes!.length,
+      //   ),
+      // ),
     );
   }
 }

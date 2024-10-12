@@ -32,22 +32,19 @@ class ForumRecentPage extends HookWidget {
       response: snapshot,
       builder: () => RefreshIndicator.adaptive(
         onRefresh: refetch,
-        child: GraphqlPagination(
+        child: PaginationView.list(
           pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
           req: (nextPage) => fetchMore(
               variables:
                   Variables$Query$Forums.fromJson(snapshot.request!.variables)
                       .copyWith(page: nextPage)
                       .toJson()),
-          child: ListView.builder(
-            padding: const EdgeInsets.all(0),
-            itemBuilder: (context, index) {
-              var thread = snapshot.parsedData!.Page!.threads![index]!;
+          builder: (context, index) {
+            var thread = snapshot.parsedData!.Page!.threads![index]!;
 
-              return ThreadCard(thread: thread);
-            },
-            itemCount: snapshot.parsedData!.Page!.threads!.length,
-          ),
+            return ThreadCard(thread: thread);
+          },
+          itemCount: snapshot.parsedData!.Page!.threads!.length,
         ),
       ),
     );

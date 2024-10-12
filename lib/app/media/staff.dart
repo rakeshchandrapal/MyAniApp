@@ -32,63 +32,57 @@ class MediaStaffScreen extends HookWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      builder: () => GraphqlPagination(
+      builder: () => PaginationView.list(
         pageInfo: snapshot!.parsedData!.Media!.staff!.pageInfo!,
         req: (nextPage) => fetchMore(
             variables:
                 Variables$Query$MediaStaff.fromJson(snapshot.request!.variables)
                     .copyWith(page: nextPage)
                     .toJson()),
-        child: ListView.separated(
-          padding: const EdgeInsets.all(0),
-          itemBuilder: (context, index) {
-            var staff = snapshot.parsedData!.Media!.staff!.edges![index]!;
+        builder: (context, index) {
+          var staff = snapshot.parsedData!.Media!.staff!.edges![index]!;
 
-            return Card.outlined(
-              child: InkWellImage(
-                onTap: () => context.pushRoute(
-                  StaffRoute(id: staff.node!.id, placeholder: staff.node),
-                ),
-                borderRadius: imageRadius,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: imageRadius,
-                      child: CachedImage(
-                        staff.node!.image!.large!,
-                        height: 150,
-                        width: 100,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            staff.node!.name!.userPreferred!,
-                            style: context.theme.textTheme.labelLarge,
-                          ),
-                          if (staff.role != null)
-                            Text(
-                              staff.role!,
-                              style: context.theme.textTheme.labelMedium,
-                            )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+          return Card.outlined(
+            child: InkWellImage(
+              onTap: () => context.pushRoute(
+                StaffRoute(id: staff.node!.id, placeholder: staff.node),
               ),
-            );
-          },
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 5,
-          ),
-          itemCount: snapshot.parsedData!.Media!.staff!.edges!.length,
-        ),
+              borderRadius: imageRadius,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: imageRadius,
+                    child: CachedImage(
+                      staff.node!.image!.large!,
+                      height: 150,
+                      width: 100,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          staff.node!.name!.userPreferred!,
+                          style: context.theme.textTheme.labelLarge,
+                        ),
+                        if (staff.role != null)
+                          Text(
+                            staff.role!,
+                            style: context.theme.textTheme.labelMedium,
+                          )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        itemCount: snapshot.parsedData!.Media!.staff!.edges!.length,
       ),
     );
   }

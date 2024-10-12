@@ -108,26 +108,44 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
           refetch: refetch,
           builder: () => RefreshIndicator.adaptive(
             onRefresh: refetch,
-            child: GraphqlPagination(
-              pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+            child: PaginationView.list(
               req: (nextPage) => fetchMore(
                 variables: Variables$Query$HomeActivities.fromJson(
                         snapshot.request!.variables)
                     .copyWith(page: nextPage)
                     .toJson(),
               ),
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  var activity = snapshot.parsedData!.Page!.activities![index]!;
+              pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+              builder: (context, index) {
+                var activity = snapshot.parsedData!.Page!.activities![index]!;
 
-                  return ActivityCard(
-                    activity: activity,
-                    refetch: refetch,
-                  );
-                },
-                itemCount: snapshot.parsedData!.Page!.activities!.length,
-              ),
+                return ActivityCard(
+                  activity: activity,
+                  refetch: refetch,
+                );
+              },
+              itemCount: snapshot!.parsedData!.Page!.activities!.length,
             ),
+            // child: GraphqlPagination(
+            //   pageInfo: snapshot!.parsedData!.Page!.pageInfo!,
+            //   req: (nextPage) => fetchMore(
+            //     variables: Variables$Query$HomeActivities.fromJson(
+            //             snapshot.request!.variables)
+            //         .copyWith(page: nextPage)
+            //         .toJson(),
+            //   ),
+            //   child: ListView.builder(
+            //     itemBuilder: (context, index) {
+            //       var activity = snapshot.parsedData!.Page!.activities![index]!;
+
+            //       return ActivityCard(
+            //         activity: activity,
+            //         refetch: refetch,
+            //       );
+            //     },
+            //     itemCount: snapshot.parsedData!.Page!.activities!.length,
+            //   ),
+            // ),
           ),
         ),
       ),
