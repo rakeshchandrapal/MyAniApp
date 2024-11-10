@@ -509,7 +509,9 @@ class SettingIntNumber extends StatelessWidget {
           onChanged: onChanged,
           value: value,
           axis: Axis.horizontal,
-          itemWidth: 50,
+          itemWidth: 60,
+          // infiniteLoop: true,
+          itemHeight: 40,
           decoration: BoxDecoration(
             border: Border.all(color: context.theme.colorScheme.primary),
             borderRadius: imageRadius,

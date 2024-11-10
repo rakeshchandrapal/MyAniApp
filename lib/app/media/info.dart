@@ -8,6 +8,8 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/media/media.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:myaniapp/utils.dart';
+import 'package:relative_time/relative_time.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -25,6 +27,21 @@ class MediaInfoScreen extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(0),
       children: [
+        if (media.nextAiringEpisode != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              color: Colors.blue[900],
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Episode ${media.nextAiringEpisode!.episode} Airing ${dateFromTimestamp(media.nextAiringEpisode!.airingAt).relativeTime(context)}",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
         if (media.genres?.isNotEmpty == true)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),

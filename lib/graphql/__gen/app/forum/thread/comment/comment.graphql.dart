@@ -41,7 +41,7 @@ class Variables$Query$Comment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Comment ||
+    if (!(other is Variables$Query$Comment) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88,7 +88,6 @@ class _CopyWithImpl$Variables$Query$Comment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) => _then(Variables$Query$Comment._({
         ..._instance._$data,
         if (id != _undefined) 'id': (id as int?),
@@ -99,9 +98,8 @@ class _CopyWithStubImpl$Variables$Query$Comment<TRes>
     implements CopyWith$Variables$Query$Comment<TRes> {
   _CopyWithStubImpl$Variables$Query$Comment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -130,13 +128,13 @@ class Query$Comment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$ThreadComment = ThreadComment;
-    resultData['ThreadComment'] =
+    _resultData['ThreadComment'] =
         l$ThreadComment?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -156,7 +154,7 @@ class Query$Comment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Comment || runtimeType != other.runtimeType) {
+    if (!(other is Query$Comment) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$ThreadComment = ThreadComment;
@@ -209,7 +207,7 @@ abstract class CopyWith$Query$Comment<TRes> {
               Iterable<
                   CopyWith$Query$Comment$ThreadComment<
                       Query$Comment$ThreadComment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Comment<TRes>
@@ -225,7 +223,6 @@ class _CopyWithImpl$Query$Comment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? ThreadComment = _undefined,
     Object? $__typename = _undefined,
@@ -239,15 +236,14 @@ class _CopyWithImpl$Query$Comment<TRes>
             : ($__typename as String),
       ));
 
-  @override
   TRes ThreadComment(
           Iterable<Query$Comment$ThreadComment?>? Function(
                   Iterable<
                       CopyWith$Query$Comment$ThreadComment<
                           Query$Comment$ThreadComment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          ThreadComment: fn(_instance.ThreadComment?.map((e) => e == null
+          ThreadComment: _fn(_instance.ThreadComment?.map((e) => e == null
               ? null
               : CopyWith$Query$Comment$ThreadComment(
                   e,
@@ -259,17 +255,15 @@ class _CopyWithStubImpl$Query$Comment<TRes>
     implements CopyWith$Query$Comment<TRes> {
   _CopyWithStubImpl$Query$Comment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<Query$Comment$ThreadComment?>? ThreadComment,
     String? $__typename,
   }) =>
       _res;
 
-  @override
-  ThreadComment(fn) => _res;
+  ThreadComment(_fn) => _res;
 }
 
 const documentNodeQueryComment = DocumentNode(definitions: [
@@ -431,7 +425,7 @@ class Query$Comment$ThreadComment {
       user: l$user == null
           ? null
           : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
-      childComments: (l$childComments as dynamic),
+      childComments: (l$childComments as dynamic?),
       isLocked: (l$isLocked as bool?),
       $__typename: (l$$__typename as String),
     );
@@ -451,35 +445,35 @@ class Query$Comment$ThreadComment {
 
   final Fragment$UserFragment? user;
 
-  final dynamic childComments;
+  final dynamic? childComments;
 
   final bool? isLocked;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$threadId = threadId;
-    resultData['threadId'] = l$threadId;
+    _resultData['threadId'] = l$threadId;
     final l$comment = comment;
-    resultData['comment'] = l$comment;
+    _resultData['comment'] = l$comment;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$childComments = childComments;
-    resultData['childComments'] = l$childComments;
+    _resultData['childComments'] = l$childComments;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -513,7 +507,7 @@ class Query$Comment$ThreadComment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Comment$ThreadComment ||
+    if (!(other is Query$Comment$ThreadComment) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -597,7 +591,7 @@ abstract class CopyWith$Query$Comment$ThreadComment<TRes> {
     int? likeCount,
     int? createdAt,
     Fragment$UserFragment? user,
-    dynamic childComments,
+    dynamic? childComments,
     bool? isLocked,
     String? $__typename,
   });
@@ -617,7 +611,6 @@ class _CopyWithImpl$Query$Comment$ThreadComment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? threadId = _undefined,
@@ -648,7 +641,7 @@ class _CopyWithImpl$Query$Comment$ThreadComment<TRes>
             : (user as Fragment$UserFragment?),
         childComments: childComments == _undefined
             ? _instance.childComments
-            : (childComments as dynamic),
+            : (childComments as dynamic?),
         isLocked:
             isLocked == _undefined ? _instance.isLocked : (isLocked as bool?),
         $__typename: $__typename == _undefined || $__typename == null
@@ -656,7 +649,6 @@ class _CopyWithImpl$Query$Comment$ThreadComment<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -669,9 +661,8 @@ class _CopyWithStubImpl$Query$Comment$ThreadComment<TRes>
     implements CopyWith$Query$Comment$ThreadComment<TRes> {
   _CopyWithStubImpl$Query$Comment$ThreadComment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? threadId,
@@ -680,13 +671,12 @@ class _CopyWithStubImpl$Query$Comment$ThreadComment<TRes>
     int? likeCount,
     int? createdAt,
     Fragment$UserFragment? user,
-    dynamic childComments,
+    dynamic? childComments,
     bool? isLocked,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }

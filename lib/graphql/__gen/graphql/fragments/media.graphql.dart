@@ -64,27 +64,27 @@ class Fragment$MediaFragment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$isAdult = isAdult;
-    resultData['isAdult'] = l$isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
-    resultData['genres'] = l$genres?.map((e) => e).toList();
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
-    resultData['format'] =
+    _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
-    resultData['description'] = l$description;
+    _resultData['description'] = l$description;
     final l$title = title;
-    resultData['title'] = l$title?.toJson();
+    _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
-    resultData['coverImage'] = l$coverImage?.toJson();
+    _resultData['coverImage'] = l$coverImage?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -116,7 +116,7 @@ class Fragment$MediaFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$MediaFragment ||
+    if (!(other is Fragment$MediaFragment) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -225,7 +225,6 @@ class _CopyWithImpl$Fragment$MediaFragment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -261,7 +260,6 @@ class _CopyWithImpl$Fragment$MediaFragment<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -270,7 +268,6 @@ class _CopyWithImpl$Fragment$MediaFragment<TRes>
             local$title, (e) => call(title: e));
   }
 
-  @override
   CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
@@ -284,9 +281,8 @@ class _CopyWithStubImpl$Fragment$MediaFragment<TRes>
     implements CopyWith$Fragment$MediaFragment<TRes> {
   _CopyWithStubImpl$Fragment$MediaFragment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$MediaType? type,
@@ -300,11 +296,9 @@ class _CopyWithStubImpl$Fragment$MediaFragment<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment$title<TRes> get title =>
       CopyWith$Fragment$MediaFragment$title.stub(_res);
 
-  @override
   CopyWith$Fragment$MediaFragment$coverImage<TRes> get coverImage =>
       CopyWith$Fragment$MediaFragment$coverImage.stub(_res);
 }
@@ -442,12 +436,12 @@ class Fragment$MediaFragment$title {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    resultData['userPreferred'] = l$userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -465,7 +459,7 @@ class Fragment$MediaFragment$title {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$MediaFragment$title ||
+    if (!(other is Fragment$MediaFragment$title) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -520,7 +514,6 @@ class _CopyWithImpl$Fragment$MediaFragment$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -539,9 +532,8 @@ class _CopyWithStubImpl$Fragment$MediaFragment$title<TRes>
     implements CopyWith$Fragment$MediaFragment$title<TRes> {
   _CopyWithStubImpl$Fragment$MediaFragment$title(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -570,12 +562,12 @@ class Fragment$MediaFragment$coverImage {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$extraLarge = extraLarge;
-    resultData['extraLarge'] = l$extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -593,7 +585,7 @@ class Fragment$MediaFragment$coverImage {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$MediaFragment$coverImage ||
+    if (!(other is Fragment$MediaFragment$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -648,7 +640,6 @@ class _CopyWithImpl$Fragment$MediaFragment$coverImage<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
@@ -667,9 +658,8 @@ class _CopyWithStubImpl$Fragment$MediaFragment$coverImage<TRes>
     implements CopyWith$Fragment$MediaFragment$coverImage<TRes> {
   _CopyWithStubImpl$Fragment$MediaFragment$coverImage(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? extraLarge,
     String? $__typename,

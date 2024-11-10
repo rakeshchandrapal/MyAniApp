@@ -110,7 +110,7 @@ class Variables$Query$UserFavorites {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$UserFavorites ||
+    if (!(other is Variables$Query$UserFavorites) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -221,7 +221,6 @@ class _CopyWithImpl$Variables$Query$UserFavorites<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? animePage = _undefined,
@@ -246,9 +245,8 @@ class _CopyWithStubImpl$Variables$Query$UserFavorites<TRes>
     implements CopyWith$Variables$Query$UserFavorites<TRes> {
   _CopyWithStubImpl$Variables$Query$UserFavorites(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     int? animePage,
@@ -282,12 +280,12 @@ class Query$UserFavorites {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$User = User;
-    resultData['User'] = l$User?.toJson();
+    _resultData['User'] = l$User?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -305,7 +303,7 @@ class Query$UserFavorites {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites || runtimeType != other.runtimeType) {
+    if (!(other is Query$UserFavorites) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$User = User;
@@ -359,7 +357,6 @@ class _CopyWithImpl$Query$UserFavorites<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? User = _undefined,
     Object? $__typename = _undefined,
@@ -373,7 +370,6 @@ class _CopyWithImpl$Query$UserFavorites<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$UserFavorites$User<TRes> get User {
     final local$User = _instance.User;
     return local$User == null
@@ -386,16 +382,14 @@ class _CopyWithStubImpl$Query$UserFavorites<TRes>
     implements CopyWith$Query$UserFavorites<TRes> {
   _CopyWithStubImpl$Query$UserFavorites(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$UserFavorites$User? User,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$UserFavorites$User<TRes> get User =>
       CopyWith$Query$UserFavorites$User.stub(_res);
 }
@@ -994,51 +988,43 @@ class Query$UserFavorites$User implements Fragment$UserFragment {
     );
   }
 
-  @override
   final int id;
 
-  @override
   final String name;
 
-  @override
   final int? donatorTier;
 
-  @override
   final String? donatorBadge;
 
-  @override
   final List<Enum$ModRole?>? moderatorRoles;
 
-  @override
   final Query$UserFavorites$User$avatar? avatar;
 
-  @override
   final String $__typename;
 
   final Query$UserFavorites$User$favourites? favourites;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$donatorTier = donatorTier;
-    resultData['donatorTier'] = l$donatorTier;
+    _resultData['donatorTier'] = l$donatorTier;
     final l$donatorBadge = donatorBadge;
-    resultData['donatorBadge'] = l$donatorBadge;
+    _resultData['donatorBadge'] = l$donatorBadge;
     final l$moderatorRoles = moderatorRoles;
-    resultData['moderatorRoles'] = l$moderatorRoles
+    _resultData['moderatorRoles'] = l$moderatorRoles
         ?.map((e) => e == null ? null : toJson$Enum$ModRole(e))
         .toList();
     final l$avatar = avatar;
-    resultData['avatar'] = l$avatar?.toJson();
+    _resultData['avatar'] = l$avatar?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
+    _resultData['__typename'] = l$$__typename;
     final l$favourites = favourites;
-    resultData['favourites'] = l$favourites?.toJson();
-    return resultData;
+    _resultData['favourites'] = l$favourites?.toJson();
+    return _resultData;
   }
 
   @override
@@ -1070,7 +1056,7 @@ class Query$UserFavorites$User implements Fragment$UserFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User ||
+    if (!(other is Query$UserFavorites$User) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1174,7 +1160,6 @@ class _CopyWithImpl$Query$UserFavorites$User<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -1210,7 +1195,6 @@ class _CopyWithImpl$Query$UserFavorites$User<TRes>
             : (favourites as Query$UserFavorites$User$favourites?),
       ));
 
-  @override
   CopyWith$Query$UserFavorites$User$avatar<TRes> get avatar {
     final local$avatar = _instance.avatar;
     return local$avatar == null
@@ -1219,7 +1203,6 @@ class _CopyWithImpl$Query$UserFavorites$User<TRes>
             local$avatar, (e) => call(avatar: e));
   }
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites<TRes> get favourites {
     final local$favourites = _instance.favourites;
     return local$favourites == null
@@ -1233,9 +1216,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User<TRes>
     implements CopyWith$Query$UserFavorites$User<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? name,
@@ -1248,11 +1230,9 @@ class _CopyWithStubImpl$Query$UserFavorites$User<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$UserFavorites$User$avatar<TRes> get avatar =>
       CopyWith$Query$UserFavorites$User$avatar.stub(_res);
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites<TRes> get favourites =>
       CopyWith$Query$UserFavorites$User$favourites.stub(_res);
 }
@@ -1272,20 +1252,17 @@ class Query$UserFavorites$User$avatar implements Fragment$UserFragment$avatar {
     );
   }
 
-  @override
   final String? large;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$large = large;
-    resultData['large'] = l$large;
+    _resultData['large'] = l$large;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1303,7 +1280,7 @@ class Query$UserFavorites$User$avatar implements Fragment$UserFragment$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$avatar ||
+    if (!(other is Query$UserFavorites$User$avatar) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1358,7 +1335,6 @@ class _CopyWithImpl$Query$UserFavorites$User$avatar<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? large = _undefined,
     Object? $__typename = _undefined,
@@ -1375,9 +1351,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$avatar<TRes>
     implements CopyWith$Query$UserFavorites$User$avatar<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$avatar(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? large,
     String? $__typename,
@@ -1441,20 +1416,20 @@ class Query$UserFavorites$User$favourites {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$anime = anime;
-    resultData['anime'] = l$anime?.toJson();
+    _resultData['anime'] = l$anime?.toJson();
     final l$manga = manga;
-    resultData['manga'] = l$manga?.toJson();
+    _resultData['manga'] = l$manga?.toJson();
     final l$characters = characters;
-    resultData['characters'] = l$characters?.toJson();
+    _resultData['characters'] = l$characters?.toJson();
     final l$staff = staff;
-    resultData['staff'] = l$staff?.toJson();
+    _resultData['staff'] = l$staff?.toJson();
     final l$studios = studios;
-    resultData['studios'] = l$studios?.toJson();
+    _resultData['studios'] = l$studios?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1480,7 +1455,7 @@ class Query$UserFavorites$User$favourites {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites ||
+    if (!(other is Query$UserFavorites$User$favourites) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1565,7 +1540,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? anime = _undefined,
     Object? manga = _undefined,
@@ -1595,7 +1569,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$anime<TRes> get anime {
     final local$anime = _instance.anime;
     return local$anime == null
@@ -1605,7 +1578,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites<TRes>
             local$anime, (e) => call(anime: e));
   }
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$manga<TRes> get manga {
     final local$manga = _instance.manga;
     return local$manga == null
@@ -1615,7 +1587,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites<TRes>
             local$manga, (e) => call(manga: e));
   }
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$characters<TRes> get characters {
     final local$characters = _instance.characters;
     return local$characters == null
@@ -1625,7 +1596,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites<TRes>
             local$characters, (e) => call(characters: e));
   }
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$staff<TRes> get staff {
     final local$staff = _instance.staff;
     return local$staff == null
@@ -1635,7 +1605,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites<TRes>
             local$staff, (e) => call(staff: e));
   }
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$studios<TRes> get studios {
     final local$studios = _instance.studios;
     return local$studios == null
@@ -1650,9 +1619,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$UserFavorites$User$favourites$anime? anime,
     Query$UserFavorites$User$favourites$manga? manga,
@@ -1663,24 +1631,19 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$anime<TRes> get anime =>
       CopyWith$Query$UserFavorites$User$favourites$anime.stub(_res);
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$manga<TRes> get manga =>
       CopyWith$Query$UserFavorites$User$favourites$manga.stub(_res);
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$characters<TRes>
       get characters =>
           CopyWith$Query$UserFavorites$User$favourites$characters.stub(_res);
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$staff<TRes> get staff =>
       CopyWith$Query$UserFavorites$User$favourites$staff.stub(_res);
 
-  @override
   CopyWith$Query$UserFavorites$User$favourites$studios<TRes> get studios =>
       CopyWith$Query$UserFavorites$User$favourites$studios.stub(_res);
 }
@@ -1718,14 +1681,14 @@ class Query$UserFavorites$User$favourites$anime {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1745,7 +1708,7 @@ class Query$UserFavorites$User$favourites$anime {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$anime ||
+    if (!(other is Query$UserFavorites$User$favourites$anime) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1809,7 +1772,7 @@ abstract class CopyWith$Query$UserFavorites$User$favourites$anime<TRes> {
               Iterable<
                   CopyWith$Query$UserFavorites$User$favourites$anime$edges<
                       Query$UserFavorites$User$favourites$anime$edges>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserFavorites$User$favourites$anime<TRes>
@@ -1825,7 +1788,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$anime<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -1844,7 +1806,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$anime<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1852,15 +1813,14 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$anime<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes edges(
           Iterable<Query$UserFavorites$User$favourites$anime$edges?>? Function(
                   Iterable<
                       CopyWith$Query$UserFavorites$User$favourites$anime$edges<
                           Query$UserFavorites$User$favourites$anime$edges>?>?)
-              fn) =>
+              _fn) =>
       call(
-          edges: fn(_instance.edges?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$UserFavorites$User$favourites$anime$edges(
                   e,
@@ -1872,9 +1832,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$anime<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$anime<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$anime(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$UserFavorites$User$favourites$anime$edges?>? edges,
@@ -1882,12 +1841,10 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$anime<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  edges(fn) => _res;
+  edges(_fn) => _res;
 }
 
 class Query$UserFavorites$User$favourites$anime$edges {
@@ -1923,16 +1880,16 @@ class Query$UserFavorites$User$favourites$anime$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$favouriteOrder = favouriteOrder;
-    resultData['favouriteOrder'] = l$favouriteOrder;
+    _resultData['favouriteOrder'] = l$favouriteOrder;
     final l$node = node;
-    resultData['node'] = l$node?.toJson();
+    _resultData['node'] = l$node?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1954,7 +1911,7 @@ class Query$UserFavorites$User$favourites$anime$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$anime$edges ||
+    if (!(other is Query$UserFavorites$User$favourites$anime$edges) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2024,7 +1981,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$anime$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? favouriteOrder = _undefined,
@@ -2044,7 +2000,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$anime$edges<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -2057,9 +2012,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$anime$edges<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$anime$edges<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$anime$edges(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? favouriteOrder,
@@ -2068,7 +2022,6 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$anime$edges<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get node =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -2106,14 +2059,14 @@ class Query$UserFavorites$User$favourites$manga {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2133,7 +2086,7 @@ class Query$UserFavorites$User$favourites$manga {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$manga ||
+    if (!(other is Query$UserFavorites$User$favourites$manga) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2197,7 +2150,7 @@ abstract class CopyWith$Query$UserFavorites$User$favourites$manga<TRes> {
               Iterable<
                   CopyWith$Query$UserFavorites$User$favourites$manga$edges<
                       Query$UserFavorites$User$favourites$manga$edges>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserFavorites$User$favourites$manga<TRes>
@@ -2213,7 +2166,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$manga<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -2232,7 +2184,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$manga<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -2240,15 +2191,14 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$manga<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes edges(
           Iterable<Query$UserFavorites$User$favourites$manga$edges?>? Function(
                   Iterable<
                       CopyWith$Query$UserFavorites$User$favourites$manga$edges<
                           Query$UserFavorites$User$favourites$manga$edges>?>?)
-              fn) =>
+              _fn) =>
       call(
-          edges: fn(_instance.edges?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$UserFavorites$User$favourites$manga$edges(
                   e,
@@ -2260,9 +2210,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$manga<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$manga<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$manga(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$UserFavorites$User$favourites$manga$edges?>? edges,
@@ -2270,12 +2219,10 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$manga<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  edges(fn) => _res;
+  edges(_fn) => _res;
 }
 
 class Query$UserFavorites$User$favourites$manga$edges {
@@ -2311,16 +2258,16 @@ class Query$UserFavorites$User$favourites$manga$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$favouriteOrder = favouriteOrder;
-    resultData['favouriteOrder'] = l$favouriteOrder;
+    _resultData['favouriteOrder'] = l$favouriteOrder;
     final l$node = node;
-    resultData['node'] = l$node?.toJson();
+    _resultData['node'] = l$node?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2342,7 +2289,7 @@ class Query$UserFavorites$User$favourites$manga$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$manga$edges ||
+    if (!(other is Query$UserFavorites$User$favourites$manga$edges) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2412,7 +2359,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$manga$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? favouriteOrder = _undefined,
@@ -2432,7 +2378,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$manga$edges<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -2445,9 +2390,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$manga$edges<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$manga$edges<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$manga$edges(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? favouriteOrder,
@@ -2456,7 +2400,6 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$manga$edges<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get node =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -2494,14 +2437,14 @@ class Query$UserFavorites$User$favourites$characters {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2521,7 +2464,7 @@ class Query$UserFavorites$User$favourites$characters {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$characters ||
+    if (!(other is Query$UserFavorites$User$favourites$characters) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2586,7 +2529,7 @@ abstract class CopyWith$Query$UserFavorites$User$favourites$characters<TRes> {
               Iterable<
                   CopyWith$Query$UserFavorites$User$favourites$characters$edges<
                       Query$UserFavorites$User$favourites$characters$edges>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserFavorites$User$favourites$characters<TRes>
@@ -2602,7 +2545,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$characters<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -2621,7 +2563,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$characters<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -2629,15 +2570,14 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$characters<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes edges(
           Iterable<Query$UserFavorites$User$favourites$characters$edges?>? Function(
                   Iterable<
                       CopyWith$Query$UserFavorites$User$favourites$characters$edges<
                           Query$UserFavorites$User$favourites$characters$edges>?>?)
-              fn) =>
+              _fn) =>
       call(
-          edges: fn(_instance.edges?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$UserFavorites$User$favourites$characters$edges(
                   e,
@@ -2649,9 +2589,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$characters<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$characters<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$characters(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$UserFavorites$User$favourites$characters$edges?>? edges,
@@ -2659,12 +2598,10 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$characters<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  edges(fn) => _res;
+  edges(_fn) => _res;
 }
 
 class Query$UserFavorites$User$favourites$characters$edges {
@@ -2701,16 +2638,16 @@ class Query$UserFavorites$User$favourites$characters$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$favouriteOrder = favouriteOrder;
-    resultData['favouriteOrder'] = l$favouriteOrder;
+    _resultData['favouriteOrder'] = l$favouriteOrder;
     final l$node = node;
-    resultData['node'] = l$node?.toJson();
+    _resultData['node'] = l$node?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2732,7 +2669,7 @@ class Query$UserFavorites$User$favourites$characters$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$characters$edges ||
+    if (!(other is Query$UserFavorites$User$favourites$characters$edges) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2806,7 +2743,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$characters$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? favouriteOrder = _undefined,
@@ -2826,7 +2762,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$characters$edges<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$CharacterFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -2842,9 +2777,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$characters$edges<
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$characters$edges(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? favouriteOrder,
@@ -2853,7 +2787,6 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$characters$edges<
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$CharacterFragment<TRes> get node =>
       CopyWith$Fragment$CharacterFragment.stub(_res);
 }
@@ -2891,14 +2824,14 @@ class Query$UserFavorites$User$favourites$staff {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2918,7 +2851,7 @@ class Query$UserFavorites$User$favourites$staff {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$staff ||
+    if (!(other is Query$UserFavorites$User$favourites$staff) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2982,7 +2915,7 @@ abstract class CopyWith$Query$UserFavorites$User$favourites$staff<TRes> {
               Iterable<
                   CopyWith$Query$UserFavorites$User$favourites$staff$edges<
                       Query$UserFavorites$User$favourites$staff$edges>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserFavorites$User$favourites$staff<TRes>
@@ -2998,7 +2931,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$staff<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -3017,7 +2949,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$staff<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -3025,15 +2956,14 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$staff<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes edges(
           Iterable<Query$UserFavorites$User$favourites$staff$edges?>? Function(
                   Iterable<
                       CopyWith$Query$UserFavorites$User$favourites$staff$edges<
                           Query$UserFavorites$User$favourites$staff$edges>?>?)
-              fn) =>
+              _fn) =>
       call(
-          edges: fn(_instance.edges?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$UserFavorites$User$favourites$staff$edges(
                   e,
@@ -3045,9 +2975,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$staff<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$staff<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$staff(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$UserFavorites$User$favourites$staff$edges?>? edges,
@@ -3055,12 +2984,10 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$staff<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  edges(fn) => _res;
+  edges(_fn) => _res;
 }
 
 class Query$UserFavorites$User$favourites$staff$edges {
@@ -3096,16 +3023,16 @@ class Query$UserFavorites$User$favourites$staff$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$favouriteOrder = favouriteOrder;
-    resultData['favouriteOrder'] = l$favouriteOrder;
+    _resultData['favouriteOrder'] = l$favouriteOrder;
     final l$node = node;
-    resultData['node'] = l$node?.toJson();
+    _resultData['node'] = l$node?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3127,7 +3054,7 @@ class Query$UserFavorites$User$favourites$staff$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$staff$edges ||
+    if (!(other is Query$UserFavorites$User$favourites$staff$edges) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3197,7 +3124,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$staff$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? favouriteOrder = _undefined,
@@ -3217,7 +3143,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$staff$edges<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$StaffFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -3230,9 +3155,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$staff$edges<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$staff$edges<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$staff$edges(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? favouriteOrder,
@@ -3241,7 +3165,6 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$staff$edges<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$StaffFragment<TRes> get node =>
       CopyWith$Fragment$StaffFragment.stub(_res);
 }
@@ -3279,14 +3202,14 @@ class Query$UserFavorites$User$favourites$studios {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$edges = edges;
-    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3306,7 +3229,7 @@ class Query$UserFavorites$User$favourites$studios {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$studios ||
+    if (!(other is Query$UserFavorites$User$favourites$studios) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3370,7 +3293,7 @@ abstract class CopyWith$Query$UserFavorites$User$favourites$studios<TRes> {
               Iterable<
                   CopyWith$Query$UserFavorites$User$favourites$studios$edges<
                       Query$UserFavorites$User$favourites$studios$edges>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserFavorites$User$favourites$studios<TRes>
@@ -3386,7 +3309,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$studios<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? edges = _undefined,
@@ -3405,7 +3327,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$studios<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -3413,15 +3334,14 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$studios<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes edges(
           Iterable<Query$UserFavorites$User$favourites$studios$edges?>? Function(
                   Iterable<
                       CopyWith$Query$UserFavorites$User$favourites$studios$edges<
                           Query$UserFavorites$User$favourites$studios$edges>?>?)
-              fn) =>
+              _fn) =>
       call(
-          edges: fn(_instance.edges?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Query$UserFavorites$User$favourites$studios$edges(
                   e,
@@ -3433,9 +3353,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$studios<TRes>
     implements CopyWith$Query$UserFavorites$User$favourites$studios<TRes> {
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$studios(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$UserFavorites$User$favourites$studios$edges?>? edges,
@@ -3443,12 +3362,10 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$studios<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  edges(fn) => _res;
+  edges(_fn) => _res;
 }
 
 class Query$UserFavorites$User$favourites$studios$edges {
@@ -3484,16 +3401,16 @@ class Query$UserFavorites$User$favourites$studios$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$favouriteOrder = favouriteOrder;
-    resultData['favouriteOrder'] = l$favouriteOrder;
+    _resultData['favouriteOrder'] = l$favouriteOrder;
     final l$node = node;
-    resultData['node'] = l$node?.toJson();
+    _resultData['node'] = l$node?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3515,7 +3432,7 @@ class Query$UserFavorites$User$favourites$studios$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserFavorites$User$favourites$studios$edges ||
+    if (!(other is Query$UserFavorites$User$favourites$studios$edges) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3588,7 +3505,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$studios$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? favouriteOrder = _undefined,
@@ -3608,7 +3524,6 @@ class _CopyWithImpl$Query$UserFavorites$User$favourites$studios$edges<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$StudioFragment<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -3623,9 +3538,8 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$studios$edges<TRes>
   _CopyWithStubImpl$Query$UserFavorites$User$favourites$studios$edges(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? favouriteOrder,
@@ -3634,7 +3548,6 @@ class _CopyWithStubImpl$Query$UserFavorites$User$favourites$studios$edges<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$StudioFragment<TRes> get node =>
       CopyWith$Fragment$StudioFragment.stub(_res);
 }

@@ -102,7 +102,7 @@ class Variables$Query$Forums {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Forums ||
+    if (!(other is Variables$Query$Forums) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -213,7 +213,6 @@ class _CopyWithImpl$Variables$Query$Forums<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? page = _undefined,
     Object? sort = _undefined,
@@ -235,9 +234,8 @@ class _CopyWithStubImpl$Variables$Query$Forums<TRes>
     implements CopyWith$Variables$Query$Forums<TRes> {
   _CopyWithStubImpl$Variables$Query$Forums(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? page,
     List<Enum$ThreadSort?>? sort,
@@ -270,12 +268,12 @@ class Query$Forums {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -293,7 +291,7 @@ class Query$Forums {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Forums || runtimeType != other.runtimeType) {
+    if (!(other is Query$Forums) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -344,7 +342,6 @@ class _CopyWithImpl$Query$Forums<TRes> implements CopyWith$Query$Forums<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -357,7 +354,6 @@ class _CopyWithImpl$Query$Forums<TRes> implements CopyWith$Query$Forums<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Forums$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -370,16 +366,14 @@ class _CopyWithStubImpl$Query$Forums<TRes>
     implements CopyWith$Query$Forums<TRes> {
   _CopyWithStubImpl$Query$Forums(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Forums$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Forums$Page<TRes> get Page =>
       CopyWith$Query$Forums$Page.stub(_res);
 }
@@ -561,14 +555,14 @@ class Query$Forums$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$threads = threads;
-    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -588,7 +582,7 @@ class Query$Forums$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Forums$Page || runtimeType != other.runtimeType) {
+    if (!(other is Query$Forums$Page) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -648,7 +642,7 @@ abstract class CopyWith$Query$Forums$Page<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Forums$Page<TRes>
@@ -664,7 +658,6 @@ class _CopyWithImpl$Query$Forums$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? threads = _undefined,
@@ -682,7 +675,6 @@ class _CopyWithImpl$Query$Forums$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -690,15 +682,14 @@ class _CopyWithImpl$Query$Forums$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          threads: fn(_instance.threads?.map((e) => e == null
+          threads: _fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -710,9 +701,8 @@ class _CopyWithStubImpl$Query$Forums$Page<TRes>
     implements CopyWith$Query$Forums$Page<TRes> {
   _CopyWithStubImpl$Query$Forums$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$ThreadFragment?>? threads,
@@ -720,10 +710,8 @@ class _CopyWithStubImpl$Query$Forums$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  threads(fn) => _res;
+  threads(_fn) => _res;
 }

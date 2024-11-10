@@ -58,64 +58,54 @@ class Fragment$ReleasingMedia implements Fragment$MediaFragment {
     );
   }
 
-  @override
   final int id;
 
-  @override
   final Enum$MediaType? type;
 
-  @override
   final bool? isAdult;
 
-  @override
   final List<String?>? genres;
 
-  @override
   final Enum$MediaFormat? format;
 
-  @override
   final String? description;
 
-  @override
   final Fragment$ReleasingMedia$title? title;
 
-  @override
   final Fragment$ReleasingMedia$coverImage? coverImage;
 
-  @override
   final String $__typename;
 
   final Fragment$ReleasingMedia$nextAiringEpisode? nextAiringEpisode;
 
   final Fragment$ReleasingMedia$airingSchedule? airingSchedule;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$isAdult = isAdult;
-    resultData['isAdult'] = l$isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
-    resultData['genres'] = l$genres?.map((e) => e).toList();
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
-    resultData['format'] =
+    _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
-    resultData['description'] = l$description;
+    _resultData['description'] = l$description;
     final l$title = title;
-    resultData['title'] = l$title?.toJson();
+    _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
-    resultData['coverImage'] = l$coverImage?.toJson();
+    _resultData['coverImage'] = l$coverImage?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
+    _resultData['__typename'] = l$$__typename;
     final l$nextAiringEpisode = nextAiringEpisode;
-    resultData['nextAiringEpisode'] = l$nextAiringEpisode?.toJson();
+    _resultData['nextAiringEpisode'] = l$nextAiringEpisode?.toJson();
     final l$airingSchedule = airingSchedule;
-    resultData['airingSchedule'] = l$airingSchedule?.toJson();
-    return resultData;
+    _resultData['airingSchedule'] = l$airingSchedule?.toJson();
+    return _resultData;
   }
 
   @override
@@ -151,7 +141,7 @@ class Fragment$ReleasingMedia implements Fragment$MediaFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia ||
+    if (!(other is Fragment$ReleasingMedia) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -275,7 +265,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -319,7 +308,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
             : (airingSchedule as Fragment$ReleasingMedia$airingSchedule?),
       ));
 
-  @override
   CopyWith$Fragment$ReleasingMedia$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -328,7 +316,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
             local$title, (e) => call(title: e));
   }
 
-  @override
   CopyWith$Fragment$ReleasingMedia$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
@@ -337,7 +324,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
             local$coverImage, (e) => call(coverImage: e));
   }
 
-  @override
   CopyWith$Fragment$ReleasingMedia$nextAiringEpisode<TRes>
       get nextAiringEpisode {
     final local$nextAiringEpisode = _instance.nextAiringEpisode;
@@ -348,7 +334,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia<TRes>
             local$nextAiringEpisode, (e) => call(nextAiringEpisode: e));
   }
 
-  @override
   CopyWith$Fragment$ReleasingMedia$airingSchedule<TRes> get airingSchedule {
     final local$airingSchedule = _instance.airingSchedule;
     return local$airingSchedule == null
@@ -362,9 +347,8 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia<TRes>
     implements CopyWith$Fragment$ReleasingMedia<TRes> {
   _CopyWithStubImpl$Fragment$ReleasingMedia(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$MediaType? type,
@@ -380,20 +364,16 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$ReleasingMedia$title<TRes> get title =>
       CopyWith$Fragment$ReleasingMedia$title.stub(_res);
 
-  @override
   CopyWith$Fragment$ReleasingMedia$coverImage<TRes> get coverImage =>
       CopyWith$Fragment$ReleasingMedia$coverImage.stub(_res);
 
-  @override
   CopyWith$Fragment$ReleasingMedia$nextAiringEpisode<TRes>
       get nextAiringEpisode =>
           CopyWith$Fragment$ReleasingMedia$nextAiringEpisode.stub(_res);
 
-  @override
   CopyWith$Fragment$ReleasingMedia$airingSchedule<TRes> get airingSchedule =>
       CopyWith$Fragment$ReleasingMedia$airingSchedule.stub(_res);
 }
@@ -547,20 +527,17 @@ class Fragment$ReleasingMedia$title implements Fragment$MediaFragment$title {
     );
   }
 
-  @override
   final String? userPreferred;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    resultData['userPreferred'] = l$userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -578,7 +555,7 @@ class Fragment$ReleasingMedia$title implements Fragment$MediaFragment$title {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia$title ||
+    if (!(other is Fragment$ReleasingMedia$title) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -633,7 +610,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -652,9 +628,8 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$title<TRes>
     implements CopyWith$Fragment$ReleasingMedia$title<TRes> {
   _CopyWithStubImpl$Fragment$ReleasingMedia$title(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -679,20 +654,17 @@ class Fragment$ReleasingMedia$coverImage
     );
   }
 
-  @override
   final String? extraLarge;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$extraLarge = extraLarge;
-    resultData['extraLarge'] = l$extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -710,7 +682,7 @@ class Fragment$ReleasingMedia$coverImage
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia$coverImage ||
+    if (!(other is Fragment$ReleasingMedia$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -766,7 +738,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$coverImage<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
@@ -785,9 +756,8 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$coverImage<TRes>
     implements CopyWith$Fragment$ReleasingMedia$coverImage<TRes> {
   _CopyWithStubImpl$Fragment$ReleasingMedia$coverImage(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? extraLarge,
     String? $__typename,
@@ -826,16 +796,16 @@ class Fragment$ReleasingMedia$nextAiringEpisode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$airingAt = airingAt;
-    resultData['airingAt'] = l$airingAt;
+    _resultData['airingAt'] = l$airingAt;
     final l$timeUntilAiring = timeUntilAiring;
-    resultData['timeUntilAiring'] = l$timeUntilAiring;
+    _resultData['timeUntilAiring'] = l$timeUntilAiring;
     final l$episode = episode;
-    resultData['episode'] = l$episode;
+    _resultData['episode'] = l$episode;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -857,7 +827,7 @@ class Fragment$ReleasingMedia$nextAiringEpisode {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia$nextAiringEpisode ||
+    if (!(other is Fragment$ReleasingMedia$nextAiringEpisode) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -925,7 +895,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$nextAiringEpisode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? airingAt = _undefined,
     Object? timeUntilAiring = _undefined,
@@ -953,9 +922,8 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$nextAiringEpisode<TRes>
     implements CopyWith$Fragment$ReleasingMedia$nextAiringEpisode<TRes> {
   _CopyWithStubImpl$Fragment$ReleasingMedia$nextAiringEpisode(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? airingAt,
     int? timeUntilAiring,
@@ -991,12 +959,12 @@ class Fragment$ReleasingMedia$airingSchedule {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$edges = edges;
-    resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
+    _resultData['edges'] = l$edges?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1014,7 +982,7 @@ class Fragment$ReleasingMedia$airingSchedule {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia$airingSchedule ||
+    if (!(other is Fragment$ReleasingMedia$airingSchedule) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1071,7 +1039,7 @@ abstract class CopyWith$Fragment$ReleasingMedia$airingSchedule<TRes> {
               Iterable<
                   CopyWith$Fragment$ReleasingMedia$airingSchedule$edges<
                       Fragment$ReleasingMedia$airingSchedule$edges>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule<TRes>
@@ -1087,7 +1055,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? edges = _undefined,
     Object? $__typename = _undefined,
@@ -1101,15 +1068,14 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule<TRes>
             : ($__typename as String),
       ));
 
-  @override
   TRes edges(
           Iterable<Fragment$ReleasingMedia$airingSchedule$edges?>? Function(
                   Iterable<
                       CopyWith$Fragment$ReleasingMedia$airingSchedule$edges<
                           Fragment$ReleasingMedia$airingSchedule$edges>?>?)
-              fn) =>
+              _fn) =>
       call(
-          edges: fn(_instance.edges?.map((e) => e == null
+          edges: _fn(_instance.edges?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ReleasingMedia$airingSchedule$edges(
                   e,
@@ -1121,17 +1087,15 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule<TRes>
     implements CopyWith$Fragment$ReleasingMedia$airingSchedule<TRes> {
   _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<Fragment$ReleasingMedia$airingSchedule$edges?>? edges,
     String? $__typename,
   }) =>
       _res;
 
-  @override
-  edges(fn) => _res;
+  edges(_fn) => _res;
 }
 
 class Fragment$ReleasingMedia$airingSchedule$edges {
@@ -1158,12 +1122,12 @@ class Fragment$ReleasingMedia$airingSchedule$edges {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$node = node;
-    resultData['node'] = l$node?.toJson();
+    _resultData['node'] = l$node?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1181,7 +1145,7 @@ class Fragment$ReleasingMedia$airingSchedule$edges {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia$airingSchedule$edges ||
+    if (!(other is Fragment$ReleasingMedia$airingSchedule$edges) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1238,7 +1202,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule$edges<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? node = _undefined,
     Object? $__typename = _undefined,
@@ -1252,7 +1215,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule$edges<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$ReleasingMedia$airingSchedule$edges$node<TRes> get node {
     final local$node = _instance.node;
     return local$node == null
@@ -1267,16 +1229,14 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule$edges<TRes>
     implements CopyWith$Fragment$ReleasingMedia$airingSchedule$edges<TRes> {
   _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule$edges(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$ReleasingMedia$airingSchedule$edges$node? node,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$ReleasingMedia$airingSchedule$edges$node<TRes> get node =>
       CopyWith$Fragment$ReleasingMedia$airingSchedule$edges$node.stub(_res);
 }
@@ -1312,16 +1272,16 @@ class Fragment$ReleasingMedia$airingSchedule$edges$node {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$airingAt = airingAt;
-    resultData['airingAt'] = l$airingAt;
+    _resultData['airingAt'] = l$airingAt;
     final l$timeUntilAiring = timeUntilAiring;
-    resultData['timeUntilAiring'] = l$timeUntilAiring;
+    _resultData['timeUntilAiring'] = l$timeUntilAiring;
     final l$episode = episode;
-    resultData['episode'] = l$episode;
+    _resultData['episode'] = l$episode;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1343,7 +1303,7 @@ class Fragment$ReleasingMedia$airingSchedule$edges$node {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ReleasingMedia$airingSchedule$edges$node ||
+    if (!(other is Fragment$ReleasingMedia$airingSchedule$edges$node) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1415,7 +1375,6 @@ class _CopyWithImpl$Fragment$ReleasingMedia$airingSchedule$edges$node<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? airingAt = _undefined,
     Object? timeUntilAiring = _undefined,
@@ -1445,9 +1404,8 @@ class _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule$edges$node<TRes>
   _CopyWithStubImpl$Fragment$ReleasingMedia$airingSchedule$edges$node(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? airingAt,
     int? timeUntilAiring,

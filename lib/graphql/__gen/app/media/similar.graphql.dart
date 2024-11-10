@@ -57,7 +57,7 @@ class Variables$Query$MediaSimilar {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$MediaSimilar ||
+    if (!(other is Variables$Query$MediaSimilar) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -119,7 +119,6 @@ class _CopyWithImpl$Variables$Query$MediaSimilar<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? mediaId = _undefined,
     Object? page = _undefined,
@@ -135,9 +134,8 @@ class _CopyWithStubImpl$Variables$Query$MediaSimilar<TRes>
     implements CopyWith$Variables$Query$MediaSimilar<TRes> {
   _CopyWithStubImpl$Variables$Query$MediaSimilar(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? mediaId,
     int? page,
@@ -168,12 +166,12 @@ class Query$MediaSimilar {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Media = Media;
-    resultData['Media'] = l$Media?.toJson();
+    _resultData['Media'] = l$Media?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -191,7 +189,7 @@ class Query$MediaSimilar {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaSimilar || runtimeType != other.runtimeType) {
+    if (!(other is Query$MediaSimilar) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Media = Media;
@@ -245,7 +243,6 @@ class _CopyWithImpl$Query$MediaSimilar<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Media = _undefined,
     Object? $__typename = _undefined,
@@ -259,7 +256,6 @@ class _CopyWithImpl$Query$MediaSimilar<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$MediaSimilar$Media<TRes> get Media {
     final local$Media = _instance.Media;
     return local$Media == null
@@ -272,16 +268,14 @@ class _CopyWithStubImpl$Query$MediaSimilar<TRes>
     implements CopyWith$Query$MediaSimilar<TRes> {
   _CopyWithStubImpl$Query$MediaSimilar(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$MediaSimilar$Media? Media,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$MediaSimilar$Media<TRes> get Media =>
       CopyWith$Query$MediaSimilar$Media.stub(_res);
 }
@@ -460,14 +454,14 @@ class Query$MediaSimilar$Media {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$recommendations = recommendations;
-    resultData['recommendations'] = l$recommendations?.toJson();
+    _resultData['recommendations'] = l$recommendations?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -487,7 +481,7 @@ class Query$MediaSimilar$Media {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaSimilar$Media ||
+    if (!(other is Query$MediaSimilar$Media) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -549,7 +543,6 @@ class _CopyWithImpl$Query$MediaSimilar$Media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? recommendations = _undefined,
@@ -565,7 +558,6 @@ class _CopyWithImpl$Query$MediaSimilar$Media<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$MediaSimilar$Media$recommendations<TRes> get recommendations {
     final local$recommendations = _instance.recommendations;
     return local$recommendations == null
@@ -580,9 +572,8 @@ class _CopyWithStubImpl$Query$MediaSimilar$Media<TRes>
     implements CopyWith$Query$MediaSimilar$Media<TRes> {
   _CopyWithStubImpl$Query$MediaSimilar$Media(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Query$MediaSimilar$Media$recommendations? recommendations,
@@ -590,7 +581,6 @@ class _CopyWithStubImpl$Query$MediaSimilar$Media<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$MediaSimilar$Media$recommendations<TRes> get recommendations =>
       CopyWith$Query$MediaSimilar$Media$recommendations.stub(_res);
 }
@@ -628,14 +618,14 @@ class Query$MediaSimilar$Media$recommendations {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$nodes = nodes;
-    resultData['nodes'] = l$nodes?.map((e) => e?.toJson()).toList();
+    _resultData['nodes'] = l$nodes?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -655,7 +645,7 @@ class Query$MediaSimilar$Media$recommendations {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaSimilar$Media$recommendations ||
+    if (!(other is Query$MediaSimilar$Media$recommendations) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -719,7 +709,7 @@ abstract class CopyWith$Query$MediaSimilar$Media$recommendations<TRes> {
               Iterable<
                   CopyWith$Query$MediaSimilar$Media$recommendations$nodes<
                       Query$MediaSimilar$Media$recommendations$nodes>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$MediaSimilar$Media$recommendations<TRes>
@@ -735,7 +725,6 @@ class _CopyWithImpl$Query$MediaSimilar$Media$recommendations<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? nodes = _undefined,
@@ -753,7 +742,6 @@ class _CopyWithImpl$Query$MediaSimilar$Media$recommendations<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -761,15 +749,14 @@ class _CopyWithImpl$Query$MediaSimilar$Media$recommendations<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes nodes(
           Iterable<Query$MediaSimilar$Media$recommendations$nodes?>? Function(
                   Iterable<
                       CopyWith$Query$MediaSimilar$Media$recommendations$nodes<
                           Query$MediaSimilar$Media$recommendations$nodes>?>?)
-              fn) =>
+              _fn) =>
       call(
-          nodes: fn(_instance.nodes?.map((e) => e == null
+          nodes: _fn(_instance.nodes?.map((e) => e == null
               ? null
               : CopyWith$Query$MediaSimilar$Media$recommendations$nodes(
                   e,
@@ -781,9 +768,8 @@ class _CopyWithStubImpl$Query$MediaSimilar$Media$recommendations<TRes>
     implements CopyWith$Query$MediaSimilar$Media$recommendations<TRes> {
   _CopyWithStubImpl$Query$MediaSimilar$Media$recommendations(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$MediaSimilar$Media$recommendations$nodes?>? nodes,
@@ -791,12 +777,10 @@ class _CopyWithStubImpl$Query$MediaSimilar$Media$recommendations<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  nodes(fn) => _res;
+  nodes(_fn) => _res;
 }
 
 class Query$MediaSimilar$Media$recommendations$nodes {
@@ -823,12 +807,12 @@ class Query$MediaSimilar$Media$recommendations$nodes {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$mediaRecommendation = mediaRecommendation;
-    resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
+    _resultData['mediaRecommendation'] = l$mediaRecommendation?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -846,7 +830,7 @@ class Query$MediaSimilar$Media$recommendations$nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaSimilar$Media$recommendations$nodes ||
+    if (!(other is Query$MediaSimilar$Media$recommendations$nodes) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -904,7 +888,6 @@ class _CopyWithImpl$Query$MediaSimilar$Media$recommendations$nodes<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? mediaRecommendation = _undefined,
     Object? $__typename = _undefined,
@@ -918,7 +901,6 @@ class _CopyWithImpl$Query$MediaSimilar$Media$recommendations$nodes<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation {
     final local$mediaRecommendation = _instance.mediaRecommendation;
     return local$mediaRecommendation == null
@@ -932,16 +914,14 @@ class _CopyWithStubImpl$Query$MediaSimilar$Media$recommendations$nodes<TRes>
     implements CopyWith$Query$MediaSimilar$Media$recommendations$nodes<TRes> {
   _CopyWithStubImpl$Query$MediaSimilar$Media$recommendations$nodes(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$MediaFragment? mediaRecommendation,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get mediaRecommendation =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

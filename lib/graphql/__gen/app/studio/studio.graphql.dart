@@ -84,7 +84,7 @@ class Variables$Query$Studio {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Studio ||
+    if (!(other is Variables$Query$Studio) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -180,7 +180,6 @@ class _CopyWithImpl$Variables$Query$Studio<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? page = _undefined,
@@ -200,9 +199,8 @@ class _CopyWithStubImpl$Variables$Query$Studio<TRes>
     implements CopyWith$Variables$Query$Studio<TRes> {
   _CopyWithStubImpl$Variables$Query$Studio(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? page,
@@ -234,12 +232,12 @@ class Query$Studio {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Studio = Studio;
-    resultData['Studio'] = l$Studio?.toJson();
+    _resultData['Studio'] = l$Studio?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -257,7 +255,7 @@ class Query$Studio {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Studio || runtimeType != other.runtimeType) {
+    if (!(other is Query$Studio) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Studio = Studio;
@@ -308,7 +306,6 @@ class _CopyWithImpl$Query$Studio<TRes> implements CopyWith$Query$Studio<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Studio = _undefined,
     Object? $__typename = _undefined,
@@ -322,7 +319,6 @@ class _CopyWithImpl$Query$Studio<TRes> implements CopyWith$Query$Studio<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Studio$Studio<TRes> get Studio {
     final local$Studio = _instance.Studio;
     return local$Studio == null
@@ -335,16 +331,14 @@ class _CopyWithStubImpl$Query$Studio<TRes>
     implements CopyWith$Query$Studio<TRes> {
   _CopyWithStubImpl$Query$Studio(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Studio$Studio? Studio,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Studio$Studio<TRes> get Studio =>
       CopyWith$Query$Studio$Studio.stub(_res);
 }
@@ -524,29 +518,25 @@ class Query$Studio$Studio implements Fragment$StudioFragment {
     );
   }
 
-  @override
   final int id;
 
-  @override
   final String name;
 
-  @override
   final String $__typename;
 
   final Query$Studio$Studio$media? media;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
+    _resultData['__typename'] = l$$__typename;
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
-    return resultData;
+    _resultData['media'] = l$media?.toJson();
+    return _resultData;
   }
 
   @override
@@ -568,7 +558,7 @@ class Query$Studio$Studio implements Fragment$StudioFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Studio$Studio || runtimeType != other.runtimeType) {
+    if (!(other is Query$Studio$Studio) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -634,7 +624,6 @@ class _CopyWithImpl$Query$Studio$Studio<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -654,7 +643,6 @@ class _CopyWithImpl$Query$Studio$Studio<TRes>
             : (media as Query$Studio$Studio$media?),
       ));
 
-  @override
   CopyWith$Query$Studio$Studio$media<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -668,9 +656,8 @@ class _CopyWithStubImpl$Query$Studio$Studio<TRes>
     implements CopyWith$Query$Studio$Studio<TRes> {
   _CopyWithStubImpl$Query$Studio$Studio(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? name,
@@ -679,7 +666,6 @@ class _CopyWithStubImpl$Query$Studio$Studio<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Studio$Studio$media<TRes> get media =>
       CopyWith$Query$Studio$Studio$media.stub(_res);
 }
@@ -715,14 +701,14 @@ class Query$Studio$Studio$media {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$nodes = nodes;
-    resultData['nodes'] = l$nodes?.map((e) => e?.toJson()).toList();
+    _resultData['nodes'] = l$nodes?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -742,7 +728,7 @@ class Query$Studio$Studio$media {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Studio$Studio$media ||
+    if (!(other is Query$Studio$Studio$media) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -804,7 +790,7 @@ abstract class CopyWith$Query$Studio$Studio$media<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Studio$Studio$media<TRes>
@@ -820,7 +806,6 @@ class _CopyWithImpl$Query$Studio$Studio$media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? nodes = _undefined,
@@ -838,7 +823,6 @@ class _CopyWithImpl$Query$Studio$Studio$media<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -846,15 +830,14 @@ class _CopyWithImpl$Query$Studio$Studio$media<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes nodes(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          nodes: fn(_instance.nodes?.map((e) => e == null
+          nodes: _fn(_instance.nodes?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -866,9 +849,8 @@ class _CopyWithStubImpl$Query$Studio$Studio$media<TRes>
     implements CopyWith$Query$Studio$Studio$media<TRes> {
   _CopyWithStubImpl$Query$Studio$Studio$media(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$MediaFragment?>? nodes,
@@ -876,10 +858,8 @@ class _CopyWithStubImpl$Query$Studio$Studio$media<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  nodes(fn) => _res;
+  nodes(_fn) => _res;
 }

@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:app_links/app_links.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:ferry/ferry.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -12,6 +15,7 @@ import 'package:myaniapp/providers/app_info.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/shared_prefs.dart';
 import 'package:myaniapp/router.dart';
+import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/url_protocol/web_url_protocol.dart'
     if (dart.library.io) 'package:myaniapp/url_protocol/api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -62,11 +66,67 @@ void main() async {
   );
 }
 
-class MainApp extends ConsumerWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends ConsumerState<MainApp> {
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _linkSubscription?.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // appRouter = AppRouter(ref);
+    if (!kIsWeb && !Platform.isLinux) initAppLinks();
+  }
+
+  Future<void> initAppLinks() async {
+    _appLinks = AppLinks();
+
+    // Check initial link if app was in cold state (terminated)
+    final appLink = await _appLinks.getInitialLink();
+    if (appLink != null) {
+      print('getInitialAppLink: $appLink');
+      openAppLink(appLink);
+    }
+
+    // if (!kIsWeb) return;5
+
+    print('listening...');
+    // Handle link when app is in warm state (front or background)
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      if (uri.scheme == "myaniapp" &&
+          uri.host == "ani" &&
+          uri.path == "/auth") {
+        var fragment = uri.fragment;
+        var token = fragment.substring(
+            fragment.indexOf("=") + 1, fragment.indexOf("&"));
+
+        ref.read(settingsProvider.notifier).updateToken(token).then((value) {
+          router.navigate(const HomeRoute());
+        });
+      }
+      openAppLink(uri);
+    });
+  }
+
+  void openAppLink(Uri uri) {
+    if (uri.host != 'root') return;
+    router.pushNamed(uri.path);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var themeMode =
         ref.watch(settingsProvider.select((value) => value.themeMode));
     var color =

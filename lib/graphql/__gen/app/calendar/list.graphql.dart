@@ -44,7 +44,7 @@ class Variables$Query$ReleasesList {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$ReleasesList ||
+    if (!(other is Variables$Query$ReleasesList) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -91,7 +91,6 @@ class _CopyWithImpl$Variables$Query$ReleasesList<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? page = _undefined}) =>
       _then(Variables$Query$ReleasesList._({
         ..._instance._$data,
@@ -103,9 +102,8 @@ class _CopyWithStubImpl$Variables$Query$ReleasesList<TRes>
     implements CopyWith$Variables$Query$ReleasesList<TRes> {
   _CopyWithStubImpl$Variables$Query$ReleasesList(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? page}) => _res;
 }
 
@@ -131,12 +129,12 @@ class Query$ReleasesList {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -154,7 +152,7 @@ class Query$ReleasesList {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$ReleasesList || runtimeType != other.runtimeType) {
+    if (!(other is Query$ReleasesList) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -208,7 +206,6 @@ class _CopyWithImpl$Query$ReleasesList<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -222,7 +219,6 @@ class _CopyWithImpl$Query$ReleasesList<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$ReleasesList$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -235,16 +231,14 @@ class _CopyWithStubImpl$Query$ReleasesList<TRes>
     implements CopyWith$Query$ReleasesList<TRes> {
   _CopyWithStubImpl$Query$ReleasesList(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$ReleasesList$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$ReleasesList$Page<TRes> get Page =>
       CopyWith$Query$ReleasesList$Page.stub(_res);
 }
@@ -385,14 +379,14 @@ class Query$ReleasesList$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$media = media;
-    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -412,7 +406,7 @@ class Query$ReleasesList$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$ReleasesList$Page ||
+    if (!(other is Query$ReleasesList$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -473,7 +467,7 @@ abstract class CopyWith$Query$ReleasesList$Page<TRes> {
       Iterable<Fragment$ReleasingMedia?>? Function(
               Iterable<
                   CopyWith$Fragment$ReleasingMedia<Fragment$ReleasingMedia>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$ReleasesList$Page<TRes>
@@ -489,7 +483,6 @@ class _CopyWithImpl$Query$ReleasesList$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? media = _undefined,
@@ -507,7 +500,6 @@ class _CopyWithImpl$Query$ReleasesList$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -515,15 +507,14 @@ class _CopyWithImpl$Query$ReleasesList$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes media(
           Iterable<Fragment$ReleasingMedia?>? Function(
                   Iterable<
                       CopyWith$Fragment$ReleasingMedia<
                           Fragment$ReleasingMedia>?>?)
-              fn) =>
+              _fn) =>
       call(
-          media: fn(_instance.media?.map((e) => e == null
+          media: _fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ReleasingMedia(
                   e,
@@ -535,9 +526,8 @@ class _CopyWithStubImpl$Query$ReleasesList$Page<TRes>
     implements CopyWith$Query$ReleasesList$Page<TRes> {
   _CopyWithStubImpl$Query$ReleasesList$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$ReleasingMedia?>? media,
@@ -545,10 +535,8 @@ class _CopyWithStubImpl$Query$ReleasesList$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  media(fn) => _res;
+  media(_fn) => _res;
 }

@@ -90,37 +90,37 @@ class Fragment$MessageActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$message = message;
-    resultData['message'] = l$message;
+    _resultData['message'] = l$message;
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$isPrivate = isPrivate;
-    resultData['isPrivate'] = l$isPrivate;
+    _resultData['isPrivate'] = l$isPrivate;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$messenger = messenger;
-    resultData['messenger'] = l$messenger?.toJson();
+    _resultData['messenger'] = l$messenger?.toJson();
     final l$recipient = recipient;
-    resultData['recipient'] = l$recipient?.toJson();
+    _resultData['recipient'] = l$recipient?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -162,7 +162,7 @@ class Fragment$MessageActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$MessageActivity ||
+    if (!(other is Fragment$MessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -291,7 +291,6 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -344,7 +343,6 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get messenger {
     final local$messenger = _instance.messenger;
     return local$messenger == null
@@ -353,7 +351,6 @@ class _CopyWithImpl$Fragment$MessageActivity<TRes>
             local$messenger, (e) => call(messenger: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get recipient {
     final local$recipient = _instance.recipient;
     return local$recipient == null
@@ -367,9 +364,8 @@ class _CopyWithStubImpl$Fragment$MessageActivity<TRes>
     implements CopyWith$Fragment$MessageActivity<TRes> {
   _CopyWithStubImpl$Fragment$MessageActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$ActivityType? type,
@@ -388,11 +384,9 @@ class _CopyWithStubImpl$Fragment$MessageActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get messenger =>
       CopyWith$Fragment$UserFragment.stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get recipient =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }

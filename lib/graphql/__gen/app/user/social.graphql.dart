@@ -65,7 +65,7 @@ class Variables$Query$UserSocials {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$UserSocials ||
+    if (!(other is Variables$Query$UserSocials) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137,7 +137,6 @@ class _CopyWithImpl$Variables$Query$UserSocials<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? followersPage = _undefined,
@@ -157,9 +156,8 @@ class _CopyWithStubImpl$Variables$Query$UserSocials<TRes>
     implements CopyWith$Variables$Query$UserSocials<TRes> {
   _CopyWithStubImpl$Variables$Query$UserSocials(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? followersPage,
@@ -199,14 +197,14 @@ class Query$UserSocials {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$followers = followers;
-    resultData['followers'] = l$followers?.toJson();
+    _resultData['followers'] = l$followers?.toJson();
     final l$following = following;
-    resultData['following'] = l$following?.toJson();
+    _resultData['following'] = l$following?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -226,7 +224,7 @@ class Query$UserSocials {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserSocials || runtimeType != other.runtimeType) {
+    if (!(other is Query$UserSocials) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$followers = followers;
@@ -287,7 +285,6 @@ class _CopyWithImpl$Query$UserSocials<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? followers = _undefined,
     Object? following = _undefined,
@@ -305,7 +302,6 @@ class _CopyWithImpl$Query$UserSocials<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$UserSocials$followers<TRes> get followers {
     final local$followers = _instance.followers;
     return local$followers == null
@@ -314,7 +310,6 @@ class _CopyWithImpl$Query$UserSocials<TRes>
             local$followers, (e) => call(followers: e));
   }
 
-  @override
   CopyWith$Query$UserSocials$following<TRes> get following {
     final local$following = _instance.following;
     return local$following == null
@@ -328,9 +323,8 @@ class _CopyWithStubImpl$Query$UserSocials<TRes>
     implements CopyWith$Query$UserSocials<TRes> {
   _CopyWithStubImpl$Query$UserSocials(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$UserSocials$followers? followers,
     Query$UserSocials$following? following,
@@ -338,11 +332,9 @@ class _CopyWithStubImpl$Query$UserSocials<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$UserSocials$followers<TRes> get followers =>
       CopyWith$Query$UserSocials$followers.stub(_res);
 
-  @override
   CopyWith$Query$UserSocials$following<TRes> get following =>
       CopyWith$Query$UserSocials$following.stub(_res);
 }
@@ -564,14 +556,14 @@ class Query$UserSocials$followers {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$followers = followers;
-    resultData['followers'] = l$followers?.map((e) => e?.toJson()).toList();
+    _resultData['followers'] = l$followers?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -591,7 +583,7 @@ class Query$UserSocials$followers {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserSocials$followers ||
+    if (!(other is Query$UserSocials$followers) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -652,7 +644,7 @@ abstract class CopyWith$Query$UserSocials$followers<TRes> {
   TRes followers(
       Iterable<Fragment$UserFragment?>? Function(
               Iterable<CopyWith$Fragment$UserFragment<Fragment$UserFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserSocials$followers<TRes>
@@ -668,7 +660,6 @@ class _CopyWithImpl$Query$UserSocials$followers<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? followers = _undefined,
@@ -686,7 +677,6 @@ class _CopyWithImpl$Query$UserSocials$followers<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -694,14 +684,13 @@ class _CopyWithImpl$Query$UserSocials$followers<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes followers(
           Iterable<Fragment$UserFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$UserFragment<Fragment$UserFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          followers: fn(_instance.followers?.map((e) => e == null
+          followers: _fn(_instance.followers?.map((e) => e == null
               ? null
               : CopyWith$Fragment$UserFragment(
                   e,
@@ -713,9 +702,8 @@ class _CopyWithStubImpl$Query$UserSocials$followers<TRes>
     implements CopyWith$Query$UserSocials$followers<TRes> {
   _CopyWithStubImpl$Query$UserSocials$followers(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$UserFragment?>? followers,
@@ -723,12 +711,10 @@ class _CopyWithStubImpl$Query$UserSocials$followers<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  followers(fn) => _res;
+  followers(_fn) => _res;
 }
 
 class Query$UserSocials$following {
@@ -762,14 +748,14 @@ class Query$UserSocials$following {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$following = following;
-    resultData['following'] = l$following?.map((e) => e?.toJson()).toList();
+    _resultData['following'] = l$following?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -789,7 +775,7 @@ class Query$UserSocials$following {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$UserSocials$following ||
+    if (!(other is Query$UserSocials$following) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -850,7 +836,7 @@ abstract class CopyWith$Query$UserSocials$following<TRes> {
   TRes following(
       Iterable<Fragment$UserFragment?>? Function(
               Iterable<CopyWith$Fragment$UserFragment<Fragment$UserFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$UserSocials$following<TRes>
@@ -866,7 +852,6 @@ class _CopyWithImpl$Query$UserSocials$following<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? following = _undefined,
@@ -884,7 +869,6 @@ class _CopyWithImpl$Query$UserSocials$following<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -892,14 +876,13 @@ class _CopyWithImpl$Query$UserSocials$following<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes following(
           Iterable<Fragment$UserFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$UserFragment<Fragment$UserFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          following: fn(_instance.following?.map((e) => e == null
+          following: _fn(_instance.following?.map((e) => e == null
               ? null
               : CopyWith$Fragment$UserFragment(
                   e,
@@ -911,9 +894,8 @@ class _CopyWithStubImpl$Query$UserSocials$following<TRes>
     implements CopyWith$Query$UserSocials$following<TRes> {
   _CopyWithStubImpl$Query$UserSocials$following(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$UserFragment?>? following,
@@ -921,10 +903,8 @@ class _CopyWithStubImpl$Query$UserSocials$following<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  following(fn) => _res;
+  following(_fn) => _res;
 }

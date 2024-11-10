@@ -90,7 +90,7 @@ class Variables$Query$HomeActivities {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$HomeActivities ||
+    if (!(other is Variables$Query$HomeActivities) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -177,7 +177,6 @@ class _CopyWithImpl$Variables$Query$HomeActivities<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? isFollowing = _undefined,
     Object? hasReplies = _undefined,
@@ -198,9 +197,8 @@ class _CopyWithStubImpl$Variables$Query$HomeActivities<TRes>
     implements CopyWith$Variables$Query$HomeActivities<TRes> {
   _CopyWithStubImpl$Variables$Query$HomeActivities(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? isFollowing,
     bool? hasReplies,
@@ -233,12 +231,12 @@ class Query$HomeActivities {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -256,7 +254,7 @@ class Query$HomeActivities {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$HomeActivities || runtimeType != other.runtimeType) {
+    if (!(other is Query$HomeActivities) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -310,7 +308,6 @@ class _CopyWithImpl$Query$HomeActivities<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -324,7 +321,6 @@ class _CopyWithImpl$Query$HomeActivities<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$HomeActivities$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -337,16 +333,14 @@ class _CopyWithStubImpl$Query$HomeActivities<TRes>
     implements CopyWith$Query$HomeActivities<TRes> {
   _CopyWithStubImpl$Query$HomeActivities(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$HomeActivities$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$HomeActivities$Page<TRes> get Page =>
       CopyWith$Query$HomeActivities$Page.stub(_res);
 }
@@ -568,14 +562,14 @@ class Query$HomeActivities$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$activities = activities;
-    resultData['activities'] = l$activities?.map((e) => e?.toJson()).toList();
+    _resultData['activities'] = l$activities?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -595,7 +589,7 @@ class Query$HomeActivities$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$HomeActivities$Page ||
+    if (!(other is Query$HomeActivities$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -658,7 +652,7 @@ abstract class CopyWith$Query$HomeActivities$Page<TRes> {
               Iterable<
                   CopyWith$Query$HomeActivities$Page$activities<
                       Query$HomeActivities$Page$activities>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$HomeActivities$Page<TRes>
@@ -674,7 +668,6 @@ class _CopyWithImpl$Query$HomeActivities$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? activities = _undefined,
@@ -692,7 +685,6 @@ class _CopyWithImpl$Query$HomeActivities$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -700,15 +692,14 @@ class _CopyWithImpl$Query$HomeActivities$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes activities(
           Iterable<Query$HomeActivities$Page$activities?>? Function(
                   Iterable<
                       CopyWith$Query$HomeActivities$Page$activities<
                           Query$HomeActivities$Page$activities>?>?)
-              fn) =>
+              _fn) =>
       call(
-          activities: fn(_instance.activities?.map((e) => e == null
+          activities: _fn(_instance.activities?.map((e) => e == null
               ? null
               : CopyWith$Query$HomeActivities$Page$activities(
                   e,
@@ -720,9 +711,8 @@ class _CopyWithStubImpl$Query$HomeActivities$Page<TRes>
     implements CopyWith$Query$HomeActivities$Page<TRes> {
   _CopyWithStubImpl$Query$HomeActivities$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$HomeActivities$Page$activities?>? activities,
@@ -730,12 +720,10 @@ class _CopyWithStubImpl$Query$HomeActivities$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  activities(fn) => _res;
+  activities(_fn) => _res;
 }
 
 class Query$HomeActivities$Page$activities {
@@ -766,10 +754,10 @@ class Query$HomeActivities$Page$activities {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -783,7 +771,7 @@ class Query$HomeActivities$Page$activities {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$HomeActivities$Page$activities ||
+    if (!(other is Query$HomeActivities$Page$activities) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -896,7 +884,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? $__typename = _undefined}) =>
       _then(Query$HomeActivities$Page$activities(
           $__typename: $__typename == _undefined || $__typename == null
@@ -908,9 +895,8 @@ class _CopyWithStubImpl$Query$HomeActivities$Page$activities<TRes>
     implements CopyWith$Query$HomeActivities$Page$activities<TRes> {
   _CopyWithStubImpl$Query$HomeActivities$Page$activities(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? $__typename}) => _res;
 }
 
@@ -965,71 +951,58 @@ class Query$HomeActivities$Page$activities$$TextActivity
     );
   }
 
-  @override
   final int id;
 
-  @override
   final int? userId;
 
-  @override
   final Enum$ActivityType? type;
 
-  @override
   final int replyCount;
 
-  @override
   final String? text;
 
-  @override
   final bool? isLocked;
 
-  @override
   final bool? isSubscribed;
 
-  @override
   final bool? isLiked;
 
-  @override
   final int likeCount;
 
-  @override
   final int createdAt;
 
-  @override
   final Fragment$UserFragment? user;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$text = text;
-    resultData['text'] = l$text;
+    _resultData['text'] = l$text;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1067,7 +1040,7 @@ class Query$HomeActivities$Page$activities$$TextActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$HomeActivities$Page$activities$$TextActivity ||
+    if (!(other is Query$HomeActivities$Page$activities$$TextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1188,7 +1161,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities$$TextActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -1232,7 +1204,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities$$TextActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1247,9 +1218,8 @@ class _CopyWithStubImpl$Query$HomeActivities$Page$activities$$TextActivity<TRes>
   _CopyWithStubImpl$Query$HomeActivities$Page$activities$$TextActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? userId,
@@ -1266,7 +1236,6 @@ class _CopyWithStubImpl$Query$HomeActivities$Page$activities$$TextActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1330,81 +1299,66 @@ class Query$HomeActivities$Page$activities$$ListActivity
     );
   }
 
-  @override
   final int id;
 
-  @override
   final int? userId;
 
-  @override
   final Enum$ActivityType? type;
 
-  @override
   final String? status;
 
-  @override
   final String? progress;
 
-  @override
   final int replyCount;
 
-  @override
   final bool? isLocked;
 
-  @override
   final bool? isSubscribed;
 
-  @override
   final bool? isLiked;
 
-  @override
   final int likeCount;
 
-  @override
   final int createdAt;
 
-  @override
   final Fragment$UserFragment? user;
 
-  @override
   final Fragment$MediaFragment? media;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$status = status;
-    resultData['status'] = l$status;
+    _resultData['status'] = l$status;
     final l$progress = progress;
-    resultData['progress'] = l$progress;
+    _resultData['progress'] = l$progress;
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1446,7 +1400,7 @@ class Query$HomeActivities$Page$activities$$ListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$HomeActivities$Page$activities$$ListActivity ||
+    if (!(other is Query$HomeActivities$Page$activities$$ListActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1580,7 +1534,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities$$ListActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -1631,7 +1584,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities$$ListActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1639,7 +1591,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities$$ListActivity<TRes>
         : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -1654,9 +1605,8 @@ class _CopyWithStubImpl$Query$HomeActivities$Page$activities$$ListActivity<TRes>
   _CopyWithStubImpl$Query$HomeActivities$Page$activities$$ListActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? userId,
@@ -1675,11 +1625,9 @@ class _CopyWithStubImpl$Query$HomeActivities$Page$activities$$ListActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -1696,15 +1644,13 @@ class Query$HomeActivities$Page$activities$$MessageActivity
         $__typename: (l$$__typename as String));
   }
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1718,7 +1664,7 @@ class Query$HomeActivities$Page$activities$$MessageActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$HomeActivities$Page$activities$$MessageActivity ||
+    if (!(other is Query$HomeActivities$Page$activities$$MessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1771,7 +1717,6 @@ class _CopyWithImpl$Query$HomeActivities$Page$activities$$MessageActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? $__typename = _undefined}) =>
       _then(Query$HomeActivities$Page$activities$$MessageActivity(
           $__typename: $__typename == _undefined || $__typename == null
@@ -1786,9 +1731,8 @@ class _CopyWithStubImpl$Query$HomeActivities$Page$activities$$MessageActivity<
   _CopyWithStubImpl$Query$HomeActivities$Page$activities$$MessageActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? $__typename}) => _res;
 }
 
@@ -1850,7 +1794,7 @@ class Variables$Mutation$ToggleLike {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$ToggleLike ||
+    if (!(other is Variables$Mutation$ToggleLike) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1912,7 +1856,6 @@ class _CopyWithImpl$Variables$Mutation$ToggleLike<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? type = _undefined,
     Object? id = _undefined,
@@ -1928,9 +1871,8 @@ class _CopyWithStubImpl$Variables$Mutation$ToggleLike<TRes>
     implements CopyWith$Variables$Mutation$ToggleLike<TRes> {
   _CopyWithStubImpl$Variables$Mutation$ToggleLike(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Enum$LikeableType? type,
     int? id,
@@ -1961,12 +1903,12 @@ class Mutation$ToggleLike {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$ToggleLikeV2 = ToggleLikeV2;
-    resultData['ToggleLikeV2'] = l$ToggleLikeV2?.toJson();
+    _resultData['ToggleLikeV2'] = l$ToggleLikeV2?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1984,7 +1926,7 @@ class Mutation$ToggleLike {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike || runtimeType != other.runtimeType) {
+    if (!(other is Mutation$ToggleLike) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$ToggleLikeV2 = ToggleLikeV2;
@@ -2038,7 +1980,6 @@ class _CopyWithImpl$Mutation$ToggleLike<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? ToggleLikeV2 = _undefined,
     Object? $__typename = _undefined,
@@ -2052,7 +1993,6 @@ class _CopyWithImpl$Mutation$ToggleLike<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$ToggleLike$ToggleLikeV2<TRes> get ToggleLikeV2 {
     final local$ToggleLikeV2 = _instance.ToggleLikeV2;
     return local$ToggleLikeV2 == null
@@ -2066,16 +2006,14 @@ class _CopyWithStubImpl$Mutation$ToggleLike<TRes>
     implements CopyWith$Mutation$ToggleLike<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$ToggleLike$ToggleLikeV2? ToggleLikeV2,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$ToggleLike$ToggleLikeV2<TRes> get ToggleLikeV2 =>
       CopyWith$Mutation$ToggleLike$ToggleLikeV2.stub(_res);
 }
@@ -2402,10 +2340,10 @@ class Mutation$ToggleLike$ToggleLikeV2 {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2419,7 +2357,7 @@ class Mutation$ToggleLike$ToggleLikeV2 {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2 ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2571,7 +2509,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? $__typename = _undefined}) =>
       _then(Mutation$ToggleLike$ToggleLikeV2(
           $__typename: $__typename == _undefined || $__typename == null
@@ -2583,9 +2520,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2<TRes>
     implements CopyWith$Mutation$ToggleLike$ToggleLikeV2<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? $__typename}) => _res;
 }
 
@@ -2618,21 +2554,19 @@ class Mutation$ToggleLike$ToggleLikeV2$$ListActivity
 
   final bool? isLiked;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2654,7 +2588,7 @@ class Mutation$ToggleLike$ToggleLikeV2$$ListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2$$ListActivity ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2$$ListActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2723,7 +2657,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2$$ListActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? likeCount = _undefined,
@@ -2746,9 +2679,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$ListActivity<TRes>
     implements CopyWith$Mutation$ToggleLike$ToggleLikeV2$$ListActivity<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$ListActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? likeCount,
@@ -2787,21 +2719,19 @@ class Mutation$ToggleLike$ToggleLikeV2$$MessageActivity
 
   final bool? isLiked;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2823,7 +2753,7 @@ class Mutation$ToggleLike$ToggleLikeV2$$MessageActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2$$MessageActivity ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2$$MessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2895,7 +2825,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2$$MessageActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? likeCount = _undefined,
@@ -2920,9 +2849,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$MessageActivity<TRes>
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$MessageActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? likeCount,
@@ -2961,21 +2889,19 @@ class Mutation$ToggleLike$ToggleLikeV2$$TextActivity
 
   final bool? isLiked;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2997,7 +2923,7 @@ class Mutation$ToggleLike$ToggleLikeV2$$TextActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2$$TextActivity ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2$$TextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3066,7 +2992,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2$$TextActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? likeCount = _undefined,
@@ -3089,9 +3014,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$TextActivity<TRes>
     implements CopyWith$Mutation$ToggleLike$ToggleLikeV2$$TextActivity<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$TextActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? likeCount,
@@ -3130,21 +3054,19 @@ class Mutation$ToggleLike$ToggleLikeV2$$ActivityReply
 
   final bool? isLiked;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3166,7 +3088,7 @@ class Mutation$ToggleLike$ToggleLikeV2$$ActivityReply
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2$$ActivityReply ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2$$ActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3235,7 +3157,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2$$ActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? likeCount = _undefined,
@@ -3258,9 +3179,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$ActivityReply<TRes>
     implements CopyWith$Mutation$ToggleLike$ToggleLikeV2$$ActivityReply<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$ActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? likeCount,
@@ -3299,21 +3219,19 @@ class Mutation$ToggleLike$ToggleLikeV2$$Thread
 
   final bool? isLiked;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3335,7 +3253,7 @@ class Mutation$ToggleLike$ToggleLikeV2$$Thread
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2$$Thread ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2$$Thread) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3403,7 +3321,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2$$Thread<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? likeCount = _undefined,
@@ -3426,9 +3343,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$Thread<TRes>
     implements CopyWith$Mutation$ToggleLike$ToggleLikeV2$$Thread<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$Thread(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? likeCount,
@@ -3467,21 +3383,19 @@ class Mutation$ToggleLike$ToggleLikeV2$$ThreadComment
 
   final bool? isLiked;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3503,7 +3417,7 @@ class Mutation$ToggleLike$ToggleLikeV2$$ThreadComment
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleLike$ToggleLikeV2$$ThreadComment ||
+    if (!(other is Mutation$ToggleLike$ToggleLikeV2$$ThreadComment) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3572,7 +3486,6 @@ class _CopyWithImpl$Mutation$ToggleLike$ToggleLikeV2$$ThreadComment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? likeCount = _undefined,
@@ -3595,9 +3508,8 @@ class _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$ThreadComment<TRes>
     implements CopyWith$Mutation$ToggleLike$ToggleLikeV2$$ThreadComment<TRes> {
   _CopyWithStubImpl$Mutation$ToggleLike$ToggleLikeV2$$ThreadComment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? likeCount,
@@ -3664,7 +3576,7 @@ class Variables$Mutation$SaveTextActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$SaveTextActivity ||
+    if (!(other is Variables$Mutation$SaveTextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3726,7 +3638,6 @@ class _CopyWithImpl$Variables$Mutation$SaveTextActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? text = _undefined,
@@ -3742,9 +3653,8 @@ class _CopyWithStubImpl$Variables$Mutation$SaveTextActivity<TRes>
     implements CopyWith$Variables$Mutation$SaveTextActivity<TRes> {
   _CopyWithStubImpl$Variables$Mutation$SaveTextActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? text,
@@ -3775,12 +3685,12 @@ class Mutation$SaveTextActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$SaveTextActivity = SaveTextActivity;
-    resultData['SaveTextActivity'] = l$SaveTextActivity?.toJson();
+    _resultData['SaveTextActivity'] = l$SaveTextActivity?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3798,7 +3708,7 @@ class Mutation$SaveTextActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveTextActivity ||
+    if (!(other is Mutation$SaveTextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3855,7 +3765,6 @@ class _CopyWithImpl$Mutation$SaveTextActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? SaveTextActivity = _undefined,
     Object? $__typename = _undefined,
@@ -3869,7 +3778,6 @@ class _CopyWithImpl$Mutation$SaveTextActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$SaveTextActivity$SaveTextActivity<TRes>
       get SaveTextActivity {
     final local$SaveTextActivity = _instance.SaveTextActivity;
@@ -3885,16 +3793,14 @@ class _CopyWithStubImpl$Mutation$SaveTextActivity<TRes>
     implements CopyWith$Mutation$SaveTextActivity<TRes> {
   _CopyWithStubImpl$Mutation$SaveTextActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$SaveTextActivity$SaveTextActivity? SaveTextActivity,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$SaveTextActivity$SaveTextActivity<TRes>
       get SaveTextActivity =>
           CopyWith$Mutation$SaveTextActivity$SaveTextActivity.stub(_res);
@@ -4126,33 +4032,33 @@ class Mutation$SaveTextActivity$SaveTextActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$text = text;
-    resultData['text'] = l$text;
+    _resultData['text'] = l$text;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4190,7 +4096,7 @@ class Mutation$SaveTextActivity$SaveTextActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveTextActivity$SaveTextActivity ||
+    if (!(other is Mutation$SaveTextActivity$SaveTextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4307,7 +4213,6 @@ class _CopyWithImpl$Mutation$SaveTextActivity$SaveTextActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -4351,7 +4256,6 @@ class _CopyWithImpl$Mutation$SaveTextActivity$SaveTextActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4364,9 +4268,8 @@ class _CopyWithStubImpl$Mutation$SaveTextActivity$SaveTextActivity<TRes>
     implements CopyWith$Mutation$SaveTextActivity$SaveTextActivity<TRes> {
   _CopyWithStubImpl$Mutation$SaveTextActivity$SaveTextActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? userId,
@@ -4383,7 +4286,6 @@ class _CopyWithStubImpl$Mutation$SaveTextActivity$SaveTextActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }

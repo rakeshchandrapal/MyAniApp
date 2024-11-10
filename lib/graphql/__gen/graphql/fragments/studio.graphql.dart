@@ -25,14 +25,14 @@ class Fragment$StudioFragment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -52,7 +52,7 @@ class Fragment$StudioFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$StudioFragment ||
+    if (!(other is Fragment$StudioFragment) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -112,7 +112,6 @@ class _CopyWithImpl$Fragment$StudioFragment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -133,9 +132,8 @@ class _CopyWithStubImpl$Fragment$StudioFragment<TRes>
     implements CopyWith$Fragment$StudioFragment<TRes> {
   _CopyWithStubImpl$Fragment$StudioFragment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? name,

@@ -77,7 +77,7 @@ class Variables$Query$Notifications {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Notifications ||
+    if (!(other is Variables$Query$Notifications) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -165,7 +165,6 @@ class _CopyWithImpl$Variables$Query$Notifications<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? page = _undefined,
     Object? types = _undefined,
@@ -184,9 +183,8 @@ class _CopyWithStubImpl$Variables$Query$Notifications<TRes>
     implements CopyWith$Variables$Query$Notifications<TRes> {
   _CopyWithStubImpl$Variables$Query$Notifications(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? page,
     List<Enum$NotificationType?>? types,
@@ -217,12 +215,12 @@ class Query$Notifications {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -240,7 +238,7 @@ class Query$Notifications {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Notifications || runtimeType != other.runtimeType) {
+    if (!(other is Query$Notifications) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -294,7 +292,6 @@ class _CopyWithImpl$Query$Notifications<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -308,7 +305,6 @@ class _CopyWithImpl$Query$Notifications<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Notifications$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -321,16 +317,14 @@ class _CopyWithStubImpl$Query$Notifications<TRes>
     implements CopyWith$Query$Notifications<TRes> {
   _CopyWithStubImpl$Query$Notifications(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Notifications$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Notifications$Page<TRes> get Page =>
       CopyWith$Query$Notifications$Page.stub(_res);
 }
@@ -1812,15 +1806,15 @@ class Query$Notifications$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$notifications = notifications;
-    resultData['notifications'] =
+    _resultData['notifications'] =
         l$notifications?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1842,7 +1836,7 @@ class Query$Notifications$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Notifications$Page ||
+    if (!(other is Query$Notifications$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1905,7 +1899,7 @@ abstract class CopyWith$Query$Notifications$Page<TRes> {
               Iterable<
                   CopyWith$Query$Notifications$Page$notifications<
                       Query$Notifications$Page$notifications>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Notifications$Page<TRes>
@@ -1921,7 +1915,6 @@ class _CopyWithImpl$Query$Notifications$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? notifications = _undefined,
@@ -1939,7 +1932,6 @@ class _CopyWithImpl$Query$Notifications$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1947,15 +1939,14 @@ class _CopyWithImpl$Query$Notifications$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes notifications(
           Iterable<Query$Notifications$Page$notifications?>? Function(
                   Iterable<
                       CopyWith$Query$Notifications$Page$notifications<
                           Query$Notifications$Page$notifications>?>?)
-              fn) =>
+              _fn) =>
       call(
-          notifications: fn(_instance.notifications?.map((e) => e == null
+          notifications: _fn(_instance.notifications?.map((e) => e == null
               ? null
               : CopyWith$Query$Notifications$Page$notifications(
                   e,
@@ -1967,9 +1958,8 @@ class _CopyWithStubImpl$Query$Notifications$Page<TRes>
     implements CopyWith$Query$Notifications$Page<TRes> {
   _CopyWithStubImpl$Query$Notifications$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$Notifications$Page$notifications?>? notifications,
@@ -1977,12 +1967,10 @@ class _CopyWithStubImpl$Query$Notifications$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  notifications(fn) => _res;
+  notifications(_fn) => _res;
 }
 
 class Query$Notifications$Page$notifications {
@@ -2069,10 +2057,10 @@ class Query$Notifications$Page$notifications {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2086,7 +2074,7 @@ class Query$Notifications$Page$notifications {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Notifications$Page$notifications ||
+    if (!(other is Query$Notifications$Page$notifications) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2453,7 +2441,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? $__typename = _undefined}) =>
       _then(Query$Notifications$Page$notifications(
           $__typename: $__typename == _undefined || $__typename == null
@@ -2465,9 +2452,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications<TRes>
     implements CopyWith$Query$Notifications$Page$notifications<TRes> {
   _CopyWithStubImpl$Query$Notifications$Page$notifications(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? $__typename}) => _res;
 }
 
@@ -2520,28 +2506,26 @@ class Query$Notifications$Page$notifications$$AiringNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$episode = episode;
-    resultData['episode'] = l$episode;
+    _resultData['episode'] = l$episode;
     final l$contexts = contexts;
-    resultData['contexts'] = l$contexts?.map((e) => e).toList();
+    _resultData['contexts'] = l$contexts?.map((e) => e).toList();
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2569,8 +2553,8 @@ class Query$Notifications$Page$notifications$$AiringNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$AiringNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$AiringNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2676,7 +2660,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$AiringNotification<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -2707,7 +2690,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$AiringNotification<
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -2724,9 +2706,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$AiringNotificati
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$AiringNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -2738,7 +2719,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$AiringNotificati
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -2786,26 +2766,24 @@ class Query$Notifications$Page$notifications$$FollowingNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2831,8 +2809,8 @@ class Query$Notifications$Page$notifications$$FollowingNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$FollowingNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$FollowingNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2921,7 +2899,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$FollowingNotificatio
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -2947,7 +2924,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$FollowingNotificatio
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -2964,9 +2940,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$FollowingNotific
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$FollowingNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -2977,7 +2952,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$FollowingNotific
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -3030,28 +3004,26 @@ class Query$Notifications$Page$notifications$$ActivityMessageNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3079,8 +3051,8 @@ class Query$Notifications$Page$notifications$$ActivityMessageNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ActivityMessageNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ActivityMessageNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3179,7 +3151,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMessageNotif
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -3209,7 +3180,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMessageNotif
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3226,9 +3196,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMessageN
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMessageNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -3240,7 +3209,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMessageN
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -3293,28 +3261,26 @@ class Query$Notifications$Page$notifications$$ActivityMentionNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3342,8 +3308,8 @@ class Query$Notifications$Page$notifications$$ActivityMentionNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ActivityMentionNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ActivityMentionNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3442,7 +3408,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMentionNotif
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -3472,7 +3437,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityMentionNotif
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3489,9 +3453,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMentionN
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMentionNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -3503,7 +3466,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityMentionN
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -3556,28 +3518,26 @@ class Query$Notifications$Page$notifications$$ActivityReplyNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3605,8 +3565,8 @@ class Query$Notifications$Page$notifications$$ActivityReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ActivityReplyNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ActivityReplyNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3703,7 +3663,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyNotific
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -3733,7 +3692,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyNotific
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3750,9 +3708,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyNot
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -3764,7 +3721,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyNot
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -3817,28 +3773,26 @@ class Query$Notifications$Page$notifications$$ActivityReplySubscribedNotificatio
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3866,8 +3820,8 @@ class Query$Notifications$Page$notifications$$ActivityReplySubscribedNotificatio
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3966,7 +3920,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplySubscri
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -3997,7 +3950,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplySubscri
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4014,9 +3966,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplySub
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplySubscribedNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -4028,7 +3979,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplySub
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4081,28 +4031,26 @@ class Query$Notifications$Page$notifications$$ActivityLikeNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4130,8 +4078,8 @@ class Query$Notifications$Page$notifications$$ActivityLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ActivityLikeNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ActivityLikeNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4228,7 +4176,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityLikeNotifica
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -4258,7 +4205,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityLikeNotifica
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4275,9 +4221,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityLikeNoti
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityLikeNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -4289,7 +4234,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityLikeNoti
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4342,28 +4286,26 @@ class Query$Notifications$Page$notifications$$ActivityReplyLikeNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4391,8 +4333,8 @@ class Query$Notifications$Page$notifications$$ActivityReplyLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ActivityReplyLikeNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ActivityReplyLikeNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4491,7 +4433,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyLikeNot
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -4522,7 +4463,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ActivityReplyLikeNot
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4539,9 +4479,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyLik
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyLikeNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -4553,7 +4492,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ActivityReplyLik
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4615,30 +4553,28 @@ class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$commentId = commentId;
-    resultData['commentId'] = l$commentId;
+    _resultData['commentId'] = l$commentId;
     final l$thread = thread;
-    resultData['thread'] = l$thread?.toJson();
+    _resultData['thread'] = l$thread?.toJson();
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4668,8 +4604,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentMentionNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentMentionNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4777,7 +4713,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -4813,7 +4748,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -4824,7 +4758,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
             local$thread, (e) => call(thread: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -4841,9 +4774,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMen
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -4857,14 +4789,12 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMen
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread
               .stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -4895,14 +4825,14 @@ class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$t
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$title = title;
-    resultData['title'] = l$title;
+    _resultData['title'] = l$title;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4922,8 +4852,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$t
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4997,7 +4927,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentMention
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -5021,9 +4950,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMen
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentMentionNotification$thread(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? title,
@@ -5089,30 +5017,28 @@ class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$commentId = commentId;
-    resultData['commentId'] = l$commentId;
+    _resultData['commentId'] = l$commentId;
     final l$thread = thread;
-    resultData['thread'] = l$thread?.toJson();
+    _resultData['thread'] = l$thread?.toJson();
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5142,8 +5068,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentReplyNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentReplyNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5251,7 +5177,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -5287,7 +5212,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -5298,7 +5222,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
             local$thread, (e) => call(thread: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -5315,9 +5238,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentRep
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -5331,14 +5253,12 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentRep
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread
               .stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -5369,14 +5289,14 @@ class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thr
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$title = title;
-    resultData['title'] = l$title;
+    _resultData['title'] = l$title;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5396,8 +5316,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thr
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5471,7 +5391,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNo
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -5495,9 +5414,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentRep
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentReplyNotification$thread(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? title,
@@ -5563,30 +5481,28 @@ class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotificatio
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$commentId = commentId;
-    resultData['commentId'] = l$commentId;
+    _resultData['commentId'] = l$commentId;
     final l$thread = thread;
-    resultData['thread'] = l$thread?.toJson();
+    _resultData['thread'] = l$thread?.toJson();
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5616,8 +5532,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotificatio
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5725,7 +5641,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -5761,7 +5676,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -5772,7 +5686,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
             local$thread, (e) => call(thread: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -5789,9 +5702,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSub
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -5805,14 +5717,12 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSub
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread
               .stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -5843,14 +5753,14 @@ class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotificatio
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$title = title;
-    resultData['title'] = l$title;
+    _resultData['title'] = l$title;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5870,8 +5780,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotificatio
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5945,7 +5855,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscri
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -5969,9 +5878,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSub
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentSubscribedNotification$thread(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? title,
@@ -6037,30 +5945,28 @@ class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$commentId = commentId;
-    resultData['commentId'] = l$commentId;
+    _resultData['commentId'] = l$commentId;
     final l$thread = thread;
-    resultData['thread'] = l$thread?.toJson();
+    _resultData['thread'] = l$thread?.toJson();
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -6090,8 +5996,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentLikeNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentLikeNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6199,7 +6105,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -6235,7 +6140,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -6246,7 +6150,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
             local$thread, (e) => call(thread: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -6263,9 +6166,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLik
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -6279,14 +6181,12 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLik
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread
               .stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6317,14 +6217,14 @@ class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thre
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$title = title;
-    resultData['title'] = l$title;
+    _resultData['title'] = l$title;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -6344,8 +6244,8 @@ class Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thre
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6419,7 +6319,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNot
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -6443,9 +6342,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLik
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadCommentLikeNotification$thread(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? title,
@@ -6506,28 +6404,26 @@ class Query$Notifications$Page$notifications$$ThreadLikeNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$thread = thread;
-    resultData['thread'] = l$thread?.toJson();
+    _resultData['thread'] = l$thread?.toJson();
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -6555,8 +6451,8 @@ class Query$Notifications$Page$notifications$$ThreadLikeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadLikeNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadLikeNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6656,7 +6552,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -6687,7 +6582,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread<
       TRes> get thread {
     final local$thread = _instance.thread;
@@ -6698,7 +6592,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
             local$thread, (e) => call(thread: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -6715,9 +6608,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotifi
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -6730,14 +6622,12 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotifi
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread<
           TRes>
       get thread =>
           CopyWith$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread
               .stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -6768,14 +6658,14 @@ class Query$Notifications$Page$notifications$$ThreadLikeNotification$thread {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$title = title;
-    resultData['title'] = l$title;
+    _resultData['title'] = l$title;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -6795,8 +6685,8 @@ class Query$Notifications$Page$notifications$$ThreadLikeNotification$thread {
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$ThreadLikeNotification$thread ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$ThreadLikeNotification$thread) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6870,7 +6760,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$ThreadLikeNotificati
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? title = _undefined,
@@ -6894,9 +6783,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotifi
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$ThreadLikeNotification$thread(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? title,
@@ -6948,26 +6836,24 @@ class Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -6993,8 +6879,8 @@ class Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7087,7 +6973,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$RelatedMediaAddition
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -7114,7 +6999,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$RelatedMediaAddition
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -7131,9 +7015,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$RelatedMediaAddi
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$RelatedMediaAdditionNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -7144,7 +7027,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$RelatedMediaAddi
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -7197,28 +7079,26 @@ class Query$Notifications$Page$notifications$$MediaDataChangeNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$reason = reason;
-    resultData['reason'] = l$reason;
+    _resultData['reason'] = l$reason;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -7246,8 +7126,8 @@ class Query$Notifications$Page$notifications$$MediaDataChangeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$MediaDataChangeNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$MediaDataChangeNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7346,7 +7226,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotif
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -7374,7 +7253,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotif
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -7391,9 +7269,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDataChangeN
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDataChangeNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -7405,7 +7282,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDataChangeN
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -7465,31 +7341,29 @@ class Query$Notifications$Page$notifications$$MediaMergeNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$deletedMediaTitles = deletedMediaTitles;
-    resultData['deletedMediaTitles'] =
+    _resultData['deletedMediaTitles'] =
         l$deletedMediaTitles?.map((e) => e).toList();
     final l$reason = reason;
-    resultData['reason'] = l$reason;
+    _resultData['reason'] = l$reason;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -7521,8 +7395,8 @@ class Query$Notifications$Page$notifications$$MediaMergeNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$MediaMergeNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$MediaMergeNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7636,7 +7510,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaMergeNotificati
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -7668,7 +7541,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaMergeNotificati
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -7685,9 +7557,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaMergeNotifi
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaMergeNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,
@@ -7700,7 +7571,6 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaMergeNotifi
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -7751,28 +7621,26 @@ class Query$Notifications$Page$notifications$$MediaDeletionNotification
 
   final int? createdAt;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$NotificationType(l$type);
     final l$context = context;
-    resultData['context'] = l$context;
+    _resultData['context'] = l$context;
     final l$deletedMediaTitle = deletedMediaTitle;
-    resultData['deletedMediaTitle'] = l$deletedMediaTitle;
+    _resultData['deletedMediaTitle'] = l$deletedMediaTitle;
     final l$reason = reason;
-    resultData['reason'] = l$reason;
+    _resultData['reason'] = l$reason;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -7800,8 +7668,8 @@ class Query$Notifications$Page$notifications$$MediaDeletionNotification
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Query$Notifications$Page$notifications$$MediaDeletionNotification ||
+    if (!(other
+            is Query$Notifications$Page$notifications$$MediaDeletionNotification) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7897,7 +7765,6 @@ class _CopyWithImpl$Query$Notifications$Page$notifications$$MediaDeletionNotific
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -7934,9 +7801,8 @@ class _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDeletionNot
   _CopyWithStubImpl$Query$Notifications$Page$notifications$$MediaDeletionNotification(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$NotificationType? type,

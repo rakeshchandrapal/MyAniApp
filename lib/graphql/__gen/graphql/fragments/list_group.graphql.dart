@@ -50,21 +50,21 @@ class Fragment$ListGroup {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$isCustomList = isCustomList;
-    resultData['isCustomList'] = l$isCustomList;
+    _resultData['isCustomList'] = l$isCustomList;
     final l$isSplitCompletedList = isSplitCompletedList;
-    resultData['isSplitCompletedList'] = l$isSplitCompletedList;
+    _resultData['isSplitCompletedList'] = l$isSplitCompletedList;
     final l$status = status;
-    resultData['status'] =
+    _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$entries = entries;
-    resultData['entries'] = l$entries?.map((e) => e?.toJson()).toList();
+    _resultData['entries'] = l$entries?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -90,7 +90,7 @@ class Fragment$ListGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$ListGroup || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$ListGroup) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$name = name;
@@ -167,7 +167,7 @@ abstract class CopyWith$Fragment$ListGroup<TRes> {
       Iterable<Fragment$MediaListEntry?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaListEntry<Fragment$MediaListEntry>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Fragment$ListGroup<TRes>
@@ -183,7 +183,6 @@ class _CopyWithImpl$Fragment$ListGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? isCustomList = _undefined,
@@ -211,15 +210,14 @@ class _CopyWithImpl$Fragment$ListGroup<TRes>
             : ($__typename as String),
       ));
 
-  @override
   TRes entries(
           Iterable<Fragment$MediaListEntry?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaListEntry<
                           Fragment$MediaListEntry>?>?)
-              fn) =>
+              _fn) =>
       call(
-          entries: fn(_instance.entries?.map((e) => e == null
+          entries: _fn(_instance.entries?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaListEntry(
                   e,
@@ -231,9 +229,8 @@ class _CopyWithStubImpl$Fragment$ListGroup<TRes>
     implements CopyWith$Fragment$ListGroup<TRes> {
   _CopyWithStubImpl$Fragment$ListGroup(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     bool? isCustomList,
@@ -244,8 +241,7 @@ class _CopyWithStubImpl$Fragment$ListGroup<TRes>
   }) =>
       _res;
 
-  @override
-  entries(fn) => _res;
+  entries(_fn) => _res;
 }
 
 const fragmentDefinitionListGroup = FragmentDefinitionNode(

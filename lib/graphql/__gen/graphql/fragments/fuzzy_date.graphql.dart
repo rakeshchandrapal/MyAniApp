@@ -30,16 +30,16 @@ class Fragment$FuzzyDate {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$day = day;
-    resultData['day'] = l$day;
+    _resultData['day'] = l$day;
     final l$month = month;
-    resultData['month'] = l$month;
+    _resultData['month'] = l$month;
     final l$year = year;
-    resultData['year'] = l$year;
+    _resultData['year'] = l$year;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -61,7 +61,7 @@ class Fragment$FuzzyDate {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$FuzzyDate || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$FuzzyDate) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$day = day;
@@ -126,7 +126,6 @@ class _CopyWithImpl$Fragment$FuzzyDate<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? day = _undefined,
     Object? month = _undefined,
@@ -147,9 +146,8 @@ class _CopyWithStubImpl$Fragment$FuzzyDate<TRes>
     implements CopyWith$Fragment$FuzzyDate<TRes> {
   _CopyWithStubImpl$Fragment$FuzzyDate(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? day,
     int? month,

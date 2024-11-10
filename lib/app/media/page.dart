@@ -120,25 +120,6 @@ class _MediaScreenState extends State<MediaScreen> {
                       FloatingActionButtonLocation.centerFloat,
                   body: NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      if (snapshot.parsedData?.Media?.nextAiringEpisode !=
-                          null)
-                        SliverToBoxAdapter(
-                          child: SafeArea(
-                            child: Container(
-                              color: Colors.blue[900],
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Episode ${snapshot.parsedData!.Media!.nextAiringEpisode!.episode} Airing ${RelativeTime(context).format(dateFromTimestamp(snapshot.parsedData!.Media!.nextAiringEpisode!.airingAt))}",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
                       MediaBar(
                         tab: tabs[tabController.index].$2,
                         data: snapshot.parsedData!.Media!,
@@ -279,15 +260,13 @@ class MediaBar extends ConsumerWidget {
       ),
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SafeArea(
-          child: BackButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll<Color?>(
-                context.theme.colorScheme.surface.withOpacity(.3),
-              ),
-              iconColor: WidgetStatePropertyAll(
-                context.theme.colorScheme.onSurface,
-              ),
+        child: BackButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color?>(
+              context.theme.colorScheme.surface.withOpacity(.3),
+            ),
+            iconColor: WidgetStatePropertyAll(
+              context.theme.colorScheme.onSurface,
             ),
           ),
         ),

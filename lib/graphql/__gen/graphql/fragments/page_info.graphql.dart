@@ -25,14 +25,14 @@ class Fragment$PageInfo {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$currentPage = currentPage;
-    resultData['currentPage'] = l$currentPage;
+    _resultData['currentPage'] = l$currentPage;
     final l$hasNextPage = hasNextPage;
-    resultData['hasNextPage'] = l$hasNextPage;
+    _resultData['hasNextPage'] = l$hasNextPage;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -52,7 +52,7 @@ class Fragment$PageInfo {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$PageInfo || runtimeType != other.runtimeType) {
+    if (!(other is Fragment$PageInfo) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$currentPage = currentPage;
@@ -111,7 +111,6 @@ class _CopyWithImpl$Fragment$PageInfo<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? currentPage = _undefined,
     Object? hasNextPage = _undefined,
@@ -134,9 +133,8 @@ class _CopyWithStubImpl$Fragment$PageInfo<TRes>
     implements CopyWith$Fragment$PageInfo<TRes> {
   _CopyWithStubImpl$Fragment$PageInfo(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? currentPage,
     bool? hasNextPage,

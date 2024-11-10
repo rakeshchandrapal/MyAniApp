@@ -57,7 +57,7 @@ class Variables$Query$CalendarSchedule {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$CalendarSchedule ||
+    if (!(other is Variables$Query$CalendarSchedule) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -119,7 +119,6 @@ class _CopyWithImpl$Variables$Query$CalendarSchedule<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? start = _undefined,
     Object? end = _undefined,
@@ -135,9 +134,8 @@ class _CopyWithStubImpl$Variables$Query$CalendarSchedule<TRes>
     implements CopyWith$Variables$Query$CalendarSchedule<TRes> {
   _CopyWithStubImpl$Variables$Query$CalendarSchedule(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? start,
     int? end,
@@ -168,12 +166,12 @@ class Query$CalendarSchedule {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -191,7 +189,7 @@ class Query$CalendarSchedule {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$CalendarSchedule ||
+    if (!(other is Query$CalendarSchedule) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -246,7 +244,6 @@ class _CopyWithImpl$Query$CalendarSchedule<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -260,7 +257,6 @@ class _CopyWithImpl$Query$CalendarSchedule<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$CalendarSchedule$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -274,16 +270,14 @@ class _CopyWithStubImpl$Query$CalendarSchedule<TRes>
     implements CopyWith$Query$CalendarSchedule<TRes> {
   _CopyWithStubImpl$Query$CalendarSchedule(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$CalendarSchedule$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$CalendarSchedule$Page<TRes> get Page =>
       CopyWith$Query$CalendarSchedule$Page.stub(_res);
 }
@@ -470,15 +464,15 @@ class Query$CalendarSchedule$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$airingSchedules = airingSchedules;
-    resultData['airingSchedules'] =
+    _resultData['airingSchedules'] =
         l$airingSchedules?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -500,7 +494,7 @@ class Query$CalendarSchedule$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$CalendarSchedule$Page ||
+    if (!(other is Query$CalendarSchedule$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -563,7 +557,7 @@ abstract class CopyWith$Query$CalendarSchedule$Page<TRes> {
               Iterable<
                   CopyWith$Query$CalendarSchedule$Page$airingSchedules<
                       Query$CalendarSchedule$Page$airingSchedules>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$CalendarSchedule$Page<TRes>
@@ -579,7 +573,6 @@ class _CopyWithImpl$Query$CalendarSchedule$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? airingSchedules = _undefined,
@@ -598,7 +591,6 @@ class _CopyWithImpl$Query$CalendarSchedule$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -606,15 +598,14 @@ class _CopyWithImpl$Query$CalendarSchedule$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes airingSchedules(
           Iterable<Query$CalendarSchedule$Page$airingSchedules?>? Function(
                   Iterable<
                       CopyWith$Query$CalendarSchedule$Page$airingSchedules<
                           Query$CalendarSchedule$Page$airingSchedules>?>?)
-              fn) =>
+              _fn) =>
       call(
-          airingSchedules: fn(_instance.airingSchedules?.map((e) => e == null
+          airingSchedules: _fn(_instance.airingSchedules?.map((e) => e == null
               ? null
               : CopyWith$Query$CalendarSchedule$Page$airingSchedules(
                   e,
@@ -626,9 +617,8 @@ class _CopyWithStubImpl$Query$CalendarSchedule$Page<TRes>
     implements CopyWith$Query$CalendarSchedule$Page<TRes> {
   _CopyWithStubImpl$Query$CalendarSchedule$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$CalendarSchedule$Page$airingSchedules?>? airingSchedules,
@@ -636,12 +626,10 @@ class _CopyWithStubImpl$Query$CalendarSchedule$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  airingSchedules(fn) => _res;
+  airingSchedules(_fn) => _res;
 }
 
 class Query$CalendarSchedule$Page$airingSchedules {
@@ -682,18 +670,18 @@ class Query$CalendarSchedule$Page$airingSchedules {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$episode = episode;
-    resultData['episode'] = l$episode;
+    _resultData['episode'] = l$episode;
     final l$airingAt = airingAt;
-    resultData['airingAt'] = l$airingAt;
+    _resultData['airingAt'] = l$airingAt;
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -717,7 +705,7 @@ class Query$CalendarSchedule$Page$airingSchedules {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$CalendarSchedule$Page$airingSchedules ||
+    if (!(other is Query$CalendarSchedule$Page$airingSchedules) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -792,7 +780,6 @@ class _CopyWithImpl$Query$CalendarSchedule$Page$airingSchedules<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? episode = _undefined,
@@ -816,7 +803,6 @@ class _CopyWithImpl$Query$CalendarSchedule$Page$airingSchedules<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -829,9 +815,8 @@ class _CopyWithStubImpl$Query$CalendarSchedule$Page$airingSchedules<TRes>
     implements CopyWith$Query$CalendarSchedule$Page$airingSchedules<TRes> {
   _CopyWithStubImpl$Query$CalendarSchedule$Page$airingSchedules(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? episode,
@@ -841,7 +826,6 @@ class _CopyWithStubImpl$Query$CalendarSchedule$Page$airingSchedules<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }

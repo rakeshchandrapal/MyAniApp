@@ -71,7 +71,7 @@ class Variables$Query$MediaThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$MediaThreads ||
+    if (!(other is Variables$Query$MediaThreads) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -144,7 +144,6 @@ class _CopyWithImpl$Variables$Query$MediaThreads<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? mediaId = _undefined,
     Object? page = _undefined,
@@ -162,9 +161,8 @@ class _CopyWithStubImpl$Variables$Query$MediaThreads<TRes>
     implements CopyWith$Variables$Query$MediaThreads<TRes> {
   _CopyWithStubImpl$Variables$Query$MediaThreads(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? mediaId,
     int? page,
@@ -195,12 +193,12 @@ class Query$MediaThreads {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -218,7 +216,7 @@ class Query$MediaThreads {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaThreads || runtimeType != other.runtimeType) {
+    if (!(other is Query$MediaThreads) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -272,7 +270,6 @@ class _CopyWithImpl$Query$MediaThreads<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -286,7 +283,6 @@ class _CopyWithImpl$Query$MediaThreads<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$MediaThreads$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -299,16 +295,14 @@ class _CopyWithStubImpl$Query$MediaThreads<TRes>
     implements CopyWith$Query$MediaThreads<TRes> {
   _CopyWithStubImpl$Query$MediaThreads(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$MediaThreads$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$MediaThreads$Page<TRes> get Page =>
       CopyWith$Query$MediaThreads$Page.stub(_res);
 }
@@ -465,14 +459,14 @@ class Query$MediaThreads$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$threads = threads;
-    resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
+    _resultData['threads'] = l$threads?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -492,7 +486,7 @@ class Query$MediaThreads$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaThreads$Page ||
+    if (!(other is Query$MediaThreads$Page) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -553,7 +547,7 @@ abstract class CopyWith$Query$MediaThreads$Page<TRes> {
       Iterable<Fragment$ThreadFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ThreadFragment<Fragment$ThreadFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$MediaThreads$Page<TRes>
@@ -569,7 +563,6 @@ class _CopyWithImpl$Query$MediaThreads$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? threads = _undefined,
@@ -587,7 +580,6 @@ class _CopyWithImpl$Query$MediaThreads$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -595,15 +587,14 @@ class _CopyWithImpl$Query$MediaThreads$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes threads(
           Iterable<Fragment$ThreadFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ThreadFragment<
                           Fragment$ThreadFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          threads: fn(_instance.threads?.map((e) => e == null
+          threads: _fn(_instance.threads?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ThreadFragment(
                   e,
@@ -615,9 +606,8 @@ class _CopyWithStubImpl$Query$MediaThreads$Page<TRes>
     implements CopyWith$Query$MediaThreads$Page<TRes> {
   _CopyWithStubImpl$Query$MediaThreads$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$ThreadFragment?>? threads,
@@ -625,10 +615,8 @@ class _CopyWithStubImpl$Query$MediaThreads$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  threads(fn) => _res;
+  threads(_fn) => _res;
 }

@@ -29,14 +29,14 @@ class Fragment$MediaListOptions {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$sectionOrder = sectionOrder;
-    resultData['sectionOrder'] = l$sectionOrder?.map((e) => e).toList();
+    _resultData['sectionOrder'] = l$sectionOrder?.map((e) => e).toList();
     final l$customLists = customLists;
-    resultData['customLists'] = l$customLists?.map((e) => e).toList();
+    _resultData['customLists'] = l$customLists?.map((e) => e).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -60,7 +60,7 @@ class Fragment$MediaListOptions {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$MediaListOptions ||
+    if (!(other is Fragment$MediaListOptions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143,7 +143,6 @@ class _CopyWithImpl$Fragment$MediaListOptions<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? sectionOrder = _undefined,
     Object? customLists = _undefined,
@@ -166,9 +165,8 @@ class _CopyWithStubImpl$Fragment$MediaListOptions<TRes>
     implements CopyWith$Fragment$MediaListOptions<TRes> {
   _CopyWithStubImpl$Fragment$MediaListOptions(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<String?>? sectionOrder,
     List<String?>? customLists,

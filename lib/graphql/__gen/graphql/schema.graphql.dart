@@ -65,7 +65,7 @@ class Input$AiringScheduleInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$AiringScheduleInput ||
+    if (!(other is Input$AiringScheduleInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -140,7 +140,6 @@ class _CopyWithImpl$Input$AiringScheduleInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? airingAt = _undefined,
     Object? episode = _undefined,
@@ -159,9 +158,8 @@ class _CopyWithStubImpl$Input$AiringScheduleInput<TRes>
     implements CopyWith$Input$AiringScheduleInput<TRes> {
   _CopyWithStubImpl$Input$AiringScheduleInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? airingAt,
     int? episode,
@@ -225,7 +223,7 @@ class Input$AniChartHighlightInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$AniChartHighlightInput ||
+    if (!(other is Input$AniChartHighlightInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -288,7 +286,6 @@ class _CopyWithImpl$Input$AniChartHighlightInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? mediaId = _undefined,
     Object? highlight = _undefined,
@@ -304,9 +301,8 @@ class _CopyWithStubImpl$Input$AniChartHighlightInput<TRes>
     implements CopyWith$Input$AniChartHighlightInput<TRes> {
   _CopyWithStubImpl$Input$AniChartHighlightInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? mediaId,
     String? highlight,
@@ -425,7 +421,7 @@ class Input$CharacterNameInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$CharacterNameInput ||
+    if (!(other is Input$CharacterNameInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -563,7 +559,6 @@ class _CopyWithImpl$Input$CharacterNameInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? first = _undefined,
     Object? middle = _undefined,
@@ -589,9 +584,8 @@ class _CopyWithStubImpl$Input$CharacterNameInput<TRes>
     implements CopyWith$Input$CharacterNameInput<TRes> {
   _CopyWithStubImpl$Input$CharacterNameInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? first,
     String? middle,
@@ -670,7 +664,7 @@ class Input$FuzzyDateInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$FuzzyDateInput || runtimeType != other.runtimeType) {
+    if (!(other is Input$FuzzyDateInput) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$year = year;
@@ -742,7 +736,6 @@ class _CopyWithImpl$Input$FuzzyDateInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? year = _undefined,
     Object? month = _undefined,
@@ -760,9 +753,8 @@ class _CopyWithStubImpl$Input$FuzzyDateInput<TRes>
     implements CopyWith$Input$FuzzyDateInput<TRes> {
   _CopyWithStubImpl$Input$FuzzyDateInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? year,
     int? month,
@@ -829,7 +821,7 @@ class Input$ListActivityOptionInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$ListActivityOptionInput ||
+    if (!(other is Input$ListActivityOptionInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -892,7 +884,6 @@ class _CopyWithImpl$Input$ListActivityOptionInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? disabled = _undefined,
     Object? type = _undefined,
@@ -908,9 +899,8 @@ class _CopyWithStubImpl$Input$ListActivityOptionInput<TRes>
     implements CopyWith$Input$ListActivityOptionInput<TRes> {
   _CopyWithStubImpl$Input$ListActivityOptionInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? disabled,
     Enum$MediaListStatus? type,
@@ -973,7 +963,7 @@ class Input$MediaExternalLinkInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$MediaExternalLinkInput ||
+    if (!(other is Input$MediaExternalLinkInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1037,7 +1027,6 @@ class _CopyWithImpl$Input$MediaExternalLinkInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? url = _undefined,
@@ -1055,9 +1044,8 @@ class _CopyWithStubImpl$Input$MediaExternalLinkInput<TRes>
     implements CopyWith$Input$MediaExternalLinkInput<TRes> {
   _CopyWithStubImpl$Input$MediaExternalLinkInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? url,
@@ -1185,7 +1173,7 @@ class Input$MediaListOptionsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$MediaListOptionsInput ||
+    if (!(other is Input$MediaListOptionsInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1347,7 +1335,6 @@ class _CopyWithImpl$Input$MediaListOptionsInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? sectionOrder = _undefined,
     Object? splitCompletedSectionByFormat = _undefined,
@@ -1377,9 +1364,8 @@ class _CopyWithStubImpl$Input$MediaListOptionsInput<TRes>
     implements CopyWith$Input$MediaListOptionsInput<TRes> {
   _CopyWithStubImpl$Input$MediaListOptionsInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<String?>? sectionOrder,
     bool? splitCompletedSectionByFormat,
@@ -1458,7 +1444,7 @@ class Input$MediaTitleInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$MediaTitleInput || runtimeType != other.runtimeType) {
+    if (!(other is Input$MediaTitleInput) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$romaji = romaji;
@@ -1530,7 +1516,6 @@ class _CopyWithImpl$Input$MediaTitleInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? romaji = _undefined,
     Object? english = _undefined,
@@ -1548,9 +1533,8 @@ class _CopyWithStubImpl$Input$MediaTitleInput<TRes>
     implements CopyWith$Input$MediaTitleInput<TRes> {
   _CopyWithStubImpl$Input$MediaTitleInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? romaji,
     String? english,
@@ -1617,7 +1601,7 @@ class Input$NotificationOptionInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$NotificationOptionInput ||
+    if (!(other is Input$NotificationOptionInput) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1679,7 +1663,6 @@ class _CopyWithImpl$Input$NotificationOptionInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? type = _undefined,
     Object? enabled = _undefined,
@@ -1695,9 +1678,8 @@ class _CopyWithStubImpl$Input$NotificationOptionInput<TRes>
     implements CopyWith$Input$NotificationOptionInput<TRes> {
   _CopyWithStubImpl$Input$NotificationOptionInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Enum$NotificationType? type,
     bool? enabled,
@@ -1798,7 +1780,7 @@ class Input$StaffNameInput {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input$StaffNameInput || runtimeType != other.runtimeType) {
+    if (!(other is Input$StaffNameInput) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$first = first;
@@ -1908,7 +1890,6 @@ class _CopyWithImpl$Input$StaffNameInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? first = _undefined,
     Object? middle = _undefined,
@@ -1931,9 +1912,8 @@ class _CopyWithStubImpl$Input$StaffNameInput<TRes>
     implements CopyWith$Input$StaffNameInput<TRes> {
   _CopyWithStubImpl$Input$StaffNameInput(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? first,
     String? middle,

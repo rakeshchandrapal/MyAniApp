@@ -33,14 +33,14 @@ class Query$GenreCollection {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$genres = genres;
-    resultData['genres'] = l$genres?.map((e) => e).toList();
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$tags = tags;
-    resultData['tags'] = l$tags?.map((e) => e?.toJson()).toList();
+    _resultData['tags'] = l$tags?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -60,7 +60,7 @@ class Query$GenreCollection {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GenreCollection || runtimeType != other.runtimeType) {
+    if (!(other is Query$GenreCollection) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$genres = genres;
@@ -131,7 +131,7 @@ abstract class CopyWith$Query$GenreCollection<TRes> {
               Iterable<
                   CopyWith$Query$GenreCollection$tags<
                       Query$GenreCollection$tags>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$GenreCollection<TRes>
@@ -147,7 +147,6 @@ class _CopyWithImpl$Query$GenreCollection<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? genres = _undefined,
     Object? tags = _undefined,
@@ -165,15 +164,14 @@ class _CopyWithImpl$Query$GenreCollection<TRes>
             : ($__typename as String),
       ));
 
-  @override
   TRes tags(
           Iterable<Query$GenreCollection$tags?>? Function(
                   Iterable<
                       CopyWith$Query$GenreCollection$tags<
                           Query$GenreCollection$tags>?>?)
-              fn) =>
+              _fn) =>
       call(
-          tags: fn(_instance.tags?.map((e) => e == null
+          tags: _fn(_instance.tags?.map((e) => e == null
               ? null
               : CopyWith$Query$GenreCollection$tags(
                   e,
@@ -185,9 +183,8 @@ class _CopyWithStubImpl$Query$GenreCollection<TRes>
     implements CopyWith$Query$GenreCollection<TRes> {
   _CopyWithStubImpl$Query$GenreCollection(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<String?>? genres,
     List<Query$GenreCollection$tags?>? tags,
@@ -195,8 +192,7 @@ class _CopyWithStubImpl$Query$GenreCollection<TRes>
   }) =>
       _res;
 
-  @override
-  tags(fn) => _res;
+  tags(_fn) => _res;
 }
 
 const documentNodeQueryGenreCollection = DocumentNode(definitions: [
@@ -302,18 +298,18 @@ class Query$GenreCollection$tags {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$description = description;
-    resultData['description'] = l$description;
+    _resultData['description'] = l$description;
     final l$category = category;
-    resultData['category'] = l$category;
+    _resultData['category'] = l$category;
     final l$isAdult = isAdult;
-    resultData['isAdult'] = l$isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -337,7 +333,7 @@ class Query$GenreCollection$tags {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$GenreCollection$tags ||
+    if (!(other is Query$GenreCollection$tags) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -410,7 +406,6 @@ class _CopyWithImpl$Query$GenreCollection$tags<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? description = _undefined,
@@ -438,9 +433,8 @@ class _CopyWithStubImpl$Query$GenreCollection$tags<TRes>
     implements CopyWith$Query$GenreCollection$tags<TRes> {
   _CopyWithStubImpl$Query$GenreCollection$tags(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     String? description,
@@ -554,13 +548,13 @@ class Variables$Query$Search {
           (l$genres as List<dynamic>?)?.map((e) => (e as String?)).toList();
     }
     if (data.containsKey('with_tags')) {
-      final l$withTags = data['with_tags'];
+      final l$with_tags = data['with_tags'];
       result$data['with_tags'] =
-          (l$withTags as List<dynamic>?)?.map((e) => (e as String?)).toList();
+          (l$with_tags as List<dynamic>?)?.map((e) => (e as String?)).toList();
     }
     if (data.containsKey('without_tags')) {
-      final l$withoutTags = data['without_tags'];
-      result$data['without_tags'] = (l$withoutTags as List<dynamic>?)
+      final l$without_tags = data['without_tags'];
+      result$data['without_tags'] = (l$without_tags as List<dynamic>?)
           ?.map((e) => (e as String?))
           .toList();
     }
@@ -673,12 +667,12 @@ class Variables$Query$Search {
       result$data['genres'] = l$genres?.map((e) => e).toList();
     }
     if (_$data.containsKey('with_tags')) {
-      final l$withTags = with_tags;
-      result$data['with_tags'] = l$withTags?.map((e) => e).toList();
+      final l$with_tags = with_tags;
+      result$data['with_tags'] = l$with_tags?.map((e) => e).toList();
     }
     if (_$data.containsKey('without_tags')) {
-      final l$withoutTags = without_tags;
-      result$data['without_tags'] = l$withoutTags?.map((e) => e).toList();
+      final l$without_tags = without_tags;
+      result$data['without_tags'] = l$without_tags?.map((e) => e).toList();
     }
     if (_$data.containsKey('isAdult')) {
       final l$isAdult = isAdult;
@@ -706,7 +700,7 @@ class Variables$Query$Search {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Search ||
+    if (!(other is Variables$Query$Search) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -842,44 +836,44 @@ class Variables$Query$Search {
     } else if (l$genres != lOther$genres) {
       return false;
     }
-    final l$withTags = with_tags;
-    final lother$withTags = other.with_tags;
+    final l$with_tags = with_tags;
+    final lOther$with_tags = other.with_tags;
     if (_$data.containsKey('with_tags') !=
         other._$data.containsKey('with_tags')) {
       return false;
     }
-    if (l$withTags != null && lother$withTags != null) {
-      if (l$withTags.length != lother$withTags.length) {
+    if (l$with_tags != null && lOther$with_tags != null) {
+      if (l$with_tags.length != lOther$with_tags.length) {
         return false;
       }
-      for (int i = 0; i < l$withTags.length; i++) {
-        final l$withTags$entry = l$withTags[i];
-        final lother$withTags$entry = lother$withTags[i];
-        if (l$withTags$entry != lother$withTags$entry) {
+      for (int i = 0; i < l$with_tags.length; i++) {
+        final l$with_tags$entry = l$with_tags[i];
+        final lOther$with_tags$entry = lOther$with_tags[i];
+        if (l$with_tags$entry != lOther$with_tags$entry) {
           return false;
         }
       }
-    } else if (l$withTags != lother$withTags) {
+    } else if (l$with_tags != lOther$with_tags) {
       return false;
     }
-    final l$withoutTags = without_tags;
-    final lother$withoutTags = other.without_tags;
+    final l$without_tags = without_tags;
+    final lOther$without_tags = other.without_tags;
     if (_$data.containsKey('without_tags') !=
         other._$data.containsKey('without_tags')) {
       return false;
     }
-    if (l$withoutTags != null && lother$withoutTags != null) {
-      if (l$withoutTags.length != lother$withoutTags.length) {
+    if (l$without_tags != null && lOther$without_tags != null) {
+      if (l$without_tags.length != lOther$without_tags.length) {
         return false;
       }
-      for (int i = 0; i < l$withoutTags.length; i++) {
-        final l$withoutTags$entry = l$withoutTags[i];
-        final lother$withoutTags$entry = lother$withoutTags[i];
-        if (l$withoutTags$entry != lother$withoutTags$entry) {
+      for (int i = 0; i < l$without_tags.length; i++) {
+        final l$without_tags$entry = l$without_tags[i];
+        final lOther$without_tags$entry = lOther$without_tags[i];
+        if (l$without_tags$entry != lOther$without_tags$entry) {
           return false;
         }
       }
-    } else if (l$withoutTags != lother$withoutTags) {
+    } else if (l$without_tags != lOther$without_tags) {
       return false;
     }
     final l$isAdult = isAdult;
@@ -924,8 +918,8 @@ class Variables$Query$Search {
     final l$yearGreater = yearGreater;
     final l$yearLesser = yearLesser;
     final l$genres = genres;
-    final l$withTags = with_tags;
-    final l$withoutTags = without_tags;
+    final l$with_tags = with_tags;
+    final l$without_tags = without_tags;
     final l$isAdult = isAdult;
     final l$onList = onList;
     final l$countryOfOrigin = countryOfOrigin;
@@ -955,14 +949,14 @@ class Variables$Query$Search {
               : Object.hashAll(l$genres.map((v) => v))
           : const {},
       _$data.containsKey('with_tags')
-          ? l$withTags == null
+          ? l$with_tags == null
               ? null
-              : Object.hashAll(l$withTags.map((v) => v))
+              : Object.hashAll(l$with_tags.map((v) => v))
           : const {},
       _$data.containsKey('without_tags')
-          ? l$withoutTags == null
+          ? l$without_tags == null
               ? null
-              : Object.hashAll(l$withoutTags.map((v) => v))
+              : Object.hashAll(l$without_tags.map((v) => v))
           : const {},
       _$data.containsKey('isAdult') ? l$isAdult : const {},
       _$data.containsKey('onList') ? l$onList : const {},
@@ -1014,7 +1008,6 @@ class _CopyWithImpl$Variables$Query$Search<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? page = _undefined,
     Object? perPage = _undefined,
@@ -1063,9 +1056,8 @@ class _CopyWithStubImpl$Variables$Query$Search<TRes>
     implements CopyWith$Variables$Query$Search<TRes> {
   _CopyWithStubImpl$Variables$Query$Search(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? page,
     int? perPage,
@@ -1110,12 +1102,12 @@ class Query$Search {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1133,7 +1125,7 @@ class Query$Search {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Search || runtimeType != other.runtimeType) {
+    if (!(other is Query$Search) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -1184,7 +1176,6 @@ class _CopyWithImpl$Query$Search<TRes> implements CopyWith$Query$Search<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -1197,7 +1188,6 @@ class _CopyWithImpl$Query$Search<TRes> implements CopyWith$Query$Search<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Search$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -1210,16 +1200,14 @@ class _CopyWithStubImpl$Query$Search<TRes>
     implements CopyWith$Query$Search<TRes> {
   _CopyWithStubImpl$Query$Search(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Search$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Search$Page<TRes> get Page =>
       CopyWith$Query$Search$Page.stub(_res);
 }
@@ -1571,14 +1559,14 @@ class Query$Search$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$media = media;
-    resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
+    _resultData['media'] = l$media?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1598,7 +1586,7 @@ class Query$Search$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Search$Page || runtimeType != other.runtimeType) {
+    if (!(other is Query$Search$Page) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -1658,7 +1646,7 @@ abstract class CopyWith$Query$Search$Page<TRes> {
       Iterable<Fragment$MediaFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$MediaFragment<Fragment$MediaFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Search$Page<TRes>
@@ -1674,7 +1662,6 @@ class _CopyWithImpl$Query$Search$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? media = _undefined,
@@ -1692,7 +1679,6 @@ class _CopyWithImpl$Query$Search$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -1700,15 +1686,14 @@ class _CopyWithImpl$Query$Search$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes media(
           Iterable<Fragment$MediaFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$MediaFragment<
                           Fragment$MediaFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          media: fn(_instance.media?.map((e) => e == null
+          media: _fn(_instance.media?.map((e) => e == null
               ? null
               : CopyWith$Fragment$MediaFragment(
                   e,
@@ -1720,9 +1705,8 @@ class _CopyWithStubImpl$Query$Search$Page<TRes>
     implements CopyWith$Query$Search$Page<TRes> {
   _CopyWithStubImpl$Query$Search$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$MediaFragment?>? media,
@@ -1730,10 +1714,8 @@ class _CopyWithStubImpl$Query$Search$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  media(fn) => _res;
+  media(_fn) => _res;
 }

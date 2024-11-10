@@ -58,7 +58,7 @@ class Variables$Query$Reviews {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Reviews ||
+    if (!(other is Variables$Query$Reviews) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -120,7 +120,6 @@ class _CopyWithImpl$Variables$Query$Reviews<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? page = _undefined,
     Object? perPage = _undefined,
@@ -136,9 +135,8 @@ class _CopyWithStubImpl$Variables$Query$Reviews<TRes>
     implements CopyWith$Variables$Query$Reviews<TRes> {
   _CopyWithStubImpl$Variables$Query$Reviews(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? page,
     int? perPage,
@@ -168,12 +166,12 @@ class Query$Reviews {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$Page = Page;
-    resultData['Page'] = l$Page?.toJson();
+    _resultData['Page'] = l$Page?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -191,7 +189,7 @@ class Query$Reviews {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Reviews || runtimeType != other.runtimeType) {
+    if (!(other is Query$Reviews) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Page = Page;
@@ -244,7 +242,6 @@ class _CopyWithImpl$Query$Reviews<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? Page = _undefined,
     Object? $__typename = _undefined,
@@ -257,7 +254,6 @@ class _CopyWithImpl$Query$Reviews<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Reviews$Page<TRes> get Page {
     final local$Page = _instance.Page;
     return local$Page == null
@@ -270,16 +266,14 @@ class _CopyWithStubImpl$Query$Reviews<TRes>
     implements CopyWith$Query$Reviews<TRes> {
   _CopyWithStubImpl$Query$Reviews(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Reviews$Page? Page,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Reviews$Page<TRes> get Page =>
       CopyWith$Query$Reviews$Page.stub(_res);
 }
@@ -422,14 +416,14 @@ class Query$Reviews$Page {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$reviews = reviews;
-    resultData['reviews'] = l$reviews?.map((e) => e?.toJson()).toList();
+    _resultData['reviews'] = l$reviews?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -449,7 +443,7 @@ class Query$Reviews$Page {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Reviews$Page || runtimeType != other.runtimeType) {
+    if (!(other is Query$Reviews$Page) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$pageInfo = pageInfo;
@@ -509,7 +503,7 @@ abstract class CopyWith$Query$Reviews$Page<TRes> {
       Iterable<Fragment$ReviewFragment?>? Function(
               Iterable<
                   CopyWith$Fragment$ReviewFragment<Fragment$ReviewFragment>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Reviews$Page<TRes>
@@ -525,7 +519,6 @@ class _CopyWithImpl$Query$Reviews$Page<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? reviews = _undefined,
@@ -543,7 +536,6 @@ class _CopyWithImpl$Query$Reviews$Page<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -551,15 +543,14 @@ class _CopyWithImpl$Query$Reviews$Page<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes reviews(
           Iterable<Fragment$ReviewFragment?>? Function(
                   Iterable<
                       CopyWith$Fragment$ReviewFragment<
                           Fragment$ReviewFragment>?>?)
-              fn) =>
+              _fn) =>
       call(
-          reviews: fn(_instance.reviews?.map((e) => e == null
+          reviews: _fn(_instance.reviews?.map((e) => e == null
               ? null
               : CopyWith$Fragment$ReviewFragment(
                   e,
@@ -571,9 +562,8 @@ class _CopyWithStubImpl$Query$Reviews$Page<TRes>
     implements CopyWith$Query$Reviews$Page<TRes> {
   _CopyWithStubImpl$Query$Reviews$Page(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Fragment$ReviewFragment?>? reviews,
@@ -581,10 +571,8 @@ class _CopyWithStubImpl$Query$Reviews$Page<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  reviews(fn) => _res;
+  reviews(_fn) => _res;
 }

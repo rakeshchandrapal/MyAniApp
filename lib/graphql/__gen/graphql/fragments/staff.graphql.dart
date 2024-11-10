@@ -36,16 +36,16 @@ class Fragment$StaffFragment {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name?.toJson();
+    _resultData['name'] = l$name?.toJson();
     final l$image = image;
-    resultData['image'] = l$image?.toJson();
+    _resultData['image'] = l$image?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -67,7 +67,7 @@ class Fragment$StaffFragment {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$StaffFragment ||
+    if (!(other is Fragment$StaffFragment) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -135,7 +135,6 @@ class _CopyWithImpl$Fragment$StaffFragment<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -155,7 +154,6 @@ class _CopyWithImpl$Fragment$StaffFragment<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$StaffFragment$name<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -164,7 +162,6 @@ class _CopyWithImpl$Fragment$StaffFragment<TRes>
             local$name, (e) => call(name: e));
   }
 
-  @override
   CopyWith$Fragment$StaffFragment$image<TRes> get image {
     final local$image = _instance.image;
     return local$image == null
@@ -178,9 +175,8 @@ class _CopyWithStubImpl$Fragment$StaffFragment<TRes>
     implements CopyWith$Fragment$StaffFragment<TRes> {
   _CopyWithStubImpl$Fragment$StaffFragment(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Fragment$StaffFragment$name? name,
@@ -189,11 +185,9 @@ class _CopyWithStubImpl$Fragment$StaffFragment<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$StaffFragment$name<TRes> get name =>
       CopyWith$Fragment$StaffFragment$name.stub(_res);
 
-  @override
   CopyWith$Fragment$StaffFragment$image<TRes> get image =>
       CopyWith$Fragment$StaffFragment$image.stub(_res);
 }
@@ -291,12 +285,12 @@ class Fragment$StaffFragment$name {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    resultData['userPreferred'] = l$userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -314,7 +308,7 @@ class Fragment$StaffFragment$name {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$StaffFragment$name ||
+    if (!(other is Fragment$StaffFragment$name) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -369,7 +363,6 @@ class _CopyWithImpl$Fragment$StaffFragment$name<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -388,9 +381,8 @@ class _CopyWithStubImpl$Fragment$StaffFragment$name<TRes>
     implements CopyWith$Fragment$StaffFragment$name<TRes> {
   _CopyWithStubImpl$Fragment$StaffFragment$name(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -418,12 +410,12 @@ class Fragment$StaffFragment$image {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$large = large;
-    resultData['large'] = l$large;
+    _resultData['large'] = l$large;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -441,7 +433,7 @@ class Fragment$StaffFragment$image {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment$StaffFragment$image ||
+    if (!(other is Fragment$StaffFragment$image) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -496,7 +488,6 @@ class _CopyWithImpl$Fragment$StaffFragment$image<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? large = _undefined,
     Object? $__typename = _undefined,
@@ -513,9 +504,8 @@ class _CopyWithStubImpl$Fragment$StaffFragment$image<TRes>
     implements CopyWith$Fragment$StaffFragment$image<TRes> {
   _CopyWithStubImpl$Fragment$StaffFragment$image(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? large,
     String? $__typename,

@@ -62,7 +62,7 @@ class Variables$Query$Activity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Activity ||
+    if (!(other is Variables$Query$Activity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -124,7 +124,6 @@ class _CopyWithImpl$Variables$Query$Activity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? page = _undefined,
@@ -140,9 +139,8 @@ class _CopyWithStubImpl$Variables$Query$Activity<TRes>
     implements CopyWith$Variables$Query$Activity<TRes> {
   _CopyWithStubImpl$Variables$Query$Activity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? page,
@@ -181,14 +179,14 @@ class Query$Activity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$activity = activity;
-    resultData['activity'] = l$activity?.toJson();
+    _resultData['activity'] = l$activity?.toJson();
     final l$replies = replies;
-    resultData['replies'] = l$replies?.toJson();
+    _resultData['replies'] = l$replies?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -208,7 +206,7 @@ class Query$Activity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity || runtimeType != other.runtimeType) {
+    if (!(other is Query$Activity) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$activity = activity;
@@ -269,7 +267,6 @@ class _CopyWithImpl$Query$Activity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? activity = _undefined,
     Object? replies = _undefined,
@@ -287,7 +284,6 @@ class _CopyWithImpl$Query$Activity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Activity$activity<TRes> get activity {
     final local$activity = _instance.activity;
     return local$activity == null
@@ -296,7 +292,6 @@ class _CopyWithImpl$Query$Activity<TRes>
             local$activity, (e) => call(activity: e));
   }
 
-  @override
   CopyWith$Query$Activity$replies<TRes> get replies {
     final local$replies = _instance.replies;
     return local$replies == null
@@ -310,9 +305,8 @@ class _CopyWithStubImpl$Query$Activity<TRes>
     implements CopyWith$Query$Activity<TRes> {
   _CopyWithStubImpl$Query$Activity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Activity$activity? activity,
     Query$Activity$replies? replies,
@@ -320,11 +314,9 @@ class _CopyWithStubImpl$Query$Activity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Activity$activity<TRes> get activity =>
       CopyWith$Query$Activity$activity.stub(_res);
 
-  @override
   CopyWith$Query$Activity$replies<TRes> get replies =>
       CopyWith$Query$Activity$replies.stub(_res);
 }
@@ -605,10 +597,10 @@ class Query$Activity$activity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -622,7 +614,7 @@ class Query$Activity$activity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity$activity ||
+    if (!(other is Query$Activity$activity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -724,7 +716,6 @@ class _CopyWithImpl$Query$Activity$activity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? $__typename = _undefined}) =>
       _then(Query$Activity$activity(
           $__typename: $__typename == _undefined || $__typename == null
@@ -736,9 +727,8 @@ class _CopyWithStubImpl$Query$Activity$activity<TRes>
     implements CopyWith$Query$Activity$activity<TRes> {
   _CopyWithStubImpl$Query$Activity$activity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? $__typename}) => _res;
 }
 
@@ -793,71 +783,58 @@ class Query$Activity$activity$$TextActivity
     );
   }
 
-  @override
   final int id;
 
-  @override
   final int? userId;
 
-  @override
   final Enum$ActivityType? type;
 
-  @override
   final int replyCount;
 
-  @override
   final String? text;
 
-  @override
   final bool? isLocked;
 
-  @override
   final bool? isSubscribed;
 
-  @override
   final bool? isLiked;
 
-  @override
   final int likeCount;
 
-  @override
   final int createdAt;
 
-  @override
   final Fragment$UserFragment? user;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$text = text;
-    resultData['text'] = l$text;
+    _resultData['text'] = l$text;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -895,7 +872,7 @@ class Query$Activity$activity$$TextActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity$activity$$TextActivity ||
+    if (!(other is Query$Activity$activity$$TextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1012,7 +989,6 @@ class _CopyWithImpl$Query$Activity$activity$$TextActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -1056,7 +1032,6 @@ class _CopyWithImpl$Query$Activity$activity$$TextActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1069,9 +1044,8 @@ class _CopyWithStubImpl$Query$Activity$activity$$TextActivity<TRes>
     implements CopyWith$Query$Activity$activity$$TextActivity<TRes> {
   _CopyWithStubImpl$Query$Activity$activity$$TextActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? userId,
@@ -1088,7 +1062,6 @@ class _CopyWithStubImpl$Query$Activity$activity$$TextActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1152,81 +1125,66 @@ class Query$Activity$activity$$ListActivity
     );
   }
 
-  @override
   final int id;
 
-  @override
   final int? userId;
 
-  @override
   final Enum$ActivityType? type;
 
-  @override
   final String? status;
 
-  @override
   final String? progress;
 
-  @override
   final int replyCount;
 
-  @override
   final bool? isLocked;
 
-  @override
   final bool? isSubscribed;
 
-  @override
   final bool? isLiked;
 
-  @override
   final int likeCount;
 
-  @override
   final int createdAt;
 
-  @override
   final Fragment$UserFragment? user;
 
-  @override
   final Fragment$MediaFragment? media;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$status = status;
-    resultData['status'] = l$status;
+    _resultData['status'] = l$status;
     final l$progress = progress;
-    resultData['progress'] = l$progress;
+    _resultData['progress'] = l$progress;
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1268,7 +1226,7 @@ class Query$Activity$activity$$ListActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity$activity$$ListActivity ||
+    if (!(other is Query$Activity$activity$$ListActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1398,7 +1356,6 @@ class _CopyWithImpl$Query$Activity$activity$$ListActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -1449,7 +1406,6 @@ class _CopyWithImpl$Query$Activity$activity$$ListActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1457,7 +1413,6 @@ class _CopyWithImpl$Query$Activity$activity$$ListActivity<TRes>
         : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
   }
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -1470,9 +1425,8 @@ class _CopyWithStubImpl$Query$Activity$activity$$ListActivity<TRes>
     implements CopyWith$Query$Activity$activity$$ListActivity<TRes> {
   _CopyWithStubImpl$Query$Activity$activity$$ListActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? userId,
@@ -1491,11 +1445,9 @@ class _CopyWithStubImpl$Query$Activity$activity$$ListActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 
-  @override
   CopyWith$Fragment$MediaFragment<TRes> get media =>
       CopyWith$Fragment$MediaFragment.stub(_res);
 }
@@ -1561,81 +1513,66 @@ class Query$Activity$activity$$MessageActivity
     );
   }
 
-  @override
   final int id;
 
-  @override
   final Enum$ActivityType? type;
 
-  @override
   final String? message;
 
-  @override
   final int replyCount;
 
-  @override
   final bool? isPrivate;
 
-  @override
   final bool? isLocked;
 
-  @override
   final bool? isSubscribed;
 
-  @override
   final bool? isLiked;
 
-  @override
   final int likeCount;
 
-  @override
   final int createdAt;
 
-  @override
   final int? userId;
 
-  @override
   final Fragment$UserFragment? messenger;
 
-  @override
   final Fragment$UserFragment? recipient;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] =
+    _resultData['type'] =
         l$type == null ? null : toJson$Enum$ActivityType(l$type);
     final l$message = message;
-    resultData['message'] = l$message;
+    _resultData['message'] = l$message;
     final l$replyCount = replyCount;
-    resultData['replyCount'] = l$replyCount;
+    _resultData['replyCount'] = l$replyCount;
     final l$isPrivate = isPrivate;
-    resultData['isPrivate'] = l$isPrivate;
+    _resultData['isPrivate'] = l$isPrivate;
     final l$isLocked = isLocked;
-    resultData['isLocked'] = l$isLocked;
+    _resultData['isLocked'] = l$isLocked;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$messenger = messenger;
-    resultData['messenger'] = l$messenger?.toJson();
+    _resultData['messenger'] = l$messenger?.toJson();
     final l$recipient = recipient;
-    resultData['recipient'] = l$recipient?.toJson();
+    _resultData['recipient'] = l$recipient?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1677,7 +1614,7 @@ class Query$Activity$activity$$MessageActivity
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity$activity$$MessageActivity ||
+    if (!(other is Query$Activity$activity$$MessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1807,7 +1744,6 @@ class _CopyWithImpl$Query$Activity$activity$$MessageActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -1860,7 +1796,6 @@ class _CopyWithImpl$Query$Activity$activity$$MessageActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get messenger {
     final local$messenger = _instance.messenger;
     return local$messenger == null
@@ -1869,7 +1804,6 @@ class _CopyWithImpl$Query$Activity$activity$$MessageActivity<TRes>
             local$messenger, (e) => call(messenger: e));
   }
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get recipient {
     final local$recipient = _instance.recipient;
     return local$recipient == null
@@ -1883,9 +1817,8 @@ class _CopyWithStubImpl$Query$Activity$activity$$MessageActivity<TRes>
     implements CopyWith$Query$Activity$activity$$MessageActivity<TRes> {
   _CopyWithStubImpl$Query$Activity$activity$$MessageActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$ActivityType? type,
@@ -1904,11 +1837,9 @@ class _CopyWithStubImpl$Query$Activity$activity$$MessageActivity<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get messenger =>
       CopyWith$Fragment$UserFragment.stub(_res);
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get recipient =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -1945,15 +1876,15 @@ class Query$Activity$replies {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$pageInfo = pageInfo;
-    resultData['pageInfo'] = l$pageInfo?.toJson();
+    _resultData['pageInfo'] = l$pageInfo?.toJson();
     final l$activityReplies = activityReplies;
-    resultData['activityReplies'] =
+    _resultData['activityReplies'] =
         l$activityReplies?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1975,7 +1906,7 @@ class Query$Activity$replies {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity$replies ||
+    if (!(other is Query$Activity$replies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2037,7 +1968,7 @@ abstract class CopyWith$Query$Activity$replies<TRes> {
               Iterable<
                   CopyWith$Query$Activity$replies$activityReplies<
                       Query$Activity$replies$activityReplies>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Activity$replies<TRes>
@@ -2053,7 +1984,6 @@ class _CopyWithImpl$Query$Activity$replies<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? pageInfo = _undefined,
     Object? activityReplies = _undefined,
@@ -2072,7 +2002,6 @@ class _CopyWithImpl$Query$Activity$replies<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo {
     final local$pageInfo = _instance.pageInfo;
     return local$pageInfo == null
@@ -2080,15 +2009,14 @@ class _CopyWithImpl$Query$Activity$replies<TRes>
         : CopyWith$Fragment$PageInfo(local$pageInfo, (e) => call(pageInfo: e));
   }
 
-  @override
   TRes activityReplies(
           Iterable<Query$Activity$replies$activityReplies?>? Function(
                   Iterable<
                       CopyWith$Query$Activity$replies$activityReplies<
                           Query$Activity$replies$activityReplies>?>?)
-              fn) =>
+              _fn) =>
       call(
-          activityReplies: fn(_instance.activityReplies?.map((e) => e == null
+          activityReplies: _fn(_instance.activityReplies?.map((e) => e == null
               ? null
               : CopyWith$Query$Activity$replies$activityReplies(
                   e,
@@ -2100,9 +2028,8 @@ class _CopyWithStubImpl$Query$Activity$replies<TRes>
     implements CopyWith$Query$Activity$replies<TRes> {
   _CopyWithStubImpl$Query$Activity$replies(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$PageInfo? pageInfo,
     List<Query$Activity$replies$activityReplies?>? activityReplies,
@@ -2110,12 +2037,10 @@ class _CopyWithStubImpl$Query$Activity$replies<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$PageInfo<TRes> get pageInfo =>
       CopyWith$Fragment$PageInfo.stub(_res);
 
-  @override
-  activityReplies(fn) => _res;
+  activityReplies(_fn) => _res;
 }
 
 class Query$Activity$replies$activityReplies {
@@ -2176,26 +2101,26 @@ class Query$Activity$replies$activityReplies {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$text = text;
-    resultData['text'] = l$text;
+    _resultData['text'] = l$text;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$isLiked = isLiked;
-    resultData['isLiked'] = l$isLiked;
+    _resultData['isLiked'] = l$isLiked;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2227,7 +2152,7 @@ class Query$Activity$replies$activityReplies {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Activity$replies$activityReplies ||
+    if (!(other is Query$Activity$replies$activityReplies) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2326,7 +2251,6 @@ class _CopyWithImpl$Query$Activity$replies$activityReplies<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? userId = _undefined,
@@ -2360,7 +2284,6 @@ class _CopyWithImpl$Query$Activity$replies$activityReplies<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -2373,9 +2296,8 @@ class _CopyWithStubImpl$Query$Activity$replies$activityReplies<TRes>
     implements CopyWith$Query$Activity$replies$activityReplies<TRes> {
   _CopyWithStubImpl$Query$Activity$replies$activityReplies(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? userId,
@@ -2389,7 +2311,6 @@ class _CopyWithStubImpl$Query$Activity$replies$activityReplies<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$UserFragment<TRes> get user =>
       CopyWith$Fragment$UserFragment.stub(_res);
 }
@@ -2463,7 +2384,7 @@ class Variables$Mutation$SaveActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$SaveActivityReply ||
+    if (!(other is Variables$Mutation$SaveActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2537,7 +2458,6 @@ class _CopyWithImpl$Variables$Mutation$SaveActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? activityId = _undefined,
@@ -2555,9 +2475,8 @@ class _CopyWithStubImpl$Variables$Mutation$SaveActivityReply<TRes>
     implements CopyWith$Variables$Mutation$SaveActivityReply<TRes> {
   _CopyWithStubImpl$Variables$Mutation$SaveActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? activityId,
@@ -2589,12 +2508,12 @@ class Mutation$SaveActivityReply {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$SaveActivityReply = SaveActivityReply;
-    resultData['SaveActivityReply'] = l$SaveActivityReply?.toJson();
+    _resultData['SaveActivityReply'] = l$SaveActivityReply?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2612,7 +2531,7 @@ class Mutation$SaveActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveActivityReply ||
+    if (!(other is Mutation$SaveActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2669,7 +2588,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? SaveActivityReply = _undefined,
     Object? $__typename = _undefined,
@@ -2684,7 +2602,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply<TRes>
       get SaveActivityReply {
     final local$SaveActivityReply = _instance.SaveActivityReply;
@@ -2700,16 +2617,14 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply<TRes>
     implements CopyWith$Mutation$SaveActivityReply<TRes> {
   _CopyWithStubImpl$Mutation$SaveActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$SaveActivityReply$SaveActivityReply? SaveActivityReply,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply<TRes>
       get SaveActivityReply =>
           CopyWith$Mutation$SaveActivityReply$SaveActivityReply.stub(_res);
@@ -2924,22 +2839,22 @@ class Mutation$SaveActivityReply$SaveActivityReply {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$activityId = activityId;
-    resultData['activityId'] = l$activityId;
+    _resultData['activityId'] = l$activityId;
     final l$text = text;
-    resultData['text'] = l$text;
+    _resultData['text'] = l$text;
     final l$likeCount = likeCount;
-    resultData['likeCount'] = l$likeCount;
+    _resultData['likeCount'] = l$likeCount;
     final l$createdAt = createdAt;
-    resultData['createdAt'] = l$createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2967,7 +2882,7 @@ class Mutation$SaveActivityReply$SaveActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveActivityReply$SaveActivityReply ||
+    if (!(other is Mutation$SaveActivityReply$SaveActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3054,7 +2969,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? activityId = _undefined,
@@ -3084,7 +2998,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -3099,9 +3012,8 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
     implements CopyWith$Mutation$SaveActivityReply$SaveActivityReply<TRes> {
   _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? activityId,
@@ -3113,7 +3025,6 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user<TRes> get user =>
       CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user.stub(_res);
 }
@@ -3152,16 +3063,16 @@ class Mutation$SaveActivityReply$SaveActivityReply$user {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$avatar = avatar;
-    resultData['avatar'] = l$avatar?.toJson();
+    _resultData['avatar'] = l$avatar?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3183,7 +3094,7 @@ class Mutation$SaveActivityReply$SaveActivityReply$user {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveActivityReply$SaveActivityReply$user ||
+    if (!(other is Mutation$SaveActivityReply$SaveActivityReply$user) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3257,7 +3168,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -3278,7 +3188,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<TRes>
       get avatar {
     final local$avatar = _instance.avatar;
@@ -3296,9 +3205,8 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user<TRes>
   _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? name,
@@ -3307,7 +3215,6 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<TRes>
       get avatar =>
           CopyWith$Mutation$SaveActivityReply$SaveActivityReply$user$avatar
@@ -3335,12 +3242,12 @@ class Mutation$SaveActivityReply$SaveActivityReply$user$avatar {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$large = large;
-    resultData['large'] = l$large;
+    _resultData['large'] = l$large;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3358,7 +3265,7 @@ class Mutation$SaveActivityReply$SaveActivityReply$user$avatar {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveActivityReply$SaveActivityReply$user$avatar ||
+    if (!(other is Mutation$SaveActivityReply$SaveActivityReply$user$avatar) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3422,7 +3329,6 @@ class _CopyWithImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? large = _undefined,
     Object? $__typename = _undefined,
@@ -3443,9 +3349,8 @@ class _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar
   _CopyWithStubImpl$Mutation$SaveActivityReply$SaveActivityReply$user$avatar(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? large,
     String? $__typename,
@@ -3534,7 +3439,7 @@ class Variables$Mutation$SaveMessageActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$SaveMessageActivity ||
+    if (!(other is Variables$Mutation$SaveMessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3619,7 +3524,6 @@ class _CopyWithImpl$Variables$Mutation$SaveMessageActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? recipientId = _undefined,
@@ -3639,9 +3543,8 @@ class _CopyWithStubImpl$Variables$Mutation$SaveMessageActivity<TRes>
     implements CopyWith$Variables$Mutation$SaveMessageActivity<TRes> {
   _CopyWithStubImpl$Variables$Mutation$SaveMessageActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? recipientId,
@@ -3674,12 +3577,12 @@ class Mutation$SaveMessageActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$SaveMessageActivity = SaveMessageActivity;
-    resultData['SaveMessageActivity'] = l$SaveMessageActivity?.toJson();
+    _resultData['SaveMessageActivity'] = l$SaveMessageActivity?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3697,7 +3600,7 @@ class Mutation$SaveMessageActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveMessageActivity ||
+    if (!(other is Mutation$SaveMessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3753,7 +3656,6 @@ class _CopyWithImpl$Mutation$SaveMessageActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? SaveMessageActivity = _undefined,
     Object? $__typename = _undefined,
@@ -3767,7 +3669,6 @@ class _CopyWithImpl$Mutation$SaveMessageActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MessageActivity<TRes> get SaveMessageActivity {
     final local$SaveMessageActivity = _instance.SaveMessageActivity;
     return local$SaveMessageActivity == null
@@ -3781,16 +3682,14 @@ class _CopyWithStubImpl$Mutation$SaveMessageActivity<TRes>
     implements CopyWith$Mutation$SaveMessageActivity<TRes> {
   _CopyWithStubImpl$Mutation$SaveMessageActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$MessageActivity? SaveMessageActivity,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MessageActivity<TRes> get SaveMessageActivity =>
       CopyWith$Fragment$MessageActivity.stub(_res);
 }
@@ -3945,7 +3844,7 @@ class Variables$Mutation$ToggleActivitySubscription {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$ToggleActivitySubscription ||
+    if (!(other is Variables$Mutation$ToggleActivitySubscription) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4009,7 +3908,6 @@ class _CopyWithImpl$Variables$Mutation$ToggleActivitySubscription<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? subscribe = _undefined,
@@ -4025,9 +3923,8 @@ class _CopyWithStubImpl$Variables$Mutation$ToggleActivitySubscription<TRes>
     implements CopyWith$Variables$Mutation$ToggleActivitySubscription<TRes> {
   _CopyWithStubImpl$Variables$Mutation$ToggleActivitySubscription(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     bool? subscribe,
@@ -4060,13 +3957,13 @@ class Mutation$ToggleActivitySubscription {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$ToggleActivitySubscription = ToggleActivitySubscription;
-    resultData['ToggleActivitySubscription'] =
+    _resultData['ToggleActivitySubscription'] =
         l$ToggleActivitySubscription?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4084,7 +3981,7 @@ class Mutation$ToggleActivitySubscription {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$ToggleActivitySubscription ||
+    if (!(other is Mutation$ToggleActivitySubscription) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4143,7 +4040,6 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? ToggleActivitySubscription = _undefined,
     Object? $__typename = _undefined,
@@ -4158,7 +4054,6 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$ToggleActivitySubscription$ToggleActivitySubscription<TRes>
       get ToggleActivitySubscription {
     final local$ToggleActivitySubscription =
@@ -4176,9 +4071,8 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription<TRes>
     implements CopyWith$Mutation$ToggleActivitySubscription<TRes> {
   _CopyWithStubImpl$Mutation$ToggleActivitySubscription(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$ToggleActivitySubscription$ToggleActivitySubscription?
         ToggleActivitySubscription,
@@ -4186,7 +4080,6 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$ToggleActivitySubscription$ToggleActivitySubscription<TRes>
       get ToggleActivitySubscription =>
           CopyWith$Mutation$ToggleActivitySubscription$ToggleActivitySubscription
@@ -4377,10 +4270,10 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4394,8 +4287,8 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription {
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Mutation$ToggleActivitySubscription$ToggleActivitySubscription ||
+    if (!(other
+            is Mutation$ToggleActivitySubscription$ToggleActivitySubscription) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4524,7 +4417,6 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscripti
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? $__typename = _undefined}) =>
       _then(Mutation$ToggleActivitySubscription$ToggleActivitySubscription(
           $__typename: $__typename == _undefined || $__typename == null
@@ -4540,9 +4432,8 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscr
   _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscription(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? $__typename}) => _res;
 }
 
@@ -4570,19 +4461,17 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$ListActivi
 
   final bool? isSubscribed;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4602,8 +4491,8 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$ListActivi
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$ListActivity ||
+    if (!(other
+            is Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$ListActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4677,7 +4566,6 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscripti
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? isSubscribed = _undefined,
@@ -4703,9 +4591,8 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscr
   _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$ListActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     bool? isSubscribed,
@@ -4738,19 +4625,17 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$TextActivi
 
   final bool? isSubscribed;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4770,8 +4655,8 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$TextActivi
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$TextActivity ||
+    if (!(other
+            is Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$TextActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4845,7 +4730,6 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscripti
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? isSubscribed = _undefined,
@@ -4871,9 +4755,8 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscr
   _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$TextActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     bool? isSubscribed,
@@ -4906,19 +4789,17 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$MessageAct
 
   final bool? isSubscribed;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$isSubscribed = isSubscribed;
-    resultData['isSubscribed'] = l$isSubscribed;
+    _resultData['isSubscribed'] = l$isSubscribed;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -4938,8 +4819,8 @@ class Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$MessageAct
     if (identical(this, other)) {
       return true;
     }
-    if (other
-            is! Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$MessageActivity ||
+    if (!(other
+            is Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$MessageActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5013,7 +4894,6 @@ class _CopyWithImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscripti
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? isSubscribed = _undefined,
@@ -5039,9 +4919,8 @@ class _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscr
   _CopyWithStubImpl$Mutation$ToggleActivitySubscription$ToggleActivitySubscription$$MessageActivity(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     bool? isSubscribed,
@@ -5093,7 +4972,7 @@ class Variables$Mutation$DeleteActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$DeleteActivityReply ||
+    if (!(other is Variables$Mutation$DeleteActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5140,7 +5019,6 @@ class _CopyWithImpl$Variables$Mutation$DeleteActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Mutation$DeleteActivityReply._({
         ..._instance._$data,
@@ -5152,9 +5030,8 @@ class _CopyWithStubImpl$Variables$Mutation$DeleteActivityReply<TRes>
     implements CopyWith$Variables$Mutation$DeleteActivityReply<TRes> {
   _CopyWithStubImpl$Variables$Mutation$DeleteActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -5181,12 +5058,12 @@ class Mutation$DeleteActivityReply {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$DeleteActivityReply = DeleteActivityReply;
-    resultData['DeleteActivityReply'] = l$DeleteActivityReply?.toJson();
+    _resultData['DeleteActivityReply'] = l$DeleteActivityReply?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5204,7 +5081,7 @@ class Mutation$DeleteActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteActivityReply ||
+    if (!(other is Mutation$DeleteActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5261,7 +5138,6 @@ class _CopyWithImpl$Mutation$DeleteActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? DeleteActivityReply = _undefined,
     Object? $__typename = _undefined,
@@ -5276,7 +5152,6 @@ class _CopyWithImpl$Mutation$DeleteActivityReply<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply<TRes>
       get DeleteActivityReply {
     final local$DeleteActivityReply = _instance.DeleteActivityReply;
@@ -5292,16 +5167,14 @@ class _CopyWithStubImpl$Mutation$DeleteActivityReply<TRes>
     implements CopyWith$Mutation$DeleteActivityReply<TRes> {
   _CopyWithStubImpl$Mutation$DeleteActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$DeleteActivityReply$DeleteActivityReply? DeleteActivityReply,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply<TRes>
       get DeleteActivityReply =>
           CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply.stub(_res);
@@ -5383,12 +5256,12 @@ class Mutation$DeleteActivityReply$DeleteActivityReply {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$deleted = deleted;
-    resultData['deleted'] = l$deleted;
+    _resultData['deleted'] = l$deleted;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5406,7 +5279,7 @@ class Mutation$DeleteActivityReply$DeleteActivityReply {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteActivityReply$DeleteActivityReply ||
+    if (!(other is Mutation$DeleteActivityReply$DeleteActivityReply) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5463,7 +5336,6 @@ class _CopyWithImpl$Mutation$DeleteActivityReply$DeleteActivityReply<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? deleted = _undefined,
     Object? $__typename = _undefined,
@@ -5480,9 +5352,8 @@ class _CopyWithStubImpl$Mutation$DeleteActivityReply$DeleteActivityReply<TRes>
     implements CopyWith$Mutation$DeleteActivityReply$DeleteActivityReply<TRes> {
   _CopyWithStubImpl$Mutation$DeleteActivityReply$DeleteActivityReply(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? deleted,
     String? $__typename,
@@ -5532,7 +5403,7 @@ class Variables$Mutation$DeleteActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$DeleteActivity ||
+    if (!(other is Variables$Mutation$DeleteActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5579,7 +5450,6 @@ class _CopyWithImpl$Variables$Mutation$DeleteActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Mutation$DeleteActivity._({
         ..._instance._$data,
@@ -5591,9 +5461,8 @@ class _CopyWithStubImpl$Variables$Mutation$DeleteActivity<TRes>
     implements CopyWith$Variables$Mutation$DeleteActivity<TRes> {
   _CopyWithStubImpl$Variables$Mutation$DeleteActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -5620,12 +5489,12 @@ class Mutation$DeleteActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$DeleteActivity = DeleteActivity;
-    resultData['DeleteActivity'] = l$DeleteActivity?.toJson();
+    _resultData['DeleteActivity'] = l$DeleteActivity?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5643,7 +5512,7 @@ class Mutation$DeleteActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteActivity ||
+    if (!(other is Mutation$DeleteActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5698,7 +5567,6 @@ class _CopyWithImpl$Mutation$DeleteActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? DeleteActivity = _undefined,
     Object? $__typename = _undefined,
@@ -5712,7 +5580,6 @@ class _CopyWithImpl$Mutation$DeleteActivity<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$DeleteActivity$DeleteActivity<TRes> get DeleteActivity {
     final local$DeleteActivity = _instance.DeleteActivity;
     return local$DeleteActivity == null
@@ -5726,16 +5593,14 @@ class _CopyWithStubImpl$Mutation$DeleteActivity<TRes>
     implements CopyWith$Mutation$DeleteActivity<TRes> {
   _CopyWithStubImpl$Mutation$DeleteActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$DeleteActivity$DeleteActivity? DeleteActivity,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$DeleteActivity$DeleteActivity<TRes> get DeleteActivity =>
       CopyWith$Mutation$DeleteActivity$DeleteActivity.stub(_res);
 }
@@ -5816,12 +5681,12 @@ class Mutation$DeleteActivity$DeleteActivity {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$deleted = deleted;
-    resultData['deleted'] = l$deleted;
+    _resultData['deleted'] = l$deleted;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -5839,7 +5704,7 @@ class Mutation$DeleteActivity$DeleteActivity {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteActivity$DeleteActivity ||
+    if (!(other is Mutation$DeleteActivity$DeleteActivity) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5895,7 +5760,6 @@ class _CopyWithImpl$Mutation$DeleteActivity$DeleteActivity<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? deleted = _undefined,
     Object? $__typename = _undefined,
@@ -5912,9 +5776,8 @@ class _CopyWithStubImpl$Mutation$DeleteActivity$DeleteActivity<TRes>
     implements CopyWith$Mutation$DeleteActivity$DeleteActivity<TRes> {
   _CopyWithStubImpl$Mutation$DeleteActivity$DeleteActivity(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? deleted,
     String? $__typename,

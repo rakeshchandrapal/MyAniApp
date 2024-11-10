@@ -59,7 +59,7 @@ class Variables$Query$MediaEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$MediaEntry ||
+    if (!(other is Variables$Query$MediaEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -121,7 +121,6 @@ class _CopyWithImpl$Variables$Query$MediaEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? mediaId = _undefined,
     Object? userId = _undefined,
@@ -137,9 +136,8 @@ class _CopyWithStubImpl$Variables$Query$MediaEntry<TRes>
     implements CopyWith$Variables$Query$MediaEntry<TRes> {
   _CopyWithStubImpl$Variables$Query$MediaEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? mediaId,
     int? userId,
@@ -170,12 +168,12 @@ class Query$MediaEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$MediaList = MediaList;
-    resultData['MediaList'] = l$MediaList?.toJson();
+    _resultData['MediaList'] = l$MediaList?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -193,7 +191,7 @@ class Query$MediaEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry || runtimeType != other.runtimeType) {
+    if (!(other is Query$MediaEntry) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$MediaList = MediaList;
@@ -247,7 +245,6 @@ class _CopyWithImpl$Query$MediaEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? MediaList = _undefined,
     Object? $__typename = _undefined,
@@ -261,7 +258,6 @@ class _CopyWithImpl$Query$MediaEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$MediaEntry$MediaList<TRes> get MediaList {
     final local$MediaList = _instance.MediaList;
     return local$MediaList == null
@@ -275,16 +271,14 @@ class _CopyWithStubImpl$Query$MediaEntry<TRes>
     implements CopyWith$Query$MediaEntry<TRes> {
   _CopyWithStubImpl$Query$MediaEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$MediaEntry$MediaList? MediaList,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$MediaEntry$MediaList<TRes> get MediaList =>
       CopyWith$Query$MediaEntry$MediaList.stub(_res);
 }
@@ -457,7 +451,7 @@ class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
       private: (l$private as bool?),
       repeat: (l$repeat as int?),
       score: (l$score as num?)?.toDouble(),
-      customLists: (l$customLists as dynamic),
+      customLists: (l$customLists as dynamic?),
       startedAt: l$startedAt == null
           ? null
           : Fragment$FuzzyDate.fromJson((l$startedAt as Map<String, dynamic>)),
@@ -477,100 +471,82 @@ class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
     );
   }
 
-  @override
   final int id;
 
-  @override
   final int mediaId;
 
-  @override
   final Enum$MediaListStatus? status;
 
-  @override
   final int? updatedAt;
 
-  @override
   final int? progress;
 
-  @override
   final int? progressVolumes;
 
-  @override
   final int? priority;
 
-  @override
   final String? notes;
 
-  @override
   final bool? hiddenFromStatusLists;
 
-  @override
   final bool? private;
 
-  @override
   final int? repeat;
 
-  @override
   final double? score;
 
-  @override
-  final dynamic customLists;
+  final dynamic? customLists;
 
-  @override
   final Fragment$FuzzyDate? startedAt;
 
-  @override
   final Fragment$FuzzyDate? completedAt;
 
-  @override
   final Query$MediaEntry$MediaList$media? media;
 
-  @override
   final String $__typename;
 
   final Query$MediaEntry$MediaList$user? user;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$mediaId = mediaId;
-    resultData['mediaId'] = l$mediaId;
+    _resultData['mediaId'] = l$mediaId;
     final l$status = status;
-    resultData['status'] =
+    _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaListStatus(l$status);
     final l$updatedAt = updatedAt;
-    resultData['updatedAt'] = l$updatedAt;
+    _resultData['updatedAt'] = l$updatedAt;
     final l$progress = progress;
-    resultData['progress'] = l$progress;
+    _resultData['progress'] = l$progress;
     final l$progressVolumes = progressVolumes;
-    resultData['progressVolumes'] = l$progressVolumes;
+    _resultData['progressVolumes'] = l$progressVolumes;
     final l$priority = priority;
-    resultData['priority'] = l$priority;
+    _resultData['priority'] = l$priority;
     final l$notes = notes;
-    resultData['notes'] = l$notes;
+    _resultData['notes'] = l$notes;
     final l$hiddenFromStatusLists = hiddenFromStatusLists;
-    resultData['hiddenFromStatusLists'] = l$hiddenFromStatusLists;
+    _resultData['hiddenFromStatusLists'] = l$hiddenFromStatusLists;
     final l$private = private;
-    resultData['private'] = l$private;
+    _resultData['private'] = l$private;
     final l$repeat = repeat;
-    resultData['repeat'] = l$repeat;
+    _resultData['repeat'] = l$repeat;
     final l$score = score;
-    resultData['score'] = l$score;
+    _resultData['score'] = l$score;
     final l$customLists = customLists;
-    resultData['customLists'] = l$customLists;
+    _resultData['customLists'] = l$customLists;
     final l$startedAt = startedAt;
-    resultData['startedAt'] = l$startedAt?.toJson();
+    _resultData['startedAt'] = l$startedAt?.toJson();
     final l$completedAt = completedAt;
-    resultData['completedAt'] = l$completedAt?.toJson();
+    _resultData['completedAt'] = l$completedAt?.toJson();
     final l$media = media;
-    resultData['media'] = l$media?.toJson();
+    _resultData['media'] = l$media?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
+    _resultData['__typename'] = l$$__typename;
     final l$user = user;
-    resultData['user'] = l$user?.toJson();
-    return resultData;
+    _resultData['user'] = l$user?.toJson();
+    return _resultData;
   }
 
   @override
@@ -620,7 +596,7 @@ class Query$MediaEntry$MediaList implements Fragment$MediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry$MediaList ||
+    if (!(other is Query$MediaEntry$MediaList) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -749,7 +725,7 @@ abstract class CopyWith$Query$MediaEntry$MediaList<TRes> {
     bool? private,
     int? repeat,
     double? score,
-    dynamic customLists,
+    dynamic? customLists,
     Fragment$FuzzyDate? startedAt,
     Fragment$FuzzyDate? completedAt,
     Query$MediaEntry$MediaList$media? media,
@@ -775,7 +751,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaId = _undefined,
@@ -822,7 +797,7 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
         score: score == _undefined ? _instance.score : (score as double?),
         customLists: customLists == _undefined
             ? _instance.customLists
-            : (customLists as dynamic),
+            : (customLists as dynamic?),
         startedAt: startedAt == _undefined
             ? _instance.startedAt
             : (startedAt as Fragment$FuzzyDate?),
@@ -840,7 +815,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
             : (user as Query$MediaEntry$MediaList$user?),
       ));
 
-  @override
   CopyWith$Fragment$FuzzyDate<TRes> get startedAt {
     final local$startedAt = _instance.startedAt;
     return local$startedAt == null
@@ -849,7 +823,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
             local$startedAt, (e) => call(startedAt: e));
   }
 
-  @override
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt {
     final local$completedAt = _instance.completedAt;
     return local$completedAt == null
@@ -858,7 +831,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
             local$completedAt, (e) => call(completedAt: e));
   }
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$media<TRes> get media {
     final local$media = _instance.media;
     return local$media == null
@@ -867,7 +839,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList<TRes>
             local$media, (e) => call(media: e));
   }
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -881,9 +852,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList<TRes>
     implements CopyWith$Query$MediaEntry$MediaList<TRes> {
   _CopyWithStubImpl$Query$MediaEntry$MediaList(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? mediaId,
@@ -897,7 +867,7 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList<TRes>
     bool? private,
     int? repeat,
     double? score,
-    dynamic customLists,
+    dynamic? customLists,
     Fragment$FuzzyDate? startedAt,
     Fragment$FuzzyDate? completedAt,
     Query$MediaEntry$MediaList$media? media,
@@ -906,19 +876,15 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$FuzzyDate<TRes> get startedAt =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
 
-  @override
   CopyWith$Fragment$FuzzyDate<TRes> get completedAt =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$media<TRes> get media =>
       CopyWith$Query$MediaEntry$MediaList$media.stub(_res);
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$user<TRes> get user =>
       CopyWith$Query$MediaEntry$MediaList$user.stub(_res);
 }
@@ -990,87 +956,71 @@ class Query$MediaEntry$MediaList$media
     );
   }
 
-  @override
   final int id;
 
-  @override
   final Enum$MediaType? type;
 
-  @override
   final bool? isAdult;
 
-  @override
   final List<String?>? genres;
 
-  @override
   final Enum$MediaFormat? format;
 
-  @override
   final String? description;
 
-  @override
   final Query$MediaEntry$MediaList$media$title? title;
 
-  @override
   final Query$MediaEntry$MediaList$media$coverImage? coverImage;
 
-  @override
   final String $__typename;
 
-  @override
   final int? episodes;
 
-  @override
   final int? chapters;
 
-  @override
   final Enum$MediaStatus? status;
 
-  @override
   final int? averageScore;
 
-  @override
   final int? popularity;
 
-  @override
   final Fragment$FuzzyDate? startDate;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$type = type;
-    resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
+    _resultData['type'] = l$type == null ? null : toJson$Enum$MediaType(l$type);
     final l$isAdult = isAdult;
-    resultData['isAdult'] = l$isAdult;
+    _resultData['isAdult'] = l$isAdult;
     final l$genres = genres;
-    resultData['genres'] = l$genres?.map((e) => e).toList();
+    _resultData['genres'] = l$genres?.map((e) => e).toList();
     final l$format = format;
-    resultData['format'] =
+    _resultData['format'] =
         l$format == null ? null : toJson$Enum$MediaFormat(l$format);
     final l$description = description;
-    resultData['description'] = l$description;
+    _resultData['description'] = l$description;
     final l$title = title;
-    resultData['title'] = l$title?.toJson();
+    _resultData['title'] = l$title?.toJson();
     final l$coverImage = coverImage;
-    resultData['coverImage'] = l$coverImage?.toJson();
+    _resultData['coverImage'] = l$coverImage?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
+    _resultData['__typename'] = l$$__typename;
     final l$episodes = episodes;
-    resultData['episodes'] = l$episodes;
+    _resultData['episodes'] = l$episodes;
     final l$chapters = chapters;
-    resultData['chapters'] = l$chapters;
+    _resultData['chapters'] = l$chapters;
     final l$status = status;
-    resultData['status'] =
+    _resultData['status'] =
         l$status == null ? null : toJson$Enum$MediaStatus(l$status);
     final l$averageScore = averageScore;
-    resultData['averageScore'] = l$averageScore;
+    _resultData['averageScore'] = l$averageScore;
     final l$popularity = popularity;
-    resultData['popularity'] = l$popularity;
+    _resultData['popularity'] = l$popularity;
     final l$startDate = startDate;
-    resultData['startDate'] = l$startDate?.toJson();
-    return resultData;
+    _resultData['startDate'] = l$startDate?.toJson();
+    return _resultData;
   }
 
   @override
@@ -1114,7 +1064,7 @@ class Query$MediaEntry$MediaList$media
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry$MediaList$media ||
+    if (!(other is Query$MediaEntry$MediaList$media) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1261,7 +1211,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? type = _undefined,
@@ -1319,7 +1268,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
             : (startDate as Fragment$FuzzyDate?),
       ));
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$media$title<TRes> get title {
     final local$title = _instance.title;
     return local$title == null
@@ -1328,7 +1276,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
             local$title, (e) => call(title: e));
   }
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> get coverImage {
     final local$coverImage = _instance.coverImage;
     return local$coverImage == null
@@ -1338,7 +1285,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media<TRes>
             local$coverImage, (e) => call(coverImage: e));
   }
 
-  @override
   CopyWith$Fragment$FuzzyDate<TRes> get startDate {
     final local$startDate = _instance.startDate;
     return local$startDate == null
@@ -1352,9 +1298,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$media<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$media<TRes> {
   _CopyWithStubImpl$Query$MediaEntry$MediaList$media(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Enum$MediaType? type,
@@ -1374,15 +1319,12 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$media<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$media$title<TRes> get title =>
       CopyWith$Query$MediaEntry$MediaList$media$title.stub(_res);
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> get coverImage =>
       CopyWith$Query$MediaEntry$MediaList$media$coverImage.stub(_res);
 
-  @override
   CopyWith$Fragment$FuzzyDate<TRes> get startDate =>
       CopyWith$Fragment$FuzzyDate.stub(_res);
 }
@@ -1406,20 +1348,17 @@ class Query$MediaEntry$MediaList$media$title
     );
   }
 
-  @override
   final String? userPreferred;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userPreferred = userPreferred;
-    resultData['userPreferred'] = l$userPreferred;
+    _resultData['userPreferred'] = l$userPreferred;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1437,7 +1376,7 @@ class Query$MediaEntry$MediaList$media$title
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry$MediaList$media$title ||
+    if (!(other is Query$MediaEntry$MediaList$media$title) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1493,7 +1432,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media$title<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userPreferred = _undefined,
     Object? $__typename = _undefined,
@@ -1512,9 +1450,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$media$title<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$media$title<TRes> {
   _CopyWithStubImpl$Query$MediaEntry$MediaList$media$title(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userPreferred,
     String? $__typename,
@@ -1541,20 +1478,17 @@ class Query$MediaEntry$MediaList$media$coverImage
     );
   }
 
-  @override
   final String? extraLarge;
 
-  @override
   final String $__typename;
 
-  @override
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$extraLarge = extraLarge;
-    resultData['extraLarge'] = l$extraLarge;
+    _resultData['extraLarge'] = l$extraLarge;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1572,7 +1506,7 @@ class Query$MediaEntry$MediaList$media$coverImage
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry$MediaList$media$coverImage ||
+    if (!(other is Query$MediaEntry$MediaList$media$coverImage) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1628,7 +1562,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$media$coverImage<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? extraLarge = _undefined,
     Object? $__typename = _undefined,
@@ -1647,9 +1580,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$media$coverImage<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$media$coverImage<TRes> {
   _CopyWithStubImpl$Query$MediaEntry$MediaList$media$coverImage(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? extraLarge,
     String? $__typename,
@@ -1685,14 +1617,14 @@ class Query$MediaEntry$MediaList$user {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$mediaListOptions = mediaListOptions;
-    resultData['mediaListOptions'] = l$mediaListOptions?.toJson();
+    _resultData['mediaListOptions'] = l$mediaListOptions?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1712,7 +1644,7 @@ class Query$MediaEntry$MediaList$user {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry$MediaList$user ||
+    if (!(other is Query$MediaEntry$MediaList$user) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1775,7 +1707,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$user<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaListOptions = _undefined,
@@ -1792,7 +1723,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$user<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
       get mediaListOptions {
     final local$mediaListOptions = _instance.mediaListOptions;
@@ -1808,9 +1738,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$user<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$user<TRes> {
   _CopyWithStubImpl$Query$MediaEntry$MediaList$user(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     Query$MediaEntry$MediaList$user$mediaListOptions? mediaListOptions,
@@ -1818,7 +1747,6 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$user<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
       get mediaListOptions =>
           CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions.stub(_res);
@@ -1847,13 +1775,13 @@ class Query$MediaEntry$MediaList$user$mediaListOptions {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$scoreFormat = scoreFormat;
-    resultData['scoreFormat'] =
+    _resultData['scoreFormat'] =
         l$scoreFormat == null ? null : toJson$Enum$ScoreFormat(l$scoreFormat);
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -1871,7 +1799,7 @@ class Query$MediaEntry$MediaList$user$mediaListOptions {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$MediaEntry$MediaList$user$mediaListOptions ||
+    if (!(other is Query$MediaEntry$MediaList$user$mediaListOptions) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1928,7 +1856,6 @@ class _CopyWithImpl$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? scoreFormat = _undefined,
     Object? $__typename = _undefined,
@@ -1947,9 +1874,8 @@ class _CopyWithStubImpl$Query$MediaEntry$MediaList$user$mediaListOptions<TRes>
     implements CopyWith$Query$MediaEntry$MediaList$user$mediaListOptions<TRes> {
   _CopyWithStubImpl$Query$MediaEntry$MediaList$user$mediaListOptions(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Enum$ScoreFormat? scoreFormat,
     String? $__typename,
@@ -2200,7 +2126,7 @@ class Variables$Mutation$SaveMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$SaveMediaListEntry ||
+    if (!(other is Variables$Mutation$SaveMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2457,7 +2383,6 @@ class _CopyWithImpl$Variables$Mutation$SaveMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? mediaId = _undefined,
@@ -2507,9 +2432,8 @@ class _CopyWithStubImpl$Variables$Mutation$SaveMediaListEntry<TRes>
     implements CopyWith$Variables$Mutation$SaveMediaListEntry<TRes> {
   _CopyWithStubImpl$Variables$Mutation$SaveMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? mediaId,
@@ -2554,12 +2478,12 @@ class Mutation$SaveMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$SaveMediaListEntry = SaveMediaListEntry;
-    resultData['SaveMediaListEntry'] = l$SaveMediaListEntry?.toJson();
+    _resultData['SaveMediaListEntry'] = l$SaveMediaListEntry?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -2577,7 +2501,7 @@ class Mutation$SaveMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$SaveMediaListEntry ||
+    if (!(other is Mutation$SaveMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2633,7 +2557,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? SaveMediaListEntry = _undefined,
     Object? $__typename = _undefined,
@@ -2647,7 +2570,6 @@ class _CopyWithImpl$Mutation$SaveMediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Fragment$MediaListEntry<TRes> get SaveMediaListEntry {
     final local$SaveMediaListEntry = _instance.SaveMediaListEntry;
     return local$SaveMediaListEntry == null
@@ -2661,16 +2583,14 @@ class _CopyWithStubImpl$Mutation$SaveMediaListEntry<TRes>
     implements CopyWith$Mutation$SaveMediaListEntry<TRes> {
   _CopyWithStubImpl$Mutation$SaveMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Fragment$MediaListEntry? SaveMediaListEntry,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Fragment$MediaListEntry<TRes> get SaveMediaListEntry =>
       CopyWith$Fragment$MediaListEntry.stub(_res);
 }
@@ -2974,7 +2894,7 @@ class Variables$Mutation$DeleteMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$DeleteMediaListEntry ||
+    if (!(other is Variables$Mutation$DeleteMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3021,7 +2941,6 @@ class _CopyWithImpl$Variables$Mutation$DeleteMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Mutation$DeleteMediaListEntry._({
         ..._instance._$data,
@@ -3033,9 +2952,8 @@ class _CopyWithStubImpl$Variables$Mutation$DeleteMediaListEntry<TRes>
     implements CopyWith$Variables$Mutation$DeleteMediaListEntry<TRes> {
   _CopyWithStubImpl$Variables$Mutation$DeleteMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -3063,12 +2981,12 @@ class Mutation$DeleteMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$DeleteMediaListEntry = DeleteMediaListEntry;
-    resultData['DeleteMediaListEntry'] = l$DeleteMediaListEntry?.toJson();
+    _resultData['DeleteMediaListEntry'] = l$DeleteMediaListEntry?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3086,7 +3004,7 @@ class Mutation$DeleteMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteMediaListEntry ||
+    if (!(other is Mutation$DeleteMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3143,7 +3061,6 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? DeleteMediaListEntry = _undefined,
     Object? $__typename = _undefined,
@@ -3158,7 +3075,6 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
       get DeleteMediaListEntry {
     final local$DeleteMediaListEntry = _instance.DeleteMediaListEntry;
@@ -3174,16 +3090,14 @@ class _CopyWithStubImpl$Mutation$DeleteMediaListEntry<TRes>
     implements CopyWith$Mutation$DeleteMediaListEntry<TRes> {
   _CopyWithStubImpl$Mutation$DeleteMediaListEntry(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$DeleteMediaListEntry$DeleteMediaListEntry? DeleteMediaListEntry,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
       get DeleteMediaListEntry =>
           CopyWith$Mutation$DeleteMediaListEntry$DeleteMediaListEntry.stub(
@@ -3266,12 +3180,12 @@ class Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$deleted = deleted;
-    resultData['deleted'] = l$deleted;
+    _resultData['deleted'] = l$deleted;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -3289,7 +3203,7 @@ class Mutation$DeleteMediaListEntry$DeleteMediaListEntry {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteMediaListEntry$DeleteMediaListEntry ||
+    if (!(other is Mutation$DeleteMediaListEntry$DeleteMediaListEntry) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3349,7 +3263,6 @@ class _CopyWithImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? deleted = _undefined,
     Object? $__typename = _undefined,
@@ -3368,9 +3281,8 @@ class _CopyWithStubImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry<TRes>
   _CopyWithStubImpl$Mutation$DeleteMediaListEntry$DeleteMediaListEntry(
       this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? deleted,
     String? $__typename,
