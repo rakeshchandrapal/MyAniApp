@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gql_dedupe_link/gql_dedupe_link.dart';
+import 'package:gql_error_link/gql_error_link.dart';
 import 'package:gql_exec/gql_exec.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:mygraphql/graphql.dart';
@@ -14,7 +15,13 @@ class GraphqlClient {
   final Link _link;
   final Cache cache;
 
-  final Map<String, StreamController> _streams = {};
+  ExceptionHandler handleException<T>(GQLRequest<T> orgRequest) {
+    // sometimes it skips errors without this
+    return (request, forward, exception) async* {
+      yield GQLResponse<T>(
+          response: {}, request: orgRequest, linkError: exception);
+    };
+  }
 
   GraphqlClient({
     required Link link,
@@ -23,6 +30,7 @@ class GraphqlClient {
 
   Stream<GQLResponse<T>> query<T>(GQLRequest<T> request) async* {
     var stream = Link.from([
+      ErrorLink(onException: handleException<T>(request)),
       DedupeLink(),
       FetchPolicyLink(cache, request.fetchPolicy),
       _link,

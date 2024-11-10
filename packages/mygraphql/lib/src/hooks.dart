@@ -100,6 +100,9 @@ class _StreamHookState<T> extends HookState<QueryHookResult<T>, StreamHook<T>> {
     }
 
     try {
+      setState(
+          () => _summary = GQLResponse<T>.loading(request: _summary.request));
+
       var req = await hook.client
           .query(GQLRequest(
             _summary.request!.query,
@@ -110,7 +113,9 @@ class _StreamHookState<T> extends HookState<QueryHookResult<T>, StreamHook<T>> {
           ))
           .last;
 
-      setState(() => _summary = GQLResponse(
+      if (req.linkError != null) throw req.linkError!;
+
+      setState(() => _summary = GQLResponse<T>(
             response: req.response,
             data: req.data,
             request: _summary.request,
@@ -119,7 +124,7 @@ class _StreamHookState<T> extends HookState<QueryHookResult<T>, StreamHook<T>> {
 
       return req.parsedData;
     } catch (err) {
-      setState(() => _summary = GQLResponse(
+      setState(() => _summary = GQLResponse<T>(
           response: {},
           request: _summary.request,
           rawError: err,
