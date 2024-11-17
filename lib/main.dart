@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:app_links/app_links.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:ferry/ferry.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:layout/layout.dart';
 import 'package:myaniapp/background.dart';
 import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/app_info.dart';
@@ -20,6 +18,7 @@ import 'package:myaniapp/url_protocol/web_url_protocol.dart'
     if (dart.library.io) 'package:myaniapp/url_protocol/api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:relative_time/relative_time.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -27,10 +26,6 @@ late Client client;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // GoRouter.optionURLReflectsImperativeAPIs = true;
-
-  // client = await initClient();
 
   var instance = await SharedPreferences.getInstance();
   final appInfo = await PackageInfo.fromPlatform();
@@ -132,7 +127,12 @@ class _MainAppState extends ConsumerState<MainApp> {
     var color =
         ref.watch(settingsProvider.select((value) => value.primaryColor));
 
-    return Layout(
+    return ResponsiveBreakpoints(
+      breakpoints: const [
+        Breakpoint(start: 0, end: 450, name: MOBILE),
+        Breakpoint(start: 451, end: 800, name: TABLET),
+        Breakpoint(start: 801, end: 1920, name: DESKTOP),
+      ],
       child: MaterialApp.router(
         routerConfig: router.config(),
         localizationsDelegates: const [

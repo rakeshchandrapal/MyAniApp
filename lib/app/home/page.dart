@@ -26,7 +26,7 @@ class HomeScreen extends ConsumerWidget {
       );
     }
 
-    return AutoTabsScaffold(
+    return AutoTabsRouter(
       routes: [
         if (user.value?.data != null) ...[
           const HomeLoggedInOverviewRoute(),
@@ -37,78 +37,10 @@ class HomeScreen extends ConsumerWidget {
           const ExploreRoute(),
         const HomeActivitiesRoute(),
       ],
-      drawer: NavigationDrawer(
-        children: [
-          InkWell(
-            onTap: user.value?.data == null
-                ? () => context.pushRoute(const LoginRoute())
-                : () => context.pushRoute(
-                    UserRoute(name: user.value!.parsedData!.Viewer!.name)),
-            child: UserAccountsDrawerHeader(
-              accountName: Show(
-                when: user.value?.parsedData != null,
-                fallback: Text(
-                  "Guest",
-                  style: TextStyle(color: context.theme.colorScheme.onSurface),
-                ),
-                child: () => Text(
-                  user.requireValue.parsedData!.Viewer!.name,
-                  style: TextStyle(color: context.theme.colorScheme.onSurface),
-                ),
-              ),
-              currentAccountPicture: Show(
-                when: user.value?.parsedData != null,
-                child: () =>
-                    CachedImage(user.value!.parsedData!.Viewer!.avatar!.large!),
-              ),
-              currentAccountPictureSize: const Size.square(90),
-              decoration: const BoxDecoration(),
-              accountEmail: user.value?.parsedData != null
-                  ? null
-                  : Text(
-                      "Sign in!",
-                      style:
-                          TextStyle(color: context.theme.colorScheme.onSurface),
-                    ),
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text("Settings"),
-            onTap: () => context.pushRoute(const SettingsRoute()),
-          ),
-          ListTile(
-            onTap: () => showAboutDialog(
-              context: context,
-              applicationVersion: ref.read(appInfoProvider).version,
-              applicationName: "MyAniApp",
-              applicationIcon: Image.asset(
-                "assets/app_icon.png",
-                height: 40,
-              ),
-            ),
-            leading: const Icon(Icons.info),
-            title: const Text('About'),
-          ),
-          if (user.value?.data != null)
-            ListTile(
-              leading: const Icon(
-                Icons.logout,
-                color: Colors.red,
-              ),
-              title: const Text("Logout"),
-              onTap: () =>
-                  ref.read(settingsProvider.notifier).updateToken(null),
-            )
-        ],
-      ),
-      bottomNavigationBuilder: (context, tabsRouter) => NavigationBar(
-        selectedIndex: tabsRouter.activeIndex,
-        onDestinationSelected: tabsRouter.setActiveIndex,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-        height: 70,
-        destinations: [
-          // TODO: change icon to explore icon if not logged in
+      builder: (context, child) {
+        final tabsRouter = AutoTabsRouter.of(context);
+
+        var destinations = [
           const NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           if (user.value?.data != null) ...[
             const NavigationDestination(
@@ -120,8 +52,110 @@ class HomeScreen extends ConsumerWidget {
           ],
           const NavigationDestination(
               icon: Icon(Icons.chat), label: "Activities"),
-        ],
-      ),
+        ];
+
+        return OrientationBuilder(
+          builder: (context, orientation) => Scaffold(
+            body: Show(
+              when: orientation == Orientation.landscape,
+              fallback: child,
+              child: () => Row(
+                children: [
+                  NavigationRail(
+                    destinations: [
+                      for (var d in destinations)
+                        NavigationRailDestination(
+                          icon: d.icon,
+                          label: Text(d.label),
+                        )
+                    ],
+                    selectedIndex: tabsRouter.activeIndex,
+                    onDestinationSelected: tabsRouter.setActiveIndex,
+                  ),
+                  Expanded(child: child!),
+                ],
+              ),
+            ),
+            drawer: NavigationDrawer(
+              children: [
+                InkWell(
+                  onTap: user.value?.data == null
+                      ? () => context.router.replace(const LoginRoute())
+                      : () => context.pushRoute(UserRoute(
+                          name: user.value!.parsedData!.Viewer!.name)),
+                  child: UserAccountsDrawerHeader(
+                    accountName: Show(
+                      when: user.value?.parsedData != null,
+                      fallback: Text(
+                        "Guest",
+                        style: TextStyle(
+                            color: context.theme.colorScheme.onSurface),
+                      ),
+                      child: () => Text(
+                        user.requireValue.parsedData!.Viewer!.name,
+                        style: TextStyle(
+                            color: context.theme.colorScheme.onSurface),
+                      ),
+                    ),
+                    currentAccountPicture: Show(
+                      when: user.value?.parsedData != null,
+                      child: () => CachedImage(
+                          user.value!.parsedData!.Viewer!.avatar!.large!),
+                    ),
+                    currentAccountPictureSize: const Size.square(90),
+                    decoration: const BoxDecoration(),
+                    accountEmail: user.value?.parsedData != null
+                        ? null
+                        : Text(
+                            "Sign in!",
+                            style: TextStyle(
+                                color: context.theme.colorScheme.onSurface),
+                          ),
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.settings),
+                  title: const Text("Settings"),
+                  onTap: () => context.pushRoute(const SettingsRoute()),
+                ),
+                ListTile(
+                  onTap: () => showAboutDialog(
+                    context: context,
+                    applicationVersion: ref.read(appInfoProvider).version,
+                    applicationName: "MyAniApp",
+                    applicationIcon: Image.asset(
+                      "assets/app_icon.png",
+                      height: 40,
+                    ),
+                  ),
+                  leading: const Icon(Icons.info),
+                  title: const Text('About'),
+                ),
+                if (user.value?.data != null)
+                  ListTile(
+                    leading: const Icon(
+                      Icons.logout,
+                      color: Colors.red,
+                    ),
+                    title: const Text("Logout"),
+                    onTap: () =>
+                        ref.read(settingsProvider.notifier).updateToken(null),
+                  )
+              ],
+            ),
+            bottomNavigationBar: Show(
+              when: orientation == Orientation.portrait,
+              child: () => NavigationBar(
+                selectedIndex: tabsRouter.activeIndex,
+                onDestinationSelected: tabsRouter.setActiveIndex,
+                labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+                height: 70,
+                destinations: destinations,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

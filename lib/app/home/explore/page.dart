@@ -136,13 +136,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 medias: data.parsedData!.popular!.media!,
                 title: "All Time Popular",
                 onTap: () => context.router.pushNamed(
-                    "/search/media?sort=${Enum$MediaSort.POPULARITY_DESC}"),
+                    "/search/media?sort=${Enum$MediaSort.POPULARITY_DESC.name}"),
               ),
               _List(
                 medias: data.parsedData!.recent!.media!,
                 title: "Recent",
-                onTap: () => context.router
-                    .pushNamed("/search/media?sort=${Enum$MediaSort.ID_DESC}"),
+                onTap: () => context.router.pushNamed(
+                    "/search/media?sort=${Enum$MediaSort.ID_DESC.name}"),
               )
             ],
           ),

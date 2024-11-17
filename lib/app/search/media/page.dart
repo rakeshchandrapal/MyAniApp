@@ -254,10 +254,13 @@ class MediaSearchQuery {
       var list = query["sort"] is List ? query["sort"] : [query["sort"]];
       var s =
           Enum$MediaSort.values.where((element) => list.contains(element.name));
+      print(s);
       if (s.isNotEmpty) {
         sort0 = s.toList();
       }
     }
+
+    print(query);
 
     if (query["genre"] != null) {
       var list = query["genre"] is List ? query["genre"] : [query["genre"]];

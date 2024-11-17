@@ -40,6 +40,34 @@ class ActivityPage extends HookConsumerWidget {
   final int id;
   final dynamic placeholder;
 
+  void reply(WidgetRef ref, BuildContext context, dynamic activity,
+      QueryRefetch refetch) {
+    requiredLogin(
+      ref,
+      "reply",
+      () => MarkdownEditor.show(
+        context,
+        leading: ActivityCard(
+          activity: activity,
+          hasTap: false,
+          withFooter: false,
+        ),
+        onSave: (text) => c
+            .query(GQLRequest(
+              saveActivityReplyQuery,
+              variables: Variables$Mutation$SaveActivityReply(
+                text: text,
+                activityId: activity.id,
+              ).toJson(),
+            ))
+            .last
+            .then(
+              (value) => refetch(),
+            ),
+      ),
+    )();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(activityQuery,
@@ -85,6 +113,8 @@ class ActivityPage extends HookConsumerWidget {
               child: ActivityCard(
                 activity: data?.activity ?? placeholder,
                 hasTap: false,
+                onReply: () => reply(
+                    ref, context, (data?.activity ?? placeholder), refetch),
               ),
             ),
             SliverAppBar(
@@ -94,30 +124,8 @@ class ActivityPage extends HookConsumerWidget {
               surfaceTintColor: Colors.transparent,
               flexibleSpace: FlexibleSpaceBar(
                 background: InkWell(
-                  onTap: requiredLogin(
-                    ref,
-                    "reply",
-                    () => MarkdownEditor.show(
-                      context,
-                      leading: ActivityCard(
-                        activity: data?.activity ?? placeholder,
-                        hasTap: false,
-                        withFooter: false,
-                      ),
-                      onSave: (text) => c
-                          .query(GQLRequest(
-                            saveActivityReplyQuery,
-                            variables: Variables$Mutation$SaveActivityReply(
-                              text: text,
-                              activityId: (placeholder ?? data?.activity)!.id,
-                            ).toJson(),
-                          ))
-                          .last
-                          .then(
-                            (value) => refetch(),
-                          ),
-                    ),
-                  ),
+                  onTap: () => reply(
+                      ref, context, (data?.activity ?? placeholder), refetch),
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -228,7 +236,8 @@ class ActivityCard extends ConsumerWidget {
       this.hasTap = true,
       // this.onDeleted,
       this.refetch,
-      this.withFooter = true})
+      this.withFooter = true,
+      this.onReply})
       : assert(activity is Fragment$ListActivity ||
             activity is Fragment$TextActivity ||
             activity is Fragment$MessageActivity);
@@ -237,11 +246,18 @@ class ActivityCard extends ConsumerWidget {
   final bool hasTap;
   final QueryRefetch? refetch;
   final bool withFooter;
+  final VoidCallback? onReply;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var userId = ref.watch(
         userProvider.select((value) => value.value?.parsedData?.Viewer?.id));
+
+    var path = 'idk';
+
+    try {
+      path = context.routeData.path;
+    } catch (error) {}
 
     var footer = withFooter
         ? Padding(
@@ -278,11 +294,17 @@ class ActivityCard extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: 5),
-                Row(
-                  children: [
-                    const Icon(Icons.chat),
-                    Text((activity.replyCount ?? 0).toString())
-                  ],
+                IconButton(
+                  onPressed: hasTap
+                      ? () => context.pushRoute(
+                          ActivityRoute(id: activity.id, placeholder: activity))
+                      : onReply,
+                  icon: Row(
+                    children: [
+                      const Icon(Icons.chat),
+                      Text((activity.replyCount ?? 0).toString())
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 5),
                 IconButton(
@@ -332,23 +354,6 @@ class ActivityCard extends ConsumerWidget {
                             .then((_) => refetch?.call()),
                       ),
                     ),
-                    // onPressed: requiredLogin(
-                    //   ref,
-                    //   "delete an activity.",
-                    //   () => ConfirmationDialog.show(
-                    //     context,
-                    //     "activity",
-                    //     () => client
-                    //         .request(
-                    //           GDeleteActivityReq(
-                    //             (b) => b..vars.id = activity.id,
-                    //           ),
-                    //         )
-                    //         .first
-                    //         .then((value) => onDeleted?.call()),
-                    //     delete: true,
-                    //   ),
-                    // ),
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
