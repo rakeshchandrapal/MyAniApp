@@ -1,14 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:myaniapp/router.gr.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @AutoRouterConfig()
-class AppRouter extends $AppRouter {
+class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
           page: HomeRoute.page,
           initial: true,
           path: "/",
+          guards: [OnboardGuard()],
           children: [
             AutoRoute(page: HomeLoggedInOverviewRoute.page, path: "home"),
             AutoRoute(page: HomeAnimeListRoute.page, path: "anime"),
@@ -77,6 +79,19 @@ class AppRouter extends $AppRouter {
             page: UserFavoritesRoute.page, path: "/user/:name/favorites/:tab"),
         AutoRoute(page: AuthRoute.page, path: "/auth")
       ];
+}
+
+// on first launch go to login page
+class OnboardGuard extends AutoRouteGuard {
+  @override
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    var prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey("seenOnboard")) {
+      resolver.next(true);
+    } else {
+      resolver.redirect(const LoginRoute());
+    }
+  }
 }
 
 var router = AppRouter();

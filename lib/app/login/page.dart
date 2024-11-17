@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myaniapp/providers/shared_prefs.dart';
 import 'package:myaniapp/router.gr.dart';
 
 @RoutePage()
@@ -112,11 +114,11 @@ class FirstOnboard extends StatelessWidget {
   }
 }
 
-class LastOnboard extends StatelessWidget {
+class LastOnboard extends ConsumerWidget {
   const LastOnboard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
@@ -131,7 +133,10 @@ class LastOnboard extends StatelessWidget {
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(Colors.blue[100]!),
                 ),
-                onPressed: () => context.pushRoute(const AnilistLoginRoute()),
+                onPressed: () => ref
+                    .read(sharedPrefsProvider)
+                    .setBool("seenOnboard", true)
+                    .then((d) => context.pushRoute(const AnilistLoginRoute())),
                 child: const Text(
                   "Login with Anilist",
                   style: TextStyle(color: Colors.black),
@@ -144,7 +149,10 @@ class LastOnboard extends StatelessWidget {
             SizedBox(
               width: double.maxFinite,
               child: ElevatedButton(
-                onPressed: () => context.pushRoute(const TokenLoginRoute()),
+                onPressed: () => ref
+                    .read(sharedPrefsProvider)
+                    .setBool("seenOnboard", true)
+                    .then((d) => context.pushRoute(const TokenLoginRoute())),
                 child: const Text("Login with Token"),
               ),
             ),
@@ -154,7 +162,12 @@ class LastOnboard extends StatelessWidget {
             SizedBox(
               width: double.maxFinite,
               child: ElevatedButton(
-                onPressed: () => context.replaceRoute(HomeRoute()),
+                onPressed: () {
+                  ref
+                      .read(sharedPrefsProvider)
+                      .setBool("seenOnboard", true)
+                      .then((d) => context.replaceRoute(const HomeRoute()));
+                },
                 child: const Text("Continue without logging in"),
               ),
             )

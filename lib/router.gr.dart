@@ -69,450 +69,6 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/thread.graphql.dart'
 import 'package:myaniapp/graphql/__gen/graphql/fragments/user.graphql.dart'
     as _i54;
 
-abstract class $AppRouter extends _i44.RootStackRouter {
-  $AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, _i44.PageFactory> pagesMap = {
-    ActivityRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ActivityRouteArgs>(
-          orElse: () => ActivityRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i1.ActivityPage(
-          key: args.key,
-          id: args.id,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    AnilistLoginRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i2.AnilistLoginScreen(),
-      );
-    },
-    AuthRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<AuthRouteArgs>(
-          orElse: () => AuthRouteArgs(
-              accessToken: queryParams.optString('access_token')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i3.AuthScreen(
-          key: args.key,
-          accessToken: args.accessToken,
-        ),
-      );
-    },
-    CalendarRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i4.CalendarScreen(),
-      );
-    },
-    CharacterRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CharacterRouteArgs>(
-          orElse: () => CharacterRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i5.CharacterPage(
-          key: args.key,
-          id: args.id,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    ExploreRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i6.ExploreScreen(),
-      );
-    },
-    ForumRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<ForumRouteArgs>(
-          orElse: () => ForumRouteArgs(
-                search: queryParams.optString('search'),
-                category: queryParams.optInt('category'),
-                tab: pathParams.getString('tab'),
-              ));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i7.ForumScreen(
-          key: args.key,
-          search: args.search,
-          category: args.category,
-          tab: args.tab,
-        ),
-      );
-    },
-    HomeActivitiesRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i8.HomeActivitiesScreen(),
-      );
-    },
-    HomeAnimeListRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.HomeAnimeListScreen(),
-      );
-    },
-    HomeLoggedInOverviewRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i10.HomeLoggedInOverviewScreen(),
-      );
-    },
-    HomeMangaListRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i11.HomeMangaListPage(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i12.HomeScreen(),
-      );
-    },
-    LoginRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i13.LoginScreen(),
-      );
-    },
-    MediaCharactersRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MediaCharactersRouteArgs>(
-          orElse: () => MediaCharactersRouteArgs());
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i14.MediaCharactersScreen(
-          key: args.key,
-          mediaId: pathParams.getInt('id'),
-        ),
-      );
-    },
-    MediaInfoRoute.name: (routeData) {
-      final args = routeData.argsAs<MediaInfoRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i15.MediaInfoScreen(
-          key: args.key,
-          media: args.media,
-        ),
-      );
-    },
-    MediaRelationsRoute.name: (routeData) {
-      final args = routeData.argsAs<MediaRelationsRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i16.MediaRelationsScreen(
-          key: args.key,
-          media: args.media,
-        ),
-      );
-    },
-    MediaReviewsRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MediaReviewsRouteArgs>(
-          orElse: () => MediaReviewsRouteArgs());
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i17.MediaReviewsScreen(
-          key: args.key,
-          mediaId: pathParams.getInt('id'),
-        ),
-      );
-    },
-    MediaRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MediaRouteArgs>(
-          orElse: () => MediaRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i18.MediaScreen(
-          key: args.key,
-          id: args.id,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    MediaSimilarRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MediaSimilarRouteArgs>(
-          orElse: () => MediaSimilarRouteArgs());
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i19.MediaSimilarScreen(
-          key: args.key,
-          mediaId: pathParams.getInt('id'),
-        ),
-      );
-    },
-    MediaStaffRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MediaStaffRouteArgs>(
-          orElse: () => MediaStaffRouteArgs());
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i20.MediaStaffScreen(
-          key: args.key,
-          mediaId: pathParams.getInt('id'),
-        ),
-      );
-    },
-    MediaThreadsRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<MediaThreadsRouteArgs>(
-          orElse: () => MediaThreadsRouteArgs());
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i21.MediaThreadsScreen(
-          key: args.key,
-          mediaId: pathParams.getInt('id'),
-        ),
-      );
-    },
-    NotificationRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i22.NotificationScreen(),
-      );
-    },
-    RecommendationsRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i23.RecommendationsScreen(),
-      );
-    },
-    ReviewRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ReviewRouteArgs>(
-          orElse: () => ReviewRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i24.ReviewScreen(
-          key: args.key,
-          id: args.id,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    ReviewsRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i25.ReviewsScreen(),
-      );
-    },
-    SearchRoute.name: (routeData) {
-      final args = routeData.argsAs<SearchRouteArgs>(
-          orElse: () => const SearchRouteArgs());
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i26.SearchScreen(
-          key: args.key,
-          autofocus: args.autofocus,
-        ),
-      );
-    },
-    SettingsRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i27.SettingsScreen(),
-      );
-    },
-    StaffProductionRolesRoute.name: (routeData) {
-      final args = routeData.argsAs<StaffProductionRolesRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i28.StaffProductionRolesScreen(
-          key: args.key,
-          staffRoles: args.staffRoles,
-        ),
-      );
-    },
-    StaffRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<StaffRouteArgs>(
-          orElse: () => StaffRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i29.StaffScreen(
-          key: args.key,
-          id: args.id,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    StaffVARolesRoute.name: (routeData) {
-      final args = routeData.argsAs<StaffVARolesRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i30.StaffVARolesScreen(
-          key: args.key,
-          medias: args.medias,
-        ),
-      );
-    },
-    StudioRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<StudioRouteArgs>(
-          orElse: () => StudioRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i31.StudioScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    ThreadCommentRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ThreadCommentRouteArgs>(
-          orElse: () => ThreadCommentRouteArgs(
-                commentId: pathParams.getInt('commentId'),
-                id: pathParams.getInt('id'),
-              ));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i32.ThreadCommentScreen(
-          key: args.key,
-          commentId: args.commentId,
-          id: args.id,
-        ),
-      );
-    },
-    ThreadRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ThreadRouteArgs>(
-          orElse: () => ThreadRouteArgs(id: pathParams.getInt('id')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i33.ThreadScreen(
-          key: args.key,
-          id: args.id,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    TokenLoginRoute.name: (routeData) {
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i34.TokenLoginPage(),
-      );
-    },
-    UserActivityRoute.name: (routeData) {
-      final args = routeData.argsAs<UserActivityRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i35.UserActivityScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    UserAnimeRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<UserAnimeRouteArgs>(
-          orElse: () => UserAnimeRouteArgs(name: pathParams.getString('name')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i36.UserAnimeScreen(
-          key: args.key,
-          name: args.name,
-        ),
-      );
-    },
-    UserFavoritesRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<UserFavoritesRouteArgs>(
-          orElse: () => UserFavoritesRouteArgs(
-                name: pathParams.getString('name'),
-                tab: pathParams.getString('tab'),
-              ));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i37.UserFavoritesScreen(
-          key: args.key,
-          name: args.name,
-          tab: args.tab,
-        ),
-      );
-    },
-    UserInfoRoute.name: (routeData) {
-      final args = routeData.argsAs<UserInfoRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i38.UserInfoScreen(
-          key: args.key,
-          user: args.user,
-        ),
-      );
-    },
-    UserMangaRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<UserMangaRouteArgs>(
-          orElse: () => UserMangaRouteArgs(name: pathParams.getString('name')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i39.UserMangaScreen(
-          key: args.key,
-          name: args.name,
-        ),
-      );
-    },
-    UserReviewsRoute.name: (routeData) {
-      final args = routeData.argsAs<UserReviewsRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i40.UserReviewsScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    UserRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<UserRouteArgs>(
-          orElse: () => UserRouteArgs(name: pathParams.getString('name')));
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i41.UserScreen(
-          key: args.key,
-          name: args.name,
-          placeholder: args.placeholder,
-        ),
-      );
-    },
-    UserSocialRoute.name: (routeData) {
-      final args = routeData.argsAs<UserSocialRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i42.UserSocialScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    UserThreadsRoute.name: (routeData) {
-      final args = routeData.argsAs<UserThreadsRouteArgs>();
-      return _i44.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i43.UserThreadsScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [_i1.ActivityPage]
 class ActivityRoute extends _i44.PageRouteInfo<ActivityRouteArgs> {
@@ -534,8 +90,19 @@ class ActivityRoute extends _i44.PageRouteInfo<ActivityRouteArgs> {
 
   static const String name = 'ActivityRoute';
 
-  static const _i44.PageInfo<ActivityRouteArgs> page =
-      _i44.PageInfo<ActivityRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ActivityRouteArgs>(
+          orElse: () => ActivityRouteArgs(id: pathParams.getInt('id')));
+      return _i1.ActivityPage(
+        key: args.key,
+        id: args.id,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class ActivityRouteArgs {
@@ -568,7 +135,12 @@ class AnilistLoginRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'AnilistLoginRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.AnilistLoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -590,8 +162,19 @@ class AuthRoute extends _i44.PageRouteInfo<AuthRouteArgs> {
 
   static const String name = 'AuthRoute';
 
-  static const _i44.PageInfo<AuthRouteArgs> page =
-      _i44.PageInfo<AuthRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final queryParams = data.queryParams;
+      final args = data.argsAs<AuthRouteArgs>(
+          orElse: () => AuthRouteArgs(
+              accessToken: queryParams.optString('access_token')));
+      return _i3.AuthScreen(
+        key: args.key,
+        accessToken: args.accessToken,
+      );
+    },
+  );
 }
 
 class AuthRouteArgs {
@@ -621,7 +204,12 @@ class CalendarRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'CalendarRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.CalendarScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -645,8 +233,19 @@ class CharacterRoute extends _i44.PageRouteInfo<CharacterRouteArgs> {
 
   static const String name = 'CharacterRoute';
 
-  static const _i44.PageInfo<CharacterRouteArgs> page =
-      _i44.PageInfo<CharacterRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<CharacterRouteArgs>(
+          orElse: () => CharacterRouteArgs(id: pathParams.getInt('id')));
+      return _i5.CharacterPage(
+        key: args.key,
+        id: args.id,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class CharacterRouteArgs {
@@ -679,7 +278,12 @@ class ExploreRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'ExploreRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.ExploreScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -709,8 +313,25 @@ class ForumRoute extends _i44.PageRouteInfo<ForumRouteArgs> {
 
   static const String name = 'ForumRoute';
 
-  static const _i44.PageInfo<ForumRouteArgs> page =
-      _i44.PageInfo<ForumRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final queryParams = data.queryParams;
+      final args = data.argsAs<ForumRouteArgs>(
+          orElse: () => ForumRouteArgs(
+                search: queryParams.optString('search'),
+                category: queryParams.optInt('category'),
+                tab: pathParams.getString('tab'),
+              ));
+      return _i7.ForumScreen(
+        key: args.key,
+        search: args.search,
+        category: args.category,
+        tab: args.tab,
+      );
+    },
+  );
 }
 
 class ForumRouteArgs {
@@ -746,7 +367,12 @@ class HomeActivitiesRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'HomeActivitiesRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i8.HomeActivitiesScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -760,7 +386,12 @@ class HomeAnimeListRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'HomeAnimeListRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i9.HomeAnimeListScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -774,7 +405,12 @@ class HomeLoggedInOverviewRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'HomeLoggedInOverviewRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i10.HomeLoggedInOverviewScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -788,7 +424,12 @@ class HomeMangaListRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'HomeMangaListRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i11.HomeMangaListPage();
+    },
+  );
 }
 
 /// generated route for
@@ -802,7 +443,12 @@ class HomeRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i12.HomeScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -816,7 +462,12 @@ class LoginRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i13.LoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -834,8 +485,18 @@ class MediaCharactersRoute
 
   static const String name = 'MediaCharactersRoute';
 
-  static const _i44.PageInfo<MediaCharactersRouteArgs> page =
-      _i44.PageInfo<MediaCharactersRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<MediaCharactersRouteArgs>(
+          orElse: () => MediaCharactersRouteArgs());
+      return _i14.MediaCharactersScreen(
+        key: args.key,
+        mediaId: pathParams.getInt('id'),
+      );
+    },
+  );
 }
 
 class MediaCharactersRouteArgs {
@@ -867,8 +528,16 @@ class MediaInfoRoute extends _i44.PageRouteInfo<MediaInfoRouteArgs> {
 
   static const String name = 'MediaInfoRoute';
 
-  static const _i44.PageInfo<MediaInfoRouteArgs> page =
-      _i44.PageInfo<MediaInfoRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MediaInfoRouteArgs>();
+      return _i15.MediaInfoScreen(
+        key: args.key,
+        media: args.media,
+      );
+    },
+  );
 }
 
 class MediaInfoRouteArgs {
@@ -905,8 +574,16 @@ class MediaRelationsRoute extends _i44.PageRouteInfo<MediaRelationsRouteArgs> {
 
   static const String name = 'MediaRelationsRoute';
 
-  static const _i44.PageInfo<MediaRelationsRouteArgs> page =
-      _i44.PageInfo<MediaRelationsRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MediaRelationsRouteArgs>();
+      return _i16.MediaRelationsScreen(
+        key: args.key,
+        media: args.media,
+      );
+    },
+  );
 }
 
 class MediaRelationsRouteArgs {
@@ -939,8 +616,18 @@ class MediaReviewsRoute extends _i44.PageRouteInfo<MediaReviewsRouteArgs> {
 
   static const String name = 'MediaReviewsRoute';
 
-  static const _i44.PageInfo<MediaReviewsRouteArgs> page =
-      _i44.PageInfo<MediaReviewsRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<MediaReviewsRouteArgs>(
+          orElse: () => MediaReviewsRouteArgs());
+      return _i17.MediaReviewsScreen(
+        key: args.key,
+        mediaId: pathParams.getInt('id'),
+      );
+    },
+  );
 }
 
 class MediaReviewsRouteArgs {
@@ -975,8 +662,19 @@ class MediaRoute extends _i44.PageRouteInfo<MediaRouteArgs> {
 
   static const String name = 'MediaRoute';
 
-  static const _i44.PageInfo<MediaRouteArgs> page =
-      _i44.PageInfo<MediaRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<MediaRouteArgs>(
+          orElse: () => MediaRouteArgs(id: pathParams.getInt('id')));
+      return _i18.MediaScreen(
+        key: args.key,
+        id: args.id,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class MediaRouteArgs {
@@ -1012,8 +710,18 @@ class MediaSimilarRoute extends _i44.PageRouteInfo<MediaSimilarRouteArgs> {
 
   static const String name = 'MediaSimilarRoute';
 
-  static const _i44.PageInfo<MediaSimilarRouteArgs> page =
-      _i44.PageInfo<MediaSimilarRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<MediaSimilarRouteArgs>(
+          orElse: () => MediaSimilarRouteArgs());
+      return _i19.MediaSimilarScreen(
+        key: args.key,
+        mediaId: pathParams.getInt('id'),
+      );
+    },
+  );
 }
 
 class MediaSimilarRouteArgs {
@@ -1041,8 +749,18 @@ class MediaStaffRoute extends _i44.PageRouteInfo<MediaStaffRouteArgs> {
 
   static const String name = 'MediaStaffRoute';
 
-  static const _i44.PageInfo<MediaStaffRouteArgs> page =
-      _i44.PageInfo<MediaStaffRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args =
+          data.argsAs<MediaStaffRouteArgs>(orElse: () => MediaStaffRouteArgs());
+      return _i20.MediaStaffScreen(
+        key: args.key,
+        mediaId: pathParams.getInt('id'),
+      );
+    },
+  );
 }
 
 class MediaStaffRouteArgs {
@@ -1070,8 +788,18 @@ class MediaThreadsRoute extends _i44.PageRouteInfo<MediaThreadsRouteArgs> {
 
   static const String name = 'MediaThreadsRoute';
 
-  static const _i44.PageInfo<MediaThreadsRouteArgs> page =
-      _i44.PageInfo<MediaThreadsRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<MediaThreadsRouteArgs>(
+          orElse: () => MediaThreadsRouteArgs());
+      return _i21.MediaThreadsScreen(
+        key: args.key,
+        mediaId: pathParams.getInt('id'),
+      );
+    },
+  );
 }
 
 class MediaThreadsRouteArgs {
@@ -1096,7 +824,12 @@ class NotificationRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'NotificationRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i22.NotificationScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1110,7 +843,12 @@ class RecommendationsRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'RecommendationsRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i23.RecommendationsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1134,8 +872,19 @@ class ReviewRoute extends _i44.PageRouteInfo<ReviewRouteArgs> {
 
   static const String name = 'ReviewRoute';
 
-  static const _i44.PageInfo<ReviewRouteArgs> page =
-      _i44.PageInfo<ReviewRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ReviewRouteArgs>(
+          orElse: () => ReviewRouteArgs(id: pathParams.getInt('id')));
+      return _i24.ReviewScreen(
+        key: args.key,
+        id: args.id,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class ReviewRouteArgs {
@@ -1168,7 +917,12 @@ class ReviewsRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'ReviewsRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i25.ReviewsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1189,8 +943,17 @@ class SearchRoute extends _i44.PageRouteInfo<SearchRouteArgs> {
 
   static const String name = 'SearchRoute';
 
-  static const _i44.PageInfo<SearchRouteArgs> page =
-      _i44.PageInfo<SearchRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<SearchRouteArgs>(orElse: () => const SearchRouteArgs());
+      return _i26.SearchScreen(
+        key: args.key,
+        autofocus: args.autofocus,
+      );
+    },
+  );
 }
 
 class SearchRouteArgs {
@@ -1220,7 +983,12 @@ class SettingsRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'SettingsRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i27.SettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1242,8 +1010,16 @@ class StaffProductionRolesRoute
 
   static const String name = 'StaffProductionRolesRoute';
 
-  static const _i44.PageInfo<StaffProductionRolesRouteArgs> page =
-      _i44.PageInfo<StaffProductionRolesRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StaffProductionRolesRouteArgs>();
+      return _i28.StaffProductionRolesScreen(
+        key: args.key,
+        staffRoles: args.staffRoles,
+      );
+    },
+  );
 }
 
 class StaffProductionRolesRouteArgs {
@@ -1283,8 +1059,19 @@ class StaffRoute extends _i44.PageRouteInfo<StaffRouteArgs> {
 
   static const String name = 'StaffRoute';
 
-  static const _i44.PageInfo<StaffRouteArgs> page =
-      _i44.PageInfo<StaffRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<StaffRouteArgs>(
+          orElse: () => StaffRouteArgs(id: pathParams.getInt('id')));
+      return _i29.StaffScreen(
+        key: args.key,
+        id: args.id,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class StaffRouteArgs {
@@ -1324,8 +1111,16 @@ class StaffVARolesRoute extends _i44.PageRouteInfo<StaffVARolesRouteArgs> {
 
   static const String name = 'StaffVARolesRoute';
 
-  static const _i44.PageInfo<StaffVARolesRouteArgs> page =
-      _i44.PageInfo<StaffVARolesRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StaffVARolesRouteArgs>();
+      return _i30.StaffVARolesScreen(
+        key: args.key,
+        medias: args.medias,
+      );
+    },
+  );
 }
 
 class StaffVARolesRouteArgs {
@@ -1363,8 +1158,18 @@ class StudioRoute extends _i44.PageRouteInfo<StudioRouteArgs> {
 
   static const String name = 'StudioRoute';
 
-  static const _i44.PageInfo<StudioRouteArgs> page =
-      _i44.PageInfo<StudioRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<StudioRouteArgs>(
+          orElse: () => StudioRouteArgs(id: pathParams.getInt('id')));
+      return _i31.StudioScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class StudioRouteArgs {
@@ -1407,8 +1212,22 @@ class ThreadCommentRoute extends _i44.PageRouteInfo<ThreadCommentRouteArgs> {
 
   static const String name = 'ThreadCommentRoute';
 
-  static const _i44.PageInfo<ThreadCommentRouteArgs> page =
-      _i44.PageInfo<ThreadCommentRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ThreadCommentRouteArgs>(
+          orElse: () => ThreadCommentRouteArgs(
+                commentId: pathParams.getInt('commentId'),
+                id: pathParams.getInt('id'),
+              ));
+      return _i32.ThreadCommentScreen(
+        key: args.key,
+        commentId: args.commentId,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class ThreadCommentRouteArgs {
@@ -1451,8 +1270,19 @@ class ThreadRoute extends _i44.PageRouteInfo<ThreadRouteArgs> {
 
   static const String name = 'ThreadRoute';
 
-  static const _i44.PageInfo<ThreadRouteArgs> page =
-      _i44.PageInfo<ThreadRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ThreadRouteArgs>(
+          orElse: () => ThreadRouteArgs(id: pathParams.getInt('id')));
+      return _i33.ThreadScreen(
+        key: args.key,
+        id: args.id,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class ThreadRouteArgs {
@@ -1485,7 +1315,12 @@ class TokenLoginRoute extends _i44.PageRouteInfo<void> {
 
   static const String name = 'TokenLoginRoute';
 
-  static const _i44.PageInfo<void> page = _i44.PageInfo<void>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      return const _i34.TokenLoginPage();
+    },
+  );
 }
 
 /// generated route for
@@ -1506,8 +1341,16 @@ class UserActivityRoute extends _i44.PageRouteInfo<UserActivityRouteArgs> {
 
   static const String name = 'UserActivityRoute';
 
-  static const _i44.PageInfo<UserActivityRouteArgs> page =
-      _i44.PageInfo<UserActivityRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UserActivityRouteArgs>();
+      return _i35.UserActivityScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class UserActivityRouteArgs {
@@ -1545,8 +1388,18 @@ class UserAnimeRoute extends _i44.PageRouteInfo<UserAnimeRouteArgs> {
 
   static const String name = 'UserAnimeRoute';
 
-  static const _i44.PageInfo<UserAnimeRouteArgs> page =
-      _i44.PageInfo<UserAnimeRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<UserAnimeRouteArgs>(
+          orElse: () => UserAnimeRouteArgs(name: pathParams.getString('name')));
+      return _i36.UserAnimeScreen(
+        key: args.key,
+        name: args.name,
+      );
+    },
+  );
 }
 
 class UserAnimeRouteArgs {
@@ -1589,8 +1442,22 @@ class UserFavoritesRoute extends _i44.PageRouteInfo<UserFavoritesRouteArgs> {
 
   static const String name = 'UserFavoritesRoute';
 
-  static const _i44.PageInfo<UserFavoritesRouteArgs> page =
-      _i44.PageInfo<UserFavoritesRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<UserFavoritesRouteArgs>(
+          orElse: () => UserFavoritesRouteArgs(
+                name: pathParams.getString('name'),
+                tab: pathParams.getString('tab'),
+              ));
+      return _i37.UserFavoritesScreen(
+        key: args.key,
+        name: args.name,
+        tab: args.tab,
+      );
+    },
+  );
 }
 
 class UserFavoritesRouteArgs {
@@ -1630,8 +1497,16 @@ class UserInfoRoute extends _i44.PageRouteInfo<UserInfoRouteArgs> {
 
   static const String name = 'UserInfoRoute';
 
-  static const _i44.PageInfo<UserInfoRouteArgs> page =
-      _i44.PageInfo<UserInfoRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UserInfoRouteArgs>();
+      return _i38.UserInfoScreen(
+        key: args.key,
+        user: args.user,
+      );
+    },
+  );
 }
 
 class UserInfoRouteArgs {
@@ -1669,8 +1544,18 @@ class UserMangaRoute extends _i44.PageRouteInfo<UserMangaRouteArgs> {
 
   static const String name = 'UserMangaRoute';
 
-  static const _i44.PageInfo<UserMangaRouteArgs> page =
-      _i44.PageInfo<UserMangaRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<UserMangaRouteArgs>(
+          orElse: () => UserMangaRouteArgs(name: pathParams.getString('name')));
+      return _i39.UserMangaScreen(
+        key: args.key,
+        name: args.name,
+      );
+    },
+  );
 }
 
 class UserMangaRouteArgs {
@@ -1707,8 +1592,16 @@ class UserReviewsRoute extends _i44.PageRouteInfo<UserReviewsRouteArgs> {
 
   static const String name = 'UserReviewsRoute';
 
-  static const _i44.PageInfo<UserReviewsRouteArgs> page =
-      _i44.PageInfo<UserReviewsRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UserReviewsRouteArgs>();
+      return _i40.UserReviewsScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class UserReviewsRouteArgs {
@@ -1748,8 +1641,19 @@ class UserRoute extends _i44.PageRouteInfo<UserRouteArgs> {
 
   static const String name = 'UserRoute';
 
-  static const _i44.PageInfo<UserRouteArgs> page =
-      _i44.PageInfo<UserRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<UserRouteArgs>(
+          orElse: () => UserRouteArgs(name: pathParams.getString('name')));
+      return _i41.UserScreen(
+        key: args.key,
+        name: args.name,
+        placeholder: args.placeholder,
+      );
+    },
+  );
 }
 
 class UserRouteArgs {
@@ -1789,8 +1693,16 @@ class UserSocialRoute extends _i44.PageRouteInfo<UserSocialRouteArgs> {
 
   static const String name = 'UserSocialRoute';
 
-  static const _i44.PageInfo<UserSocialRouteArgs> page =
-      _i44.PageInfo<UserSocialRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UserSocialRouteArgs>();
+      return _i42.UserSocialScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class UserSocialRouteArgs {
@@ -1827,8 +1739,16 @@ class UserThreadsRoute extends _i44.PageRouteInfo<UserThreadsRouteArgs> {
 
   static const String name = 'UserThreadsRoute';
 
-  static const _i44.PageInfo<UserThreadsRouteArgs> page =
-      _i44.PageInfo<UserThreadsRouteArgs>(name);
+  static _i44.PageInfo page = _i44.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UserThreadsRouteArgs>();
+      return _i43.UserThreadsScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class UserThreadsRouteArgs {
