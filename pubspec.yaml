@@ -1,7 +1,7 @@
 name: myaniapp
 description: "An unofficial Anilist app."
 publish_to: "none"
-version: 0.5.8
+version: 0.5.9
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
@@ -11,18 +11,13 @@ dependencies:
   auto_route: ^9.2.2
   built_collection: ^5.1.1
   built_value: ^8.9.2
-  cached_network_image: ^3.3.1
+  cached_network_image: ^3.4.1
   collection: ^1.19.0
-  ferry: ^0.16.0+1
-  ferry_exec: ^0.6.1
-  ferry_flutter: ^0.9.0-dev.6
-  ferry_hive_store: ^0.5.2
-  ffi: ^2.1.2
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_hooks: ^0.20.5
-  flutter_local_notifications: ^17.2.3
+  flutter_local_notifications: ^18.0.1
   flutter_markdown: ^0.7.2+1
   flutter_riverpod: ^2.5.1
   gql: ^1.0.0+1
@@ -37,7 +32,7 @@ dependencies:
   markdown: ^7.2.2
   markdown_viewer: ^0.6.2
   markdown_widget: ^2.3.2+6
-  package_info_plus: ^8.0.0
+  package_info_plus: ^8.1.1
   relative_time: ^5.0.0
   shared_preferences: ^2.2.2
   url_launcher: ^6.2.5
@@ -49,20 +44,21 @@ dependencies:
     path: "./packages/mygraphql"
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
-  graphql_codegen: ^0.14.0
   hooks_riverpod: ^2.5.1
   gql_link: ^1.0.1-alpha+1717789143896
   numberpicker: ^2.1.2
   responsive_framework: ^1.5.1
   dots_indicator: ^3.0.0
+
 dev_dependencies:
+  graphql_codegen: ^1.1.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   # ferry_generator: ^0.10.0
   build_runner: ^2.4.11
-  custom_lint: ^0.6.4
-  riverpod_lint: ^2.3.10
+  custom_lint: ^0.7.0
+  riverpod_lint: ^2.3.2
   flutter_launcher_icons: ^0.13.1
   auto_route_generator: ^9.0.0
   freezed: ^2.5.2
