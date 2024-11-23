@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/providers/shared_prefs.dart';
 
 class _Settings {
@@ -8,6 +9,7 @@ class _Settings {
   final Color? primaryColor;
   final bool blurCovers;
   final bool showEmbedMediaCard;
+  final Enum$MediaType defaultHomeList;
 
   _Settings({
     required this.token,
@@ -15,6 +17,7 @@ class _Settings {
     required this.primaryColor,
     required this.blurCovers,
     required this.showEmbedMediaCard,
+    required this.defaultHomeList,
   });
 }
 
@@ -33,6 +36,10 @@ class _SettingsNotifier extends Notifier<_Settings> {
           : null,
       blurCovers: sharedPrefs.getBool("blurCovers") ?? false,
       showEmbedMediaCard: sharedPrefs.getBool("showEmbedMediaCard") ?? false,
+      defaultHomeList: Enum$MediaType.values.firstWhere((element) =>
+          element.name ==
+          (sharedPrefs.getString("defaultHomeList") ??
+              Enum$MediaType.ANIME.name)),
     );
   }
 
@@ -43,6 +50,7 @@ class _SettingsNotifier extends Notifier<_Settings> {
       primaryColor: state.primaryColor,
       blurCovers: state.blurCovers,
       showEmbedMediaCard: state.showEmbedMediaCard,
+      defaultHomeList: state.defaultHomeList,
     );
 
     ref.read(sharedPrefsProvider).setString("themeMode", themeMode.name);
@@ -57,6 +65,7 @@ class _SettingsNotifier extends Notifier<_Settings> {
       primaryColor: color,
       showEmbedMediaCard: state.showEmbedMediaCard,
       blurCovers: state.blurCovers,
+      defaultHomeList: state.defaultHomeList,
     );
 
     ref.read(sharedPrefsProvider).setInt("themeColor", color.value);
@@ -71,6 +80,7 @@ class _SettingsNotifier extends Notifier<_Settings> {
       blurCovers: blur,
       showEmbedMediaCard: state.showEmbedMediaCard,
       primaryColor: state.primaryColor,
+      defaultHomeList: state.defaultHomeList,
     );
 
     ref.read(sharedPrefsProvider).setBool("blurCovers", blur);
@@ -85,6 +95,7 @@ class _SettingsNotifier extends Notifier<_Settings> {
       blurCovers: state.blurCovers,
       showEmbedMediaCard: setting,
       primaryColor: state.primaryColor,
+      defaultHomeList: state.defaultHomeList,
     );
 
     ref.read(sharedPrefsProvider).setBool("showEmbedMediaCard", setting);
@@ -100,6 +111,7 @@ class _SettingsNotifier extends Notifier<_Settings> {
         blurCovers: state.blurCovers,
         primaryColor: state.primaryColor,
         showEmbedMediaCard: state.showEmbedMediaCard,
+        defaultHomeList: state.defaultHomeList,
       );
     });
 
@@ -110,6 +122,21 @@ class _SettingsNotifier extends Notifier<_Settings> {
     } else {
       await ref.read(sharedPrefsProvider).setString("token", token);
     }
+
+    ref.notifyListeners();
+  }
+
+  void updateDefaultHomeList(Enum$MediaType setting) {
+    state = _Settings(
+      token: state.token,
+      themeMode: state.themeMode,
+      blurCovers: state.blurCovers,
+      showEmbedMediaCard: state.showEmbedMediaCard,
+      primaryColor: state.primaryColor,
+      defaultHomeList: setting,
+    );
+
+    ref.read(sharedPrefsProvider).setString("defaultHomeList", setting.name);
 
     ref.notifyListeners();
   }

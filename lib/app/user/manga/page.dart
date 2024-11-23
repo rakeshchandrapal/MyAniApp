@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/user/anime/page.dart';
 import 'package:myaniapp/graphql/__gen/app/lists.graphql.dart';
-import 'package:myaniapp/graphql/__gen/graphql/fragments/list_group.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
@@ -48,10 +47,7 @@ class UserMangaScreen extends HookWidget {
         notificationPredicate: (notification) => notification.depth == 1,
         child: MediaListView(
           refetch: refetch,
-          groups: snapshot.parsedData!.MediaListCollection!.lists!
-              .whereType<Fragment$ListGroup>()
-              .toList(),
-          user: snapshot.parsedData!.MediaListCollection!.user!,
+          response: snapshot,
           type: Enum$MediaType.MANGA,
         ),
       ),

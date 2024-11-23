@@ -442,7 +442,24 @@ class SettingsScreen extends ConsumerWidget {
                           );
                     }
                   },
-                )
+                ),
+                PopupSettingsTile(
+                  title: "Default Home Page List",
+                  value: settings.defaultHomeList,
+                  onSelected: (value) => ref
+                      .read(settingsProvider.notifier)
+                      .updateDefaultHomeList(value),
+                  items: [
+                    PopupSettingItem(
+                      value: Enum$MediaType.ANIME,
+                      label: "Anime",
+                    ),
+                    PopupSettingItem(
+                      value: Enum$MediaType.MANGA,
+                      label: "Manga",
+                    ),
+                  ],
+                ),
               ],
             ),
         ],
@@ -540,7 +557,8 @@ class SettingsTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   DefaultTextStyle(
-                    style: context.theme.textTheme.bodyLarge ?? const TextStyle(),
+                    style:
+                        context.theme.textTheme.bodyLarge ?? const TextStyle(),
                     child: title,
                   ),
                   if (subtitle != null)

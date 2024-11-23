@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/activity/page.dart';
-import 'package:myaniapp/app/forum/%5Btab%5D/page.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/home/page.dart';
 import 'package:myaniapp/common/hiding_floating_button.dart';
@@ -12,7 +11,6 @@ import 'package:myaniapp/graphql/__gen/app/home/activities.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/providers/user.dart';
-import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
 
@@ -40,20 +38,14 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
     var (:snapshot, :fetchMore, :refetch) = c.useQuery(
-      GQLRequest(homeActivitiesQuery,
-          variables: Variables$Query$HomeActivities(
-                  hasReplies: !isFollowing, isFollowing: isFollowing)
-              .toJson(),
-          parseData: Query$HomeActivities.fromJson,
-          mergeResults: defaultMergeResults("Page.activities")
-          // mergeResults: (previousResult, result) {
-          //   result['data']['Page']['activities'] = [
-          //     ...?previousResult?['data']?['Page']?['activities'],
-          //     ...?result['data']?['Page']?['activities']
-          //   ];
-          //   return result;
-          // },
-          ),
+      GQLRequest(
+        homeActivitiesQuery,
+        variables: Variables$Query$HomeActivities(
+                hasReplies: !isFollowing, isFollowing: isFollowing)
+            .toJson(),
+        parseData: Query$HomeActivities.fromJson,
+        mergeResults: defaultMergeResults("Page.activities"),
+      ),
     );
 
     return HidingFloatingButton(
@@ -84,20 +76,14 @@ class _HomeActivitiesScreenState extends ConsumerState<HomeActivitiesScreen> {
         appBar: AppBar(
           leading: const HomeLeadingIcon(),
           actions: [
-            IconButton(
-              // onPressed: () {},
-              onPressed: () => context.pushRoute(ForumRoute(
-                tab: ForumTabs.overview.name,
-              )),
-              icon: const Icon(Icons.forum),
-            ),
             if (user.value?.data != null)
               Switch.adaptive(
                 value: isFollowing,
                 thumbIcon: WidgetStateProperty.resolveWith(getThumbIcon),
                 onChanged: (value) {
                   setState(() => isFollowing = !isFollowing);
-                  Future.delayed(const Duration(milliseconds: 100), () => refetch());
+                  Future.delayed(
+                      const Duration(milliseconds: 100), () => refetch());
                 },
               ),
           ],

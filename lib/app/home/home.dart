@@ -75,14 +75,6 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
           onRefresh: refetch,
           child: ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Welcome ${user.value!.parsedData!.Viewer!.name}!",
-                  style: context.theme.textTheme.titleLarge
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
               InProgress(
                 list: snapshot.parsedData!.list!.mediaList!,
                 refetch: refetch,

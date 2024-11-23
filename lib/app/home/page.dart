@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myaniapp/app/forum/%5Btab%5D/page.dart';
 import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/common/show.dart';
@@ -32,10 +33,11 @@ class HomeScreen extends ConsumerWidget {
           const HomeLoggedInOverviewRoute(),
           const HomeAnimeListRoute(),
           const ExploreRoute(),
-          const HomeMangaListRoute()
+          // const HomeMangaListRoute()
         ] else
           const ExploreRoute(),
         const HomeActivitiesRoute(),
+        ForumRoute(tab: ForumTabs.overview.name),
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -44,14 +46,13 @@ class HomeScreen extends ConsumerWidget {
           const NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           if (user.value?.data != null) ...[
             const NavigationDestination(
-                icon: Icon(Icons.tv), label: "Anime List"),
+                icon: Icon(Icons.view_list_sharp), label: "Lists"),
             const NavigationDestination(
                 icon: Icon(Icons.explore), label: "Explore"),
-            const NavigationDestination(
-                icon: Icon(Icons.book), label: "Manga List"),
           ],
           const NavigationDestination(
               icon: Icon(Icons.chat), label: "Activities"),
+          const NavigationDestination(icon: Icon(Icons.forum), label: "Forums"),
         ];
 
         return OrientationBuilder(
@@ -72,7 +73,7 @@ class HomeScreen extends ConsumerWidget {
                     selectedIndex: tabsRouter.activeIndex,
                     onDestinationSelected: tabsRouter.setActiveIndex,
                   ),
-                  Expanded(child: child!),
+                  Expanded(child: child),
                 ],
               ),
             ),
