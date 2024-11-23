@@ -1,7 +1,7 @@
 name: myaniapp
 description: "An unofficial Anilist app."
 publish_to: "none"
-version: 0.5.9
+version: 0.5.10
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
@@ -79,7 +79,7 @@ icons_launcher:
       enable: true
     macos:
       enable: true
-    linux: 
+    linux:
       enable: true`
 
 flutter_launcher_icons:
