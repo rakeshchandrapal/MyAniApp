@@ -22,12 +22,11 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/router.gr.dart';
-import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
-import 'package:relative_time/relative_time.dart';
 
 @RoutePage()
 class MediaScreen extends StatefulHookWidget {

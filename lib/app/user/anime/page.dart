@@ -20,6 +20,7 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/list_group.graphql.dart
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 // import 'package:myaniapp/graphql/widget.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';

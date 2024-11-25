@@ -11,6 +11,7 @@ import 'package:myaniapp/graphql/__gen/app/notifications/notifications.graphql.d
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/notifications/notifications.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
@@ -211,7 +212,8 @@ class NotificationScreen extends HookWidget {
                                   maxLines: 3,
                                 ),
                                 Text(
-                                  dateFromTimestamp(n.createdAt)
+                                  (n.createdAt as int)
+                                      .dateFromTimestamp()
                                       .relativeTime(context),
                                   style: context.theme.textTheme.labelLarge
                                       ?.copyWith(

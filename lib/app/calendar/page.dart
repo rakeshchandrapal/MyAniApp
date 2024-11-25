@@ -11,6 +11,7 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/calendar/calendar.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
@@ -84,147 +85,146 @@ class _CalendarState extends State<Calendar> {
       refetch: refetch,
       response: snapshot,
       loading: null,
-      builder: ()  => CustomScrollView(
-          controller: scrollController,
-          slivers: [
-            SliverAppBar(
-              primary: false,
-              pinned: true,
-              automaticallyImplyLeading: false,
-              toolbarHeight: 50,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        scrollController.jumpTo(0);
-                        setState(
-                            () => day = day.subtract(const Duration(days: 1)));
-                      },
-                      icon: const Icon(Icons.arrow_left),
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        var selectedDate = await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(1940),
-                          initialDate: day,
-                          lastDate: DateTime(3000),
-                        );
+      builder: () => CustomScrollView(
+        controller: scrollController,
+        slivers: [
+          SliverAppBar(
+            primary: false,
+            pinned: true,
+            automaticallyImplyLeading: false,
+            toolbarHeight: 50,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      scrollController.jumpTo(0);
+                      setState(
+                          () => day = day.subtract(const Duration(days: 1)));
+                    },
+                    icon: const Icon(Icons.arrow_left),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      var selectedDate = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1940),
+                        initialDate: day,
+                        lastDate: DateTime(3000),
+                      );
 
-                        if (selectedDate != null &&
-                            !day.isAtSameMomentAs(selectedDate)) {
-                          scrollController.jumpTo(0);
-                          setState(() => day = selectedDate);
-                        }
-                      },
-                      child: Text(
-                        dateFormat.format(day),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
+                      if (selectedDate != null &&
+                          !day.isAtSameMomentAs(selectedDate)) {
                         scrollController.jumpTo(0);
-                        setState(() => day = day.add(const Duration(days: 1)));
-                      },
-                      icon: const Icon(Icons.arrow_right),
-                    )
-                  ],
-                ),
+                        setState(() => day = selectedDate);
+                      }
+                    },
+                    child: Text(
+                      dateFormat.format(day),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      scrollController.jumpTo(0);
+                      setState(() => day = day.add(const Duration(days: 1)));
+                    },
+                    icon: const Icon(Icons.arrow_right),
+                  )
+                ],
               ),
             ),
-            if (snapshot.loading == true)
-              const SliverFillRemaining(
-                child: Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              )
-            // else if (response?.hasErrors == true)
-            //   SliverFillRemaining(
-            //     child: GraphqlError(
-            //       exception: (response!.graphqlErrors, response.linkException),
-            //     ),
-            //   )
-            else
-              SliverList.builder(
-                itemBuilder: (context, index) {
-                  var schedule = snapshot.parsedData!.Page!.airingSchedules![index]!;
-                  var timestamp = dateFromTimestamp(schedule.airingAt);
+          ),
+          if (snapshot.loading == true)
+            const SliverFillRemaining(
+              child: Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            )
+          // else if (response?.hasErrors == true)
+          //   SliverFillRemaining(
+          //     child: GraphqlError(
+          //       exception: (response!.graphqlErrors, response.linkException),
+          //     ),
+          //   )
+          else
+            SliverList.builder(
+              itemBuilder: (context, index) {
+                var schedule =
+                    snapshot.parsedData!.Page!.airingSchedules![index]!;
+                var timestamp = schedule.airingAt.dateFromTimestamp();
 
-                  bool isNext = timestamp.isAfter(now)
-                      ? index != 0
-                          ? dateFromTimestamp(snapshot.parsedData!.Page!
-                                  .airingSchedules![index - 1]!.airingAt)
-                              .isBefore(now)
-                          : false
-                      : false;
+                bool isNext = timestamp.isAfter(now)
+                    ? index != 0
+                        ? snapshot.parsedData!.Page!
+                            .airingSchedules![index - 1]!.airingAt
+                            .dateFromTimestamp()
+                            .isBefore(now)
+                        : false
+                    : false;
 
-                  return Stack(
-                    children: [
-                      Card.outlined(
-                        child: InkWellImage(
-                          onTap: () => context.pushRoute(
-                            MediaRoute(
-                                id: schedule.media!.id,
-                                placeholder: schedule.media),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 120,
-                                width: 90,
-                                child: GridCard(
-                                  image:
-                                      schedule.media!.coverImage!.extraLarge!,
-                                  blur: schedule.media!.isAdult ?? false,
+                return Stack(
+                  children: [
+                    Card.outlined(
+                      child: InkWellImage(
+                        onTap: () => context.pushRoute(
+                          MediaRoute(
+                              id: schedule.media!.id,
+                              placeholder: schedule.media),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 120,
+                              width: 90,
+                              child: GridCard(
+                                image: schedule.media!.coverImage!.extraLarge!,
+                                blur: schedule.media!.isAdult ?? false,
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      schedule.media!.title!.userPreferred!,
+                                      style: context.theme.textTheme.labelLarge,
+                                    ),
+                                    Text(
+                                      "Episode ${schedule.episode} ${timestamp.isAfter(now) ? "airing at" : "aired at"} ${hourTime.format(timestamp)}",
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        schedule.media!.title!.userPreferred!,
-                                        style:
-                                            context.theme.textTheme.labelLarge,
-                                      ),
-                                      Text(
-                                        "Episode ${schedule.episode} ${timestamp.isAfter(now) ? "airing at" : "aired at"} ${hourTime.format(timestamp)}",
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      if (isNext)
-                        Positioned(
-                          top: 0,
-                          right: 5,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: imageRadius,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 8),
-                            child: const Text("Next"),
+                    ),
+                    if (isNext)
+                      Positioned(
+                        top: 0,
+                        right: 5,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: imageRadius,
                           ),
-                        )
-                    ],
-                  );
-                },
-                itemCount: snapshot.parsedData!.Page!.airingSchedules!.length,
-              ),
-          ],
-        ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 8),
+                          child: const Text("Next"),
+                        ),
+                      )
+                  ],
+                );
+              },
+              itemCount: snapshot.parsedData!.Page!.airingSchedules!.length,
+            ),
+        ],
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ library;
 export 'src/graphql_base.dart';
 export 'src/stores/cache.dart';
 export 'src/stores/in_memory.dart';
+export 'src/stores/hive.dart';
 export 'src/links/auth_link.dart';
 export 'src/response.dart';
 export 'src/hooks.dart';

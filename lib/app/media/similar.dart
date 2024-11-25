@@ -10,6 +10,7 @@ import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/graphql/__gen/app/media/similar.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:mygraphql/graphql.dart';
@@ -63,8 +64,7 @@ class MediaSimilarScreen extends HookConsumerWidget {
               onLongPress: () => MediaSheet.show(context, media),
             );
           },
-          itemCount:
-              snapshot.parsedData!.Media!.recommendations!.nodes!.length,
+          itemCount: snapshot.parsedData!.Media!.recommendations!.nodes!.length,
         ),
         child: () => PaginationView.grid(
           padding: const EdgeInsets.all(8),
@@ -98,8 +98,7 @@ class MediaSimilarScreen extends HookConsumerWidget {
               onLongPress: () => MediaSheet.show(context, media),
             );
           },
-          itemCount:
-              snapshot.parsedData!.Media!.recommendations!.nodes!.length,
+          itemCount: snapshot.parsedData!.Media!.recommendations!.nodes!.length,
         ),
       ),
       // builder: () => GraphqlPagination(

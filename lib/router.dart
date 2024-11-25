@@ -51,6 +51,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: ReviewRoute.page, path: "/review/:id"),
         AutoRoute(page: ReviewsRoute.page, path: "/reviews"),
         AutoRoute(page: SearchRoute.page, path: "/search/media"),
+        AutoRoute(page: StaffSearchRoute.page, path: "/search/staff"),
         AutoRoute(page: SettingsRoute.page, path: "/settings"),
         AutoRoute(
           page: StaffRoute.page,

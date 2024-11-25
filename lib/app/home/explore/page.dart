@@ -5,12 +5,14 @@ import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/home/page.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
+import 'package:myaniapp/common/text_viewall_button.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/home/explore/explore.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:mygraphql/graphql.dart';
 // import 'package:myaniapp/graphql/widget.dart';
@@ -73,6 +75,45 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                   ),
                   onTap: () => context.pushRoute(SearchRoute(autofocus: true)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8, top: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        SegmentedButton(
+                          segments: const [
+                            ButtonSegment(
+                              value: 0,
+                              icon: Icon(
+                                Icons.thumb_up,
+                                size: 17,
+                              ),
+                              label: Text('Search Media'),
+                            ),
+                            ButtonSegment(
+                              value: 1,
+                              icon: Icon(Icons.calendar_today),
+                              label: Text('Search Staff'),
+                            ),
+                          ],
+                          selected: const {9},
+                          onSelectionChanged: (v) {
+                            if (v.firstOrNull == 0) {
+                              context.pushRoute(SearchRoute());
+                            }
+                            if (v.firstOrNull == 1) {
+                              context.pushRoute(StaffSearchRoute());
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -195,24 +236,12 @@ class _List extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Text(
-                title,
-                style: context.theme.textTheme.titleLarge
-                    ?.copyWith(fontWeight: FontWeight.w500),
-              ),
-              TextButton(
-                onPressed: onTap,
-                child: const Text("more"),
-              )
-            ],
-          ),
+          child: TextViewAllButton(title: title, onTap: onTap),
         ),
         SizedBox(
-          height: 190,
+          height: 170,
           child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
             primary: false,
             children: [

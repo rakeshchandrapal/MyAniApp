@@ -114,3 +114,9 @@ extension Abbreviate on num {
     return f.format(this);
   }
 }
+
+extension DateFromUnix on int {
+  DateTime dateFromTimestamp() {
+    return DateTime.fromMillisecondsSinceEpoch(this * 1000);
+  }
+}

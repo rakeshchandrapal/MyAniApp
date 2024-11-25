@@ -91,7 +91,8 @@ class _CommentState extends State<Comment> {
                             width: 5,
                           ),
                           Text(
-                            dateFromTimestamp(widget.createdAt)
+                            widget.createdAt
+                                .dateFromTimestamp()
                                 .relativeTime(context),
                             style: context.theme.textTheme.labelSmall
                                 ?.copyWith(color: context.theme.hintColor),

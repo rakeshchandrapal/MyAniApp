@@ -10,6 +10,7 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/viewer.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/utils.dart';
@@ -287,7 +288,7 @@ class SettingsScreen extends ConsumerWidget {
                         value: score,
                         label: switch (score) {
                           Enum$ScoreFormat.POINT_3 =>
-                            "3 Point Simily ${scoreToText(score, 3)}",
+                            "3 Point Smiley ${scoreToText(score, 3)}",
                           Enum$ScoreFormat.POINT_5 =>
                             "5 Point ${scoreToText(score, 3)}",
                           Enum$ScoreFormat.POINT_10 =>

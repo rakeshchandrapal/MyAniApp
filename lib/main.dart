@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gql_http_link/gql_http_link.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myaniapp/background.dart';
 import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/app_info.dart';
@@ -15,17 +17,35 @@ import 'package:myaniapp/router.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/url_protocol/web_url_protocol.dart'
     if (dart.library.io) 'package:myaniapp/url_protocol/api.dart';
+import 'package:mygraphql/graphql.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:relative_time/relative_time.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
+
+late GraphqlClient c;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   var instance = await SharedPreferences.getInstance();
   final appInfo = await PackageInfo.fromPlatform();
+  await Hive.initFlutter();
+
+  var box = await Hive.openBox("graphql");
+
+  c = GraphqlClient(
+    cache: Cache(store: HiveStore(box)),
+    link: AuthLink(
+      getToken: () async {
+        var prefs = await SharedPreferences.getInstance();
+        return prefs.getString("token");
+      },
+      authHeader: "Authorization",
+    ).concat(
+      HttpLink("https://graphql.anilist.co"),
+    ),
+  );
 
   if (!kIsWeb) {
     if (Platform.isWindows) {
@@ -124,23 +144,16 @@ class _MainAppState extends ConsumerState<MainApp> {
     var color =
         ref.watch(settingsProvider.select((value) => value.primaryColor));
 
-    return ResponsiveBreakpoints(
-      breakpoints: const [
-        Breakpoint(start: 0, end: 450, name: MOBILE),
-        Breakpoint(start: 451, end: 800, name: TABLET),
-        Breakpoint(start: 801, end: 1920, name: DESKTOP),
+    return MaterialApp.router(
+      routerConfig: router.config(),
+      localizationsDelegates: const [
+        RelativeTimeLocalizations.delegate,
       ],
-      child: MaterialApp.router(
-        routerConfig: router.config(),
-        localizationsDelegates: const [
-          RelativeTimeLocalizations.delegate,
-        ],
-        themeMode: themeMode,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light(color),
-        darkTheme: AppTheme.dark(color),
-        scrollBehavior: _ScrollBehavior(),
-      ),
+      themeMode: themeMode,
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light(color),
+      darkTheme: AppTheme.dark(color),
+      scrollBehavior: _ScrollBehavior(),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:gql_http_link/gql_http_link.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:myaniapp/graphql/__gen/app/notifications/notifications.graphql.dart';
 import 'package:myaniapp/graphql/__gen/app/viewer.graphql.dart';
@@ -20,7 +19,6 @@ void callbackDispatcher() {
         if (!(await PushNotifications().hasPermission())) {
           return true;
         }
-        await Hive.initFlutter();
         final client = GraphqlClient(
           cache: Cache(store: InMemoryStore()),
           link: AuthLink(

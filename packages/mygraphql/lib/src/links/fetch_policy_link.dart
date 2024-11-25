@@ -8,7 +8,7 @@ import 'package:mygraphql/graphql.dart';
 import 'package:normalize/utils.dart';
 
 var _defaultFetchPolicy = {
-  OperationType.query: FetchPolicy.cacheFirst,
+  OperationType.query: FetchPolicy.cacheAndNetwork,
   OperationType.mutation: FetchPolicy.networkOnly,
   OperationType.subscription: FetchPolicy.cacheAndNetwork,
 };

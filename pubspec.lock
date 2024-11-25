@@ -159,7 +159,7 @@ packages:
     source: hosted
     version: "7.3.2"
   built_collection:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: built_collection
       sha256: "376e3dd27b51ea877c28d525560790aee2e6fbb5f20e2f85d5081027d94e2100"
@@ -167,7 +167,7 @@ packages:
     source: hosted
     version: "5.1.1"
   built_value:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: built_value
       sha256: c7913a9737ee4007efedaffc968c049fd0f3d0e49109e778edc10de9426005cb
@@ -310,14 +310,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0+6.7.0"
-  dart_markdown:
-    dependency: transitive
-    description:
-      name: dart_markdown
-      sha256: b9b7e13733dd418bc83e6f4e68d79caebab6cd3a8b301e91d1bfd6ef5ef8e993
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.7"
   dart_style:
     dependency: transitive
     description:
@@ -531,7 +523,7 @@ packages:
     source: hosted
     version: "1.0.1-alpha+1730759315362"
   gql_code_builder:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: gql_code_builder
       sha256: b70e17fe62af58c3a9a3dfd619bf0b07ca15afe4d285001fbcd0852a40538401
@@ -810,14 +802,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.2.2"
-  markdown_viewer:
-    dependency: "direct main"
-    description:
-      name: markdown_viewer
-      sha256: e819ea779eaeca933bb38228e02888ad72409aba922efb2e65abb2f8b046dc8e
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.2"
   markdown_widget:
     dependency: "direct main"
     description:
@@ -1033,14 +1017,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  responsive_framework:
-    dependency: "direct main"
-    description:
-      name: responsive_framework
-      sha256: a8e1c13d4ba980c60cbf6fa1e9907cd60662bf2585184d7c96ca46c43de91552
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.1"
   riverpod:
     dependency: transitive
     description:
@@ -1454,14 +1430,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.8.0"
-  win32_registry:
-    dependency: "direct main"
-    description:
-      name: win32_registry
-      sha256: "21ec76dfc731550fd3e2ce7a33a9ea90b828fdf19a5c3bcf556fa992cfa99852"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.5"
   workmanager:
     dependency: "direct main"
     description:

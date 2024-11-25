@@ -16,6 +16,7 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/review.graphql.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
@@ -154,7 +155,8 @@ class ReviewScreen extends HookConsumerWidget {
                   )),
                   title: Text((data ?? placeholder)!.user!.name),
                   subtitle: data != null
-                      ? Text(dateFromTimestamp(data.createdAt)
+                      ? Text(data.createdAt
+                          .dateFromTimestamp()
                           .relativeTime(context))
                       : null,
                   leading: ConstrainedBox(

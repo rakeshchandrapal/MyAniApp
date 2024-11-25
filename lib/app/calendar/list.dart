@@ -11,6 +11,7 @@ import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/app/calendar/list.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
@@ -52,7 +53,7 @@ class MyListReleases extends HookWidget {
 
             if (next == null) return const SizedBox();
 
-            var timestamp = dateFromTimestamp(next.airingAt);
+            var timestamp = next.airingAt.dateFromTimestamp();
 
             return Card.outlined(
               child: InkWellImage(

@@ -5,6 +5,7 @@ import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:mygraphql/graphql.dart';
 
 class TagsEditorSheet extends StatefulHookWidget {
@@ -65,8 +66,7 @@ class _TagsEditorSheetState extends State<TagsEditorSheet> {
         builder: () {
           return HookBuilder(
             builder: (context) {
-              var tags = useMemoized(
-                  () => Tag.sort(snapshot.parsedData!.tags!),
+              var tags = useMemoized(() => Tag.sort(snapshot.parsedData!.tags!),
                   [snapshot.parsedData!.tags!]);
               var textEditingController = useTextEditingController();
               var notifier = useValueListenable(textEditingController);

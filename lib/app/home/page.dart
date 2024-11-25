@@ -43,13 +43,13 @@ class HomeScreen extends ConsumerWidget {
         final tabsRouter = AutoTabsRouter.of(context);
 
         var destinations = [
-          const NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           if (user.value?.data != null) ...[
+            const NavigationDestination(icon: Icon(Icons.home), label: "Home"),
             const NavigationDestination(
                 icon: Icon(Icons.view_list_sharp), label: "Lists"),
-            const NavigationDestination(
-                icon: Icon(Icons.explore), label: "Explore"),
           ],
+          const NavigationDestination(
+              icon: Icon(Icons.explore), label: "Explore"),
           const NavigationDestination(
               icon: Icon(Icons.chat), label: "Activities"),
           const NavigationDestination(icon: Icon(Icons.forum), label: "Forums"),

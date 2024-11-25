@@ -162,7 +162,8 @@ class ThreadCard extends StatelessWidget {
                             ),
                             const TextSpan(text: " replied "),
                             TextSpan(
-                              text: dateFromTimestamp(thread.repliedAt!)
+                              text: thread.repliedAt!
+                                  .dateFromTimestamp()
                                   .relativeTime(context),
                             )
                           ],

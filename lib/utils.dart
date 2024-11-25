@@ -5,9 +5,9 @@ import 'package:myaniapp/common/dialogs/login.dart';
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/providers/user.dart';
 
-DateTime dateFromTimestamp(int timestamp) {
-  return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-}
+// DateTime dateFromTimestamp(int timestamp) {
+//   return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+// }
 
 VoidCallback requiredLogin(
     WidgetRef ref, String action, VoidCallback callback) {

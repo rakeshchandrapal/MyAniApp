@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/app/search/media/page.dart';
+import 'package:myaniapp/app/search/media/query.dart';
 import 'package:myaniapp/app/search/media/tags.dart';
 import 'package:myaniapp/app/settings/settings_screen.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
@@ -12,6 +13,7 @@ import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:mygraphql/graphql.dart';
@@ -50,6 +52,7 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
   void initState() {
     super.initState();
     query = MediaSearchQuery(
+      widget.oldQuery.rawQuery,
       endDate: widget.oldQuery.endDate,
       format: widget.oldQuery.format,
       genres: widget.oldQuery.genres,
@@ -334,6 +337,13 @@ class GenresButton extends HookConsumerWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
+      loading: SettingsTile(
+        title: Text(
+          "Fetching Genres...",
+          style: context.theme.textTheme.bodyMedium
+              ?.copyWith(color: context.theme.disabledColor),
+        ),
+      ),
       builder: () {
         var genresList = snapshot.parsedData!.genres!.toList();
 

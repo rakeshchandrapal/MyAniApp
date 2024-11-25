@@ -20,24 +20,11 @@ import 'package:myaniapp/graphql/__gen/graphql/fragments/media_entry.graphql.dar
 import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:mygraphql/graphql.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-var c = GraphqlClient(
-  cache: Cache(store: InMemoryStore()),
-  link: AuthLink(
-    getToken: () async {
-      var prefs = await SharedPreferences.getInstance();
-      return prefs.getString("token");
-    },
-    authHeader: "Authorization",
-  ).concat(
-    HttpLink("https://graphql.anilist.co"),
-  ),
-);
 
 @RoutePage()
 class HomeLoggedInOverviewScreen extends HookConsumerWidget {
@@ -144,92 +131,6 @@ class HomeLoggedInOverviewScreen extends HookConsumerWidget {
           ),
         ),
       ),
-      // body: GQLRequest(
-      //   operationRequest: GHomeOverviewReq((b) => b
-      //     ..requestId = "homeLoggedInPage"
-      //     ..vars.userId = user.value!.data!.Viewer!.id),
-      //   builder: (context, response, error, refetch) =>
-      //       RefreshIndicator.adaptive(
-      //     onRefresh: refetch,
-      //     child: ListView(
-      //       children: [
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Text(
-      //             "Welcome ${user.value!.data!.Viewer!.name}!",
-      //             style: context.theme.textTheme.titleLarge
-      //                 ?.copyWith(fontWeight: FontWeight.bold),
-      //           ),
-      //         ),
-      //         InProgress(
-      //           list: response!.data!.list!.mediaList!,
-      //           refetch: refetch,
-      //         ),
-      //         // Threads
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Wrap(
-      //             crossAxisAlignment: WrapCrossAlignment.center,
-      //             children: [
-      //               Text(
-      //                 "Forum Activity",
-      //                 style: context.theme.textTheme.titleLarge
-      //                     ?.copyWith(fontWeight: FontWeight.bold),
-      //               ),
-      //               TextButton(
-      //                 onPressed: () => context
-      //                     .pushRoute(ForumRoute(tab: ForumTabs.overview.name)),
-      //                 child: const Text("All"),
-      //               )
-      //             ],
-      //           ),
-      //         ),
-      //         ListView.builder(
-      //           shrinkWrap: true,
-      //           primary: false,
-      //           itemBuilder: (context, index) {
-      //             var thread = response.data!.forums!.threads![index]!;
-
-      //             return ThreadCard(thread: thread);
-      //           },
-      //           itemCount: response.data!.forums!.threads!.length,
-      //         ),
-      //         // Reviews
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Wrap(
-      //             crossAxisAlignment: WrapCrossAlignment.center,
-      //             children: [
-      //               Text(
-      //                 "Recent Reviews",
-      //                 style: context.theme.textTheme.titleLarge
-      //                     ?.copyWith(fontWeight: FontWeight.bold),
-      //               ),
-      //               TextButton(
-      //                 onPressed: () => context.pushRoute(ReviewsRoute()),
-      //                 child: const Text("More"),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //         GridView.builder(
-      //           primary: false,
-      //           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-      //             maxCrossAxisExtent: 300,
-      //             mainAxisExtent: 200,
-      //           ),
-      //           shrinkWrap: true,
-      //           itemBuilder: (context, index) {
-      //             var review = response.data!.reviews!.reviews![index]!;
-
-      //             return ReviewCard(review: review);
-      //           },
-      //           itemCount: response.data!.reviews!.reviews!.length,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
@@ -274,7 +175,7 @@ class InProgress extends ConsumerWidget {
         ),
         switch (settings.inProgress) {
           ListType.grid => SizedBox(
-              height: 190,
+              height: 170,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 shrinkWrap: true,

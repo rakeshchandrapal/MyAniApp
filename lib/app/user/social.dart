@@ -7,6 +7,7 @@ import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/graphql/__gen/app/user/social.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/router.gr.dart';
 import 'package:mygraphql/graphql.dart';
 

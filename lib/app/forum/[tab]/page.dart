@@ -55,35 +55,15 @@ class ForumScreen extends StatefulWidget {
 
 class _ForumScreenState extends State<ForumScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  // int? category;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Future(
-  //     () => setState(
-  //       () {
-  //         String? cat =
-  //             GoRouterState.of(context).uri.queryParameters['category'];
-
-  //         if (cat != null) category = int.tryParse(cat);
-  //         search = context.routeData.queryParams.getString("search");
-  //       },
-  //     ),
-  //   );
-  // }
 
   void goTo(ForumTabs tab, {int? category, String? search}) {
-    context.replaceRoute(ForumRoute(
+    // print([widget.category, ca])
+    context.navigateTo(ForumRoute(
         tab: category != null && tab == ForumTabs.overview
             ? ForumTabs.recent.name
             : tab.name,
         category: category,
         search: search));
-    // context.replace(
-    //     "/forum/${category != null && tab == ForumTabs.overview ? ForumTabs.recent.name : tab.name}?category=$category=search=$search");
-    // this.category = category;
-    // this.search = search;
   }
 
   @override
@@ -124,21 +104,9 @@ class _ForumScreenState extends State<ForumScreen> {
         ],
       ),
       appBar: AppBar(
-        leadingWidth: 100,
-        leading: Row(
-          children: [
-            BackButton(
-              style: ButtonStyle(
-                padding: WidgetStateProperty.all(
-                  const EdgeInsets.all(16),
-                ),
-              ),
-            ),
-            IconButton(
-              onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-              icon: const Icon(Icons.menu),
-            )
-          ],
+        leading: IconButton(
+          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+          icon: const Icon(Icons.menu),
         ),
         actions: [
           Padding(
@@ -150,7 +118,10 @@ class _ForumScreenState extends State<ForumScreen> {
                 value: ForumTabs.values
                     .firstWhere((element) => element.name == widget.tab),
                 onChanged: (values) => goTo(values.first,
-                    category: widget.category, search: widget.search),
+                    category: values.first == ForumTabs.overview
+                        ? null
+                        : widget.category,
+                    search: widget.search),
                 items: ForumTabs.values.map(
                   (e) => DropdownMenuEntry(
                     value: e,

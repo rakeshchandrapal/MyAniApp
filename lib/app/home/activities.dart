@@ -10,6 +10,7 @@ import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/graphql/__gen/app/home/activities.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';

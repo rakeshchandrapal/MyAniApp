@@ -36,7 +36,7 @@ class MediaInfoScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Episode ${media.nextAiringEpisode!.episode} Airing ${dateFromTimestamp(media.nextAiringEpisode!.airingAt).relativeTime(context)}",
+                  "Episode ${media.nextAiringEpisode!.episode} Airing ${media.nextAiringEpisode!.airingAt.dateFromTimestamp().relativeTime(context)}",
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

@@ -25,3 +25,4 @@ dependencies:
   gql_transform_link: ^1.0.0
   gql_error_link: ^1.0.0+1
   flutter_hooks: ^0.20.5
+  hive: ^2.2.3
