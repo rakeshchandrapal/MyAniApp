@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/extensions.dart';
 
@@ -71,7 +71,7 @@ class _MarkdownEditorState extends State<MarkdownEditor> {
           leading:
               _pageController.positions.isNotEmpty && _pageController.page == 0
                   ? IconButton(
-                      onPressed: () => context.maybePop(),
+                      onPressed: () => context.pop(),
                       icon: const Icon(Icons.cancel),
                     )
                   : IconButton(
@@ -97,7 +97,7 @@ class _MarkdownEditorState extends State<MarkdownEditor> {
               IconButton(
                 onPressed: () {
                   widget.onSave(_editingController.text);
-                  context.maybePop();
+                  context.pop();
                 },
                 icon: const Icon(Icons.send),
               ),

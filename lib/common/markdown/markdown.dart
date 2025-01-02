@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:markdown_widget/widget/span_node.dart';
@@ -13,7 +13,7 @@ import 'package:myaniapp/common/markdown/generator/link.dart';
 import 'package:myaniapp/common/markdown/generator/media_card.dart';
 import 'package:myaniapp/common/markdown/generator/spoiler.dart';
 import 'package:myaniapp/providers/settings.dart';
-import 'package:myaniapp/router.gr.dart';
+import 'package:myaniapp/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 RegExp removeFromMarkdown = RegExp("<BR>|<br>|~~~|```");
@@ -124,36 +124,34 @@ class MarkdownWidget extends ConsumerWidget {
             if (uri?.host == 'anilist.co') {
               try {
                 if (['anime', 'manga'].contains(uri!.pathSegments.first)) {
-                  // context.router.pushNamed('/media/${uri.pathSegments[1]}');
-                  context.pushRoute(
-                      MediaRoute(id: int.parse(uri.pathSegments[1])));
+                  context.push('/media/${uri.pathSegments[1]}');
+                  // context.pushRoute(
+                  //     MediaRoute(id: int.parse(uri.pathSegments[1])));
                   return;
                 } else if (['character', 'staff']
                     .contains(uri.pathSegments.first)) {
                   if (uri.pathSegments[1] == "staff") {
-                    context.pushRoute(
-                        StaffRoute(id: int.parse(uri.pathSegments[1])));
+                    context
+                        .push(Routes.staff(int.parse(uri.queryParameters[1]!)));
                   } else {
-                    context.pushRoute(
-                        CharacterRoute(id: int.parse(uri.pathSegments[1])));
+                    context.push(
+                        Routes.character(int.parse(uri.queryParameters[1]!)));
                   }
                   return;
                 } else if (uri.pathSegments.first == 'forum' &&
                     uri.pathSegments[1] == 'thread') {
                   if (uri.pathSegments.length == 5) {
-                    context.pushRoute(
-                      ThreadCommentRoute(
-                          commentId: int.parse(uri.pathSegments[4]),
-                          id: int.parse(uri.pathSegments[2])),
-                    );
+                    context.push(Routes.threadComment(
+                      int.parse(uri.pathSegments[4]),
+                      int.parse(uri.pathSegments[2]),
+                    ));
                   } else {
-                    context.pushRoute(
-                        ThreadRoute(id: int.parse(uri.pathSegments.last)));
+                    context
+                        .push(Routes.thread(int.parse(uri.pathSegments.last)));
                   }
                   return;
                 } else if (uri.pathSegments.first == 'activity') {
-                  context.pushRoute(
-                      ActivityRoute(id: int.parse(uri.pathSegments[1])));
+                  context.push(Routes.activity(int.parse(uri.pathSegments[1])));
                   return;
                 }
               } catch (err) {}

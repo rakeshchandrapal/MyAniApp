@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/graphql/__gen/graphql/fragments/fuzzy_date.graphql.dart';
-import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/fragments/fuzzy_date.graphql.dart';
+import 'package:myaniapp/graphql/__gen/schema.graphql.dart';
 
 extension Capitalize on String {
   String capitalize() {
@@ -118,5 +119,22 @@ extension Abbreviate on num {
 extension DateFromUnix on int {
   DateTime dateFromTimestamp() {
     return DateTime.fromMillisecondsSinceEpoch(this * 1000);
+  }
+}
+
+extension TextStyleBold on TextStyle {
+  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
+}
+
+extension PopFromBranches on StatefulNavigationShell {
+  void popFromBranches(BuildContext context) {
+    if (currentIndex != 0) {
+      goBranch(0);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pop();
+      });
+    } else {
+      context.pop();
+    }
   }
 }

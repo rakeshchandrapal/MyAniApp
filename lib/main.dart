@@ -13,8 +13,9 @@ import 'package:myaniapp/notifications/push.dart';
 import 'package:myaniapp/providers/app_info.dart';
 import 'package:myaniapp/providers/settings.dart';
 import 'package:myaniapp/providers/shared_prefs.dart';
-import 'package:myaniapp/router.dart';
-import 'package:myaniapp/router.gr.dart';
+// import 'package:myaniapp/router.dart';
+// import 'package:myaniapp/router.gr.dart';
+import 'package:myaniapp/routes.dart';
 import 'package:myaniapp/url_protocol/web_url_protocol.dart'
     if (dart.library.io) 'package:myaniapp/url_protocol/api.dart';
 import 'package:mygraphql/graphql.dart';
@@ -125,7 +126,7 @@ class _MainAppState extends ConsumerState<MainApp> {
             fragment.indexOf("=") + 1, fragment.indexOf("&"));
 
         ref.read(settingsProvider.notifier).updateToken(token).then((value) {
-          router.navigate(const HomeRoute());
+          // router.navigate(const HomeRoute());
         });
       }
       openAppLink(uri);
@@ -134,7 +135,7 @@ class _MainAppState extends ConsumerState<MainApp> {
 
   void openAppLink(Uri uri) {
     if (uri.host != 'root') return;
-    router.pushNamed(uri.path);
+    // router.pushNamed(uri.path);
   }
 
   @override
@@ -145,7 +146,7 @@ class _MainAppState extends ConsumerState<MainApp> {
         ref.watch(settingsProvider.select((value) => value.primaryColor));
 
     return MaterialApp.router(
-      routerConfig: router.config(),
+      routerConfig: goRouter,
       localizationsDelegates: const [
         RelativeTimeLocalizations.delegate,
       ],

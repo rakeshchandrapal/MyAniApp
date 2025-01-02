@@ -1,21 +1,20 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:myaniapp/app/home/home.dart';
-import 'package:myaniapp/app/search/media/page.dart';
 import 'package:myaniapp/app/search/media/query.dart';
 import 'package:myaniapp/app/search/media/tags.dart';
-import 'package:myaniapp/app/settings/settings_screen.dart';
+import 'package:myaniapp/app/settings/widgets.dart';
 import 'package:myaniapp/common/list_setting_button.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
-import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/search_media.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
-import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/common/gql_widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/list_settings.dart';
 import 'package:myaniapp/providers/user.dart';
+import 'package:myaniapp/routes.dart';
 import 'package:mygraphql/graphql.dart';
 
 var countries = {
@@ -100,9 +99,8 @@ class _MediaSearchEditorState extends ConsumerState<MediaSearchEditor> {
                     } else {
                       query.isAdult = null;
                     }
-                    context.router
-                        .replaceNamed("/search/media${query.toString()}");
-                    context.maybePop();
+                    context.replace(Routes.searchMedia(query.toString()));
+                    context.pop();
                   },
                   child: const Text("Save"),
                 ),

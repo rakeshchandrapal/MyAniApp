@@ -1,21 +1,24 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
+
 var queryRegex = RegExp(r"(?:query|mutation) (\w+)[^]+?{[^]+?\n}");
 var fragmentRegex = RegExp(r"fragment (\w+)[^]+?{[^]+?\n}");
 var inlineFragment = RegExp(r"\.\.\.(\w+)");
 
 void main(List<String> args) {
-  var dir = Directory(Platform.isWindows ? r".\lib\app" : "./lib/app");
+  var dir = Directory(Platform.isWindows ? r".\lib\graphql" : "./lib/graphql");
   var fragmentDir = Directory(Platform.isWindows
       ? r".\lib\graphql\fragments"
       : "./lib/graphql/fragments");
 
   List<File> graphqlQueriesFiles = dir
-      .listSync(recursive: true)
+      .listSync()
       .whereType<File>()
       .where(
         (element) => element.path.endsWith(".graphql"),
       )
+      .whereNot((element) => element.path.endsWith("schema.graphql"))
       .toList();
   // List
   List<File> fragmentFiles = fragmentDir
@@ -37,7 +40,8 @@ void main(List<String> args) {
       var e = query;
 
       for (var inlineFragmentMatch in inlineFragment.allMatches(query)) {
-        e += "\n\n\n" '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
+        e += "\n\n\n"
+            '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
         // }
       }
 
@@ -57,7 +61,8 @@ void main(List<String> args) {
       var e = fragment;
 
       for (var inlineFragmentMatch in inlineFragment.allMatches(fragment)) {
-        e += "\n\n\n" '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
+        e += "\n\n\n"
+            '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
         // }
       }
 
@@ -75,7 +80,8 @@ void main(List<String> args) {
       var e = fragment;
 
       for (var inlineFragmentMatch in inlineFragment.allMatches(fragment)) {
-        e += "\n\n\n" '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
+        e += "\n\n\n"
+            '""""\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}""""';
         // e +=
         //     "\"\"\"\n\"\$${toLowerCamelCase(inlineFragmentMatch.group(1)!)}\"\nr\"\"\"";
         // }

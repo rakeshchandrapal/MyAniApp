@@ -3,7 +3,7 @@ import 'package:myaniapp/common/cached_image.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/fragments/media.graphql.dart';
 
 class MediaSheet extends StatelessWidget {
   static void show(BuildContext context, Fragment$MediaFragment media,

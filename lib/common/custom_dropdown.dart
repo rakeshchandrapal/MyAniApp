@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/extensions.dart';
 
 class SheetDropdownMenu<T> extends StatefulWidget {
@@ -89,7 +89,7 @@ class _SheetDropdownMenuState<T> extends State<SheetDropdownMenu<T>> {
                                 setState(() => selectedValues = newValues);
                                 // values = newValues;
                                 if (!widget.isMulti) {
-                                  context.maybePop();
+                                  context.pop();
                                 } else {
                                   inSetState(() {});
                                 }

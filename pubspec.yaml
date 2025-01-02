@@ -1,14 +1,14 @@
 name: myaniapp
 description: "An unofficial Anilist app."
 publish_to: "none"
-version: 0.5.11
+version: 0.5.12
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
   app_links: ^6.1.1
-  auto_route: ^9.2.2
+  # auto_route: ^9.2.2
   cached_network_image: ^3.4.1
   collection: ^1.19.0
   flutter:
@@ -28,7 +28,7 @@ dependencies:
   markdown_widget: ^2.3.2+6
   package_info_plus: ^8.1.1
   relative_time: ^5.0.0
-  shared_preferences: ^2.2.2
+  shared_preferences: ^2.3.4
   url_launcher: ^6.2.5
   win32: ^5.5.1
   workmanager: ^0.5.2
@@ -44,17 +44,18 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
+  ffi: any
+  go_router: ^14.6.1
 dev_dependencies:
-  graphql_codegen: ^1.1.0
+  graphql_codegen: ^1.1.1
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  # ferry_generator: ^0.10.0
   build_runner: ^2.4.11
   custom_lint: ^0.7.0
   riverpod_lint: ^2.3.2
   flutter_launcher_icons: ^0.13.1
-  auto_route_generator: ^9.0.0
+  # auto_route_generator: ^9.0.0
   freezed: ^2.5.2
   json_serializable: ^6.8.0
   icons_launcher: ^3.0.0

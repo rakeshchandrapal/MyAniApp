@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/common/cached_image.dart';
 
 class ImageViewer extends StatefulWidget {
@@ -52,7 +52,7 @@ class _ImageViewerState extends State<ImageViewer> {
             direction:
                 _block ? DismissDirection.none : DismissDirection.vertical,
             onDismissed: (direction) {
-              context.maybePop();
+              context.pop();
             },
             onUpdate: (details) {
               setState(() => _opacity = 1 - details.progress);
@@ -87,7 +87,7 @@ class _ImageViewerState extends State<ImageViewer> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 24),
               child: IconButton(
-                onPressed: () => context.maybePop(),
+                onPressed: () => context.pop(),
                 icon: Container(
                   width: 40,
                   height: 40,

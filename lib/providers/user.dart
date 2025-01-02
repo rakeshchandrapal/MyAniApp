@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/app/home/home.dart';
-import 'package:myaniapp/graphql/__gen/app/viewer.graphql.dart';
+import 'package:myaniapp/graphql/__gen/viewer.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/settings.dart';

@@ -43,7 +43,9 @@ class _HidingFloatingButtonState extends State<HidingFloatingButton>
     return NotificationListener<UserScrollNotification>(
       onNotification: (notification) {
         if (widget.notificationPredicate != null &&
-            widget.notificationPredicate!(notification) == false) return false;
+            widget.notificationPredicate!(notification) == false) {
+          return false;
+        }
         if (notification.direction == ScrollDirection.reverse && isVisible) {
           setState(() => isVisible = false);
           _animationController.forward();

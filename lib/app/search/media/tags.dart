@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:myaniapp/app/home/home.dart';
 import 'package:myaniapp/constants.dart';
-import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
+import 'package:myaniapp/graphql/__gen/search_media.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
-import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/common/gql_widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:mygraphql/graphql.dart';
 

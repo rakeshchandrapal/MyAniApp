@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:myaniapp/graphql/__gen/graphql/fragments/page_info.graphql.dart';
+import 'package:myaniapp/graphql/__gen/fragments/page_info.graphql.dart';
 
 class GraphqlPagination extends StatefulWidget {
   const GraphqlPagination({
@@ -161,7 +161,5 @@ class _PaginationViewState extends State<PaginationView> {
         ],
       ),
     );
-    // }
-    return const Placeholder();
   }
 }

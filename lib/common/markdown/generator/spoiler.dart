@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import "package:markdown/markdown.dart" as md2;
 import 'package:markdown_widget/markdown_widget.dart' as md;
 import 'package:myaniapp/common/markdown/markdown.dart';
-import 'package:myaniapp/router.dart';
+import 'package:myaniapp/routes.dart';
 
 md.SpanNodeGeneratorWithTag spoilerTag = md.SpanNodeGeneratorWithTag(
   tag: "spoiler",
@@ -64,7 +64,7 @@ class SpoilerNode extends md.ElementNode {
       style: style,
       recognizer: TapGestureRecognizer()
         ..onTap = () => showDialog(
-              context: router.navigatorKey.currentContext!,
+              context: goRouter.configuration.navigatorKey.currentContext!,
               builder: (context) => Dialog(
                 child: Padding(
                   padding:

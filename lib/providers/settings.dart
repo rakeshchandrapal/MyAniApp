@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/schema.graphql.dart';
 import 'package:myaniapp/providers/shared_prefs.dart';
 
 class _Settings {

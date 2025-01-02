@@ -1,15 +1,10 @@
 targets:
   $default:
     builders:
-      auto_route_generator:auto_route_generator:
-        generate_for:
-          - lib/app/**.dart
-      auto_route_generator:auto_router_generator:
-        generate_for:
-          - lib/router.dart
       graphql_codegen:
         options:
           outputDirectory: "/lib/graphql/__gen"
+          assetsPath: "lib/graphql/**.graphql"
           scalars:
             ISODateTime:
               type: String

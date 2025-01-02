@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
-import 'package:myaniapp/router.dart';
+// import 'package:myaniapp/router.dart';
 
 class PushNotifications {
   factory PushNotifications() => _instance;
@@ -189,7 +189,7 @@ void notificationTap(NotificationResponse notificationResponse) {
       jsonDecode(notificationResponse.payload!);
   if (decodePayload?['path'] != null) {
     try {
-      router.pushNamed(decodePayload!['path'] as String);
+      // router.pushNamed(decodePayload!['path'] as String);
     } catch (e) {}
   }
 }

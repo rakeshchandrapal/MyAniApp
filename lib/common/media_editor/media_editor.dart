@@ -1,20 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:myaniapp/app/home/home.dart';
-import 'package:myaniapp/app/settings/settings_screen.dart';
+import 'package:myaniapp/app/settings/widgets.dart';
 import 'package:myaniapp/common/dialogs/confirmation.dart';
 import 'package:myaniapp/common/show.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__gen/app/media_editor.graphql.dart';
-import 'package:myaniapp/graphql/__gen/graphql/fragments/media.graphql.dart';
-import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/fragments/media.graphql.dart';
+import 'package:myaniapp/graphql/__gen/media_entry.graphql.dart';
+import 'package:myaniapp/graphql/__gen/schema.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
-import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/common/gql_widget.dart';
 import 'package:myaniapp/main.dart';
 import 'package:myaniapp/providers/user.dart';
 import 'package:mygraphql/graphql.dart';
@@ -201,7 +200,7 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                     widget.onDelete!();
                   }
 
-                  if (context.mounted) context.maybePop();
+                  if (context.mounted) context.pop();
                 },
                 delete: true,
               ),
@@ -217,15 +216,14 @@ class __MediaEditorViewState extends ConsumerState<_MediaEditorView> {
                   } else {
                     options = options.copyWith(id: widget.entry.id);
                   }
-                  print(options.toJson());
-                  var i = await c
+                  await c
                       .query(GQLRequest(saveMediaListEntryQuery,
                           variables: options.toJson()))
                       .last;
                   widget.onSave();
                 }
 
-                if (context.mounted) context.maybePop();
+                if (context.mounted) context.pop();
               },
               icon: const Icon(Icons.save),
             ),
@@ -506,7 +504,7 @@ class SettingIntNumber extends StatelessWidget {
       subtitle: Center(
         child: NumberPicker(
           minValue: 0,
-          maxValue: max ?? (value ?? 0) + 100,
+          maxValue: max ?? value + 100,
           onChanged: onChanged,
           value: value,
           axis: Axis.horizontal,

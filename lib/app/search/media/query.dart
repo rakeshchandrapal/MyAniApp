@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:myaniapp/app/home/home.dart';
-import 'package:myaniapp/graphql/__gen/app/search/media/mediaSearch.graphql.dart';
-import 'package:myaniapp/graphql/__gen/graphql/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/schema.graphql.dart';
+import 'package:myaniapp/graphql/__gen/search_media.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/main.dart';
 import 'package:mygraphql/graphql.dart';
@@ -54,7 +53,7 @@ class MediaSearchQuery {
     List<Query$GenreCollection$tags>? withTag0;
     List<Query$GenreCollection$tags>? withoutTag0;
     Enum$MediaType? type0 = Enum$MediaType.values
-        .firstWhereOrNull((element) => element.name == query["type"]);
+        .firstWhereOrNull((element) => element.name == query["type"]?.first);
     Enum$MediaSeason? season0 = Enum$MediaSeason.values
         .firstWhereOrNull((element) => element.name == query["season"]);
 
@@ -72,47 +71,40 @@ class MediaSearchQuery {
     }
 
     if (query["sort"] != null) {
-      var list = query["sort"] is List ? query["sort"] : [query["sort"]];
-      var s =
-          Enum$MediaSort.values.where((element) => list.contains(element.name));
+      var s = Enum$MediaSort.values
+          .where((element) => query["sort"].contains(element.name));
       if (s.isNotEmpty) {
         sort0 = s.toList();
       }
     }
 
     if (query["genre"] != null) {
-      var list = query["genre"] is List ? query["genre"] : [query["genre"]];
-      var g = collection!.genres!.where((element) => list.contains(element));
+      var g = collection!.genres!
+          .where((element) => query["genre"].contains(element));
       if (g.isNotEmpty) {
         genre0 = g.cast<String>().toList();
       }
     }
 
     if (query["withTags"] != null) {
-      var list =
-          query["withTags"] is List ? query["withTags"] : [query["withTags"]];
-      var t =
-          collection!.tags!.where((element) => list.contains(element!.name));
+      var t = collection!.tags!
+          .where((element) => query["withTags"].contains(element!.name));
       if (t.isNotEmpty) {
         withTag0 = t.cast<Query$GenreCollection$tags>().toList();
       }
     }
 
     if (query["withoutTags"] != null) {
-      var list = query["withoutTags"] is List
-          ? query["withoutTags"]
-          : [query["withoutTags"]];
-      var t =
-          collection!.tags!.where((element) => list.contains(element!.name));
+      var t = collection!.tags!
+          .where((element) => query["withoutTags"].contains(element!.name));
       if (t.isNotEmpty == true) {
         withoutTag0 = t.cast<Query$GenreCollection$tags>().toList();
       }
     }
 
     if (query["format"] != null) {
-      var list = query["format"] is List ? query["format"] : [query["format"]];
       var f = Enum$MediaFormat.values
-          .where((element) => list.contains(element.name));
+          .where((element) => query["format"].contains(element.name));
       if (f.isNotEmpty) {
         format0 = f.toList();
       }
@@ -130,8 +122,9 @@ class MediaSearchQuery {
       season: season0,
       countryOfOrigin: query["countryOfOrigin"],
       endDate: query["endDate"] != null ? int.tryParse(query["endDate"]) : null,
-      isAdult:
-          query["isAdult"] != null ? bool.tryParse(query["isAdult"]) : null,
+      isAdult: query["isAdult"] != null
+          ? bool.tryParse(query["isAdult"]?.first)
+          : null,
       onList: query["onList"] != null ? bool.tryParse(query["onList"]) : null,
       startDate:
           query["startDate"] != null ? int.tryParse(query["startDate"]) : null,

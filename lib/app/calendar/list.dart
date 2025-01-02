@@ -1,19 +1,17 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:myaniapp/app/calendar/page.dart';
-import 'package:myaniapp/app/home/home.dart';
+import 'package:go_router/go_router.dart';
+import 'package:myaniapp/app/calendar/screen.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/pagination.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/graphql/__gen/app/calendar/list.graphql.dart';
+import 'package:myaniapp/graphql/__gen/release_list.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
-import 'package:myaniapp/graphql/widget.dart';
+import 'package:myaniapp/common/gql_widget.dart';
 import 'package:myaniapp/main.dart';
-import 'package:myaniapp/router.gr.dart';
-import 'package:myaniapp/utils.dart';
+import 'package:myaniapp/routes.dart';
 import 'package:mygraphql/graphql.dart';
 
 class MyListReleases extends HookWidget {
@@ -57,9 +55,8 @@ class MyListReleases extends HookWidget {
 
             return Card.outlined(
               child: InkWellImage(
-                onTap: () => context.pushRoute(
-                  MediaRoute(id: media.id, placeholder: media),
-                ),
+                onTap: () => context.push(Routes.media(media.id),
+                    extra: {"placeholder": media}),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

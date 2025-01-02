@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/utils.dart';
 import 'package:relative_time/relative_time.dart';
 
 class Comment extends StatefulWidget {

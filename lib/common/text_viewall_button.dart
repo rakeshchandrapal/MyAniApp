@@ -17,8 +17,7 @@ class TextViewAllButton extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.theme.textTheme.titleLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: context.theme.textTheme.titleLarge?.bold,
         ),
         Spacer(),
         TextButton(

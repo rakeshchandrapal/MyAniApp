@@ -1,7 +1,0 @@
-# import '/graphql/fragments/media.graphql'
-
-query EmbedMediaCard($id: Int) {
-  Media(id: $id) {
-    ...MediaFragment
-  }
-}

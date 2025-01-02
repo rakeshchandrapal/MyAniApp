@@ -1,4 +1,4 @@
-import 'package:myaniapp/graphql/__gen/app/notifications/notifications.graphql.dart';
+import 'package:myaniapp/graphql/__gen/notifications.graphql.dart';
 
 class AnilistNotification {
   final Query$Notifications$Page$notifications notification;

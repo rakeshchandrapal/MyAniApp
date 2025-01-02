@@ -54,17 +54,9 @@ class ImageNode2 extends SpanNode {
   @override
   InlineSpan build() {
     double? width;
-    double? height;
-    double? heightPercent;
 
     if (attributes['width'] != null) {
       width = double.tryParse(attributes['width']!);
-    }
-    if (attributes['height'] != null) {
-      height = double.tryParse(attributes['height']!);
-    }
-    if (attributes["heightPercent"] != null) {
-      heightPercent = double.tryParse(attributes["heightPercent"]!);
     }
 
     final imageUrl = attributes['src'] ?? '';

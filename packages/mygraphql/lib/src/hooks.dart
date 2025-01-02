@@ -100,9 +100,6 @@ class _StreamHookState<T> extends HookState<QueryHookResult<T>, StreamHook<T>> {
     }
 
     try {
-      setState(
-          () => _summary = GQLResponse<T>.loading(request: _summary.request));
-
       var req = await hook.client
           .query(GQLRequest(
             _summary.request!.query,

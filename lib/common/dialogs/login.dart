@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myaniapp/extensions.dart';
-import 'package:myaniapp/router.gr.dart';
+import 'package:myaniapp/routes.dart';
 
 class LoginDialog extends StatelessWidget {
   const LoginDialog({super.key, required this.reason});
@@ -27,8 +27,7 @@ class LoginDialog extends StatelessWidget {
           children: [
             Text(
               "Login to $reason.",
-              style: context.theme.textTheme.bodyLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: context.theme.textTheme.bodyLarge?.bold,
             ),
             const SizedBox(
               height: 20,
@@ -39,14 +38,14 @@ class LoginDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () => context.pushRoute(const LoginRoute()),
+                    onPressed: () => context.push(Routes.login),
                     child: const Text("Login"),
                   ),
                   const SizedBox(
                     width: 5,
                   ),
                   TextButton(
-                    onPressed: () => context.maybePop(),
+                    onPressed: () => context.pop(),
                     child: const Text("    Back    "),
                   ),
                 ],
