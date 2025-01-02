@@ -1,0 +1,74 @@
+query UserFavorites(
+    $name: String
+    $animePage: Int
+    $mangaPage: Int
+    $characterPage: Int
+    $staffPage: Int
+    $studioPage: Int
+) {
+    User(name: $name) {
+        ...UserFragment
+        favourites {
+            anime(page: $animePage) {
+                pageInfo {
+                    ...PageInfo
+                }
+                edges {
+                    id
+                    favouriteOrder
+                    node {
+                        ...MediaFragment
+                    }
+                }
+            }
+            manga(page: $mangaPage) {
+                pageInfo {
+                    ...PageInfo
+                }
+                edges {
+                    id
+                    favouriteOrder
+                    node {
+                        ...MediaFragment
+                    }
+                }
+            }
+            characters(page: $characterPage) {
+                pageInfo {
+                    ...PageInfo
+                }
+                edges {
+                    id
+                    favouriteOrder
+                    node {
+                        ...CharacterFragment
+                    }
+                }
+            }
+            staff(page: $staffPage) {
+                pageInfo {
+                    ...PageInfo
+                }
+                edges {
+                    id
+                    favouriteOrder
+                    node {
+                        ...StaffFragment
+                    }
+                }
+            }
+            studios(page: $studioPage) {
+                pageInfo {
+                    ...PageInfo
+                }
+                edges {
+                    id
+                    favouriteOrder
+                    node {
+                        ...StudioFragment
+                    }
+                }
+            }
+        }
+    }
+}

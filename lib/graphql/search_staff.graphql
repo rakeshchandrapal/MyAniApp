@@ -1,0 +1,15 @@
+query StaffSearch(
+    $page: Int = 1
+    $search: String
+    $isBirthday: Boolean
+    $sort: [StaffSort] = [FAVOURITES_DESC, ID_DESC]
+) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            ...PageInfo
+        }
+        staff(isBirthday: $isBirthday, sort: $sort, search: $search) {
+            ...StaffFragment
+        }
+    }
+}

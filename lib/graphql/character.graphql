@@ -1,0 +1,34 @@
+query Character($id: Int, $page: Int, $onList: Boolean) {
+    Character(id: $id) {
+        ...CharacterFragment
+        description
+        gender
+        age
+        bloodType
+        isFavourite
+        siteUrl
+        isFavouriteBlocked
+        favourites
+        dateOfBirth {
+            ...FuzzyDate
+        }
+        media(sort: [POPULARITY_DESC], page: $page, onList: $onList) {
+            pageInfo {
+                ...PageInfo
+            }
+            edges {
+                voiceActorRoles(sort: LANGUAGE) {
+                    roleNotes
+                    dubGroup
+                    voiceActor {
+                        ...StaffFragment
+                        languageV2
+                    }
+                }
+                node {
+                    ...MediaFragment
+                }
+            }
+        }
+    }
+}

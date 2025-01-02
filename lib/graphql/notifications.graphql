@@ -1,0 +1,199 @@
+query Notifications(
+    $page: Int
+    $types: [NotificationType]
+    $reset: Boolean = true
+) {
+    Page(page: $page, perPage: 50) {
+        pageInfo {
+            ...PageInfo
+        }
+        notifications(type_in: $types, resetNotificationCount: $reset) {
+            ... on AiringNotification {
+                id
+                type
+                episode
+                contexts
+                media {
+                    ...MediaFragment
+                }
+                createdAt
+            }
+            ... on FollowingNotification {
+                id
+                type
+                context
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ActivityMessageNotification {
+                id
+                type
+                context
+                activityId
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ActivityMentionNotification {
+                id
+                type
+                context
+                activityId
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ActivityReplyNotification {
+                id
+                type
+                context
+                activityId
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ActivityReplySubscribedNotification {
+                id
+                type
+                context
+                activityId
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ActivityLikeNotification {
+                id
+                type
+                context
+                activityId
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ActivityReplyLikeNotification {
+                id
+                type
+                context
+                activityId
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ThreadCommentMentionNotification {
+                id
+                type
+                context
+                commentId
+                thread {
+                    id
+                    title
+                }
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ThreadCommentReplyNotification {
+                id
+                type
+                context
+                commentId
+                thread {
+                    id
+                    title
+                }
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ThreadCommentSubscribedNotification {
+                id
+                type
+                context
+                commentId
+                thread {
+                    id
+                    title
+                }
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ThreadCommentLikeNotification {
+                id
+                type
+                context
+                commentId
+                thread {
+                    id
+                    title
+                }
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on ThreadLikeNotification {
+                id
+                type
+                context
+                thread {
+                    id
+                    title
+                }
+                user {
+                    ...UserFragment
+                }
+                createdAt
+            }
+            ... on RelatedMediaAdditionNotification {
+                id
+                type
+                context
+                media {
+                    ...MediaFragment
+                }
+                createdAt
+            }
+            ... on MediaDataChangeNotification {
+                id
+                type
+                context
+                media {
+                    ...MediaFragment
+                }
+                reason
+                createdAt
+            }
+            ... on MediaMergeNotification {
+                id
+                type
+                context
+                media {
+                    ...MediaFragment
+                }
+                deletedMediaTitles
+                reason
+                createdAt
+            }
+            ... on MediaDeletionNotification {
+                id
+                type
+                context
+                deletedMediaTitle
+                reason
+                createdAt
+            }
+        }
+    }
+}

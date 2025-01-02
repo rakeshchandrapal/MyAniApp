@@ -1,0 +1,10 @@
+query Reviews($page: Int, $perPage: Int = 30) {
+    Page(page: $page, perPage: $perPage) {
+        pageInfo {
+            ...PageInfo
+        }
+        reviews(sort: ID_DESC) {
+            ...ReviewFragment
+        }
+    }
+}

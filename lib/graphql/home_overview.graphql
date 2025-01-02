@@ -1,0 +1,31 @@
+query HomeOverview($page: Int = 1, $userId: Int!, $type: MediaType) {
+  releasing: Page(page: $page) {
+    media(
+      onList: true
+      status_in: [RELEASING, NOT_YET_RELEASED]
+      sort: [START_DATE_DESC, STATUS]
+    ) {
+      ...ReleasingMedia
+    }
+  }
+  list: Page {
+    mediaList(
+      userId: $userId
+      status_in: [CURRENT, REPEATING]
+      sort: UPDATED_TIME_DESC
+      type: $type
+    ) {
+      ...MediaListEntry
+    }
+  }
+  forums: Page(perPage: 5) {
+    threads(sort: REPLIED_AT_DESC) {
+      ...ThreadFragment
+    }
+  }
+  reviews: Page(perPage: 6) {
+    reviews(sort: ID_DESC) {
+      ...ReviewFragment
+    }
+  }
+}

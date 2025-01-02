@@ -1,0 +1,29 @@
+# import '/graphql/fragments/media.graphql'
+
+query Explore($season: MediaSeason, $seasonYear: Int, $nextSeason: MediaSeason, $nextYear: Int) {
+  trending: Page(page: 1, perPage: 10) {
+    media(sort: TRENDING_DESC, type: ANIME, isAdult: false) {
+      ...MediaFragment
+    }
+  }
+  season: Page(page: 1, perPage: 13) {
+    media(season: $season, seasonYear: $seasonYear, sort: POPULARITY_DESC, type: ANIME, isAdult: false) {
+      ...MediaFragment
+    }
+  }
+  nextSeason: Page(page: 1, perPage: 14) {
+    media(season: $nextSeason, seasonYear: $nextYear, sort: POPULARITY_DESC, type: ANIME, isAdult: false) {
+      ...MediaFragment
+    }
+  }
+  popular: Page(page: 1, perPage: 11) {
+    media(sort: POPULARITY_DESC, type: ANIME, isAdult: false) {
+      ...MediaFragment
+    }
+  }
+  recent: Page(page: 1, perPage: 12) {
+    media(sort: ID_DESC, isAdult: false) {
+      ...MediaFragment
+    }
+  }
+}

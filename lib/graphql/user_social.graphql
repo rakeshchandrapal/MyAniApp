@@ -1,0 +1,18 @@
+query UserSocials($id: Int!, $followersPage: Int, $followingPage: Int) {
+    followers: Page(page: $followersPage) {
+        pageInfo {
+            ...PageInfo
+        }
+        followers(userId: $id, sort: USERNAME) {
+            ...UserFragment
+        }
+    }
+    following: Page(page: $followingPage, perPage: 25) {
+        pageInfo {
+            ...PageInfo
+        }
+        following(userId: $id, sort: USERNAME) {
+            ...UserFragment
+        }
+    }
+}

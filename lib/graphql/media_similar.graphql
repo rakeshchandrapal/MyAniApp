@@ -1,0 +1,15 @@
+query MediaSimilar($mediaId: Int, $page: Int) {
+    Media(id: $mediaId) {
+        id
+        recommendations(page: $page, sort: [RATING_DESC, ID]) {
+            pageInfo {
+                ...PageInfo
+            }
+            nodes {
+                mediaRecommendation {
+                    ...MediaFragment
+                }
+            }
+        }
+    }
+}

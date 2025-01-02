@@ -1,0 +1,13 @@
+query Studio($id: Int!, $page: Int, $sort: [MediaSort], $onList: Boolean) {
+    Studio(id: $id) {
+        ...StudioFragment
+        media(page: $page, sort: $sort, onList: $onList) {
+            pageInfo {
+                ...PageInfo
+            }
+            nodes {
+                ...MediaFragment
+            }
+        }
+    }
+}

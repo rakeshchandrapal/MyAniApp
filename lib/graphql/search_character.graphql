@@ -1,0 +1,15 @@
+query CharacterSearch(
+    $page: Int = 1
+    $search: String
+    $isBirthday: Boolean
+    $sort: [CharacterSort] = [FAVOURITES_DESC, ID_DESC]
+) {
+    Page(page: $page, perPage: 30) {
+        pageInfo {
+            ...PageInfo
+        }
+        characters(isBirthday: $isBirthday, sort: $sort, search: $search) {
+            ...CharacterFragment
+        }
+    }
+}

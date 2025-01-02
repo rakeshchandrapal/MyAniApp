@@ -1,0 +1,22 @@
+query UserActivities($userId: Int, $activityType: ActivityType, $page: Int) {
+    Page(page: $page, perPage: 25) {
+        pageInfo {
+            ...PageInfo
+        }
+        activities(
+            userId: $userId
+            type: $activityType
+            sort: [PINNED, ID_DESC]
+        ) {
+            ... on TextActivity {
+                ...TextActivity
+            }
+            ... on ListActivity {
+                ...ListActivity
+            }
+            ... on MessageActivity {
+                ...MessageActivity
+            }
+        }
+    }
+}
