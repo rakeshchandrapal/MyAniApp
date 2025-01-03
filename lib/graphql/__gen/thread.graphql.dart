@@ -583,6 +583,27 @@ const documentNodeQueryThread = DocumentNode(definitions: [
                     selectionSet: null,
                   ),
                   FieldNode(
+                    name: NameNode(value: 'donatorTier'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'donatorBadge'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'moderatorRoles'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
                     name: NameNode(value: 'avatar'),
                     alias: null,
                     arguments: [],
@@ -2060,6 +2081,9 @@ class Query$Thread$comments$threadComments$user {
   Query$Thread$comments$threadComments$user({
     required this.id,
     required this.name,
+    this.donatorTier,
+    this.donatorBadge,
+    this.moderatorRoles,
     this.avatar,
     this.$__typename = 'User',
   });
@@ -2068,11 +2092,19 @@ class Query$Thread$comments$threadComments$user {
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$donatorTier = json['donatorTier'];
+    final l$donatorBadge = json['donatorBadge'];
+    final l$moderatorRoles = json['moderatorRoles'];
     final l$avatar = json['avatar'];
     final l$$__typename = json['__typename'];
     return Query$Thread$comments$threadComments$user(
       id: (l$id as int),
       name: (l$name as String),
+      donatorTier: (l$donatorTier as int?),
+      donatorBadge: (l$donatorBadge as String?),
+      moderatorRoles: (l$moderatorRoles as List<dynamic>?)
+          ?.map((e) => e == null ? null : fromJson$Enum$ModRole((e as String)))
+          .toList(),
       avatar: l$avatar == null
           ? null
           : Query$Thread$comments$threadComments$user$avatar.fromJson(
@@ -2085,6 +2117,12 @@ class Query$Thread$comments$threadComments$user {
 
   final String name;
 
+  final int? donatorTier;
+
+  final String? donatorBadge;
+
+  final List<Enum$ModRole?>? moderatorRoles;
+
   final Query$Thread$comments$threadComments$user$avatar? avatar;
 
   final String $__typename;
@@ -2095,6 +2133,14 @@ class Query$Thread$comments$threadComments$user {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$donatorTier = donatorTier;
+    _resultData['donatorTier'] = l$donatorTier;
+    final l$donatorBadge = donatorBadge;
+    _resultData['donatorBadge'] = l$donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    _resultData['moderatorRoles'] = l$moderatorRoles
+        ?.map((e) => e == null ? null : toJson$Enum$ModRole(e))
+        .toList();
     final l$avatar = avatar;
     _resultData['avatar'] = l$avatar?.toJson();
     final l$$__typename = $__typename;
@@ -2106,11 +2152,19 @@ class Query$Thread$comments$threadComments$user {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$donatorTier = donatorTier;
+    final l$donatorBadge = donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
     final l$avatar = avatar;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$donatorTier,
+      l$donatorBadge,
+      l$moderatorRoles == null
+          ? null
+          : Object.hashAll(l$moderatorRoles.map((v) => v)),
       l$avatar,
       l$$__typename,
     ]);
@@ -2133,6 +2187,32 @@ class Query$Thread$comments$threadComments$user {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$donatorTier = donatorTier;
+    final lOther$donatorTier = other.donatorTier;
+    if (l$donatorTier != lOther$donatorTier) {
+      return false;
+    }
+    final l$donatorBadge = donatorBadge;
+    final lOther$donatorBadge = other.donatorBadge;
+    if (l$donatorBadge != lOther$donatorBadge) {
+      return false;
+    }
+    final l$moderatorRoles = moderatorRoles;
+    final lOther$moderatorRoles = other.moderatorRoles;
+    if (l$moderatorRoles != null && lOther$moderatorRoles != null) {
+      if (l$moderatorRoles.length != lOther$moderatorRoles.length) {
+        return false;
+      }
+      for (int i = 0; i < l$moderatorRoles.length; i++) {
+        final l$moderatorRoles$entry = l$moderatorRoles[i];
+        final lOther$moderatorRoles$entry = lOther$moderatorRoles[i];
+        if (l$moderatorRoles$entry != lOther$moderatorRoles$entry) {
+          return false;
+        }
+      }
+    } else if (l$moderatorRoles != lOther$moderatorRoles) {
       return false;
     }
     final l$avatar = avatar;
@@ -2171,6 +2251,9 @@ abstract class CopyWith$Query$Thread$comments$threadComments$user<TRes> {
   TRes call({
     int? id,
     String? name,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
     Query$Thread$comments$threadComments$user$avatar? avatar,
     String? $__typename,
   });
@@ -2193,6 +2276,9 @@ class _CopyWithImpl$Query$Thread$comments$threadComments$user<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? donatorTier = _undefined,
+    Object? donatorBadge = _undefined,
+    Object? moderatorRoles = _undefined,
     Object? avatar = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -2201,6 +2287,15 @@ class _CopyWithImpl$Query$Thread$comments$threadComments$user<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        donatorTier: donatorTier == _undefined
+            ? _instance.donatorTier
+            : (donatorTier as int?),
+        donatorBadge: donatorBadge == _undefined
+            ? _instance.donatorBadge
+            : (donatorBadge as String?),
+        moderatorRoles: moderatorRoles == _undefined
+            ? _instance.moderatorRoles
+            : (moderatorRoles as List<Enum$ModRole?>?),
         avatar: avatar == _undefined
             ? _instance.avatar
             : (avatar as Query$Thread$comments$threadComments$user$avatar?),
@@ -2228,6 +2323,9 @@ class _CopyWithStubImpl$Query$Thread$comments$threadComments$user<TRes>
   call({
     int? id,
     String? name,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
     Query$Thread$comments$threadComments$user$avatar? avatar,
     String? $__typename,
   }) =>

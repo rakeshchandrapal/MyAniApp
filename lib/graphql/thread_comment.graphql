@@ -7,7 +7,14 @@ query Comment($id: Int) {
         likeCount
         createdAt
         user {
-            ...UserFragment
+            id
+            name
+            donatorTier
+            donatorBadge
+            moderatorRoles
+            avatar {
+                large
+            }
         }
         childComments
         isLocked

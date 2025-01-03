@@ -30,8 +30,12 @@ query Thread($id: Int, $page: Int) {
             likeCount
             createdAt
             user {
+                # using "UserFragment" here breaks "childComments"...
                 id
                 name
+                donatorTier
+                donatorBadge
+                moderatorRoles
                 avatar {
                     large
                 }

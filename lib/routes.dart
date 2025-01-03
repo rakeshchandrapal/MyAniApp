@@ -303,7 +303,7 @@ final class Routes {
   static String thread(int id) => _thread.replaceFirst(":id", "$id");
   static String threadComment(int id, int commentId) => _threadComment
       .replaceFirst(":id", "$id")
-      .replaceFirst(":commmentId", "$commentId");
+      .replaceFirst(":commentId", "$commentId");
   static String activity(int id) => _activity.replaceFirst(":id", "$id");
   static String forums(ForumTabs tab, {String? search, int? category}) =>
       "${_forums.replaceFirst(":tab", tab.name)}?search=$search&category=$category";

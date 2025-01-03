@@ -39,6 +39,8 @@ class HomeScreen extends ConsumerWidget {
       const NavigationDestination(icon: Icon(Icons.forum), label: "Forums"),
     ];
 
+    print([destinations.length, child.currentIndex]);
+
     return OrientationBuilder(builder: (context, orientation) {
       return Scaffold(
         body: Show(
@@ -54,11 +56,13 @@ class HomeScreen extends ConsumerWidget {
                       label: Text(d.label),
                     )
                 ],
-                selectedIndex: child.currentIndex,
+                selectedIndex: destinations.length == 3
+                    ? child.currentIndex - 2
+                    : child.currentIndex,
                 onDestinationSelected: (value) {
                   var v = destinations.length == 3 ? value + 2 : value;
 
-                  if (value != 4) {
+                  if (v != 4) {
                     child.goBranch(v);
                   } else {
                     context.go(Routes.forums(ForumTabs.overview));
@@ -74,13 +78,15 @@ class HomeScreen extends ConsumerWidget {
           when: orientation == Orientation.portrait,
           child: () => NavigationBar(
             destinations: destinations,
-            selectedIndex: child.currentIndex,
+            selectedIndex: destinations.length == 3
+                ? child.currentIndex - 2
+                : child.currentIndex,
             labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
             height: 70,
             onDestinationSelected: (value) {
               var v = destinations.length == 3 ? value + 2 : value;
 
-              if (value != 4) {
+              if (v != 4) {
                 child.goBranch(v);
               } else {
                 context.go(Routes.forums(ForumTabs.overview));

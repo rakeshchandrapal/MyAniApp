@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myaniapp/app/thread/screen.dart';
+import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/thread_comment.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/common/gql_widget.dart';
@@ -52,8 +53,8 @@ class ThreadCommentScreen extends HookWidget {
               likeCount: snapshot.parsedData!.ThreadComment!.first!.likeCount,
               refetch: refetch,
               parentId: snapshot.parsedData!.ThreadComment!.first!.id,
-              replies: snapshot
-                  .parsedData!.ThreadComment!.first!.childComments?.asList,
+              replies: snapshot.parsedData!.ThreadComment!.first!.childComments
+                  as List?,
               onAvatarTap: () => context.push(
                 Routes.user(
                     snapshot.parsedData!.ThreadComment!.first!.user!.name),
@@ -62,6 +63,18 @@ class ThreadCommentScreen extends HookWidget {
                       snapshot.parsedData!.ThreadComment!.first!.user!
                 },
               ),
+              donatorText: snapshot.parsedData!.ThreadComment!.first!.user!
+                          .donatorTier !=
+                      0
+                  ? snapshot
+                      .parsedData!.ThreadComment!.first!.user!.donatorBadge
+                  : null,
+              modRoles: snapshot
+                  .parsedData!.ThreadComment!.first!.user!.moderatorRoles
+                  ?.fold(
+                      [],
+                      (previousValue, element) =>
+                          [...?previousValue, element!.name.capitalize()]),
             )
           ],
         ),

@@ -240,22 +240,30 @@ class ThreadScreen extends HookWidget {
                   var comment =
                       snapshot.parsedData!.comments!.threadComments![index]!;
 
-                  if (comment.user == null) return const SizedBox();
+                  // if (comment.user == null) return const SizedBox();
                   // print(comment.childComments);
 
                   return ThreadComment(
                     id: comment.id,
                     parentId: comment.id,
-                    avatar: comment.user!.avatar!.large!,
-                    username: comment.user!.name,
+                    avatar: comment.user?.avatar?.large ?? anilistDefaultImage,
+                    username: comment.user?.name ?? "unknown",
                     comment: comment.comment!,
                     createdAt: comment.createdAt,
                     replies: comment.childComments as List?,
                     isLiked: comment.isLiked ?? false,
                     likeCount: comment.likeCount,
                     refetch: refetch,
-                    onAvatarTap: () =>
-                        context.push(Routes.user(comment.user!.name)),
+                    onAvatarTap: comment.user != null
+                        ? () => context.push(Routes.user(comment.user!.name))
+                        : null,
+                    donatorText: comment.user!.donatorTier != 0
+                        ? comment.user!.donatorBadge
+                        : null,
+                    modRoles: comment.user!.moderatorRoles?.fold(
+                        [],
+                        (previousValue, element) =>
+                            [...?previousValue, element!.name.capitalize()]),
                   );
                 },
                 itemCount:
@@ -339,14 +347,16 @@ class ThreadComment extends ConsumerWidget {
     required this.avatar,
     required this.username,
     required this.createdAt,
-    this.replies,
-    this.isReply,
-    this.onAvatarTap,
     required this.isLiked,
     required this.id,
     required this.likeCount,
     required this.refetch,
     required this.parentId,
+    this.replies,
+    this.isReply,
+    this.onAvatarTap,
+    this.donatorText,
+    this.modRoles,
   });
 
   final int id;
@@ -361,6 +371,8 @@ class ThreadComment extends ConsumerWidget {
   final bool isLiked;
   final int likeCount;
   final QueryRefetch refetch;
+  final String? donatorText;
+  final List<String>? modRoles;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -375,6 +387,10 @@ class ThreadComment extends ConsumerWidget {
     } catch (err) {}
 
     return Comment(
+      badge: [
+        if (modRoles?.isNotEmpty == true) CommentBadge(text: modRoles!),
+        if (donatorText != null) CommentBadge(text: [donatorText!]),
+      ],
       collapsible: true,
       avatar: avatar,
       username: username,
@@ -399,10 +415,18 @@ class ThreadComment extends ConsumerWidget {
                   replies: reply.childComments as List?,
                   isLiked: reply.isLiked ?? false,
                   likeCount: reply.likeCount,
-                  onAvatarTap: () =>
-                      context.push(Routes.user(reply.user!.name)),
+                  onAvatarTap: reply.user != null
+                      ? () => context.push(Routes.user(reply.user!.name))
+                      : null,
                   isReply: true,
                   refetch: refetch,
+                  donatorText: reply.user!.donatorTier != 0
+                      ? reply.user!.donatorBadge
+                      : null,
+                  modRoles: reply.user!.moderatorRoles?.fold(
+                      [],
+                      (previousValue, element) =>
+                          [...?previousValue, element!.name.capitalize()]),
                 ),
             ]
           : null,

@@ -140,10 +140,15 @@ class MarkdownWidget extends ConsumerWidget {
                   return;
                 } else if (uri.pathSegments.first == 'forum' &&
                     uri.pathSegments[1] == 'thread') {
+                  print(uri.pathSegments);
                   if (uri.pathSegments.length == 5) {
-                    context.push(Routes.threadComment(
-                      int.parse(uri.pathSegments[4]),
+                    print(Routes.threadComment(
                       int.parse(uri.pathSegments[2]),
+                      int.parse(uri.pathSegments[4]),
+                    ));
+                    context.push(Routes.threadComment(
+                      int.parse(uri.pathSegments[2]),
+                      int.parse(uri.pathSegments[4]),
                     ));
                   } else {
                     context

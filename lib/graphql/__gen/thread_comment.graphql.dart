@@ -1,5 +1,5 @@
-import 'fragments/user.graphql.dart';
 import 'package:gql/ast.dart';
+import 'schema.graphql.dart';
 
 class Variables$Query$Comment {
   factory Variables$Query$Comment({int? id}) => Variables$Query$Comment._({
@@ -341,9 +341,62 @@ const documentNodeQueryComment = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'UserFragment'),
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
                 directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'donatorTier'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'donatorBadge'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'moderatorRoles'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'avatar'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'large'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -386,7 +439,6 @@ const documentNodeQueryComment = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionUserFragment,
 ]);
 
 class Query$Comment$ThreadComment {
@@ -423,7 +475,8 @@ class Query$Comment$ThreadComment {
       createdAt: (l$createdAt as int),
       user: l$user == null
           ? null
-          : Fragment$UserFragment.fromJson((l$user as Map<String, dynamic>)),
+          : Query$Comment$ThreadComment$user.fromJson(
+              (l$user as Map<String, dynamic>)),
       childComments: (l$childComments as dynamic?),
       isLocked: (l$isLocked as bool?),
       $__typename: (l$$__typename as String),
@@ -442,7 +495,7 @@ class Query$Comment$ThreadComment {
 
   final int createdAt;
 
-  final Fragment$UserFragment? user;
+  final Query$Comment$ThreadComment$user? user;
 
   final dynamic? childComments;
 
@@ -589,12 +642,12 @@ abstract class CopyWith$Query$Comment$ThreadComment<TRes> {
     bool? isLiked,
     int? likeCount,
     int? createdAt,
-    Fragment$UserFragment? user,
+    Query$Comment$ThreadComment$user? user,
     dynamic? childComments,
     bool? isLocked,
     String? $__typename,
   });
-  CopyWith$Fragment$UserFragment<TRes> get user;
+  CopyWith$Query$Comment$ThreadComment$user<TRes> get user;
 }
 
 class _CopyWithImpl$Query$Comment$ThreadComment<TRes>
@@ -637,7 +690,7 @@ class _CopyWithImpl$Query$Comment$ThreadComment<TRes>
             : (createdAt as int),
         user: user == _undefined
             ? _instance.user
-            : (user as Fragment$UserFragment?),
+            : (user as Query$Comment$ThreadComment$user?),
         childComments: childComments == _undefined
             ? _instance.childComments
             : (childComments as dynamic?),
@@ -648,11 +701,12 @@ class _CopyWithImpl$Query$Comment$ThreadComment<TRes>
             : ($__typename as String),
       ));
 
-  CopyWith$Fragment$UserFragment<TRes> get user {
+  CopyWith$Query$Comment$ThreadComment$user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith$Fragment$UserFragment.stub(_then(_instance))
-        : CopyWith$Fragment$UserFragment(local$user, (e) => call(user: e));
+        ? CopyWith$Query$Comment$ThreadComment$user.stub(_then(_instance))
+        : CopyWith$Query$Comment$ThreadComment$user(
+            local$user, (e) => call(user: e));
   }
 }
 
@@ -669,13 +723,394 @@ class _CopyWithStubImpl$Query$Comment$ThreadComment<TRes>
     bool? isLiked,
     int? likeCount,
     int? createdAt,
-    Fragment$UserFragment? user,
+    Query$Comment$ThreadComment$user? user,
     dynamic? childComments,
     bool? isLocked,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Fragment$UserFragment<TRes> get user =>
-      CopyWith$Fragment$UserFragment.stub(_res);
+  CopyWith$Query$Comment$ThreadComment$user<TRes> get user =>
+      CopyWith$Query$Comment$ThreadComment$user.stub(_res);
+}
+
+class Query$Comment$ThreadComment$user {
+  Query$Comment$ThreadComment$user({
+    required this.id,
+    required this.name,
+    this.donatorTier,
+    this.donatorBadge,
+    this.moderatorRoles,
+    this.avatar,
+    this.$__typename = 'User',
+  });
+
+  factory Query$Comment$ThreadComment$user.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$donatorTier = json['donatorTier'];
+    final l$donatorBadge = json['donatorBadge'];
+    final l$moderatorRoles = json['moderatorRoles'];
+    final l$avatar = json['avatar'];
+    final l$$__typename = json['__typename'];
+    return Query$Comment$ThreadComment$user(
+      id: (l$id as int),
+      name: (l$name as String),
+      donatorTier: (l$donatorTier as int?),
+      donatorBadge: (l$donatorBadge as String?),
+      moderatorRoles: (l$moderatorRoles as List<dynamic>?)
+          ?.map((e) => e == null ? null : fromJson$Enum$ModRole((e as String)))
+          .toList(),
+      avatar: l$avatar == null
+          ? null
+          : Query$Comment$ThreadComment$user$avatar.fromJson(
+              (l$avatar as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int id;
+
+  final String name;
+
+  final int? donatorTier;
+
+  final String? donatorBadge;
+
+  final List<Enum$ModRole?>? moderatorRoles;
+
+  final Query$Comment$ThreadComment$user$avatar? avatar;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$donatorTier = donatorTier;
+    _resultData['donatorTier'] = l$donatorTier;
+    final l$donatorBadge = donatorBadge;
+    _resultData['donatorBadge'] = l$donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    _resultData['moderatorRoles'] = l$moderatorRoles
+        ?.map((e) => e == null ? null : toJson$Enum$ModRole(e))
+        .toList();
+    final l$avatar = avatar;
+    _resultData['avatar'] = l$avatar?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$donatorTier = donatorTier;
+    final l$donatorBadge = donatorBadge;
+    final l$moderatorRoles = moderatorRoles;
+    final l$avatar = avatar;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$donatorTier,
+      l$donatorBadge,
+      l$moderatorRoles == null
+          ? null
+          : Object.hashAll(l$moderatorRoles.map((v) => v)),
+      l$avatar,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$Comment$ThreadComment$user ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$donatorTier = donatorTier;
+    final lOther$donatorTier = other.donatorTier;
+    if (l$donatorTier != lOther$donatorTier) {
+      return false;
+    }
+    final l$donatorBadge = donatorBadge;
+    final lOther$donatorBadge = other.donatorBadge;
+    if (l$donatorBadge != lOther$donatorBadge) {
+      return false;
+    }
+    final l$moderatorRoles = moderatorRoles;
+    final lOther$moderatorRoles = other.moderatorRoles;
+    if (l$moderatorRoles != null && lOther$moderatorRoles != null) {
+      if (l$moderatorRoles.length != lOther$moderatorRoles.length) {
+        return false;
+      }
+      for (int i = 0; i < l$moderatorRoles.length; i++) {
+        final l$moderatorRoles$entry = l$moderatorRoles[i];
+        final lOther$moderatorRoles$entry = lOther$moderatorRoles[i];
+        if (l$moderatorRoles$entry != lOther$moderatorRoles$entry) {
+          return false;
+        }
+      }
+    } else if (l$moderatorRoles != lOther$moderatorRoles) {
+      return false;
+    }
+    final l$avatar = avatar;
+    final lOther$avatar = other.avatar;
+    if (l$avatar != lOther$avatar) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Comment$ThreadComment$user
+    on Query$Comment$ThreadComment$user {
+  CopyWith$Query$Comment$ThreadComment$user<Query$Comment$ThreadComment$user>
+      get copyWith => CopyWith$Query$Comment$ThreadComment$user(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Comment$ThreadComment$user<TRes> {
+  factory CopyWith$Query$Comment$ThreadComment$user(
+    Query$Comment$ThreadComment$user instance,
+    TRes Function(Query$Comment$ThreadComment$user) then,
+  ) = _CopyWithImpl$Query$Comment$ThreadComment$user;
+
+  factory CopyWith$Query$Comment$ThreadComment$user.stub(TRes res) =
+      _CopyWithStubImpl$Query$Comment$ThreadComment$user;
+
+  TRes call({
+    int? id,
+    String? name,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
+    Query$Comment$ThreadComment$user$avatar? avatar,
+    String? $__typename,
+  });
+  CopyWith$Query$Comment$ThreadComment$user$avatar<TRes> get avatar;
+}
+
+class _CopyWithImpl$Query$Comment$ThreadComment$user<TRes>
+    implements CopyWith$Query$Comment$ThreadComment$user<TRes> {
+  _CopyWithImpl$Query$Comment$ThreadComment$user(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Comment$ThreadComment$user _instance;
+
+  final TRes Function(Query$Comment$ThreadComment$user) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? donatorTier = _undefined,
+    Object? donatorBadge = _undefined,
+    Object? moderatorRoles = _undefined,
+    Object? avatar = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Comment$ThreadComment$user(
+        id: id == _undefined || id == null ? _instance.id : (id as int),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        donatorTier: donatorTier == _undefined
+            ? _instance.donatorTier
+            : (donatorTier as int?),
+        donatorBadge: donatorBadge == _undefined
+            ? _instance.donatorBadge
+            : (donatorBadge as String?),
+        moderatorRoles: moderatorRoles == _undefined
+            ? _instance.moderatorRoles
+            : (moderatorRoles as List<Enum$ModRole?>?),
+        avatar: avatar == _undefined
+            ? _instance.avatar
+            : (avatar as Query$Comment$ThreadComment$user$avatar?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$Comment$ThreadComment$user$avatar<TRes> get avatar {
+    final local$avatar = _instance.avatar;
+    return local$avatar == null
+        ? CopyWith$Query$Comment$ThreadComment$user$avatar.stub(
+            _then(_instance))
+        : CopyWith$Query$Comment$ThreadComment$user$avatar(
+            local$avatar, (e) => call(avatar: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$Comment$ThreadComment$user<TRes>
+    implements CopyWith$Query$Comment$ThreadComment$user<TRes> {
+  _CopyWithStubImpl$Query$Comment$ThreadComment$user(this._res);
+
+  TRes _res;
+
+  call({
+    int? id,
+    String? name,
+    int? donatorTier,
+    String? donatorBadge,
+    List<Enum$ModRole?>? moderatorRoles,
+    Query$Comment$ThreadComment$user$avatar? avatar,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$Comment$ThreadComment$user$avatar<TRes> get avatar =>
+      CopyWith$Query$Comment$ThreadComment$user$avatar.stub(_res);
+}
+
+class Query$Comment$ThreadComment$user$avatar {
+  Query$Comment$ThreadComment$user$avatar({
+    this.large,
+    this.$__typename = 'UserAvatar',
+  });
+
+  factory Query$Comment$ThreadComment$user$avatar.fromJson(
+      Map<String, dynamic> json) {
+    final l$large = json['large'];
+    final l$$__typename = json['__typename'];
+    return Query$Comment$ThreadComment$user$avatar(
+      large: (l$large as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? large;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$large = large;
+    _resultData['large'] = l$large;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$large = large;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$large,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$Comment$ThreadComment$user$avatar ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$large = large;
+    final lOther$large = other.large;
+    if (l$large != lOther$large) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Comment$ThreadComment$user$avatar
+    on Query$Comment$ThreadComment$user$avatar {
+  CopyWith$Query$Comment$ThreadComment$user$avatar<
+          Query$Comment$ThreadComment$user$avatar>
+      get copyWith => CopyWith$Query$Comment$ThreadComment$user$avatar(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$Comment$ThreadComment$user$avatar<TRes> {
+  factory CopyWith$Query$Comment$ThreadComment$user$avatar(
+    Query$Comment$ThreadComment$user$avatar instance,
+    TRes Function(Query$Comment$ThreadComment$user$avatar) then,
+  ) = _CopyWithImpl$Query$Comment$ThreadComment$user$avatar;
+
+  factory CopyWith$Query$Comment$ThreadComment$user$avatar.stub(TRes res) =
+      _CopyWithStubImpl$Query$Comment$ThreadComment$user$avatar;
+
+  TRes call({
+    String? large,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Comment$ThreadComment$user$avatar<TRes>
+    implements CopyWith$Query$Comment$ThreadComment$user$avatar<TRes> {
+  _CopyWithImpl$Query$Comment$ThreadComment$user$avatar(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Comment$ThreadComment$user$avatar _instance;
+
+  final TRes Function(Query$Comment$ThreadComment$user$avatar) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? large = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Comment$ThreadComment$user$avatar(
+        large: large == _undefined ? _instance.large : (large as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Comment$ThreadComment$user$avatar<TRes>
+    implements CopyWith$Query$Comment$ThreadComment$user$avatar<TRes> {
+  _CopyWithStubImpl$Query$Comment$ThreadComment$user$avatar(this._res);
+
+  TRes _res;
+
+  call({
+    String? large,
+    String? $__typename,
+  }) =>
+      _res;
 }

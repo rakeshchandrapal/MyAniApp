@@ -452,15 +452,19 @@ var commentQuery = removeFragmentDups(r"""query Comment($id: Int) {
         likeCount
         createdAt
         user {
-            ...UserFragment
+            id
+            name
+            donatorTier
+            donatorBadge
+            moderatorRoles
+            avatar {
+                large
+            }
         }
         childComments
         isLocked
     }
-}
-
-
-""""$userFragment""""""");
+}""");
 var genreCollectionQuery = removeFragmentDups(r"""query GenreCollection {
     genres: GenreCollection
     tags: MediaTagCollection {
@@ -1209,8 +1213,12 @@ var threadQuery = removeFragmentDups(r"""query Thread($id: Int, $page: Int) {
             likeCount
             createdAt
             user {
+                # using "UserFragment" here breaks "childComments"...
                 id
                 name
+                donatorTier
+                donatorBadge
+                moderatorRoles
                 avatar {
                     large
                 }

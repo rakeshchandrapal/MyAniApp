@@ -190,6 +190,16 @@ class ActivityScreen extends HookConsumerWidget {
                         color: comment.isLiked == true ? Colors.red : null,
                       ),
                     ),
+                    badge: [
+                      if (comment.user!.donatorTier != 0)
+                        CommentBadge(text: [comment.user!.donatorBadge!]),
+                      if (comment.user!.moderatorRoles?.isNotEmpty == true)
+                        CommentBadge(
+                            text: comment.user!.moderatorRoles!.fold(
+                                [],
+                                (previousValue, element) =>
+                                    [...previousValue, element!.name]))
+                    ],
                   );
                 },
                 itemCount: data!.replies!.activityReplies!.length,

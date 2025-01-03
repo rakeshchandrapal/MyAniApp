@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
+import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:relative_time/relative_time.dart';
 
@@ -29,7 +30,7 @@ class Comment extends StatefulWidget {
   final bool isReply;
   final bool collapsible;
   final GestureTapCallback? onAvatarTap;
-  final Widget? badge;
+  final List<CommentBadge>? badge;
 
   @override
   State<Comment> createState() => _CommentState();
@@ -86,6 +87,8 @@ class _CommentState extends State<Comment> {
                             widget.username,
                             maxLines: 2,
                           ),
+                          if (widget.badge?.isNotEmpty == true)
+                            ...widget.badge!,
                           const SizedBox(
                             width: 5,
                           ),
@@ -96,7 +99,6 @@ class _CommentState extends State<Comment> {
                             style: context.theme.textTheme.labelSmall
                                 ?.copyWith(color: context.theme.hintColor),
                           ),
-                          if (widget.badge != null) widget.badge!,
                         ],
                       ),
                     ),
@@ -114,6 +116,30 @@ class _CommentState extends State<Comment> {
                 children: widget.replies!,
               ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CommentBadge extends StatelessWidget {
+  const CommentBadge({super.key, required this.text});
+
+  final List<String> text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4),
+      child: Tooltip(
+        message: text.length > 1 ? text.join("\n") : "",
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            borderRadius: imageRadius,
+            color: context.theme.colorScheme.surfaceContainerHigh,
+          ),
+          child: Text(text.first, style: context.theme.textTheme.labelSmall),
         ),
       ),
     );

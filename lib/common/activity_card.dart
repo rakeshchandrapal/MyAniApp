@@ -167,6 +167,16 @@ class ActivityCard extends ConsumerWidget {
             : null,
         avatar: a.user!.avatar!.large!,
         username: a.user!.name,
+        badge: [
+          if (a.user!.donatorTier != 0)
+            CommentBadge(text: [a.user!.donatorBadge!]),
+          if (a.user!.moderatorRoles?.isNotEmpty == true)
+            CommentBadge(
+                text: a.user!.moderatorRoles!.fold(
+                    [],
+                    (previousValue, element) =>
+                        [...previousValue, element!.name]))
+        ],
         createdAt: a.createdAt,
         footer: footer,
         body: Padding(

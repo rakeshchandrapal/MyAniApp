@@ -6,6 +6,7 @@ import 'package:myaniapp/app/user/reviews.tab.dart';
 import 'package:myaniapp/app/user/social.tab.dart';
 import 'package:myaniapp/app/user/threads.tab.dart';
 import 'package:myaniapp/common/cached_image.dart';
+import 'package:myaniapp/common/comment.dart';
 import 'package:myaniapp/common/image_viewer.dart';
 import 'package:myaniapp/common/ink_well_image.dart';
 import 'package:myaniapp/common/invisible_expanded_title.dart';
@@ -237,7 +238,17 @@ class UserAppBar extends StatelessWidget {
                     ),
                     Flexible(
                       child: SelectableText((data ?? placeholderData)!.name),
-                    )
+                    ),
+                    if (data != null) ...[
+                      if (data!.donatorTier != 0)
+                        CommentBadge(text: [data!.donatorBadge!]),
+                      if (data!.moderatorRoles?.isNotEmpty == true)
+                        CommentBadge(
+                            text: data!.moderatorRoles!.fold(
+                                [],
+                                (previousValue, element) =>
+                                    [...previousValue, element!.name]))
+                    ],
                   ],
                 ),
               ),

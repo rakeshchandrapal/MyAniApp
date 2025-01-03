@@ -55,7 +55,7 @@ class MediaSearchQuery {
     Enum$MediaType? type0 = Enum$MediaType.values
         .firstWhereOrNull((element) => element.name == query["type"]?.first);
     Enum$MediaSeason? season0 = Enum$MediaSeason.values
-        .firstWhereOrNull((element) => element.name == query["season"]);
+        .firstWhereOrNull((element) => element.name == query["season"]?.first);
 
     Query$GenreCollection? collection;
 
@@ -120,15 +120,22 @@ class MediaSearchQuery {
       withTags: withTag0,
       withoutTags: withoutTag0,
       season: season0,
-      countryOfOrigin: query["countryOfOrigin"],
-      endDate: query["endDate"] != null ? int.tryParse(query["endDate"]) : null,
-      isAdult: query["isAdult"] != null
+      countryOfOrigin: query["countryOfOrigin"]?.first,
+      endDate: query["endDate"]?.first != null
+          ? int.tryParse(query["endDate"]?.first)
+          : null,
+      isAdult: query["isAdult"]?.first != null
           ? bool.tryParse(query["isAdult"]?.first)
           : null,
-      onList: query["onList"] != null ? bool.tryParse(query["onList"]) : null,
-      startDate:
-          query["startDate"] != null ? int.tryParse(query["startDate"]) : null,
-      year: query["year"] != null ? int.tryParse(query["year"]) : null,
+      onList: query["onList"]?.first != null
+          ? bool.tryParse(query["onList"]?.first)
+          : null,
+      startDate: query["startDate"]?.first != null
+          ? int.tryParse(query["startDate"]?.first)
+          : null,
+      year: query["year"]?.first != null
+          ? int.tryParse(query["year"]?.first)
+          : null,
     );
   }
 
