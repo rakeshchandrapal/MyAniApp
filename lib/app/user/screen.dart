@@ -246,8 +246,10 @@ class UserAppBar extends StatelessWidget {
                         CommentBadge(
                             text: data!.moderatorRoles!.fold(
                                 [],
-                                (previousValue, element) =>
-                                    [...previousValue, element!.name]))
+                                (previousValue, element) => [
+                                      ...previousValue,
+                                      element!.name.capitalize()
+                                    ]))
                     ],
                   ],
                 ),
