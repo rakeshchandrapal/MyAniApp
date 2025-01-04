@@ -25,16 +25,12 @@ class MediaListView extends ConsumerStatefulWidget {
   const MediaListView({
     super.key,
     required this.response,
-    // required this.groups,
-    // required this.user,
     required this.type,
     required this.refetch,
     this.appBarLeading,
     this.appBarActions,
   });
 
-  // final List<Fragment$ListGroup> groups;
-  // final Query$MediaList$MediaListCollection$user user;
   final Enum$MediaType type;
   final Widget? appBarLeading;
   final QueryRefetch refetch;
@@ -91,9 +87,8 @@ class _MediaListViewState extends ConsumerState<MediaListView>
         if (entry != null) groups.add(entry);
       }
       if (listGroups.length != groups.length) {
-        var leftover = listGroups.where((p0) => !user
-            .mediaListOptions!.animeList!.sectionOrder!
-            .contains(p0.name));
+        var leftover = listGroups.where((p0) =>
+            !user.mediaListOptions!.animeList!.sectionOrder!.contains(p0.name));
         groups.addAll(leftover);
       }
     } else {
@@ -104,9 +99,8 @@ class _MediaListViewState extends ConsumerState<MediaListView>
         if (entry != null) groups.add(entry);
       }
       if (listGroups.length != groups.length) {
-        var leftover = listGroups.where((p0) => !user
-            .mediaListOptions!.mangaList!.sectionOrder!
-            .contains(p0.name));
+        var leftover = listGroups.where((p0) =>
+            !user.mediaListOptions!.mangaList!.sectionOrder!.contains(p0.name));
         groups.addAll(leftover);
       }
     }

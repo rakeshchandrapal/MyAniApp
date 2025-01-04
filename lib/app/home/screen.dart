@@ -39,8 +39,6 @@ class HomeScreen extends ConsumerWidget {
       const NavigationDestination(icon: Icon(Icons.forum), label: "Forums"),
     ];
 
-    print([destinations.length, child.currentIndex]);
-
     return OrientationBuilder(builder: (context, orientation) {
       return Scaffold(
         body: Show(

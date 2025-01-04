@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gql_http_link/gql_http_link.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myaniapp/background.dart';
@@ -32,6 +33,7 @@ void main() async {
   var instance = await SharedPreferences.getInstance();
   final appInfo = await PackageInfo.fromPlatform();
   await Hive.initFlutter();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
 
   var box = await Hive.openBox("graphql");
 

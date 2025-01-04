@@ -246,7 +246,7 @@ class ActivityCard extends ConsumerWidget {
         footer: footer,
         body: MarkdownWidget.body(
           data: a.text!,
-          selectable: true,
+          selectable: !hasTap,
         ),
       );
     } else if (activity is Fragment$MessageActivity) {

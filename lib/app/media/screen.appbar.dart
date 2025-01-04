@@ -270,12 +270,13 @@ class _MediaTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           "$lang: ",
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        Expanded(child: SelectableText(title)),
+        SelectableText(title),
       ],
     );
   }

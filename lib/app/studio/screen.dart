@@ -35,7 +35,8 @@ class StudioScreen extends HookConsumerWidget {
     return GQLWidget(
       refetch: refetch,
       response: snapshot,
-      loading: const Scaffold(
+      loading: Scaffold(
+        appBar: AppBar(),
         body: Center(
           child: CircularProgressIndicator.adaptive(),
         ),
@@ -60,6 +61,8 @@ class StudioScreen extends HookConsumerWidget {
           ],
         ),
         body: PaginationView(
+          padding:
+              listSetting.studio == ListType.grid ? EdgeInsets.all(8) : null,
           isGrid: listSetting.studio == ListType.grid,
           pageInfo: snapshot.parsedData!.Studio!.media!.pageInfo!,
           req: (nextPage) => fetchMore(

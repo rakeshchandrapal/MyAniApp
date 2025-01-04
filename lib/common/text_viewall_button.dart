@@ -13,18 +13,18 @@ class TextViewAllButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          title,
-          style: context.theme.textTheme.titleLarge?.bold,
-        ),
-        Spacer(),
-        TextButton(
-          onPressed: onTap,
-          child: Text("View all", style: context.theme.textTheme.labelSmall),
-        )
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: context.theme.textTheme.titleLarge?.bold,
+          ),
+          Spacer(),
+          Icon(Icons.keyboard_arrow_right),
+        ],
+      ),
     );
   }
 }

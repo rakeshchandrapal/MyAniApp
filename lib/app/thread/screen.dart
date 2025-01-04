@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myaniapp/app/home/forum/screen.dart';
 import 'package:myaniapp/common/comment.dart';
 import 'package:myaniapp/common/custom_dropdown.dart';
@@ -24,7 +25,7 @@ import 'package:myaniapp/utils.dart';
 import 'package:mygraphql/graphql.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ThreadScreen extends HookWidget {
+class ThreadScreen extends HookConsumerWidget {
   ThreadScreen({super.key, required this.id, this.placeholder});
 
   final int id;
@@ -33,7 +34,7 @@ class ThreadScreen extends HookWidget {
   final dataKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var scrollController = useScrollController();
     var (:snapshot, :fetchMore, :refetch) = c.useQuery(GQLRequest(
       threadQuery,
@@ -124,36 +125,115 @@ class ThreadScreen extends HookWidget {
                 ),
                 footer: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: SingleChildScrollView(
-                    primary: false,
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        for (var cat
-                            in (threadData ?? placeholder)!.categories!)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: ActionChip(
-                              label: Text(cat!.name),
-                              onPressed: () => context.push(Routes.forums(
-                                ForumTabs.recent,
-                                category: cat.id,
-                              )),
-                            ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SingleChildScrollView(
+                        primary: false,
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (var cat
+                                in (threadData ?? placeholder)!.categories!)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: ActionChip(
+                                  label: Text(cat!.name),
+                                  onPressed: () => context.push(Routes.forums(
+                                    ForumTabs.recent,
+                                    category: cat.id,
+                                  )),
+                                ),
+                              ),
+                            for (var cat in (threadData ?? placeholder)!
+                                .mediaCategories!)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: ActionChip(
+                                  label: Text(cat!.title!.userPreferred!),
+                                  onPressed: () => context.push(
+                                      Routes.media(cat.id),
+                                      extra: {"placeholder": cat}),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      if (threadData != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 2,
+                            horizontal: 4,
                           ),
-                        for (var cat
-                            in (threadData ?? placeholder)!.mediaCategories!)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: ActionChip(
-                              label: Text(cat!.title!.userPreferred!),
-                              onPressed: () => context.push(
-                                  Routes.media(cat.id),
-                                  extra: {"placeholder": cat}),
+                          child: Row(children: [
+                            IconButton(
+                              color: (threadData!.isLiked ?? false)
+                                  ? Colors.red
+                                  : null,
+                              onPressed: requiredLogin(
+                                  ref,
+                                  "like an activity",
+                                  () => c
+                                      .query(
+                                        GQLRequest(
+                                          toggleLikeQuery,
+                                          variables:
+                                              Variables$Mutation$ToggleLike(
+                                                      id: threadData.id,
+                                                      type: Enum$LikeableType
+                                                          .THREAD)
+                                                  .toJson(),
+                                        ),
+                                      )
+                                      .last
+                                      .then((_) => refetch
+                                          ?.call(FetchPolicy.cacheOnly))),
+                              icon: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.favorite,
+                                  ),
+                                  Text(
+                                    (threadData.likeCount as int? ?? 0)
+                                        .abbreviate(),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                      ],
-                    ),
+                            const SizedBox(width: 5),
+                            IconButton(
+                              onPressed: requiredLogin(
+                                ref,
+                                "subscribe to an activity",
+                                () => c
+                                    .query(
+                                      GQLRequest(
+                                        toggleThreadSubscriptionQuery,
+                                        variables:
+                                            Variables$Mutation$ToggleThreadSubscription(
+                                          id: threadData.id,
+                                          subscribe:
+                                              !(threadData.isSubscribed ??
+                                                  false),
+                                        ).toJson(),
+                                      ),
+                                    )
+                                    .last
+                                    .then((_) =>
+                                        refetch?.call(FetchPolicy.cacheOnly)),
+                              ),
+                              icon: Icon(
+                                threadData.isSubscribed == true
+                                    ? Icons.notifications_active
+                                    : Icons.notifications,
+                                color: (threadData.isSubscribed ?? false)
+                                    ? Colors.yellow
+                                    : null,
+                              ),
+                            ),
+                          ]),
+                        )
+                    ],
                   ),
                 ),
               ),
