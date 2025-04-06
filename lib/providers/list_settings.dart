@@ -31,16 +31,16 @@ class _ListSettings {
 
   Map<String, String> toJson() {
     return {
-      "inProgress": inProgress.name,
-      "animeList": animeList.name,
-      "mangaList": mangaList.name,
-      "mediaRelations": mediaRelations.name,
-      "mediaSimilar": mediaSimilar.name,
-      "character": character.name,
-      "staffVA": staffVA.name,
-      "staffProduction": staffProduction.name,
-      "search": search.name,
-      "studio": studio.name,
+      "list.inProgress": inProgress.name,
+      "list.animeList": animeList.name,
+      "list.mangaList": mangaList.name,
+      "list.mediaRelations": mediaRelations.name,
+      "list.mediaSimilar": mediaSimilar.name,
+      "list.character": character.name,
+      "list.staffVA": staffVA.name,
+      "list.staffProduction": staffProduction.name,
+      "list.search": search.name,
+      "list.studio": studio.name,
     };
   }
 

@@ -191,14 +191,14 @@ class ActivityScreen extends HookConsumerWidget {
                       ),
                     ),
                     badge: [
-                      if (comment.user!.donatorTier != 0)
-                        CommentBadge(text: [comment.user!.donatorBadge!]),
                       if (comment.user!.moderatorRoles?.isNotEmpty == true)
                         CommentBadge(
                             text: comment.user!.moderatorRoles!.fold(
                                 [],
                                 (previousValue, element) =>
-                                    [...previousValue, element!.name]))
+                                    [...previousValue, element!.name])),
+                      if (comment.user!.donatorTier != 0)
+                        CommentBadge(text: [comment.user!.donatorBadge!]),
                     ],
                   );
                 },

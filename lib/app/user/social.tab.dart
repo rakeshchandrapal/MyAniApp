@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myaniapp/common/comment.dart';
 import 'package:myaniapp/common/list_tile_circle_avatar.dart';
 import 'package:myaniapp/common/pagination.dart';
+import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/user_social.graphql.dart';
 import 'package:myaniapp/graphql/queries.dart';
 import 'package:myaniapp/common/gql_widget.dart';
@@ -121,7 +123,21 @@ class _SocialsViewState extends State<SocialsView> {
 
                 return ListTile(
                   leading: ListTileCircleAvatar(url: user.avatar!.large!),
-                  title: Text(user.name),
+                  title: Row(
+                    children: [
+                      Text(user.name),
+                      if (user!.moderatorRoles?.isNotEmpty == true)
+                        CommentBadge(
+                            text: user!.moderatorRoles!.fold(
+                                [],
+                                (previousValue, element) => [
+                                      ...previousValue,
+                                      element!.name.capitalize()
+                                    ])),
+                      if (user!.donatorTier != 0)
+                        CommentBadge(text: [user!.donatorBadge!]),
+                    ],
+                  ),
                   onTap: () => context.push(Routes.user(user.name),
                       extra: {"placeholder": user}),
                 );

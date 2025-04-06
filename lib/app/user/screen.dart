@@ -240,8 +240,6 @@ class UserAppBar extends StatelessWidget {
                       child: SelectableText((data ?? placeholderData)!.name),
                     ),
                     if (data != null) ...[
-                      if (data!.donatorTier != 0)
-                        CommentBadge(text: [data!.donatorBadge!]),
                       if (data!.moderatorRoles?.isNotEmpty == true)
                         CommentBadge(
                             text: data!.moderatorRoles!.fold(
@@ -249,7 +247,9 @@ class UserAppBar extends StatelessWidget {
                                 (previousValue, element) => [
                                       ...previousValue,
                                       element!.name.capitalize()
-                                    ]))
+                                    ])),
+                      if (data!.donatorTier != 0)
+                        CommentBadge(text: [data!.donatorBadge!]),
                     ],
                   ],
                 ),

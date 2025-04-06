@@ -180,7 +180,7 @@ class NotificationScreen extends HookWidget {
                             child: ClipRRect(
                               borderRadius: imageRadius,
                               child: CachedImage(
-                                n.media.coverImage.extraLarge,
+                                n.user.avatar.large,
                                 fit: BoxFit.fill,
                               ),
                             ),

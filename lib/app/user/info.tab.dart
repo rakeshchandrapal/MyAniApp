@@ -4,6 +4,7 @@ import 'package:myaniapp/app/user/favorites.screen.dart';
 import 'package:myaniapp/common/markdown/markdown.dart';
 import 'package:myaniapp/common/media_cards/grid_card.dart';
 import 'package:myaniapp/common/media_cards/sheet.dart';
+import 'package:myaniapp/common/text_viewall_button.dart';
 import 'package:myaniapp/constants.dart';
 import 'package:myaniapp/extensions.dart';
 import 'package:myaniapp/graphql/__gen/user.graphql.dart';
@@ -62,19 +63,11 @@ class UserInfoTab extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Favorite Anime",
-                      style: context.theme.textTheme.titleMedium,
-                    ),
-                    ElevatedButton(
-                      onPressed: () => context.push(
-                          Routes.userFavorites(user.name, FavoriteTabs.anime)),
-                      child: const Text("All"),
-                    )
-                  ],
+                child: TextViewAllButton(
+                  title: "Favorite Anime",
+                  style: context.theme.textTheme.titleMedium,
+                  onTap: () => context.push(
+                      Routes.userFavorites(user.name, FavoriteTabs.anime)),
                 ),
               ),
               SizedBox(
@@ -106,19 +99,11 @@ class UserInfoTab extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Favorite Manga",
-                      style: context.theme.textTheme.titleMedium,
-                    ),
-                    ElevatedButton(
-                      onPressed: () => context.push(
-                          Routes.userFavorites(user.name, FavoriteTabs.manga)),
-                      child: const Text("All"),
-                    )
-                  ],
+                child: TextViewAllButton(
+                  title: "Favorite Manga",
+                  style: context.theme.textTheme.titleMedium,
+                  onTap: () => context.push(
+                      Routes.userFavorites(user.name, FavoriteTabs.manga)),
                 ),
               ),
               SizedBox(
@@ -150,19 +135,11 @@ class UserInfoTab extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Favorite Characters",
-                      style: context.theme.textTheme.titleMedium,
-                    ),
-                    ElevatedButton(
-                      onPressed: () => context.push(Routes.userFavorites(
-                          user.name, FavoriteTabs.characters)),
-                      child: const Text("All"),
-                    )
-                  ],
+                child: TextViewAllButton(
+                  title: "Favorite Characters",
+                  style: context.theme.textTheme.titleMedium,
+                  onTap: () => context.push(
+                      Routes.userFavorites(user.name, FavoriteTabs.characters)),
                 ),
               ),
               SizedBox(
@@ -191,19 +168,11 @@ class UserInfoTab extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Favorite Staff",
-                            style: context.theme.textTheme.titleMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () => context.push(Routes.userFavorites(
-                                user.name, FavoriteTabs.staff)),
-                            child: const Text("All"),
-                          )
-                        ],
+                      child: TextViewAllButton(
+                        title: "Favorite Staff",
+                        style: context.theme.textTheme.titleMedium,
+                        onTap: () => context.push(Routes.userFavorites(
+                            user.name, FavoriteTabs.staff)),
                       ),
                     ),
                     SizedBox(
@@ -235,19 +204,11 @@ class UserInfoTab extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Favorite Studios",
-                            style: context.theme.textTheme.titleMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () => context.push(Routes.userFavorites(
-                                user.name, FavoriteTabs.studios)),
-                            child: const Text("All"),
-                          )
-                        ],
+                      child: TextViewAllButton(
+                        title: "Favorite Studios",
+                        style: context.theme.textTheme.titleMedium,
+                        onTap: () => context.push(Routes.userFavorites(
+                            user.name, FavoriteTabs.studios)),
                       ),
                     ),
                     SizedBox(

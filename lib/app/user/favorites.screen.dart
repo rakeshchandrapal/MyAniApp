@@ -320,7 +320,7 @@ class _FavoriteStudios extends StatelessWidget {
 
           return ListTile(
             title: Text(studio.node!.name),
-            onTap: () => context.push(Routes.media(studio.node!.id)),
+            onTap: () => context.push(Routes.studio(studio.node!.id)),
           );
         },
         itemCount: studios.edges!.length,
